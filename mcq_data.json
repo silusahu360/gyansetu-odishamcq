@@ -6,7 +6,16 @@
     "SCIENCE": [],
     "SOCIAL SCIENCE": [],
     "HINDI": [],
-    "SANSKRIT": []
+    "SANSKRIT": [][
+  {
+    "title": "କାହା ମୁଖ ଅନାଇ ବଞ୍ଚିବି",
+    "file": "Chapter_1.html"
+  },
+  {
+    "title": "ଦ୍ୱିତୀୟ ଅଧ୍ୟାୟ",
+    "file": "Chapter_2.html"
+  }
+]
   },
   "CLASS VII": {
     "ODIA": [],
@@ -44,7 +53,7 @@
       },
       {
         "title": "କାହା ମୁଖ ଅନାଇ ବଞ୍ଚିବି",
-        "file": "Chapter_1_Kaha_Mukha_Anai_Banchibi_60_MCQs.html"
+        "file": "Chapter_1_Kaha_Mukha_Anai_Banchibi_60_MCQ.html"
       }
     ],
     "SCIENCE": [
