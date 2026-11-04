@@ -18,330 +18,61 @@
       --radius: 12px;
       --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
     }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    }
-
-    body {
-      background-color: var(--bg);
-      color: var(--text);
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-    }
-
-    header {
-      background: linear-gradient(135deg, var(--primary), var(--secondary));
-      color: white;
-      padding: 1.25rem 1rem;
-      text-align: center;
-      position: sticky;
-      top: 0;
-      z-index: 10;
-      box-shadow: var(--shadow);
-    }
-
-    header h1 {
-      font-size: 1.4rem;
-      font-weight: 700;
-      letter-spacing: 0.5px;
-    }
-
-    header p {
-      font-size: 0.85rem;
-      opacity: 0.9;
-      margin-top: 4px;
-    }
-
-    main {
-      flex: 1;
-      padding: 1rem;
-      max-width: 600px;
-      margin: 0 auto;
-      width: 100%;
-    }
-
-    .view {
-      display: none;
-      animation: fadeIn 0.2s ease-in-out;
-    }
-
-    .view.active {
-      display: block;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(4px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .breadcrumb {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      margin-bottom: 1rem;
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      overflow-x: auto;
-      white-space: nowrap;
-      padding-bottom: 4px;
-    }
-
-    .breadcrumb button {
-      background: none;
-      border: none;
-      color: var(--secondary);
-      cursor: pointer;
-      font-weight: 600;
-      padding: 0;
-    }
-
-    .grid-menu {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
-    }
-
-    .card {
-      background: var(--card-bg);
-      border-radius: var(--radius);
-      padding: 1.25rem 1rem;
-      text-align: center;
-      box-shadow: var(--shadow);
-      cursor: pointer;
-      border: 1px solid #e2e8f0;
-      transition: transform 0.1s, border-color 0.1s;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      min-height: 100px;
-    }
-
-    .card:active {
-      transform: scale(0.98);
-      border-color: var(--secondary);
-    }
-
-    .card-icon {
-      font-size: 1.75rem;
-      margin-bottom: 8px;
-    }
-
-    .card-title {
-      font-size: 1rem;
-      font-weight: 600;
-      color: var(--text);
-    }
-
-    .subject-card {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: var(--card-bg);
-      border-radius: var(--radius);
-      padding: 1rem;
-      margin-bottom: 10px;
-      box-shadow: var(--shadow);
-      border: 1px solid #e2e8f0;
-    }
-
-    .subject-info h3 {
-      font-size: 1rem;
-      color: var(--text);
-      margin-bottom: 4px;
-    }
-
-    .subject-actions {
-      display: flex;
-      gap: 8px;
-    }
-
-    .btn {
-      padding: 0.5rem 0.85rem;
-      border-radius: 8px;
-      font-size: 0.8rem;
-      font-weight: 600;
-      cursor: pointer;
-      border: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      text-decoration: none;
-    }
-
-    .btn-notes {
-      background-color: #e0f2fe;
-      color: #0369a1;
-    }
-
-    .btn-quiz {
-      background-color: #fef3c7;
-      color: #b45309;
-    }
-
-    .topic-list {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .topic-item {
-      background: var(--card-bg);
-      padding: 1rem;
-      border-radius: var(--radius);
-      border: 1px solid #e2e8f0;
-      box-shadow: var(--shadow);
-      cursor: pointer;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .topic-item:active {
-      border-color: var(--secondary);
-    }
-
-    .quiz-container {
-      background: var(--card-bg);
-      border-radius: var(--radius);
-      padding: 1.25rem;
-      box-shadow: var(--shadow);
-      border: 1px solid #e2e8f0;
-    }
-
-    .quiz-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 1rem;
-      padding-bottom: 0.5rem;
-      border-bottom: 1px solid #e2e8f0;
-      font-size: 0.85rem;
-      color: var(--text-muted);
-    }
-
-    .question-box {
-      font-size: 1.05rem;
-      font-weight: 600;
-      margin-bottom: 1.25rem;
-      line-height: 1.5;
-    }
-
-    .options-list {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      margin-bottom: 1.25rem;
-    }
-
-    .option-btn {
-      background: #f8fafc;
-      border: 1.5px solid #cbd5e1;
-      padding: 0.85rem 1rem;
-      border-radius: 8px;
-      text-align: left;
-      font-size: 0.95rem;
-      cursor: pointer;
-      transition: all 0.15s;
-    }
-
-    .option-btn:active {
-      background: #f1f5f9;
-    }
-
-    .option-btn.correct {
-      background-color: #dcfce7;
-      border-color: var(--success);
-      color: #14532d;
-      font-weight: 600;
-    }
-
-    .option-btn.wrong {
-      background-color: #fee2e2;
-      border-color: var(--danger);
-      color: #7f1d1d;
-    }
-
-    .explanation-box {
-      display: none;
-      background: #eff6ff;
-      border-left: 4px solid var(--secondary);
-      padding: 0.85rem;
-      border-radius: 4px;
-      font-size: 0.85rem;
-      margin-bottom: 1rem;
-      line-height: 1.4;
-    }
-
-    .quiz-footer {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .btn-next {
-      background: var(--primary);
-      color: white;
-      padding: 0.6rem 1.25rem;
-      border-radius: 8px;
-      border: none;
-      font-weight: 600;
-      cursor: pointer;
-      display: none;
-    }
-
-    .score-view {
-      text-align: center;
-      padding: 2rem 1rem;
-      background: var(--card-bg);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-    }
-
-    .score-circle {
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      background: #e0f2fe;
-      color: var(--primary);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.8rem;
-      font-weight: 700;
-      margin: 0 auto 1.5rem auto;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: system-ui, -apple-system, sans-serif; }
+    body { background-color: var(--bg); color: var(--text); min-height: 100vh; display: flex; flex-direction: column; }
+    header { background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; padding: 1.25rem 1rem; text-align: center; position: sticky; top: 0; z-index: 10; box-shadow: var(--shadow); }
+    header h1 { font-size: 1.4rem; font-weight: 700; }
+    header p { font-size: 0.85rem; opacity: 0.9; margin-top: 4px; }
+    main { flex: 1; padding: 1rem; max-width: 600px; margin: 0 auto; width: 100%; }
+    .view { display: none; animation: fadeIn 0.2s ease-in-out; }
+    .view.active { display: block; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+    .breadcrumb { display: flex; align-items: center; gap: 8px; margin-bottom: 1rem; font-size: 0.85rem; color: var(--text-muted); }
+    .breadcrumb button { background: none; border: none; color: var(--secondary); cursor: pointer; font-weight: 600; padding: 0; }
+    .grid-menu { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    .card { background: var(--card-bg); border-radius: var(--radius); padding: 1.25rem 1rem; text-align: center; box-shadow: var(--shadow); cursor: pointer; border: 1px solid #e2e8f0; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100px; }
+    .card:active { transform: scale(0.98); }
+    .card-icon { font-size: 1.75rem; margin-bottom: 8px; }
+    .card-title { font-size: 1rem; font-weight: 600; color: var(--text); }
+    .subject-card { display: flex; justify-content: space-between; align-items: center; background: var(--card-bg); border-radius: var(--radius); padding: 1rem; margin-bottom: 10px; box-shadow: var(--shadow); border: 1px solid #e2e8f0; }
+    .subject-info h3 { font-size: 0.95rem; color: var(--text); }
+    .subject-actions { display: flex; gap: 8px; }
+    .btn { padding: 0.5rem 0.85rem; border-radius: 8px; font-size: 0.8rem; font-weight: 600; cursor: pointer; border: none; }
+    .btn-quiz { background-color: #fef3c7; color: #b45309; }
+    .topic-list { display: flex; flex-direction: column; gap: 10px; }
+    .topic-item { background: var(--card-bg); padding: 1rem; border-radius: var(--radius); border: 1px solid #e2e8f0; box-shadow: var(--shadow); cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+    .quiz-container { background: var(--card-bg); border-radius: var(--radius); padding: 1.25rem; box-shadow: var(--shadow); border: 1px solid #e2e8f0; }
+    .quiz-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid #e2e8f0; font-size: 0.85rem; color: var(--text-muted); }
+    .question-box { font-size: 1.05rem; font-weight: 600; margin-bottom: 1.25rem; line-height: 1.5; }
+    .options-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 1.25rem; }
+    .option-btn { background: #f8fafc; border: 1.5px solid #cbd5e1; padding: 0.85rem 1rem; border-radius: 8px; text-align: left; font-size: 0.95rem; cursor: pointer; }
+    .option-btn.correct { background-color: #dcfce7; border-color: var(--success); color: #14532d; font-weight: 600; }
+    .option-btn.wrong { background-color: #fee2e2; border-color: var(--danger); color: #7f1d1d; }
+    .explanation-box { display: none; background: #eff6ff; border-left: 4px solid var(--secondary); padding: 0.85rem; border-radius: 4px; font-size: 0.85rem; margin-bottom: 1rem; }
+    .btn-next { background: var(--primary); color: white; padding: 0.6rem 1.25rem; border-radius: 8px; border: none; font-weight: 600; cursor: pointer; display: none; }
+    .score-view { text-align: center; padding: 2rem 1rem; background: var(--card-bg); border-radius: var(--radius); box-shadow: var(--shadow); }
+    .score-circle { width: 120px; height: 120px; border-radius: 50%; background: #e0f2fe; color: var(--primary); display: flex; align-items: center; justify-content: center; font-size: 1.8rem; font-weight: 700; margin: 0 auto 1.5rem auto; }
   </style>
 </head>
 <body>
-
   <header>
     <h1>ଜ୍ଞାନସେତୁ ଓଡ଼ିଶା (GyanSetu)</h1>
     <p>NCERT & Odisha State Board Learning Portal</p>
   </header>
 
   <main>
-    <!-- View 1: Class Selection -->
     <section id="view-classes" class="view active">
       <div class="breadcrumb">ଶ୍ରେଣୀ ଚୟନ କରନ୍ତୁ (Select Class)</div>
       <div class="grid-menu" id="class-grid"></div>
     </section>
 
-    <!-- View 2: Subject Selection -->
     <section id="view-subjects" class="view">
       <div class="breadcrumb">
-        <button onclick="navigate('view-classes')">ଶ୍ରେଣୀ</button> &gt;
-        <span id="bc-class"></span>
+        <button onclick="navigate('view-classes')">ଶ୍ରେଣୀ</button> &gt; <span id="bc-class"></span>
       </div>
       <div id="subject-list"></div>
     </section>
 
-    <!-- View 3: Topic/Chapter Selection for Quiz -->
     <section id="view-topics" class="view">
       <div class="breadcrumb">
         <button onclick="navigate('view-classes')">ଶ୍ରେଣୀ</button> &gt;
@@ -351,11 +82,9 @@
       <div id="topic-list" class="topic-list"></div>
     </section>
 
-    <!-- View 4: Quiz Interface -->
     <section id="view-quiz" class="view">
       <div class="breadcrumb">
-        <button onclick="navigate('view-topics')">ଅଧ୍ୟାୟ</button> &gt;
-        <span id="bc-quiz-topic"></span>
+        <button onclick="navigate('view-topics')">ଅଧ୍ୟାୟ</button> &gt; <span id="bc-quiz-topic"></span>
       </div>
       <div class="quiz-container">
         <div class="quiz-header">
@@ -365,91 +94,55 @@
         <div class="question-box" id="q-text"></div>
         <div class="options-list" id="options-container"></div>
         <div class="explanation-box" id="explanation-container"></div>
-        <div class="quiz-footer">
-          <div></div>
+        <div style="display:flex; justify-content:flex-end;">
           <button class="btn-next" id="btn-next" onclick="nextQuestion()">ପରବର୍ତ୍ତୀ ପ୍ରଶ୍ନ &rarr;</button>
         </div>
       </div>
     </section>
 
-    <!-- View 5: Scoreboard Result -->
     <section id="view-score" class="view">
       <div class="score-view">
         <h2>ଅଭ୍ୟାସ ସମାପ୍ତ!</h2>
         <p style="color: var(--text-muted); margin: 0.5rem 0 1.5rem 0;">ଆପଣଙ୍କ ଫଳାଫଳ</p>
         <div class="score-circle" id="final-score">0/0</div>
-        <button class="btn btn-notes" style="padding: 0.75rem 1.5rem; font-size: 1rem;" onclick="navigate('view-topics')">ଅନ୍ୟ ଅଧ୍ୟାୟ ଅଭ୍ୟାସ କରନ୍ତୁ</button>
+        <button class="btn btn-quiz" style="padding: 0.75rem 1.5rem; font-size: 1rem;" onclick="navigate('view-topics')">ଅନ୍ୟ ଅଧ୍ୟାୟ ଅଭ୍ୟାସ କରନ୍ତୁ</button>
       </div>
     </section>
   </main>
 
   <script>
-    // GitHub Raw URL for dynamic MCQ data
     const GITHUB_MCQ_JSON_URL = "https://raw.githubusercontent.com/silusahu360/gyansetu-odishamcq/main/mcq_data.json";
 
-    // Google Drive Notes configuration with complete subjects for Classes 6-10
-    const DRIVE_DATA = {
-      "CLASS VI": {
-        "MIL ODIA (ମାତୃଭାଷା)": "#",
-        "ENGLISH (ଇଂରାଜୀ)": "#",
-        "MATHEMATICS (ଗଣିତ)": "#",
-        "SCIENCE (ବିଜ୍ଞାନ)": "#",
-        "HISTORY & CIVICS (ଇତିହାସ ଓ ରାଜନୀତି ବିଜ୍ଞାନ)": "#",
-        "GEOGRAPHY (ଭୂଗୋଳ)": "#",
-        "HINDI (ହିନ୍ଦୀ)": "#",
-        "SANSKRIT (ସଂସ୍କୃତ)": "#"
-      },
-      "CLASS VII": {
-        "MIL ODIA (ମାତୃଭାଷା)": "#",
-        "ENGLISH (ଇଂରାଜୀ)": "#",
-        "MATHEMATICS (ଗଣିତ)": "#",
-        "SCIENCE (ବିଜ୍ଞାନ)": "#",
-        "HISTORY & CIVICS (ଇତିହାସ ଓ ରାଜନୀତି ବିଜ୍ଞାନ)": "#",
-        "GEOGRAPHY (ଭୂଗୋଳ)": "#",
-        "HINDI (ହିନ୍ଦୀ)": "#",
-        "SANSKRIT (ସଂସ୍କୃତ)": "#"
-      },
-      "CLASS VIII": {
-        "MIL ODIA (ମାତୃଭାଷା)": "#",
-        "ENGLISH (ଇଂରାଜୀ)": "#",
-        "MATHEMATICS (ଗଣିତ)": "#",
-        "SCIENCE (ବିଜ୍ଞାନ)": "#",
-        "HISTORY & CIVICS (ଇତିହାସ ଓ ରାଜନୀତି ବିଜ୍ଞାନ)": "#",
-        "GEOGRAPHY (ଭୂଗୋଳ)": "#",
-        "HINDI (ହିନ୍ଦୀ)": "#",
-        "SANSKRIT (ସଂସ୍କୃତ)": "#"
-      },
-      "CLASS IX": {
-        "FLO - ODIA (ମାତୃଭାଷା ସାହିତ୍ୟ)": "#",
-        "SLE - ENGLISH (ଇଂରାଜୀ)": "#",
-        "MATHEMATICS (ଗଣିତ)": "#",
-        "PHYSICAL SCIENCE (ଭୌତିକ ବିଜ୍ଞାନ)": "#",
-        "LIFE SCIENCE (ଜୀବ ବିଜ୍ଞାନ)": "#",
-        "HISTORY & POL. SC. (ଇତିହାସ ଓ ରାଜନୀତି)": "#",
-        "GEOGRAPHY & ECON. (ଭୂଗୋଳ ଓ ଅର୍ଥନୀତି)": "#",
-        "TLH - HINDI (ତୃତୀୟ ଭାଷା ହିନ୍ଦୀ)": "#",
-        "TLS - SANSKRIT (ତୃତୀୟ ଭାଷା ସଂସ୍କୃତ)": "#"
-      },
-      "CLASS X": {
-        "FLO - ODIA (ସାହିତ୍ୟ ସିନ୍ଧୁ)": "#",
-        "SLE - ENGLISH (ଇଂରାଜୀ)": "#",
-        "MATHEMATICS (ମାଧ୍ୟମିକ ବୀଜଗଣିତ ଓ ଜ୍ୟାମିତି)": "#",
-        "PHYSICAL SCIENCE (ଭୌତିକ ବିଜ୍ଞାନ)": "#",
-        "LIFE SCIENCE (ଜୀବ ବିଜ୍ଞାନ)": "#",
-        "HISTORY & POL. SC. (ଇତିହାସ ଓ ରାଜନୀତି ବିଜ୍ଞାନ)": "#",
-        "GEOGRAPHY & ECON. (ଭୂଗୋଳ ଓ ଅର୍ଥନୀତି)": "#",
-        "TLH - HINDI (ହିନ୍ଦୀ)": "#",
-        "TLS - SANSKRIT (ସଂସ୍କୃତ)": "#"
-      }
+    const SUBJECT_MAP = {
+      "CLASS VI": [
+        "MIL ODIA (ମାତୃଭାଷା)", "ENGLISH (ଇଂରାଜୀ)", "MATHEMATICS (ଗଣିତ)", "SCIENCE (ବିଜ୍ଞାନ)",
+        "HISTORY & CIVICS (ଇତିହାସ ଓ ରାଜନୀତି)", "GEOGRAPHY (ଭୂଗୋଳ)", "HINDI (ହିନ୍ଦୀ)", "SANSKRIT (ସଂସ୍କୃତ)"
+      ],
+      "CLASS VII": [
+        "MIL ODIA (ମାତୃଭାଷା)", "ENGLISH (ଇଂରାଜୀ)", "MATHEMATICS (ଗଣିତ)", "SCIENCE (ବିଜ୍ଞାନ)",
+        "HISTORY & CIVICS (ଇତିହାସ ଓ ରାଜନୀତି)", "GEOGRAPHY (ଭୂଗୋଳ)", "HINDI (ହିନ୍ଦୀ)", "SANSKRIT (ସଂସ୍କୃତ)"
+      ],
+      "CLASS VIII": [
+        "MIL ODIA (ମାତୃଭାଷା)", "ENGLISH (ଇଂରାଜୀ)", "MATHEMATICS (ଗଣିତ)", "SCIENCE (ବିଜ୍ଞାନ)",
+        "HISTORY & CIVICS (ଇତିହାସ ଓ ରାଜନୀତି)", "GEOGRAPHY (ଭୂଗୋଳ)", "HINDI (ହିନ୍ଦୀ)", "SANSKRIT (ସଂସ୍କୃତ)"
+      ],
+      "CLASS IX": [
+        "FLO - ODIA (ମାତୃଭାଷା ସାହିତ୍ୟ)", "SLE - ENGLISH (ଇଂରାଜୀ)", "MATHEMATICS (ଗଣିତ)",
+        "PHYSICAL SCIENCE (ଭୌତିକ ବିଜ୍ଞାନ)", "LIFE SCIENCE (ଜୀବ ବିଜ୍ଞାନ)",
+        "HISTORY & POL. SC. (ଇତିହାସ ଓ ରାଜନୀତି)", "GEOGRAPHY & ECON. (ଭୂଗୋଳ ଓ ଅର୍ଥନୀତି)",
+        "TLH - HINDI (ହିନ୍ଦୀ)", "TLS - SANSKRIT (ସଂସ୍କୃତ)"
+      ],
+      "CLASS X": [
+        "FLO - ODIA (ସାହିତ୍ୟ ସିନ୍ଧୁ)", "SLE - ENGLISH (ଇଂରାଜୀ)", "MATHEMATICS (ଗଣିତ)",
+        "PHYSICAL SCIENCE (ଭୌତିକ ବିଜ୍ଞାନ)", "LIFE SCIENCE (ଜୀବ ବିଜ୍ଞାନ)",
+        "HISTORY & POL. SC. (ଇତିହାସ ଓ ରାଜନୀତି)", "GEOGRAPHY & ECON. (ଭୂଗୋଳ ଓ ଅର୍ଥନୀତି)",
+        "TLH - HINDI (ହିନ୍ଦୀ)", "TLS - SANSKRIT (ସଂସ୍କୃତ)"
+      ]
     };
 
     let remoteMcqData = null;
-    let selectedClass = "";
-    let selectedSubject = "";
-    let selectedTopic = "";
-    let currentQuestions = [];
-    let currentQIdx = 0;
-    let score = 0;
+    let selectedClass = "", selectedSubject = "", selectedTopic = "";
+    let currentQuestions = [], currentQIdx = 0, score = 0;
 
     window.onload = function() {
       renderClasses();
@@ -457,10 +150,10 @@
     };
 
     function fetchMCQData() {
-      fetch(GITHUB_MCQ_JSON_URL)
+      fetch(GITHUB_MCQ_JSON_URL + "?t=" + new Date().getTime())
         .then(res => res.json())
         .then(data => { remoteMcqData = data; })
-        .catch(err => { console.warn("GitHub MCQ data fetch pending.", err); });
+        .catch(err => console.warn(err));
     }
 
     function navigate(viewId) {
@@ -472,7 +165,6 @@
       const classes = ["CLASS VI", "CLASS VII", "CLASS VIII", "CLASS IX", "CLASS X"];
       const grid = document.getElementById('class-grid');
       grid.innerHTML = '';
-
       classes.forEach(cls => {
         const card = document.createElement('div');
         card.className = 'card';
@@ -492,38 +184,19 @@
     function renderSubjects(cls) {
       const subjectList = document.getElementById('subject-list');
       subjectList.innerHTML = '';
-
-      const subjects = DRIVE_DATA[cls] ? Object.keys(DRIVE_DATA[cls]) : [];
+      const subjects = SUBJECT_MAP[cls] || [];
 
       subjects.forEach(sub => {
         const item = document.createElement('div');
         item.className = 'subject-card';
-
-        const driveUrl = DRIVE_DATA[cls] && DRIVE_DATA[cls][sub] ? DRIVE_DATA[cls][sub] : "#";
-
         item.innerHTML = `
-          <div class="subject-info">
-            <h3>${sub}</h3>
-          </div>
+          <div class="subject-info"><h3>${sub}</h3></div>
           <div class="subject-actions">
-            <button class="btn btn-notes" onclick="openDriveLink('${driveUrl}')">📖 ଟିପ୍ପଣୀ</button>
             <button class="btn btn-quiz" onclick="selectSubject('${sub}')">✍️ ଅଭ୍ୟାସ (MCQ)</button>
           </div>
         `;
         subjectList.appendChild(item);
       });
-    }
-
-    function openDriveLink(url) {
-      if (url === "#") {
-        alert("ଏହି ବିଷୟର ଟିପ୍ପଣୀ (Notes) ଖୁବ୍ ଶୀଘ୍ର ଉପଲବ୍ଧ ହେବ।");
-        return;
-      }
-      if (window.AppInventor) {
-        window.AppInventor.setWebViewString("OPEN_URL:" + url);
-      } else {
-        window.open(url, '_blank');
-      }
     }
 
     function selectSubject(sub) {
@@ -537,17 +210,10 @@
     function renderTopics(cls, sub) {
       const topicList = document.getElementById('topic-list');
       topicList.innerHTML = '';
-
-      let topics = [];
-      if (remoteMcqData && remoteMcqData[cls] && remoteMcqData[cls][sub]) {
-        topics = Object.keys(remoteMcqData[cls][sub]);
-      }
+      let topics = (remoteMcqData && remoteMcqData[cls] && remoteMcqData[cls][sub]) ? Object.keys(remoteMcqData[cls][sub]) : [];
 
       if (topics.length === 0) {
-        topicList.innerHTML = `
-          <div style="text-align: center; padding: 2rem; color: var(--text-muted); background: white; border-radius: 12px; box-shadow: var(--shadow);">
-            ଏହି ବିଷୟ ପାଇଁ MCQ ଖୁବ୍ ଶୀଘ୍ର ଯୋଡ଼ାଯିବ।
-          </div>`;
+        topicList.innerHTML = `<div style="text-align:center; padding:2rem; color:var(--text-muted); background:white; border-radius:12px;">ଏହି ବିଷୟ ପାଇଁ MCQ ଖୁବ୍ ଶୀଘ୍ର ଯୋଡ଼ାଯିବ।</div>`;
         return;
       }
 
@@ -564,8 +230,7 @@
     function startQuiz(topic) {
       selectedTopic = topic;
       currentQuestions = remoteMcqData[selectedClass][selectedSubject][topic];
-      currentQIdx = 0;
-      score = 0;
+      currentQIdx = 0; score = 0;
       document.getElementById('bc-quiz-topic').innerText = topic;
       navigate('view-quiz');
       showQuestion();
@@ -576,11 +241,9 @@
       document.getElementById('q-counter').innerText = `ପ୍ରଶ୍ନ ${currentQIdx + 1} / ${currentQuestions.length}`;
       document.getElementById('score-live').innerText = `ସ୍ମୋର: ${score}`;
       document.getElementById('q-text').innerText = q.q;
-
       const optContainer = document.getElementById('options-container');
       optContainer.innerHTML = '';
-      const expContainer = document.getElementById('explanation-container');
-      expContainer.style.display = 'none';
+      document.getElementById('explanation-container').style.display = 'none';
       document.getElementById('btn-next').style.display = 'none';
 
       q.options.forEach((opt, idx) => {
@@ -594,34 +257,25 @@
 
     function handleAnswer(selectedIdx, clickedBtn) {
       const q = currentQuestions[currentQIdx];
-      const optButtons = document.querySelectorAll('.option-btn');
-      optButtons.forEach(b => b.disabled = true);
-
+      document.querySelectorAll('.option-btn').forEach(b => b.disabled = true);
       if (selectedIdx === q.ans) {
-        clickedBtn.classList.add('correct');
-        score++;
+        clickedBtn.classList.add('correct'); score++;
         document.getElementById('score-live').innerText = `ସ୍ମୋର: ${score}`;
       } else {
         clickedBtn.classList.add('wrong');
-        optButtons[q.ans].classList.add('correct');
+        document.querySelectorAll('.option-btn')[q.ans].classList.add('correct');
       }
-
       if (q.exp) {
         const expBox = document.getElementById('explanation-container');
-        expBox.innerHTML = `<strong>ବ୍ୟାଖ୍ୟା (Explanation):</strong> ${q.exp}`;
+        expBox.innerHTML = `<strong>ବ୍ୟାଖ୍ୟା:</strong> ${q.exp}`;
         expBox.style.display = 'block';
       }
-
       document.getElementById('btn-next').style.display = 'block';
     }
 
     function nextQuestion() {
       currentQIdx++;
-      if (currentQIdx < currentQuestions.length) {
-        showQuestion();
-      } else {
-        showScoreboard();
-      }
+      if (currentQIdx < currentQuestions.length) { showQuestion(); } else { showScoreboard(); }
     }
 
     function showScoreboard() {
