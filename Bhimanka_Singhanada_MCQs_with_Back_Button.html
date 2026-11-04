@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="or">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ଭୀମଙ୍କ ସିଂହନାଦ ରଡ଼ି - MCQ Practice</title>
+<style>
+:root{--p:#5b21b6;--ink:#241b35;--good:#15803d;--bad:#b91c1c}
+*{box-sizing:border-box}body{margin:0;background:#f5f3ff;color:var(--ink);font-family:"Noto Sans Odia","Noto Sans Oriya",system-ui,sans-serif;line-height:1.7}
+header{background:linear-gradient(135deg,#4c1d95,#7e22ce);color:white;text-align:center;padding:24px 14px}
+header h1{font-size:clamp(22px,5vw,30px);margin:0 0 5px}header p{margin:0}
+.wrap{max-width:850px;margin:18px auto;padding:0 12px 30px}
+.info,.question,.result{background:#fff;border-radius:14px;padding:16px;margin:14px 0;box-shadow:0 3px 14px #2e10651a}
+.info{border-left:5px solid var(--p)}
+.progressrow{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;color:var(--p);font-weight:700}
+.progress{height:8px;background:#e9d5ff;border-radius:20px;overflow:hidden;margin:9px 0}.bar{height:100%;width:0;background:var(--p)}
+.question h3{font-size:17px;margin:0 0 12px}.qno{color:var(--p);font-weight:800}
+.option{display:flex;gap:9px;align-items:flex-start;border:1px solid #e5e1ed;border-radius:10px;padding:10px 12px;margin:8px 0;cursor:pointer}
+.option:hover{background:#faf5ff;border-color:#c4b5fd}.option input{margin-top:7px;accent-color:var(--p)}
+.option.correct{border-color:var(--good);background:#f0fdf4}.option.wrong{border-color:var(--bad);background:#fef2f2}
+.explain{display:none;margin-top:10px;padding:10px 12px;background:#f5f3ff;border-radius:9px;font-size:14px}
+button{border:0;border-radius:10px;padding:12px 18px;font-size:16px;font-weight:700;cursor:pointer}
+.back-btn{display:block;width:100%;margin:14px 0;background:#1d4ed8;color:#fff;padding:14px;border-radius:12px}
+#submit{background:var(--p);color:#fff;width:100%;margin:12px 0}.result{display:none;text-align:center;border:2px solid #c4b5fd}
+.score{font-size:32px;font-weight:900;color:var(--p)}#retry{background:#ede9fe;color:#4c1d95;margin-top:12px}
+.small{font-size:13px;color:#665b78}footer{text-align:center;color:#756b84;font-size:12px;padding:15px}
+</style></head>
+<body>
+<header><h1>ଅଧ୍ୟାୟ : ଭୀମଙ୍କ ସିଂହନାଦ ରଡ଼ି</h1><p>Class 10 • MIL Odia • Exam-Oriented MCQ Practice</p></header>
+<main class="wrap">
+<button class="back-btn" type="button" onclick="goBack()">← BACK</button>
+<section class="info"><b>ଅଭ୍ୟାସ ନିର୍ଦ୍ଦେଶ:</b> ପ୍ରତ୍ୟେକ ପ୍ରଶ୍ନର ଗୋଟିଏ ଠିକ୍ ଉତ୍ତର ବାଛନ୍ତୁ। ସମସ୍ତ ପ୍ରଶ୍ନର ଉତ୍ତର ଦେଇ <b>Submit &amp; Check Score</b> ଦବାନ୍ତୁ। ଫଳାଫଳ, ଠିକ୍ ଉତ୍ତର ଓ ବ୍ୟାଖ୍ୟା ଦେଖିପାରିବେ।</section>
+<div class="progressrow"><span id="answered">ଉତ୍ତର ଦିଆଯାଇଛି: ୦ / ୩୦</span><span>ମୋଟ ମାର୍କ: ୩୦</span></div><div class="progress"><div class="bar" id="bar"></div></div>
+<form id="quiz"></form><button id="submit" type="button">Submit &amp; Check Score</button>
+<section class="result" id="result" aria-live="polite"><div>ଆପଣଙ୍କ ଫଳାଫଳ</div><div class="score" id="score"></div><div id="remark"></div><button id="retry" type="button">Try Again</button></section>
+<p class="small">ଟିପ୍ପଣୀ: ପ୍ରଶ୍ନଗୁଡ଼ିକ ଦିଆଯାଇଥିବା PDFର ପାଠ୍ୟ, କବି ପରିଚୟ, ଶବ୍ଦାର୍ଥ ଓ ଅଭ୍ୟାସ ପ୍ରଶ୍ନକୁ ଆଧାର କରି ପ୍ରସ୍ତୁତ।</p>
+</main><footer>Odia MIL • Chapter MCQ Test</footer>
+<script>
+function goBack(){
+  if(window.history.length > 1){ window.history.back(); }
+  else { alert("Previous page not found. Please use the app back button."); }
+}
+const questions=[
+{q:"‘ଭୀମଙ୍କ ସିଂହନାଦ ରଡ଼ି’ ପାଠର ରଚୟିତା କିଏ?",o:["ସାରଳା ଦାସ","ଉପେନ୍ଦ୍ର ଭଞ୍ଜ","ଫକୀରମୋହନ ସେନାପତି","ଗଙ୍ଗାଧର ମେହେର"],a:0,e:"ପାଠର କବି ପରିଚୟରେ ସାରଳା ଦାସଙ୍କ ନାମ ଦିଆଯାଇଛି।"},
+{q:"ସାରଳା ଦାସ କେଉଁ ଉପାଧିରେ ପରିଚିତ?",o:["ଆଦିକବି","କବିସମ୍ରାଟ","ସ୍ୱଭାବକବି","କବିବର"],a:0,e:"ସାରଳା ଦାସ ଓଡ଼ିଆ ସାହିତ୍ୟର ଆଦିକବି ଭାବେ ପରିଚିତ।"},
+{q:"ସାରଳା ଦାସଙ୍କ ପ୍ରସିଦ୍ଧ ରଚନା କେଉଁଟି?",o:["ଓଡ଼ିଆ ମହାଭାରତ","ତପସ୍ୱିନୀ","ଚିଲିକା","ରେବତୀ"],a:0,e:"ସାରଳା ଦାସଙ୍କ ଓଡ଼ିଆ ମହାଭାରତ ଏକ ପ୍ରସିଦ୍ଧ କୃତି।"},
+{q:"‘ଭୀମ’ କେଉଁ ମହାକାବ୍ୟର ଏକ ପ୍ରମୁଖ ପାତ୍ର?",o:["ରାମାୟଣ","ମହାଭାରତ","କୁମାରସମ୍ଭବ","ମେଘଦୂତ"],a:1,e:"ଭୀମ ମହାଭାରତର ପାଣ୍ଡବ ଭ୍ରାତାମାନଙ୍କ ମଧ୍ୟରୁ ଜଣେ।"},
+{q:"ଭୀମ କେଉଁ ପାଣ୍ଡବ ଭାଇ?",o:["ପ୍ରଥମ","ଦ୍ୱିତୀୟ","ତୃତୀୟ","ପଞ୍ଚମ"],a:1,e:"ପାଣ୍ଡବମାନଙ୍କ ମଧ୍ୟରେ ଭୀମ ଦ୍ୱିତୀୟ।"},
+{q:"‘ସିଂହନାଦ’ ଶବ୍ଦର ଅର୍ଥ କ’ଣ?",o:["ସିଂହର ଗର୍ଜନ","ପକ୍ଷୀର କାକଳି","ନଦୀର ଶବ୍ଦ","ବର୍ଷାର ଶବ୍ଦ"],a:0,e:"ସିଂହନାଦର ଅର୍ଥ ସିଂହର ଗର୍ଜନ ବା ତାହା ପରି ଗମ୍ଭୀର ଧ୍ୱନି।"},
+{q:"‘ରଡ଼ି’ ଶବ୍ଦଟି କେଉଁ ଭାବକୁ ସୂଚାଏ?",o:["ଉଚ୍ଚ ସ୍ୱରରେ ଡାକ/ଚିତ୍କାର","ମୃଦୁ ହସ","ନିରବତା","ଫୁସୁରୁ ଫାସୁରୁ"],a:0,e:"ପାଠର ଶୀର୍ଷକରେ ରଡ଼ି ଉଚ୍ଚସ୍ୱରର ଧ୍ୱନି ବା ଚିତ୍କାରକୁ ସୂଚାଏ।"},
+{q:"ମହାଭାରତରେ ପାଣ୍ଡବଙ୍କ ସଂଖ୍ୟା କେତେ?",o:["ତିନି","ଚାରି","ପାଞ୍ଚ","ଛଅ"],a:2,e:"ପାଣ୍ଡବ ଭାଇ ପାଞ୍ଚଜଣ।"},
+{q:"ଭୀମ କେଉଁ ଗୁଣ ପାଇଁ ବିଶେଷ ପରିଚିତ?",o:["ଅସାଧାରଣ ବଳ","ସଙ୍ଗୀତ ପ୍ରତିଭା","ଚିତ୍ରକଳା","ଜ୍ୟୋତିଷ ଜ୍ଞାନ"],a:0,e:"ମହାଭାରତରେ ଭୀମ ତାଙ୍କ ଅପାର ଶାରୀରିକ ବଳ ପାଇଁ ପ୍ରସିଦ୍ଧ।"},
+{q:"ସାରଳା ଦାସଙ୍କ ରଚନା କେଉଁ ଭାଷାରେ?",o:["ଓଡ଼ିଆ","ବଙ୍ଗଳା","ହିନ୍ଦୀ","ତେଲୁଗୁ"],a:0,e:"ସାରଳା ଦାସ ଓଡ଼ିଆ ଭାଷାର ଆଦିକବି।"},
+{q:"‘କବି ପରିଚୟ’ ଅଂଶରେ କାହା ବିଷୟରେ ଆଲୋଚନା ହୋଇଛି?",o:["ସାରଳା ଦାସ","ଭୀମ","ଅର୍ଜୁନ","ଦୁର୍ଯ୍ୟୋଧନ"],a:0,e:"ପାଠର ପ୍ରାରମ୍ଭିକ ଅଂଶରେ କବି ସାରଳା ଦାସଙ୍କ ପରିଚୟ ରହିଛି।"},
+{q:"‘ମହାଭାରତ’ କେଉଁ ପ୍ରକାର ସାହିତ୍ୟକୃତି?",o:["ମହାକାବ୍ୟ","ଗଳ୍ପ","ନାଟକ","ପ୍ରବନ୍ଧ"],a:0,e:"ମହାଭାରତ ଏକ ମହାକାବ୍ୟ।"},
+{q:"‘ବଳ’ ଶବ୍ଦର ନିକଟତମ ଅର୍ଥ କ’ଣ?",o:["ଶକ୍ତି","ଦୁର୍ବଳତା","ଭୟ","ଦୁଃଖ"],a:0,e:"ବଳର ଅର୍ଥ ଶକ୍ତି ବା ସାମର୍ଥ୍ୟ।"},
+{q:"‘ଶୂର’ ଶବ୍ଦର ଅର୍ଥ କ’ଣ?",o:["ବୀର/ସାହସୀ","ଭୀରୁ","ଅଳସୁଆ","ଦୁଃଖୀ"],a:0,e:"ଶୂର ଅର୍ଥ ବୀର ବା ସାହସୀ ବ୍ୟକ୍ତି।"},
+{q:"‘ପ୍ରତିଜ୍ଞା’ ଶବ୍ଦର ଅର୍ଥ କ’ଣ?",o:["ଶପଥ","ଅନୁରୋଧ","ପ୍ରଶ୍ନ","ଉତ୍ତର"],a:0,e:"ପ୍ରତିଜ୍ଞାର ଅର୍ଥ ଦୃଢ଼ ସଂକଳ୍ପ ବା ଶପଥ।"},
+{q:"‘କ୍ରୋଧ’ର ବିପରୀତ ଭାବ କେଉଁଟି?",o:["ଶାନ୍ତି","ରୋଷ","ଅସନ୍ତୋଷ","ଉତ୍ତେଜନା"],a:0,e:"କ୍ରୋଧର ବିପରୀତ ଭାବ ଶାନ୍ତି ବା ପ୍ରଶାନ୍ତତା।"},
+{q:"‘ବିଜୟ’ର ବିପରୀତ ଶବ୍ଦ କ’ଣ?",o:["ପରାଜୟ","ସଫଳତା","ଜୟ","ଗୌରବ"],a:0,e:"ବିଜୟର ବିପରୀତ ହେଉଛି ପରାଜୟ।"},
+{q:"‘ଶତ୍ରୁ’ ଶବ୍ଦର ବିପରୀତ କ’ଣ?",o:["ମିତ୍ର","ବିରୋଧୀ","ପ୍ରତିଦ୍ୱନ୍ଦ୍ୱୀ","ବୈରୀ"],a:0,e:"ଶତ୍ରୁର ବିପରୀତ ଶବ୍ଦ ମିତ୍ର।"},
+{q:"‘ସାହସ’ର ନିକଟତମ ଅର୍ଥ କ’ଣ?",o:["ଧୈର୍ଯ୍ୟ ଓ ବୀରତ୍ୱ","ଭୟ","ଅଳସତା","ନିରାଶା"],a:0,e:"ସାହସ ଅର୍ଥ ଭୟକୁ ଜୟ କରି କାର୍ଯ୍ୟ କରିବାର ମନୋବଳ।"},
+{q:"ଭୀମଙ୍କ ଚରିତ୍ର ସହ କେଉଁ ଗୁଣଟି ଅଧିକ ସମ୍ପୃକ୍ତ?",o:["ବୀରତ୍ୱ","କାପୁରୁଷତା","ଅସତ୍ୟ","ଅଳସତା"],a:0,e:"ଭୀମଙ୍କ ଚରିତ୍ରରେ ବୀରତ୍ୱ ଓ ଶକ୍ତି ପ୍ରମୁଖ ଗୁଣ।"},
+{q:"ଓଡ଼ିଆ ମହାଭାରତର ରଚୟିତା କିଏ?",o:["ସାରଳା ଦାସ","ଜଗନ୍ନାଥ ଦାସ","ବଳରାମ ଦାସ","ଅଚ୍ୟୁତାନନ୍ଦ ଦାସ"],a:0,e:"ଓଡ଼ିଆ ମହାଭାରତ ସାରଳା ଦାସଙ୍କ ରଚନା।"},
+{q:"‘ଆଦିକବି’ ଶବ୍ଦର ଅର୍ଥ କ’ଣ?",o:["ପ୍ରାଚୀନ/ପ୍ରଥମ କବି","ଶେଷ କବି","ନାଟ୍ୟକାର","ଗାୟକ"],a:0,e:"ଆଦିକବି ଅର୍ଥ ଆରମ୍ଭିକ ବା ପ୍ରଥମ କବି।"},
+{q:"ପାଣ୍ଡବମାନଙ୍କ ମଧ୍ୟରେ ଭୀମଙ୍କ ଭାଇ ଅର୍ଜୁନ କେଉଁ ଗୁଣ ପାଇଁ ପ୍ରସିଦ୍ଧ?",o:["ଧନୁର୍ବିଦ୍ୟା","ଗଦାଯୁଦ୍ଧ ମାତ୍ର","ଚିକିତ୍ସା","ଚାଷ"],a:0,e:"ଅର୍ଜୁନ ମହାଭାରତରେ ଧନୁର୍ବିଦ୍ୟା ପାଇଁ ପ୍ରସିଦ୍ଧ।"},
+{q:"ଭୀମଙ୍କ ସହ ମହାଭାରତରେ କେଉଁ ଅସ୍ତ୍ରର ସମ୍ପର୍କ ବିଶେଷ ଭାବେ ଉଲ୍ଲେଖ ହୁଏ?",o:["ଗଦା","ବୀଣା","କଲମ","ଶଙ୍ଖ ମାତ୍ର"],a:0,e:"ଭୀମ ଗଦାଯୁଦ୍ଧରେ ପାରଦର୍ଶୀ ଥିଲେ।"},
+{q:"ପାଠର ଶୀର୍ଷକରେ ‘ଭୀମ’ ନାମ ଥିବାରୁ ମୁଖ୍ୟ ଆଲୋଚ୍ୟ ବିଷୟ କିଏ?",o:["ଭୀମଙ୍କ ବୀରତ୍ୱ ଓ ଗର୍ଜନ","କୃଷ୍ଣଙ୍କ ବାଲ୍ୟଲୀଳା","ରାମଙ୍କ ବନବାସ","ସୀତାଙ୍କ ଅଗ୍ନିପରୀକ୍ଷା"],a:0,e:"ଶୀର୍ଷକ ଭୀମଙ୍କ ସିଂହନାଦ ବା ଗର୍ଜନକୁ କେନ୍ଦ୍ର କରିଛି।"},
+{q:"‘ଗର୍ଜନ’ ଶବ୍ଦର ଅର୍ଥ କ’ଣ?",o:["ଉଚ୍ଚ ଓ ଗମ୍ଭୀର ଧ୍ୱନି","ମୃଦୁ କଥା","ନିରବତା","କାନ୍ଦଣା"],a:0,e:"ଗର୍ଜନ ହେଉଛି ଉଚ୍ଚ ଓ ଗମ୍ଭୀର ଧ୍ୱନି।"},
+{q:"ମହାଭାରତର କାହାଣୀରେ ପାଣ୍ଡବମାନେ କାହା ସହ ସଂଘର୍ଷ କରିଥିଲେ?",o:["କୌରବମାନଙ୍କ ସହ","ବାନରମାନଙ୍କ ସହ","ରାକ୍ଷସମାନଙ୍କ ସହ ମାତ୍ର","ଦେବତାମାନଙ୍କ ସହ"],a:0,e:"ମହାଭାରତର ମୁଖ୍ୟ ସଂଘର୍ଷ ପାଣ୍ଡବ ଓ କୌରବଙ୍କ ମଧ୍ୟରେ।"},
+{q:"ସାହିତ୍ୟ ପାଠରେ ଶବ୍ଦାର୍ଥ ଅଧ୍ୟୟନ କରିବାର ଉଦ୍ଦେଶ୍ୟ କ’ଣ?",o:["ପାଠର ଅର୍ଥ ସ୍ପଷ୍ଟ ବୁଝିବା","ପାଠକୁ ମନେ ନ ରଖିବା","କେବଳ ଲେଖା ସୁନ୍ଦର କରିବା","ପ୍ରଶ୍ନ ଏଡ଼ାଇବା"],a:0,e:"ଶବ୍ଦାର୍ଥ ଜାଣିଲେ ପାଠର ଭାବ ଓ ଅର୍ଥ ଭଲଭାବେ ବୁଝିହୁଏ।"},
+{q:"ସାରଳା ଦାସଙ୍କ ଓଡ଼ିଆ ମହାଭାରତର ଗୁରୁତ୍ୱ କ’ଣ?",o:["ଓଡ଼ିଆ ସାହିତ୍ୟର ଏକ ମୂଲ୍ୟବାନ ମହାକାବ୍ୟ","ଏକ ଆଧୁନିକ ଉପନ୍ୟାସ","ଏକ ଇଂରାଜୀ ନାଟକ","ଏକ ବୈଜ୍ଞାନିକ ପୁସ୍ତକ"],a:0,e:"ସାରଳା ଦାସଙ୍କ ଓଡ଼ିଆ ମହାଭାରତ ଓଡ଼ିଆ ସାହିତ୍ୟର ମୂଲ୍ୟବାନ କୃତି।"},
+{q:"ଏହି ପାଠର ଅଧ୍ୟୟନରେ କେଉଁ ଦୁଇଟି ବିଷୟ ଉପରେ ଧ୍ୟାନ ଦେବା ଉଚିତ?",o:["କବି ପରିଚୟ ଓ ଶବ୍ଦାର୍ଥ","କେବଳ ଚିତ୍ର ଓ ରଙ୍ଗ","କେବଳ ଗଣିତ","କେବଳ ଇଂରାଜୀ ବ୍ୟାକରଣ"],a:0,e:"PDFରେ କବି ପରିଚୟ, ପାଠ୍ୟାଂଶ, ଶବ୍ଦାର୍ଥ ଓ ଅଭ୍ୟାସ ପ୍ରଶ୍ନ ରହିଛି।"}
+];
+const form=document.getElementById('quiz'), nums=['୧','୨','୩','୪','୫','୬','୭','୮','୯','୧୦','୧୧','୧୨','୧୩','୧୪','୧୫','୧୬','୧୭','୧୮','୧୯','୨୦','୨୧','୨୨','୨୩','୨୪','୨୫','୨୬','୨୭','୨୮','୨୯','୩୦'];
+function render(){form.innerHTML='';questions.forEach((x,i)=>{let b=document.createElement('section');b.className='question';b.id='q'+i;let h=document.createElement('h3');h.innerHTML='<span class="qno">ପ୍ରଶ୍ନ '+nums[i]+'.</span> '+x.q;b.appendChild(h);x.o.forEach((op,j)=>{let l=document.createElement('label');l.className='option';l.innerHTML=`<input type="radio" name="q${i}" value="${j}"><span>${['(କ)','(ଖ)','(ଗ)','(ଘ)'][j]} ${op}</span>`;b.appendChild(l)});let e=document.createElement('div');e.className='explain';e.id='ex'+i;b.appendChild(e);form.appendChild(b)});progress()}
+function progress(){let n=questions.filter((q,i)=>form.querySelector(`input[name="q${i}"]:checked`)).length;document.getElementById('answered').textContent=`ଉତ୍ତର ଦିଆଯାଇଛି: ${n} / ୩୦`;document.getElementById('bar').style.width=n/questions.length*100+'%'}
+form.addEventListener('change',progress);
+document.getElementById('submit').onclick=()=>{let score=0,un=0;questions.forEach((q,i)=>{let c=form.querySelector(`input[name="q${i}"]:checked`);if(!c)un++;let ls=[...document.querySelectorAll(`#q${i} .option`)];ls.forEach((l,j)=>{if(j===q.a)l.classList.add('correct');if(c&&+c.value===j&&j!==q.a)l.classList.add('wrong')});if(c&&+c.value===q.a)score++;let e=document.getElementById('ex'+i);e.style.display='block';e.innerHTML=`<b>${c&&+c.value===q.a?'ଠିକ୍ ଉତ୍ତର!':'ଠିକ୍ ଉତ୍ତର: '+['(କ)','(ଖ)','(ଗ)','(ଘ)'][q.a]+' '+q.o[q.a]}</b><br>${q.e}`});let p=Math.round(score/30*100);document.getElementById('score').textContent=score+' / 30';document.getElementById('remark').textContent=p+'% • '+(un?un+'ଟି ପ୍ରଶ୍ନ ଅନୁତ୍ତରିତ। ':'')+(p>=80?'ଅତି ଉତ୍ତମ!':p>=60?'ଭଲ ପ୍ରୟାସ।':p>=40?'ଆଉଥରେ ଅଭ୍ୟାସ କରନ୍ତୁ।':'ପାଠଟି ପୁଣି ପଢ଼ି ଅଭ୍ୟାସ କରନ୍ତୁ।');document.getElementById('result').style.display='block';document.getElementById('result').scrollIntoView({behavior:'smooth'});document.getElementById('submit').disabled=true;document.getElementById('submit').textContent='Submitted'};
+document.getElementById('retry').onclick=()=>{document.getElementById('submit').disabled=false;document.getElementById('submit').textContent='Submit & Check Score';document.getElementById('result').style.display='none';render();window.scrollTo({top:0,behavior:'smooth'})};render();
+</script></body></html>
