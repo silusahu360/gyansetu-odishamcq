@@ -1,7 +1,23 @@
 {
   "CLASS X": {
     "ODIA": [
+      { "title": "ଭୀମଙ୍କ ସିଂହନାଦ ରଡ଼ି", "file": "Bhimanka_Singhanada_MCQs_with_Back_Button.html" }{
+  "CLASS X": {
+    "ODIA": [
       { "title": "ଭୀମଙ୍କ ସିଂହନାଦ ରଡ଼ି", "file": "Bhimanka_Singhanada_MCQs_with_Back_Button.html" }
+    ],
+    "HISTORY": [
+      { "title": "ସ୍ୱତନ୍ତ୍ର ଓଡ଼ିଶା ପ୍ରଦେଶ ଗଠନ", "file": "swatantra_odisha_quiz.html" }
+    ],
+    "ENGLISH": [
+      { "title": "A Letter to God", "file": "a_letter_to_god.html" }
+    ]
+  },
+  "CLASS IX": {
+    "ODIA": [],
+    "HISTORY": []
+  }
+}
     ],
     "HISTORY": [
       { "title": "ସ୍ୱତନ୍ତ୍ର ଓଡ଼ିଶା ପ୍ରଦେଶ ଗଠନ", "file": "swatantra_odisha_quiz.html" }
