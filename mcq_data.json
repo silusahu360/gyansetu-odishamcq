@@ -1,1 +1,77 @@
-
+{
+  "CLASS VI": {
+    "ODIA": [],
+    "ENGLISH": [],
+    "MATHEMATICS": [],
+    "SCIENCE": [],
+    "SOCIAL SCIENCE": [],
+    "HINDI": [],
+    "SANSKRIT": []
+  },
+  "CLASS VII": {
+    "ODIA": [],
+    "ENGLISH": [],
+    "MATHEMATICS": [],
+    "SCIENCE": [],
+    "SOCIAL SCIENCE": [],
+    "HINDI": [],
+    "SANSKRIT": []
+  },
+  "CLASS VIII": {
+    "ODIA": [],
+    "ENGLISH": [],
+    "HINDI": [],
+    "SANSKRIT": [],
+    "MATHEMATICS": [],
+    "SCIENCE": [],
+    "SOCIAL SCIENCE": []
+  },
+  "CLASS IX": {
+    "ODIA": [],
+    "ENGLISH": [],
+    "SANSKRIT": [],
+    "HINDI": [],
+    "MATHEMATICS": [],
+    "SCIENCE": [],
+    "GEOGRAPHY": [],
+    "HISTORY": []
+  },
+  "CLASS X": {
+    "ODIA": [
+      {
+        "title": "ଭୀମଙ୍କ ସିଂହନାଦ ରଡ଼ି",
+        "file": "Bhimanka_Singhanada_MCQs_with_Back_Button.html"
+      },
+      {
+        "title": "କାହା ମୁଖ ଅନାଇ ବଞ୍ଚିବି",
+        "file": "Chapter_1_Kaha_Mukha_Anai_Banchibi_60_MCQ.html"
+      },
+      {
+        "title": "ରାଘବଙ୍କ ଲଙ୍କା ଯାତ୍ରାନୁକୂଳ",
+        "file": "Class_10_Chapter_3_Raghavanka_Lanka_Yatra_60_MCQ.html"
+      }
+    ],
+    "SCIENCE": [
+      {
+        "title": "ପୋଷଣ (Nutrition - 100 MCQ)",
+        "file": "Chapter_1_Nutrition_100_MCQ_Odia.html"
+      }
+    ],
+    "HISTORY": [
+      {
+        "title": "ସ୍ୱତନ୍ତ୍ର ଓଡ଼ିଶା ପ୍ରଦେଶ ଗଠନ",
+        "file": "swatantra_odisha_quiz.html"
+      }
+    ],
+    "ENGLISH": [
+      {
+        "title": "A Letter to God",
+        "file": "a_letter_to_god.html"
+      }
+    ],
+    "MATHEMATICS": [],
+    "GEOGRAPHY": [],
+    "HINDI": [],
+    "SANSKRIT": []
+  }
+}
