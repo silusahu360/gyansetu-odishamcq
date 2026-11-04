@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="or">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chapter 4 - ଚିଲିକାରେ ସାୟନ୍ତନ ଦୃଶ୍ୟ | MCQ</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Oriya:wght@400;500;600;700;800&display=swap');
+:root{--bg:#f3f6ff;--card:#fff;--ink:#172554;--muted:#64748b;--primary:#4f46e5;--green:#15803d;--red:#dc2626}
+*{box-sizing:border-box} body{margin:0;background:linear-gradient(135deg,#e0e7ff,#f0fdfa);font-family:'Noto Sans Oriya',system-ui,sans-serif;color:var(--ink);padding:16px}
+.wrap{max-width:850px;margin:auto}.hero{background:linear-gradient(120deg,#4338ca,#7c3aed);color:white;padding:24px;border-radius:22px;box-shadow:0 12px 30px #3730a333}
+.hero h1{font-size:clamp(21px,4vw,30px);margin:0 0 8px}.hero p{margin:4px 0;opacity:.95}
+.stats{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}.pill{background:#ffffff22;border:1px solid #ffffff55;padding:7px 12px;border-radius:30px;font-size:14px}
+.panel{background:var(--card);border-radius:18px;padding:18px;margin-top:16px;box-shadow:0 6px 20px #1e293b12}
+.topline{display:flex;justify-content:space-between;gap:10px;align-items:center;color:var(--muted);font-size:14px}
+.progress{height:8px;background:#e2e8f0;border-radius:20px;margin:12px 0 18px;overflow:hidden}.bar{height:100%;width:0;background:linear-gradient(90deg,#4f46e5,#06b6d4);transition:.25s}
+.q{font-size:19px;line-height:1.7;font-weight:700;margin:10px 0 16px}
+.options{display:grid;gap:10px}.opt{width:100%;text-align:left;border:2px solid #e2e8f0;background:#fff;color:#1e293b;padding:12px 14px;border-radius:12px;font:inherit;font-size:16px;cursor:pointer;line-height:1.55}.opt:hover{border-color:#818cf8;background:#eef2ff}.opt:disabled{cursor:default}.opt.correct{border-color:#16a34a;background:#dcfce7}.opt.wrong{border-color:#dc2626;background:#fee2e2}
+.feedback{margin-top:14px;padding:12px;border-radius:12px;display:none;line-height:1.6}.feedback.good{display:block;background:#dcfce7;color:#166534}.feedback.bad{display:block;background:#fee2e2;color:#991b1b}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}.btn{border:0;border-radius:12px;padding:11px 17px;font:inherit;font-weight:700;cursor:pointer}.primary{background:var(--primary);color:white}.secondary{background:#e0e7ff;color:#3730a3}.btn:disabled{opacity:.45;cursor:not-allowed}
+.result{text-align:center}.score{font-size:44px;font-weight:800;color:#4f46e5;margin:10px}.small{color:var(--muted);font-size:14px}.review{margin-top:14px;text-align:left}.review details{background:#f8fafc;padding:10px 12px;border-radius:10px;margin:8px 0}.review summary{cursor:pointer;font-weight:600}
+footer{text-align:center;color:#64748b;font-size:13px;padding:20px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="hero">
+<h1>ଅଧ୍ୟାୟ ୪: ଚିଲିକାରେ ସାୟନ୍ତନ ଦୃଶ୍ୟ</h1>
+<p>ଶ୍ରେଣୀ: ଦଶମ | ଓଡ଼ିଆ | ବହୁବିକଳ୍ପୀୟ ପ୍ରଶ୍ନ</p>
+<div class="stats"><span class="pill">ମୋଟ ପ୍ରଶ୍ନ: ୩୦</span><span class="pill">ତୁରନ୍ତ ଫଳାଫଳ</span><span class="pill">ଅଭ୍ୟାସ ପରୀକ୍ଷା</span></div>
+</header>
+<section class="panel" id="quiz">
+<div class="topline"><span id="counter">ପ୍ରଶ୍ନ ୧ / ୩୦</span><span id="scoreLive">ଠିକ୍: ୦</span></div>
+<div class="progress"><div class="bar" id="bar"></div></div>
+<div class="q" id="question"></div>
+<div class="options" id="options"></div>
+<div class="feedback" id="feedback"></div>
+<div class="actions"><button class="btn secondary" id="prev" onclick="previous()" disabled>← ପୂର୍ବ ପ୍ରଶ୍ନ</button><button class="btn primary" id="next" onclick="next()" disabled>ପରବର୍ତ୍ତୀ ପ୍ରଶ୍ନ →</button></div>
+</section>
+<section class="panel result" id="result" hidden>
+<h2>ଅଭିନନ୍ଦନ! ପରୀକ୍ଷା ସମାପ୍ତ</h2><div class="score" id="finalScore"></div><p id="remark"></p>
+<div class="actions" style="justify-content:center"><button class="btn primary" onclick="restart()">ପୁଣି ଅଭ୍ୟାସ କରନ୍ତୁ</button><button class="btn secondary" onclick="window.print()">Print / PDF</button></div>
+<div class="review" id="review"></div>
+</section>
+<footer>GyanSetu Odisha • Chapter-wise MCQ Practice</footer>
+</div>
+<script>
+const questions = [
+{q:"‘ଚିଲିକାରେ ସାୟନ୍ତନ ଦୃଶ୍ୟ’ କବିତାର କବି କିଏ?",o:["ଫକୀରମୋହନ ସେନାପତି","ରାଧାନାଥ ରାୟ","ଗଙ୍ଗାଧର ମେହେର","ମଧୁସୂଦନ ରାଓ"],a:1,e:"ଏହି କବିତାର ରଚୟିତା ରାଧାନାଥ ରାୟ।"},
+{q:"‘ସାୟନ୍ତନ’ ଶବ୍ଦର ଅର୍ଥ କ’ଣ?",o:["ପ୍ରଭାତକାଳୀନ","ମଧ୍ୟାହ୍ନକାଳୀନ","ସନ୍ଧ୍ୟାକାଳୀନ","ରାତ୍ରିକାଳୀନ"],a:2,e:"ସାୟନ୍ତନର ଅର୍ଥ ସନ୍ଧ୍ୟା ସମୟର।"},
+{q:"କବିତାର ମୁଖ୍ୟ ପ୍ରାକୃତିକ ପରିବେଶ କେଉଁଠାର?",o:["ହୀରାକୁଦ","ଚିଲିକା","ଶିମିଳିପାଳ","କୋଣାର୍କ"],a:1,e:"କବିତାରେ ଚିଲିକା ହ୍ରଦର ସନ୍ଧ୍ୟାକାଳୀନ ଦୃଶ୍ୟ ବର୍ଣ୍ଣିତ।"},
+{q:"ଚିଲିକା କେଉଁ ପ୍ରକାରର ଜଳାଶୟ?",o:["ମରୁଭୂମି","ହ୍ରଦ/ଲବଣାକ୍ତ ଜଳାଶୟ","ପର୍ବତ","ଝରଣା"],a:1,e:"ଚିଲିକା ଏକ ବିଶାଳ ଲବଣାକ୍ତ ଜଳାଶୟ ବା ହ୍ରଦ।"},
+{q:"କବିତାରେ କେଉଁ ସମୟର ପ୍ରକୃତିଚିତ୍ର ଅଙ୍କିତ ହୋଇଛି?",o:["ବସନ୍ତର ପ୍ରଭାତ","ଗ୍ରୀଷ୍ମର ମଧ୍ୟାହ୍ନ","ସନ୍ଧ୍ୟାବେଳ","ଶୀତର ରାତି"],a:2,e:"ଶୀର୍ଷକ ଅନୁସାରେ ଏହା ସନ୍ଧ୍ୟାବେଳର ଦୃଶ୍ୟ।"},
+{q:"ରାଧାନାଥ ରାୟ କେଉଁ ସାହିତ୍ୟ ଧାରାର ପ୍ରମୁଖ କବି?",o:["ଆଧୁନିକ ଓଡ଼ିଆ କାବ୍ୟଧାରା","ଭକ୍ତିଯୁଗୀୟ ପଦାବଳୀ","ପାଞ୍ଚସଖା ସାହିତ୍ୟ","ଲୋକଗୀତ"],a:0,e:"ରାଧାନାଥ ରାୟ ଆଧୁନିକ ଓଡ଼ିଆ କାବ୍ୟଧାରାର ପ୍ରମୁଖ କବି।"},
+{q:"‘ଦୃଶ୍ୟ’ ଶବ୍ଦର ନିକଟାର୍ଥକ ଶବ୍ଦ କେଉଁଟି?",o:["ଶ୍ରବଣ","ଦେଖିବା ଯୋଗ୍ୟ ଚିତ୍ର","ସୁଗନ୍ଧ","ସ୍ପର୍ଶ"],a:1,e:"ଦୃଶ୍ୟ ଅର୍ଥ ଯାହାକୁ ଦେଖିହୁଏ ବା ଦେଖିବା ଯୋଗ୍ୟ ଚିତ୍ର।"},
+{q:"କବିତାରେ ପ୍ରକୃତିର କେଉଁ ରୂପ ପ୍ରଧାନ ଭାବେ ଉପସ୍ଥାପିତ?",o:["ସନ୍ଧ୍ୟାର ମନୋହର ରୂପ","ଝଡ଼ର ଭୟଙ୍କର ରୂପ","ମରୁଭୂମିର ରୂପ","ବରଫର ରୂପ"],a:0,e:"କବି ଚିଲିକାର ସନ୍ଧ୍ୟାକାଳୀନ ସୌନ୍ଦର୍ଯ୍ୟକୁ ଚିତ୍ରଣ କରିଛନ୍ତି।"},
+{q:"ଚିଲିକାର ପରିବେଶ କବିଙ୍କ ମନରେ କେଉଁ ଭାବ ଜାଗ୍ରତ କରେ?",o:["ଘୃଣା","ସୌନ୍ଦର୍ଯ୍ୟବୋଧ ଓ ମୁଗ୍ଧତା","କ୍ରୋଧ","ଭୟ"],a:1,e:"ପ୍ରକୃତିର ମନୋହର ରୂପ କବିଙ୍କୁ ମୁଗ୍ଧ କରେ।"},
+{q:"‘ସନ୍ଧ୍ୟା’ର ବିପରୀତ ସମୟ କେଉଁଟି?",o:["ପ୍ରଭାତ","ରାତି","ଅପରାହ୍ଣ","ଗୋଧୂଳି"],a:0,e:"ସନ୍ଧ୍ୟାର ବିପରୀତ ସମୟ ହେଉଛି ପ୍ରଭାତ।"},
+{q:"ଚିଲିକା କେଉଁ ରାଜ୍ୟରେ ଅବସ୍ଥିତ?",o:["ପଶ୍ଚିମବଙ୍ଗ","ଓଡ଼ିଶା","ଆନ୍ଧ୍ରପ୍ରଦେଶ","ବିହାର"],a:1,e:"ଚିଲିକା ଓଡ଼ିଶାରେ ଅବସ୍ଥିତ।"},
+{q:"କବିତାରେ କବି କେଉଁ ମାଧ୍ୟମରେ ପ୍ରକୃତିସୌନ୍ଦର୍ଯ୍ୟ ଦେଖାଇଛନ୍ତି?",o:["ଚିତ୍ରମୟ ଭାଷା ଓ ଉପମା","ଗଣିତ ସୂତ୍ର","ସମ୍ବାଦ ଶୈଳୀ","ଆଇନର ଧାରା"],a:0,e:"କବି ଚିତ୍ରମୟ କାବ୍ୟଭାଷା ଦ୍ୱାରା ଦୃଶ୍ୟକୁ ଜୀବନ୍ତ କରିଛନ୍ତି।"},
+{q:"‘ମନୋହର’ ଶବ୍ଦର ଅର୍ଥ କ’ଣ?",o:["ମନକୁ ଆକର୍ଷିତ କରୁଥିବା","ମନକୁ ଦୁଃଖ ଦେଉଥିବା","ଅତ୍ୟନ୍ତ କଠିନ","ଅସ୍ପଷ୍ଟ"],a:0,e:"ମନୋହର ଅର୍ଥ ସୁନ୍ଦର ଓ ମନକୁ ଆକର୍ଷିତ କରୁଥିବା।"},
+{q:"‘ବିହଙ୍ଗ’ ଶବ୍ଦର ଅର୍ଥ କ’ଣ?",o:["ମାଛ","ପକ୍ଷୀ","ଗଛ","ପର୍ବତ"],a:1,e:"ବିହଙ୍ଗ ଅର୍ଥ ପକ୍ଷୀ।"},
+{q:"‘ତଟ’ ଶବ୍ଦର ଅର୍ଥ କ’ଣ?",o:["କୂଳ","ଆକାଶ","ମେଘ","ଜଙ୍ଗଲ"],a:0,e:"ତଟ ଅର୍ଥ ନଦୀ ବା ହ୍ରଦର କୂଳ।"},
+{q:"‘ନୀଳ’ ଶବ୍ଦ କେଉଁ ରଙ୍ଗକୁ ବୁଝାଏ?",o:["ଲାଲ","ହଳଦିଆ","ନୀଳ/ଆକାଶୀ","ସବୁଜ"],a:2,e:"ନୀଳ ଏକ ରଙ୍ଗର ନାମ।"},
+{q:"‘ପ୍ରସନ୍ନ’ ଶବ୍ଦର ଅର୍ଥ କ’ଣ?",o:["ଖୁସି/ସନ୍ତୁଷ୍ଟ","ବିରକ୍ତ","କ୍ଳାନ୍ତ","କ୍ରୁଦ୍ଧ"],a:0,e:"ପ୍ରସନ୍ନ ଅର୍ଥ ଖୁସି ବା ସନ୍ତୁଷ୍ଟ।"},
+{q:"‘ବିପୁଳ’ ଶବ୍ଦର ଅର୍ଥ କ’ଣ?",o:["ଅଳ୍ପ","ବିଶାଳ/ବହୁତ","ସଂକୀର୍ଣ୍ଣ","ଛୋଟ"],a:1,e:"ବିପୁଳ ଅର୍ଥ ବହୁତ ବା ବିଶାଳ।"},
+{q:"‘ମୃଦୁ’ ଶବ୍ଦର ବିପରୀତ ଅର୍ଥ କେଉଁଟି?",o:["କୋମଳ","କଠୋର","ନରମ","ସୁନ୍ଦର"],a:1,e:"ମୃଦୁର ବିପରୀତ ହେଉଛି କଠୋର।"},
+{q:"‘ଆକାଶ’ର ଏକ ପର୍ଯ୍ୟାୟବାଚୀ ଶବ୍ଦ କେଉଁଟି?",o:["ଗଗନ","ଧରା","ସାଗର","ଅରଣ୍ୟ"],a:0,e:"ଗଗନ ହେଉଛି ଆକାଶର ପର୍ଯ୍ୟାୟବାଚୀ।"},
+{q:"‘ସାଗର’ର ପର୍ଯ୍ୟାୟବାଚୀ ଶବ୍ଦ କେଉଁଟି?",o:["ପବନ","ସମୁଦ୍ର","ପର୍ବତ","ପୁଷ୍ପ"],a:1,e:"ସମୁଦ୍ର ହେଉଛି ସାଗରର ପର୍ଯ୍ୟାୟବାଚୀ।"},
+{q:"‘ସୁନ୍ଦର’ର ବିପରୀତ ଶବ୍ଦ କେଉଁଟି?",o:["ମନୋହର","କୁତ୍ସିତ","ରମଣୀୟ","ଆକର୍ଷଣୀୟ"],a:1,e:"ସୁନ୍ଦରର ବିପରୀତ ହେଉଛି କୁତ୍ସିତ।"},
+{q:"କବିତାର ଶୀର୍ଷକରେ ‘ଚିଲିକା’ କାହାକୁ ସୂଚାଏ?",o:["ଏକ ପର୍ବତ","ଏକ ହ୍ରଦ","ଏକ ନଗର","ଏକ ନଦୀ"],a:1,e:"ଚିଲିକା ଓଡ଼ିଶାର ପ୍ରସିଦ୍ଧ ହ୍ରଦ।"},
+{q:"‘ସାୟନ୍ତନ ଦୃଶ୍ୟ’ର ଅର୍ଥ କେଉଁଟି ଅଧିକ ଠିକ୍?",o:["ସକାଳର ଦୃଶ୍ୟ","ସନ୍ଧ୍ୟା ସମୟର ଦୃଶ୍ୟ","ବର୍ଷାର ଦୃଶ୍ୟ","ରାତିର ସ୍ୱପ୍ନ"],a:1,e:"ସାୟନ୍ତନ ଅର୍ଥ ସନ୍ଧ୍ୟାକାଳୀନ; ତେଣୁ ଏହା ସନ୍ଧ୍ୟାର ଦୃଶ୍ୟ।"},
+{q:"ପ୍ରକୃତିବର୍ଣ୍ଣନା ମାଧ୍ୟମରେ କବି ସାଧାରଣତଃ କ’ଣ ପ୍ରକାଶ କରନ୍ତି?",o:["ପ୍ରକୃତି ପ୍ରତି ଭଲପାଇବା","ବାଣିଜ୍ୟ ହିସାବ","ଯୁଦ୍ଧନୀତି","ରାଜନୈତିକ ଆଦେଶ"],a:0,e:"ପ୍ରକୃତିବର୍ଣ୍ଣନାରେ କବିଙ୍କ ପ୍ରକୃତିପ୍ରେମ ଓ ସୌନ୍ଦର୍ଯ୍ୟବୋଧ ପ୍ରକାଶ ପାଏ।"},
+{q:"ରାଧାନାଥ ରାୟଙ୍କ ଜନ୍ମ କେଉଁ ଶତାବ୍ଦୀରେ ହୋଇଥିଲା?",o:["୧୭ଶ","୧୮ଶ","୧୯ଶ","୨୦ଶ"],a:2,e:"ରାଧାନାଥ ରାୟଙ୍କ ଜନ୍ମ ୧୯ଶ ଶତାବ୍ଦୀରେ (୧୮୪୮) ହୋଇଥିଲା।"},
+{q:"କବିତାର ମୂଳ ଆକର୍ଷଣ କ’ଣ?",o:["ଚିଲିକାର ସନ୍ଧ୍ୟାକାଳୀନ ପ୍ରାକୃତିକ ସୌନ୍ଦର୍ଯ୍ୟ","ଯୁଦ୍ଧର ବର୍ଣ୍ଣନା","ନଗର ଜୀବନ","କୃଷିକାର୍ଯ୍ୟ"],a:0,e:"କବିତାର କେନ୍ଦ୍ରବିନ୍ଦୁ ହେଉଛି ଚିଲିକାର ସନ୍ଧ୍ୟାକାଳୀନ ସୌନ୍ଦର୍ଯ୍ୟ।"},
+{q:"‘ଗୋଧୂଳି’ କେଉଁ ସମୟକୁ କୁହାଯାଏ?",o:["ସୂର୍ଯ୍ୟୋଦୟ ପୂର୍ବରୁ","ସୂର୍ଯ୍ୟାସ୍ତ ସମୟର ଧୂଳିମୟ ସନ୍ଧ୍ୟା","ମଧ୍ୟରାତ୍ରି","ମଧ୍ୟାହ୍ନ"],a:1,e:"ଗୋଧୂଳି ହେଉଛି ସୂର୍ଯ୍ୟାସ୍ତ ସମୟର ସନ୍ଧ୍ୟାବେଳ।"},
+{q:"ଏହି କବିତା ପଢ଼ିବାରୁ କେଉଁ ଗୁଣ ବିକଶିତ ହୁଏ?",o:["ପ୍ରକୃତିକୁ ଉପଭୋଗ ଓ ସୁରକ୍ଷା କରିବାର ଭାବ","ଅପଚୟ","ଅବହେଳା","ହିଂସା"],a:0,e:"ପ୍ରକୃତିର ସୌନ୍ଦର୍ଯ୍ୟକୁ ଭଲପାଇବା ଓ ସୁରକ୍ଷା କରିବାର ପ୍ରେରଣା ମିଳେ।"},
+{q:"ଚିଲିକାର ସୌନ୍ଦର୍ଯ୍ୟକୁ ଉପଭୋଗ କରିବା ସହ କେଉଁ ଦାୟିତ୍ୱ ଆମର?",o:["ଜଳ ଓ ପରିବେଶକୁ ସ୍ୱଚ୍ଛ ରଖିବା","ପ୍ଲାଷ୍ଟିକ୍ ଫିଙ୍ଗିବା","ପକ୍ଷୀଙ୍କୁ ହଇରାଣ କରିବା","ଜଳ ପ୍ରଦୂଷଣ କରିବା"],a:0,e:"ଚିଲିକାର ପରିବେଶ ଓ ଜଳଜୀବଙ୍କ ସୁରକ୍ଷା ଆମର ଦାୟିତ୍ୱ।"}
+];
+let index=0, answers=Array(questions.length).fill(null), locked=false;
+const od=n=>String(n).replace(/\d/g,d=>"୦୧୨୩୪୫୬୭୮୯"[d]);
+function render(){
+ const q=questions[index]; document.getElementById('counter').textContent=`ପ୍ରଶ୍ନ ${od(index+1)} / ${od(questions.length)}`;
+ document.getElementById('scoreLive').textContent=`ଠିକ୍: ${od(answers.filter((v,i)=>v===questions[i].a).length)}`;
+ document.getElementById('bar').style.width=`${index/questions.length*100}%`;
+ document.getElementById('question').textContent=`${od(index+1)}. ${q.q}`;
+ const box=document.getElementById('options');box.innerHTML='';
+ q.o.forEach((v,i)=>{let b=document.createElement('button');b.className='opt';b.textContent=`${"କଖଗଘ"[i]||["କ","ଖ","ଗ","ଘ"][i]}. ${v}`;b.disabled=answers[index]!==null;
+ if(answers[index]!==null){if(i===q.a)b.classList.add('correct');else if(i===answers[index])b.classList.add('wrong')}
+ b.onclick=()=>choose(i);box.appendChild(b)});
+ const f=document.getElementById('feedback');f.className='feedback';f.textContent='';
+ if(answers[index]!==null){f.classList.add(answers[index]===q.a?'good':'bad');f.textContent=(answers[index]===q.a?'ଠିକ୍ ଉତ୍ତର! ':'ଭୁଲ ଉତ୍ତର। ')+q.e}
+ document.getElementById('prev').disabled=index===0;document.getElementById('next').disabled=answers[index]===null;
+ document.getElementById('next').textContent=index===questions.length-1?'ଫଳାଫଳ ଦେଖନ୍ତୁ':'ପରବର୍ତ୍ତୀ ପ୍ରଶ୍ନ →';
+}
+function choose(i){if(answers[index]!==null)return;answers[index]=i;render()}
+function next(){if(index<questions.length-1){index++;render()}else showResult()}
+function previous(){if(index>0){index--;render()}}
+function showResult(){
+ document.getElementById('quiz').hidden=true;document.getElementById('result').hidden=false;
+ let score=answers.filter((v,i)=>v===questions[i].a).length;
+ document.getElementById('finalScore').textContent=`${od(score)} / ${od(questions.length)}`;
+ document.getElementById('remark').textContent=score>=25?'ଅତି ଉତ୍ତମ! ଆପଣଙ୍କ ପ୍ରସ୍ତୁତି ଭଲ ଅଛି।':score>=18?'ଭଲ ପ୍ରୟାସ। ଭୁଲ ଉତ୍ତରଗୁଡ଼ିକ ପୁଣି ପଢ଼ନ୍ତୁ।':'ଆଉଥରେ ଅଭ୍ୟାସ କରନ୍ତୁ। ଉତ୍ତର ସହ ବ୍ୟାଖ୍ୟା ପଢ଼ନ୍ତୁ।';
+ document.getElementById('review').innerHTML='<h3>ଉତ୍ତର ସମୀକ୍ଷା</h3>'+questions.map((q,i)=>`<details><summary>${od(i+1)}. ${q.q} ${answers[i]===q.a?'✓':'✗'}</summary><p>ସଠିକ୍ ଉତ୍ତର: <b>${q.o[q.a]}</b></p><p>${q.e}</p></details>`).join('');
+}
+function restart(){index=0;answers=Array(questions.length).fill(null);document.getElementById('quiz').hidden=false;document.getElementById('result').hidden=true;render()}
+render();
+</script>
+</body></html>
