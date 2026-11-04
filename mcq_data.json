@@ -1,7 +1,54 @@
 {
-  "CLASS VI": {},
-  "CLASS VII": {},
-  "CLASS VIII": {},
-  "CLASS IX": {},
-  "CLASS X": {}
+  "CLASS VI": {
+    "MIL ODIA (ମାତୃଭାଷା)": {},
+    "ENGLISH (ଇଂରାଜୀ)": {},
+    "MATHEMATICS (ଗଣିତ)": {},
+    "SCIENCE (ବିଜ୍ଞାନ)": {},
+    "HISTORY & CIVICS (ଇତିହାସ ଓ ରାଜନୀତି ବିଜ୍ଞାନ)": {},
+    "GEOGRAPHY (ଭୂଗୋଳ)": {},
+    "HINDI (ହିନ୍ଦୀ)": {},
+    "SANSKRIT (ସଂସ୍କୃତ)": {}
+  },
+  "CLASS VII": {
+    "MIL ODIA (ମାତୃଭାଷା)": {},
+    "ENGLISH (ଇଂରାଜୀ)": {},
+    "MATHEMATICS (ଗଣିତ)": {},
+    "SCIENCE (ବିଜ୍ଞାନ)": {},
+    "HISTORY & CIVICS (ଇତିହାସ ଓ ରାଜନୀତି ବିଜ୍ଞାନ)": {},
+    "GEOGRAPHY (ଭୂଗୋଳ)": {},
+    "HINDI (ହିନ୍ଦୀ)": {},
+    "SANSKRIT (ସଂସ୍କୃତ)": {}
+  },
+  "CLASS VIII": {
+    "MIL ODIA (ମାତୃଭାଷା)": {},
+    "ENGLISH (ଇଂରାଜୀ)": {},
+    "MATHEMATICS (ଗଣିତ)": {},
+    "SCIENCE (ବିଜ୍ଞାନ)": {},
+    "HISTORY & CIVICS (ଇତିହାସ ଓ ରାଜନୀତି ବିଜ୍ଞାନ)": {},
+    "GEOGRAPHY (ଭୂଗୋଳ)": {},
+    "HINDI (ହିନ୍ଦୀ)": {},
+    "SANSKRIT (ସଂସ୍କୃତ)": {}
+  },
+  "CLASS IX": {
+    "FLO - ODIA (ମାତୃଭାଷା ସାହିତ୍ୟ)": {},
+    "SLE - ENGLISH (ଇଂରାଜୀ)": {},
+    "MATHEMATICS (ଗଣିତ)": {},
+    "PHYSICAL SCIENCE (ଭୌତିକ ବିଜ୍ଞାନ)": {},
+    "LIFE SCIENCE (ଜୀବ ବିଜ୍ଞାନ)": {},
+    "HISTORY & POL. SC. (ଇତିହାସ ଓ ରାଜନୀତି)": {},
+    "GEOGRAPHY & ECON. (ଭୂଗୋଳ ଓ ଅର୍ଥନୀତି)": {},
+    "TLH - HINDI (ତୃତୀୟ ଭାଷା ହିନ୍ଦୀ)": {},
+    "TLS - SANSKRIT (ତୃତୀୟ ଭାଷା ସଂସ୍କୃତ)": {}
+  },
+  "CLASS X": {
+    "FLO - ODIA (ସାହିତ୍ୟ ସିନ୍ଧୁ)": {},
+    "SLE - ENGLISH (ଇଂରାଜୀ)": {},
+    "MATHEMATICS (ମାଧ୍ୟମିକ ବୀଜଗଣିତ ଓ ଜ୍ୟାମିତି)": {},
+    "PHYSICAL SCIENCE (ଭୌତିକ ବିଜ୍ଞାନ)": {},
+    "LIFE SCIENCE (ଜୀବ ବିଜ୍ଞାନ)": {},
+    "HISTORY & POL. SC. (ଇତିହାସ ଓ ରାଜନୀତି ବିଜ୍ଞାନ)": {},
+    "GEOGRAPHY & ECON. (ଭୂଗୋଳ ଓ ଅର୍ଥନୀତି)": {},
+    "TLH - HINDI (ହିନ୍ଦୀ)": {},
+    "TLS - SANSKRIT (ସଂସ୍କୃତ)": {}
+  }
 }
