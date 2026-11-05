@@ -1,3 +1,1108 @@
+
+Gemini
+
+New chat
+Library
+Images
+Scheduled
+Customise
+Videos
+New notebook
+MIT App Inventor APK Guide
+GitHub 404 ଏରର୍ ସମାଧାନ
+Guardian SOS Webpage Code Review
+GyanSetu MCQ JSON Metadata
+GitHub ରେ Red ଏବଂ Green ରଙ୍ଗ କାହିଁକି ଆସେ
+MIT App Inventor ରେ Single vs Multiple HTML ଫାଇଲ୍
+ସ୍ନେକ୍ ଗେମ୍ ହଟାଯାଇଥିବା କୋଡ୍
+MIT App Inventor APK ତିଆରି
+GyanSetu App UI Modifications and Updates
+GyanSetu Odisha App Blocks Setup
+Drive Link PDF Access Solution
+Class 10 English MCQ Quiz
+MIT App Inventor ରେ WebViewer ଜୁମ୍ କଣ୍ଟ୍ରୋଲ୍
+WebViewer ରେ Zoom In ଏବଂ Zoom Out କରିବା
+MIT App Inventor ରେ PDF ଡାଉନଲୋଡ୍ ଏବଂ ଅଫଲାଇନ୍ ପଢ଼ିବା ପ୍ରଣା
+ସ୍ୱତନ୍ତ୍ର ଓଡ଼ିଶା ପ୍ରଦେଶ ଗଠନ MCQ କୁଇଜ୍
+Indian National Movement MCQ App
+MIT App Inventor ରେ Share Option ଯୋଡ଼ିବା
+GitHub ଏରର୍ ଏବଂ ୱେବସାଇଟ୍ ସମସ୍ୟା ସମାଧାନ
+GitHub ରେ HTML ଫାଇଲ୍ ଅପଲୋଡ୍
+PDF ସ୍କ୍ରିନ୍ ସେଟିଂସ୍ ଓ ବ୍ଲକ୍ସ
+Android File Exposed Error ସମାଧାନ
+APK ରେ ସବସ୍କ୍ରିପସନ୍ ସେଟଅପ୍ ସମୟ
+MIT App Inventor ସମସ୍ୟା ସମାଧାନ
+Easy Connect ଆପ୍ ତିଆରି କରନ୍ତୁ
+Screen1 वर Contact दिसत नाही समस्या
+Conversation with Gemini
+Aau gote apk ra quiz pain eita sethi achi
+
+ଯଦି ସେହି index.html ଫାଇଲ୍‌ଟି ଅନ୍ୟ ଏକ ଆପ୍‌ରେ ବ୍ୟବହାର ହେଉଛି, ତେବେ ତାକୁ ନ ବଦଳାଇ ( disturb ନ କରି) ଏହି ନୂଆ ଆପ୍ ପାଇଁ ନୂଆ ଫାଇଲ୍ ତିଆରି କରିବା ସବୁଠାରୁ ନିରାପଦ:
+
+ନୂଆ ଫାଇଲ୍ ବନାନ୍ତୁ (app.html):
+
+ସଂଶୋଧିତ କୋଡ୍‌କୁ ନୂଆ ନାମ ଦିଅନ୍ତୁ, ଯେପରିକି app.html।
+
+GitHub repository (gyansetu-odishamcq) ରେ + (Add file) କ୍ଲିକ୍ କରି app.html କୁ ଅପଲୋଡ୍ କିମ୍ବା create କରି Commit changes କରିଦିଅନ୍ତୁ।   
+fa9e8274-a76f-4edd-9c4e-00bc7fe4fe6f
+
+ଫଳରେ ପୁରୁଣା ଆପ୍‌ର index.html ସମ୍ପୂର୍ଣ୍ଣ ସୁରକ୍ଷିତ ରହିବ।   
+fa9e8274-a76f-4edd-9c4e-00bc7fe4fe6f
+
+MIT App Inventor Blocks ରେ ଲିଙ୍କ୍ ବଦଳାନ୍ତୁ:
+
+ନୂଆ ଆପ୍ ପାଇଁ Screen1.Initialize ରେ ଲିଙ୍କ୍‌ଟି ଏପରି ରଖନ୍ତୁ:
+
+Plaintext
+when Screen1.Initialize do:
+    set WebViewer1.HomeUrl to "https://silusahu360.github.io/gyansetu-odishamcq/app.html"
+    call WebViewer1.GoHome
+ଏହାଦ୍ୱାରା ଦୁଇଟି ଯାକ ଆପ୍ ସ୍ୱତନ୍ତ୍ର ଭାବେ ଏବଂ ବିନା କୌଣସି ଅସୁବିଧାରେ ଚାଲିବ।
+
+ଏକଦମ୍ ସଠିକ୍ ଜାଗାରେ ଅଛନ୍ତି!
+
+ଏବେ ତଳେ ଥିବା "1 Enter file contents here" ବାକ୍ସ ଭିତରେ କ୍ଲିକ୍ କରନ୍ତୁ ଏବଂ ନିମ୍ନଲିଖିତ କୋଡ୍‌ଟିକୁ କପି କରି Paste କରିଦିଅନ୍ତୁ:
+
+HTML
+<!DOCTYPE html>
+<html lang="or">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#4c1d95">
+<title>GyanSetu Odisha</title>
+<style>
+:root{
+  --primary:#6d28d9;--deep:#4c1d95;--accent:#fbbf24;
+  --bg:#f5f3ff;--card:#ffffff;--ink:#241746;--muted:#71658b;
+  --line:#e6ddf7;--good:#15803d;--bad:#b91c1c;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;font-family:system-ui,-apple-system,"Noto Sans Oriya","Noto Sans",sans-serif;
+  font-size:17px;line-height:1.55;background:linear-gradient(145deg,#fdf2f8 0%,#f3e8ff 45%,#e0f2fe 100%);
+  background-attachment:fixed;color:var(--ink);min-height:100vh;
+}
+body.dark{
+  --bg:#101827;--card:#1d293b;--ink:#edf2f7;--muted:#aab7c8;--line:#344256;
+  background:linear-gradient(145deg,#111827,#1e1b4b 55%,#172554);background-attachment:fixed;
+}
+header{
+  background:linear-gradient(115deg,#4c1d95 0%,#7c3aed 42%,#db2777 100%);
+  color:#fff;text-align:center;padding:18px 12px;position:sticky;top:0;z-index:5;
+  box-shadow:0 4px 14px rgba(0,0,0,0.15);border-bottom:4px solid #fbbf24;
+}
+.brand{font-size:clamp(22px,5vw,30px);font-weight:850}.brand span{color:#fde68a}
+header p{margin:6px 0 0;font-size:15px;line-height:1.5;opacity:.95}
+main{max-width:680px;margin:auto;padding:18px 14px 28px}
+.screen{display:none}
+.screen.active{display:block !important;animation:up .2s}
+@keyframes up{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+h2{font-size:23px;line-height:1.4;margin:12px 0 18px;text-align:center;color:#5b21b6}
+body.dark h2{color:#c4b5fd}
+.card{background:var(--card);border:1px solid #e9d5ff;border-radius:16px;padding:16px;margin-bottom:12px;box-shadow:0 8px 24px rgba(76,29,149,0.08)}
+body.dark .card{border-color:#344256;box-shadow:0 8px 24px rgba(0,0,0,0.25)}
+
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.tile{
+  border:0;border-radius:13px;padding:16px 12px;color:white;font-size:17px;line-height:1.4;
+  font-weight:750;background:linear-gradient(135deg,#2563eb,#7c3aed);min-height:68px;
+  cursor:pointer;box-shadow:0 5px 14px rgba(76,29,149,0.15);transition:transform .15s,filter .15s;
+  display:flex;align-items:center;justify-content:center;text-align:center;
+}
+.tile:nth-child(2n){background:linear-gradient(135deg,#0f9f8f,#047857)}
+.tile:nth-child(3n){background:linear-gradient(135deg,#f97316,#db2777)}
+.tile:nth-child(4n){background:linear-gradient(135deg,#0891b2,#2563eb)}
+.tile:active,.btn:active{transform:scale(.98);filter:brightness(.96)}
+
+.btn{border:0;border-radius:10px;padding:14px 16px;background:linear-gradient(135deg,#6d28d9,#4f46e5);color:white;font-weight:700;font-size:16px;line-height:1.4;cursor:pointer;box-shadow:0 3px 9px rgba(76,29,149,0.12)}
+.btn.secondary{background:linear-gradient(135deg,#64748b,#475569)}
+.btn.green{background:linear-gradient(135deg,#10b981,#047857)}
+.btn.orange{background:linear-gradient(135deg,#f59e0b,#ea580c)}
+.btn.red{background:linear-gradient(135deg,#ef4444,#be123c)}
+.btn.light{background:#ede9fe;color:#5b21b6;border:1px solid #ddd6fe}
+body.dark .btn.light{background:#312e81;color:#ede9fe;border-color:#4338ca}
+.btnrow{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin:10px 0}
+.btn.full{width:100%;margin-top:8px}
+
+.subject{
+  display:flex;align-items:center;justify-content:space-between;gap:10px;text-align:left;
+  width:100%;margin:8px 0;background:var(--card);color:var(--ink);border:1px solid var(--line);
+  border-left:5px solid #8b5cf6;border-radius:12px;padding:16px;font-size:16px;font-weight:700;
+  box-shadow:0 4px 12px rgba(76,29,149,0.06);cursor:pointer;
+}
+.subject:nth-child(3n+2){border-left-color:#0d9488}
+.subject:nth-child(3n){border-left-color:#f97316}
+
+.field{width:100%;padding:12px;border:1.5px solid #d8b4fe;border-radius:9px;background:var(--card);color:var(--ink);margin:5px 0 12px;font-size:15px}
+.field:focus{outline:2px solid #a78bfa;border-color:#7c3aed}
+.back{
+  border:2px solid #a78bfa;color:#4c1d95;background:linear-gradient(135deg,#fff7ed,#ede9fe);
+  width:100%;padding:16px;border-radius:25px;margin-top:14px;font-size:18px;font-weight:800;
+  box-shadow:0 5px 14px rgba(76,29,149,0.12);cursor:pointer;
+}
+body.dark .back{color:#f5f3ff;border:2px solid #8b5cf6;background:linear-gradient(135deg,#312e81,#1d293b)}
+
+.status-pill{
+  display:inline-flex;align-items:center;gap:8px;padding:8px 16px;margin:12px auto 4px;
+  background:linear-gradient(135deg,#ede9fe,#fdf4ff);border:1.5px solid #c4b5fd;
+  border-radius:30px;color:#5b21b6;font-size:14px;font-weight:750;box-shadow:0 2px 8px rgba(124,58,237,0.1);
+}
+body.dark .status-pill{background:linear-gradient(135deg,#1e1b4b,#312e81);border-color:#6d28d9;color:#e0e7ff}
+.dot{width:9px;height:9px;background:#22c55e;border-radius:50%;box-shadow:0 0 8px #22c55e}
+
+.muted{color:var(--muted);font-size:15px;line-height:1.5}
+
+.quiz-timer-strip{
+  position:sticky;top:70px;z-index:9;display:flex;justify-content:space-between;align-items:center;
+  background:linear-gradient(100deg,#4c1d95,#7c3aed);color:#fff;padding:10px 16px;
+  border-radius:12px;margin-bottom:12px;box-shadow:0 6px 18px rgba(76,29,149,0.3);
+}
+.quiz-time-badge{font-size:19px;font-weight:850;color:#fde68a;font-family:monospace;letter-spacing:1px}
+
+.subject-group{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px;margin-bottom:12px}
+.subject-header{font-size:16px;font-weight:800;color:#6d28d9;display:flex;justify-content:space-between;align-items:center;padding-bottom:8px;border-bottom:1.5px dashed var(--line);margin-bottom:8px}
+body.dark .subject-header{color:#c4b5fd}
+.item{padding:10px 6px;border-bottom:1px solid var(--line);font-size:15px}
+.item:last-child{border-bottom:0}
+
+.modal-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(15,23,42,0.85);z-index:99;display:none;align-items:center;justify-content:center;padding:16px}
+.modal-overlay.active{display:flex}
+.modal-box{background:var(--card);color:var(--ink);border-radius:18px;max-width:420px;width:100%;padding:24px;text-align:center;box-shadow:0 12px 36px rgba(0,0,0,0.35);border:2px solid #a78bfa}
+
+.dev-badge-card{margin-top:20px;padding:16px 14px;background:linear-gradient(135deg,rgba(109,40,217,.08),rgba(219,39,119,.08));border:1.5px solid #c4b5fd;border-radius:14px;text-align:center}
+.dev-tag{display:inline-block;font-size:11px;font-weight:750;letter-spacing:1px;color:#7c3aed;text-transform:uppercase;background:#ede9fe;padding:3px 10px;border-radius:20px;margin-bottom:6px}
+.dev-name{font-size:21px;font-weight:850;color:#4c1d95;display:flex;align-items:center;justify-content:center;gap:6px}
+.dev-desc{font-size:13px;color:#64748b;margin-top:6px;line-height:1.4}
+body.dark .dev-badge-card{background:linear-gradient(135deg,rgba(139,92,246,.15),rgba(236,72,153,.15));border-color:#6d28d9}
+body.dark .dev-tag{background:#312e81;color:#ddd6fe}body.dark .dev-name{color:#e0e7ff}body.dark .dev-desc{color:#aab7c8}
+footer{text-align:center;padding:15px;color:#6b5b86;font-size:13px}
+@media(max-width:380px){.btnrow{grid-template-columns:1fr}.grid{gap:8px}}
+
+#snakeCanvas {
+  background: #111827;
+  border-radius: 12px;
+  display: block;
+  margin: 0 auto;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.3);
+  max-width: 100%;
+}
+.dpad {
+  display: grid;
+  grid-template-columns: repeat(3, 60px);
+  grid-template-rows: repeat(3, 50px);
+  gap: 8px;
+  justify-content: center;
+  margin-top: 14px;
+}
+.dpad-btn {
+  background: #ede9fe;
+  color: #4c1d95;
+  border: 1.5px solid #c4b5fd;
+  border-radius: 10px;
+  font-size: 20px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="brand">🎓 GYANSETU <span>ODISHA</span></div>
+  <p>NCERT & Odisha State Board Learning Portal</p>
+</header>
+<main>
+
+<!-- HOME SCREEN -->
+<section id="home" class="screen active">
+  <h2>ସ୍ୱାଗତମ୍ | Welcome</h2>
+  <div class="grid">
+    <button class="tile" onclick="showClasses('notes')">📚 Notes Library</button>
+    <button class="tile" onclick="openMcqSetup()">📝 MCQ Practice</button>
+    <button class="tile" onclick="showClasses('materials')">📂 Study Materials</button>
+    <button class="tile" onclick="openSavedNotesScreen()">📥 Saved Notes</button>
+    <button class="tile" onclick="openOfflineQuizMenu()">⚡ Downloaded Quiz</button>
+    <button class="tile" onclick="openSnakeGame()">🎮 Mind Fresh</button>
+  </div>
+  <div class="btnrow">
+    <button class="btn green" onclick="shareApp()">📤 Share App</button>
+    <button class="btn" onclick="checkUpdates()">🔄 Check Update</button>
+    <button class="btn secondary" onclick="showScreen('studyTimer')">⏱ Study Timer</button>
+    <button class="btn light" onclick="toggleTheme()">🌙 Dark / Light</button>
+    <button class="btn light" onclick="showScreen('about')">ℹ About / Help</button>
+  </div>
+  <div style="text-align:center;">
+    <div id="homeStatusPill" class="status-pill"><span class="dot"></span><span id="homeStatus">Ready to learn.</span></div>
+  </div>
+</section>
+
+<!-- CLASSES SCREEN -->
+<section id="classes" class="screen">
+  <h2 id="classTitle">Select Class</h2>
+  <div class="grid" id="classGrid"></div>
+  <button class="back" onclick="showScreen('home')">⬅ Home</button>
+</section>
+
+<!-- SUBJECTS SCREEN -->
+<section id="subjects" class="screen">
+  <h2 id="subjectTitle">Select Subject</h2>
+  <div id="subjectList"></div>
+  <button class="back" onclick="showScreen('classes')">⬅ Back to Classes</button>
+</section>
+
+<!-- FOLDER SCREEN -->
+<section id="folder" class="screen">
+  <h2 id="folderTitle">Study Materials</h2>
+  <div class="card">
+    <p id="folderMessage" class="muted">Google Drive folder is ready for your chapters.</p>
+    <button class="btn full" onclick="openDrive()">📂 Open Google Drive</button>
+    <button class="btn green full" onclick="downloadNotes()">⬇ Download Notes</button>
+    <button class="btn secondary full" onclick="openSavedNotesScreen()">📱 Open Saved Notes</button>
+    <button class="btn light full" onclick="bookmarkCurrent()">⭐ Bookmark this Subject</button>
+    <p id="noteStatus" style="font-size:14px;color:var(--muted);margin-top:10px;text-align:center;"></p>
+  </div>
+  <button class="back" onclick="showScreen('subjects')">⬅ Back</button>
+</section>
+
+<!-- MCQ SETUP SCREEN -->
+<section id="mcqSetup" class="screen">
+  <h2>Topic-wise MCQ Practice</h2>
+  <div class="card">
+    <label>1. Class</label><select id="mcqClass" class="field" onchange="fillSubjects()"></select>
+    <label>2. Subject</label><select id="mcqSubject" class="field" onchange="fillTopics()"></select>
+    <label>3. Chapter / Topic</label><select id="mcqTopic" class="field"></select>
+    
+    <div class="btnrow">
+      <button class="btn green" onclick="startQuiz()">START QUIZ ➜</button>
+      <button class="btn orange" onclick="downloadSelectedTopicMcq()">💾 Save Offline</button>
+    </div>
+  </div>
+  <button class="back" onclick="showScreen('home')">⬅ Home</button>
+</section>
+
+<!-- OFFLINE QUIZ MENU SCREEN -->
+<section id="offlineQuizMenuScreen" class="screen">
+  <h2>⚡ Downloaded Offline Quiz Sets</h2>
+  <div class="card">
+    <p class="muted">ଅଫଲାଇନ୍‌ରେ ଅଭ୍ୟାସ କରିବା ପାଇଁ ଆପଣଙ୍କ ଡାଉନଲୋଡ୍ ହୋଇଥିବା ସେଟ୍:</p>
+    <div id="downloadedQuizList"></div>
+  </div>
+  <button class="back" onclick="showScreen('home')">⬅ Home</button>
+</section>
+
+<!-- CONTENT / QUIZ / NOTE VIEWER SCREEN -->
+<section id="quizScreen" class="screen">
+  <div id="quizTimerBar" class="quiz-timer-strip">
+    <div style="display:flex;align-items:center;gap:8px;">
+      <span style="font-size:15px;font-weight:700;">⏱ RUNNING TIME:</span>
+      <span id="quizRunningTimer" class="quiz-time-badge">00:00</span>
+    </div>
+    <button class="btn secondary" style="padding:6px 14px;font-size:13px;border-radius:8px;" onclick="pauseQuiz()">⏸ Pause</button>
+  </div>
+
+  <div id="noteActionToolbar" style="display:none;margin-bottom:10px;gap:8px;">
+    <button class="btn green full" onclick="saveCurrentNoteOffline()">💾 Save Note for Offline</button>
+  </div>
+
+  <div id="quizFrameContainer" style="width:100%;border-radius:14px;overflow:hidden;background:#fff;box-shadow:0 6px 20px rgba(0,0,0,0.1);">
+    <iframe id="quizFrame" style="width:100%;height:72vh;border:0;display:block;" title="Content Viewer"></iframe>
+  </div>
+
+  <div class="btnrow" style="margin-top:14px;">
+    <button id="viewerBackButton" class="back" style="margin-top:0;" onclick="handleViewerBack()">⬅ Back</button>
+    <button class="back" style="margin-top:0;background:linear-gradient(135deg,#e0e7ff,#ede9fe);color:#4338ca;" onclick="goHomeFromViewer()">⌂ Home</button>
+  </div>
+</section>
+
+<!-- OFFLINE SAVED NOTE VIEWER SCREEN -->
+<section id="offlineNoteViewer" class="screen">
+  <h2 id="savedNoteTitle">Saved Note</h2>
+  <div class="card" id="savedNoteBody" style="min-height:50vh;padding:18px;line-height:1.7;"></div>
+  <button class="back" onclick="showScreen('downloads')">⬅ Back to Saved Notes</button>
+</section>
+
+<!-- SNAKE GAME SCREEN -->
+<section id="snakeGameScreen" class="screen">
+  <h2>🎮 Mind Fresh: Snake Game</h2>
+  <div class="card" style="text-align:center;">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;font-weight:750;color:#6d28d9;">
+      <span>Score: <b id="snakeScore">0</b></span>
+      <span>High Score: <b id="snakeHighScore">0</b></span>
+    </div>
+    
+    <canvas id="snakeCanvas" width="300" height="300" style="width:300px;height:300px;max-width:100%;"></canvas>
+    <p id="snakeCanvasError" style="display:none;color:#b91c1c;font-weight:700;">Game board load heiparilani.</p>
+    
+    <div class="dpad">
+      <div></div>
+      <button class="dpad-btn" onclick="changeSnakeDir('UP')">⬆</button>
+      <div></div>
+      <button class="dpad-btn" onclick="changeSnakeDir('LEFT')">⬅</button>
+      <button class="dpad-btn" style="background:#10b981;color:#fff;" onclick="startSnakeGame()">▶</button>
+      <button class="dpad-btn" onclick="changeSnakeDir('RIGHT')">➡</button>
+      <div></div>
+      <button class="dpad-btn" onclick="changeSnakeDir('DOWN')">⬇</button>
+      <div></div>
+    </div>
+    
+    <div class="btnrow" style="margin-top:14px;">
+      <button class="btn green" onclick="startSnakeGame()">🔄 Restart</button>
+      <button class="btn secondary" onclick="exitSnakeGame()">⬅ Exit Game</button>
+    </div>
+  </div>
+  <button class="back" onclick="exitSnakeGame()">⬅ Home</button>
+</section>
+
+<!-- QUIZ PAUSE MODAL -->
+<div id="pauseModal" class="modal-overlay">
+  <div class="modal-box">
+    <h3 style="color:#7c3aed;margin-top:0;font-size:22px;">⏸ Quiz Paused</h3>
+    <p class="muted">ଆପଣଙ୍କ Quiz ସମୟ ସ୍ଥଗିତ ରହିଛି।</p>
+    <div style="margin:18px 0;padding:12px;background:#ede9fe;border-radius:12px;font-size:18px;font-weight:800;color:#6d28d9;">
+      ଚାଲୁଥିବା ସମୟ: <span id="pausedTimeText" style="color:#4c1d95;font-family:monospace;">00:00</span>
+    </div>
+    <button class="btn green full" onclick="resumeQuiz()">▶ RESUME QUIZ</button>
+    <button class="btn red full" onclick="closePauseAndExit()">Exit Practice</button>
+  </div>
+</div>
+
+<!-- DOWNLOADS SCREEN -->
+<section id="downloads" class="screen">
+  <h2>📥 Saved Offline Notes</h2>
+  <div class="card">
+    <p class="muted" style="margin-top:0;">ନେଟ୍ ନଥିଲେ ମଧ୍ୟ ସେଭ୍ ହୋଇଥିବା ନୋଟ୍ ପଢ଼ିପାରିବେ।</p>
+    <div id="savedNotesList"></div>
+  </div>
+  <button class="back" onclick="showScreen('home')">Home</button>
+</section>
+
+<!-- BOOKMARKS SCREEN -->
+<section id="bookmarks" class="screen">
+  <h2>⭐ Bookmarks</h2>
+  <div id="bookmarkList"></div>
+  <button class="btn red full" onclick="clearBookmarks()">Clear All Bookmarks</button>
+  <button class="back" onclick="showScreen('home')">Home</button>
+</section>
+
+<!-- STUDY TIMER SCREEN -->
+<section id="studyTimer" class="screen">
+  <h2>⏱ Study Timer</h2>
+  <div class="card result" style="text-align:center;">
+    <div class="score" id="studyClock" style="font-size:42px;font-weight:850;color:#7c3aed;margin:12px 0;">00:00:00</div>
+    <button class="btn green" onclick="startStudy()">Start</button>
+    <button class="btn orange" onclick="pauseStudy()">Pause</button>
+    <button class="btn red" onclick="resetStudy()">Reset</button>
+  </div>
+  <button class="back" onclick="showScreen('home')">Home</button>
+</section>
+
+<!-- ABOUT SECTION -->
+<section id="about" class="screen">
+  <h2>About GyanSetu Odisha</h2>
+  <div class="card">
+    <h3 style="text-align:center;color:#7c3aed;margin:8px 0 6px">🎓 GyanSetu Odisha</h3>
+    <p class="muted" style="text-align:center;font-size:16px">Classes VI to X ପାଇଁ ଏକ ସ୍ମାର୍ଟ ଶିକ୍ଷଣ ପୋର୍ଟାଲ୍।</p>
+    
+    <div class="dev-badge-card">
+      <div class="dev-tag">App Creator & Educator</div>
+      <div class="dev-name">👨‍🏫 Sangram Sahu</div>
+      <div class="dev-desc">Dedicated to empowering Odisha school students with smart NCERT learning tools.</div>
+    </div>
+  </div>
+  <button class="back" onclick="showScreen('home')">⌂ HOME</button>
+</section>
+
+</main>
+<footer>© 2026 GyanSetu Odisha · Developed by Sangram Sahu</footer>
+
+<script>
+const CURRENT_VERSION = "2.0";
+const GITHUB_PAGES_BASE = "https://silusahu360.github.io/gyansetu-odishamcq/";
+const GITHUB_MCQ_JSON_URL = "https://raw.githubusercontent.com/silusahu360/gyansetu-odishamcq/main/mcq_data.json";
+
+const classDriveFolders = {
+  "CLASS VI":"https://drive.google.com/drive/folders/1KUhgA15GZ0jMPfF22XhN_0ipuayW3jhr",
+  "CLASS VII":"https://drive.google.com/drive/folders/1ToIWcidnQfATl6_awNSSPRcRK1nyZWAv",
+  "CLASS VIII":"https://drive.google.com/drive/folders/1gnCILN6NhsAsK2c4ljn8DbTNv4zAnMCC",
+  "CLASS IX":"https://drive.google.com/drive/folders/1xC7s790hPESNNYKTDZ8jnFvgkDLHrKbD",
+  "CLASS X":"https://drive.google.com/drive/folders/1KC4TAH3EzQiOdfwj9SKmttCOdhfqz0Td"
+};
+
+const subjectsByClass = {
+  "CLASS VI":["ODIA","ENGLISH","MATHEMATICS","SCIENCE","SOCIAL SCIENCE","HINDI","SANSKRIT"],
+  "CLASS VII":["ODIA","ENGLISH","MATHEMATICS","SCIENCE","SOCIAL SCIENCE","HINDI","SANSKRIT"],
+  "CLASS VIII":["ODIA","ENGLISH","HINDI","SANSKRIT","MATHEMATICS","SCIENCE","SOCIAL SCIENCE"],
+  "CLASS IX":["ODIA","ENGLISH","SANSKRIT","HINDI","MATHEMATICS","SCIENCE","GEOGRAPHY","HISTORY"],
+  "CLASS X":["ODIA","ENGLISH","SANSKRIT","HINDI","MATHEMATICS","SCIENCE","GEOGRAPHY","HISTORY"]
+};
+
+let mcqDataStore = {};
+let currentClass = "CLASS X", currentSubject = "", currentFolder = "";
+let currentViewMode = "quiz";
+let currentNoteHtmlUrl = "";
+let quizSeconds = 0, quizTimerInterval = null, isQuizPaused = false;
+let studySeconds = 0, studyInterval = null;
+
+const $ = id => document.getElementById(id);
+
+function showScreen(id) {
+  let target = $(id);
+  if (!target) target = $("home");
+  document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
+  target.classList.add("active");
+  window.scrollTo(0,0);
+  
+  if (id === "bookmarks") renderBookmarks();
+  if (id === "downloads") renderSavedNotesList();
+}
+
+function showClasses(mode) {
+  window.classMode = mode;
+  $("classTitle").textContent = mode === "notes" ? "Select Class · Notes Library" : "Select Class · Study Materials";
+  $("classGrid").innerHTML = "";
+  Object.keys(subjectsByClass).forEach(c => {
+    let b = document.createElement("button");
+    b.className = "tile";
+    b.textContent = c;
+    b.onclick = () => showSubjects(c);
+    $("classGrid").appendChild(b);
+  });
+  showScreen("classes");
+}
+
+function showSubjects(cls) {
+  currentClass = cls;
+  $("subjectTitle").textContent = cls + " · Select Subject";
+  $("subjectList").innerHTML = "";
+  subjectsByClass[cls].forEach(s => {
+    let b = document.createElement("button");
+    b.className = "subject";
+    b.innerHTML = `<span>${s}</span><span>➜</span>`;
+    b.onclick = () => openSubject(s);
+    $("subjectList").appendChild(b);
+  });
+  showScreen("subjects");
+}
+
+function openSubject(sub) {
+  currentSubject = sub;
+  currentFolder = classDriveFolders[currentClass];
+
+  if (window.classMode === "notes") {
+    currentViewMode = "note";
+    let cleanCls = currentClass.toLowerCase().replace(/[^a-z0-9]/g, "");
+    let cleanSub = sub.toLowerCase().replace(/[^a-z0-9]/g, "");
+    let noteFileName = `${cleanCls}_${cleanSub}_note.html`;
+    currentNoteHtmlUrl = GITHUB_PAGES_BASE + noteFileName;
+
+    $("quizTimerBar").style.display = "none";
+    $("noteActionToolbar").style.display = "flex";
+    $("viewerBackButton").textContent = "⬅ Back to Subjects";
+    showScreen("quizScreen");
+
+    $("quizFrame").srcdoc = "<div style='display:flex;align-items:center;justify-content:center;height:60vh;font-family:sans-serif;color:#6d28d9;font-size:18px;'><b>Loading Note... ଅପେକ୍ଷା କରନ୍ତୁ...</b></div>";
+    fetch(currentNoteHtmlUrl + "?t=" + Date.now())
+      .then(r => {
+        if (!r.ok) throw new Error("HTTP " + r.status);
+        return r.text();
+      })
+      .then(html => {
+        $("quizFrame").srcdoc = html;
+      })
+      .catch(err => {
+        $("quizFrame").srcdoc = "<div style='padding:20px;text-align:center;'>ଇଣ୍ଟରନେଟ୍ ସଂଯୋଗ ଯାଞ୍ଚ କରନ୍ତୁ କିମ୍ବା ପରେ ଚେଷ୍ଟା କରନ୍ତୁ।</div>";
+      });
+    return;
+  }
+
+  currentViewMode = "materials";
+  $("folderTitle").textContent = currentClass + " · " + sub;
+  $("folderMessage").textContent = currentClass + " · " + sub + " Drive folder is ready.";
+  $("noteStatus").textContent = "";
+  showScreen("folder");
+}
+
+function cleanViewerFrame() {
+  clearInterval(quizTimerInterval);
+  quizTimerInterval = null;
+  const frame = $("quizFrame");
+  if (frame) frame.srcdoc = "";
+  const toolbar = $("noteActionToolbar");
+  if (toolbar) toolbar.style.display = "none";
+}
+
+function handleViewerBack() {
+  cleanViewerFrame();
+  if (currentViewMode === "quiz") {
+    showScreen("mcqSetup");
+  } else if (currentViewMode === "downloaded_quiz") {
+    showScreen("offlineQuizMenuScreen");
+  } else {
+    showScreen("subjects");
+  }
+}
+
+function goHomeFromViewer() {
+  cleanViewerFrame();
+  showScreen("home");
+}
+
+async function saveCurrentNoteOffline() {
+  try {
+    let resp = await fetch(currentNoteHtmlUrl);
+    if (!resp.ok) throw new Error("Fetch error");
+    let htmlContent = await resp.text();
+
+    let saved = JSON.parse(localStorage.getItem("gs_saved_notes") || "{}");
+    let key = currentClass + " · " + currentSubject;
+    saved[key] = {
+      title: key,
+      content: htmlContent,
+      date: new Date().toLocaleDateString('or-IN')
+    };
+    localStorage.setItem("gs_saved_notes", JSON.stringify(saved));
+    alert("✅ ଏହି ନୋଟ୍ Offline ପାଇଁ Save ହୋଇଗଲା!");
+  } catch (e) {
+    alert("ଇଣ୍ଟରନେଟ୍ ଯାଞ୍ଚ କରନ୍ତୁ କିମ୍ବା ପରେ ଚେଷ୍ଟା କରନ୍ତୁ।");
+  }
+}
+
+async function downloadSelectedTopicMcq() {
+  let fileName = $("mcqTopic").value;
+  let topicName = $("mcqTopic").options[$("mcqTopic").selectedIndex]?.text || "Topic MCQ";
+  if (!fileName) {
+    alert("ଦୟାକରି ଏକ Topic ବାଛନ୍ତୁ।");
+    return;
+  }
+  let fullUrl = GITHUB_PAGES_BASE + fileName;
+  try {
+    let resp = await fetch(fullUrl);
+    if (!resp.ok) throw new Error("Fetch error");
+    let htmlContent = await resp.text();
+
+    let savedMcqs = JSON.parse(localStorage.getItem("gs_saved_mcqs") || "{}");
+    let key = $("mcqClass").value + " · " + $("mcqSubject").value + " - " + topicName;
+    savedMcqs[key] = {
+      title: key,
+      content: htmlContent,
+      date: new Date().toLocaleDateString('or-IN')
+    };
+    localStorage.setItem("gs_saved_mcqs", JSON.stringify(savedMcqs));
+    alert("✅ ଏହି Topic Offline ପାଇଁ Save ହୋଇଗଲା!");
+  } catch (e) {
+    alert("ଡାଉନଲୋଡ୍ ବିଫଳ ହେଲା। ଇଣ୍ଟରନେଟ୍ ଯାଞ୍ଚ କରନ୍ତୁ।");
+  }
+}
+
+function openSavedNotesScreen() {
+  showScreen("downloads");
+  renderSavedNotesList();
+}
+
+function renderSavedNotesList() {
+  let saved = JSON.parse(localStorage.getItem("gs_saved_notes") || "{}");
+  let container = $("savedNotesList");
+  let keys = Object.keys(saved);
+
+  if (!keys.length) {
+    container.innerHTML = `<div style="text-align:center;padding:16px;color:var(--muted);">କୌଣସି ନୋଟ୍ ସେଭ୍ ହୋଇନାହିଁ।</div>`;
+    return;
+  }
+
+  let html = "";
+  keys.forEach(k => {
+    let item = saved[k];
+    html += `
+      <div class="item" style="display:flex;justify-content:space-between;align-items:center;padding:12px 6px;">
+        <div><b>📖 ${item.title}</b><br><small class="muted">${item.date || 'Available Offline'}</small></div>
+        <div style="display:flex;gap:6px;">
+          <button class="btn green" style="padding:6px 12px;font-size:13px;" onclick="viewSavedNote('${k}')">Open</button>
+          <button class="btn red" style="padding:6px 10px;font-size:13px;" onclick="deleteSavedNote('${k}')">✕</button>
+        </div>
+      </div>
+    `;
+  });
+  container.innerHTML = html;
+}
+
+function viewSavedNote(key) {
+  let saved = JSON.parse(localStorage.getItem("gs_saved_notes") || "{}");
+  if (saved[key]) {
+    $("savedNoteTitle").textContent = key;
+    $("savedNoteBody").innerHTML = saved[key].content;
+    showScreen("offlineNoteViewer");
+  }
+}
+
+function deleteSavedNote(key) {
+  if (confirm(key + " ନୋଟ୍ କାଢ଼ିବାକୁ ଚାହାନ୍ତି କି?")) {
+    let saved = JSON.parse(localStorage.getItem("gs_saved_notes") || "{}");
+    delete saved[key];
+    localStorage.setItem("gs_saved_notes", JSON.stringify(saved));
+    renderSavedNotesList();
+  }
+}
+
+function openOfflineQuizMenu() {
+  showScreen("offlineQuizMenuScreen");
+  renderDownloadedQuizList();
+}
+
+function renderDownloadedQuizList() {
+  let savedMcqs = JSON.parse(localStorage.getItem("gs_saved_mcqs") || "{}");
+  let container = $("downloadedQuizList");
+  let keys = Object.keys(savedMcqs);
+
+  if (!keys.length) {
+    container.innerHTML = `<div style="text-align:center;padding:18px;color:var(--muted);">କୌଣସି Quiz ଡାଉନଲୋଡ୍ ହୋଇନାହିଁ।<br><br><b>MCQ Practice</b> କୁ ଯାଇ topic ବାଛନ୍ତୁ ଏବଂ <b>💾 Save Offline</b> ଦବାନ୍ତୁ।</div>`;
+    return;
+  }
+
+  let html = `<h4 style="margin:8px 0 10px;color:#6d28d9;">📥 ଆପଣଙ୍କ ଡାଉନଲୋଡ୍ ସେଟ୍:</h4>`;
+  keys.forEach(k => {
+    html += `
+      <div class="item" style="display:flex;justify-content:space-between;align-items:center;padding:10px 4px;">
+        <div style="font-size:15px;"><b>📝 ${k}</b></div>
+        <div style="display:flex;gap:6px;">
+          <button class="btn green" style="padding:5px 10px;font-size:13px;" onclick="openDownloadedMcq('${k}')">Play</button>
+          <button class="btn red" style="padding:5px 8px;font-size:13px;" onclick="deleteDownloadedMcq('${k}')">✕</button>
+        </div>
+      </div>
+    `;
+  });
+  container.innerHTML = html;
+}
+
+function openDownloadedMcq(key) {
+  let savedMcqs = JSON.parse(localStorage.getItem("gs_saved_mcqs") || "{}");
+  if (savedMcqs[key]) {
+    currentViewMode = "downloaded_quiz";
+    $("quizTimerBar").style.display = "none";
+    $("noteActionToolbar").style.display = "none";
+    $("viewerBackButton").textContent = "⬅ Back to Sets";
+    showScreen("quizScreen");
+    $("quizFrame").srcdoc = savedMcqs[key].content;
+  }
+}
+
+function deleteDownloadedMcq(key) {
+  if (confirm(key + " ସେଟ୍ କାଢ଼ିବାକୁ ଚାହାନ୍ତି କି?")) {
+    let savedMcqs = JSON.parse(localStorage.getItem("gs_saved_mcqs") || "{}");
+    delete savedMcqs[key];
+    localStorage.setItem("gs_saved_mcqs", JSON.stringify(savedMcqs));
+    renderDownloadedQuizList();
+  }
+}
+
+/* SNAKE GAME */
+let snake = [];
+let snakeFood = { x: 0, y: 0 };
+let snakeDx = 15, snakeDy = 0;
+let snakeScore = 0, snakeHighScore = localStorage.getItem("gs_snake_hi") || 0;
+let snakeInterval = null;
+const snakeGrid = 15;
+
+function openSnakeGame() {
+  showScreen("snakeGameScreen");
+  $("snakeHighScore").textContent = snakeHighScore;
+  startSnakeGame();
+}
+
+function startSnakeGame() {
+  clearInterval(snakeInterval);
+  snake = [
+    { x: 150, y: 150 },
+    { x: 135, y: 150 },
+    { x: 120, y: 150 }
+  ];
+  snakeDx = snakeGrid;
+  snakeDy = 0;
+  snakeScore = 0;
+  $("snakeScore").textContent = 0;
+  spawnSnakeFood();
+  const canvas = $("snakeCanvas");
+  if (canvas) { canvas.style.display = "block"; canvas.width = 300; canvas.height = 300; }
+  drawSnake();
+  snakeInterval = setInterval(updateSnake, 140);
+}
+
+function spawnSnakeFood() {
+  snakeFood.x = Math.floor(Math.random() * (300 / snakeGrid)) * snakeGrid;
+  snakeFood.y = Math.floor(Math.random() * (300 / snakeGrid)) * snakeGrid;
+}
+
+function changeSnakeDir(dir) {
+  if (dir === 'UP' && snakeDy === 0) { snakeDx = 0; snakeDy = -snakeGrid; }
+  else if (dir === 'DOWN' && snakeDy === 0) { snakeDx = 0; snakeDy = snakeGrid; }
+  else if (dir === 'LEFT' && snakeDx === 0) { snakeDx = -snakeGrid; snakeDy = 0; }
+  else if (dir === 'RIGHT' && snakeDx === 0) { snakeDx = snakeGrid; snakeDy = 0; }
+}
+
+function updateSnake() {
+  const head = { x: snake[0].x + snakeDx, y: snake[0].y + snakeDy };
+
+  if (head.x < 0) head.x = 300 - snakeGrid;
+  else if (head.x >= 300) head.x = 0;
+  if (head.y < 0) head.y = 300 - snakeGrid;
+  else if (head.y >= 300) head.y = 0;
+
+  for (let i = 0; i < snake.length; i++) {
+    if (head.x === snake[i].x && head.y === snake[i].y) {
+      clearInterval(snakeInterval);
+      alert("💥 Game Over! ଆପଣଙ୍କ ସ୍କୋର: " + snakeScore);
+      return;
+    }
+  }
+
+  snake.unshift(head);
+
+  if (head.x === snakeFood.x && head.y === snakeFood.y) {
+    snakeScore += 10;
+    $("snakeScore").textContent = snakeScore;
+    if (snakeScore > snakeHighScore) {
+      snakeHighScore = snakeScore;
+      localStorage.setItem("gs_snake_hi", snakeHighScore);
+      $("snakeHighScore").textContent = snakeHighScore;
+    }
+    spawnSnakeFood();
+  } else {
+    snake.pop();
+  }
+
+  drawSnake();
+}
+
+function drawSnake() {
+  const canvas = $("snakeCanvas");
+  if (!canvas) return;
+  const ctx = canvas.getContext("2d");
+  if (!ctx) return;
+
+  ctx.fillStyle = "#1e1b4b";
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  ctx.fillStyle = "#fbbf24";
+  ctx.beginPath();
+  ctx.arc(snakeFood.x + snakeGrid/2, snakeFood.y + snakeGrid/2, snakeGrid/2.5, 0, 2*Math.PI);
+  ctx.fill();
+
+  snake.forEach((part, index) => {
+    ctx.fillStyle = index === 0 ? "#22c55e" : "#86efac";
+    ctx.fillRect(part.x, part.y, snakeGrid - 1, snakeGrid - 1);
+  });
+}
+
+function exitSnakeGame() {
+  clearInterval(snakeInterval);
+  showScreen("home");
+}
+
+function sendBridge(msg) {
+  if (window.AppInventor && typeof window.AppInventor.setWebViewString === "function") {
+    window.AppInventor.setWebViewString(msg);
+    return true;
+  }
+  return false;
+}
+
+function openDrive() {
+  if (!currentFolder) {
+    alert("ପ୍ରଥମେ Class ଓ Subject ବାଛନ୍ତୁ।");
+    return;
+  }
+  if (sendBridge("OPEN_URL~" + currentFolder)) return;
+  window.open(currentFolder, "_blank");
+}
+
+function downloadNotes() {
+  openDrive();
+}
+
+function bookmarkCurrent() {
+  let a = JSON.parse(localStorage.getItem("gs_bookmarks") || "[]");
+  let v = { cls: currentClass, sub: currentSubject };
+  if (!a.some(x => x.cls === v.cls && x.sub === v.sub)) {
+    a.push(v);
+    localStorage.setItem("gs_bookmarks", JSON.stringify(a));
+    $("noteStatus").textContent = "⭐ Subject bookmarked successfully!";
+  } else {
+    $("noteStatus").textContent = "Already in bookmarks!";
+  }
+}
+
+function renderBookmarks() {
+  let a = JSON.parse(localStorage.getItem("gs_bookmarks") || "[]");
+  let container = $("bookmarkList");
+  if (!a.length) {
+    container.innerHTML = '<div class="card" style="text-align:center;color:var(--muted);">No bookmarks saved yet.</div>';
+    return;
+  }
+  
+  let grouped = {};
+  a.forEach((b, idx) => {
+    let key = b.sub || "OTHER";
+    if (!grouped[key]) grouped[key] = [];
+    grouped[key].push({ ...b, originalIndex: idx });
+  });
+
+  let html = "";
+  Object.keys(grouped).forEach(sub => {
+    html += `<div class="subject-group">
+      <div class="subject-header">
+        <span>📖 ${sub}</span>
+        <span style="font-size:12px;background:#ede9fe;padding:2px 8px;border-radius:12px;color:#6d28d9;">${grouped[sub].length} saved</span>
+      </div>`;
+    grouped[sub].forEach(item => {
+      html += `<div class="item" style="display:flex;justify-content:space-between;align-items:center;">
+        <div><b>${item.cls}</b><br><small class="muted">${item.sub}</small></div>
+        <div style="display:flex;gap:6px;">
+          <button class="btn green" style="padding:6px 12px;font-size:13px;" onclick="goToBookmarked('${item.cls}','${item.sub}')">Open</button>
+          <button class="btn red" style="padding:6px 10px;font-size:13px;" onclick="deleteBookmark(${item.originalIndex})">✕</button>
+        </div>
+      </div>`;
+    });
+    html += `</div>`;
+  });
+  container.innerHTML = html;
+}
+
+function goToBookmarked(cls, sub) {
+  currentClass = cls;
+  window.classMode = "materials";
+  openSubject(sub);
+}
+
+function deleteBookmark(idx) {
+  let a = JSON.parse(localStorage.getItem("gs_bookmarks") || "[]");
+  a.splice(idx, 1);
+  localStorage.setItem("gs_bookmarks", JSON.stringify(a));
+  renderBookmarks();
+}
+
+function clearBookmarks() {
+  if (confirm("Clear all bookmarks?")) {
+    localStorage.removeItem("gs_bookmarks");
+    renderBookmarks();
+  }
+}
+
+function openMcqSetup() {
+  showScreen("mcqSetup");
+  $("mcqClass").innerHTML = Object.keys(subjectsByClass).map(c => `<option ${c==="CLASS X"?"selected":""}>${c}</option>`).join("");
+  fillSubjects();
+  loadRemoteMcq();
+}
+
+function fillSubjects() {
+  let c = $("mcqClass").value;
+  $("mcqSubject").innerHTML = (subjectsByClass[c] || []).map(s => `<option>${s}</option>`).join("");
+  fillTopics();
+}
+
+async function loadRemoteMcq() {
+  try {
+    let r = await fetch(GITHUB_MCQ_JSON_URL + "?t=" + Date.now(), { cache: "no-store" });
+    if (!r.ok) throw Error("HTTP " + r.status);
+    mcqDataStore = await r.json();
+    fillTopics();
+  } catch (e) {
+    console.log("Remote JSON:", e);
+  }
+}
+
+function fillTopics() {
+  let c = $("mcqClass").value, s = $("mcqSubject").value;
+  let topicSelect = $("mcqTopic");
+  let list = (mcqDataStore[c] && mcqDataStore[c][s]) ? mcqDataStore[c][s] : [];
+
+  if (Array.isArray(list) && list.length > 0) {
+    topicSelect.innerHTML = list.map(item => `<option value="${item.file}">${item.title}</option>`).join("");
+  } else {
+    topicSelect.innerHTML = '<option value="">No topics added yet</option>';
+  }
+}
+
+function fmtTime(s) {
+  return String(Math.floor(s / 60)).padStart(2, "0") + ":" + String(s % 60).padStart(2, "0");
+}
+
+function startQuiz() {
+  let fileName = $("mcqTopic").value;
+  if (!fileName) {
+    alert("ଦୟାକରି ଏକ Topic ବାଛନ୍ତୁ।");
+    return;
+  }
+
+  currentViewMode = "quiz";
+  let fullUrl = GITHUB_PAGES_BASE + fileName;
+
+  $("quizTimerBar").style.display = "flex";
+  $("noteActionToolbar").style.display = "none";
+  $("viewerBackButton").textContent = "⬅ Back to Topics";
+
+  quizSeconds = 0;
+  isQuizPaused = false;
+  $("quizRunningTimer").textContent = "00:00";
+  if (quizTimerInterval) clearInterval(quizTimerInterval);
+
+  quizTimerInterval = setInterval(() => {
+    if (!isQuizPaused) {
+      quizSeconds++;
+      $("quizRunningTimer").textContent = fmtTime(quizSeconds);
+    }
+  }, 1000);
+
+  $("pauseModal").classList.remove("active");
+  showScreen("quizScreen");
+  
+  $("quizFrame").srcdoc = "<div style='display:flex;align-items:center;justify-content:center;height:60vh;font-family:sans-serif;color:#6d28d9;font-size:18px;'><b>Loading Quiz... ଅପେକ୍ଷା କରନ୍ତୁ...</b></div>";
+  fetch(fullUrl + "?t=" + Date.now())
+    .then(r => {
+      if (!r.ok) throw new Error("HTTP " + r.status);
+      return r.text();
+    })
+    .then(html => {
+      $("quizFrame").srcdoc = html;
+    })
+    .catch(err => {
+      $("quizFrame").srcdoc = "<div style='padding:20px;text-align:center;'>ଇଣ୍ଟରନେଟ୍ ସଂଯୋଗ ଯାଞ୍ଚ କରନ୍ତୁ କିମ୍ବା ପରେ ଚେଷ୍ଟା କରନ୍ତୁ।</div>";
+    });
+}
+
+function pauseQuiz() {
+  isQuizPaused = true;
+  $("pausedTimeText").textContent = fmtTime(quizSeconds);
+  $("pauseModal").classList.add("active");
+}
+
+function resumeQuiz() {
+  isQuizPaused = false;
+  $("pauseModal").classList.remove("active");
+}
+
+function closePauseAndExit() {
+  $("pauseModal").classList.remove("active");
+  cleanViewerFrame();
+  showScreen("mcqSetup");
+}
+
+function startStudy() {
+  if (studyInterval) return;
+  studyInterval = setInterval(() => {
+    studySeconds++;
+    renderStudyClock();
+  }, 1000);
+}
+
+function pauseStudy() {
+  clearInterval(studyInterval);
+  studyInterval = null;
+}
+
+function resetStudy() {
+  pauseStudy();
+  studySeconds = 0;
+  renderStudyClock();
+}
+
+function renderStudyClock() {
+  $("studyClock").textContent = [
+    Math.floor(studySeconds / 3600),
+    Math.floor(studySeconds / 60) % 60,
+    studySeconds % 60
+  ].map(x => String(x).padStart(2, "0")).join(":");
+}
+
+function toggleTheme() {
+  document.body.classList.toggle("dark");
+  localStorage.setItem("gs_dark", document.body.classList.contains("dark") ? "1" : "0");
+}
+
+async function shareApp() {
+  const message = `🎓 GyanSetu Odisha - NCERT Notes & MCQ App!\n\nDownload: https://github.com/silusahu360/gyansetu-odishamcq/releases/latest`;
+  try {
+    if (navigator.share) {
+      await navigator.share({ title: "GyanSetu Odisha", text: message });
+      return;
+    }
+  } catch (e) {}
+  window.prompt("Share message କପି କରନ୍ତୁ:", message);
+}
+
+async function checkUpdates() {
+  const status = $("homeStatus");
+  if (status) status.textContent = "ନୂଆ ଅପଡେଟ୍ ଯାଞ୍ଚ ହେଉଛି...";
+  
+  const GITHUB_API_URL = "https://api.github.com/repos/silusahu360/gyansetu-odishamcq/releases/latest";
+
+  try {
+    const res = await fetch(GITHUB_API_URL, {
+      headers: { "Accept": "application/vnd.github.v3+json" }
+    });
+    if (!res.ok) throw new Error("Release error");
+    const releaseData = await res.json();
+    const remoteVersion = releaseData.tag_name ? releaseData.tag_name.replace(/^[vV]/, "").trim() : "2.0";
+    const apkAsset = releaseData.assets && releaseData.assets.find(a => a.name.endsWith(".apk"));
+    const downloadUrl = apkAsset ? apkAsset.browser_download_url : releaseData.html_url;
+
+    sendBridge("LATEST_RELEASE~" + remoteVersion + "~" + downloadUrl);
+
+    if (remoteVersion > CURRENT_VERSION) {
+      if (status) {
+        status.innerHTML = `🔔 ନୂଆ ଅପଡେଟ୍ (v${remoteVersion})! <a href="${downloadUrl}" target="_blank" style="color:var(--primary);font-weight:700;">Download</a>`;
+      }
+    } else {
+      if (status) status.textContent = "✅ ଆପଣ ସର୍ବଶେଷ ଭର୍ସନ ବ୍ୟବହାର କରୁଛନ୍ତି।";
+    }
+  } catch (err) {
+    if (status) status.textContent = "ଅପଡେଟ୍ ଯାଞ୍ଚ ବିଫଳ ହେଲା।";
+  }
+}
+
+function handleAndroidBack() {
+  const active = document.querySelector(".screen.active");
+  const id = active ? active.id : "home";
+  if (id === "snakeGameScreen") { exitSnakeGame(); return; }
+  if (id === "quizScreen") { handleViewerBack(); return; }
+  if (id === "offlineNoteViewer") { showScreen("downloads"); return; }
+  if (id === "folder") { showScreen("subjects"); return; }
+  if (id === "subjects") { showScreen("classes"); return; }
+  if (["classes","mcqSetup","offlineQuizMenuScreen","downloads","studyTimer","about","bookmarks"].includes(id)) { showScreen("home"); return; }
+  if (id === "home") return;
+  showScreen("home");
+}
+
+if (localStorage.getItem("gs_dark") === "1") document.body.classList.add("dark");
+</script>
+</body>
+</html>
+ଏହାପରେ କ’ଣ କରିବେ:
+କୋଡ୍ Paste କରିସାରିବା ପରେ ଉପରେ ଡାହାଣ ପାଖରେ ଥିବା ସବୁଜ ରଙ୍ଗର Commit changes... ବଟନ୍ ଉପରେ କ୍ଲିକ୍ କରନ୍ତୁ।
+
+ଏହାପରେ ଆସୁଥିବା ପପ୍-ଅପ୍‌ରେ ଆଉଥରେ Commit changes କ୍ଲିକ୍ କରିଦିଅନ୍ତୁ।
+
+ଆପଣଙ୍କର ନୂଆ ଫାଇଲ୍ app.html ଏବେ GitHub ରେ ଲାଇଭ୍ ହୋଇଗଲା!
+
+ଏହା ସରିଗଲେ ଜଣାନ୍ତୁ, ଆମେ MIT App Inventor ର ବ୍ଲକ୍‌ରେ ଏହି ଲିଙ୍କ୍ କେଉଁଠି ଦେବେ ତାହା ଦେଖିନେବା।
+
+Emiti snake game add kara
+
+Your HTML file is ready
+
+HTML icon
+app
+ HTML 
+ଆପଣଙ୍କର ଦିଆଯାଇଥିବା Nokia Neon Snake Game (Audio Beep Sound + Neon Glow Apple + D-Pad Controls) କୁ ସିଧାସଳଖ app.html ର "Mind Fresh" ସେକ୍ସନରେ ଯୋଡ଼ି ଦିଆଗଲା!   
+nokia_snake_game.html
+
+ବର୍ତ୍ତମାନ GitHub ରେ ଯେଉଁ app.html ପେଜ୍ ଖୋଲି ରଖିଛନ୍ତି, ସେହି ବାକ୍ସ ଭିତରେ ନିମ୍ନ କୋଡ୍‌ଟିକୁ Paste କରି Commit changes କରିଦିଅନ୍ତୁ:   
+5845edc7-1e42-47a4-96de-85dade810bf2
+
+HTML
 <!DOCTYPE html>
 <html lang="or">
 <head>
@@ -1090,4 +2195,4786 @@ function handleAndroidBack() {
   const id = active ? active.id : "home";
   if (id === "snakeGameScreen") { exitNokiaGame(); return; }
   if (id === "quizScreen") { handleViewerBack(); return; }
+  if (id === "offlineNoteViewer") { showScreen("downloads"); return; }
+  if (id === "folder") { showScreen("subjects"); return; }
+  if (id === "subjects") { showScreen("classes"); return; }
+  if (["classes","mcqSetup","offlineQuizMenuScreen","downloads","studyTimer","about","bookmarks"].includes(id)) { showScreen("home"); return; }
+  if (id === "home") return;
+  showScreen("home");
+}
+
+if (localStorage.getItem("gs_dark") === "1") document.body.classList.add("dark");
+</script>
+</body>
+</html>
+Paste କରିସାରିବା ପରେ ଉପରେ Commit changes... ବଟନ୍ ଦବାଇ Save କରିଦିଅନ୍ତୁ। ସେଭ୍ ହେବା ପରେ କୁହନ୍ତୁ, MIT App Inventor ର ବ୍ଲକ୍ ଯାଞ୍ଚ କରିନେବା।   
+5845edc7-1e42-47a4-96de-85dade810bf2
+
+Hn tapore kn karibaa
+
+GitHub ରେ app.html ଫାଇଲ୍ ସେଭ୍ (Commit changes) ହୋଇସାରିବା ପରେ, ଏବେ MIT App Inventor ରେ APK ପ୍ରସ୍ତୁତ କରିବା ପାଇଁ ଶେଷ ୩ଟି ପଦକ୍ଷେପ ବାକି ରହିଲା:   
+5845edc7-1e42-47a4-96de-85dade810bf2
+
+Step 1: MIT App Inventor (Designer View)
+ai2.appinventor.mit.edu ରେ ନିଜ ପ୍ରୋଜେକ୍ଟ ଖୋଲନ୍ତୁ।
+
+Screen1 ଉପରେ କେବଳ ଏହି ଦୁଇଟି Component ରଖନ୍ତୁ:
+
+User Interface ରୁ WebViewer (Properties: Width: Fill parent, Height: Fill parent, IgnoreSslErrors: Checked)।
+
+Connectivity ରୁ ActivityStarter (Properties: Action ଘରେ ଲେଖନ୍ତୁ android.intent.action.VIEW)।
+
+Step 2: MIT App Inventor (Blocks Setup)
+ଉପର ଡାହାଣ ପାଖରେ ଥିବା Blocks ସେକ୍ସନକୁ ଯାଇ ଏହି ୩ଟି ବ୍ଲକ୍ ଯୋଡ଼ନ୍ତୁ:
+
+Screen ଆରମ୍ଭ ହେବା ମାତ୍ରେ app.html ଲୋଡ୍ କରିବା:
+
+Plaintext
+when Screen1.Initialize do:
+    set WebViewer1.HomeUrl to "https://silusahu360.github.io/gyansetu-odishamcq/app.html"
+    call WebViewer1.GoHome
+Google Drive ଲିଙ୍କ୍ ବାହାର Browser ରେ ଖୋଲିବା (403 Error ରୁ ରକ୍ଷା ପାଇବା ପାଇଁ):
+
+Plaintext
+when WebViewer1.WebViewStringChange do:
+    if call text.starts at (text: WebViewer1.WebViewString, piece: "OPEN_URL~") = 1 then:
+        set ActivityStarter1.DataUri to call text.segment (
+            text: WebViewer1.WebViewString,
+            start: 10,
+            length: call text.length(WebViewer1.WebViewString) - 9
+        )
+        call ActivityStarter1.StartActivity
+ମୋବାଇଲ୍ Back Button ସମ୍ଭାଳିବା (ଆପ୍ ହଠାତ୍ ବନ୍ଦ ନ ହେବା ପାଇଁ):
+
+Plaintext
+when Screen1.BackPressed do:
+    if call WebViewer1.CanGoBack then:
+        call WebViewer1.GoBack
+    else:
+        call Screen1.CloseApplication
+Step 3: APK Build କରନ୍ତୁ
+ଉପର ମେନୁରେ Build ଉପରେ କ୍ଲିକ୍ କରନ୍ତୁ।
+
+Android App (.apk) ବାଛନ୍ତୁ।
+
+Build ୧୦୦% ହେବା ପରେ APK ଫାଇଲ୍ ଡାଉନଲୋଡ୍ କରି ନିଜ ଫୋନ୍‌ରେ install କରି ଚଲାନ୍ତୁ।
+
+ଆପ୍ ଭିତରେ Mind Fresh ବଟନ୍ ଦବାଇଲେ ସିଧାସଳଖ ନୂଆ Nokia Neon Snake Game ସାଉଣ୍ଡ୍ ସହିତ ଚାଲିବ! Blocks ଯୋଡ଼ିବାରେ କୌଣସି ଅସୁବିଧା ହେଉଛି କି?   
+app.html
+
+Step 2 easy re batao kaouthu kn aaniki jodibi j
+
+Step 2 (Blocks ଯୋଡ଼ିବା) ବହୁତ ସହଜ। ବାମ ପାଖରେ ଥିବା ରଙ୍ଗବେରଙ୍ଗର ଲିଷ୍ଟରୁ କେଉଁ Block କେଉଁଠୁ ଆଣିବେ, ତାହା ନିମ୍ନରେ ସରଳ ଭାବେ ଦିଆଗଲା:
+
+Block ୧: ଆପ୍ ଖୋଲିବା ମାତ୍ରେ ଲିଙ୍କ୍ ଲୋଡ୍ କରିବା
+ବାମ ପାଖ ଲିଷ୍ଟରୁ Screen1 ଉପରେ କ୍ଲିକ୍ କରନ୍ତୁ:
+
+ସେଥିରୁ when Screen1.Initialize do ବ୍ଲକ୍‌ଟି ଆଣି ରଖନ୍ତୁ।
+
+ବାମ ପାଖରୁ WebViewer1 ଉପରେ କ୍ଲିକ୍ କରନ୍ତୁ:
+
+ସବୁଜ ରଙ୍ଗର set WebViewer1.HomeUrl to ଆଣି ତା' ଭିତରେ ଖଞ୍ଜନ୍ତୁ।
+
+ବାମ ପାଖ ଉପରେ ଥିବା Built-in > Text ଉପରେ କ୍ଲିକ୍ କରନ୍ତୁ:
+
+ସବୁଠୁ ଉପରେ ଥିବା ଖାଲି ଘର " " (Empty string) ବ୍ଲକ୍ ଆଣି HomeUrl ସାମ୍ନାରେ ଯୋଡ଼ନ୍ତୁ ଏବଂ ସେଥିରେ ଲେଖନ୍ତୁ:
+[https://silusahu360.github.io/gyansetu-odishamcq/app.html](https://silusahu360.github.io/gyansetu-odishamcq/app.html)
+
+ପୁଣି WebViewer1 ଉପରେ କ୍ଲିକ୍ କରନ୍ତୁ:
+
+ବାଇଗଣୀ ରଙ୍ଗର call WebViewer1.GoHome ବ୍ଲକ୍ ଆଣି ତା' ତଳେ ଯୋଡ଼ନ୍ତୁ।
+
+Block ୨: Google Drive ବାହାର Browser ରେ ଖୋଲିବା
+ବାମ ପାଖରୁ WebViewer1 ଉପରେ କ୍ଲିକ୍ କରନ୍ତୁ:
+
+when WebViewer1.WebViewStringChange do ଆଣନ୍ତୁ।
+
+ବାମ ପାଖ Built-in > Control କୁ ଯାଆନ୍ତୁ:
+
+if then ବ୍ଲକ୍ ଆଣି ତା' ଭିତରେ ରଖନ୍ତୁ।
+
+ବାମ ପାଖ Built-in > Math କୁ ଯାଆନ୍ତୁ:
+
+ସମାନ ଚିହ୍ନ ଥିବା = ବ୍ଲକ୍ ଆଣି if ସାମ୍ନାରେ ଲଗାନ୍ତୁ।
+
+ବାମ ପାଖ Built-in > Text କୁ ଯାଆନ୍ତୁ:
+
+starts at text: [piece: ] ବ୍ଲକ୍ ଆଣି = ର ବାମ ପାଖରେ ଲଗାନ୍ତୁ।
+
+starts at text: ଘରେ WebViewer1 ରୁ WebViewer1.WebViewString ବ୍ଲକ୍ ଆଣି ଯୋଡ଼ନ୍ତୁ।
+
+piece: ଘରେ Text ରୁ ଖାଲି ଘର " " ଆଣି ଲେଖନ୍ତୁ: OPEN_URL~   
+index-6.html
+
+Built-in > Math ରୁ ସଂଖ୍ୟା ବ୍ଲକ୍ 0 ଆଣି ତାକୁ 1 କରି = ର ଡାହାଣ ପାଖରେ ଲଗାନ୍ତୁ।
+
+ବାମ ପାଖରୁ ActivityStarter1 କୁ ଯାଆନ୍ତୁ:
+
+set ActivityStarter1.DataUri to ବ୍ଲକ୍ ଆଣି then ଭିତରେ ରଖନ୍ତୁ।
+
+Built-in > Text ରୁ segment text: [start: ] [length: ] ଆଣି DataUri ସାମ୍ନାରେ ଯୋଡ଼ନ୍ତୁ:
+
+text: ଘରେ WebViewer1 ରୁ WebViewer1.WebViewString ବ୍ଲକ୍ ଯୋଡ଼ନ୍ତୁ।
+
+start: ଘରେ Math ରୁ ସଂଖ୍ୟା ବ୍ଲକ୍ ଆଣି 10 ଲେଖନ୍ତୁ।
+
+length: ଘରେ Math ରୁ ବିୟୋଗ ଚିହ୍ନ - ବ୍ଲକ୍ ଲଗାନ୍ତୁ:
+
+ବାମ ପାଖରେ Text ରୁ length ବ୍ଲକ୍ ଲଗାଇ ତା' ଭିତରେ WebViewer1.WebViewString ରଖନ୍ତୁ।
+
+ଡାହାଣ ପାଖରେ Math ରୁ ସଂଖ୍ୟା 9 ଲେଖନ୍ତୁ।
+
+ପୁଣି ActivityStarter1 ରୁ:
+
+ବାଇଗଣୀ ରଙ୍ଗର call ActivityStarter1.StartActivity ବ୍ଲକ୍ ଆଣି ତା' ତଳେ ଲଗାଇଦିଅନ୍ତୁ।
+
+Block ୩: Back Button ସମ୍ଭାଳିବା (ଆପ୍ ବନ୍ଦ ନ ହେବା ପାଇଁ)
+ବାମ ପାଖରୁ Screen1 ଉପରେ କ୍ଲିକ୍ କରନ୍ତୁ:
+
+when Screen1.BackPressed do ବ୍ଲକ୍ ଆଣନ୍ତୁ।
+
+Built-in > Control କୁ ଯାଆନ୍ତୁ:
+
+if then else ବ୍ଲକ୍ ଆଣି ତା' ଭିତରେ ରଖନ୍ତୁ।
+
+WebViewer1 ରୁ:
+
+call WebViewer1.CanGoBack ଆଣି if ସାମ୍ନାରେ ଯୋଡ଼ନ୍ତୁ।
+
+WebViewer1 ରୁ:
+
+call WebViewer1.GoBack ଆଣି then ଭିତରେ ରଖନ୍ତୁ।
+
+Control କୁ ଯାଆନ୍ତୁ:
+
+close application ଆଣି else ଭିତରେ ରଖନ୍ତୁ।
+
+ଏହି ୩ଟି ବ୍ଲକ୍ ସେଟ୍ ହୋଇଗଲା ପରେ ଆପଣ ଉପରୁ Build > Android App (.apk) କରିପାରିବେ।
+
+ଫଟୋରେ ଆପଣ ପ୍ରଥମ Block ଏକଦମ୍ ସଠିକ୍ ଭାବେ ଯୋଡ଼ିଛନ୍ତି!   
+0a70006a-c44d-4cd7-a1c4-35efcee33547
+
+ଏବେ ତଳେ ଥିବା when WebViewer1.WebViewStringChange ଭିତରେ କେବଳ ୫ଟି Block ଯୋଡ଼ିବାକୁ ହେବ। ବାମ ପାଖ ମେନୁରୁ ଏଗୁଡ଼ିକୁ କ୍ରମାନ୍ୱୟରେ ଆଣି ରଖନ୍ତୁ:   
+0a70006a-c44d-4cd7-a1c4-35efcee33547
+
+Step 1: if then ଆଣନ୍ତୁ
+ବାମ ପାଖରେ ଥିବା Built-in > Control (ହଳଦିଆ ରଙ୍ଗ) ଉପରେ କ୍ଲିକ୍ କରନ୍ତୁ।
+
+ସେଥିରୁ if then ବ୍ଲକ୍‌ଟି ଆଣି do ର ଖାଲି ସ୍ଥାନରେ ଖଞ୍ଜନ୍ତୁ।
+
+Step 2: ସମାନ ଚିହ୍ନ = ଆଣନ୍ତୁ
+ବାମ ପାଖ Built-in > Math (ନୀଳ ରଙ୍ଗ) କୁ ଯାଆନ୍ତୁ।
+
+ସେଥିରୁ = (ସମାନ ଚିହ୍ନ ଥିବା ବ୍ଲକ୍) ଆଣି if ସାମ୍ନାରେ ଯୋଡ଼ନ୍ତୁ।
+
+Step 3: starts at ବ୍ଲକ୍ ସେଟ୍ କରନ୍ତୁ
+ବାମ ପାଖ Built-in > Text (ଗୋଲାପୀ ରଙ୍ଗ) କୁ ଯାଆନ୍ତୁ:
+
+ସେଥିରୁ starts at text: [piece: ] ଆଣି = ର ବାମ ପାଖରେ ଲଗାନ୍ତୁ।
+
+ଏବେ when WebViewer1.WebViewStringChange ବ୍ଲକ୍ ଉପରେ ଥିବା ଲାଲ୍ ରଙ୍ଗର value ଉପରେ ମାଉସ୍ ରଖନ୍ତୁ:
+
+ସେଠାରୁ get value ନେଇ text: ଖାଲି ଘରେ ଲଗାଇଦିଅନ୍ତୁ।   
+0a70006a-c44d-4cd7-a1c4-35efcee33547
+
+ପୁଣି Text ରୁ ଏକ ଖାଲି ଘର " " ଆଣି piece: ଘରେ ଯୋଡ଼ନ୍ତୁ ଏବଂ ସେଥିରେ ଲେଖନ୍ତୁ:
+
+OPEN_URL~   
+index-6.html
+
+ବାମ ପାଖ Math ରୁ ସଂଖ୍ୟା ବ୍ଲକ୍ 0 ଆଣି ତାକୁ 1 କରନ୍ତୁ ଏବଂ = ର ଡାହାଣ ପାଖ ଘରେ ଲଗାନ୍ତୁ।
+
+Step 4: ActivityStarter1.DataUri ଯୋଡ଼ନ୍ତୁ
+ବାମ ପାଖ ତଳୁ ActivityStarter1 ଉପରେ କ୍ଲିକ୍ କରନ୍ତୁ:
+
+ସବୁଜ ରଙ୍ଗର set ActivityStarter1.DataUri to ଆଣି then ଭିତରେ ରଖନ୍ତୁ।
+
+ବାମ ପାଖ Text ରୁ segment text: [start: ] [length: ] ଆଣି DataUri to ସାମ୍ନାରେ ଯୋଡ଼ନ୍ତୁ:
+
+text: ଘରେ ପୁଣି ଉପରୁ get value ଆଣି ଲଗାନ୍ତୁ।   
+0a70006a-c44d-4cd7-a1c4-35efcee33547
+
+start: ଘରେ Math ରୁ ସଂଖ୍ୟା ବ୍ଲକ୍ ଆଣି 10 ଲେଖନ୍ତୁ।
+
+length: ଘରେ Math ରୁ ବିୟୋଗ ଚିହ୍ନ - ବ୍ଲକ୍ ଲଗାନ୍ତୁ:
+
+ବିୟୋଗ ଚିହ୍ନର ବାମ ପାଖରେ Text ରୁ length ବ୍ଲକ୍ ଲଗାଇ ତା' ଭିତରେ get value ଦିଅନ୍ତୁ।   
+0a70006a-c44d-4cd7-a1c4-35efcee33547
+
+ଡାହାଣ ପାଖରେ Math ରୁ ସଂଖ୍ୟା 9 ଲେଖନ୍ତୁ।
+
+Step 5: Start Activity ଚଲାନ୍ତୁ
+ପୁଣି ବାମ ପାଖରୁ ActivityStarter1 କୁ ଯାଆନ୍ତୁ:
+
+ବାଇଗଣୀ ରଙ୍ଗର call ActivityStarter1.StartActivity ଆଣି set ActivityStarter1.DataUri to ର ତଳେ ଖଞ୍ଜି ଦିଅନ୍ତୁ।
+
+ଏତିକି ଯୋଡ଼ିଦେଲେ Google Drive ଲିଙ୍କ୍ ଉପରେ କ୍ଲିକ୍ କଲେ ତାହା ଆପେ ଆପେ ମୋବାଇଲ୍‌ର ବାହାର Browser ରେ ବିନା କୌଣସି Error ରେ ଖୋଲିଯିବ! ଏହା ପରେ କେବଳ ମୋବାଇଲ୍‌ର Back button ବ୍ଲକ୍‌ଟି ବାକି ରହିବ।   
+index-6.html
+
+Next
+
+Step 2 ର ଶେଷ ଅଂଶ ହେଉଛି ମୋବାଇଲ୍ Back Button କଣ୍ଟ୍ରୋଲ୍ କରିବା, ଯାହାଦ୍ୱାରା ୟୁଜର୍ ବ୍ୟାକ୍ ବଟନ୍ ଦବାଇଲେ ଆପ୍ ହଠାତ୍ ବନ୍ଦ ନ ହୋଇ ପୂର୍ବ ପେଜ୍‌କୁ ଫେରିବ।
+
+ଏହି ବ୍ଲକ୍ ଯୋଡ଼ିବା ପାଇଁ ନିମ୍ନ ପଦକ୍ଷେପଗୁଡ଼ିକ କରନ୍ତୁ:
+
+Step 3: Back Button Block ସେଟ୍ କରନ୍ତୁ
+Screen1 Block:
+
+ବାମ ପାଖ ଲିଷ୍ଟରୁ Screen1 ଉପରେ କ୍ଲିକ୍ କରନ୍ତୁ।
+
+ସେଥିରୁ ବାଦାମୀ ରଙ୍ଗର when Screen1.BackPressed do ବ୍ଲକ୍‌ଟି ଆଣି ତଳେ ଖାଲି ଜାଗାରେ ରଖନ୍ତୁ।
+
+Verification: କାର୍ଯ୍ୟସ୍ଥଳୀରେ when Screen1.BackPressed do ବ୍ଲକ୍ ଦେଖାଯିବ।
+
+If-Then-Else ବ୍ଲକ୍ ଯୋଡ଼ନ୍ତୁ:
+
+ବାମ ପାଖ Built-in > Control (ହଳଦିଆ ରଙ୍ଗ) କୁ ଯାଆନ୍ତୁ।
+
+ସେଥିରୁ if then ବ୍ଲକ୍‌ଟି ଆଣି do ଭିତରେ ଲଗାନ୍ତୁ।
+
+ଏବେ ସେହି if then ବ୍ଲକ୍‌ର ବାମ ପାଖରେ ଥିବା ନୀଳ ରଙ୍ଗର ଛୋଟ ଗିଅର୍ (Settings ⚙️) ଆଇକନ୍ ଉପରେ କ୍ଲିକ୍ କରନ୍ତୁ।
+
+ଭିତରେ ଥିବା else ଖଣ୍ଡଟିକୁ ଟାଣି ଆଣି ଡାହାଣ ପାଖ if ତଳେ ଯୋଡ଼ିଦିଅନ୍ତୁ (ଏହାଦ୍ୱାରା ବ୍ଲକ୍‌ଟି if then else ହୋଇଯିବ)। ପୁଣି ⚙️ ଆଇକନ୍ ଉପରେ କ୍ଲିକ୍ କରି ତାକୁ ବନ୍ଦ କରନ୍ତୁ।
+
+Verification: ହଳଦିଆ ବ୍ଲକ୍‌ଟିରେ if, then, ଏବଂ else ଏହି ତିନୋଟି ଯାକ ସ୍ଥାନ ଦେଖାଯିବ।
+
+CanGoBack ଯାଞ୍ଚ କରନ୍ତୁ:
+
+ବାମ ପାଖରୁ WebViewer1 ଉପରେ କ୍ଲିକ୍ କରନ୍ତୁ।
+
+ସେଥିରୁ ସବୁଜ ରଙ୍ଗର call WebViewer1.CanGoBack ବ୍ଲକ୍ ଆଣି if ସାମ୍ନାରେ ଲଗାନ୍ତୁ।
+
+Verification: if ସାମ୍ନାରେ call WebViewer1.CanGoBack ସଂଯୋଗ ହୋଇଥିବ।
+
+GoBack କମାଣ୍ଡ ଦିଅନ୍ତୁ:
+
+ପୁଣି WebViewer1 କୁ ଯାଆନ୍ତୁ।
+
+ବାଇଗଣୀ ରଙ୍ଗର call WebViewer1.GoBack ବ୍ଲକ୍ ଆଣି then ଭିତରେ ରଖନ୍ତୁ।
+
+Verification: then ଭିତରେ call WebViewer1.GoBack ବସିଥିବ।
+
+Close Application ଯୋଡ଼ନ୍ତୁ:
+
+ବାମ ପାଖ Built-in > Control କୁ ଯାଆନ୍ତୁ।
+
+ସ୍କ୍ରୋଲ୍ କରି ତଳୁ close application ବ୍ଲକ୍ ଆଣି else ଭିତରେ ରଖନ୍ତୁ।
+
+Verification: else ଭିତରେ close application ସଫଳତାର ସହ ଯୋଡ଼ି ହୋଇଥିବ।
+
+Step 4: APK Build କରନ୍ତୁ
+ବ୍ଲକ୍ ସେକ୍ସନର ସମସ୍ତ କାମ ଶେଷ ହୋଇଛି:
+
+ଉପର ଧଳା ମେନୁ ବାର୍‌ରେ Build ଉପରେ କ୍ଲିକ୍ କରନ୍ତୁ।
+
+Android App (.apk) ବିକଳ୍ପକୁ ବାଛନ୍ତୁ।
+
+ପ୍ରୋସେସ୍ ୧୦୦% ହେବା ପରେ ଏକ QR code ଏବଂ "Download .apk" ବଟନ୍ ଆସିବ, ସେଠାରୁ ଫାଇଲ୍ ଡାଉନଲୋଡ୍ କରି ଫୋନ୍‌ରେ ଇନଷ୍ଟଲ୍ କରନ୍ତୁ।
+
+Apk companion re run karibj?
+
+ହଁ, MIT AI2 Companion ଆପ୍‌ରେ ଏହା ନିଶ୍ଚୟ run କରିବ, କିନ୍ତୁ ଗୋଟିଏ କଥା ମନେରଖିବା ଜରୁରୀ:
+
+Companion ରେ କ’ଣ କାମ କରିବ:
+
+ସମସ୍ତ ପେଜ୍ (Home, Classes, Subjects) ଲୋଡ୍ ହେବ।
+
+Offline MCQ Practice ଏବଂ Download ବଟନ୍ କାମ କରିବ।
+
+Nokia Neon Snake Game ସମ୍ପୂର୍ଣ୍ଣ ସାଉଣ୍ଡ୍ ସହିତ ଚାଲିବ।
+
+Timer ଏବଂ Dark/Light ମୋଡ୍ ସବୁକିଛି ଦେଖିପାରିବେ।
+
+Companion ରେ କେଉଁଠି ଛୋଟ ସୀମା ରହିପାରେ:
+
+Back Button: Companion ଭିତରେ ଟେଷ୍ଟ କଲାବେଳେ Back ବଟନ୍ ଦବାଇଲେ ବେଳେବେଳେ WebViewer ଭିତରେ ପଛକୁ ନ ଯାଇ Companion ଆପ୍ ହିଁ ବାହାରକୁ ଆସିଯାଏ।
+
+ActivityStarter (Google Drive Link): କିଛି ଫୋନ୍‌ରେ Companion ମାଧ୍ୟମରେ ବାହାର Browser ଖୋଲିବା ବେଳେ Permission ବା Intent block ହୋଇପାରେ।
+
+ତେଣୁ Companion ରେ ଚେକ୍ କରି ସବୁ ଡିଜାଇନ୍ ଓ ଗେମ୍ ଦେଖିନିଅନ୍ତୁ, କିନ୍ତୁ ଶେଷରେ ସମ୍ପୂର୍ଣ୍ଣ ଅସଲ ଅନୁଭୂତି ପାଇଁ Build > Android App (.apk) କରି ଫୋନ୍‌ରେ ଇନଷ୍ଟଲ୍ କରିବା ସବୁଠାରୁ ଭଲ ହେବ।
+
+Ethi button press kale kichhi b aasunj
+
+ଫଟୋରେ ଆପଣଙ୍କର UI (Home Screen) ସମ୍ପୂର୍ଣ୍ଣ ସଠିକ୍ ଭାବେ ଲୋଡ୍ ହୋଇଛି!
+
+ବଟନ୍ ଦବାଇଲେ କିଛି ନ ଆସିବାର ମୁଖ୍ୟ କାରଣ ହେଉଛି: MIT App Inventor ର WebViewer ରେ JavaScript (କିମ୍ବା WebViewString) ବନ୍ଦ ରହିଛି। ଏହା ବନ୍ଦ ଥିଲେ HTML ର ବଟନ୍ କ୍ଲିକ୍ କାମ କରେ ନାହିଁ।
+
+ଏହାକୁ ଠିକ୍ କରିବା ପାଇଁ MIT App Inventor ରେ ନିମ୍ନଲିଖିତ ସେଟିଂ ଯାଞ୍ଚ କରି On କରନ୍ତୁ:
+
+Step 1: WebViewer ର Properties On କରନ୍ତୁ
+MIT App Inventor ରେ Designer view କୁ ଯାଆନ୍ତୁ।
+
+Component ତାଲିକାରୁ WebViewer1 ଉପରେ କ୍ଲିକ୍ କରନ୍ତୁ।
+
+ଡାହାଣ ପାଖ Properties ପ୍ୟାନେଲ୍‌ରେ ଦେଖନ୍ତୁ ଏବଂ ଏହି ଦୁଇଟି ଚେକ୍‌ବକ୍ସରେ ଟିକ୍ (Check) ମାରନ୍ତୁ:
+
+PromptforPermission 
+→ Check (ଟିକ୍ କରନ୍ତୁ)
+
+IgnoreSslErrors 
+→ Check (ଟିକ୍ କରନ୍ତୁ)
+
+(ଯଦି କୌଣସି EnableJavaScript ଅପ୍ସନ୍ ଦିଶୁଥାଏ, ତେବେ ତାହା ମଧ୍ୟ Checked ଥିବା ଦରକାର)।
+
+Step 2: app.html କୋଡ୍‌ରେ ଥିବା ଏକ ଛୋଟ Error ଫିକ୍ସ କରନ୍ତୁ
+ଆପଣ app.html ଭିତରେ ଶେଷ ଆଡ଼କୁ ଦେଖିଲେ ଗୋଟିଏ ଲାଇନ୍ ରହିଛି ଯାହା Companion ଭିତରେ JavaScript କୁ block କରିଦିଏ:
+
+JavaScript
+// ଏହି ଲାଇନ୍‌ରେ ଦୁଇଟି backslash \\ ରହିଯାଇଛି:
+const message = `🎓 GyanSetu Odisha - NCERT Notes & MCQ App!\\n\\nDownload: ...`;
+ଏହାକୁ ସଜାଡ଼ିବା ଏବଂ ବଟନ୍ ଯେପରି ପ୍ରତ୍ୟେକ Screen ଖୋଲିବ, ସେଥିପାଇଁ GitHub ରେ app.html କୁ Edit କରି <script> ଭିତରର ସବୁଠୁ ତଳ ଅଂଶରେ ଏହି ଛୋଟ ପରିବର୍ତ୍ତନ କରିଦିଅନ୍ତୁ (କିମ୍ବା ସିଧାସଳଖ GitHub ରେ ଯାଇ Edit କରନ୍ତୁ):
+
+GitHub ରେ app.html ଖୋଲି ✏️ (Edit) ଦବାନ୍ତୁ।   
+0a70006a-c44d-4cd7-a1c4-35efcee33547
+
+ଲାଇନ୍ ନମ୍ବର 624 ପାଖରେ ଥିବା:
+
+JavaScript
+const message = `🎓 GyanSetu Odisha - NCERT Notes & MCQ App!\\n\\nDownload: https://github.com/silusahu360/gyansetu-odishamcq/releases/latest`;
+କୁ ବଦଳାଇ ସାଧାରଣ କରିଦିଅନ୍ତୁ:
+
+JavaScript
+const message = "🎓 GyanSetu Odisha - NCERT Notes & MCQ App!\n\nDownload: https://github.com/silusahu360/gyansetu-odishamcq/releases/latest";
+ତଳେ Commit changes କରିଦିଅନ୍ତୁ।   
+fe5e5f96-1ae2-4b29-b1de-7f12ad67944b
++ 1
+
+Step 3: ସବୁଠାରୁ ଗୁରୁତ୍ୱପୂର୍ଣ୍ଣ କଥା (Companion vs Direct APK)
+Companion ଆପ୍ ଅନେକ ସମୟରେ WebViewer ର inline onclick function ଗୁଡ଼ିକୁ ସୁରକ୍ଷା କାରଣରୁ ବ୍ଲକ୍ କରିଦିଏ।
+
+ଥରେ Build > Android App (.apk) ଉପରେ କ୍ଲିକ୍ କରି ନିଜ ମୋବାଇଲ୍‌ରେ ସିଧାସଳଖ install କରି ଦେଖନ୍ତୁ। APK ରେ ଏହି ସମସ୍ତ ବଟନ୍ (Notes Library, Mind Fresh, Study Timer) ସଙ୍ଗେ ସଙ୍ଗେ କାମ କରିବ!
+
+Mun se html file debi tume edit kariba?
+
+ହଁ, ନିଶ୍ଚୟ! ଆପଣ ଏଠାରେ ସେହି HTML ଫାଇଲ୍‌ଟିକୁ ପଠାନ୍ତୁ (ଫାଇଲ୍ attach କରିପାରିବେ କିମ୍ବା କୋଡ୍ paste କରିଦେଇପାରିବେ)।
+
+ମୁଁ ତାହାର ସମସ୍ତ JavaScript, ବଟନ୍ କ୍ଲିକ୍ (onclick events), ଏବଂ ସମସ୍ୟାଗୁଡ଼ିକୁ ସମ୍ପୂର୍ଣ୍ଣ ଭାବେ ସଜାଡ଼ି ସଠିକ୍ କୋଡ୍ ପ୍ରସ୍ତୁତ କରିଦେବି, ଯାହାଦ୍ୱାରା ପ୍ରତ୍ୟେକ ବଟନ୍ ସୁରୁଖୁରୁରେ କାମ କରିବ। ଆପଣ ଫାଇଲ୍‌ଟି ପଠାନ୍ତୁ!
+
+<!DOCTYPE html>
+
+<html lang="or">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+<meta name="theme-color" content="#4c1d95">
+
+<title>GyanSetu Odisha</title>
+
+<style>
+
+:root{
+
+  --primary:#6d28d9;--deep:#4c1d95;--accent:#fbbf24;
+
+  --bg:#f5f3ff;--card:#ffffff;--ink:#241746;--muted:#71658b;
+
+  --line:#e6ddf7;--good:#15803d;--bad:#b91c1c;
+
+}
+
+*{box-sizing:border-box}
+
+body{
+
+  margin:0;font-family:system-ui,-apple-system,"Noto Sans Oriya","Noto Sans",sans-serif;
+
+  font-size:17px;line-height:1.55;background:linear-gradient(145deg,#fdf2f8 0%,#f3e8ff 45%,#e0f2fe 100%);
+
+  background-attachment:fixed;color:var(--ink);min-height:100vh;
+
+}
+
+body.dark{
+
+  --bg:#101827;--card:#1d293b;--ink:#edf2f7;--muted:#aab7c8;--line:#344256;
+
+  background:linear-gradient(145deg,#111827,#1e1b4b 55%,#172554);background-attachment:fixed;
+
+}
+
+header{
+
+  background:linear-gradient(115deg,#4c1d95 0%,#7c3aed 42%,#db2777 100%);
+
+  color:#fff;text-align:center;padding:18px 12px;position:sticky;top:0;z-index:5;
+
+  box-shadow:0 4px 14px rgba(0,0,0,0.15);border-bottom:4px solid #fbbf24;
+
+}
+
+.brand{font-size:clamp(22px,5vw,30px);font-weight:850}.brand span{color:#fde68a}
+
+header p{margin:6px 0 0;font-size:15px;line-height:1.5;opacity:.95}
+
+main{max-width:680px;margin:auto;padding:18px 14px 28px}
+
+.screen{display:none}
+
+.screen.active{display:block !important;animation:up .2s}
+
+@keyframes up{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+h2{font-size:23px;line-height:1.4;margin:12px 0 18px;text-align:center;color:#5b21b6}
+
+body.dark h2{color:#c4b5fd}
+
+.card{background:var(--card);border:1px solid #e9d5ff;border-radius:16px;padding:16px;margin-bottom:12px;box-shadow:0 8px 24px rgba(76,29,149,0.08)}
+
+body.dark .card{border-color:#344256;box-shadow:0 8px 24px rgba(0,0,0,0.25)}
+
+
+
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+
+.tile{
+
+  border:0;border-radius:13px;padding:16px 12px;color:white;font-size:17px;line-height:1.4;
+
+  font-weight:750;background:linear-gradient(135deg,#2563eb,#7c3aed);min-height:68px;
+
+  cursor:pointer;box-shadow:0 5px 14px rgba(76,29,149,0.15);transition:transform .15s,filter .15s;
+
+  display:flex;align-items:center;justify-content:center;text-align:center;
+
+}
+
+.tile:nth-child(2n){background:linear-gradient(135deg,#0f9f8f,#047857)}
+
+.tile:nth-child(3n){background:linear-gradient(135deg,#f97316,#db2777)}
+
+.tile:nth-child(4n){background:linear-gradient(135deg,#0891b2,#2563eb)}
+
+.tile:active,.btn:active{transform:scale(.98);filter:brightness(.96)}
+
+
+
+.btn{border:0;border-radius:10px;padding:14px 16px;background:linear-gradient(135deg,#6d28d9,#4f46e5);color:white;font-weight:700;font-size:16px;line-height:1.4;cursor:pointer;box-shadow:0 3px 9px rgba(76,29,149,0.12)}
+
+.btn.secondary{background:linear-gradient(135deg,#64748b,#475569)}
+
+.btn.green{background:linear-gradient(135deg,#10b981,#047857)}
+
+.btn.orange{background:linear-gradient(135deg,#f59e0b,#ea580c)}
+
+.btn.red{background:linear-gradient(135deg,#ef4444,#be123c)}
+
+.btn.cyan{background:linear-gradient(135deg,#0284c7,#0369a1)}
+
+.btn.purple{background:linear-gradient(135deg,#9333ea,#7e22ce)}
+
+.btn.light{background:#ede9fe;color:#5b21b6;border:1px solid #ddd6fe}
+
+body.dark .btn.light{background:#312e81;color:#ede9fe;border-color:#4338ca}
+
+.btnrow{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin:10px 0}
+
+.btn.full{width:100%;margin-top:8px}
+
+
+
+.subject{
+
+  display:flex;align-items:center;justify-content:space-between;gap:10px;text-align:left;
+
+  width:100%;margin:8px 0;background:var(--card);color:var(--ink);border:1px solid var(--line);
+
+  border-left:5px solid #8b5cf6;border-radius:12px;padding:16px;font-size:16px;font-weight:700;
+
+  box-shadow:0 4px 12px rgba(76,29,149,0.06);cursor:pointer;
+
+}
+
+.subject:nth-child(3n+2){border-left-color:#0d9488}
+
+.subject:nth-child(3n){border-left-color:#f97316}
+
+
+
+.field{width:100%;padding:12px;border:1.5px solid #d8b4fe;border-radius:9px;background:var(--card);color:var(--ink);margin:5px 0 12px;font-size:15px}
+
+.field:focus{outline:2px solid #a78bfa;border-color:#7c3aed}
+
+.back{
+
+  border:2px solid #a78bfa;color:#4c1d95;background:linear-gradient(135deg,#fff7ed,#ede9fe);
+
+  width:100%;padding:16px;border-radius:25px;margin-top:14px;font-size:18px;font-weight:800;
+
+  box-shadow:0 5px 14px rgba(76,29,149,0.12);cursor:pointer;
+
+}
+
+body.dark .back{color:#f5f3ff;border:2px solid #8b5cf6;background:linear-gradient(135deg,#312e81,#1d293b)}
+
+
+
+.status-pill{
+
+  display:inline-flex;align-items:center;gap:8px;padding:8px 16px;margin:12px auto 4px;
+
+  background:linear-gradient(135deg,#ede9fe,#fdf4ff);border:1.5px solid #c4b5fd;
+
+  border-radius:30px;color:#5b21b6;font-size:14px;font-weight:750;box-shadow:0 2px 8px rgba(124,58,237,0.1);
+
+}
+
+body.dark .status-pill{background:linear-gradient(135deg,#1e1b4b,#312e81);border-color:#6d28d9;color:#e0e7ff}
+
+.dot{width:9px;height:9px;background:#22c55e;border-radius:50%;box-shadow:0 0 8px #22c55e}
+
+
+
+.muted{color:var(--muted);font-size:15px;line-height:1.5}
+
+
+
+.quiz-timer-strip{
+
+  position:sticky;top:70px;z-index:9;display:flex;justify-content:space-between;align-items:center;
+
+  background:linear-gradient(100deg,#4c1d95,#7c3aed);color:#fff;padding:10px 16px;
+
+  border-radius:12px;margin-bottom:12px;box-shadow:0 6px 18px rgba(76,29,149,0.3);
+
+}
+
+.quiz-time-badge{font-size:19px;font-weight:850;color:#fde68a;font-family:monospace;letter-spacing:1px}
+
+
+
+.subject-group{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px;margin-bottom:12px}
+
+.subject-header{font-size:16px;font-weight:800;color:#6d28d9;display:flex;justify-content:space-between;align-items:center;padding-bottom:8px;border-bottom:1.5px dashed var(--line);margin-bottom:8px}
+
+body.dark .subject-header{color:#c4b5fd}
+
+.item{padding:10px 6px;border-bottom:1px solid var(--line);font-size:15px}
+
+.item:last-child{border-bottom:0}
+
+
+
+.modal-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(15,23,42,0.85);z-index:99;display:none;align-items:center;justify-content:center;padding:16px}
+
+.modal-overlay.active{display:flex}
+
+.modal-box{background:var(--card);color:var(--ink);border-radius:18px;max-width:420px;width:100%;padding:24px;text-align:center;box-shadow:0 12px 36px rgba(0,0,0,0.35);border:2px solid #a78bfa}
+
+
+
+.dev-badge-card{margin-top:20px;padding:16px 14px;background:linear-gradient(135deg,rgba(109,40,217,.08),rgba(219,39,119,.08));border:1.5px solid #c4b5fd;border-radius:14px;text-align:center}
+
+.dev-tag{display:inline-block;font-size:11px;font-weight:750;letter-spacing:1px;color:#7c3aed;text-transform:uppercase;background:#ede9fe;padding:3px 10px;border-radius:20px;margin-bottom:6px}
+
+.dev-name{font-size:21px;font-weight:850;color:#4c1d95;display:flex;align-items:center;justify-content:center;gap:6px}
+
+.dev-desc{font-size:13px;color:#64748b;margin-top:6px;line-height:1.4}
+
+body.dark .dev-badge-card{background:linear-gradient(135deg,rgba(139,92,246,.15),rgba(236,72,153,.15));border-color:#6d28d9}
+
+body.dark .dev-tag{background:#312e81;color:#ddd6fe}body.dark .dev-name{color:#e0e7ff}body.dark .dev-desc{color:#aab7c8}
+
+footer{text-align:center;padding:15px;color:#6b5b86;font-size:13px}
+
+@media(max-width:380px){.btnrow{grid-template-columns:1fr}.grid{gap:8px}}
+
+
+
+/* NOKIA NEON SNAKE STYLES */
+
+.nokia-snake-card{
+
+  background:#140c2b;border:2px solid #8b5cf6;border-radius:22px;
+
+  padding:16px;width:100%;max-width:390px;margin:0 auto;box-shadow:0 0 25px rgba(139,92,246,0.3);
+
+  text-align:center;color:#f8fafc;
+
+}
+
+.nokia-title{
+
+  font-size:21px;font-weight:900;letter-spacing:1.5px;color:#fde047;
+
+  text-shadow:0 0 12px rgba(253,224,71,0.5);margin:0 0 10px;
+
+}
+
+.nokia-scoreboard{
+
+  display:flex;justify-content:space-around;background:#0d0620;border:1.5px solid #3b2075;
+
+  border-radius:14px;padding:8px;margin-bottom:12px;font-weight:800;
+
+}
+
+.nokia-score-item{font-size:13px;color:#a78bfa;}
+
+.nokia-score-num{font-size:20px;color:#38bdf8;font-family:monospace;display:block;}
+
+
+
+#nokiaCanvas{
+
+  background:#090414;border:2.5px solid #38bdf8;border-radius:12px;
+
+  box-shadow:0 0 16px rgba(56,189,248,0.25);display:block;margin:0 auto 12px;
+
+  max-width:100%;
+
+}
+
+.nokia-pad{
+
+  display:grid;grid-template-columns: repeat(3, 1fr);
+
+  grid-template-rows: repeat(3, 50px);
+
+  gap:8px;width:210px;margin:10px auto;
+
+}
+
+.nokia-pad-btn{
+
+  background:linear-gradient(135deg,#6d28d9,#4f46e5);border:1.5px solid #a78bfa;
+
+  border-radius:12px;color:white;font-size:22px;display:flex;align-items:center;
+
+  justify-content:center;cursor:pointer;user-select:none;box-shadow:0 4px 10px rgba(0,0,0,0.4);
+
+}
+
+.nokia-pad-btn:active{transform:scale(0.94);background:#7c3aed;}
+
+.nokia-pad-up{grid-column:2;grid-row:1;}
+
+.nokia-pad-left{grid-column:1;grid-row:2;}
+
+.nokia-pad-center{grid-column:2;grid-row:2;background:#059669;border-color:#34d399;font-size:15px;font-weight:800;}
+
+.nokia-pad-right{grid-column:3;grid-row:2;}
+
+.nokia-pad-down{grid-column:2;grid-row:3;}
+
+</style>
+
+</head>
+
+<body>
+
+
+
+<header>
+
+  <div class="brand">🎓 GYANSETU <span>ODISHA</span></div>
+
+  <p>NCERT & Odisha State Board Learning Portal</p>
+
+</header>
+
+<main>
+
+
+
+<!-- HOME SCREEN -->
+
+<section id="home" class="screen active">
+
+  <h2>ସ୍ୱାଗତମ୍ | Welcome</h2>
+
+  <div class="grid">
+
+    <button class="tile" onclick="showClasses('notes')">📚 Notes Library</button>
+
+    <button class="tile" onclick="openMcqSetup()">📝 MCQ Practice</button>
+
+    <button class="tile" onclick="showClasses('materials')">📂 Study Materials</button>
+
+    <button class="tile" onclick="openSavedNotesScreen()">📥 Saved Notes</button>
+
+    <button class="tile" onclick="openOfflineQuizMenu()">⚡ Downloaded Quiz</button>
+
+    <button class="tile" onclick="openSnakeGame()">🎮 Mind Fresh</button>
+
+  </div>
+
+  <div class="btnrow">
+
+    <button class="btn green" onclick="shareApp()">📤 Share App</button>
+
+    <button class="btn" onclick="checkUpdates()">🔄 Check Update</button>
+
+    <button class="btn secondary" onclick="showScreen('studyTimer')">⏱ Study Timer</button>
+
+    <button class="btn light" onclick="toggleTheme()">🌙 Dark / Light</button>
+
+    <button class="btn light" onclick="showScreen('about')">ℹ About / Help</button>
+
+  </div>
+
+  <div style="text-align:center;">
+
+    <div id="homeStatusPill" class="status-pill"><span class="dot"></span><span id="homeStatus">Ready to learn.</span></div>
+
+  </div>
+
+</section>
+
+
+
+<!-- CLASSES SCREEN -->
+
+<section id="classes" class="screen">
+
+  <h2 id="classTitle">Select Class</h2>
+
+  <div class="grid" id="classGrid"></div>
+
+  <button class="back" onclick="showScreen('home')">⬅ Home</button>
+
+</section>
+
+
+
+<!-- SUBJECTS SCREEN -->
+
+<section id="subjects" class="screen">
+
+  <h2 id="subjectTitle">Select Subject</h2>
+
+  <div id="subjectList"></div>
+
+  <button class="back" onclick="showScreen('classes')">⬅ Back to Classes</button>
+
+</section>
+
+
+
+<!-- FOLDER SCREEN -->
+
+<section id="folder" class="screen">
+
+  <h2 id="folderTitle">Study Materials</h2>
+
+  <div class="card">
+
+    <p id="folderMessage" class="muted">Google Drive folder is ready for your chapters.</p>
+
+    <button class="btn full" onclick="openDrive()">📂 Open Google Drive</button>
+
+    <button class="btn green full" onclick="downloadNotes()">⬇ Download Notes</button>
+
+    <button class="btn secondary full" onclick="openSavedNotesScreen()">📱 Open Saved Notes</button>
+
+    <button class="btn light full" onclick="bookmarkCurrent()">⭐ Bookmark this Subject</button>
+
+    <p id="noteStatus" style="font-size:14px;color:var(--muted);margin-top:10px;text-align:center;"></p>
+
+  </div>
+
+  <button class="back" onclick="showScreen('subjects')">⬅ Back</button>
+
+</section>
+
+
+
+<!-- MCQ SETUP SCREEN -->
+
+<section id="mcqSetup" class="screen">
+
+  <h2>Topic-wise MCQ Practice</h2>
+
+  <div class="card">
+
+    <label>1. Class</label><select id="mcqClass" class="field" onchange="fillSubjects()"></select>
+
+    <label>2. Subject</label><select id="mcqSubject" class="field" onchange="fillTopics()"></select>
+
+    <label>3. Chapter / Topic</label><select id="mcqTopic" class="field"></select>
+
+    
+
+    <div class="btnrow">
+
+      <button class="btn green" onclick="startQuiz()">START QUIZ ➜</button>
+
+      <button class="btn orange" onclick="downloadSelectedTopicMcq()">💾 Save Offline</button>
+
+    </div>
+
+  </div>
+
+  <button class="back" onclick="showScreen('home')">⬅ Home</button>
+
+</section>
+
+
+
+<!-- OFFLINE QUIZ MENU SCREEN -->
+
+<section id="offlineQuizMenuScreen" class="screen">
+
+  <h2>⚡ Downloaded Offline Quiz Sets</h2>
+
+  <div class="card">
+
+    <p class="muted">ଅଫଲାଇନ୍‌ରେ ଅଭ୍ୟାସ କରିବା ପାଇଁ ଆପଣଙ୍କ ଡାଉନଲୋଡ୍ ହୋଇଥିବା ସେଟ୍:</p>
+
+    <div id="downloadedQuizList"></div>
+
+  </div>
+
+  <button class="back" onclick="showScreen('home')">⬅ Home</button>
+
+</section>
+
+
+
+<!-- CONTENT / QUIZ / NOTE VIEWER SCREEN -->
+
+<section id="quizScreen" class="screen">
+
+  <div id="quizTimerBar" class="quiz-timer-strip">
+
+    <div style="display:flex;align-items:center;gap:8px;">
+
+      <span style="font-size:15px;font-weight:700;">⏱ RUNNING TIME:</span>
+
+      <span id="quizRunningTimer" class="quiz-time-badge">00:00</span>
+
+    </div>
+
+    <button class="btn secondary" style="padding:6px 14px;font-size:13px;border-radius:8px;" onclick="pauseQuiz()">⏸ Pause</button>
+
+  </div>
+
+
+
+  <div id="noteActionToolbar" style="display:none;margin-bottom:10px;gap:8px;">
+
+    <button class="btn green full" onclick="saveCurrentNoteOffline()">💾 Save Note for Offline</button>
+
+  </div>
+
+
+
+  <div id="quizFrameContainer" style="width:100%;border-radius:14px;overflow:hidden;background:#fff;box-shadow:0 6px 20px rgba(0,0,0,0.1);">
+
+    <iframe id="quizFrame" style="width:100%;height:72vh;border:0;display:block;" title="Content Viewer"></iframe>
+
+  </div>
+
+
+
+  <div class="btnrow" style="margin-top:14px;">
+
+    <button id="viewerBackButton" class="back" style="margin-top:0;" onclick="handleViewerBack()">⬅ Back</button>
+
+    <button class="back" style="margin-top:0;background:linear-gradient(135deg,#e0e7ff,#ede9fe);color:#4338ca;" onclick="goHomeFromViewer()">⌂ Home</button>
+
+  </div>
+
+</section>
+
+
+
+<!-- OFFLINE SAVED NOTE VIEWER SCREEN -->
+
+<section id="offlineNoteViewer" class="screen">
+
+  <h2 id="savedNoteTitle">Saved Note</h2>
+
+  <div class="card" id="savedNoteBody" style="min-height:50vh;padding:18px;line-height:1.7;"></div>
+
+  <button class="back" onclick="showScreen('downloads')">⬅ Back to Saved Notes</button>
+
+</section>
+
+
+
+<!-- NOKIA NEON SNAKE GAME SCREEN (MIND FRESH) -->
+
+<section id="snakeGameScreen" class="screen">
+
+  <div class="nokia-snake-card">
+
+    <div class="nokia-title">🐍 NOKIA NEON SNAKE ⚡</div>
+
+    
+
+    <div class="nokia-scoreboard">
+
+      <div class="nokia-score-item">SCORE<span class="nokia-score-num" id="nokiaScoreVal">0</span></div>
+
+      <div class="nokia-score-item">BEST RECORD<span class="nokia-score-num" id="nokiaHighScoreVal">0</span></div>
+
+    </div>
+
+
+
+    <canvas id="nokiaCanvas" width="300" height="300"></canvas>
+
+
+
+    <div class="nokia-pad">
+
+      <button class="nokia-pad-btn nokia-pad-up" onclick="setNokiaDir('UP')">▲</button>
+
+      <button class="nokia-pad-btn nokia-pad-left" onclick="setNokiaDir('LEFT')">◀</button>
+
+      <button class="nokia-pad-btn nokia-pad-center" onclick="toggleNokiaPause()" id="nokiaPauseBtn">⏸</button>
+
+      <button class="nokia-pad-btn nokia-pad-right" onclick="setNokiaDir('RIGHT')">▶</button>
+
+      <button class="nokia-pad-btn nokia-pad-down" onclick="setNokiaDir('DOWN')">▼</button>
+
+    </div>
+
+
+
+    <div class="btnrow" style="margin-top:10px;">
+
+      <button class="btn cyan" onclick="resetNokiaGame()">🔄 Restart</button>
+
+      <button class="btn purple" onclick="toggleNokiaSound()" id="nokiaSoundBtn">🔊 Sound ON</button>
+
+    </div>
+
+
+
+    <button class="back" onclick="exitNokiaGame()">⬅ Return to Home</button>
+
+  </div>
+
+</section>
+
+
+
+<!-- QUIZ PAUSE MODAL -->
+
+<div id="pauseModal" class="modal-overlay">
+
+  <div class="modal-box">
+
+    <h3 style="color:#7c3aed;margin-top:0;font-size:22px;">⏸ Quiz Paused</h3>
+
+    <p class="muted">ଆପଣଙ୍କ Quiz ସମୟ ସ୍ଥଗିତ ରହିଛି।</p>
+
+    <div style="margin:18px 0;padding:12px;background:#ede9fe;border-radius:12px;font-size:18px;font-weight:800;color:#6d28d9;">
+
+      ଚାଲୁଥିବା ସମୟ: <span id="pausedTimeText" style="color:#4c1d95;font-family:monospace;">00:00</span>
+
+    </div>
+
+    <button class="btn green full" onclick="resumeQuiz()">▶ RESUME QUIZ</button>
+
+    <button class="btn red full" onclick="closePauseAndExit()">Exit Practice</button>
+
+  </div>
+
+</div>
+
+
+
+<!-- DOWNLOADS SCREEN -->
+
+<section id="downloads" class="screen">
+
+  <h2>📥 Saved Offline Notes</h2>
+
+  <div class="card">
+
+    <p class="muted" style="margin-top:0;">ନେଟ୍ ନଥିଲେ ମଧ୍ୟ ସେଭ୍ ହୋଇଥିବା ନୋଟ୍ ପଢ଼ିପାରିବେ।</p>
+
+    <div id="savedNotesList"></div>
+
+  </div>
+
+  <button class="back" onclick="showScreen('home')">Home</button>
+
+</section>
+
+
+
+<!-- BOOKMARKS SCREEN -->
+
+<section id="bookmarks" class="screen">
+
+  <h2>⭐ Bookmarks</h2>
+
+  <div id="bookmarkList"></div>
+
+  <button class="btn red full" onclick="clearBookmarks()">Clear All Bookmarks</button>
+
+  <button class="back" onclick="showScreen('home')">Home</button>
+
+</section>
+
+
+
+<!-- STUDY TIMER SCREEN -->
+
+<section id="studyTimer" class="screen">
+
+  <h2>⏱ Study Timer</h2>
+
+  <div class="card result" style="text-align:center;">
+
+    <div class="score" id="studyClock" style="font-size:42px;font-weight:850;color:#7c3aed;margin:12px 0;">00:00:00</div>
+
+    <button class="btn green" onclick="startStudy()">Start</button>
+
+    <button class="btn orange" onclick="pauseStudy()">Pause</button>
+
+    <button class="btn red" onclick="resetStudy()">Reset</button>
+
+  </div>
+
+  <button class="back" onclick="showScreen('home')">Home</button>
+
+</section>
+
+
+
+<!-- ABOUT SECTION -->
+
+<section id="about" class="screen">
+
+  <h2>About GyanSetu Odisha</h2>
+
+  <div class="card">
+
+    <h3 style="text-align:center;color:#7c3aed;margin:8px 0 6px">🎓 GyanSetu Odisha</h3>
+
+    <p class="muted" style="text-align:center;font-size:16px">Classes VI to X ପାଇଁ ଏକ ସ୍ମାର୍ଟ ଶିକ୍ଷଣ ପୋର୍ଟାଲ୍।</p>
+
+    
+
+    <div class="dev-badge-card">
+
+      <div class="dev-tag">App Creator & Educator</div>
+
+      <div class="dev-name">👨‍🏫 Sangram Sahu</div>
+
+      <div class="dev-desc">Dedicated to empowering Odisha school students with smart NCERT learning tools.</div>
+
+    </div>
+
+  </div>
+
+  <button class="back" onclick="showScreen('home')">⌂ HOME</button>
+
+</section>
+
+
+
+</main>
+
+<footer>© 2026 GyanSetu Odisha · Developed by Sangram Sahu</footer>
+
+
+
+<script>
+
+const CURRENT_VERSION = "2.0";
+
+const GITHUB_PAGES_BASE = "https://silusahu360.github.io/gyansetu-odishamcq/";
+
+const GITHUB_MCQ_JSON_URL = "https://raw.githubusercontent.com/silusahu360/gyansetu-odishamcq/main/mcq_data.json";
+
+
+
+const classDriveFolders = {
+
+  "CLASS VI":"https://drive.google.com/drive/folders/1KUhgA15GZ0jMPfF22XhN_0ipuayW3jhr",
+
+  "CLASS VII":"https://drive.google.com/drive/folders/1ToIWcidnQfATl6_awNSSPRcRK1nyZWAv",
+
+  "CLASS VIII":"https://drive.google.com/drive/folders/1gnCILN6NhsAsK2c4ljn8DbTNv4zAnMCC",
+
+  "CLASS IX":"https://drive.google.com/drive/folders/1xC7s790hPESNNYKTDZ8jnFvgkDLHrKbD",
+
+  "CLASS X":"https://drive.google.com/drive/folders/1KC4TAH3EzQiOdfwj9SKmttCOdhfqz0Td"
+
+};
+
+
+
+const subjectsByClass = {
+
+  "CLASS VI":["ODIA","ENGLISH","MATHEMATICS","SCIENCE","SOCIAL SCIENCE","HINDI","SANSKRIT"],
+
+  "CLASS VII":["ODIA","ENGLISH","MATHEMATICS","SCIENCE","SOCIAL SCIENCE","HINDI","SANSKRIT"],
+
+  "CLASS VIII":["ODIA","ENGLISH","HINDI","SANSKRIT","MATHEMATICS","SCIENCE","SOCIAL SCIENCE"],
+
+  "CLASS IX":["ODIA","ENGLISH","SANSKRIT","HINDI","MATHEMATICS","SCIENCE","GEOGRAPHY","HISTORY"],
+
+  "CLASS X":["ODIA","ENGLISH","SANSKRIT","HINDI","MATHEMATICS","SCIENCE","GEOGRAPHY","HISTORY"]
+
+};
+
+
+
+let mcqDataStore = {};
+
+let currentClass = "CLASS X", currentSubject = "", currentFolder = "";
+
+let currentViewMode = "quiz";
+
+let currentNoteHtmlUrl = "";
+
+let quizSeconds = 0, quizTimerInterval = null, isQuizPaused = false;
+
+let studySeconds = 0, studyInterval = null;
+
+
+
+const $ = id => document.getElementById(id);
+
+
+
+function showScreen(id) {
+
+  let target = $(id);
+
+  if (!target) target = $("home");
+
+  document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
+
+  target.classList.add("active");
+
+  window.scrollTo(0,0);
+
+  
+
+  if (id === "bookmarks") renderBookmarks();
+
+  if (id === "downloads") renderSavedNotesList();
+
+}
+
+
+
+function showClasses(mode) {
+
+  window.classMode = mode;
+
+  $("classTitle").textContent = mode === "notes" ? "Select Class · Notes Library" : "Select Class · Study Materials";
+
+  $("classGrid").innerHTML = "";
+
+  Object.keys(subjectsByClass).forEach(c => {
+
+    let b = document.createElement("button");
+
+    b.className = "tile";
+
+    b.textContent = c;
+
+    b.onclick = () => showSubjects(c);
+
+    $("classGrid").appendChild(b);
+
+  });
+
+  showScreen("classes");
+
+}
+
+
+
+function showSubjects(cls) {
+
+  currentClass = cls;
+
+  $("subjectTitle").textContent = cls + " · Select Subject";
+
+  $("subjectList").innerHTML = "";
+
+  subjectsByClass[cls].forEach(s => {
+
+    let b = document.createElement("button");
+
+    b.className = "subject";
+
+    b.innerHTML = `<span>${s}</span><span>➜</span>`;
+
+    b.onclick = () => openSubject(s);
+
+    $("subjectList").appendChild(b);
+
+  });
+
+  showScreen("subjects");
+
+}
+
+
+
+function openSubject(sub) {
+
+  currentSubject = sub;
+
+  currentFolder = classDriveFolders[currentClass];
+
+
+
+  if (window.classMode === "notes") {
+
+    currentViewMode = "note";
+
+    let cleanCls = currentClass.toLowerCase().replace(/[^a-z0-9]/g, "");
+
+    let cleanSub = sub.toLowerCase().replace(/[^a-z0-9]/g, "");
+
+    let noteFileName = `${cleanCls}_${cleanSub}_note.html`;
+
+    currentNoteHtmlUrl = GITHUB_PAGES_BASE + noteFileName;
+
+
+
+    $("quizTimerBar").style.display = "none";
+
+    $("noteActionToolbar").style.display = "flex";
+
+    $("viewerBackButton").textContent = "⬅ Back to Subjects";
+
+    showScreen("quizScreen");
+
+
+
+    $("quizFrame").srcdoc = "<div style='display:flex;align-items:center;justify-content:center;height:60vh;font-family:sans-serif;color:#6d28d9;font-size:18px;'><b>Loading Note... ଅପେକ୍ଷା କରନ୍ତୁ...</b></div>";
+
+    fetch(currentNoteHtmlUrl + "?t=" + Date.now())
+
+      .then(r => {
+
+        if (!r.ok) throw new Error("HTTP " + r.status);
+
+        return r.text();
+
+      })
+
+      .then(html => {
+
+        $("quizFrame").srcdoc = html;
+
+      })
+
+      .catch(err => {
+
+        $("quizFrame").srcdoc = "<div style='padding:20px;text-align:center;'>ଇଣ୍ଟରନେଟ୍ ସଂଯୋଗ ଯାଞ୍ଚ କରନ୍ତୁ କିମ୍ବା ପରେ ଚେଷ୍ଟା କରନ୍ତୁ।</div>";
+
+      });
+
+    return;
+
+  }
+
+
+
+  currentViewMode = "materials";
+
+  $("folderTitle").textContent = currentClass + " · " + sub;
+
+  $("folderMessage").textContent = currentClass + " · " + sub + " Drive folder is ready.";
+
+  $("noteStatus").textContent = "";
+
+  showScreen("folder");
+
+}
+
+
+
+function cleanViewerFrame() {
+
+  clearInterval(quizTimerInterval);
+
+  quizTimerInterval = null;
+
+  const frame = $("quizFrame");
+
+  if (frame) frame.srcdoc = "";
+
+  const toolbar = $("noteActionToolbar");
+
+  if (toolbar) toolbar.style.display = "none";
+
+}
+
+
+
+function handleViewerBack() {
+
+  cleanViewerFrame();
+
+  if (currentViewMode === "quiz") {
+
+    showScreen("mcqSetup");
+
+  } else if (currentViewMode === "downloaded_quiz") {
+
+    showScreen("offlineQuizMenuScreen");
+
+  } else {
+
+    showScreen("subjects");
+
+  }
+
+}
+
+
+
+function goHomeFromViewer() {
+
+  cleanViewerFrame();
+
+  showScreen("home");
+
+}
+
+
+
+async function saveCurrentNoteOffline() {
+
+  try {
+
+    let resp = await fetch(currentNoteHtmlUrl);
+
+    if (!resp.ok) throw new Error("Fetch error");
+
+    let htmlContent = await resp.text();
+
+
+
+    let saved = JSON.parse(localStorage.getItem("gs_saved_notes") || "{}");
+
+    let key = currentClass + " · " + currentSubject;
+
+    saved[key] = {
+
+      title: key,
+
+      content: htmlContent,
+
+      date: new Date().toLocaleDateString('or-IN')
+
+    };
+
+    localStorage.setItem("gs_saved_notes", JSON.stringify(saved));
+
+    alert("✅ ଏହି ନୋଟ୍ Offline ପାଇଁ Save ହୋଇଗଲା!");
+
+  } catch (e) {
+
+    alert("ଇଣ୍ଟରନେଟ୍ ଯାଞ୍ଚ କରନ୍ତୁ କିମ୍ବା ପରେ ଚେଷ୍ଟା କରନ୍ତୁ।");
+
+  }
+
+}
+
+
+
+async function downloadSelectedTopicMcq() {
+
+  let fileName = $("mcqTopic").value;
+
+  let topicName = $("mcqTopic").options[$("mcqTopic").selectedIndex]?.text || "Topic MCQ";
+
+  if (!fileName) {
+
+    alert("ଦୟାକରି ଏକ Topic ବାଛନ୍ତୁ।");
+
+    return;
+
+  }
+
+  let fullUrl = GITHUB_PAGES_BASE + fileName;
+
+  try {
+
+    let resp = await fetch(fullUrl);
+
+    if (!resp.ok) throw new Error("Fetch error");
+
+    let htmlContent = await resp.text();
+
+
+
+    let savedMcqs = JSON.parse(localStorage.getItem("gs_saved_mcqs") || "{}");
+
+    let key = $("mcqClass").value + " · " + $("mcqSubject").value + " - " + topicName;
+
+    savedMcqs[key] = {
+
+      title: key,
+
+      content: htmlContent,
+
+      date: new Date().toLocaleDateString('or-IN')
+
+    };
+
+    localStorage.setItem("gs_saved_mcqs", JSON.stringify(savedMcqs));
+
+    alert("✅ ଏହି Topic Offline ପାଇଁ Save ହୋଇଗଲା!");
+
+  } catch (e) {
+
+    alert("ଡାଉନଲୋଡ୍ ବିଫଳ ହେଲା। ଇଣ୍ଟରନେଟ୍ ଯାଞ୍ଚ କରନ୍ତୁ।");
+
+  }
+
+}
+
+
+
+function openSavedNotesScreen() {
+
+  showScreen("downloads");
+
+  renderSavedNotesList();
+
+}
+
+
+
+function renderSavedNotesList() {
+
+  let saved = JSON.parse(localStorage.getItem("gs_saved_notes") || "{}");
+
+  let container = $("savedNotesList");
+
+  let keys = Object.keys(saved);
+
+
+
+  if (!keys.length) {
+
+    container.innerHTML = `<div style="text-align:center;padding:16px;color:var(--muted);">କୌଣସି ନୋଟ୍ ସେଭ୍ ହୋଇନାହିଁ।</div>`;
+
+    return;
+
+  }
+
+
+
+  let html = "";
+
+  keys.forEach(k => {
+
+    let item = saved[k];
+
+    html += `
+
+      <div class="item" style="display:flex;justify-content:space-between;align-items:center;padding:12px 6px;">
+
+        <div><b>📖 ${item.title}</b><br><small class="muted">${item.date || 'Available Offline'}</small></div>
+
+        <div style="display:flex;gap:6px;">
+
+          <button class="btn green" style="padding:6px 12px;font-size:13px;" onclick="viewSavedNote('${k}')">Open</button>
+
+          <button class="btn red" style="padding:6px 10px;font-size:13px;" onclick="deleteSavedNote('${k}')">✕</button>
+
+        </div>
+
+      </div>
+
+    `;
+
+  });
+
+  container.innerHTML = html;
+
+}
+
+
+
+function viewSavedNote(key) {
+
+  let saved = JSON.parse(localStorage.getItem("gs_saved_notes") || "{}");
+
+  if (saved[key]) {
+
+    $("savedNoteTitle").textContent = key;
+
+    $("savedNoteBody").innerHTML = saved[key].content;
+
+    showScreen("offlineNoteViewer");
+
+  }
+
+}
+
+
+
+function deleteSavedNote(key) {
+
+  if (confirm(key + " ନୋଟ୍ କାଢ଼ିବାକୁ ଚାହାନ୍ତି କି?")) {
+
+    let saved = JSON.parse(localStorage.getItem("gs_saved_notes") || "{}");
+
+    delete saved[key];
+
+    localStorage.setItem("gs_saved_notes", JSON.stringify(saved));
+
+    renderSavedNotesList();
+
+  }
+
+}
+
+
+
+function openOfflineQuizMenu() {
+
+  showScreen("offlineQuizMenuScreen");
+
+  renderDownloadedQuizList();
+
+}
+
+
+
+function renderDownloadedQuizList() {
+
+  let savedMcqs = JSON.parse(localStorage.getItem("gs_saved_mcqs") || "{}");
+
+  let container = $("downloadedQuizList");
+
+  let keys = Object.keys(savedMcqs);
+
+
+
+  if (!keys.length) {
+
+    container.innerHTML = `<div style="text-align:center;padding:18px;color:var(--muted);">କୌଣସି Quiz ଡାଉନଲୋଡ୍ ହୋଇନାହିଁ।<br><br><b>MCQ Practice</b> କୁ ଯାଇ topic ବାଛନ୍ତୁ ଏବଂ <b>💾 Save Offline</b> ଦବାନ୍ତୁ।</div>`;
+
+    return;
+
+  }
+
+
+
+  let html = `<h4 style="margin:8px 0 10px;color:#6d28d9;">📥 ଆପଣଙ୍କ ଡାଉନଲୋଡ୍ ସେଟ୍:</h4>`;
+
+  keys.forEach(k => {
+
+    html += `
+
+      <div class="item" style="display:flex;justify-content:space-between;align-items:center;padding:10px 4px;">
+
+        <div style="font-size:15px;"><b>📝 ${k}</b></div>
+
+        <div style="display:flex;gap:6px;">
+
+          <button class="btn green" style="padding:5px 10px;font-size:13px;" onclick="openDownloadedMcq('${k}')">Play</button>
+
+          <button class="btn red" style="padding:5px 8px;font-size:13px;" onclick="deleteDownloadedMcq('${k}')">✕</button>
+
+        </div>
+
+      </div>
+
+    `;
+
+  });
+
+  container.innerHTML = html;
+
+}
+
+
+
+function openDownloadedMcq(key) {
+
+  let savedMcqs = JSON.parse(localStorage.getItem("gs_saved_mcqs") || "{}");
+
+  if (savedMcqs[key]) {
+
+    currentViewMode = "downloaded_quiz";
+
+    $("quizTimerBar").style.display = "none";
+
+    $("noteActionToolbar").style.display = "none";
+
+    $("viewerBackButton").textContent = "⬅ Back to Sets";
+
+    showScreen("quizScreen");
+
+    $("quizFrame").srcdoc = savedMcqs[key].content;
+
+  }
+
+}
+
+
+
+function deleteDownloadedMcq(key) {
+
+  if (confirm(key + " ସେଟ୍ କାଢ଼ିବାକୁ ଚାହାନ୍ତି କି?")) {
+
+    let savedMcqs = JSON.parse(localStorage.getItem("gs_saved_mcqs") || "{}");
+
+    delete savedMcqs[key];
+
+    localStorage.setItem("gs_saved_mcqs", JSON.stringify(savedMcqs));
+
+    renderDownloadedQuizList();
+
+  }
+
+}
+
+
+
+/* ========================================================
+
+   NOKIA NEON SNAKE ENGINE (WITH AUDIO BEEP + NEON GLOW)
+
+   ======================================================== */
+
+var nokiaCanvas = null;
+
+var nokiaCtx = null;
+
+var nokiaGridSize = 15;
+
+var nokiaTileCount = 20;
+
+
+
+var nokiaSnake = [
+
+  { x: 10, y: 10 },
+
+  { x: 10, y: 11 },
+
+  { x: 10, y: 12 }
+
+];
+
+var nokiaDx = 0;
+
+var nokiaDy = -1;
+
+var nokiaFood = { x: 5, y: 5 };
+
+var nokiaScore = 0;
+
+var nokiaHighScore = 0;
+
+try { nokiaHighScore = parseInt(localStorage.getItem("gs_snake_hi") || "0", 10); } catch(e){}
+
+
+
+var nokiaGameInterval = null;
+
+var nokiaIsPaused = false;
+
+var nokiaSoundEnabled = true;
+
+var nokiaAudioCtx = null;
+
+
+
+function playNokiaBeep(freq, duration) {
+
+  if (!nokiaSoundEnabled) return;
+
+  try {
+
+    if (!nokiaAudioCtx) nokiaAudioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+    var osc = nokiaAudioCtx.createOscillator();
+
+    var gain = nokiaAudioCtx.createGain();
+
+    osc.type = "square";
+
+    osc.frequency.value = freq;
+
+    gain.gain.setValueAtTime(0.08, nokiaAudioCtx.currentTime);
+
+    osc.connect(gain);
+
+    gain.connect(nokiaAudioCtx.destination);
+
+    osc.start();
+
+    osc.stop(nokiaAudioCtx.currentTime + duration);
+
+  } catch(e){}
+
+}
+
+
+
+function openSnakeGame() {
+
+  showScreen("snakeGameScreen");
+
+  nokiaCanvas = document.getElementById("nokiaCanvas");
+
+  nokiaCtx = nokiaCanvas.getContext("2d");
+
+  document.getElementById("nokiaHighScoreVal").textContent = nokiaHighScore;
+
+  resetNokiaGame();
+
+  clearInterval(nokiaGameInterval);
+
+  nokiaGameInterval = setInterval(updateNokiaSnake, 130);
+
+}
+
+
+
+function spawnNokiaFood() {
+
+  nokiaFood.x = Math.floor(Math.random() * nokiaTileCount);
+
+  nokiaFood.y = Math.floor(Math.random() * nokiaTileCount);
+
+  for (var i = 0; i < nokiaSnake.length; i++) {
+
+    if (nokiaSnake[i].x === nokiaFood.x && nokiaSnake[i].y === nokiaFood.y) {
+
+      spawnNokiaFood();
+
+      break;
+
+    }
+
+  }
+
+}
+
+
+
+function drawNokiaSnake() {
+
+  if (!nokiaCtx) return;
+
+
+
+  // Clear Screen
+
+  nokiaCtx.fillStyle = "#090414";
+
+  nokiaCtx.fillRect(0, 0, nokiaCanvas.width, nokiaCanvas.height);
+
+
+
+  // Matrix Grid lines
+
+  nokiaCtx.strokeStyle = "#160b30";
+
+  nokiaCtx.lineWidth = 0.5;
+
+  for (var x = 0; x < nokiaCanvas.width; x += nokiaGridSize) {
+
+    nokiaCtx.beginPath(); nokiaCtx.moveTo(x, 0); nokiaCtx.lineTo(x, nokiaCanvas.height); nokiaCtx.stroke();
+
+  }
+
+  for (var y = 0; y < nokiaCanvas.height; y += nokiaGridSize) {
+
+    nokiaCtx.beginPath(); nokiaCtx.moveTo(0, y); nokiaCtx.lineTo(nokiaCanvas.width, y); nokiaCtx.stroke();
+
+  }
+
+
+
+  // Draw Glowing Food
+
+  nokiaCtx.fillStyle = "#f43f5e";
+
+  nokiaCtx.shadowColor = "#f43f5e";
+
+  nokiaCtx.shadowBlur = 8;
+
+  nokiaCtx.fillRect(nokiaFood.x * nokiaGridSize + 1, nokiaFood.y * nokiaGridSize + 1, nokiaGridSize - 2, nokiaGridSize - 2);
+
+  nokiaCtx.shadowBlur = 0;
+
+
+
+  // Draw Neon Snake
+
+  for (var i = 0; i < nokiaSnake.length; i++) {
+
+    if (i === 0) {
+
+      nokiaCtx.fillStyle = "#38bdf8"; // Head
+
+      nokiaCtx.shadowColor = "#38bdf8";
+
+      nokiaCtx.shadowBlur = 10;
+
+    } else {
+
+      nokiaCtx.fillStyle = "#4ade80"; // Body
+
+      nokiaCtx.shadowBlur = 0;
+
+    }
+
+    nokiaCtx.fillRect(nokiaSnake[i].x * nokiaGridSize + 1, nokiaSnake[i].y * nokiaGridSize + 1, nokiaGridSize - 2, nokiaGridSize - 2);
+
+  }
+
+  nokiaCtx.shadowBlur = 0;
+
+}
+
+
+
+function updateNokiaSnake() {
+
+  if (nokiaIsPaused) return;
+
+
+
+  var head = { x: nokiaSnake[0].x + nokiaDx, y: nokiaSnake[0].y + nokiaDy };
+
+
+
+  // Nokia Screen Wrap-around
+
+  if (head.x < 0) head.x = nokiaTileCount - 1;
+
+  if (head.x >= nokiaTileCount) head.x = 0;
+
+  if (head.y < 0) head.y = nokiaTileCount - 1;
+
+  if (head.y >= nokiaTileCount) head.y = 0;
+
+
+
+  // Self Collision
+
+  for (var i = 0; i < nokiaSnake.length; i++) {
+
+    if (nokiaSnake[i].x === head.x && nokiaSnake[i].y === head.y) {
+
+      playNokiaBeep(180, 0.3);
+
+      alert("💥 Game Over! ଆପଣଙ୍କ ସ୍କୋର: " + nokiaScore);
+
+      resetNokiaGame();
+
+      return;
+
+    }
+
+  }
+
+
+
+  nokiaSnake.unshift(head);
+
+
+
+  // Check Food
+
+  if (head.x === nokiaFood.x && head.y === nokiaFood.y) {
+
+    nokiaScore += 10;
+
+    document.getElementById("nokiaScoreVal").textContent = nokiaScore;
+
+    if (nokiaScore > nokiaHighScore) {
+
+      nokiaHighScore = nokiaScore;
+
+      document.getElementById("nokiaHighScoreVal").textContent = nokiaHighScore;
+
+      try { localStorage.setItem("gs_snake_hi", nokiaHighScore); } catch(e){}
+
+    }
+
+    playNokiaBeep(780, 0.08);
+
+    spawnNokiaFood();
+
+  } else {
+
+    nokiaSnake.pop();
+
+  }
+
+
+
+  drawNokiaSnake();
+
+}
+
+
+
+function setNokiaDir(d) {
+
+  if (d === 'UP' && nokiaDy !== 1) { nokiaDx = 0; nokiaDy = -1; }
+
+  else if (d === 'DOWN' && nokiaDy !== -1) { nokiaDx = 0; nokiaDy = 1; }
+
+  else if (d === 'LEFT' && nokiaDx !== 1) { nokiaDx = -1; nokiaDy = 0; }
+
+  else if (d === 'RIGHT' && nokiaDx !== -1) { nokiaDx = 1; nokiaDy = 0; }
+
+  playNokiaBeep(440, 0.03);
+
+}
+
+
+
+function toggleNokiaPause() {
+
+  nokiaIsPaused = !nokiaIsPaused;
+
+  document.getElementById("nokiaPauseBtn").textContent = nokiaIsPaused ? "▶" : "⏸";
+
+}
+
+
+
+function toggleNokiaSound() {
+
+  nokiaSoundEnabled = !nokiaSoundEnabled;
+
+  document.getElementById("nokiaSoundBtn").textContent = nokiaSoundEnabled ? "🔊 Sound ON" : "🔇 Sound OFF";
+
+}
+
+
+
+function resetNokiaGame() {
+
+  nokiaSnake = [
+
+    { x: 10, y: 10 },
+
+    { x: 10, y: 11 },
+
+    { x: 10, y: 12 }
+
+  ];
+
+  nokiaDx = 0;
+
+  nokiaDy = -1;
+
+  nokiaScore = 0;
+
+  nokiaIsPaused = false;
+
+  document.getElementById("nokiaScoreVal").textContent = "0";
+
+  document.getElementById("nokiaPauseBtn").textContent = "⏸";
+
+  spawnNokiaFood();
+
+  drawNokiaSnake();
+
+}
+
+
+
+function exitNokiaGame() {
+
+  clearInterval(nokiaGameInterval);
+
+  showScreen("home");
+
+}
+
+
+
+/* BRIDGE & OTHER UTILITIES */
+
+function sendBridge(msg) {
+
+  if (window.AppInventor && typeof window.AppInventor.setWebViewString === "function") {
+
+    window.AppInventor.setWebViewString(msg);
+
+    return true;
+
+  }
+
+  return false;
+
+}
+
+
+
+function openDrive() {
+
+  if (!currentFolder) {
+
+    alert("ପ୍ରଥମେ Class ଓ Subject ବାଛନ୍ତୁ।");
+
+    return;
+
+  }
+
+  if (sendBridge("OPEN_URL~" + currentFolder)) return;
+
+  window.open(currentFolder, "_blank");
+
+}
+
+
+
+function downloadNotes() {
+
+  openDrive();
+
+}
+
+
+
+function bookmarkCurrent() {
+
+  let a = JSON.parse(localStorage.getItem("gs_bookmarks") || "[]");
+
+  let v = { cls: currentClass, sub: currentSubject };
+
+  if (!a.some(x => x.cls === v.cls && x.sub === v.sub)) {
+
+    a.push(v);
+
+    localStorage.setItem("gs_bookmarks", JSON.stringify(a));
+
+    $("noteStatus").textContent = "⭐ Subject bookmarked successfully!";
+
+  } else {
+
+    $("noteStatus").textContent = "Already in bookmarks!";
+
+  }
+
+}
+
+
+
+function renderBookmarks() {
+
+  let a = JSON.parse(localStorage.getItem("gs_bookmarks") || "[]");
+
+  let container = $("bookmarkList");
+
+  if (!a.length) {
+
+    container.innerHTML = '<div class="card" style="text-align:center;color:var(--muted);">No bookmarks saved yet.</div>';
+
+    return;
+
+  }
+
+  
+
+  let grouped = {};
+
+  a.forEach((b, idx) => {
+
+    let key = b.sub || "OTHER";
+
+    if (!grouped[key]) grouped[key] = [];
+
+    grouped[key].push({ ...b, originalIndex: idx });
+
+  });
+
+
+
+  let html = "";
+
+  Object.keys(grouped).forEach(sub => {
+
+    html += `<div class="subject-group">
+
+      <div class="subject-header">
+
+        <span>📖 ${sub}</span>
+
+        <span style="font-size:12px;background:#ede9fe;padding:2px 8px;border-radius:12px;color:#6d28d9;">${grouped[sub].length} saved</span>
+
+      </div>`;
+
+    grouped[sub].forEach(item => {
+
+      html += `<div class="item" style="display:flex;justify-content:space-between;align-items:center;">
+
+        <div><b>${item.cls}</b><br><small class="muted">${item.sub}</small></div>
+
+        <div style="display:flex;gap:6px;">
+
+          <button class="btn green" style="padding:6px 12px;font-size:13px;" onclick="goToBookmarked('${item.cls}','${item.sub}')">Open</button>
+
+          <button class="btn red" style="padding:6px 10px;font-size:13px;" onclick="deleteBookmark(${item.originalIndex})">✕</button>
+
+        </div>
+
+      </div>`;
+
+    });
+
+    html += `</div>`;
+
+  });
+
+  container.innerHTML = html;
+
+}
+
+
+
+function goToBookmarked(cls, sub) {
+
+  currentClass = cls;
+
+  window.classMode = "materials";
+
+  openSubject(sub);
+
+}
+
+
+
+function deleteBookmark(idx) {
+
+  let a = JSON.parse(localStorage.getItem("gs_bookmarks") || "[]");
+
+  a.splice(idx, 1);
+
+  localStorage.setItem("gs_bookmarks", JSON.stringify(a));
+
+  renderBookmarks();
+
+}
+
+
+
+function clearBookmarks() {
+
+  if (confirm("Clear all bookmarks?")) {
+
+    localStorage.removeItem("gs_bookmarks");
+
+    renderBookmarks();
+
+  }
+
+}
+
+
+
+function openMcqSetup() {
+
+  showScreen("mcqSetup");
+
+  $("mcqClass").innerHTML = Object.keys(subjectsByClass).map(c => `<option ${c==="CLASS X"?"selected":""}>${c}</option>`).join("");
+
+  fillSubjects();
+
+  loadRemoteMcq();
+
+}
+
+
+
+function fillSubjects() {
+
+  let c = $("mcqClass").value;
+
+  $("mcqSubject").innerHTML = (subjectsByClass[c] || []).map(s => `<option>${s}</option>`).join("");
+
+  fillTopics();
+
+}
+
+
+
+async function loadRemoteMcq() {
+
+  try {
+
+    let r = await fetch(GITHUB_MCQ_JSON_URL + "?t=" + Date.now(), { cache: "no-store" });
+
+    if (!r.ok) throw Error("HTTP " + r.status);
+
+    mcqDataStore = await r.json();
+
+    fillTopics();
+
+  } catch (e) {
+
+    console.log("Remote JSON:", e);
+
+  }
+
+}
+
+
+
+function fillTopics() {
+
+  let c = $("mcqClass").value, s = $("mcqSubject").value;
+
+  let topicSelect = $("mcqTopic");
+
+  let list = (mcqDataStore[c] && mcqDataStore[c][s]) ? mcqDataStore[c][s] : [];
+
+
+
+  if (Array.isArray(list) && list.length > 0) {
+
+    topicSelect.innerHTML = list.map(item => `<option value="${item.file}">${item.title}</option>`).join("");
+
+  } else {
+
+    topicSelect.innerHTML = '<option value="">No topics added yet</option>';
+
+  }
+
+}
+
+
+
+function fmtTime(s) {
+
+  return String(Math.floor(s / 60)).padStart(2, "0") + ":" + String(s % 60).padStart(2, "0");
+
+}
+
+
+
+function startQuiz() {
+
+  let fileName = $("mcqTopic").value;
+
+  if (!fileName) {
+
+    alert("ଦୟାକରି ଏକ Topic ବାଛନ୍ତୁ।");
+
+    return;
+
+  }
+
+
+
+  currentViewMode = "quiz";
+
+  let fullUrl = GITHUB_PAGES_BASE + fileName;
+
+
+
+  $("quizTimerBar").style.display = "flex";
+
+  $("noteActionToolbar").style.display = "none";
+
+  $("viewerBackButton").textContent = "⬅ Back to Topics";
+
+
+
+  quizSeconds = 0;
+
+  isQuizPaused = false;
+
+  $("quizRunningTimer").textContent = "00:00";
+
+  if (quizTimerInterval) clearInterval(quizTimerInterval);
+
+
+
+  quizTimerInterval = setInterval(() => {
+
+    if (!isQuizPaused) {
+
+      quizSeconds++;
+
+      $("quizRunningTimer").textContent = fmtTime(quizSeconds);
+
+    }
+
+  }, 1000);
+
+
+
+  $("pauseModal").classList.remove("active");
+
+  showScreen("quizScreen");
+
+  
+
+  $("quizFrame").srcdoc = "<div style='display:flex;align-items:center;justify-content:center;height:60vh;font-family:sans-serif;color:#6d28d9;font-size:18px;'><b>Loading Quiz... ଅପେକ୍ଷା କରନ୍ତୁ...</b></div>";
+
+  fetch(fullUrl + "?t=" + Date.now())
+
+    .then(r => {
+
+      if (!r.ok) throw new Error("HTTP " + r.status);
+
+      return r.text();
+
+    })
+
+    .then(html => {
+
+      $("quizFrame").srcdoc = html;
+
+    })
+
+    .catch(err => {
+
+      $("quizFrame").srcdoc = "<div style='padding:20px;text-align:center;'>ଇଣ୍ଟରନେଟ୍ ସଂଯୋଗ ଯାଞ୍ଚ କରନ୍ତୁ କିମ୍ବା ପରେ ଚେଷ୍ଟା କରନ୍ତୁ।</div>";
+
+    });
+
+}
+
+
+
+function pauseQuiz() {
+
+  isQuizPaused = true;
+
+  $("pausedTimeText").textContent = fmtTime(quizSeconds);
+
+  $("pauseModal").classList.add("active");
+
+}
+
+
+
+function resumeQuiz() {
+
+  isQuizPaused = false;
+
+  $("pauseModal").classList.remove("active");
+
+}
+
+
+
+function closePauseAndExit() {
+
+  $("pauseModal").classList.remove("active");
+
+  cleanViewerFrame();
+
+  showScreen("mcqSetup");
+
+}
+
+
+
+function startStudy() {
+
+  if (studyInterval) return;
+
+  studyInterval = setInterval(() => {
+
+    studySeconds++;
+
+    renderStudyClock();
+
+  }, 1000);
+
+}
+
+
+
+function pauseStudy() {
+
+  clearInterval(studyInterval);
+
+  studyInterval = null;
+
+}
+
+
+
+function resetStudy() {
+
+  pauseStudy();
+
+  studySeconds = 0;
+
+  renderStudyClock();
+
+}
+
+
+
+function renderStudyClock() {
+
+  $("studyClock").textContent = [
+
+    Math.floor(studySeconds / 3600),
+
+    Math.floor(studySeconds / 60) % 60,
+
+    studySeconds % 60
+
+  ].map(x => String(x).padStart(2, "0")).join(":");
+
+}
+
+
+
+function toggleTheme() {
+
+  document.body.classList.toggle("dark");
+
+  localStorage.setItem("gs_dark", document.body.classList.contains("dark") ? "1" : "0");
+
+}
+
+
+
+async function shareApp() {
+
+  const message = `🎓 GyanSetu Odisha - NCERT Notes & MCQ App!\n\nDownload: https://github.com/silusahu360/gyansetu-odishamcq/releases/latest`;
+
+  try {
+
+    if (navigator.share) {
+
+      await navigator.share({ title: "GyanSetu Odisha", text: message });
+
+      return;
+
+    }
+
+  } catch (e) {}
+
+  window.prompt("Share message କପି କରନ୍ତୁ:", message);
+
+}
+
+
+
+async function checkUpdates() {
+
+  const status = $("homeStatus");
+
+  if (status) status.textContent = "ନୂଆ ଅପଡେଟ୍ ଯାଞ୍ଚ ହେଉଛି...";
+
+  
+
+  const GITHUB_API_URL = "https://api.github.com/repos/silusahu360/gyansetu-odishamcq/releases/latest";
+
+
+
+  try {
+
+    const res = await fetch(GITHUB_API_URL, {
+
+      headers: { "Accept": "application/vnd.github.v3+json" }
+
+    });
+
+    if (!res.ok) throw new Error("Release error");
+
+    const releaseData = await res.json();
+
+    const remoteVersion = releaseData.tag_name ? releaseData.tag_name.replace(/^[vV]/, "").trim() : "2.0";
+
+    const apkAsset = releaseData.assets && releaseData.assets.find(a => a.name.endsWith(".apk"));
+
+    const downloadUrl = apkAsset ? apkAsset.browser_download_url : releaseData.html_url;
+
+
+
+    sendBridge("LATEST_RELEASE~" + remoteVersion + "~" + downloadUrl);
+
+
+
+    if (remoteVersion > CURRENT_VERSION) {
+
+      if (status) {
+
+        status.innerHTML = `🔔 ନୂଆ ଅପଡେଟ୍ (v${remoteVersion})! <a href="${downloadUrl}" target="_blank" style="color:var(--primary);font-weight:700;">Download</a>`;
+
+      }
+
+    } else {
+
+      if (status) status.textContent = "✅ ଆପଣ ସର୍ବଶେଷ ଭର୍ସନ ବ୍ୟବହାର କରୁଛନ୍ତି।";
+
+    }
+
+  } catch (err) {
+
+    if (status) status.textContent = "ଅପଡେଟ୍ ଯାଞ୍ଚ ବିଫଳ ହେଲା।";
+
+  }
+
+}
+
+
+
+function handleAndroidBack() {
+
+  const active = document.querySelector(".screen.active");
+
+  const id = active ? active.id : "home";
+
+  if (id === "snakeGameScreen") { exitNokiaGame(); return; }
+
+  if (id === "quizScreen") { handleViewerBack(); return; }
+
   if (
+
+Your HTML file is ready
+
+HTML icon
+app
+ HTML 
+ଆପଣ ଦେଇଥିବା ଫାଇଲ୍‌ରେ ବଟନ୍ କାମ ନ କରିବାର ମୁଖ୍ୟ କାରଣଗୁଡ଼ିକ ଥିଲା:
+
+କୋଡ୍‌ର ଶେଷ ଭାଗରେ JavaScript function (handleAndroidBack) କଟି ଯାଇଥିଲା, ଯାହା ଫଳରେ ପୂରା Script block crush ହୋଇ କୌଣସି onclick event କାମ କରୁନଥିଲା।
+
+HTML ଭିତରେ ଥିବା ଅଦୃଶ୍ୟ Non-Breaking Spaces (\u00a0) ଯୋଗୁଁ WebViewer ସ୍କ୍ରିପ୍ଟକୁ parse କରିପାରୁନଥିଲା।
+
+ସମସ୍ତ ବଟନ୍‌ରେ type="button" ଯୋଡ଼ି ଦିଆଯାଇଛି, ଯାହାଦ୍ୱାରା WebViewer ଭିତରେ କ୍ଲିକ୍ ତୁରନ୍ତ ଟ୍ରିଗର୍ ହେବ।
+
+ଏହି ସମସ୍ତ ତ୍ରୁଟିକୁ ସଜାଡ଼ି ସମ୍ପୂର୍ଣ୍ଣ ସଠିକ୍ କୋଡ୍ ପ୍ରସ୍ତୁତ କରାଯାଇଛି। ଆପଣ ଉପରୋକ୍ତ app.html ଫାଇଲ୍‌କୁ ଡାଉନଲୋଡ୍ କରିପାରିବେ, କିମ୍ବା ନିମ୍ନରେ ଥିବା କୋଡ୍‌କୁ ସିଧାସଳଖ GitHub ର app.html ଭିତରେ ପୁରୁଣା ସବୁ କୋଡ୍ ହଟାଇ Paste କରି Commit changes କରିଦିଅନ୍ତୁ:   
+0a70006a-c44d-4cd7-a1c4-35efcee33547
++ 1
+
+HTML
+<!DOCTYPE html>
+<html lang="or">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#4c1d95">
+<title>GyanSetu Odisha</title>
+<style>
+:root{
+  --primary:#6d28d9;--deep:#4c1d95;--accent:#fbbf24;
+  --bg:#f5f3ff;--card:#ffffff;--ink:#241746;--muted:#71658b;
+  --line:#e6ddf7;--good:#15803d;--bad:#b91c1c;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;font-family:system-ui,-apple-system,"Noto Sans Oriya","Noto Sans",sans-serif;
+  font-size:17px;line-height:1.55;background:linear-gradient(145deg,#fdf2f8 0%,#f3e8ff 45%,#e0f2fe 100%);
+  background-attachment:fixed;color:var(--ink);min-height:100vh;
+}
+body.dark{
+  --bg:#101827;--card:#1d293b;--ink:#edf2f7;--muted:#aab7c8;--line:#344256;
+  background:linear-gradient(145deg,#111827,#1e1b4b 55%,#172554);background-attachment:fixed;
+}
+header{
+  background:linear-gradient(115deg,#4c1d95 0%,#7c3aed 42%,#db2777 100%);
+  color:#fff;text-align:center;padding:18px 12px;position:sticky;top:0;z-index:5;
+  box-shadow:0 4px 14px rgba(0,0,0,0.15);border-bottom:4px solid #fbbf24;
+}
+.brand{font-size:clamp(22px,5vw,30px);font-weight:850}.brand span{color:#fde68a}
+header p{margin:6px 0 0;font-size:15px;line-height:1.5;opacity:.95}
+main{max-width:680px;margin:auto;padding:18px 14px 28px}
+.screen{display:none}
+.screen.active{display:block !important;animation:up .2s}
+@keyframes up{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+h2{font-size:23px;line-height:1.4;margin:12px 0 18px;text-align:center;color:#5b21b6}
+body.dark h2{color:#c4b5fd}
+.card{background:var(--card);border:1px solid #e9d5ff;border-radius:16px;padding:16px;margin-bottom:12px;box-shadow:0 8px 24px rgba(76,29,149,0.08)}
+body.dark .card{border-color:#344256;box-shadow:0 8px 24px rgba(0,0,0,0.25)}
+
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.tile{
+  border:0;border-radius:13px;padding:16px 12px;color:white;font-size:17px;line-height:1.4;
+  font-weight:750;background:linear-gradient(135deg,#2563eb,#7c3aed);min-height:68px;
+  cursor:pointer;box-shadow:0 5px 14px rgba(76,29,149,0.15);transition:transform .15s,filter .15s;
+  display:flex;align-items:center;justify-content:center;text-align:center;
+}
+.tile:nth-child(2n){background:linear-gradient(135deg,#0f9f8f,#047857)}
+.tile:nth-child(3n){background:linear-gradient(135deg,#f97316,#db2777)}
+.tile:nth-child(4n){background:linear-gradient(135deg,#0891b2,#2563eb)}
+.tile:active,.btn:active{transform:scale(.98);filter:brightness(.96)}
+
+.btn{border:0;border-radius:10px;padding:14px 16px;background:linear-gradient(135deg,#6d28d9,#4f46e5);color:white;font-weight:700;font-size:16px;line-height:1.4;cursor:pointer;box-shadow:0 3px 9px rgba(76,29,149,0.12)}
+.btn.secondary{background:linear-gradient(135deg,#64748b,#475569)}
+.btn.green{background:linear-gradient(135deg,#10b981,#047857)}
+.btn.orange{background:linear-gradient(135deg,#f59e0b,#ea580c)}
+.btn.red{background:linear-gradient(135deg,#ef4444,#be123c)}
+.btn.cyan{background:linear-gradient(135deg,#0284c7,#0369a1)}
+.btn.purple{background:linear-gradient(135deg,#9333ea,#7e22ce)}
+.btn.light{background:#ede9fe;color:#5b21b6;border:1px solid #ddd6fe}
+body.dark .btn.light{background:#312e81;color:#ede9fe;border-color:#4338ca}
+.btnrow{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin:10px 0}
+.btn.full{width:100%;margin-top:8px}
+
+.subject{
+  display:flex;align-items:center;justify-content:space-between;gap:10px;text-align:left;
+  width:100%;margin:8px 0;background:var(--card);color:var(--ink);border:1px solid var(--line);
+  border-left:5px solid #8b5cf6;border-radius:12px;padding:16px;font-size:16px;font-weight:700;
+  box-shadow:0 4px 12px rgba(76,29,149,0.06);cursor:pointer;
+}
+.subject:nth-child(3n+2){border-left-color:#0d9488}
+.subject:nth-child(3n){border-left-color:#f97316}
+
+.field{width:100%;padding:12px;border:1.5px solid #d8b4fe;border-radius:9px;background:var(--card);color:var(--ink);margin:5px 0 12px;font-size:15px}
+.field:focus{outline:2px solid #a78bfa;border-color:#7c3aed}
+.back{
+  border:2px solid #a78bfa;color:#4c1d95;background:linear-gradient(135deg,#fff7ed,#ede9fe);
+  width:100%;padding:16px;border-radius:25px;margin-top:14px;font-size:18px;font-weight:800;
+  box-shadow:0 5px 14px rgba(76,29,149,0.12);cursor:pointer;
+}
+body.dark .back{color:#f5f3ff;border:2px solid #8b5cf6;background:linear-gradient(135deg,#312e81,#1d293b)}
+
+.status-pill{
+  display:inline-flex;align-items:center;gap:8px;padding:8px 16px;margin:12px auto 4px;
+  background:linear-gradient(135deg,#ede9fe,#fdf4ff);border:1.5px solid #c4b5fd;
+  border-radius:30px;color:#5b21b6;font-size:14px;font-weight:750;box-shadow:0 2px 8px rgba(124,58,237,0.1);
+}
+body.dark .status-pill{background:linear-gradient(135deg,#1e1b4b,#312e81);border-color:#6d28d9;color:#e0e7ff}
+.dot{width:9px;height:9px;background:#22c55e;border-radius:50%;box-shadow:0 0 8px #22c55e}
+
+.muted{color:var(--muted);font-size:15px;line-height:1.5}
+
+.quiz-timer-strip{
+  position:sticky;top:70px;z-index:9;display:flex;justify-content:space-between;align-items:center;
+  background:linear-gradient(100deg,#4c1d95,#7c3aed);color:#fff;padding:10px 16px;
+  border-radius:12px;margin-bottom:12px;box-shadow:0 6px 18px rgba(76,29,149,0.3);
+}
+.quiz-time-badge{font-size:19px;font-weight:850;color:#fde68a;font-family:monospace;letter-spacing:1px}
+
+.subject-group{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px;margin-bottom:12px}
+.subject-header{font-size:16px;font-weight:800;color:#6d28d9;display:flex;justify-content:space-between;align-items:center;padding-bottom:8px;border-bottom:1.5px dashed var(--line);margin-bottom:8px}
+body.dark .subject-header{color:#c4b5fd}
+.item{padding:10px 6px;border-bottom:1px solid var(--line);font-size:15px}
+.item:last-child{border-bottom:0}
+
+.modal-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(15,23,42,0.85);z-index:99;display:none;align-items:center;justify-content:center;padding:16px}
+.modal-overlay.active{display:flex}
+.modal-box{background:var(--card);color:var(--ink);border-radius:18px;max-width:420px;width:100%;padding:24px;text-align:center;box-shadow:0 12px 36px rgba(0,0,0,0.35);border:2px solid #a78bfa}
+
+.dev-badge-card{margin-top:20px;padding:16px 14px;background:linear-gradient(135deg,rgba(109,40,217,.08),rgba(219,39,119,.08));border:1.5px solid #c4b5fd;border-radius:14px;text-align:center}
+.dev-tag{display:inline-block;font-size:11px;font-weight:750;letter-spacing:1px;color:#7c3aed;text-transform:uppercase;background:#ede9fe;padding:3px 10px;border-radius:20px;margin-bottom:6px}
+.dev-name{font-size:21px;font-weight:850;color:#4c1d95;display:flex;align-items:center;justify-content:center;gap:6px}
+.dev-desc{font-size:13px;color:#64748b;margin-top:6px;line-height:1.4}
+body.dark .dev-badge-card{background:linear-gradient(135deg,rgba(139,92,246,.15),rgba(236,72,153,.15));border-color:#6d28d9}
+body.dark .dev-tag{background:#312e81;color:#ddd6fe}body.dark .dev-name{color:#e0e7ff}body.dark .dev-desc{color:#aab7c8}
+footer{text-align:center;padding:15px;color:#6b5b86;font-size:13px}
+@media(max-width:380px){.btnrow{grid-template-columns:1fr}.grid{gap:8px}}
+
+/* NOKIA NEON SNAKE STYLES */
+.nokia-snake-card{
+  background:#140c2b;border:2px solid #8b5cf6;border-radius:22px;
+  padding:16px;width:100%;max-width:390px;margin:0 auto;box-shadow:0 0 25px rgba(139,92,246,0.3);
+  text-align:center;color:#f8fafc;
+}
+.nokia-title{
+  font-size:21px;font-weight:900;letter-spacing:1.5px;color:#fde047;
+  text-shadow:0 0 12px rgba(253,224,71,0.5);margin:0 0 10px;
+}
+.nokia-scoreboard{
+  display:flex;justify-content:space-around;background:#0d0620;border:1.5px solid #3b2075;
+  border-radius:14px;padding:8px;margin-bottom:12px;font-weight:800;
+}
+.nokia-score-item{font-size:13px;color:#a78bfa;}
+.nokia-score-num{font-size:20px;color:#38bdf8;font-family:monospace;display:block;}
+
+#nokiaCanvas{
+  background:#090414;border:2.5px solid #38bdf8;border-radius:12px;
+  box-shadow:0 0 16px rgba(56,189,248,0.25);display:block;margin:0 auto 12px;
+  max-width:100%;
+}
+.nokia-pad{
+  display:grid;grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 50px);
+  gap:8px;width:210px;margin:10px auto;
+}
+.nokia-pad-btn{
+  background:linear-gradient(135deg,#6d28d9,#4f46e5);border:1.5px solid #a78bfa;
+  border-radius:12px;color:white;font-size:22px;display:flex;align-items:center;
+  justify-content:center;cursor:pointer;user-select:none;box-shadow:0 4px 10px rgba(0,0,0,0.4);
+}
+.nokia-pad-btn:active{transform:scale(0.94);background:#7c3aed;}
+.nokia-pad-up{grid-column:2;grid-row:1;}
+.nokia-pad-left{grid-column:1;grid-row:2;}
+.nokia-pad-center{grid-column:2;grid-row:2;background:#059669;border-color:#34d399;font-size:15px;font-weight:800;}
+.nokia-pad-right{grid-column:3;grid-row:2;}
+.nokia-pad-down{grid-column:2;grid-row:3;}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="brand">🎓 GYANSETU <span>ODISHA</span></div>
+  <p>NCERT & Odisha State Board Learning Portal</p>
+</header>
+<main>
+
+<!-- HOME SCREEN -->
+<section id="home" class="screen active">
+  <h2>ସ୍ୱାଗତମ୍ | Welcome</h2>
+  <div class="grid">
+    <button type="button" class="tile" onclick="showClasses('notes')">📚 Notes Library</button>
+    <button type="button" class="tile" onclick="openMcqSetup()">📝 MCQ Practice</button>
+    <button type="button" class="tile" onclick="showClasses('materials')">📂 Study Materials</button>
+    <button type="button" class="tile" onclick="openSavedNotesScreen()">📥 Saved Notes</button>
+    <button type="button" class="tile" onclick="openOfflineQuizMenu()">⚡ Downloaded Quiz</button>
+    <button type="button" class="tile" onclick="openSnakeGame()">🎮 Mind Fresh</button>
+  </div>
+  <div class="btnrow">
+    <button type="button" class="btn green" onclick="shareApp()">📤 Share App</button>
+    <button type="button" class="btn" onclick="checkUpdates()">🔄 Check Update</button>
+    <button type="button" class="btn secondary" onclick="showScreen('studyTimer')">⏱ Study Timer</button>
+    <button type="button" class="btn light" onclick="toggleTheme()">🌙 Dark / Light</button>
+    <button type="button" class="btn light" onclick="showScreen('about')">ℹ About / Help</button>
+  </div>
+  <div style="text-align:center;">
+    <div id="homeStatusPill" class="status-pill"><span class="dot"></span><span id="homeStatus">Ready to learn.</span></div>
+  </div>
+</section>
+
+<!-- CLASSES SCREEN -->
+<section id="classes" class="screen">
+  <h2 id="classTitle">Select Class</h2>
+  <div class="grid" id="classGrid"></div>
+  <button type="button" class="back" onclick="showScreen('home')">⬅ Home</button>
+</section>
+
+<!-- SUBJECTS SCREEN -->
+<section id="subjects" class="screen">
+  <h2 id="subjectTitle">Select Subject</h2>
+  <div id="subjectList"></div>
+  <button type="button" class="back" onclick="showScreen('classes')">⬅ Back to Classes</button>
+</section>
+
+<!-- FOLDER SCREEN -->
+<section id="folder" class="screen">
+  <h2 id="folderTitle">Study Materials</h2>
+  <div class="card">
+    <p id="folderMessage" class="muted">Google Drive folder is ready for your chapters.</p>
+    <button type="button" class="btn full" onclick="openDrive()">📂 Open Google Drive</button>
+    <button type="button" class="btn green full" onclick="downloadNotes()">⬇ Download Notes</button>
+    <button type="button" class="btn secondary full" onclick="openSavedNotesScreen()">📱 Open Saved Notes</button>
+    <button type="button" class="btn light full" onclick="bookmarkCurrent()">⭐ Bookmark this Subject</button>
+    <p id="noteStatus" style="font-size:14px;color:var(--muted);margin-top:10px;text-align:center;"></p>
+  </div>
+  <button type="button" class="back" onclick="showScreen('subjects')">⬅ Back</button>
+</section>
+
+<!-- MCQ SETUP SCREEN -->
+<section id="mcqSetup" class="screen">
+  <h2>Topic-wise MCQ Practice</h2>
+  <div class="card">
+    <label>1. Class</label><select id="mcqClass" class="field" onchange="fillSubjects()"></select>
+    <label>2. Subject</label><select id="mcqSubject" class="field" onchange="fillTopics()"></select>
+    <label>3. Chapter / Topic</label><select id="mcqTopic" class="field"></select>
+    
+    <div class="btnrow">
+      <button type="button" class="btn green" onclick="startQuiz()">START QUIZ ➜</button>
+      <button type="button" class="btn orange" onclick="downloadSelectedTopicMcq()">💾 Save Offline</button>
+    </div>
+  </div>
+  <button type="button" class="back" onclick="showScreen('home')">⬅ Home</button>
+</section>
+
+<!-- OFFLINE QUIZ MENU SCREEN -->
+<section id="offlineQuizMenuScreen" class="screen">
+  <h2>⚡ Downloaded Offline Quiz Sets</h2>
+  <div class="card">
+    <p class="muted">ଅଫଲାଇନ୍‌ରେ ଅଭ୍ୟାସ କରିବା ପାଇଁ ଆପଣଙ୍କ ଡାଉନଲୋଡ୍ ହୋଇଥିବା ସେଟ୍:</p>
+    <div id="downloadedQuizList"></div>
+  </div>
+  <button type="button" class="back" onclick="showScreen('home')">⬅ Home</button>
+</section>
+
+<!-- CONTENT / QUIZ / NOTE VIEWER SCREEN -->
+<section id="quizScreen" class="screen">
+  <div id="quizTimerBar" class="quiz-timer-strip">
+    <div style="display:flex;align-items:center;gap:8px;">
+      <span style="font-size:15px;font-weight:700;">⏱ RUNNING TIME:</span>
+      <span id="quizRunningTimer" class="quiz-time-badge">00:00</span>
+    </div>
+    <button type="button" class="btn secondary" style="padding:6px 14px;font-size:13px;border-radius:8px;" onclick="pauseQuiz()">⏸ Pause</button>
+  </div>
+
+  <div id="noteActionToolbar" style="display:none;margin-bottom:10px;gap:8px;">
+    <button type="button" class="btn green full" onclick="saveCurrentNoteOffline()">💾 Save Note for Offline</button>
+  </div>
+
+  <div id="quizFrameContainer" style="width:100%;border-radius:14px;overflow:hidden;background:#fff;box-shadow:0 6px 20px rgba(0,0,0,0.1);">
+    <iframe id="quizFrame" style="width:100%;height:72vh;border:0;display:block;" title="Content Viewer"></iframe>
+  </div>
+
+  <div class="btnrow" style="margin-top:14px;">
+    <button type="button" id="viewerBackButton" class="back" style="margin-top:0;" onclick="handleViewerBack()">⬅ Back</button>
+    <button type="button" class="back" style="margin-top:0;background:linear-gradient(135deg,#e0e7ff,#ede9fe);color:#4338ca;" onclick="goHomeFromViewer()">⌂ Home</button>
+  </div>
+</section>
+
+<!-- OFFLINE SAVED NOTE VIEWER SCREEN -->
+<section id="offlineNoteViewer" class="screen">
+  <h2 id="savedNoteTitle">Saved Note</h2>
+  <div class="card" id="savedNoteBody" style="min-height:50vh;padding:18px;line-height:1.7;"></div>
+  <button type="button" class="back" onclick="showScreen('downloads')">⬅ Back to Saved Notes</button>
+</section>
+
+<!-- NOKIA NEON SNAKE GAME SCREEN (MIND FRESH) -->
+<section id="snakeGameScreen" class="screen">
+  <div class="nokia-snake-card">
+    <div class="nokia-title">🐍 NOKIA NEON SNAKE ⚡</div>
+    
+    <div class="nokia-scoreboard">
+      <div class="nokia-score-item">SCORE<span class="nokia-score-num" id="nokiaScoreVal">0</span></div>
+      <div class="nokia-score-item">BEST RECORD<span class="nokia-score-num" id="nokiaHighScoreVal">0</span></div>
+    </div>
+
+    <canvas id="nokiaCanvas" width="300" height="300"></canvas>
+
+    <div class="nokia-pad">
+      <button type="button" class="nokia-pad-btn nokia-pad-up" onclick="setNokiaDir('UP')">▲</button>
+      <button type="button" class="nokia-pad-btn nokia-pad-left" onclick="setNokiaDir('LEFT')">◀</button>
+      <button type="button" class="nokia-pad-btn nokia-pad-center" onclick="toggleNokiaPause()" id="nokiaPauseBtn">⏸</button>
+      <button type="button" class="nokia-pad-btn nokia-pad-right" onclick="setNokiaDir('RIGHT')">▶</button>
+      <button type="button" class="nokia-pad-btn nokia-pad-down" onclick="setNokiaDir('DOWN')">▼</button>
+    </div>
+
+    <div class="btnrow" style="margin-top:10px;">
+      <button type="button" class="btn cyan" onclick="resetNokiaGame()">🔄 Restart</button>
+      <button type="button" class="btn purple" onclick="toggleNokiaSound()" id="nokiaSoundBtn">🔊 Sound ON</button>
+    </div>
+
+    <button type="button" class="back" onclick="exitNokiaGame()">⬅ Return to Home</button>
+  </div>
+</section>
+
+<!-- QUIZ PAUSE MODAL -->
+<div id="pauseModal" class="modal-overlay">
+  <div class="modal-box">
+    <h3 style="color:#7c3aed;margin-top:0;font-size:22px;">⏸ Quiz Paused</h3>
+    <p class="muted">ଆପଣଙ୍କ Quiz ସମୟ ସ୍ଥଗିତ ରହିଛି।</p>
+    <div style="margin:18px 0;padding:12px;background:#ede9fe;border-radius:12px;font-size:18px;font-weight:800;color:#6d28d9;">
+      ଚାଲୁଥିବା ସମୟ: <span id="pausedTimeText" style="color:#4c1d95;font-family:monospace;">00:00</span>
+    </div>
+    <button type="button" class="btn green full" onclick="resumeQuiz()">▶ RESUME QUIZ</button>
+    <button type="button" class="btn red full" onclick="closePauseAndExit()">Exit Practice</button>
+  </div>
+</div>
+
+<!-- DOWNLOADS SCREEN -->
+<section id="downloads" class="screen">
+  <h2>📥 Saved Offline Notes</h2>
+  <div class="card">
+    <p class="muted" style="margin-top:0;">ନେଟ୍ ନଥିଲେ ମଧ୍ୟ ସେଭ୍ ହୋଇଥିବା ନୋଟ୍ ପଢ଼ିପାରିବେ।</p>
+    <div id="savedNotesList"></div>
+  </div>
+  <button type="button" class="back" onclick="showScreen('home')">Home</button>
+</section>
+
+<!-- BOOKMARKS SCREEN -->
+<section id="bookmarks" class="screen">
+  <h2>⭐ Bookmarks</h2>
+  <div id="bookmarkList"></div>
+  <button type="button" class="btn red full" onclick="clearBookmarks()">Clear All Bookmarks</button>
+  <button type="button" class="back" onclick="showScreen('home')">Home</button>
+</section>
+
+<!-- STUDY TIMER SCREEN -->
+<section id="studyTimer" class="screen">
+  <h2>⏱ Study Timer</h2>
+  <div class="card result" style="text-align:center;">
+    <div class="score" id="studyClock" style="font-size:42px;font-weight:850;color:#7c3aed;margin:12px 0;">00:00:00</div>
+    <button type="button" class="btn green" onclick="startStudy()">Start</button>
+    <button type="button" class="btn orange" onclick="pauseStudy()">Pause</button>
+    <button type="button" class="btn red" onclick="resetStudy()">Reset</button>
+  </div>
+  <button type="button" class="back" onclick="showScreen('home')">Home</button>
+</section>
+
+<!-- ABOUT SECTION -->
+<section id="about" class="screen">
+  <h2>About GyanSetu Odisha</h2>
+  <div class="card">
+    <h3 style="text-align:center;color:#7c3aed;margin:8px 0 6px">🎓 GyanSetu Odisha</h3>
+    <p class="muted" style="text-align:center;font-size:16px">Classes VI to X ପାଇଁ ଏକ ସ୍ମାର୍ଟ ଶିକ୍ଷଣ ପୋର୍ଟାଲ୍।</p>
+    
+    <div class="dev-badge-card">
+      <div class="dev-tag">App Creator & Educator</div>
+      <div class="dev-name">👨‍🏫 Sangram Sahu</div>
+      <div class="dev-desc">Dedicated to empowering Odisha school students with smart NCERT learning tools.</div>
+    </div>
+  </div>
+  <button type="button" class="back" onclick="showScreen('home')">⌂ HOME</button>
+</section>
+
+</main>
+<footer>© 2026 GyanSetu Odisha · Developed by Sangram Sahu</footer>
+
+<script>
+const CURRENT_VERSION = "2.0";
+const GITHUB_PAGES_BASE = "https://silusahu360.github.io/gyansetu-odishamcq/";
+const GITHUB_MCQ_JSON_URL = "https://raw.githubusercontent.com/silusahu360/gyansetu-odishamcq/main/mcq_data.json";
+
+const classDriveFolders = {
+  "CLASS VI":"https://drive.google.com/drive/folders/1KUhgA15GZ0jMPfF22XhN_0ipuayW3jhr",
+  "CLASS VII":"https://drive.google.com/drive/folders/1ToIWcidnQfATl6_awNSSPRcRK1nyZWAv",
+  "CLASS VIII":"https://drive.google.com/drive/folders/1gnCILN6NhsAsK2c4ljn8DbTNv4zAnMCC",
+  "CLASS IX":"https://drive.google.com/drive/folders/1xC7s790hPESNNYKTDZ8jnFvgkDLHrKbD",
+  "CLASS X":"https://drive.google.com/drive/folders/1KC4TAH3EzQiOdfwj9SKmttCOdhfqz0Td"
+};
+
+const subjectsByClass = {
+  "CLASS VI":["ODIA","ENGLISH","MATHEMATICS","SCIENCE","SOCIAL SCIENCE","HINDI","SANSKRIT"],
+  "CLASS VII":["ODIA","ENGLISH","MATHEMATICS","SCIENCE","SOCIAL SCIENCE","HINDI","SANSKRIT"],
+  "CLASS VIII":["ODIA","ENGLISH","HINDI","SANSKRIT","MATHEMATICS","SCIENCE","SOCIAL SCIENCE"],
+  "CLASS IX":["ODIA","ENGLISH","SANSKRIT","HINDI","MATHEMATICS","SCIENCE","GEOGRAPHY","HISTORY"],
+  "CLASS X":["ODIA","ENGLISH","SANSKRIT","HINDI","MATHEMATICS","SCIENCE","GEOGRAPHY","HISTORY"]
+};
+
+let mcqDataStore = {};
+let currentClass = "CLASS X", currentSubject = "", currentFolder = "";
+let currentViewMode = "quiz";
+let currentNoteHtmlUrl = "";
+let quizSeconds = 0, quizTimerInterval = null, isQuizPaused = false;
+let studySeconds = 0, studyInterval = null;
+
+const $ = id => document.getElementById(id);
+
+function showScreen(id) {
+  let target = $(id);
+  if (!target) target = $("home");
+  document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
+  target.classList.add("active");
+  window.scrollTo(0,0);
+  
+  if (id === "bookmarks") renderBookmarks();
+  if (id === "downloads") renderSavedNotesList();
+}
+
+function showClasses(mode) {
+  window.classMode = mode;
+  $("classTitle").textContent = mode === "notes" ? "Select Class · Notes Library" : "Select Class · Study Materials";
+  $("classGrid").innerHTML = "";
+  Object.keys(subjectsByClass).forEach(c => {
+    let b = document.createElement("button");
+    b.type = "button";
+    b.className = "tile";
+    b.textContent = c;
+    b.onclick = () => showSubjects(c);
+    $("classGrid").appendChild(b);
+  });
+  showScreen("classes");
+}
+
+function showSubjects(cls) {
+  currentClass = cls;
+  $("subjectTitle").textContent = cls + " · Select Subject";
+  $("subjectList").innerHTML = "";
+  subjectsByClass[cls].forEach(s => {
+    let b = document.createElement("button");
+    b.type = "button";
+    b.className = "subject";
+    b.innerHTML = `<span>${s}</span><span>➜</span>`;
+    b.onclick = () => openSubject(s);
+    $("subjectList").appendChild(b);
+  });
+  showScreen("subjects");
+}
+
+function openSubject(sub) {
+  currentSubject = sub;
+  currentFolder = classDriveFolders[currentClass];
+
+  if (window.classMode === "notes") {
+    currentViewMode = "note";
+    let cleanCls = currentClass.toLowerCase().replace(/[^a-z0-9]/g, "");
+    let cleanSub = sub.toLowerCase().replace(/[^a-z0-9]/g, "");
+    let noteFileName = `${cleanCls}_${cleanSub}_note.html`;
+    currentNoteHtmlUrl = GITHUB_PAGES_BASE + noteFileName;
+
+    $("quizTimerBar").style.display = "none";
+    $("noteActionToolbar").style.display = "flex";
+    $("viewerBackButton").textContent = "⬅ Back to Subjects";
+    showScreen("quizScreen");
+
+    $("quizFrame").srcdoc = "<div style='display:flex;align-items:center;justify-content:center;height:60vh;font-family:sans-serif;color:#6d28d9;font-size:18px;'><b>Loading Note... ଅପେକ୍ଷା କରନ୍ତୁ...</b></div>";
+    fetch(currentNoteHtmlUrl + "?t=" + Date.now())
+      .then(r => {
+        if (!r.ok) throw new Error("HTTP " + r.status);
+        return r.text();
+      })
+      .then(html => {
+        $("quizFrame").srcdoc = html;
+      })
+      .catch(err => {
+        $("quizFrame").srcdoc = "<div style='padding:20px;text-align:center;'>ଇଣ୍ଟରନେଟ୍ ସଂଯୋଗ ଯାଞ୍ଚ କରନ୍ତୁ କିମ୍ବା ପରେ ଚେଷ୍ଟା କରନ୍ତୁ।</div>";
+      });
+    return;
+  }
+
+  currentViewMode = "materials";
+  $("folderTitle").textContent = currentClass + " · " + sub;
+  $("folderMessage").textContent = currentClass + " · " + sub + " Drive folder is ready.";
+  $("noteStatus").textContent = "";
+  showScreen("folder");
+}
+
+function cleanViewerFrame() {
+  clearInterval(quizTimerInterval);
+  quizTimerInterval = null;
+  const frame = $("quizFrame");
+  if (frame) frame.srcdoc = "";
+  const toolbar = $("noteActionToolbar");
+  if (toolbar) toolbar.style.display = "none";
+}
+
+function handleViewerBack() {
+  cleanViewerFrame();
+  if (currentViewMode === "quiz") {
+    showScreen("mcqSetup");
+  } else if (currentViewMode === "downloaded_quiz") {
+    showScreen("offlineQuizMenuScreen");
+  } else {
+    showScreen("subjects");
+  }
+}
+
+function goHomeFromViewer() {
+  cleanViewerFrame();
+  showScreen("home");
+}
+
+async function saveCurrentNoteOffline() {
+  try {
+    let resp = await fetch(currentNoteHtmlUrl);
+    if (!resp.ok) throw new Error("Fetch error");
+    let htmlContent = await resp.text();
+
+    let saved = JSON.parse(localStorage.getItem("gs_saved_notes") || "{}");
+    let key = currentClass + " · " + currentSubject;
+    saved[key] = {
+      title: key,
+      content: htmlContent,
+      date: new Date().toLocaleDateString('or-IN')
+    };
+    localStorage.setItem("gs_saved_notes", JSON.stringify(saved));
+    alert("✅ ଏହି ନୋଟ୍ Offline ପାଇଁ Save ହୋଇଗଲା!");
+  } catch (e) {
+    alert("ଇଣ୍ଟରନେଟ୍ ଯାଞ୍ଚ କରନ୍ତୁ କିମ୍ବା ପରେ ଚେଷ୍ଟା କରନ୍ତୁ।");
+  }
+}
+
+async function downloadSelectedTopicMcq() {
+  let fileName = $("mcqTopic").value;
+  let topicName = $("mcqTopic").options[$("mcqTopic").selectedIndex]?.text || "Topic MCQ";
+  if (!fileName) {
+    alert("ଦୟାକରି ଏକ Topic ବାଛନ୍ତୁ।");
+    return;
+  }
+  let fullUrl = GITHUB_PAGES_BASE + fileName;
+  try {
+    let resp = await fetch(fullUrl);
+    if (!resp.ok) throw new Error("Fetch error");
+    let htmlContent = await resp.text();
+
+    let savedMcqs = JSON.parse(localStorage.getItem("gs_saved_mcqs") || "{}");
+    let key = $("mcqClass").value + " · " + $("mcqSubject").value + " - " + topicName;
+    savedMcqs[key] = {
+      title: key,
+      content: htmlContent,
+      date: new Date().toLocaleDateString('or-IN')
+    };
+    localStorage.setItem("gs_saved_mcqs", JSON.stringify(savedMcqs));
+    alert("✅ ଏହି Topic Offline ପାଇଁ Save ହୋଇଗଲା!");
+  } catch (e) {
+    alert("ଡାଉନଲୋଡ୍ ବିଫଳ ହେଲା। ଇଣ୍ଟରନେଟ୍ ଯାଞ୍ଚ କରନ୍ତୁ।");
+  }
+}
+
+function openSavedNotesScreen() {
+  showScreen("downloads");
+  renderSavedNotesList();
+}
+
+function renderSavedNotesList() {
+  let saved = JSON.parse(localStorage.getItem("gs_saved_notes") || "{}");
+  let container = $("savedNotesList");
+  let keys = Object.keys(saved);
+
+  if (!keys.length) {
+    container.innerHTML = `<div style="text-align:center;padding:16px;color:var(--muted);">କୌଣସି ନୋଟ୍ ସେଭ୍ ହୋଇନାହିଁ।</div>`;
+    return;
+  }
+
+  let html = "";
+  keys.forEach(k => {
+    let item = saved[k];
+    html += `
+      <div class="item" style="display:flex;justify-content:space-between;align-items:center;padding:12px 6px;">
+        <div><b>📖 ${item.title}</b><br><small class="muted">${item.date || 'Available Offline'}</small></div>
+        <div style="display:flex;gap:6px;">
+          <button type="button" class="btn green" style="padding:6px 12px;font-size:13px;" onclick="viewSavedNote('${k}')">Open</button>
+          <button type="button" class="btn red" style="padding:6px 10px;font-size:13px;" onclick="deleteSavedNote('${k}')">✕</button>
+        </div>
+      </div>
+    `;
+  });
+  container.innerHTML = html;
+}
+
+function viewSavedNote(key) {
+  let saved = JSON.parse(localStorage.getItem("gs_saved_notes") || "{}");
+  if (saved[key]) {
+    $("savedNoteTitle").textContent = key;
+    $("savedNoteBody").innerHTML = saved[key].content;
+    showScreen("offlineNoteViewer");
+  }
+}
+
+function deleteSavedNote(key) {
+  if (confirm(key + " ନୋଟ୍ କାଢ଼ିବାକୁ ଚାହାନ୍ତି କି?")) {
+    let saved = JSON.parse(localStorage.getItem("gs_saved_notes") || "{}");
+    delete saved[key];
+    localStorage.setItem("gs_saved_notes", JSON.stringify(saved));
+    renderSavedNotesList();
+  }
+}
+
+function openOfflineQuizMenu() {
+  showScreen("offlineQuizMenuScreen");
+  renderDownloadedQuizList();
+}
+
+function renderDownloadedQuizList() {
+  let savedMcqs = JSON.parse(localStorage.getItem("gs_saved_mcqs") || "{}");
+  let container = $("downloadedQuizList");
+  let keys = Object.keys(savedMcqs);
+
+  if (!keys.length) {
+    container.innerHTML = `<div style="text-align:center;padding:18px;color:var(--muted);">କୌଣସି Quiz ଡାଉନଲୋଡ୍ ହୋଇନାହିଁ।<br><br><b>MCQ Practice</b> କୁ ଯାଇ topic ବାଛନ୍ତୁ ଏବଂ <b>💾 Save Offline</b> ଦବାନ୍ତୁ।</div>`;
+    return;
+  }
+
+  let html = `<h4 style="margin:8px 0 10px;color:#6d28d9;">📥 ଆପଣଙ୍କ ଡାଉନଲୋଡ୍ ସେଟ୍:</h4>`;
+  keys.forEach(k => {
+    html += `
+      <div class="item" style="display:flex;justify-content:space-between;align-items:center;padding:10px 4px;">
+        <div style="font-size:15px;"><b>📝 ${k}</b></div>
+        <div style="display:flex;gap:6px;">
+          <button type="button" class="btn green" style="padding:5px 10px;font-size:13px;" onclick="openDownloadedMcq('${k}')">Play</button>
+          <button type="button" class="btn red" style="padding:5px 8px;font-size:13px;" onclick="deleteDownloadedMcq('${k}')">✕</button>
+        </div>
+      </div>
+    `;
+  });
+  container.innerHTML = html;
+}
+
+function openDownloadedMcq(key) {
+  let savedMcqs = JSON.parse(localStorage.getItem("gs_saved_mcqs") || "{}");
+  if (savedMcqs[key]) {
+    currentViewMode = "downloaded_quiz";
+    $("quizTimerBar").style.display = "none";
+    $("noteActionToolbar").style.display = "none";
+    $("viewerBackButton").textContent = "⬅ Back to Sets";
+    showScreen("quizScreen");
+    $("quizFrame").srcdoc = savedMcqs[key].content;
+  }
+}
+
+function deleteDownloadedMcq(key) {
+  if (confirm(key + " ସେଟ୍ କାଢ଼ିବାକୁ ଚାହାନ୍ତି କି?")) {
+    let savedMcqs = JSON.parse(localStorage.getItem("gs_saved_mcqs") || "{}");
+    delete savedMcqs[key];
+    localStorage.setItem("gs_saved_mcqs", JSON.stringify(savedMcqs));
+    renderDownloadedQuizList();
+  }
+}
+
+/* ========================================================
+   NOKIA NEON SNAKE ENGINE (WITH AUDIO BEEP + NEON GLOW)
+   ======================================================== */
+var nokiaCanvas = null;
+var nokiaCtx = null;
+var nokiaGridSize = 15;
+var nokiaTileCount = 20;
+
+var nokiaSnake = [
+  { x: 10, y: 10 },
+  { x: 10, y: 11 },
+  { x: 10, y: 12 }
+];
+var nokiaDx = 0;
+var nokiaDy = -1;
+var nokiaFood = { x: 5, y: 5 };
+var nokiaScore = 0;
+var nokiaHighScore = 0;
+try { nokiaHighScore = parseInt(localStorage.getItem("gs_snake_hi") || "0", 10); } catch(e){}
+
+var nokiaGameInterval = null;
+var nokiaIsPaused = false;
+var nokiaSoundEnabled = true;
+var nokiaAudioCtx = null;
+
+function playNokiaBeep(freq, duration) {
+  if (!nokiaSoundEnabled) return;
+  try {
+    if (!nokiaAudioCtx) nokiaAudioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    var osc = nokiaAudioCtx.createOscillator();
+    var gain = nokiaAudioCtx.createGain();
+    osc.type = "square";
+    osc.frequency.value = freq;
+    gain.gain.setValueAtTime(0.08, nokiaAudioCtx.currentTime);
+    osc.connect(gain);
+    gain.connect(nokiaAudioCtx.destination);
+    osc.start();
+    osc.stop(nokiaAudioCtx.currentTime + duration);
+  } catch(e){}
+}
+
+function openSnakeGame() {
+  showScreen("snakeGameScreen");
+  nokiaCanvas = document.getElementById("nokiaCanvas");
+  nokiaCtx = nokiaCanvas.getContext("2d");
+  document.getElementById("nokiaHighScoreVal").textContent = nokiaHighScore;
+  resetNokiaGame();
+  clearInterval(nokiaGameInterval);
+  nokiaGameInterval = setInterval(updateNokiaSnake, 130);
+}
+
+function spawnNokiaFood() {
+  nokiaFood.x = Math.floor(Math.random() * nokiaTileCount);
+  nokiaFood.y = Math.floor(Math.random() * nokiaTileCount);
+  for (var i = 0; i < nokiaSnake.length; i++) {
+    if (nokiaSnake[i].x === nokiaFood.x && nokiaSnake[i].y === nokiaFood.y) {
+      spawnNokiaFood();
+      break;
+    }
+  }
+}
+
+function drawNokiaSnake() {
+  if (!nokiaCtx) return;
+
+  // Clear Screen
+  nokiaCtx.fillStyle = "#090414";
+  nokiaCtx.fillRect(0, 0, nokiaCanvas.width, nokiaCanvas.height);
+
+  // Matrix Grid lines
+  nokiaCtx.strokeStyle = "#160b30";
+  nokiaCtx.lineWidth = 0.5;
+  for (var x = 0; x < nokiaCanvas.width; x += nokiaGridSize) {
+    nokiaCtx.beginPath(); nokiaCtx.moveTo(x, 0); nokiaCtx.lineTo(x, nokiaCanvas.height); nokiaCtx.stroke();
+  }
+  for (var y = 0; y < nokiaCanvas.height; y += nokiaGridSize) {
+    nokiaCtx.beginPath(); nokiaCtx.moveTo(0, y); nokiaCtx.lineTo(nokiaCanvas.width, y); nokiaCtx.stroke();
+  }
+
+  // Draw Glowing Food
+  nokiaCtx.fillStyle = "#f43f5e";
+  nokiaCtx.shadowColor = "#f43f5e";
+  nokiaCtx.shadowBlur = 8;
+  nokiaCtx.fillRect(nokiaFood.x * nokiaGridSize + 1, nokiaFood.y * nokiaGridSize + 1, nokiaGridSize - 2, nokiaGridSize - 2);
+  nokiaCtx.shadowBlur = 0;
+
+  // Draw Neon Snake
+  for (var i = 0; i < nokiaSnake.length; i++) {
+    if (i === 0) {
+      nokiaCtx.fillStyle = "#38bdf8"; // Head
+      nokiaCtx.shadowColor = "#38bdf8";
+      nokiaCtx.shadowBlur = 10;
+    } else {
+      nokiaCtx.fillStyle = "#4ade80"; // Body
+      nokiaCtx.shadowBlur = 0;
+    }
+    nokiaCtx.fillRect(nokiaSnake[i].x * nokiaGridSize + 1, nokiaSnake[i].y * nokiaGridSize + 1, nokiaGridSize - 2, nokiaGridSize - 2);
+  }
+  nokiaCtx.shadowBlur = 0;
+}
+
+function updateNokiaSnake() {
+  if (nokiaIsPaused) return;
+
+  var head = { x: nokiaSnake[0].x + nokiaDx, y: nokiaSnake[0].y + nokiaDy };
+
+  // Nokia Screen Wrap-around
+  if (head.x < 0) head.x = nokiaTileCount - 1;
+  if (head.x >= nokiaTileCount) head.x = 0;
+  if (head.y < 0) head.y = nokiaTileCount - 1;
+  if (head.y >= nokiaTileCount) head.y = 0;
+
+  // Self Collision
+  for (var i = 0; i < nokiaSnake.length; i++) {
+    if (nokiaSnake[i].x === head.x && nokiaSnake[i].y === head.y) {
+      playNokiaBeep(180, 0.3);
+      alert("💥 Game Over! ଆପଣଙ୍କ ସ୍କୋର: " + nokiaScore);
+      resetNokiaGame();
+      return;
+    }
+  }
+
+  nokiaSnake.unshift(head);
+
+  // Check Food
+  if (head.x === nokiaFood.x && head.y === nokiaFood.y) {
+    nokiaScore += 10;
+    document.getElementById("nokiaScoreVal").textContent = nokiaScore;
+    if (nokiaScore > nokiaHighScore) {
+      nokiaHighScore = nokiaScore;
+      document.getElementById("nokiaHighScoreVal").textContent = nokiaHighScore;
+      try { localStorage.setItem("gs_snake_hi", nokiaHighScore); } catch(e){}
+    }
+    playNokiaBeep(780, 0.08);
+    spawnNokiaFood();
+  } else {
+    nokiaSnake.pop();
+  }
+
+  drawNokiaSnake();
+}
+
+function setNokiaDir(d) {
+  if (d === 'UP' && nokiaDy !== 1) { nokiaDx = 0; nokiaDy = -1; }
+  else if (d === 'DOWN' && nokiaDy !== -1) { nokiaDx = 0; nokiaDy = 1; }
+  else if (d === 'LEFT' && nokiaDx !== 1) { nokiaDx = -1; nokiaDy = 0; }
+  else if (d === 'RIGHT' && nokiaDx !== -1) { nokiaDx = 1; nokiaDy = 0; }
+  playNokiaBeep(440, 0.03);
+}
+
+function toggleNokiaPause() {
+  nokiaIsPaused = !nokiaIsPaused;
+  document.getElementById("nokiaPauseBtn").textContent = nokiaIsPaused ? "▶" : "⏸";
+}
+
+function toggleNokiaSound() {
+  nokiaSoundEnabled = !nokiaSoundEnabled;
+  document.getElementById("nokiaSoundBtn").textContent = nokiaSoundEnabled ? "🔊 Sound ON" : "🔇 Sound OFF";
+}
+
+function resetNokiaGame() {
+  nokiaSnake = [
+    { x: 10, y: 10 },
+    { x: 10, y: 11 },
+    { x: 10, y: 12 }
+  ];
+  nokiaDx = 0;
+  nokiaDy = -1;
+  nokiaScore = 0;
+  nokiaIsPaused = false;
+  document.getElementById("nokiaScoreVal").textContent = "0";
+  document.getElementById("nokiaPauseBtn").textContent = "⏸";
+  spawnNokiaFood();
+  drawNokiaSnake();
+}
+
+function exitNokiaGame() {
+  clearInterval(nokiaGameInterval);
+  showScreen("home");
+}
+
+/* BRIDGE & OTHER UTILITIES */
+function sendBridge(msg) {
+  if (window.AppInventor && typeof window.AppInventor.setWebViewString === "function") {
+    window.AppInventor.setWebViewString(msg);
+    return true;
+  }
+  return false;
+}
+
+function openDrive() {
+  if (!currentFolder) {
+    alert("ପ୍ରଥମେ Class ଓ Subject ବାଛନ୍ତୁ।");
+    return;
+  }
+  if (sendBridge("OPEN_URL~" + currentFolder)) return;
+  window.open(currentFolder, "_blank");
+}
+
+function downloadNotes() {
+  openDrive();
+}
+
+function bookmarkCurrent() {
+  let a = JSON.parse(localStorage.getItem("gs_bookmarks") || "[]");
+  let v = { cls: currentClass, sub: currentSubject };
+  if (!a.some(x => x.cls === v.cls && x.sub === v.sub)) {
+    a.push(v);
+    localStorage.setItem("gs_bookmarks", JSON.stringify(a));
+    $("noteStatus").textContent = "⭐ Subject bookmarked successfully!";
+  } else {
+    $("noteStatus").textContent = "Already in bookmarks!";
+  }
+}
+
+function renderBookmarks() {
+  let a = JSON.parse(localStorage.getItem("gs_bookmarks") || "[]");
+  let container = $("bookmarkList");
+  if (!a.length) {
+    container.innerHTML = '<div class="card" style="text-align:center;color:var(--muted);">No bookmarks saved yet.</div>';
+    return;
+  }
+  
+  let grouped = {};
+  a.forEach((b, idx) => {
+    let key = b.sub || "OTHER";
+    if (!grouped[key]) grouped[key] = [];
+    grouped[key].push({ ...b, originalIndex: idx });
+  });
+
+  let html = "";
+  Object.keys(grouped).forEach(sub => {
+    html += `<div class="subject-group">
+      <div class="subject-header">
+        <span>📖 ${sub}</span>
+        <span style="font-size:12px;background:#ede9fe;padding:2px 8px;border-radius:12px;color:#6d28d9;">${grouped[sub].length} saved</span>
+      </div>`;
+    grouped[sub].forEach(item => {
+      html += `<div class="item" style="display:flex;justify-content:space-between;align-items:center;">
+        <div><b>${item.cls}</b><br><small class="muted">${item.sub}</small></div>
+        <div style="display:flex;gap:6px;">
+          <button type="button" class="btn green" style="padding:6px 12px;font-size:13px;" onclick="goToBookmarked('${item.cls}','${item.sub}')">Open</button>
+          <button type="button" class="btn red" style="padding:6px 10px;font-size:13px;" onclick="deleteBookmark(${item.originalIndex})">✕</button>
+        </div>
+      </div>`;
+    });
+    html += `</div>`;
+  });
+  container.innerHTML = html;
+}
+
+function goToBookmarked(cls, sub) {
+  currentClass = cls;
+  window.classMode = "materials";
+  openSubject(sub);
+}
+
+function deleteBookmark(idx) {
+  let a = JSON.parse(localStorage.getItem("gs_bookmarks") || "[]");
+  a.splice(idx, 1);
+  localStorage.setItem("gs_bookmarks", JSON.stringify(a));
+  renderBookmarks();
+}
+
+function clearBookmarks() {
+  if (confirm("Clear all bookmarks?")) {
+    localStorage.removeItem("gs_bookmarks");
+    renderBookmarks();
+  }
+}
+
+function openMcqSetup() {
+  showScreen("mcqSetup");
+  $("mcqClass").innerHTML = Object.keys(subjectsByClass).map(c => `<option ${c==="CLASS X"?"selected":""}>${c}</option>`).join("");
+  fillSubjects();
+  loadRemoteMcq();
+}
+
+function fillSubjects() {
+  let c = $("mcqClass").value;
+  $("mcqSubject").innerHTML = (subjectsByClass[c] || []).map(s => `<option>${s}</option>`).join("");
+  fillTopics();
+}
+
+async function loadRemoteMcq() {
+  try {
+    let r = await fetch(GITHUB_MCQ_JSON_URL + "?t=" + Date.now(), { cache: "no-store" });
+    if (!r.ok) throw Error("HTTP " + r.status);
+    mcqDataStore = await r.json();
+    fillTopics();
+  } catch (e) {
+    console.log("Remote JSON:", e);
+  }
+}
+
+function fillTopics() {
+  let c = $("mcqClass").value, s = $("mcqSubject").value;
+  let topicSelect = $("mcqTopic");
+  let list = (mcqDataStore[c] && mcqDataStore[c][s]) ? mcqDataStore[c][s] : [];
+
+  if (Array.isArray(list) && list.length > 0) {
+    topicSelect.innerHTML = list.map(item => `<option value="${item.file}">${item.title}</option>`).join("");
+  } else {
+    topicSelect.innerHTML = '<option value="">No topics added yet</option>';
+  }
+}
+
+function fmtTime(s) {
+  return String(Math.floor(s / 60)).padStart(2, "0") + ":" + String(s % 60).padStart(2, "0");
+}
+
+function startQuiz() {
+  let fileName = $("mcqTopic").value;
+  if (!fileName) {
+    alert("ଦୟାକରି ଏକ Topic ବାଛନ୍ତୁ।");
+    return;
+  }
+
+  currentViewMode = "quiz";
+  let fullUrl = GITHUB_PAGES_BASE + fileName;
+
+  $("quizTimerBar").style.display = "flex";
+  $("noteActionToolbar").style.display = "none";
+  $("viewerBackButton").textContent = "⬅ Back to Topics";
+
+  quizSeconds = 0;
+  isQuizPaused = false;
+  $("quizRunningTimer").textContent = "00:00";
+  if (quizTimerInterval) clearInterval(quizTimerInterval);
+
+  quizTimerInterval = setInterval(() => {
+    if (!isQuizPaused) {
+      quizSeconds++;
+      $("quizRunningTimer").textContent = fmtTime(quizSeconds);
+    }
+  }, 1000);
+
+  $("pauseModal").classList.remove("active");
+  showScreen("quizScreen");
+  
+  $("quizFrame").srcdoc = "<div style='display:flex;align-items:center;justify-content:center;height:60vh;font-family:sans-serif;color:#6d28d9;font-size:18px;'><b>Loading Quiz... ଅପେକ୍ଷା କରନ୍ତୁ...</b></div>";
+  fetch(fullUrl + "?t=" + Date.now())
+    .then(r => {
+      if (!r.ok) throw new Error("HTTP " + r.status);
+      return r.text();
+    })
+    .then(html => {
+      $("quizFrame").srcdoc = html;
+    })
+    .catch(err => {
+      $("quizFrame").srcdoc = "<div style='padding:20px;text-align:center;'>ଇଣ୍ଟରନେଟ୍ ସଂଯୋଗ ଯାଞ୍ଚ କରନ୍ତୁ କିମ୍ବା ପରେ ଚେଷ୍ଟା କରନ୍ତୁ।</div>";
+    });
+}
+
+function pauseQuiz() {
+  isQuizPaused = true;
+  $("pausedTimeText").textContent = fmtTime(quizSeconds);
+  $("pauseModal").classList.add("active");
+}
+
+function resumeQuiz() {
+  isQuizPaused = false;
+  $("pauseModal").classList.remove("active");
+}
+
+function closePauseAndExit() {
+  $("pauseModal").classList.remove("active");
+  cleanViewerFrame();
+  showScreen("mcqSetup");
+}
+
+function startStudy() {
+  if (studyInterval) return;
+  studyInterval = setInterval(() => {
+    studySeconds++;
+    renderStudyClock();
+  }, 1000);
+}
+
+function pauseStudy() {
+  clearInterval(studyInterval);
+  studyInterval = null;
+}
+
+function resetStudy() {
+  pauseStudy();
+  studySeconds = 0;
+  renderStudyClock();
+}
+
+function renderStudyClock() {
+  $("studyClock").textContent = [
+    Math.floor(studySeconds / 3600),
+    Math.floor(studySeconds / 60) % 60,
+    studySeconds % 60
+  ].map(x => String(x).padStart(2, "0")).join(":");
+}
+
+function toggleTheme() {
+  document.body.classList.toggle("dark");
+  localStorage.setItem("gs_dark", document.body.classList.contains("dark") ? "1" : "0");
+}
+
+async function shareApp() {
+  const message = "🎓 GyanSetu Odisha - NCERT Notes & MCQ App!\n\nDownload: https://github.com/silusahu360/gyansetu-odishamcq/releases/latest";
+  try {
+    if (navigator.share) {
+      await navigator.share({ title: "GyanSetu Odisha", text: message });
+      return;
+    }
+  } catch (e) {}
+  window.prompt("Share message କପି କରନ୍ତୁ:", message);
+}
+
+async function checkUpdates() {
+  const status = $("homeStatus");
+  if (status) status.textContent = "ନୂଆ ଅପଡେଟ୍ ଯାଞ୍ଚ ହେଉଛି...";
+  
+  const GITHUB_API_URL = "https://api.github.com/repos/silusahu360/gyansetu-odishamcq/releases/latest";
+
+  try {
+    const res = await fetch(GITHUB_API_URL, {
+      headers: { "Accept": "application/vnd.github.v3+json" }
+    });
+    if (!res.ok) throw new Error("Release error");
+    const releaseData = await res.json();
+    const remoteVersion = releaseData.tag_name ? releaseData.tag_name.replace(/^[vV]/, "").trim() : "2.0";
+    const apkAsset = releaseData.assets && releaseData.assets.find(a => a.name.endsWith(".apk"));
+    const downloadUrl = apkAsset ? apkAsset.browser_download_url : releaseData.html_url;
+
+    sendBridge("LATEST_RELEASE~" + remoteVersion + "~" + downloadUrl);
+
+    if (remoteVersion > CURRENT_VERSION) {
+      if (status) {
+        status.innerHTML = `🔔 ନୂଆ ଅପଡେଟ୍ (v${remoteVersion})! <a href="${downloadUrl}" target="_blank" style="color:var(--primary);font-weight:700;">Download</a>`;
+      }
+    } else {
+      if (status) status.textContent = "✅ ଆପଣ ସର୍ବଶେଷ ଭର୍ସନ ବ୍ୟବହାର କରୁଛନ୍ତି।";
+    }
+  } catch (err) {
+    if (status) status.textContent = "ଅପଡେଟ୍ ଯାଞ୍ଚ ବିଫଳ ହେଲା।";
+  }
+}
+
+function handleAndroidBack() {
+  const active = document.querySelector(".screen.active");
+  const id = active ? active.id : "home";
+  if (id === "snakeGameScreen") { exitNokiaGame(); return; }
+  if (id === "quizScreen") { handleViewerBack(); return; }
+  if (id === "offlineNoteViewer") { showScreen("downloads"); return; }
+  if (id === "folder") { showScreen("subjects"); return; }
+  if (id === "subjects") { showScreen("classes"); return; }
+  if (["classes","mcqSetup","offlineQuizMenuScreen","downloads","studyTimer","about","bookmarks"].includes(id)) { showScreen("home"); return; }
+  if (id === "home") return;
+  showScreen("home");
+}
+
+if (localStorage.getItem("gs_dark") === "1") document.body.classList.add("dark");
+</script>
+</body>
+</html>
+ଏହାକୁ Save କରିସାରିବା ପରେ ଫୋନ୍‌ରେ ପୁଣି ଥରେ ପରୀକ୍ଷା କରନ୍ତୁ, ସମସ୍ତ ବଟନ୍ ସୁରୁଖୁରୁରେ କାମ କରିବ।   
+fe5e5f96-1ae2-4b29-b1de-7f12ad67944b
++ 1
+
+
+
+
+Gemini is AI and can make mistakes.
+
+<!DOCTYPE html>
+<html lang="or">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#4c1d95">
+<title>GyanSetu Odisha</title>
+<style>
+:root{
+  --primary:#6d28d9;--deep:#4c1d95;--accent:#fbbf24;
+  --bg:#f5f3ff;--card:#ffffff;--ink:#241746;--muted:#71658b;
+  --line:#e6ddf7;--good:#15803d;--bad:#b91c1c;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;font-family:system-ui,-apple-system,"Noto Sans Oriya","Noto Sans",sans-serif;
+  font-size:17px;line-height:1.55;background:linear-gradient(145deg,#fdf2f8 0%,#f3e8ff 45%,#e0f2fe 100%);
+  background-attachment:fixed;color:var(--ink);min-height:100vh;
+}
+body.dark{
+  --bg:#101827;--card:#1d293b;--ink:#edf2f7;--muted:#aab7c8;--line:#344256;
+  background:linear-gradient(145deg,#111827,#1e1b4b 55%,#172554);background-attachment:fixed;
+}
+header{
+  background:linear-gradient(115deg,#4c1d95 0%,#7c3aed 42%,#db2777 100%);
+  color:#fff;text-align:center;padding:18px 12px;position:sticky;top:0;z-index:5;
+  box-shadow:0 4px 14px rgba(0,0,0,0.15);border-bottom:4px solid #fbbf24;
+}
+.brand{font-size:clamp(22px,5vw,30px);font-weight:850}.brand span{color:#fde68a}
+header p{margin:6px 0 0;font-size:15px;line-height:1.5;opacity:.95}
+main{max-width:680px;margin:auto;padding:18px 14px 28px}
+.screen{display:none}
+.screen.active{display:block !important;animation:up .2s}
+@keyframes up{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+h2{font-size:23px;line-height:1.4;margin:12px 0 18px;text-align:center;color:#5b21b6}
+body.dark h2{color:#c4b5fd}
+.card{background:var(--card);border:1px solid #e9d5ff;border-radius:16px;padding:16px;margin-bottom:12px;box-shadow:0 8px 24px rgba(76,29,149,0.08)}
+body.dark .card{border-color:#344256;box-shadow:0 8px 24px rgba(0,0,0,0.25)}
+
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.tile{
+  border:0;border-radius:13px;padding:16px 12px;color:white;font-size:17px;line-height:1.4;
+  font-weight:750;background:linear-gradient(135deg,#2563eb,#7c3aed);min-height:68px;
+  cursor:pointer;box-shadow:0 5px 14px rgba(76,29,149,0.15);transition:transform .15s,filter .15s;
+  display:flex;align-items:center;justify-content:center;text-align:center;
+}
+.tile:nth-child(2n){background:linear-gradient(135deg,#0f9f8f,#047857)}
+.tile:nth-child(3n){background:linear-gradient(135deg,#f97316,#db2777)}
+.tile:nth-child(4n){background:linear-gradient(135deg,#0891b2,#2563eb)}
+.tile:active,.btn:active{transform:scale(.98);filter:brightness(.96)}
+
+.btn{border:0;border-radius:10px;padding:14px 16px;background:linear-gradient(135deg,#6d28d9,#4f46e5);color:white;font-weight:700;font-size:16px;line-height:1.4;cursor:pointer;box-shadow:0 3px 9px rgba(76,29,149,0.12)}
+.btn.secondary{background:linear-gradient(135deg,#64748b,#475569)}
+.btn.green{background:linear-gradient(135deg,#10b981,#047857)}
+.btn.orange{background:linear-gradient(135deg,#f59e0b,#ea580c)}
+.btn.red{background:linear-gradient(135deg,#ef4444,#be123c)}
+.btn.cyan{background:linear-gradient(135deg,#0284c7,#0369a1)}
+.btn.purple{background:linear-gradient(135deg,#9333ea,#7e22ce)}
+.btn.light{background:#ede9fe;color:#5b21b6;border:1px solid #ddd6fe}
+body.dark .btn.light{background:#312e81;color:#ede9fe;border-color:#4338ca}
+.btnrow{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin:10px 0}
+.btn.full{width:100%;margin-top:8px}
+
+.subject{
+  display:flex;align-items:center;justify-content:space-between;gap:10px;text-align:left;
+  width:100%;margin:8px 0;background:var(--card);color:var(--ink);border:1px solid var(--line);
+  border-left:5px solid #8b5cf6;border-radius:12px;padding:16px;font-size:16px;font-weight:700;
+  box-shadow:0 4px 12px rgba(76,29,149,0.06);cursor:pointer;
+}
+.subject:nth-child(3n+2){border-left-color:#0d9488}
+.subject:nth-child(3n){border-left-color:#f97316}
+
+.field{width:100%;padding:12px;border:1.5px solid #d8b4fe;border-radius:9px;background:var(--card);color:var(--ink);margin:5px 0 12px;font-size:15px}
+.field:focus{outline:2px solid #a78bfa;border-color:#7c3aed}
+.back{
+  border:2px solid #a78bfa;color:#4c1d95;background:linear-gradient(135deg,#fff7ed,#ede9fe);
+  width:100%;padding:16px;border-radius:25px;margin-top:14px;font-size:18px;font-weight:800;
+  box-shadow:0 5px 14px rgba(76,29,149,0.12);cursor:pointer;
+}
+body.dark .back{color:#f5f3ff;border:2px solid #8b5cf6;background:linear-gradient(135deg,#312e81,#1d293b)}
+
+.status-pill{
+  display:inline-flex;align-items:center;gap:8px;padding:8px 16px;margin:12px auto 4px;
+  background:linear-gradient(135deg,#ede9fe,#fdf4ff);border:1.5px solid #c4b5fd;
+  border-radius:30px;color:#5b21b6;font-size:14px;font-weight:750;box-shadow:0 2px 8px rgba(124,58,237,0.1);
+}
+body.dark .status-pill{background:linear-gradient(135deg,#1e1b4b,#312e81);border-color:#6d28d9;color:#e0e7ff}
+.dot{width:9px;height:9px;background:#22c55e;border-radius:50%;box-shadow:0 0 8px #22c55e}
+
+.muted{color:var(--muted);font-size:15px;line-height:1.5}
+
+.quiz-timer-strip{
+  position:sticky;top:70px;z-index:9;display:flex;justify-content:space-between;align-items:center;
+  background:linear-gradient(100deg,#4c1d95,#7c3aed);color:#fff;padding:10px 16px;
+  border-radius:12px;margin-bottom:12px;box-shadow:0 6px 18px rgba(76,29,149,0.3);
+}
+.quiz-time-badge{font-size:19px;font-weight:850;color:#fde68a;font-family:monospace;letter-spacing:1px}
+
+.subject-group{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px;margin-bottom:12px}
+.subject-header{font-size:16px;font-weight:800;color:#6d28d9;display:flex;justify-content:space-between;align-items:center;padding-bottom:8px;border-bottom:1.5px dashed var(--line);margin-bottom:8px}
+body.dark .subject-header{color:#c4b5fd}
+.item{padding:10px 6px;border-bottom:1px solid var(--line);font-size:15px}
+.item:last-child{border-bottom:0}
+
+.modal-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(15,23,42,0.85);z-index:99;display:none;align-items:center;justify-content:center;padding:16px}
+.modal-overlay.active{display:flex}
+.modal-box{background:var(--card);color:var(--ink);border-radius:18px;max-width:420px;width:100%;padding:24px;text-align:center;box-shadow:0 12px 36px rgba(0,0,0,0.35);border:2px solid #a78bfa}
+
+.dev-badge-card{margin-top:20px;padding:16px 14px;background:linear-gradient(135deg,rgba(109,40,217,.08),rgba(219,39,119,.08));border:1.5px solid #c4b5fd;border-radius:14px;text-align:center}
+.dev-tag{display:inline-block;font-size:11px;font-weight:750;letter-spacing:1px;color:#7c3aed;text-transform:uppercase;background:#ede9fe;padding:3px 10px;border-radius:20px;margin-bottom:6px}
+.dev-name{font-size:21px;font-weight:850;color:#4c1d95;display:flex;align-items:center;justify-content:center;gap:6px}
+.dev-desc{font-size:13px;color:#64748b;margin-top:6px;line-height:1.4}
+body.dark .dev-badge-card{background:linear-gradient(135deg,rgba(139,92,246,.15),rgba(236,72,153,.15));border-color:#6d28d9}
+body.dark .dev-tag{background:#312e81;color:#ddd6fe}body.dark .dev-name{color:#e0e7ff}body.dark .dev-desc{color:#aab7c8}
+footer{text-align:center;padding:15px;color:#6b5b86;font-size:13px}
+@media(max-width:380px){.btnrow{grid-template-columns:1fr}.grid{gap:8px}}
+
+/* NOKIA NEON SNAKE STYLES */
+.nokia-snake-card{
+  background:#140c2b;border:2px solid #8b5cf6;border-radius:22px;
+  padding:16px;width:100%;max-width:390px;margin:0 auto;box-shadow:0 0 25px rgba(139,92,246,0.3);
+  text-align:center;color:#f8fafc;
+}
+.nokia-title{
+  font-size:21px;font-weight:900;letter-spacing:1.5px;color:#fde047;
+  text-shadow:0 0 12px rgba(253,224,71,0.5);margin:0 0 10px;
+}
+.nokia-scoreboard{
+  display:flex;justify-content:space-around;background:#0d0620;border:1.5px solid #3b2075;
+  border-radius:14px;padding:8px;margin-bottom:12px;font-weight:800;
+}
+.nokia-score-item{font-size:13px;color:#a78bfa;}
+.nokia-score-num{font-size:20px;color:#38bdf8;font-family:monospace;display:block;}
+
+#nokiaCanvas{
+  background:#090414;border:2.5px solid #38bdf8;border-radius:12px;
+  box-shadow:0 0 16px rgba(56,189,248,0.25);display:block;margin:0 auto 12px;
+  max-width:100%;
+}
+.nokia-pad{
+  display:grid;grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 50px);
+  gap:8px;width:210px;margin:10px auto;
+}
+.nokia-pad-btn{
+  background:linear-gradient(135deg,#6d28d9,#4f46e5);border:1.5px solid #a78bfa;
+  border-radius:12px;color:white;font-size:22px;display:flex;align-items:center;
+  justify-content:center;cursor:pointer;user-select:none;box-shadow:0 4px 10px rgba(0,0,0,0.4);
+}
+.nokia-pad-btn:active{transform:scale(0.94);background:#7c3aed;}
+.nokia-pad-up{grid-column:2;grid-row:1;}
+.nokia-pad-left{grid-column:1;grid-row:2;}
+.nokia-pad-center{grid-column:2;grid-row:2;background:#059669;border-color:#34d399;font-size:15px;font-weight:800;}
+.nokia-pad-right{grid-column:3;grid-row:2;}
+.nokia-pad-down{grid-column:2;grid-row:3;}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="brand">🎓 GYANSETU <span>ODISHA</span></div>
+  <p>NCERT & Odisha State Board Learning Portal</p>
+</header>
+<main>
+
+<!-- HOME SCREEN -->
+<section id="home" class="screen active">
+  <h2>ସ୍ୱାଗତମ୍ | Welcome</h2>
+  <div class="grid">
+    <button type="button" class="tile" onclick="showClasses('notes')">📚 Notes Library</button>
+    <button type="button" class="tile" onclick="openMcqSetup()">📝 MCQ Practice</button>
+    <button type="button" class="tile" onclick="showClasses('materials')">📂 Study Materials</button>
+    <button type="button" class="tile" onclick="openSavedNotesScreen()">📥 Saved Notes</button>
+    <button type="button" class="tile" onclick="openOfflineQuizMenu()">⚡ Downloaded Quiz</button>
+    <button type="button" class="tile" onclick="openSnakeGame()">🎮 Mind Fresh</button>
+  </div>
+  <div class="btnrow">
+    <button type="button" class="btn green" onclick="shareApp()">📤 Share App</button>
+    <button type="button" class="btn" onclick="checkUpdates()">🔄 Check Update</button>
+    <button type="button" class="btn secondary" onclick="showScreen('studyTimer')">⏱ Study Timer</button>
+    <button type="button" class="btn light" onclick="toggleTheme()">🌙 Dark / Light</button>
+    <button type="button" class="btn light" onclick="showScreen('about')">ℹ About / Help</button>
+  </div>
+  <div style="text-align:center;">
+    <div id="homeStatusPill" class="status-pill"><span class="dot"></span><span id="homeStatus">Ready to learn.</span></div>
+  </div>
+</section>
+
+<!-- CLASSES SCREEN -->
+<section id="classes" class="screen">
+  <h2 id="classTitle">Select Class</h2>
+  <div class="grid" id="classGrid"></div>
+  <button type="button" class="back" onclick="showScreen('home')">⬅ Home</button>
+</section>
+
+<!-- SUBJECTS SCREEN -->
+<section id="subjects" class="screen">
+  <h2 id="subjectTitle">Select Subject</h2>
+  <div id="subjectList"></div>
+  <button type="button" class="back" onclick="showScreen('classes')">⬅ Back to Classes</button>
+</section>
+
+<!-- FOLDER SCREEN -->
+<section id="folder" class="screen">
+  <h2 id="folderTitle">Study Materials</h2>
+  <div class="card">
+    <p id="folderMessage" class="muted">Google Drive folder is ready for your chapters.</p>
+    <button type="button" class="btn full" onclick="openDrive()">📂 Open Google Drive</button>
+    <button type="button" class="btn green full" onclick="downloadNotes()">⬇ Download Notes</button>
+    <button type="button" class="btn secondary full" onclick="openSavedNotesScreen()">📱 Open Saved Notes</button>
+    <button type="button" class="btn light full" onclick="bookmarkCurrent()">⭐ Bookmark this Subject</button>
+    <p id="noteStatus" style="font-size:14px;color:var(--muted);margin-top:10px;text-align:center;"></p>
+  </div>
+  <button type="button" class="back" onclick="showScreen('subjects')">⬅ Back</button>
+</section>
+
+<!-- MCQ SETUP SCREEN -->
+<section id="mcqSetup" class="screen">
+  <h2>Topic-wise MCQ Practice</h2>
+  <div class="card">
+    <label>1. Class</label><select id="mcqClass" class="field" onchange="fillSubjects()"></select>
+    <label>2. Subject</label><select id="mcqSubject" class="field" onchange="fillTopics()"></select>
+    <label>3. Chapter / Topic</label><select id="mcqTopic" class="field"></select>
+    
+    <div class="btnrow">
+      <button type="button" class="btn green" onclick="startQuiz()">START QUIZ ➜</button>
+      <button type="button" class="btn orange" onclick="downloadSelectedTopicMcq()">💾 Save Offline</button>
+    </div>
+  </div>
+  <button type="button" class="back" onclick="showScreen('home')">⬅ Home</button>
+</section>
+
+<!-- OFFLINE QUIZ MENU SCREEN -->
+<section id="offlineQuizMenuScreen" class="screen">
+  <h2>⚡ Downloaded Offline Quiz Sets</h2>
+  <div class="card">
+    <p class="muted">ଅଫଲାଇନ୍‌ରେ ଅଭ୍ୟାସ କରିବା ପାଇଁ ଆପଣଙ୍କ ଡାଉନଲୋଡ୍ ହୋଇଥିବା ସେଟ୍:</p>
+    <div id="downloadedQuizList"></div>
+  </div>
+  <button type="button" class="back" onclick="showScreen('home')">⬅ Home</button>
+</section>
+
+<!-- CONTENT / QUIZ / NOTE VIEWER SCREEN -->
+<section id="quizScreen" class="screen">
+  <div id="quizTimerBar" class="quiz-timer-strip">
+    <div style="display:flex;align-items:center;gap:8px;">
+      <span style="font-size:15px;font-weight:700;">⏱ RUNNING TIME:</span>
+      <span id="quizRunningTimer" class="quiz-time-badge">00:00</span>
+    </div>
+    <button type="button" class="btn secondary" style="padding:6px 14px;font-size:13px;border-radius:8px;" onclick="pauseQuiz()">⏸ Pause</button>
+  </div>
+
+  <div id="noteActionToolbar" style="display:none;margin-bottom:10px;gap:8px;">
+    <button type="button" class="btn green full" onclick="saveCurrentNoteOffline()">💾 Save Note for Offline</button>
+  </div>
+
+  <div id="quizFrameContainer" style="width:100%;border-radius:14px;overflow:hidden;background:#fff;box-shadow:0 6px 20px rgba(0,0,0,0.1);">
+    <iframe id="quizFrame" style="width:100%;height:72vh;border:0;display:block;" title="Content Viewer"></iframe>
+  </div>
+
+  <div class="btnrow" style="margin-top:14px;">
+    <button type="button" id="viewerBackButton" class="back" style="margin-top:0;" onclick="handleViewerBack()">⬅ Back</button>
+    <button type="button" class="back" style="margin-top:0;background:linear-gradient(135deg,#e0e7ff,#ede9fe);color:#4338ca;" onclick="goHomeFromViewer()">⌂ Home</button>
+  </div>
+</section>
+
+<!-- OFFLINE SAVED NOTE VIEWER SCREEN -->
+<section id="offlineNoteViewer" class="screen">
+  <h2 id="savedNoteTitle">Saved Note</h2>
+  <div class="card" id="savedNoteBody" style="min-height:50vh;padding:18px;line-height:1.7;"></div>
+  <button type="button" class="back" onclick="showScreen('downloads')">⬅ Back to Saved Notes</button>
+</section>
+
+<!-- NOKIA NEON SNAKE GAME SCREEN (MIND FRESH) -->
+<section id="snakeGameScreen" class="screen">
+  <div class="nokia-snake-card">
+    <div class="nokia-title">🐍 NOKIA NEON SNAKE ⚡</div>
+    
+    <div class="nokia-scoreboard">
+      <div class="nokia-score-item">SCORE<span class="nokia-score-num" id="nokiaScoreVal">0</span></div>
+      <div class="nokia-score-item">BEST RECORD<span class="nokia-score-num" id="nokiaHighScoreVal">0</span></div>
+    </div>
+
+    <canvas id="nokiaCanvas" width="300" height="300"></canvas>
+
+    <div class="nokia-pad">
+      <button type="button" class="nokia-pad-btn nokia-pad-up" onclick="setNokiaDir('UP')">▲</button>
+      <button type="button" class="nokia-pad-btn nokia-pad-left" onclick="setNokiaDir('LEFT')">◀</button>
+      <button type="button" class="nokia-pad-btn nokia-pad-center" onclick="toggleNokiaPause()" id="nokiaPauseBtn">⏸</button>
+      <button type="button" class="nokia-pad-btn nokia-pad-right" onclick="setNokiaDir('RIGHT')">▶</button>
+      <button type="button" class="nokia-pad-btn nokia-pad-down" onclick="setNokiaDir('DOWN')">▼</button>
+    </div>
+
+    <div class="btnrow" style="margin-top:10px;">
+      <button type="button" class="btn cyan" onclick="resetNokiaGame()">🔄 Restart</button>
+      <button type="button" class="btn purple" onclick="toggleNokiaSound()" id="nokiaSoundBtn">🔊 Sound ON</button>
+    </div>
+
+    <button type="button" class="back" onclick="exitNokiaGame()">⬅ Return to Home</button>
+  </div>
+</section>
+
+<!-- QUIZ PAUSE MODAL -->
+<div id="pauseModal" class="modal-overlay">
+  <div class="modal-box">
+    <h3 style="color:#7c3aed;margin-top:0;font-size:22px;">⏸ Quiz Paused</h3>
+    <p class="muted">ଆପଣଙ୍କ Quiz ସମୟ ସ୍ଥଗିତ ରହିଛି।</p>
+    <div style="margin:18px 0;padding:12px;background:#ede9fe;border-radius:12px;font-size:18px;font-weight:800;color:#6d28d9;">
+      ଚାଲୁଥିବା ସମୟ: <span id="pausedTimeText" style="color:#4c1d95;font-family:monospace;">00:00</span>
+    </div>
+    <button type="button" class="btn green full" onclick="resumeQuiz()">▶ RESUME QUIZ</button>
+    <button type="button" class="btn red full" onclick="closePauseAndExit()">Exit Practice</button>
+  </div>
+</div>
+
+<!-- DOWNLOADS SCREEN -->
+<section id="downloads" class="screen">
+  <h2>📥 Saved Offline Notes</h2>
+  <div class="card">
+    <p class="muted" style="margin-top:0;">ନେଟ୍ ନଥିଲେ ମଧ୍ୟ ସେଭ୍ ହୋଇଥିବା ନୋଟ୍ ପଢ଼ିପାରିବେ।</p>
+    <div id="savedNotesList"></div>
+  </div>
+  <button type="button" class="back" onclick="showScreen('home')">Home</button>
+</section>
+
+<!-- BOOKMARKS SCREEN -->
+<section id="bookmarks" class="screen">
+  <h2>⭐ Bookmarks</h2>
+  <div id="bookmarkList"></div>
+  <button type="button" class="btn red full" onclick="clearBookmarks()">Clear All Bookmarks</button>
+  <button type="button" class="back" onclick="showScreen('home')">Home</button>
+</section>
+
+<!-- STUDY TIMER SCREEN -->
+<section id="studyTimer" class="screen">
+  <h2>⏱ Study Timer</h2>
+  <div class="card result" style="text-align:center;">
+    <div class="score" id="studyClock" style="font-size:42px;font-weight:850;color:#7c3aed;margin:12px 0;">00:00:00</div>
+    <button type="button" class="btn green" onclick="startStudy()">Start</button>
+    <button type="button" class="btn orange" onclick="pauseStudy()">Pause</button>
+    <button type="button" class="btn red" onclick="resetStudy()">Reset</button>
+  </div>
+  <button type="button" class="back" onclick="showScreen('home')">Home</button>
+</section>
+
+<!-- ABOUT SECTION -->
+<section id="about" class="screen">
+  <h2>About GyanSetu Odisha</h2>
+  <div class="card">
+    <h3 style="text-align:center;color:#7c3aed;margin:8px 0 6px">🎓 GyanSetu Odisha</h3>
+    <p class="muted" style="text-align:center;font-size:16px">Classes VI to X ପାଇଁ ଏକ ସ୍ମାର୍ଟ ଶିକ୍ଷଣ ପୋର୍ଟାଲ୍।</p>
+    
+    <div class="dev-badge-card">
+      <div class="dev-tag">App Creator & Educator</div>
+      <div class="dev-name">👨‍🏫 Sangram Sahu</div>
+      <div class="dev-desc">Dedicated to empowering Odisha school students with smart NCERT learning tools.</div>
+    </div>
+  </div>
+  <button type="button" class="back" onclick="showScreen('home')">⌂ HOME</button>
+</section>
+
+</main>
+<footer>© 2026 GyanSetu Odisha · Developed by Sangram Sahu</footer>
+
+<script>
+const CURRENT_VERSION = "2.0";
+const GITHUB_PAGES_BASE = "https://silusahu360.github.io/gyansetu-odishamcq/";
+const GITHUB_MCQ_JSON_URL = "https://raw.githubusercontent.com/silusahu360/gyansetu-odishamcq/main/mcq_data.json";
+
+const classDriveFolders = {
+  "CLASS VI":"https://drive.google.com/drive/folders/1KUhgA15GZ0jMPfF22XhN_0ipuayW3jhr",
+  "CLASS VII":"https://drive.google.com/drive/folders/1ToIWcidnQfATl6_awNSSPRcRK1nyZWAv",
+  "CLASS VIII":"https://drive.google.com/drive/folders/1gnCILN6NhsAsK2c4ljn8DbTNv4zAnMCC",
+  "CLASS IX":"https://drive.google.com/drive/folders/1xC7s790hPESNNYKTDZ8jnFvgkDLHrKbD",
+  "CLASS X":"https://drive.google.com/drive/folders/1KC4TAH3EzQiOdfwj9SKmttCOdhfqz0Td"
+};
+
+const subjectsByClass = {
+  "CLASS VI":["ODIA","ENGLISH","MATHEMATICS","SCIENCE","SOCIAL SCIENCE","HINDI","SANSKRIT"],
+  "CLASS VII":["ODIA","ENGLISH","MATHEMATICS","SCIENCE","SOCIAL SCIENCE","HINDI","SANSKRIT"],
+  "CLASS VIII":["ODIA","ENGLISH","HINDI","SANSKRIT","MATHEMATICS","SCIENCE","SOCIAL SCIENCE"],
+  "CLASS IX":["ODIA","ENGLISH","SANSKRIT","HINDI","MATHEMATICS","SCIENCE","GEOGRAPHY","HISTORY"],
+  "CLASS X":["ODIA","ENGLISH","SANSKRIT","HINDI","MATHEMATICS","SCIENCE","GEOGRAPHY","HISTORY"]
+};
+
+let mcqDataStore = {};
+let currentClass = "CLASS X", currentSubject = "", currentFolder = "";
+let currentViewMode = "quiz";
+let currentNoteHtmlUrl = "";
+let quizSeconds = 0, quizTimerInterval = null, isQuizPaused = false;
+let studySeconds = 0, studyInterval = null;
+
+const $ = id => document.getElementById(id);
+
+function showScreen(id) {
+  let target = $(id);
+  if (!target) target = $("home");
+  document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
+  target.classList.add("active");
+  window.scrollTo(0,0);
+  
+  if (id === "bookmarks") renderBookmarks();
+  if (id === "downloads") renderSavedNotesList();
+}
+
+function showClasses(mode) {
+  window.classMode = mode;
+  $("classTitle").textContent = mode === "notes" ? "Select Class · Notes Library" : "Select Class · Study Materials";
+  $("classGrid").innerHTML = "";
+  Object.keys(subjectsByClass).forEach(c => {
+    let b = document.createElement("button");
+    b.type = "button";
+    b.className = "tile";
+    b.textContent = c;
+    b.onclick = () => showSubjects(c);
+    $("classGrid").appendChild(b);
+  });
+  showScreen("classes");
+}
+
+function showSubjects(cls) {
+  currentClass = cls;
+  $("subjectTitle").textContent = cls + " · Select Subject";
+  $("subjectList").innerHTML = "";
+  subjectsByClass[cls].forEach(s => {
+    let b = document.createElement("button");
+    b.type = "button";
+    b.className = "subject";
+    b.innerHTML = `<span>${s}</span><span>➜</span>`;
+    b.onclick = () => openSubject(s);
+    $("subjectList").appendChild(b);
+  });
+  showScreen("subjects");
+}
+
+function openSubject(sub) {
+  currentSubject = sub;
+  currentFolder = classDriveFolders[currentClass];
+
+  if (window.classMode === "notes") {
+    currentViewMode = "note";
+    let cleanCls = currentClass.toLowerCase().replace(/[^a-z0-9]/g, "");
+    let cleanSub = sub.toLowerCase().replace(/[^a-z0-9]/g, "");
+    let noteFileName = `${cleanCls}_${cleanSub}_note.html`;
+    currentNoteHtmlUrl = GITHUB_PAGES_BASE + noteFileName;
+
+    $("quizTimerBar").style.display = "none";
+    $("noteActionToolbar").style.display = "flex";
+    $("viewerBackButton").textContent = "⬅ Back to Subjects";
+    showScreen("quizScreen");
+
+    $("quizFrame").srcdoc = "<div style='display:flex;align-items:center;justify-content:center;height:60vh;font-family:sans-serif;color:#6d28d9;font-size:18px;'><b>Loading Note... ଅପେକ୍ଷା କରନ୍ତୁ...</b></div>";
+    fetch(currentNoteHtmlUrl + "?t=" + Date.now())
+      .then(r => {
+        if (!r.ok) throw new Error("HTTP " + r.status);
+        return r.text();
+      })
+      .then(html => {
+        $("quizFrame").srcdoc = html;
+      })
+      .catch(err => {
+        $("quizFrame").srcdoc = "<div style='padding:20px;text-align:center;'>ଇଣ୍ଟରନେଟ୍ ସଂଯୋଗ ଯାଞ୍ଚ କରନ୍ତୁ କିମ୍ବା ପରେ ଚେଷ୍ଟା କରନ୍ତୁ।</div>";
+      });
+    return;
+  }
+
+  currentViewMode = "materials";
+  $("folderTitle").textContent = currentClass + " · " + sub;
+  $("folderMessage").textContent = currentClass + " · " + sub + " Drive folder is ready.";
+  $("noteStatus").textContent = "";
+  showScreen("folder");
+}
+
+function cleanViewerFrame() {
+  clearInterval(quizTimerInterval);
+  quizTimerInterval = null;
+  const frame = $("quizFrame");
+  if (frame) frame.srcdoc = "";
+  const toolbar = $("noteActionToolbar");
+  if (toolbar) toolbar.style.display = "none";
+}
+
+function handleViewerBack() {
+  cleanViewerFrame();
+  if (currentViewMode === "quiz") {
+    showScreen("mcqSetup");
+  } else if (currentViewMode === "downloaded_quiz") {
+    showScreen("offlineQuizMenuScreen");
+  } else {
+    showScreen("subjects");
+  }
+}
+
+function goHomeFromViewer() {
+  cleanViewerFrame();
+  showScreen("home");
+}
+
+async function saveCurrentNoteOffline() {
+  try {
+    let resp = await fetch(currentNoteHtmlUrl);
+    if (!resp.ok) throw new Error("Fetch error");
+    let htmlContent = await resp.text();
+
+    let saved = JSON.parse(localStorage.getItem("gs_saved_notes") || "{}");
+    let key = currentClass + " · " + currentSubject;
+    saved[key] = {
+      title: key,
+      content: htmlContent,
+      date: new Date().toLocaleDateString('or-IN')
+    };
+    localStorage.setItem("gs_saved_notes", JSON.stringify(saved));
+    alert("✅ ଏହି ନୋଟ୍ Offline ପାଇଁ Save ହୋଇଗଲା!");
+  } catch (e) {
+    alert("ଇଣ୍ଟରନେଟ୍ ଯାଞ୍ଚ କରନ୍ତୁ କିମ୍ବା ପରେ ଚେଷ୍ଟା କରନ୍ତୁ।");
+  }
+}
+
+async function downloadSelectedTopicMcq() {
+  let fileName = $("mcqTopic").value;
+  let topicName = $("mcqTopic").options[$("mcqTopic").selectedIndex]?.text || "Topic MCQ";
+  if (!fileName) {
+    alert("ଦୟାକରି ଏକ Topic ବାଛନ୍ତୁ।");
+    return;
+  }
+  let fullUrl = GITHUB_PAGES_BASE + fileName;
+  try {
+    let resp = await fetch(fullUrl);
+    if (!resp.ok) throw new Error("Fetch error");
+    let htmlContent = await resp.text();
+
+    let savedMcqs = JSON.parse(localStorage.getItem("gs_saved_mcqs") || "{}");
+    let key = $("mcqClass").value + " · " + $("mcqSubject").value + " - " + topicName;
+    savedMcqs[key] = {
+      title: key,
+      content: htmlContent,
+      date: new Date().toLocaleDateString('or-IN')
+    };
+    localStorage.setItem("gs_saved_mcqs", JSON.stringify(savedMcqs));
+    alert("✅ ଏହି Topic Offline ପାଇଁ Save ହୋଇଗଲା!");
+  } catch (e) {
+    alert("ଡାଉନଲୋଡ୍ ବିଫଳ ହେଲା। ଇଣ୍ଟରନେଟ୍ ଯାଞ୍ଚ କରନ୍ତୁ।");
+  }
+}
+
+function openSavedNotesScreen() {
+  showScreen("downloads");
+  renderSavedNotesList();
+}
+
+function renderSavedNotesList() {
+  let saved = JSON.parse(localStorage.getItem("gs_saved_notes") || "{}");
+  let container = $("savedNotesList");
+  let keys = Object.keys(saved);
+
+  if (!keys.length) {
+    container.innerHTML = `<div style="text-align:center;padding:16px;color:var(--muted);">କୌଣସି ନୋଟ୍ ସେଭ୍ ହୋଇନାହିଁ।</div>`;
+    return;
+  }
+
+  let html = "";
+  keys.forEach(k => {
+    let item = saved[k];
+    html += `
+      <div class="item" style="display:flex;justify-content:space-between;align-items:center;padding:12px 6px;">
+        <div><b>📖 ${item.title}</b><br><small class="muted">${item.date || 'Available Offline'}</small></div>
+        <div style="display:flex;gap:6px;">
+          <button type="button" class="btn green" style="padding:6px 12px;font-size:13px;" onclick="viewSavedNote('${k}')">Open</button>
+          <button type="button" class="btn red" style="padding:6px 10px;font-size:13px;" onclick="deleteSavedNote('${k}')">✕</button>
+        </div>
+      </div>
+    `;
+  });
+  container.innerHTML = html;
+}
+
+function viewSavedNote(key) {
+  let saved = JSON.parse(localStorage.getItem("gs_saved_notes") || "{}");
+  if (saved[key]) {
+    $("savedNoteTitle").textContent = key;
+    $("savedNoteBody").innerHTML = saved[key].content;
+    showScreen("offlineNoteViewer");
+  }
+}
+
+function deleteSavedNote(key) {
+  if (confirm(key + " ନୋଟ୍ କାଢ଼ିବାକୁ ଚାହାନ୍ତି କି?")) {
+    let saved = JSON.parse(localStorage.getItem("gs_saved_notes") || "{}");
+    delete saved[key];
+    localStorage.setItem("gs_saved_notes", JSON.stringify(saved));
+    renderSavedNotesList();
+  }
+}
+
+function openOfflineQuizMenu() {
+  showScreen("offlineQuizMenuScreen");
+  renderDownloadedQuizList();
+}
+
+function renderDownloadedQuizList() {
+  let savedMcqs = JSON.parse(localStorage.getItem("gs_saved_mcqs") || "{}");
+  let container = $("downloadedQuizList");
+  let keys = Object.keys(savedMcqs);
+
+  if (!keys.length) {
+    container.innerHTML = `<div style="text-align:center;padding:18px;color:var(--muted);">କୌଣସି Quiz ଡାଉନଲୋଡ୍ ହୋଇନାହିଁ।<br><br><b>MCQ Practice</b> କୁ ଯାଇ topic ବାଛନ୍ତୁ ଏବଂ <b>💾 Save Offline</b> ଦବାନ୍ତୁ।</div>`;
+    return;
+  }
+
+  let html = `<h4 style="margin:8px 0 10px;color:#6d28d9;">📥 ଆପଣଙ୍କ ଡାଉନଲୋଡ୍ ସେଟ୍:</h4>`;
+  keys.forEach(k => {
+    html += `
+      <div class="item" style="display:flex;justify-content:space-between;align-items:center;padding:10px 4px;">
+        <div style="font-size:15px;"><b>📝 ${k}</b></div>
+        <div style="display:flex;gap:6px;">
+          <button type="button" class="btn green" style="padding:5px 10px;font-size:13px;" onclick="openDownloadedMcq('${k}')">Play</button>
+          <button type="button" class="btn red" style="padding:5px 8px;font-size:13px;" onclick="deleteDownloadedMcq('${k}')">✕</button>
+        </div>
+      </div>
+    `;
+  });
+  container.innerHTML = html;
+}
+
+function openDownloadedMcq(key) {
+  let savedMcqs = JSON.parse(localStorage.getItem("gs_saved_mcqs") || "{}");
+  if (savedMcqs[key]) {
+    currentViewMode = "downloaded_quiz";
+    $("quizTimerBar").style.display = "none";
+    $("noteActionToolbar").style.display = "none";
+    $("viewerBackButton").textContent = "⬅ Back to Sets";
+    showScreen("quizScreen");
+    $("quizFrame").srcdoc = savedMcqs[key].content;
+  }
+}
+
+function deleteDownloadedMcq(key) {
+  if (confirm(key + " ସେଟ୍ କାଢ଼ିବାକୁ ଚାହାନ୍ତି କି?")) {
+    let savedMcqs = JSON.parse(localStorage.getItem("gs_saved_mcqs") || "{}");
+    delete savedMcqs[key];
+    localStorage.setItem("gs_saved_mcqs", JSON.stringify(savedMcqs));
+    renderDownloadedQuizList();
+  }
+}
+
+/* ========================================================
+   NOKIA NEON SNAKE ENGINE (WITH AUDIO BEEP + NEON GLOW)
+   ======================================================== */
+var nokiaCanvas = null;
+var nokiaCtx = null;
+var nokiaGridSize = 15;
+var nokiaTileCount = 20;
+
+var nokiaSnake = [
+  { x: 10, y: 10 },
+  { x: 10, y: 11 },
+  { x: 10, y: 12 }
+];
+var nokiaDx = 0;
+var nokiaDy = -1;
+var nokiaFood = { x: 5, y: 5 };
+var nokiaScore = 0;
+var nokiaHighScore = 0;
+try { nokiaHighScore = parseInt(localStorage.getItem("gs_snake_hi") || "0", 10); } catch(e){}
+
+var nokiaGameInterval = null;
+var nokiaIsPaused = false;
+var nokiaSoundEnabled = true;
+var nokiaAudioCtx = null;
+
+function playNokiaBeep(freq, duration) {
+  if (!nokiaSoundEnabled) return;
+  try {
+    if (!nokiaAudioCtx) nokiaAudioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    var osc = nokiaAudioCtx.createOscillator();
+    var gain = nokiaAudioCtx.createGain();
+    osc.type = "square";
+    osc.frequency.value = freq;
+    gain.gain.setValueAtTime(0.08, nokiaAudioCtx.currentTime);
+    osc.connect(gain);
+    gain.connect(nokiaAudioCtx.destination);
+    osc.start();
+    osc.stop(nokiaAudioCtx.currentTime + duration);
+  } catch(e){}
+}
+
+function openSnakeGame() {
+  showScreen("snakeGameScreen");
+  nokiaCanvas = document.getElementById("nokiaCanvas");
+  nokiaCtx = nokiaCanvas.getContext("2d");
+  document.getElementById("nokiaHighScoreVal").textContent = nokiaHighScore;
+  resetNokiaGame();
+  clearInterval(nokiaGameInterval);
+  nokiaGameInterval = setInterval(updateNokiaSnake, 130);
+}
+
+function spawnNokiaFood() {
+  nokiaFood.x = Math.floor(Math.random() * nokiaTileCount);
+  nokiaFood.y = Math.floor(Math.random() * nokiaTileCount);
+  for (var i = 0; i < nokiaSnake.length; i++) {
+    if (nokiaSnake[i].x === nokiaFood.x && nokiaSnake[i].y === nokiaFood.y) {
+      spawnNokiaFood();
+      break;
+    }
+  }
+}
+
+function drawNokiaSnake() {
+  if (!nokiaCtx) return;
+
+  // Clear Screen
+  nokiaCtx.fillStyle = "#090414";
+  nokiaCtx.fillRect(0, 0, nokiaCanvas.width, nokiaCanvas.height);
+
+  // Matrix Grid lines
+  nokiaCtx.strokeStyle = "#160b30";
+  nokiaCtx.lineWidth = 0.5;
+  for (var x = 0; x < nokiaCanvas.width; x += nokiaGridSize) {
+    nokiaCtx.beginPath(); nokiaCtx.moveTo(x, 0); nokiaCtx.lineTo(x, nokiaCanvas.height); nokiaCtx.stroke();
+  }
+  for (var y = 0; y < nokiaCanvas.height; y += nokiaGridSize) {
+    nokiaCtx.beginPath(); nokiaCtx.moveTo(0, y); nokiaCtx.lineTo(nokiaCanvas.width, y); nokiaCtx.stroke();
+  }
+
+  // Draw Glowing Food
+  nokiaCtx.fillStyle = "#f43f5e";
+  nokiaCtx.shadowColor = "#f43f5e";
+  nokiaCtx.shadowBlur = 8;
+  nokiaCtx.fillRect(nokiaFood.x * nokiaGridSize + 1, nokiaFood.y * nokiaGridSize + 1, nokiaGridSize - 2, nokiaGridSize - 2);
+  nokiaCtx.shadowBlur = 0;
+
+  // Draw Neon Snake
+  for (var i = 0; i < nokiaSnake.length; i++) {
+    if (i === 0) {
+      nokiaCtx.fillStyle = "#38bdf8"; // Head
+      nokiaCtx.shadowColor = "#38bdf8";
+      nokiaCtx.shadowBlur = 10;
+    } else {
+      nokiaCtx.fillStyle = "#4ade80"; // Body
+      nokiaCtx.shadowBlur = 0;
+    }
+    nokiaCtx.fillRect(nokiaSnake[i].x * nokiaGridSize + 1, nokiaSnake[i].y * nokiaGridSize + 1, nokiaGridSize - 2, nokiaGridSize - 2);
+  }
+  nokiaCtx.shadowBlur = 0;
+}
+
+function updateNokiaSnake() {
+  if (nokiaIsPaused) return;
+
+  var head = { x: nokiaSnake[0].x + nokiaDx, y: nokiaSnake[0].y + nokiaDy };
+
+  // Nokia Screen Wrap-around
+  if (head.x < 0) head.x = nokiaTileCount - 1;
+  if (head.x >= nokiaTileCount) head.x = 0;
+  if (head.y < 0) head.y = nokiaTileCount - 1;
+  if (head.y >= nokiaTileCount) head.y = 0;
+
+  // Self Collision
+  for (var i = 0; i < nokiaSnake.length; i++) {
+    if (nokiaSnake[i].x === head.x && nokiaSnake[i].y === head.y) {
+      playNokiaBeep(180, 0.3);
+      alert("💥 Game Over! ଆପଣଙ୍କ ସ୍କୋର: " + nokiaScore);
+      resetNokiaGame();
+      return;
+    }
+  }
+
+  nokiaSnake.unshift(head);
+
+  // Check Food
+  if (head.x === nokiaFood.x && head.y === nokiaFood.y) {
+    nokiaScore += 10;
+    document.getElementById("nokiaScoreVal").textContent = nokiaScore;
+    if (nokiaScore > nokiaHighScore) {
+      nokiaHighScore = nokiaScore;
+      document.getElementById("nokiaHighScoreVal").textContent = nokiaHighScore;
+      try { localStorage.setItem("gs_snake_hi", nokiaHighScore); } catch(e){}
+    }
+    playNokiaBeep(780, 0.08);
+    spawnNokiaFood();
+  } else {
+    nokiaSnake.pop();
+  }
+
+  drawNokiaSnake();
+}
+
+function setNokiaDir(d) {
+  if (d === 'UP' && nokiaDy !== 1) { nokiaDx = 0; nokiaDy = -1; }
+  else if (d === 'DOWN' && nokiaDy !== -1) { nokiaDx = 0; nokiaDy = 1; }
+  else if (d === 'LEFT' && nokiaDx !== 1) { nokiaDx = -1; nokiaDy = 0; }
+  else if (d === 'RIGHT' && nokiaDx !== -1) { nokiaDx = 1; nokiaDy = 0; }
+  playNokiaBeep(440, 0.03);
+}
+
+function toggleNokiaPause() {
+  nokiaIsPaused = !nokiaIsPaused;
+  document.getElementById("nokiaPauseBtn").textContent = nokiaIsPaused ? "▶" : "⏸";
+}
+
+function toggleNokiaSound() {
+  nokiaSoundEnabled = !nokiaSoundEnabled;
+  document.getElementById("nokiaSoundBtn").textContent = nokiaSoundEnabled ? "🔊 Sound ON" : "🔇 Sound OFF";
+}
+
+function resetNokiaGame() {
+  nokiaSnake = [
+    { x: 10, y: 10 },
+    { x: 10, y: 11 },
+    { x: 10, y: 12 }
+  ];
+  nokiaDx = 0;
+  nokiaDy = -1;
+  nokiaScore = 0;
+  nokiaIsPaused = false;
+  document.getElementById("nokiaScoreVal").textContent = "0";
+  document.getElementById("nokiaPauseBtn").textContent = "⏸";
+  spawnNokiaFood();
+  drawNokiaSnake();
+}
+
+function exitNokiaGame() {
+  clearInterval(nokiaGameInterval);
+  showScreen("home");
+}
+
+/* BRIDGE & OTHER UTILITIES */
+function sendBridge(msg) {
+  if (window.AppInventor && typeof window.AppInventor.setWebViewString === "function") {
+    window.AppInventor.setWebViewString(msg);
+    return true;
+  }
+  return false;
+}
+
+function openDrive() {
+  if (!currentFolder) {
+    alert("ପ୍ରଥମେ Class ଓ Subject ବାଛନ୍ତୁ।");
+    return;
+  }
+  if (sendBridge("OPEN_URL~" + currentFolder)) return;
+  window.open(currentFolder, "_blank");
+}
+
+function downloadNotes() {
+  openDrive();
+}
+
+function bookmarkCurrent() {
+  let a = JSON.parse(localStorage.getItem("gs_bookmarks") || "[]");
+  let v = { cls: currentClass, sub: currentSubject };
+  if (!a.some(x => x.cls === v.cls && x.sub === v.sub)) {
+    a.push(v);
+    localStorage.setItem("gs_bookmarks", JSON.stringify(a));
+    $("noteStatus").textContent = "⭐ Subject bookmarked successfully!";
+  } else {
+    $("noteStatus").textContent = "Already in bookmarks!";
+  }
+}
+
+function renderBookmarks() {
+  let a = JSON.parse(localStorage.getItem("gs_bookmarks") || "[]");
+  let container = $("bookmarkList");
+  if (!a.length) {
+    container.innerHTML = '<div class="card" style="text-align:center;color:var(--muted);">No bookmarks saved yet.</div>';
+    return;
+  }
+  
+  let grouped = {};
+  a.forEach((b, idx) => {
+    let key = b.sub || "OTHER";
+    if (!grouped[key]) grouped[key] = [];
+    grouped[key].push({ ...b, originalIndex: idx });
+  });
+
+  let html = "";
+  Object.keys(grouped).forEach(sub => {
+    html += `<div class="subject-group">
+      <div class="subject-header">
+        <span>📖 ${sub}</span>
+        <span style="font-size:12px;background:#ede9fe;padding:2px 8px;border-radius:12px;color:#6d28d9;">${grouped[sub].length} saved</span>
+      </div>`;
+    grouped[sub].forEach(item => {
+      html += `<div class="item" style="display:flex;justify-content:space-between;align-items:center;">
+        <div><b>${item.cls}</b><br><small class="muted">${item.sub}</small></div>
+        <div style="display:flex;gap:6px;">
+          <button type="button" class="btn green" style="padding:6px 12px;font-size:13px;" onclick="goToBookmarked('${item.cls}','${item.sub}')">Open</button>
+          <button type="button" class="btn red" style="padding:6px 10px;font-size:13px;" onclick="deleteBookmark(${item.originalIndex})">✕</button>
+        </div>
+      </div>`;
+    });
+    html += `</div>`;
+  });
+  container.innerHTML = html;
+}
+
+function goToBookmarked(cls, sub) {
+  currentClass = cls;
+  window.classMode = "materials";
+  openSubject(sub);
+}
+
+function deleteBookmark(idx) {
+  let a = JSON.parse(localStorage.getItem("gs_bookmarks") || "[]");
+  a.splice(idx, 1);
+  localStorage.setItem("gs_bookmarks", JSON.stringify(a));
+  renderBookmarks();
+}
+
+function clearBookmarks() {
+  if (confirm("Clear all bookmarks?")) {
+    localStorage.removeItem("gs_bookmarks");
+    renderBookmarks();
+  }
+}
+
+function openMcqSetup() {
+  showScreen("mcqSetup");
+  $("mcqClass").innerHTML = Object.keys(subjectsByClass).map(c => `<option ${c==="CLASS X"?"selected":""}>${c}</option>`).join("");
+  fillSubjects();
+  loadRemoteMcq();
+}
+
+function fillSubjects() {
+  let c = $("mcqClass").value;
+  $("mcqSubject").innerHTML = (subjectsByClass[c] || []).map(s => `<option>${s}</option>`).join("");
+  fillTopics();
+}
+
+async function loadRemoteMcq() {
+  try {
+    let r = await fetch(GITHUB_MCQ_JSON_URL + "?t=" + Date.now(), { cache: "no-store" });
+    if (!r.ok) throw Error("HTTP " + r.status);
+    mcqDataStore = await r.json();
+    fillTopics();
+  } catch (e) {
+    console.log("Remote JSON:", e);
+  }
+}
+
+function fillTopics() {
+  let c = $("mcqClass").value, s = $("mcqSubject").value;
+  let topicSelect = $("mcqTopic");
+  let list = (mcqDataStore[c] && mcqDataStore[c][s]) ? mcqDataStore[c][s] : [];
+
+  if (Array.isArray(list) && list.length > 0) {
+    topicSelect.innerHTML = list.map(item => `<option value="${item.file}">${item.title}</option>`).join("");
+  } else {
+    topicSelect.innerHTML = '<option value="">No topics added yet</option>';
+  }
+}
+
+function fmtTime(s) {
+  return String(Math.floor(s / 60)).padStart(2, "0") + ":" + String(s % 60).padStart(2, "0");
+}
+
+function startQuiz() {
+  let fileName = $("mcqTopic").value;
+  if (!fileName) {
+    alert("ଦୟାକରି ଏକ Topic ବାଛନ୍ତୁ।");
+    return;
+  }
+
+  currentViewMode = "quiz";
+  let fullUrl = GITHUB_PAGES_BASE + fileName;
+
+  $("quizTimerBar").style.display = "flex";
+  $("noteActionToolbar").style.display = "none";
+  $("viewerBackButton").textContent = "⬅ Back to Topics";
+
+  quizSeconds = 0;
+  isQuizPaused = false;
+  $("quizRunningTimer").textContent = "00:00";
+  if (quizTimerInterval) clearInterval(quizTimerInterval);
+
+  quizTimerInterval = setInterval(() => {
+    if (!isQuizPaused) {
+      quizSeconds++;
+      $("quizRunningTimer").textContent = fmtTime(quizSeconds);
+    }
+  }, 1000);
+
+  $("pauseModal").classList.remove("active");
+  showScreen("quizScreen");
+  
+  $("quizFrame").srcdoc = "<div style='display:flex;align-items:center;justify-content:center;height:60vh;font-family:sans-serif;color:#6d28d9;font-size:18px;'><b>Loading Quiz... ଅପେକ୍ଷା କରନ୍ତୁ...</b></div>";
+  fetch(fullUrl + "?t=" + Date.now())
+    .then(r => {
+      if (!r.ok) throw new Error("HTTP " + r.status);
+      return r.text();
+    })
+    .then(html => {
+      $("quizFrame").srcdoc = html;
+    })
+    .catch(err => {
+      $("quizFrame").srcdoc = "<div style='padding:20px;text-align:center;'>ଇଣ୍ଟରନେଟ୍ ସଂଯୋଗ ଯାଞ୍ଚ କରନ୍ତୁ କିମ୍ବା ପରେ ଚେଷ୍ଟା କରନ୍ତୁ।</div>";
+    });
+}
+
+function pauseQuiz() {
+  isQuizPaused = true;
+  $("pausedTimeText").textContent = fmtTime(quizSeconds);
+  $("pauseModal").classList.add("active");
+}
+
+function resumeQuiz() {
+  isQuizPaused = false;
+  $("pauseModal").classList.remove("active");
+}
+
+function closePauseAndExit() {
+  $("pauseModal").classList.remove("active");
+  cleanViewerFrame();
+  showScreen("mcqSetup");
+}
+
+function startStudy() {
+  if (studyInterval) return;
+  studyInterval = setInterval(() => {
+    studySeconds++;
+    renderStudyClock();
+  }, 1000);
+}
+
+function pauseStudy() {
+  clearInterval(studyInterval);
+  studyInterval = null;
+}
+
+function resetStudy() {
+  pauseStudy();
+  studySeconds = 0;
+  renderStudyClock();
+}
+
+function renderStudyClock() {
+  $("studyClock").textContent = [
+    Math.floor(studySeconds / 3600),
+    Math.floor(studySeconds / 60) % 60,
+    studySeconds % 60
+  ].map(x => String(x).padStart(2, "0")).join(":");
+}
+
+function toggleTheme() {
+  document.body.classList.toggle("dark");
+  localStorage.setItem("gs_dark", document.body.classList.contains("dark") ? "1" : "0");
+}
+
+async function shareApp() {
+  const message = "🎓 GyanSetu Odisha - NCERT Notes & MCQ App!\n\nDownload: https://github.com/silusahu360/gyansetu-odishamcq/releases/latest";
+  try {
+    if (navigator.share) {
+      await navigator.share({ title: "GyanSetu Odisha", text: message });
+      return;
+    }
+  } catch (e) {}
+  window.prompt("Share message କପି କରନ୍ତୁ:", message);
+}
+
+async function checkUpdates() {
+  const status = $("homeStatus");
+  if (status) status.textContent = "ନୂଆ ଅପଡେଟ୍ ଯାଞ୍ଚ ହେଉଛି...";
+  
+  const GITHUB_API_URL = "https://api.github.com/repos/silusahu360/gyansetu-odishamcq/releases/latest";
+
+  try {
+    const res = await fetch(GITHUB_API_URL, {
+      headers: { "Accept": "application/vnd.github.v3+json" }
+    });
+    if (!res.ok) throw new Error("Release error");
+    const releaseData = await res.json();
+    const remoteVersion = releaseData.tag_name ? releaseData.tag_name.replace(/^[vV]/, "").trim() : "2.0";
+    const apkAsset = releaseData.assets && releaseData.assets.find(a => a.name.endsWith(".apk"));
+    const downloadUrl = apkAsset ? apkAsset.browser_download_url : releaseData.html_url;
+
+    sendBridge("LATEST_RELEASE~" + remoteVersion + "~" + downloadUrl);
+
+    if (remoteVersion > CURRENT_VERSION) {
+      if (status) {
+        status.innerHTML = `🔔 ନୂଆ ଅପଡେଟ୍ (v${remoteVersion})! <a href="${downloadUrl}" target="_blank" style="color:var(--primary);font-weight:700;">Download</a>`;
+      }
+    } else {
+      if (status) status.textContent = "✅ ଆପଣ ସର୍ବଶେଷ ଭର୍ସନ ବ୍ୟବହାର କରୁଛନ୍ତି।";
+    }
+  } catch (err) {
+    if (status) status.textContent = "ଅପଡେଟ୍ ଯାଞ୍ଚ ବିଫଳ ହେଲା।";
+  }
+}
+
+function handleAndroidBack() {
+  const active = document.querySelector(".screen.active");
+  const id = active ? active.id : "home";
+  if (id === "snakeGameScreen") { exitNokiaGame(); return; }
+  if (id === "quizScreen") { handleViewerBack(); return; }
+  if (id === "offlineNoteViewer") { showScreen("downloads"); return; }
+  if (id === "folder") { showScreen("subjects"); return; }
+  if (id === "subjects") { showScreen("classes"); return; }
+  if (["classes","mcqSetup","offlineQuizMenuScreen","downloads","studyTimer","about","bookmarks"].includes(id)) { showScreen("home"); return; }
+  if (id === "home") return;
+  showScreen("home");
+}
+
+if (localStorage.getItem("gs_dark") === "1") document.body.classList.add("dark");
+</script>
+</body>
+</html>
+app.html
+app.html
+Loading app.html.Displaying app.html.
