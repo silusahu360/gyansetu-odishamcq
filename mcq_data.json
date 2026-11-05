@@ -1,26 +1,10 @@
-
-                 {
-  "classes": [
-    {
-      "class_name": "CLASS X",
-      "subjects": [
-        {
-          "subject_name": "ODIA",
-          "topics": [
-            {
-              "topic_name": "ଭୀମଙ୍କ ସିଂହନାଦ ରଡ଼ି",
-              "quiz_title": "MCQ Practice",
-              "questions": [
-                {
-                  "question": "ଆପଣଙ୍କ ପ୍ରଶ୍ନ ଏଠାରେ ଲେଖନ୍ତୁ?",
-                  "options": ["ଅପ୍ସନ A", "ଅପ୍ସନ B", "ଅପ୍ସନ C", "ଅପ୍ସନ D"],
-                  "answer": "ଅପ୍ସନ A"
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    }
-  ]
+{
+  "CLASS X": {
+    "ODIA": [
+      {
+        "title": "Bhima Singhana Radi",
+        "file": "bheema_singhanada.html"
+      }
+    ]
+  }
 }
