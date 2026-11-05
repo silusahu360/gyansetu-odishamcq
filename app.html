@@ -1046,15 +1046,11 @@ function toggleTheme() {
   localStorage.setItem("gs_dark", document.body.classList.contains("dark") ? "1" : "0");
 }
 
-async function shareApp() {
-  const message = "🎓 GyanSetu Odisha - NCERT Notes & MCQ App!\n\nDownload: https://github.com/silusahu360/gyansetu-odishamcq/releases/latest";
-  try {
-    if (navigator.share) {
-      await navigator.share({ title: "GyanSetu Odisha", text: message });
-      return;
-    }
-  } catch (e) {}
-  window.prompt("Share message କପି କରନ୍ତୁ:", message);
+function shareApp() {
+  const msg = "🎓 GyanSetu Odisha - NCERT Notes & MCQ Learning Portal!\n\nDownload App: https://github.com/silusahu360/gyansetu-odishamcq/releases/latest";
+  const waUrl = "https://api.whatsapp.com/send?text=" + encodeURIComponent(msg);
+  if (sendBridge("OPEN_URL~" + waUrl)) return;
+  window.open(waUrl, "_blank");
 }
 
 async function checkUpdates() {
