@@ -5,7 +5,25 @@
       {
   "title": "ଭୀମଙ୍କ ସିଂହନାଦ ରଡ଼ି",
   "file": "Bhimanka_Singhanada_MCQs_with_Back_Button.html"
-}
+}[
+  {
+    "id": 1,
+    "chapter_no": 4,
+    "title": "ଚିଲିକାରେ ସାୟନ୍ତନ ଦୃଶ୍ୟ (30 MCQs)",
+    "fileName": "Chapter_4_Chilikare_Sayantan_Drushya_30_MCQ.html",
+    "url": "https://raw.githubusercontent.com/silusahu360/gyansetu-odishamcq/main/Chapter_4_Chilikare_Sayantan_Drushya_30_MCQ.html",
+    "total_questions": 30
+  },
+  {
+    "id": 2,
+    "chapter_no": 3,
+    "title": "ରାଘବଙ୍କ ଲଙ୍କା ଯାତ୍ରା (60 MCQs)",
+    "fileName": "Class_10_Chapter_3_Raghavanka_Lanka_Yatra_60_MCQ.html",
+    "url": "https://raw.githubusercontent.com/silusahu360/gyansetu-odishamcq/main/Class_10_Chapter_3_Raghavanka_Lanka_Yatra_60_MCQ.html",
+    "total_questions": 60
+  }
+]
+
     ],
     "ENGLISH": [
       { "title": "The Priceless Gift", "file": "The_Priceless_Gift_Exam_MCQ.html" },
