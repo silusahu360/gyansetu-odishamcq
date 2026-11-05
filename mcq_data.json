@@ -1,80 +1,436 @@
 {
-  "CLASS VI": {
-    "ODIA": [],
-    "ENGLISH": [],
-    "MATHEMATICS": [],
-    "SCIENCE": [],
-    "SOCIAL SCIENCE": [],
-    "HINDI": [],
-    "SANSKRIT": []
-  },
-  "CLASS VII": {
-    "ODIA": [],
-    "ENGLISH": [],
-    "MATHEMATICS": [],
-    "SCIENCE": [],
-    "SOCIAL SCIENCE": [],
-    "HINDI": [],
-    "SANSKRIT": []
-  },
-  "CLASS VIII": {
-    "ODIA": [],
-    "ENGLISH": [],
-    "HINDI": [],
-    "SANSKRIT": [],
-    "MATHEMATICS": [],
-    "SCIENCE": [],
-    "SOCIAL SCIENCE": []
+  "CLASS X": {
+    "ସାହିତ୍ୟ ସିନ୍ଧୁ (Odia)": [
+      {
+        "title": "ପଦ୍ୟ ୧: କାହା ମୁଖ ଅନାଇ ବଞ୍ଚିବି",
+        "file": "Chapter_1_Kaha_Mukha_Anai_Banchibi.html"
+      },
+      {
+        "title": "ପଦ୍ୟ ୨: ମଙ୍ଗଳେ ଅଇଲା ଉଷା",
+        "file": "class10_odia_mangale_aila_usha.html"
+      },
+      {
+        "title": "ପଦ୍ୟ ୩: ରାଘବଙ୍କ ଲଙ୍କା ଯାତ୍ରା",
+        "file": "Class_10_Chapter_3_Raghavanka_Lanka_Yatra.html"
+      },
+      {
+        "title": "ପଦ୍ୟ ୪: ଚିଲିକାରେ ସାୟନ୍ତନ ଦୃଶ୍ୟ",
+        "file": "Chapter_4_Chilikare_Sayantan_Drushya.html"
+      },
+      {
+        "title": "ପଦ୍ୟ ୫: ଭୀମଙ୍କ ସିଂହନାଦ ରଡ଼ି",
+        "file": "Bhimanka_Singhanada_MCQs_with_Bank.html"
+      },
+      {
+        "title": "ଗଦ୍ୟ ୧: ଜନ୍ମଭୂମି",
+        "file": "class10_odia_janmabhumi.html"
+      },
+      {
+        "title": "ଗଦ୍ୟ ୨: କାଠୁରିଆ",
+        "file": "class10_odia_kathuria.html"
+      }
+    ],
+    "ଜୀବ ବିଜ୍ଞାନ (Life Science)": [
+      {
+        "title": "ଅଧ୍ୟାୟ ୧: ପୋଷଣ (Nutrition)",
+        "file": "Chapter_1_Nutrition_100_MCQ_Odia.html"
+      },
+      {
+        "title": "ଅଧ୍ୟାୟ ୨: ଶ୍ୱସନ (Respiration)",
+        "file": "class10_life_science_ch2_respiration.html"
+      },
+      {
+        "title": "ଅଧ୍ୟାୟ ୩: ପରିବହନ ଓ ସଞ୍ଚାଳନ",
+        "file": "class10_life_science_ch3_transport.html"
+      },
+      {
+        "title": "ଅଧ୍ୟାୟ ୪: ରେଚନ (Excretion)",
+        "file": "class10_life_science_ch4_excretion.html"
+      },
+      {
+        "title": "ଅଧ୍ୟାୟ ୫: ନିୟନ୍ତ୍ରଣ ଓ ସମନ୍ୱୟ",
+        "file": "class10_life_science_ch5_control.html"
+      },
+      {
+        "title": "ଅଧ୍ୟାୟ ୬: ଜନନ (Reproduction)",
+        "file": "class10_life_science_ch6_reproduction.html"
+      }
+    ],
+    "ଭୌତିକ ବିଜ୍ଞାନ (Physical Science)": [
+      {
+        "title": "ଅଧ୍ୟାୟ ୧: ରାସାୟନିକ ପ୍ରତିକ୍ରିୟା ଓ ସମୀକରଣ",
+        "file": "class10_physical_science_ch1.html"
+      },
+      {
+        "title": "ଅଧ୍ୟାୟ ୨: ଅମ୍ଳ, କ୍ଷାରକ ଓ ଲବଣ",
+        "file": "class10_physical_science_ch2.html"
+      },
+      {
+        "title": "ଅଧ୍ୟାୟ ୩: ଧାତୁ ଓ ଅଧାତୁ",
+        "file": "class10_physical_science_ch3.html"
+      },
+      {
+        "title": "ଅଧ୍ୟାୟ ୪: କାର୍ବନ ଓ ଏହାର ଯୌଗିକ",
+        "file": "class10_physical_science_ch4.html"
+      },
+      {
+        "title": "ଅଧ୍ୟାୟ ୫: ଆଲୋକ - ପ୍ରତିଫଳନ ଓ ପ୍ରତିସରଣ",
+        "file": "class10_physical_science_ch5.html"
+      },
+      {
+        "title": "ଅଧ୍ୟାୟ ୬: ବିଦ୍ୟୁତ୍ (Electricity)",
+        "file": "class10_physical_science_ch6.html"
+      }
+    ],
+    "English (Skills for Writing)": [
+      {
+        "title": "Chapter 1: The Priceless Gift",
+        "file": "The_Priceless_Gift_Exam_MCQ.html"
+      },
+      {
+        "title": "Chapter 2: All Things Bright and Beautiful",
+        "file": "class10_english_ch2_all_things.html"
+      },
+      {
+        "title": "Chapter 3: A Letter to God",
+        "file": "class10_english_ch3_letter_to_god.html"
+      },
+      {
+        "title": "Chapter 4: The Solitary Reaper",
+        "file": "class10_english_ch4_solitary_reaper.html"
+      },
+      {
+        "title": "Chapter 5: At the High School",
+        "file": "class10_english_ch5_high_school.html"
+      }
+    ],
+    "ଇତିହାସ ଓ ରାଜନୀତି ବିଜ୍ଞାନ (History & Civics)": [
+      {
+        "title": "ଅଧ୍ୟାୟ ୧: ସ୍ୱତନ୍ତ୍ର ଓଡ଼ିଶା ପ୍ରଦେଶ ଗଠନ",
+        "file": "swatantra_odisha_quiz.html"
+      },
+      {
+        "title": "ଅଧ୍ୟାୟ ୨: ଭାରତରେ ଜାତୀୟତାବାଦର ବିକାଶ",
+        "file": "class10_history_ch2.html"
+      },
+      {
+        "title": "ଅଧ୍ୟାୟ ୩: ଭାରତ ଛାଡ଼ ଆନ୍ଦୋଳନ ଓ ଓଡ଼ିଶା",
+        "file": "class10_history_ch3.html"
+      },
+      {
+        "title": "ରାଜନୀତି: ଭାରତୀୟ ସମ୍ବିଧାନ ଓ ମୌଳିକ ଅଧିକାର",
+        "file": "class10_civics_ch1.html"
+      }
+    ],
+    "ଭୂଗୋଳ ଓ ଅର୍ଥନୀତି (Geography & Economics)": [
+      {
+        "title": "ଅଧ୍ୟାୟ ୧: ସମ୍ବଳ ଓ ଏହାର ବିକାଶ",
+        "file": "class10_geo_ch1.html"
+      },
+      {
+        "title": "ଅଧ୍ୟାୟ ୨: ଜଙ୍ଗଲ ଓ ବନ୍ୟପ୍ରାଣୀ ସମ୍ବଳ",
+        "file": "class10_geo_ch2.html"
+      },
+      {
+        "title": "ଅଧ୍ୟାୟ ୩: ଜଳ ସମ୍ବଳ",
+        "file": "class10_geo_ch3.html"
+      },
+      {
+        "title": "ଅର୍ଥନୀତି: ଆର୍ଥିକ ବିକାଶ ଓ ଉଦାରୀକରଣ",
+        "file": "class10_eco_ch1.html"
+      }
+    ],
+    "ଗଣିତ (Mathematics)": [
+      {
+        "title": "ଅଧ୍ୟାୟ ୧: ସରଳ ସହସମୀକରଣ",
+        "file": "class10_math_ch1.html"
+      },
+      {
+        "title": "ଅଧ୍ୟାୟ ୨: ଦ୍ୱିଘାତ ସମୀକରଣ",
+        "file": "class10_math_ch2.html"
+      },
+      {
+        "title": "ଅଧ୍ୟାୟ ୩: ସମାନ୍ତର ପ୍ରଗତି (AP)",
+        "file": "class10_math_ch3.html"
+      },
+      {
+        "title": "ଅଧ୍ୟାୟ ୪: ତ୍ରିକୋଣମିତି (Trigonometry)",
+        "file": "class10_math_ch4.html"
+      }
+    ],
+    "ସଂସ୍କୃତ (Sanskrit)": [
+      {
+        "title": "ଅଧ୍ୟାୟ ୧: ସୁଭାଷିତାନି",
+        "file": "class10_sanskrit_ch1.html"
+      },
+      {
+        "title": "ଅଧ୍ୟାୟ ୨: ନୀତି ଶ୍ଳୋକ",
+        "file": "class10_sanskrit_ch2.html"
+      }
+    ],
+    "ହିନ୍ଦୀ (Hindi)": [
+      {
+        "title": "पाठ 1: अनमोल वाणी (कबीर व रहीम)",
+        "file": "class10_hindi_ch1.html"
+      },
+      {
+        "title": "पाठ 2: मनुष्यता (मैथिलीशरण गुप्त)",
+        "file": "class10_hindi_ch2.html"
+      }
+    ]
   },
   "CLASS IX": {
-    "ODIA": [],
-    "ENGLISH": [],
-    "SANSKRIT": [],
-    "HINDI": [],
-    "MATHEMATICS": [],
-    "SCIENCE": [],
-    "GEOGRAPHY": [],
-    "HISTORY": []
+    "ସାହିତ୍ୟ ଧାରା (Odia)": [
+      {
+        "title": "ପଦ୍ୟ ୧: କାଳିନ୍ଦୀ",
+        "file": "class9_odia_ch1.html"
+      },
+      {
+        "title": "ଗଦ୍ୟ ୧: ଧୂଳି",
+        "file": "class9_odia_ch2.html"
+      }
+    ],
+    "ଭୌତିକ ବିଜ୍ଞାନ (Physical Science)": [
+      {
+        "title": "ଅଧ୍ୟାୟ ୧: ପଦାର୍ଥ ଓ ଏହାର ସ୍ୱରୂପ",
+        "file": "class9_phy_sci_ch1.html"
+      },
+      {
+        "title": "ଅଧ୍ୟାୟ ୨: ବଳ ଓ ଗତି ନିୟମ",
+        "file": "class9_phy_sci_ch2.html"
+      }
+    ],
+    "ଜୀବ ବିଜ୍ଞାନ (Life Science)": [
+      {
+        "title": "ଅଧ୍ୟାୟ ୧: ଜୀବକୋଷ ଏବଂ ଏହାର ଗଠନ",
+        "file": "class9_life_sci_ch1.html"
+      },
+      {
+        "title": "ଅଧ୍ୟାୟ ୨: ଟିସୁ (Tissues)",
+        "file": "class9_life_sci_ch2.html"
+      }
+    ],
+    "English": [
+      {
+        "title": "Chapter 1: The Price of Flowers",
+        "file": "class9_english_ch1.html"
+      },
+      {
+        "title": "Chapter 2: No Men Are Foreign",
+        "file": "class9_english_ch2.html"
+      }
+    ],
+    "ଗଣିତ (Mathematics)": [
+      {
+        "title": "ଅଧ୍ୟାୟ ୧: ବାସ୍ତବ ସଂଖ୍ୟା (Real Numbers)",
+        "file": "class9_math_ch1.html"
+      },
+      {
+        "title": "ଅଧ୍ୟାୟ ୨: ସେଟ୍ ପ୍ରକ୍ରିୟା (Sets)",
+        "file": "class9_math_ch2.html"
+      }
+    ],
+    "ଇତିହାସ ଓ ରାଜନୀତି ବିଜ୍ଞାନ (History & Civics)": [
+      {
+        "title": "ଅଧ୍ୟାୟ ୧: ଫରାସୀ ବିପ୍ଳବ",
+        "file": "class9_history_ch1.html"
+      },
+      {
+        "title": "ଅଧ୍ୟାୟ ୨: ଭାରତର ସମ୍ବିଧାନ ନିର୍ମାଣ",
+        "file": "class9_history_ch2.html"
+      }
+    ],
+    "ଭୂଗୋଳ (Geography)": [
+      {
+        "title": "ଅଧ୍ୟାୟ ୧: ଭାରତର ଆକାର ଓ ଅବସ୍ଥିତି",
+        "file": "class9_geo_ch1.html"
+      }
+    ],
+    "ସଂସ୍କୃତ (Sanskrit)": [
+      {
+        "title": "ଅଧ୍ୟାୟ ୧: ସଦାଚାରଃ",
+        "file": "class9_sans_ch1.html"
+      }
+    ],
+    "ହିନ୍ଦୀ (Hindi)": [
+      {
+        "title": "पाठ 1: दोहे (कबीरदास)",
+        "file": "class9_hindi_ch1.html"
+      }
+    ]
   },
-  "CLASS X": {
-    "ODIA": [
+  "CLASS VIII": {
+    "ସାହିତ୍ୟିକା (Odia)": [
       {
-        "title": "ଭୀମଙ୍କ ସିଂହନାଦ ରଡ଼ି",
-        "file": "Bhimanka_Singhanada_MCQs_with_Back_Button.html"
+        "title": "ପାଠ ୧: ମାତୃଭାଷା ପ୍ରୀତି",
+        "file": "class8_odia_ch1.html"
       },
       {
-        "title": "କାହା ମୁଖ ଅନାଇ ବଞ୍ଚିବି",
-        "file": "Chapter_1_Kaha_Mukha_Anai_Banchibi_60_MCQ.html"
+        "title": "ପାଠ ୨: ସାଧୁତାର ପୁରସ୍କାର",
+        "file": "class8_odia_ch2.html"
+      }
+    ],
+    "ବିଜ୍ଞାନ (Science)": [
+      {
+        "title": "ଅଧ୍ୟାୟ ୧: ଫସଲ ଉତ୍ପାଦନ ଓ ପରିଚାଳନା",
+        "file": "class8_sci_ch1.html"
       },
       {
-        "title": "ରାଘବଙ୍କ ଲଙ୍କା ଯାତ୍ରାନୁକୂଳ",
-        "file": "Class_10_Chapter_3_Raghavanka_Lanka_Yatra_60_MCQ.html"
-      },{
-  "title": "ଚିଲିକାରେ ସାୟନ୍ତନ ଦୃଶ୍ୟ",
-  "file": "Chapter_4_Chilikare_Sayantan_Drushya_30_MCQ.html"
-}
-    ],
-    "SCIENCE": [
+        "title": "ଅଧ୍ୟାୟ ୨: ଅଣୁଜୀବ: ମିତ୍ର ଓ ଶତ୍ରୁ",
+        "file": "class8_sci_ch2.html"
+      },
       {
-        "title": "ପୋଷଣ (Nutrition - 100 MCQ)",
-        "file": "Chapter_1_Nutrition_100_MCQ_Odia.html"
+        "title": "ଅଧ୍ୟାୟ ୩: ବଳ ଓ ଚାପ",
+        "file": "class8_sci_ch3.html"
       }
     ],
-    "HISTORY": [
+    "ଗଣିତ (Mathematics)": [
       {
-        "title": "ସ୍ୱତନ୍ତ୍ର ଓଡ଼ିଶା ପ୍ରଦେଶ ଗଠନ",
-        "file": "swatantra_odisha_quiz.html"
+        "title": "ଅଧ୍ୟାୟ ୧: ପରିମେୟ ସଂଖ୍ୟା (Rational Numbers)",
+        "file": "class8_math_ch1.html"
       }
     ],
-    "ENGLISH": [
+    "ଇତିହାସ ଓ ନାଗରିକ ବିଜ୍ଞାନ (History)": [
       {
-        "title": "A Letter to God",
-        "file": "a_letter_to_god.html"
+        "title": "ଅଧ୍ୟାୟ ୧: ୧୮୫୭ ମହାବିଦ୍ରୋହ",
+        "file": "class8_hist_ch1.html"
       }
     ],
-    "MATHEMATICS": [],
-    "GEOGRAPHY": [],
-    "HINDI": [],
-    "SANSKRIT": []
+    "ଭୂଗୋଳ (Geography)": [
+      {
+        "title": "ଅଧ୍ୟାୟ ୧: ସମ୍ବଳ ଓ ଏହାର ପ୍ରକାରଭେଦ",
+        "file": "class8_geo_ch1.html"
+      }
+    ],
+    "English": [
+      {
+        "title": "Chapter 1: A Day in the Ashram",
+        "file": "class8_eng_ch1.html"
+      }
+    ],
+    "ହିନ୍ଦୀ (Hindi)": [
+      {
+        "title": "पाठ 1: ध्वनि (कविता)",
+        "file": "class8_hindi_ch1.html"
+      }
+    ],
+    "ସଂସ୍କୃତ (Sanskrit)": [
+      {
+        "title": "ଅଧ୍ୟାୟ ୧: ସୁଭାଷିତାନି",
+        "file": "class8_sans_ch1.html"
+      }
+    ]
+  },
+  "CLASS VII": {
+    "ସାହିତ୍ୟ ସୌରଭ (Odia)": [
+      {
+        "title": "ପାଠ ୧: କଳା କଳେବର କହ୍ନାଇ",
+        "file": "class7_odia_ch1.html"
+      },
+      {
+        "title": "ପାଠ ୨: ଗ୍ରାମ୍ୟ ଜୀବନ",
+        "file": "class7_odia_ch2.html"
+      }
+    ],
+    "ବିଜ୍ଞାନ (Science)": [
+      {
+        "title": "ଅଧ୍ୟାୟ ୧: ଉଦ୍ଭିଦରେ ପୋଷଣ (Nutrition in Plants)",
+        "file": "class7_sci_ch1.html"
+      },
+      {
+        "title": "ଅଧ୍ୟାୟ ୨: ଉତ୍ତାପ (Heat)",
+        "file": "class7_sci_ch2.html"
+      },
+      {
+        "title": "ଅଧ୍ୟାୟ ୩: ଅମ୍ଳ, କ୍ଷାରକ ଓ ଲବଣ",
+        "file": "class7_sci_ch3.html"
+      }
+    ],
+    "ଗଣିତ (Mathematics)": [
+      {
+        "title": "ଅଧ୍ୟାୟ ୧: ପୂର୍ଣ୍ଣସଂଖ୍ୟା (Integers)",
+        "file": "class7_math_ch1.html"
+      }
+    ],
+    "ସାମାଜିକ ବିଜ୍ଞାନ (Social Science)": [
+      {
+        "title": "ଅଧ୍ୟାୟ ୧: ପରିବେଶ ଓ ଆମ ପୃଥିବୀ",
+        "file": "class7_sst_ch1.html"
+      }
+    ],
+    "English": [
+      {
+        "title": "Chapter 1: Three Questions",
+        "file": "class7_eng_ch1.html"
+      }
+    ],
+    "ହିନ୍ଦୀ (Hindi)": [
+      {
+        "title": "पाठ 1: हम पंछी उन्मुक्त गगन के",
+        "file": "class7_hindi_ch1.html"
+      }
+    ],
+    "ସଂସ୍କୃତ (Sanskrit)": [
+      {
+        "title": "ଅଧ୍ୟାୟ ୧: ସୁଭାଷିତାନି",
+        "file": "class7_sans_ch1.html"
+      }
+    ]
+  },
+  "CLASS VI": {
+    "ସାହିତ୍ୟ କଳିକା (Odia)": [
+      {
+        "title": "ପାଠ ୧: ପ୍ରାର୍ଥନା",
+        "file": "class6_odia_ch1.html"
+      },
+      {
+        "title": "ପାଠ ୨: ଆମ ଓଡ଼ିଶା",
+        "file": "class6_odia_ch2.html"
+      }
+    ],
+    "ବିଜ୍ଞାନ (Science)": [
+      {
+        "title": "ଅଧ୍ୟାୟ ୧: ଖାଦ୍ୟ - ଏହା କେଉଁଠାରୁ ମିଳେ?",
+        "file": "class6_sci_ch1.html"
+      },
+      {
+        "title": "ଅଧ୍ୟାୟ ୨: ଖାଦ୍ୟର ଉପାଦାନ",
+        "file": "class6_sci_ch2.html"
+      },
+      {
+        "title": "ଅଧ୍ୟାୟ ୩: ପଦାର୍ଥର ପୃଥକୀକରଣ",
+        "file": "class6_sci_ch3.html"
+      }
+    ],
+    "ଗଣିତ (Mathematics)": [
+      {
+        "title": "ଅଧ୍ୟାୟ ୧: ସଂଖ୍ୟାକୁ ଜାଣିବା (Knowing Our Numbers)",
+        "file": "class6_math_ch1.html"
+      }
+    ],
+    "ସାମାଜିକ ବିଜ୍ଞାନ (Social Science)": [
+      {
+        "title": "ଅଧ୍ୟାୟ ୧: ସୌରଜଗତରେ ପୃଥିବୀ",
+        "file": "class6_sst_ch1.html"
+      }
+    ],
+    "English": [
+      {
+        "title": "Chapter 1: A Tale of Two Birds",
+        "file": "class6_eng_ch1.html"
+      }
+    ],
+    "ହିନ୍ଦୀ (Hindi)": [
+      {
+        "title": "पाठ 1: वह चिड़िया जो",
+        "file": "class6_hindi_ch1.html"
+      }
+    ],
+    "ସଂସ୍କୃତ (Sanskrit)": [
+      {
+        "title": "ଅଧ୍ୟାୟ ୧: ଶବ୍ଦପରିଚୟଃ",
+        "file": "class6_sans_ch1.html"
+      }
+    ]
   }
 }
