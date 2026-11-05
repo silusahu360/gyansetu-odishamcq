@@ -2,7 +2,10 @@
   "CLASS X": {
     "ODIA": [
       { "title": "ବନ୍ଦେ ଉତ୍କଳ ଜନନୀ", "file": "" },
-      { "title": "ବଡ଼ ମଣିଷ ଛୋଟ ମନ", "file": "" }
+      {
+  "title": "ଭୀମଙ୍କ ସିଂହନାଦ ରଡ଼ି",
+  "file": "Bhimanka_Singhanada_MCQs_with_Back_Button.html"
+}
     ],
     "ENGLISH": [
       { "title": "The Priceless Gift", "file": "The_Priceless_Gift_Exam_MCQ.html" },
