@@ -1,0 +1,25 @@
+{
+  "classes": [
+    {
+      "class_name": "CLASS X",
+      "subjects": [
+        {
+          "subject_name": "SCIENCE",
+          "topics": [
+            {
+              "topic_name": "ଅଧ୍ୟାୟ ୧: ପୋଷଣ",
+              "quiz_title": "୧୦୦ MCQ Quiz",
+              "questions": [
+                {
+                  "question": "Gaaffiin kee asiitti kunoo?",
+                  "options": ["A", "B", "C", "D"],
+                  "answer": "A"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
