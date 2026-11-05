@@ -1,173 +1,20 @@
-{
-  "CLASS X": {
-    "ODIA": [
-      { "title": "ବନ୍ଦେ ଉତ୍କଳ ଜନନୀ", "file": "" },
-      {
-  "title": "ଭୀମଙ୍କ ସିଂହନାଦ ରଡ଼ି",
-  "file": "Bhimanka_Singhanada_MCQs_with_Back_Button.html"
-}[
+[
   {
     "id": 1,
-    "chapter_no": 4,
-    "title": "ଚିଲିକାରେ ସାୟନ୍ତନ ଦୃଶ୍ୟ (30 MCQs)",
-    "fileName": "Chapter_4_Chilikare_Sayantan_Drushya_30_MCQ.html",
-    "url": "https://raw.githubusercontent.com/silusahu360/gyansetu-odishamcq/main/Chapter_4_Chilikare_Sayantan_Drushya_30_MCQ.html",
-    "total_questions": 30
+    "title": "ଭୀମଙ୍କ ସିଂହନାଦ ରଡ଼ି - MCQ Practice",
+    "filename": "bhimanka_singhanada_radi.html",
+    "description": "ଭୀମଙ୍କ ସିଂହନାଦ ରଡ଼ି ପ୍ରସଙ୍ଗର ଅଭ୍ୟାସ ପ୍ରଶ୍ନୋତ୍ତର ଏବଂ MCQ Practice।"
   },
   {
     "id": 2,
-    "chapter_no": 3,
-    "title": "ରାଘବଙ୍କ ଲଙ୍କା ଯାତ୍ରା (60 MCQs)",
-    "fileName": "Class_10_Chapter_3_Raghavanka_Lanka_Yatra_60_MCQ.html",
-    "url": "https://raw.githubusercontent.com/silusahu360/gyansetu-odishamcq/main/Class_10_Chapter_3_Raghavanka_Lanka_Yatra_60_MCQ.html",
-    "total_questions": 60
+    "title": "Class 9 Odia | Chapter 1 Quiz",
+    "filename": "class_9_odia_chapter_1.html",
+    "description": "ନବମ ଶ୍ରେଣୀ ସାହିତ୍ୟର ପ୍ରଥମ ଅଧ୍ୟାୟ ପାଇଁ ଆଦର୍ଶ ପ୍ରଶ୍ନୋତ୍ତର କୁଇଜ୍।"
+  },
+  {
+    "id": 3,
+    "title": "ଅଧ୍ୟାୟ ୧: ପୋଷଣ | ୧୦୦ MCQ Quiz",
+    "filename": "chapter_1_poshana_100_mcq.html",
+    "description": "ଦଶମ ଶ୍ରେଣୀ ବିଜ୍ଞାନ - ପ୍ରଥମ ଅଧ୍ୟାୟ ପୋଷଣ ବିଷୟର ୧୦୦ ଗୁରୁତ୍ୱପୂର୍ଣ୍ଣ MCQ Quiz।"
   }
 ]
-
-    ],
-    "ENGLISH": [
-      { "title": "The Priceless Gift", "file": "The_Priceless_Gift_Exam_MCQ.html" },
-      { "title": "The Village Fair", "file": "" }
-    ],
-    "MATHEMATICS": [
-      { "title": "Real Numbers", "file": "" },
-      { "title": "Polynomials", "file": "" }
-    ],
-    "SCIENCE": [
-      { "title": "Chemical Reactions", "file": "" },
-      { "title": "Life Processes", "file": "Chapter_1_Nutrition_100_MCQ_Odia.html" }
-    ],
-    "SOCIAL SCIENCE": [
-      { "title": "Rise of Nationalism", "file": "swatantra_odisha_quiz.html" },
-      { "title": "Resources and Development", "file": "" }
-    ],
-    "SANSKRIT": [
-      { "title": "ସଂସ୍କୃତ ସାହିତ୍ୟ", "file": "" },
-      { "title": "ସୁଭାଷିତାନି", "file": "" }
-    ],
-    "HINDI": [
-      { "title": "दोहे", "file": "" },
-      { "title": "बड़े भाई साहब", "file": "" }
-    ]
-  },
-  "CLASS IX": {
-    "ODIA": [
-      { "title": "ମାତୃଭୂମି", "file": "" },
-      { "title": "ସଭ୍ୟତା ଓ ସଂସ୍କୃତି", "file": "" }
-    ],
-    "ENGLISH": [
-      { "title": "The Road Not Taken", "file": "" },
-      { "title": "The Little Girl", "file": "" }
-    ],
-    "MATHEMATICS": [
-      { "title": "Number Systems", "file": "" },
-      { "title": "Linear Equations", "file": "" }
-    ],
-    "SCIENCE": [
-      { "title": "Matter in Our Surroundings", "file": "" },
-      { "title": "The Fundamental Unit of Life", "file": "" }
-    ],
-    "SOCIAL SCIENCE": [
-      { "title": "The French Revolution", "file": "" },
-      { "title": "Physical Features of India", "file": "" }
-    ],
-    "SANSKRIT": [
-      { "title": "ସୁଭାଷିତାନି", "file": "" },
-      { "title": "ବିଦ୍ୟାୟାଃ ମହତ୍ତ୍ୱମ୍", "file": "" }
-    ],
-    "HINDI": [
-      { "title": "दो बैलों की कथा", "file": "" },
-      { "title": "ल्हासा की ओर", "file": "" }
-    ]
-  },
-  "CLASS VIII": {
-    "ODIA": [
-      { "title": "ଜାତୀୟ ସଙ୍ଗୀତ", "file": "" },
-      { "title": "ମାତୃଭାଷା", "file": "" }
-    ],
-    "ENGLISH": [
-      { "title": "The Best Christmas Present", "file": "" },
-      { "title": "The Tsunami", "file": "" }
-    ],
-    "MATHEMATICS": [
-      { "title": "Rational Numbers", "file": "" },
-      { "title": "Linear Equations", "file": "" }
-    ],
-    "SCIENCE": [
-      { "title": "Crop Production", "file": "" },
-      { "title": "Microorganisms", "file": "" }
-    ],
-    "SOCIAL SCIENCE": [
-      { "title": "Resources", "file": "" },
-      { "title": "The Indian Constitution", "file": "" }
-    ],
-    "SANSKRIT": [
-      { "title": "ସୁଭାଷିତାନି", "file": "" },
-      { "title": "ନୀତିଶ୍ଲୋକାଃ", "file": "" }
-    ],
-    "HINDI": [
-      { "title": "ध्वनि", "file": "" },
-      { "title": "लाख की चूड़ियाँ", "file": "" }
-    ]
-  },
-  "CLASS VII": {
-    "ODIA": [
-      { "title": "ବର୍ଷା ଋତୁ", "file": "" },
-      { "title": "ସ୍ୱାଧୀନତା ଦିବସ", "file": "" }
-    ],
-    "ENGLISH": [
-      { "title": "Three Questions", "file": "" },
-      { "title": "A Gift of Chappals", "file": "" }
-    ],
-    "MATHEMATICS": [
-      { "title": "Integers", "file": "" },
-      { "title": "Fractions and Decimals", "file": "" }
-    ],
-    "SCIENCE": [
-      { "title": "Nutrition in Plants", "file": "" },
-      { "title": "Heat", "file": "" }
-    ],
-    "SOCIAL SCIENCE": [
-      { "title": "Environment", "file": "" },
-      { "title": "Inside Our Earth", "file": "" }
-    ],
-    "SANSKRIT": [
-      { "title": "ସୁଭାଷିତାନି", "file": "" },
-      { "title": "ବିଦ୍ୟା", "file": "" }
-    ],
-    "HINDI": [
-      { "title": "हम पंछी उन्मुक्त गगन के", "file": "" },
-      { "title": "दादी माँ", "file": "" }
-    ]
-  },
-  "CLASS VI": {
-    "ODIA": [
-      { "title": "ଆମ ଗାଁ", "file": "" },
-      { "title": "ପ୍ରକୃତିର ଦାନ", "file": "" }
-    ],
-    "ENGLISH": [
-      { "title": "Who Did Patrick's Homework?", "file": "" },
-      { "title": "A House, A Home", "file": "" }
-    ],
-    "MATHEMATICS": [
-      { "title": "Knowing Our Numbers", "file": "" },
-      { "title": "Whole Numbers", "file": "" }
-    ],
-    "SCIENCE": [
-      { "title": "Food: Where Does It Come From?", "file": "" },
-      { "title": "Components of Food", "file": "" }
-    ],
-    "SOCIAL SCIENCE": [
-      { "title": "The Earth in the Solar System", "file": "" },
-      { "title": "Globe", "file": "" }
-    ],
-    "SANSKRIT": [
-      { "title": "ଶବ୍ଦ ପରିଚୟ", "file": "" },
-      { "title": "ସଂଖ୍ୟା", "file": "" }
-    ],
-    "HINDI": [
-      { "title": "वह चिड़िया जो", "file": "" },
-      { "title": "बचपन", "file": "" }
-    ]
-  }
-}
