@@ -1257,14 +1257,14 @@ function toggleTheme() {
 }
 
 /* SHARE */
-const APP_DOWNLOAD_LINK = "https://YOUR-APP-DOWNLOAD-LINK-HERE";
+const APP_DOWNLOAD_LINK = "https://github.com/silusahu360/gyansetu-odishamcq/releases/download/v1.0.0/GYANSETU_ODISHA.apk";
 
 function shareApp() {
   const message =
     "🎓 ଜ୍ଞାନସେତୁ ଓଡ଼ିଶା (GyanSetu Odisha)\n" +
     "ଷଷ୍ଠ ରୁ ଦଶମ ଶ୍ରେଣୀ ପାଇଁ NCERT ଓ ଓଡ଼ିଶା ବୋର୍ଡ ଶିକ୍ଷଣ ଆପ୍。\n" +
     "📚 ନୋଟ୍ସ, 📝 MCQ ଅଭ୍ୟାସ ଓ 📂 ଅଧ୍ୟୟନ ସାମଗ୍ରୀ ଏକ ସ୍ଥାନରେ।\n\n" +
-    "📲 ଆପ୍ ଡାଉନଲୋଡ୍ କରିବାକୁ ଏହି ଲିଙ୍କ୍‌ରେ କ୍ଲିକ୍ କରନ୍ତୁ:\n" + APP_DOWNLOAD_LINK;
+    "📲 ଆପ୍ ଡାଉନଲୋଡ୍ କରିବାକୁ ଏହି ଲିଙ୍କ୍‌ରେ କ୍ଲିକ୍ କରନ୍ତୁ:\n" + APP_DOWNLOAD_LINK
 
   if (sendBridge("SHARE~" + message)) return;
 
