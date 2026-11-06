@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="or">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ଦଶମ ଶ୍ରେଣୀ ଭୂଗୋଳ - ପ୍ରଥମ ଅଧ୍ୟାୟ: ସମ୍ବଳ ଓ ତା'ର ବିକାଶ (ମେଗା MCQ କୁଇଜ୍)</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --success-color: #27ae60;
+            --error-color: #e74c3c;
+            --bg-color: #f8f9fa;
+            --card-bg: #ffffff;
+            --text-color: #333333;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .quiz-container {
+            background-color: var(--card-bg);
+            width: 100%;
+            max-width: 750px;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: var(--primary-color);
+            text-align: center;
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #7f8c8d;
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+        }
+
+        .quiz-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background-color: #e0e0e0;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background-color: var(--secondary-color);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .question-box {
+            font-size: 1.15rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+            line-height: 1.5;
+        }
+
+        .options-list {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 20px 0;
+        }
+
+        .option-item {
+            background-color: #f1f2f6;
+            border: 2px solid transparent;
+            padding: 12px 18px;
+            margin-bottom: 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 1rem;
+        }
+
+        .option-item:hover:not(.disabled) {
+            background-color: #e4e7eb;
+            border-color: var(--secondary-color);
+        }
+
+        .option-item.correct {
+            background-color: #d4edda;
+            border-color: var(--success-color);
+            color: #155724;
+            font-weight: 600;
+        }
+
+        .option-item.incorrect {
+            background-color: #f8d7da;
+            border-color: var(--error-color);
+            color: #721c24;
+            font-weight: 600;
+        }
+
+        .option-item.disabled {
+            cursor: default;
+        }
+
+        .explanation-box {
+            background-color: #e8f4fd;
+            border-left: 5px solid var(--secondary-color);
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            display: none;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .explanation-box.show {
+            display: block;
+        }
+
+        .explanation-title {
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 5px;
+        }
+
+        .btn-container {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .next-btn {
+            background-color: var(--secondary-color);
+            color: white;
+            border: none;
+            padding: 10px 24px;
+            font-size: 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            display: none;
+        }
+
+        .next-btn:hover {
+            background-color: #2980b9;
+        }
+
+        .score-card {
+            text-align: center;
+            display: none;
+        }
+
+        .score-card h2 {
+            color: var(--primary-color);
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .score-card p {
+            font-size: 1.1rem;
+            color: #555;
+            margin-bottom: 20px;
+        }
+
+        .restart-btn {
+            background-color: var(--success-color);
+            color: white;
+            border: none;
+            padding: 12px 28px;
+            font-size: 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .restart-btn:hover {
+            background-color: #219653;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="quiz-container">
+        <div id="quiz-screen">
+            <h1>ଦଶମ ଶ୍ରେଣୀ ଭୂଗୋଳ - ପ୍ରଥମ ଅଧ୍ୟାୟ</h1>
+            <div class="subtitle">ସମ୍ବଳ ଓ ତା'ର ବିକାଶ - ମେଗା MCQ କୁଇଜ୍ (୫୫ଟି ପ୍ରଶ୍ନ)</div>
+            
+            <div class="quiz-meta">
+                <span id="question-counter">ପ୍ରଶ୍ନ ୧ / ୫୫</span>
+                <span id="score-display">ସ୍କୋର୍: ୦</span>
+            </div>
+
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress-fill"></div>
+            </div>
+
+            <div class="question-box" id="question-text">ପ୍ରଶ୍ନ ଲୋଡ୍ ହେଉଛି...</div>
+
+            <ul class="options-list" id="options-list">
+                <!-- Options will be injected dynamically -->
+            </ul>
+
+            <div class="explanation-box" id="explanation-box">
+                <div class="explanation-title" id="explanation-title">ସ୍ପଷ୍ଟୀକରଣ (Explanation):</div>
+                <div id="explanation-text"></div>
+            </div>
+
+            <div class="btn-container">
+                <button class="next-btn" id="next-btn" onclick="nextQuestion()">ପରବର୍ତ୍ତୀ ପ୍ରଶ୍ନ</button>
+            </div>
+        </div>
+
+        <div class="score-card" id="score-card">
+            <h2>କୁଇଜ୍ ସମାପ୍ତ ହେଲା!</h2>
+            <p id="score-text">ଆପଣଙ୍କ ସ୍କୋର୍: ୦ / ୫୫</p>
+            <button class="restart-btn" onclick="restartQuiz()">ପୁନର୍ବାର ଖେଳନ୍ତୁ</button>
+        </div>
+    </div>
+
+    <script>
+        const quizData = [
+            {
+                question: "ମନୁଷ୍ୟ ତା'ର ଜୀବନଧାରଣ ପାଇଁ କାହା ଉପରେ ସଦାସର୍ବଦା ନିର୍ଭର କରିଥାଏ?",
+                options: ["ଭୂପୃଷ୍ଠସ୍ଥ ପ୍ରାକୃତିକ ପରିବେଶ", "କେବଳ କାର୍ଯ୍ୟାଳୟ", "ବିଦେଶୀ ରାଷ୍ଟ୍ର", "କୃତ୍ରିମ ଉପଗ୍ରହ"],
+                correct: 0,
+                explanation: "ମନୁଷ୍ୟ ଜୀବନଧାରଣ ପାଇଁ ଭୂପୃଷ୍ଠସ୍ଥ ପ୍ରାକୃତିକ ପରିବେଶ ଉପରେ ସଦାସର୍ବଦା ନିର୍ଭର କରିଥାଏ ଏବଂ ପ୍ରତ୍ୟକ୍ଷ ବା ପରୋକ୍ଷ ଭାବରେ ପରିବେଶର ବସ୍ତୁ ବିନିଯୋଗ କରିଥାଏ[span_0](start_span)[span_0](end_span)."
+            },
+            {
+                question: "କାଠରୁ କାଠ ଉପକରଣ, ତୁଳାରୁ ସୂତା ଓ ଲୁଗା ପ୍ରସ୍ତୁତ ହେଲେ ସାମଗ୍ରୀ ଅପେକ୍ଷା ଉତ୍ପାଦଗୁଡ଼ିକ କ'ଣ ହୋଇଥାଏ?",
+                options: ["ଅଧିକ ମୂଲ୍ୟବାନ", "କମ୍ ମୂଲ୍ୟବାନ", "ମୂଲ୍ୟହୀନ", "ସମାନ ମୂଲ୍ୟର"],
+                correct: 0,
+                explanation: "ସାମଗ୍ରୀଗୁଡ଼ିକ ଅପେକ୍ଷା ସେଥିରୁ ଉତ୍ପାଦିତ ଉତ୍ପାଦଗୁଡ଼ିକ ଅଧିକ ମୂଲ୍ୟବାନ ଓ ଉପଯୋଗୀ ହୋଇଥାଏ[span_1](start_span)[span_1](end_span)."
+            },
+            {
+                question: "ସମ୍ବଳ (Resource) ହେବା ପାଇଁ କେଉଁ ଦୃଷ୍ଟିକୋଣରୁ ସୁଗମ୍ୟ, ସମ୍ଭବ ଓ ଗ୍ରହଣଯୋଗ୍ୟ ହେବା ଆବଶ୍ୟକ?",
+                options: ["ପ୍ରାଦ୍ୟୋଗିକ, ଆର୍ଥନୀତିକ ଓ ସାଂସ୍କୃତିକ", "କେବଳ ରାଜନୈତିକ", "କେବଳ ଧାର୍ମିକ", "କେବଳ ଶୈକ୍ଷିକ"],
+                correct: 0,
+                explanation: "ପରିବେଶର ଯେଉଁ ପଦାର୍ଥ ପ୍ରାଦ୍ୟୋଗିକ ଦୃଷ୍ଟିକୋଣରୁ ସୁଗମ୍ୟ, ଆର୍ଥନୀତିକ ଦୃଷ୍ଟିକୋଣରୁ ସମ୍ଭବ ଏବଂ ସାଂସ୍କୃତିକ ଦୃଷ୍ଟିକୋଣରୁ ଗ୍ରହଣଯୋଗ୍ୟ, ତାକୁ ସମ୍ବଳ କୁହାଯାଏ[span_2](start_span)[span_2](end_span)."
+            },
+            {
+                question: "ପ୍ରାକୃତିକ ପରିବେଶରେ କେଉଁ ଚାରୋଟି ମଧ୍ୟରେ ଥିବା ପରସ୍ପର ନିର୍ଭରଶୀଳତା ଉପରେ ରୂପାନ୍ତରଣ ପ୍ରକ୍ରିୟା ନିର୍ଭର କରେ?",
+                options: ["ପ୍ରକୃତି, ମନୁଷ୍ୟ, ପ୍ରାଦ୍ୟୋଗ ଓ ଅନୁଷ୍ଠାନ", "ଜଳ, ବାୟୁ, ମାଟି, ଅଗ୍ନି", "ରାଜା, ପ୍ରଜା, ସୈନିକ, ମନ୍ତ୍ରୀ", "ଶିକ୍ଷା, ସ୍ୱାସ୍ଥ୍ୟ, ବାଣିଜ୍ୟ, ବ୍ୟାଙ୍କ"],
+                correct: 0,
+                explanation: "ରୂପାନ୍ତରଣ ପ୍ରକ୍ରିୟା ପ୍ରାକୃତିକ ପରିବେଶରେ ପ୍ରକୃତି, ମନୁଷ୍ୟ, ପ୍ରାଦ୍ୟୋଗ ଓ ଅନୁଷ୍ଠାନ ମଧ୍ୟରେ ଥିବା ପରସ୍ପର ନିର୍ଭରଶୀଳତା ଉପରେ ନିର୍ଭର କରିଥାଏ[span_3](start_span)[span_3](end_span)."
+            },
+            {
+                question: "ଆର୍ଥନୀତିକ ଭୂଗୋଳରେ ମନୁଷ୍ୟକୁ କ'ଣ ଭାବରେ ଗ୍ରହଣ କରାଯାଇଥାଏ?",
+                options: ["ମୁଖ୍ୟ କର୍ତ୍ତା", "କେବଳ ଦର୍ଶକ", "ବାଧକ", "ନିଷ୍କ୍ରିୟ ପଦାର୍ଥ"],
+                correct: 0,
+                explanation: "ଆର୍ଥନୀତିକ ଭୂଗୋଳରେ ମନୁଷ୍ୟକୁ ଏକ ମୁଖ୍ୟ କର୍ତ୍ତା ଭାବରେ ଗ୍ରହଣ କରାଯାଇଥାଏ, କାରଣ ଉତ୍ପାଦନ, ବଣ୍ଟନ, ବ୍ୟବହାର ଓ କ୍ଷୟ ପ୍ରଭୃତି ସମସ୍ତ ପ୍ରକ୍ରିୟା ମନୁଷ୍ୟ ଦ୍ୱାରା ସମାହିତ ହୋଇଥାଏ[span_4](start_span)[span_4](end_span)[span_5](start_span)[span_5](end_span)."
+            },
+            {
+                question: "ମନୁଷ୍ୟକୁ ଆଉ କେଉଁ ରୂପରେ ବିଚାର କରାଯାଏ?",
+                options: ["ମାନବ ସମ୍ବଳ", "କେବଳ ଉପଭୋକ୍ତା", "ଅନାବଶ୍ୟକ କାରକ", "କେବଳ ଶ୍ରମିକ"],
+                correct: 0,
+                explanation: "ମନୁଷ୍ୟକୁ ସମ୍ବଳର ସ୍ରଷ୍ଟା, ଉପଭୋକ୍ତା ଓ କ୍ଷୟକାରୀ କାରକ ଭାବେ ବିଚାର କରାଯିବା ସହ ଏକ 'ମାନବ ସମ୍ବଳ' ଭାବରେ ଗ୍ରହଣ କରାଯାଇଥାଏ[span_6](start_span)[span_6](end_span)."
+            },
+            {
+                question: "ସମ୍ବଳର ଚାରିଗୋଟି ବିଶେଷତ୍ଵ ମଧ୍ୟରୁ ନିମ୍ନୋକ୍ତ ମଧ୍ୟରୁ କେଉଁଟି ଅଟେ?",
+                options: ["ଉପଯୋଗିତା, କାର୍ଯ୍ୟଦକ୍ଷତା, ସୁଲଭତା ଓ ପରିବର୍ତ୍ତନଶୀଳତା", "କଠିନତା, ତରଳତା, ଗ୍ୟାସୀୟତା", "ରଙ୍ଗ, ଗନ୍ଧ, ସ୍ୱାଦ", "ଓଜନ, ଆୟତନ, ଘନତ୍ୱ"],
+                correct: 0,
+                explanation: "ସମ୍ବଳର ଚାରିଗୋଟି ବିଶେଷତ୍ଵ ହେଉଛି: (୧) ଉପଯୋଗିତା, (୨) କାର୍ଯ୍ୟଦକ୍ଷତା, (୩) ସୁଲଭତା ଏବଂ (୪) ପରିବର୍ତ୍ତନଶୀଳତା[span_7](start_span)[span_7](end_span)."
+            },
+            {
+                question: "ପ୍ରକୃତି ଅନୁସାରେ ସମ୍ବଳକୁ କେତୋଟି ଭାଗରେ ବିଭକ୍ତ କରାଯାଇଛି?",
+                options: ["ତିନୋଟି (ପ୍ରାକୃତିକ, ସାଂସ୍କୃତିକ ଓ ମାନବ ସମ୍ବଳ)", "ଦୁଇଟି", "ଚାରିଟି", "ପାଞ୍ଚଟି"],
+                correct: 0,
+                explanation: "ପ୍ରକୃତି ଅନୁସାରେ ସମ୍ବଳକୁ ତିନୋଟି ଭାଗରେ ବିଭକ୍ତ କରାଯାଇଛି: ପ୍ରାକୃତିକ ସମ୍ବଳ, ସାଂସ୍କୃତିକ ସମ୍ବଳ ଏବଂ ମାନବ ସମ୍ବଳ[span_8](start_span)[span_8](end_span)."
+            },
+            {
+                question: "ନିମ୍ନୋକ୍ତ ମଧ୍ୟରୁ କେଉଁଟି 'ପ୍ରାକୃତିକ ସମ୍ବଳ' ଅଟେ?",
+                options: ["ଭୂମି, ମୃତ୍ତିକା, ଅରଣ୍ୟ ଓ ଜଳ", "ଶିକ୍ଷାନୁଷ୍ଠାନ ଓ ବ୍ୟାଙ୍କ", "ଗମନାଗମନ ଓ ବାଣିଜ୍ୟ", "ଶିଳ୍ପ ଓ ସ୍ୱାସ୍ଥ୍ୟ"],
+                correct: 0,
+                explanation: "ଭୂମି, ମୃତ୍ତିକା, ଅରଣ୍ୟ, ବନ୍ୟପ୍ରାଣୀ, ଜଳ, ବାୟୁ ଓ ଖଣିଜ ପଦାର୍ଥ ପ୍ରାକୃତିକ ସମ୍ବଳ ଅଟନ୍ତି[span_9](start_span)[span_9](end_span)."
+            },
+            {
+                question: "ନିମ୍ନୋକ୍ତ ମଧ୍ୟରୁ କେଉଁଟି 'ସାଂସ୍କୃତିକ ସମ୍ବଳ' ଅନ୍ତର୍ଭୁକ୍ତ?",
+                options: ["ଶିକ୍ଷା, ସ୍ୱାସ୍ଥ୍ୟ, ଗମନାଗମନ ଓ ବାଣିଜ୍ୟ ଅନୁଷ୍ଠାନ", "ସୌରଶକ୍ତି ଓ ପବନ ଶକ୍ତି", "ନଦୀ ଓ ପର୍ବତ", "ପଶୁପକ୍ଷୀ ଓ ଉଦ୍ଭିଦ"],
+                correct: 0,
+                explanation: "ମନୁଷ୍ୟକୃତ ସାଂସ୍କୃତିକ ଓ ଆର୍ଥନୈତିକ ଅନୁଷ୍ଠାନ, ଶିଳ୍ପ, ଶିକ୍ଷା, ସ୍ୱାସ୍ଥ୍ୟ, ଗମନାଗମନ, ବାଣିଜ୍ୟ ଇତ୍ୟାଦି ସାଂସ୍କୃତିକ ସମ୍ବଳ ଅଟେ[span_10](start_span)[span_10](end_span)."
+            },
+            {
+                question: "ଉତ୍ପତ୍ତି ଅନୁସାରେ ସମ୍ବଳ କେତେ ପ୍ରକାର?",
+                options: ["ଦୁଇ ପ୍ରକାର (ଜୈବ ଓ ଅଜୈବ)", "ତିନି ପ୍ରକାର", "ଚାରି ପ୍ରକାର", "ପାଞ୍ଚ ପ୍ରକାର"],
+                correct: 0,
+                explanation: "ଉତ୍ପତ୍ତି ଅନୁସାରେ ସମ୍ବଳ ଦୁଇ ପ୍ରକାର: (୧) ଜୈବ ସମ୍ବଳ (Biotic Resources) ଏବଂ (୨) ଅଜୈବ ସମ୍ବଳ (Abiotic Resources)[span_11](start_span)[span_11](end_span)."
+            },
+            {
+                question: "ନିମ୍ନୋକ୍ତ ମଧ୍ୟରୁ କେଉଁଟି 'ଜୈବ ସମ୍ବଳ' (Biotic Resource) ଅଟେ?",
+                options: ["ମନୁଷ୍ୟ, ପ୍ରାଣୀ, ଉଦ୍ଭିଦ ଓ ଅଣୁଜୀବ", "ଭୂମି, ଶିଳ୍ପ ଓ ଜଳ", "ଖଣିଜ ପଦାର୍ଥ ଓ ମୃତ୍ତିକା", "ସୌରଶକ୍ତି"],
+                correct: 0,
+                explanation: "ଜୈବ ମଣ୍ଡଳର ଅନ୍ତର୍ଗତ ସଜୀବ ବସ୍ତୁ ଯଥା ମନୁଷ୍ୟ, ପ୍ରାଣୀ, ଉଦ୍ଭିଦ, ଅଣୁଜୀବ, ପଶୁପକ୍ଷୀ ଓ ମାଛ ଜୈବ ସମ୍ବଳ ଅଟନ୍ତି[span_12](start_span)[span_12](end_span)."
+            },
+            {
+                question: "ନିମ୍ନୋକ୍ତ ମଧ୍ୟରୁ କେଉଁଟି 'ଅଜୈବ ସମ୍ବଳ' (Abiotic Resource) ଅଟେ?",
+                options: ["ଭୂମି, ଶିଳ୍ପ, ଜଳ ଓ ଖଣିଜ ପଦାର୍ଥ", "ଉଦ୍ଭିଦ ଓ ପ୍ରାଣୀ", "ଅଣୁଜୀବ", "ମନୁଷ୍ୟ"],
+                correct: 0,
+                explanation: "ଅଜୈବ ସମ୍ବଳଗୁଡ଼ିକ ଅଜୈବ ବା ନିର୍ଜୀବ ବସ୍ତୁ ଅଟେ, ଯଥା: ଭୂମି, ଶିଳ୍ପ(ମୂଳ ପଦାର୍ଥ), ଜଳ, ମୃତ୍ତିକା, ଖଣିଜ ପଦାର୍ଥ ଇତ୍ୟାଦି[span_13](start_span)[span_13](end_span)."
+            },
+            {
+                question: "ବ୍ୟବହାର ଓ ସୁଲଭତା ଅନୁସାରେ ସମ୍ବଳ କେତେ ପ୍ରକାର?",
+                options: ["ଦୁଇ ପ୍ରକାର (ଅସରନ୍ତି ଓ ସରନ୍ତି ସମ୍ବଳ)", "ତିନି ପ୍ରକାର", "ଚାରି ପ୍ରକାର", "ପାଞ୍ଚ ପ୍ରକାର"],
+                correct: 0,
+                explanation: "ବ୍ୟବହାର ଓ ସୁଲଭତା ଅନୁସାରେ ସମ୍ବଳ ଦୁଇ ପ୍ରକାର: (୧) ଅସରନ୍ତି ବା ଅକ୍ଷୟ ସମ୍ବଳ ଏବଂ (୨) ସରନ୍ତି ବା ସୀମିତ ବା କ୍ଷୟଶୀଳ ସମ୍ବଳ[span_14](start_span)[span_14](end_span)."
+            },
+            {
+                question: "ନିମ୍ନୋକ୍ତ ମଧ୍ୟରୁ କେଉଁଟି 'ଅସରନ୍ତି ବା ଅକ୍ଷୟ ସମ୍ବଳ' (Inexhaustible Resource) ଅଟେ?",
+                options: ["ସୌରଶକ୍ତି ଓ ବାୟୁ", "କୋଇଲା", "ପେଟ୍ରୋଲିୟମ୍", "ଖଣିଜ ଲୁହାପଥର"],
+                correct: 0,
+                explanation: "ଯେଉଁ ସମ୍ବଳ ମନୁଷ୍ୟର ବାରମ୍ବାର ବ୍ୟବହାର ସତ୍ତ୍ବେ ନିଃଶେଷ ହୁଏ ନାହିଁ, ତାକୁ ଅସରନ୍ତି ବା ଅକ୍ଷୟ ସମ୍ବଳ କୁହାଯାଏ; ଯଥା: ସୌରଶକ୍ତି, ବାୟୁ ଇତ୍ୟାଦି[span_15](start_span)[span_15](end_span)."
+            },
+            {
+                question: "ନିମ୍ନୋକ୍ତ ମଧ୍ୟରୁ କେଉଁଟି 'ସରନ୍ତି ବା କ୍ଷୟଶୀଳ ସମ୍ବଳ' (Exhaustible Resource) ଅଟେ?",
+                options: ["ପେଟ୍ରୋଲିୟମ୍ ଓ କୋଇଲା", "ସୌରଶକ୍ତି", "ବାୟୁ", "ସୂର୍ଯ୍ୟକିରଣ"],
+                correct: 0,
+                explanation: "ମନୁଷ୍ୟର ବ୍ୟବହାର ଦ୍ୱାରା ଯେଉଁ ସମ୍ବଳ କ୍ରମଶଃ ହ୍ରାସ ପାଇଥାଏ କିମ୍ବା ଶେଷ ହୋଇଯିବାର ଆଶଙ୍କା ଥାଏ, ତାକୁ ସରନ୍ତି ବା କ୍ଷୟଶୀଳ ସମ୍ବଳ କୁହାଯାଏ (ଯଥା: ପେଟ୍ରୋଲିୟମ୍, କୋଇଲା)[span_16](start_span)[span_16](end_span)."
+            },
+            {
+                question: "ପରିମାଣ ଅନୁସାରେ ସମ୍ବଳ କେତେ ପ୍ରକାର?",
+                options: ["ଦୁଇ ପ୍ରକାର (ଅପୂରଣୀୟ ଓ ଅବିରାମ/ପୂରଣୀୟ ସମ୍ବଳ)", "ତିନି ପ୍ରକାର", "ଚାରି ପ୍ରକାର", "ପାଞ୍ଚ ପ୍ରକାର"],
+                correct: 0,
+                explanation: "ପରିମାଣ ଅନୁସାରେ ସମ୍ବଳ ଦୁଇ ପ୍ରକାର: (୧) ଅପୂରଣୀୟ ସମ୍ବଳ ଏବଂ (୨) ଅବିରାମ ସମ୍ବଳ କିମ୍ବା ପୂରଣୀୟ ସମ୍ବଳ[span_17](start_span)[span_17](end_span)."
+            },
+            {
+                question: "ନିମ୍ନୋକ୍ତ ମଧ୍ୟରୁ କେଉଁଟି 'ଅପୂରଣୀୟ ସମ୍ବଳ' (Irreplenishable Resource) ଅଟେ?",
+                options: ["କୋଇଲା ଓ ଖଣିଜ ତୈଳ", "ସୌରଶକ୍ତି", "ଭୂ-ତାପଜ ଶକ୍ତି", "ପବନ ଶକ୍ତି"],
+                correct: 0,
+                explanation: "ଯେଉଁ ସମ୍ବଳ ମନୁଷ୍ୟର ବ୍ୟବହାର ଦ୍ବାରା ସମ୍ପୂର୍ଣ ଶେଷ ହୋଇଯାଏ ଏବଂ ପୁନଃ ସୃଷ୍ଟି କରାଯାଇପାରେ ନାହିଁ, ତାକୁ ଅପୂରଣୀୟ ସମ୍ବଳ କୁହାଯାଏ; ଯଥା: ଖଣିଜ ପଦାର୍ଥ, ଖଣିଜ ତୈଳ, କୋଇଲା[span_18](start_span)[span_18](end_span)."
+            },
+            {
+                question: "ନିମ୍ନୋକ୍ତ ମଧ୍ୟରୁ କେଉଁଟି 'ଅବିରାମ ବା ପୂରଣୀୟ ସମ୍ବଳ' (Replenishable Resource) ଅଟେ?",
+                options: ["ସୌରଶକ୍ତି ଓ ଭୂ-ତାପଜ ଶକ୍ତି", "କୋଇଲା", "ପେଟ୍ରୋଲିୟମ୍", "ପ୍ରାକୃତିକ ଗ୍ୟାସ୍"],
+                correct: 0,
+                explanation: "ବ୍ୟବହାର ଦ୍ୱାରା ଯେଉଁ ସମ୍ବଳର ପରିମାଣରେ କୌଣସି ହ୍ରାସ ପରିଲକ୍ଷିତ ହୋଇ ନ ଥାଏ, ତାକୁ ଅବିରାମ ବା ପୂରଣୀୟ ସମ୍ବଳ କୁହାଯାଏ; ଯଥା: ସୌରଶକ୍ତି, ଭୂ-ତାପଜ ଶକ୍ତି, ଜୁଆର ଶକ୍ତି, ପବନ ଶକ୍ତି[span_19](start_span)[span_19](end_span)."
+            },
+            {
+                question: "ଭରଣ ଅନୁସାରେ ସମ୍ବଳ କେତେ ଭାଗରେ ବିଭକ୍ତ?",
+                options: ["ଦୁଇ ଭାଗ (ନବୀକରଣ ଯୋଗ୍ୟ ଓ ନବୀକରଣ ଅଯୋଗ୍ୟ ସମ୍ବଳ)", "ତିନି ଭାଗ", "ଚାରି ଭାଗ", "ପାଞ୍ଚ ଭାଗ"],
+                correct: 0,
+                explanation: "ଭରଣ ଅନୁସାରେ ସମ୍ବଳ ଦୁଇ ଭାଗରେ ବିଭକ୍ତ: (୧) ନବୀକରଣ ଯୋଗ୍ୟ ସମ୍ବଳ ଏବଂ (୨) ନବୀକରଣ ଅଯୋଗ୍ୟ ସମ୍ବଳ[span_20](start_span)[span_20](end_span)."
+            },
+            {
+                question: "ଜଙ୍ଗଲଜାତ, ପ୍ରାଣୀଜାତ ଓ କୃଷିଜାତ ପଦାର୍ଥ କେଉଁ ଶ୍ରେଣୀର ସମ୍ବଳ ଅଟେ?",
+                options: ["ନବୀକରଣ ଯୋଗ୍ୟ ସମ୍ବଳ", "ନବୀକରଣ ଅଯୋଗ୍ୟ ସମ୍ବଳ", "ଆନ୍ତର୍ଜାତୀୟ ସମ୍ବଳ", "ସ୍ଥାନୀୟ ସମ୍ବଳ"],
+                correct: 0,
+                explanation: "ଜଙ୍ଗଲଜାତ ପଦାର୍ଥ, ପ୍ରାଣୀଜାତ ପଦାର୍ଥ, କୃଷିଜାତ ପଦାର୍ଥ ଇତ୍ୟାଦି ଚକ୍ରୀୟ ପ୍ରକ୍ରିୟା ଦ୍ୱାରା ପୁନଃ ନବୀକରଣ କରାଯାଇ ବ୍ୟବହୃତ ହୋଇଥାଏ, ତେଣୁ ଏହା ନବୀକରଣ ଯୋଗ୍ୟ ସମ୍ବଳ[span_21](start_span)[span_21](end_span)."
+            },
+            {
+                question: "ଅଦରକାରୀ ଧାତବ ପଦାର୍ଥଗୁଡ଼ିକୁ ଯାନ୍ତ୍ରିକ ପଦ୍ଧତିରେ ପୁନଃଚକ୍ରୀୟ ପ୍ରକ୍ରିୟା ଦ୍ୱାରା ପୁନର୍ବାର ବ୍ୟବହାରଯୋଗ୍ୟ କରାଗଲେ ତାକୁ କ'ଣ କୁହାଯାଏ?",
+                options: ["ପୁନରୁଦ୍ଧାରଯୋଗ୍ୟ ସମ୍ବଳ (Recoverable Resources)", "ଅପୂରଣୀୟ ସମ୍ବଳ", "ପ୍ରଚ୍ଛନ୍ନ ସମ୍ବଳ", "ସମ୍ବଳ ଭଣ୍ଡାର"],
+                correct: 0,
+                explanation: "ଯେଉଁ ନବୀକରଣ ଅଯୋଗ୍ୟ ସମ୍ବଳଗୁଡ଼ିକୁ ପୁନରୁଦ୍ଧାର କରାଯାଇପାରେ (ଯଥା ମାଟି, ଲୁହା, ଆଲୁମିନିୟମ୍, ତମ୍ବା), ସେଗୁଡ଼ିକୁ ପୁନରୁଦ୍ଧାରଯୋଗ୍ୟ ସମ୍ବଳ କୁହାଯାଏ[span_22](start_span)[span_22](end_span)."
+            },
+            {
+                question: "ବଣ୍ଟନ ବା ବିତରଣ ଅନୁସାରେ ସମ୍ବଳ କେତେ ପ୍ରକାର?",
+                options: ["ଦୁଇ ପ୍ରକାର (ସର୍ବତ୍ର ସୁଲଭ ଓ ସ୍ଥାନୀୟ ସମ୍ବଳ)", "ତିନି ପ୍ରକାର", "ଚାରି ପ୍ରକାର", "ପାଞ୍ଚ ପ୍ରକାର"],
+                correct: 0,
+                explanation: "ବଣ୍ଟନ ବା ବିତରଣ ଅନୁସାରେ ସମ୍ବଳ ଦୁଇ ପ୍ରକାର: (୧) ସର୍ବତ୍ର ସୁଲଭ ସମ୍ବଳ (Ubiquitous Resources) ଏବଂ (୨) ସ୍ଥାନୀୟ ସମ୍ବଳ (Localised Resources)[span_23](start_span)[span_23](end_span)[span_24](start_span)[span_24](end_span)."
+            },
+            {
+                question: "ନିମ୍ନୋକ୍ତ ମଧ୍ୟରୁ କେଉଁଟି 'ସର୍ବତ୍ର ସୁଲଭ ସମ୍ବଳ' (Ubiquitous Resource) ଅଟେ?",
+                options: ["ଭୂମି, ଜଳ ଓ ବାୟୁ", "କୋଇଲା", "ପେଟ୍ରୋଲିୟମ୍", "ତମ୍ବା"],
+                correct: 0,
+                explanation: "ଯେଉଁ ସମ୍ବଳଗୁଡ଼ିକ ଭୂ-ପୃଷ୍ଠରେ ସବୁଠାରେ ମିଳିଥାଏ, ସେଗୁଡ଼ିକୁ ସର୍ବତ୍ର ସୁଲଭ ସମ୍ବଳ କୁହାଯାଏ; ଯଥା: ଭୂମି, ଜଳ, ବାୟୁ[span_25](start_span)[span_25](end_span)."
+            },
+            {
+                question: "ନିମ୍ନୋକ୍ତ ମଧ୍ୟରୁ କେଉଁଟି 'ସ୍ଥାନୀୟ ସମ୍ବଳ' (Localised Resource) ଅଟେ?",
+                options: ["ଖଣିଜ ପଦାର୍ଥ", "ବାୟୁ", "ସୂର୍ଯ୍ୟକିରଣ", "ଜଳ (ସର୍ବତ୍ର)"],
+                correct: 0,
+                explanation: "ଯେଉଁ ସମ୍ବଳଗୁଡ଼ିକ ଭୂପୃଷ୍ଠର କେତେକ ନିର୍ଦ୍ଦିଷ୍ଟ ସ୍ଥାନରେ ସୀମିତଭାବେ ମିଳିଥାଏ, ସେଗୁଡ଼ିକୁ ସ୍ଥାନୀୟ ସମ୍ବଳ କୁହାଯାଏ; ଯଥା: ଖଣିଜ ପଦାର୍ଥ[span_26](start_span)[span_26](end_span)."
+            },
+            {
+                question: "ବିକାଶସ୍ତର ଅନୁସାରେ ସମ୍ବଳକୁ କେତେ ଭାଗରେ ବିଭକ୍ତ କରାଯାଇଛି?",
+                options: ["ଚାରି ଭାଗ", "ତିନି ଭାଗ", "ଦୁଇ ଭାଗ", "ପାଞ୍ଚ ଭାଗ"],
+                correct: 0,
+                explanation: "ବିକାଶସ୍ତର ଅନୁସାରେ ସମ୍ବଳକୁ ଚାରି ଭାଗରେ ବିଭକ୍ତ କରାଯାଇଛି: (୧) ପ୍ରଚ୍ଛନ୍ନ ବା ଗଚ୍ଛିତ ସମ୍ବଳ, (୨) ସମ୍ବଳ ଭଣ୍ଡାର, (୩) ବିକଶିତ ସମ୍ବଳ ଏବଂ (୪) ସଂରକ୍ଷିତ ସମ୍ବଳ[span_27](start_span)[span_27](end_span)."
+            },
+            {
+                question: "ଗୁଜରାଟ ଓ ରାଜସ୍ଥାନରେ ପ୍ରଚୁର ସୌରଶକ୍ତି ଓ ପବନ ଶକ୍ତି ମହଜୁଦ ଥିଲେ ମଧ୍ୟ ସମ୍ବଳର କେଉଁ ସ୍ତର ଅନ୍ତର୍ଗତ?",
+                options: ["ପ୍ରଚ୍ଛନ୍ନ ବା ଗଚ୍ଛିତ ସମ୍ବଳ (Potential Resources)", "ବିକଶିତ ସମ୍ବଳ", "ସଂରକ୍ଷିତ ସମ୍ବଳ", "ଗୋଷ୍ଠୀଗତ ସମ୍ବଳ"],
+                correct: 0,
+                explanation: "ଯେଉଁ ସମ୍ବଳ ପ୍ରକୃତିର ଗନ୍ତାଘରେ ଅବ୍ୟବହୃତ ଅବସ୍ଥାରେ ରହିଛି ତାକୁ ପ୍ରଚ୍ଛନ୍ନ ବା ଗଚ୍ଛିତ ସମ୍ବଳ କୁହାଯାଏ (ଯଥା: ଗୁଜରାଟ ଓ ରାଜସ୍ଥାନର ସୌର ଓ ପବନ ଶକ୍ତି)[span_28](start_span)[span_28](end_span)."
+            },
+            {
+                question: "ପରିବେଶରେ ଥିବା ପଦାର୍ଥ ଯାହା ମନୁଷ୍ୟର ଆବଶ୍ୟକତା ପୂରଣ କରିପାରିବ ମାତ୍ର ଆଜିର ଜ୍ଞାନକୌଶଳ ଅନୁସାରେ ବ୍ୟବହାର ହୋଇପାରୁନାହିଁ, ତାକୁ କ'ଣ କୁହାଯାଏ?",
+                options: ["ସମ୍ବଳ ଭଣ୍ଡାର (Stock)", "ବିକଶିତ ସମ୍ବଳ", "ବ୍ୟକ୍ତିଗତ ସମ୍ବଳ", "ଆନ୍ତର୍ଜାତୀୟ ସମ୍ବଳ"],
+                correct: 0,
+                explanation: "ପରିବେଶରେ ଥିବା ପଦାର୍ଥ ଯାହା ମନୁଷ୍ୟର ଆବଶ୍ୟକତା ପୂରଣ କରିବ କିନ୍ତୁ ଆଜିର ଜ୍ଞାନକୌଶଳ ଅଭାବରୁ ବ୍ୟବହାର ହୋଇପାରୁନାହିଁ, ତାହା 'ସମ୍ବଳ ଭଣ୍ଡାର' ଅଟେ[span_29](start_span)[span_29](end_span)."
+            },
+            {
+                question: "ଯାହା ବ୍ୟବହାର ଉପଯୋଗୀ କରାଯାଇପାରିଛି, ତାକୁ କେଉଁ ସମ୍ବଳ କୁହାଯାଏ?",
+                options: ["ବିକଶିତ ସମ୍ବଳ (Developed Resources)", "ପ୍ରଚ୍ଛନ୍ନ ସମ୍ବଳ", "ସମ୍ବଳ ଭଣ୍ଡାର", "ଅପୂରଣୀୟ ସମ୍ବଳ"],
+                correct: 0,
+                explanation: "ଯାହା ବ୍ୟବହାର ଉପଯୋଗୀ କରାଯାଇପାରିଛି (ଯଥା: ଜଳ-ବିଦ୍ୟୁତ୍ ଶକ୍ତି, ଅରଣ୍ୟ, ଖଣିଜ ପଦାର୍ଥ) ତାକୁ ବିକଶିତ ସମ୍ବଳ କୁହାଯାଏ[span_30](start_span)[span_30](end_span)."
+            },
+            {
+                question: "ଯେଉଁ ସମ୍ବଳ ପଦାର୍ଥଗୁଡ଼ିକର ସନ୍ଧାନ ମିଳିପାରିଛି, ମାତ୍ର ବ୍ୟବହାର ଉପଯୋଗୀ ହୋଇପାରିନାହିଁ କିନ୍ତୁ ଭବିଷ୍ୟତରେ ଉପଯୋଗୀ ହେବାର ଆଶା ଅଛି, ତାକୁ କ'ଣ କୁହାଯାଏ?",
+                options: ["ସଂରକ୍ଷିତ ସମ୍ବଳ (Reserve)", "ବ୍ୟକ୍ତିଗତ ସମ୍ବଳ", "ସର୍ବତ୍ର ସୁଲଭ ସମ୍ବଳ", "ଜୈବ ସମ୍ବଳ"],
+                correct: 0,
+                explanation: "ଯେଉଁ ସମ୍ବଳ ପଦାର୍ଥଗୁଡ଼ିକର ସନ୍ଧାନ ମିଳିଛି, ମାତ୍ର ବ୍ୟବହାର ହୋଇନି କିନ୍ତୁ ଭବିଷ୍ୟତରେ ହେବ, ତାକୁ ସଂରକ୍ଷିତ ସମ୍ବଳ (Reserve) କୁହାଯାଏ[span_31](start_span)[span_31](end_span)."
+            },
+            {
+                question: "ମାଲିକାନା ଅନୁସାରେ ସମ୍ବଳକୁ କେତେ ଭାଗରେ ବିଭକ୍ତ କରାଯାଇଛି?",
+                options: ["ଚାରି ଭାଗ (ବ୍ୟକ୍ତିଗତ, ଗୋଷ୍ଠୀଗତ, ଜାତୀୟ ଓ ଆନ୍ତର୍ଜାତୀୟ)", "ତିନି ଭାଗ", "ଦୁଇ ଭାଗ", "ପାଞ୍ଚ ଭାଗ"],
+                correct: 0,
+                explanation: "ମାଲିକାନା ଅନୁସାରେ ସମ୍ବଳ ଚାରି ଭାଗରେ ବିଭକ୍ତ: (୧) ବ୍ୟକ୍ତିଗତ ସମ୍ବଳ, (୨) ଗୋଷ୍ଠୀଗତ ସମ୍ବଳ, (୩) ଜାତୀୟ ସମ୍ବଳ ଏବଂ (୪) ଆନ୍ତର୍ଜାତୀୟ ସମ୍ବଳ[span_32](start_span)[span_32](end_span)[span_33](start_span)[span_33](end_span)."
+            },
+            {
+                question: "ନିମ୍ନୋକ୍ତ ମଧ୍ୟରୁ କେଉଁଟି 'ବ୍ୟକ୍ତିଗତ ସମ୍ବଳ' (Individual Resource) ଅଟେ?",
+                options: ["ଚାଷ ଜମି, ଗୃହ ଓ ପୁଷ୍କରିଣୀ (ନିଜସ୍ୱ)", "ଶ୍ମଶାନ", "ରାସ୍ତାଘାଟ", "ସମୁଦ୍ରର ଜଳଭାଗ"],
+                correct: 0,
+                explanation: "ଯେଉଁ ସମ୍ବଳ ନିଜସ୍ୱ ଅଧିକାରରେ ରହିଛି, ତାକୁ ବ୍ୟକ୍ତିଗତ ସମ୍ବଳ କୁହାଯାଏ; ଯଥା: ଚାଷ ଜମି, ଗୃହ, ରୋପଣ କୃଷି ଭୂମି, ନିଜସ୍ୱ ପୁଷ୍କରିଣୀ, କୂପ[span_34](start_span)[span_34](end_span)."
+            },
+            {
+                question: "ନିମ୍ନୋକ୍ତ ମଧ୍ୟରୁ କେଉଁଟି 'ଗୋଷ୍ଠୀଗତ ସମ୍ବଳ' (Community Resource) ଅଟେ?",
+                options: ["ଶ୍ମଶାନ, ଗୋଚର ଭୂମି ଓ ଖେଳପଡ଼ିଆ", "ବ୍ୟକ୍ତିଗତ ଘର", "ନିଜସ୍ୱ ଚାଷ ଜମି", "କାରଖାନା"],
+                correct: 0,
+                explanation: "କୌଣସି ଗୋଷ୍ଠୀର ସମସ୍ତ ବ୍ୟକ୍ତିଙ୍କର ସମୂହ ମାଲିକାନାରେ ଥିବା ସ୍ଥାବର ଓ ଅସ୍ଥାବର ସମ୍ପତ୍ତି (ଯଥା: ଗୋଚର ଭୂମି, ଶ୍ମଶାନ, ପ୍ରମୋଦ ଉଦ୍ୟାନ, ଖେଳପଡ଼ିଆ) ଗୋଷ୍ଠୀଗତ ସମ୍ବଳ ଅଟେ[span_35](start_span)[span_35](end_span)."
+            },
+            {
+                question: "ଦେଶର ଭୌଗୋଳିକ ସୀମାରେଖା ମଧ୍ୟରେ ଥିବା ସମସ୍ତ ପ୍ରାକୃତିକ, ସାଂସ୍କୃତିକ ଓ ମାନବ ସମ୍ବଳକୁ କ'ଣ କୁହାଯାଏ?",
+                options: ["ଜାତୀୟ ସମ୍ବଳ (National Resources)", "ଆନ୍ତର୍ଜାତୀୟ ସମ୍ବଳ", "ବ୍ୟକ୍ତିଗତ ସମ୍ବଳ", "ଗୋଷ୍ଠୀଗତ ସମ୍ବଳ"],
+                correct: 0,
+                explanation: "ଦେଶର ଭୌଗୋଳିକ ସୀମାରେଖା ମଧ୍ୟରେ ଥିବା ସମସ୍ତ ପ୍ରାକୃତିକ ସମ୍ବଳ, ସାଂସ୍କୃତିକ ସମ୍ବଳ, ମାନବ ସମ୍ବଳ ଏବଂ ଘରୋଇ ସମ୍ବଳକୁ ଜାତୀୟ ସମ୍ବଳ କୁହାଯାଏ[span_36](start_span)[span_36](end_span)."
+            },
+            {
+                question: "ଜାତୀୟ ସମ୍ବଳ ଅନ୍ତର୍ଗତ ଉପକୂଳଠାରୁ ସମୁଦ୍ରଆଡ଼କୁ ପ୍ରାୟ କେତେ ଦୂରତା ପର୍ଯ୍ୟନ୍ତ ଜଳଭାଗ ରହିଥାଏ?",
+                options: ["୧୨ ନଟିକାଲ ମାଇଲ (ପ୍ରାୟ 22.2 କି.ମି.)", "୨୦୦ ନଟିକାଲ ମାଇଲ", "୫୦ ନଟିକାଲ ମାଇଲ", "୩୭୦ ନଟିକାଲ ମାଇଲ"],
+                correct: 0,
+                explanation: "ଜାତୀୟ ସମ୍ବଳ ଅନ୍ତର୍ଗତ ଉପକୂଳଠାରୁ ସମୁଦ୍ରଆଡ଼କୁ ପ୍ରାୟ ୧୨ ନଟିକାଲ ମାଇଲ (ପ୍ରାୟ ୨୨.୨ କି.ମି.) ଦୂରତାରେ ଥିବା ଜଳଭାଗ ରହିଥାଏ[span_37](start_span)[span_37](end_span)."
+            },
+            {
+                question: "ସମୁଦ୍ର ଉପକୂଳର ଅନନ୍ୟ ଆର୍ଥନୀତିକ ଅଞ୍ଚଳ (EEZ) କେତେ ଦୂରତାର ପରବର୍ତ୍ତୀ ଅଞ୍ଚଳକୁ ବୁଝାଏ ଯାହା ଆନ୍ତର୍ଜାତୀୟ ସମ୍ବଳ ଅଟେ?",
+                options: ["୨୦୦ ନଟିକାଲ ମାଇଲ (୩୭୦ କି.ମି.)", "୧୨ ନଟିକାଲ ମାଇଲ", "୫୦ ନଟିକାଲ ମାଇଲ", "୫୦୦ ନଟିକାଲ ମାଇଲ"],
+                correct: 0,
+                explanation: "ସମୁଦ୍ର ଉପକୂଳର ଅନନ୍ୟ ଆର୍ଥନୀତିକ ଅଞ୍ଚଳ (EEZ) ୨୦୦ ନଟିକାଲ ମାଇଲ (୩୭୦ କି.ମି.)ର ପରବର୍ତ୍ତୀ ଅଞ୍ଚଳରେ ଥିବା ସାମୁଦ୍ରିକ ସମ୍ବଳ ଆନ୍ତର୍ଜାତୀୟ ସମ୍ବଳ ଅଟେ[span_38](start_span)[span_38](end_span)."
+            },
+            {
+                question: "ଆନ୍ତର୍ଜାତୀୟ ସମ୍ବଳ ଉପରେ କାହାର କର୍ତ୍ତୃତ୍ୱ ରହିଥାଏ?",
+                options: ["ବିଶ୍ୱ ଜାତିସଂଘ (U.N.)", "କୌଣସି ଗୋଟିଏ ନିର୍ଦ୍ଦିଷ୍ଟ ଦେଶ", "ସ୍ଥାନୀୟ ପଞ୍ଚାୟତ", "ରାଜ୍ୟ ସରକାର"],
+                correct: 0,
+                explanation: "ଆନ୍ତର୍ଜାତୀୟ ସମ୍ବଳ ଉପରେ ବିଶ୍ୱ ଜାତିସଂଘ (U.N.) ର କର୍ତ୍ତୃତ୍ୱ ରହିଥାଏ ଏବଂ ଏହାର ବିନା ଅନୁମତିରେ କୌଣସି ଦେଶ ଅଧିକାର ସାବ୍ୟସ୍ତ କରିପାରିବେ ନାହିଁ[span_39](start_span)[span_39](end_span)."
+            },
+            {
+                question: "ଭାରତ ମହାସାଗରର EEZ ଅଞ୍ଚଳରୁ ଭାରତ କେଉଁ ଖଣିଜ ଦ୍ରବ୍ୟ ଉତ୍ତୋଳନ କରିବାର ଅଧିକାର ପାଇଛି?",
+                options: ["ମାଙ୍ଗାନିଜ ନୋଡୁଲ୍ସ (Manganese Nodules)", "ହୀରା", "ସ୍ୱର୍ଣ୍ଣ", "ୟୁରାନିୟମ"],
+                correct: 0,
+                explanation: "ଭାରତ ମହାସାଗରର EEZ ଅଞ୍ଚଳରୁ ଭାରତ ମାଙ୍ଗାନିଜ ନୋଡୁଲ୍ସ (Manganese Nodules) ଉତ୍ତୋଳନ କରିବାର ଅଧିକାର ପାଇଛି[span_40](start_span)[span_40](end_span)."
+            },
+            {
+                question: "ସମ୍ବଳ ବିନିଯୋଗର ଆବଶ୍ୟକତା ତଥା ଆଗାମୀ ବଂଶଧରଙ୍କ ପାଇଁ ସେଗୁଡ଼ିକର ସଂରକ୍ଷଣ ମଧ୍ୟରେ ସନ୍ତୁଳନ ରକ୍ଷା କରିବାକୁ କ'ଣ କୁହାଯାଏ?",
+                options: ["ଧାରଣୀୟ ବିକାଶ (Sustainable Development)", "ସମ୍ବଳ ଅପଚୟ", "ଅବକ୍ଷୟ", "ବ୍ୟାବସାୟିକରଣ"],
+                correct: 0,
+                explanation: "ସମ୍ବଳ ବିନିଯୋଗର ଆବଶ୍ୟକତା ତଥା ଆଗାମୀ ବଂଶଧରଙ୍କ ପାଇଁ ସେଗୁଡ଼ିକର ସଂରକ୍ଷଣ ମଧ୍ୟରେ ସନ୍ତୁଳନ ରକ୍ଷା କରିବାକୁ ଧାରଣୀୟ ବିକାଶ (Sustainable Development) କୁହାଯାଏ[span_41](start_span)[span_41](end_span)."
+            },
+            {
+                question: "ଧାରଣୀୟ ବିକାଶର ଏକ ମୁଖ୍ୟ ବିଶେଷତ୍ତ୍ଵ କ'ଣ?",
+                options: ["ପୃଥିବୀର ସମସ୍ତ ଜୀବଜନ୍ତୁଙ୍କ ପ୍ରତି ସମ୍ମାନ ଓ ଯତ୍ନଶୀଳ ହେବା", "ଜଙ୍ଗଲ ସମ୍ପୂର୍ଣ୍ଣ ନଷ୍ଟ କରିବା", "ପ୍ରାକୃତିକ ସମ୍ବଳ ଅତ୍ୟଧିକ ବ୍ୟବହାର କରିବା", "ପ୍ରଦୂଷଣ ବୃଦ୍ଧି କରିବା"],
+                correct: 0,
+                explanation: "ଧାରଣୀୟ ବିକାଶର ବିଶେଷତ୍ତ୍ଵ ହେଲା ପୃଥିବୀର ସମସ୍ତ ଜୀବଜନ୍ତୁଙ୍କ ପ୍ରତି ସମ୍ମାନ ଓ ଯତ୍ନଶୀଳ ହେବା, ମନୁଷ୍ୟର ଜୀବନଧାରଣ ମାନରେ ଉନ୍ନତି ଆଣିବା, ଓ ପ୍ରାକୃତିକ ସମ୍ବଳର ଅବକ୍ଷୟ ହ୍ରାସ କରିବା[span_42](start_span)[span_42](end_span)."
+            },
+            {
+                question: "ସମ୍ବଳ ସଂରକ୍ଷଣର ମୁଖ୍ୟ ତିନୋଟି ଉପାୟ ମଧ୍ୟରେ ନିମ୍ନୋକ୍ତ ମଧ୍ୟରୁ କେଉଁଟି ଅଟେ?",
+                options: ["ସମ୍ବଳ ବ୍ୟବହାରର ଯଥୋଚିତ ହ୍ରାସ, ପୁନଃଚକ୍ରୀକରଣ ଓ ପୁନଃବ୍ୟବହାର", "କେବଳ ଜାଳିବା", "କେବଳ ଫିଙ୍ଗିଦେବା", "କୌଣସିଟି ନୁହେଁ"],
+                correct: 0,
+                explanation: "ସମ୍ବଳ ସଂରକ୍ଷଣର ମୁଖ୍ୟ ତିନୋଟି ଉପାୟ ହେଉଛି: (କ) ସମ୍ବଳ ବ୍ୟବହାରର ଯଥୋଚିତ ହ୍ରାସ, (ଖ) ପୁନଃଚକ୍ରୀକରଣ କୌଶଳ, (ଗ) ପୁନଃବ୍ୟବହାର[span_43](start_span)[span_43](end_span)."
+            },
+            {
+                question: "ଝାଡ଼ଖଣ୍ଡ, ଛତିଶଗଡ଼, ଓଡ଼ିଶା ଓ ମଧ୍ୟପ୍ରଦେଶ ରାଜ୍ୟଗୁଡ଼ିକରେ କେଉଁ ସମ୍ବଳ ଅଧିକ ପରିମାଣରେ ଦେଖାଯାଇଥାଏ?",
+                options: ["ଖଣିଜ ସମ୍ବଳ", "ଜଳ ସମ୍ବଳ", "ଶୀତଳ ମରୁଭୂମି", "କେବଳ ସୌରଶକ୍ତି"],
+                correct: 0,
+                explanation: "ଝାଡ଼ଖଣ୍ଡ, ଛତିଶଗଡ଼, ଓଡ଼ିଶା, ମଧ୍ୟପ୍ରଦେଶ ଇତ୍ୟାଦି ରାଜ୍ୟଗୁଡ଼ିକରେ ବିଭିନ୍ନ ପ୍ରକାର ଖଣିଜ ସମ୍ବଳ ଅଧିକ ପରିମାଣରେ ଦେଖାଯାଇଥାଏ[span_44](start_span)[span_44](end_span)."
+            },
+            {
+                question: "ଅରୁଣାଚଳ ପ୍ରଦେଶରେ କେଉଁ ସମ୍ବଳ ପ୍ରଚୁର ଥିଲେ ମଧ୍ୟ ବ୍ୟବହାର ନିମିତ୍ତ ସର୍ବନିମ୍ନ ସୁବିଧା ମିଳି ନ ଥାଏ?",
+                options: ["ଜଳ ସମ୍ବଳ", "ଖଣିଜ ତୈଳ", "କୋଇଲା", "ହୀରା"],
+                correct: 0,
+                explanation: "ଅରୁଣାଚଳ ପ୍ରଦେଶରେ ଅଧିକ ପରିମାଣରେ ଜଳ ସମ୍ବଳ ରହିଥିଲେ ମଧ୍ୟ ତା'ର ବ୍ୟବହାର ନିମିତ୍ତ ସର୍ବନିମ୍ନ ସୁବିଧା ମିଳି ନ ଥାଏ[span_45](start_span)[span_45](end_span)."
+            },
+            {
+                question: "ଲାଦାଖ କ'ଣ ଅଟେ?",
+                options: ["ଏକ ଶୀତଳ ମରୁଭୂମି", "ଏକ ଉଷ୍ଣ ମରୁଭୂମି", "ଏକ ଘଞ୍ଚ ଜଙ୍ଗଲ ଅଞ୍ଚଳ", "ଏକ ଉପକୂଳବର୍ତ୍ତୀ ଅଞ୍ଚଳ"],
+                correct: 0,
+                explanation: "ଲାଦାଖ ଏକ ଶୀତଳ ମରୁଭୂମି ହୋଇଥିବାରୁ ଦେଶର ଅନ୍ୟାନ୍ୟ ଅଞ୍ଚଳ ସହିତ ଏହାର ଉତ୍ତମ ସଂଯୋଗ ନାହିଁ[span_46](start_span)[span_46](end_span)."
+            },
+            {
+                question: "ପ୍ରକୃତି ଓ ପ୍ରାକୃତିକ ସମ୍ବଳର ସଂରକ୍ଷଣ ପାଇଁ ଗଠିତ ଆନ୍ତର୍ଜାତୀୟ ସଂସ୍ଥା IUCN ର ପୂର୍ଣ୍ଣରୂପ କ'ଣ?",
+                options: ["International Union for Conservation of Nature and Natural Resources", "International United Climate Network", "Intergovernmental Union of Natural Conservation", "International Urban Council for Nature"],
+                correct: 0,
+                explanation: "IUCN ର ପୂର୍ଣ୍ଣରୂପ ହେଉଛି International Union for Conservation of Nature and Natural Resources[span_47](start_span)[span_47](end_span)."
+            },
+            {
+                question: "IUCN ବନ୍ୟପ୍ରାଣୀ ସଂରକ୍ଷଣ ମାଧ୍ୟମରେ କେତୋଟି ଜାତିର ସଂଖ୍ୟା ପ୍ରତି ଦୃଷ୍ଟି ଦେଉଛି?",
+                options: ["ପାଞ୍ଚଗୋଟି", "ତିନୋଟି", "ଚାରିଟି", "ଛଅଟି"],
+                correct: 0,
+                explanation: "IUCN ବନ୍ୟପ୍ରାଣୀ ସଂରକ୍ଷଣ ମାଧ୍ୟମରେ ପାଞ୍ଚଗୋଟି ଜାତିର ସଂଖ୍ୟା ପ୍ରତି ଦୃଷ୍ଟି ଦେଉଛି: (କ) ବିଲୁପ୍ତ ବା ନିଶ୍ଚିହ୍ନ ଜାତି, (ଖ) ବିପଦସଙ୍କୁଳ ଜାତି, (ଗ) ସମ୍ବେଦନଶୀଳ ଜାତି, (ଘ) ବିରଳ ଜାତି, (ଙ) କମ୍ ଜଣାଥିବା ଜାତି[span_48](start_span)[span_48](end_span)."
+            },
+            {
+                question: "ଭାରତ କେତେ ମସିହାରେ ରିଓଡି ଜାନେରିଓ ବିଶ୍ୱ ବୈଠକ (Earth Summit) ରେ ଯୋଗଦେଇଥିଲା?",
+                options: ["୧୯୯୨ ମସିହାରେ", "୧୯୪୭ ମସିହାରେ", "୨୦୦୦ ମସିହାରେ", "୧୯୮୦ ମସିହାରେ"],
+                correct: 0,
+                explanation: "ଭାରତ ୧୯୯୨ ରେ ରିଓଡି ଜାନେରିଓ ବିଶ୍ୱ ବୈଠକ (Rio de Janeiro Earth Summit, 1992) ରେ ଯୋଗଦେଇ ପ୍ରାକୃତିକ ସମ୍ବଳ ଓ ପରିବେଶ ସଂରକ୍ଷଣ ନିମିତ୍ତ ଧ୍ୟାନ ଦେଉଛି[span_49](start_span)[span_49](end_span)."
+            },
+            {
+                question: "ମୃତ୍ତିକାର ଉର୍ବରତା ବୃଦ୍ଧି ପାଇଁ କେଉଁ ପଦ୍ଧତି ଅବଲମ୍ବନ କରାଯାଇଥାଏ?",
+                options: ["ଫସଲ ଚକ୍ର (Crop rotation) ଓ ଉପଯୁକ୍ତ ସାର ପ୍ରୟୋଗ", "କେବଳ ଜଳସେଚନ", "ରାସାୟନିକ ବିଷ ପ୍ରୟୋଗ", "ଜଙ୍ଗଲ ପୋଡ଼ିବା"],
+                correct: 0,
+                explanation: "ଉପଯୁକ୍ତ ପରିମାଣର ସାର ପ୍ରୟୋଗ ଦ୍ୱାରା ବା ଫସଲ ଚକ୍ର (Crop rotation) ମାଧ୍ୟମରେ ମୃତ୍ତିକାର ଉର୍ବରତା ବୃଦ୍ଧି କରାଯାଇପାରିବ[span_50](start_span)[span_50](end_span)."
+            },
+            {
+                question: "ସମ୍ବଳ ସଂରକ୍ଷଣର ମୁଖ୍ୟ ମୌଳିକ ଉଦ୍ଦେଶ୍ୟ ମଧ୍ୟରେ କେଉଁଟି ଅନ୍ତର୍ଭୁକ୍ତ?",
+                options: ["ଜୀବନଧାରଣ ପାଇଁ ଅପରିହାର୍ଯ୍ୟ ପରିବେଶର ସୁରକ୍ଷା ଓ ଜୈବ ବିବିଧତା ସୁରକ୍ଷିତ ରଖିବା", "ପରିବେଶ ପ୍ରଦୂଷଣ ବୃଦ୍ଧି କରିବା", "ଜଙ୍ଗଲ ଧ୍ୱଂସ କରିବା", "ଖଣିଜ ତୈଳ ଅପଚୟ କରିବା"],
+                correct: 0,
+                explanation: "ସମ୍ବଳ ସଂରକ୍ଷଣର ମୁଖ୍ୟ ଉଦ୍ଦେଶ୍ୟ ହେଉଛି ଜୀବନଧାରଣ ପାଇଁ ଅପରିହାର୍ଯ୍ୟ ପରିବେଶର ସୁରକ୍ଷା, ପରିସଂସ୍ଥାର ଅନ୍ତର୍ନିହିତ କ୍ଷମତା ଅକ୍ଷୁର୍ଣ୍ଣ ରଖିବା ଏବଂ ଜୈବ ବିବିଧତାକୁ ସୁରକ୍ଷିତ ରଖିବା[span_51](start_span)[span_51](end_span)."
+            },
+            {
+                question: "କୋଇଲା ଓ ଖଣିଜ ତୈଳ ଅବିରତ ବ୍ୟବହୃତ ହେଲେ ପ୍ରାୟ କେତେ ଶତାବ୍ଦୀ ମଧ୍ୟରେ ଶେଷ ହୋଇଯିବ ବୋଲି ଆଶଙ୍କା କରାଯାଉଛି?",
+                options: ["ଏହି ଶତାବ୍ଦୀ ମଧ୍ୟରେ", "ଆଗାମୀ ୧୦ ଶତାବ୍ଦୀରେ", "କେବେବି ଶେଷ ହେବ ନାହିଁ", "୫ ଶତାବ୍ଦୀ ପରେ"],
+                correct: 0,
+                explanation: "କୋଇଲା ଓ ଖଣିଜ ତୈଳ ଅବିରତ ବ୍ୟବହୃତ ହେଲେ ଏହି ଶତାବ୍ଦୀ ମଧ୍ୟରେ ତାହା ଶେଷ ହୋଇଯିବ[span_52](start_span)[span_52](end_span)."
+            },
+            {
+                question: "ଶକ୍ତିର ବିକଳ୍ପ ଉତ୍ସ ଭାବରେ କାହାର ବ୍ୟବହାରକୁ ପ୍ରୋତ୍ସାହନ ଦେବା ଆବଶ୍ୟକ?",
+                options: ["ସୌରଶକ୍ତି, ପବନଶକ୍ତି ଓ ଜୈବ ଗ୍ୟାସ୍", "କେବଳ କୋଇଲା", "କେବଳ ପେଟ୍ରୋଲ", "ପ୍ଲାଷ୍ଟିକ ଜାଳେଣି"],
+                correct: 0,
+                explanation: "ଶକ୍ତିର ବିକଳ୍ପ ଉତ୍ସ ଭାବରେ ସୌରଶକ୍ତି, ପବନଶକ୍ତି, ଜୈବ ଗ୍ୟାସ୍ ଇତ୍ୟାଦିର ବ୍ୟବହାର ପ୍ରତି ପ୍ରୋତ୍ସାହନ ଓ ସୁଯୋଗ ସୃଷ୍ଟି କରିବା ଆବଶ୍ୟକ[span_53](start_span)[span_53](end_span)."
+            },
+            {
+                question: "ସମ୍ବଳ ସଂରକ୍ଷଣ ପାଇଁ ସର୍ବୋପରି କାହାର ଆବଶ୍ୟକତା ରହିଛି?",
+                options: ["ଜନସାଧାରଣଙ୍କ ମଧ୍ୟରେ ଶିକ୍ଷା ଓ ସଚେତନତା ସୃଷ୍ଟି", "କେବଳ କର ସଂଗ୍ରହ", "ଶିକ୍ଷାନୁଷ୍ଠାନ ବନ୍ଦ କରିବା", "ରାସ୍ତାଘାଟ ନିର୍ମାଣ"],
+                correct: 0,
+                explanation: "ସର୍ବୋପରି, ଜନସାଧାରଣଙ୍କ ମଧ୍ୟରେ ଶିକ୍ଷା ଓ ସଚେତନତା ସୃଷ୍ଟି ଦ୍ୱାରାହିଁ ସମ୍ବଳର ଉପଯୁକ୍ତ ବିକାଶ ଓ ବିବେକାନୁମୋଦିତ ବ୍ୟବହାର ସମ୍ଭବ ହେବ[span_54](start_span)[span_54](end_span)."
+            },
+            {
+                question: "ଭାରତ ସ୍ୱାଧୀନତା ପାଇଲାପରେ କେଉଁ ଯୋଜନାଠାରୁ ସମ୍ବଳ ଯୋଜନାର ଲକ୍ଷ୍ୟ ହାସଲ କରିବାପାଇଁ ଚେଷ୍ଟା କରିଆସିଛି?",
+                options: ["ପ୍ରଥମ ପଞ୍ଚବାର୍ଷିକ ଯୋଜନାଠାରୁ", "ଦଶମ ପଞ୍ଚବାର୍ଷିକ ଯୋଜନାଠାରୁ", "କୌଣସି ଯୋଜନାରୁ ନୁହେଁ", "ଦ୍ୱାଦଶ ଯୋଜନାଠାରୁ"],
+                correct: 0,
+                explanation: "ଭାରତ ସ୍ୱାଧୀନତା ପାଇଲାପରେ ପ୍ରଥମ ପଞ୍ଚବାର୍ଷିକ ଯୋଜନାଠାରୁ ସମ୍ବଳ ଯୋଜନାର ଲକ୍ଷ୍ୟ ହାସଲ କରିବାପାଇଁ ଚେଷ୍ଟା କରିଆସିଛି[span_55](start_span)[span_55](end_span)."
+            },
+            {
+                question: "ସମ୍ବଳର ଅସମାନ ବଣ୍ଟନ ଯୋଗୁଁ ସମାଜ କେତେଟି ସ୍ପଷ୍ଟ ଶ୍ରେଣୀରେ ବିଭକ୍ତ ହୋଇଛି?",
+                options: ["ଦୁଇଟି (ଧନୀ ଓ ଦରିଦ୍ର)", "ତିନୋଟି", "ଚାରିଟି", "କୌଣସି ବିଭାଗ ନାହିଁ"],
+                correct: 0,
+                explanation: "ସମ୍ବଳ ଆହରଣରେ ବିଷମତା ଯୋଗୁଁ କେତେକ ମୁଷ୍ଟିମେୟ ବ୍ୟକ୍ତିଙ୍କ ପାଖରେ ଏହା ଜମା ହୋଇ ରହିଛି, ଫଳରେ ଧନୀ ଦରିଦ୍ର ଭେଦଭାବ ସୃଷ୍ଟି ହୋଇ ସମାଜ ଦୁଇଟି ସ୍ପଷ୍ଟ ଶ୍ରେଣୀରେ ବିଭକ୍ତ ହୋଇଛି[span_56](start_span)[span_56](end_span)."
+            },
+            {
+                question: "ନିର୍ବିକାର ସମ୍ବଳ ଉତ୍ତୋଳନ ଯୋଗୁଁ କ'ଣ ନଷ୍ଟ ହେବାରେ ଲାଗିଛି?",
+                options: ["ପାରିସ୍ଥିତିକ ଭାରସାମ୍ୟ", "ସୂର୍ଯ୍ୟଙ୍କ ଆଲୋକ", "ଚନ୍ଦ୍ରର ଗତି", "ରୁତୁ ପରିବର୍ତ୍ତନ"],
+                correct: 0,
+                explanation: "ନିର୍ବିକାର ସମ୍ବଳ ଉତ୍ତୋଳନ ଯୋଗୁଁ ପାରିସ୍ଥିତିକ ଭାରସାମ୍ୟ ନଷ୍ଟ ହେବାରେ ଲାଗିଛି ଏବଂ ଭୂତପ୍ରୀକରଣ, ଓଜୋନସ୍ତର ହ୍ରାସ, ପ୍ରଦୂଷଣ ବୃଦ୍ଧି ପାଉଛି[span_57](start_span)[span_57](end_span)."
+            }
+        ];
+
+        let currentQuestion = 0;
+        let score = 0;
+        let answered = false;
+
+        const questionText = document.getElementById("question-text");
+        const optionsList = document.getElementById("options-list");
+        const explanationBox = document.getElementById("explanation-box");
+        const explanationText = document.getElementById("explanation-text");
+        const nextBtn = document.getElementById("next-btn");
+        const progressFill = document.getElementById("progress-fill");
+        const quizScreen = document.getElementById("quiz-screen");
+        const scoreCard = document.getElementById("score-card");
+        const scoreText = document.getElementById("score-text");
+        const questionCounter = document.getElementById("question-counter");
+        const scoreDisplay = document.getElementById("score-display");
+
+        function loadQuestion() {
+            answered = false;
+            explanationBox.classList.remove("show");
+            nextBtn.style.display = "none";
+            
+            const currentData = quizData[currentQuestion];
+            questionText.innerText = `ପ୍ରଶ୍ନ ${currentQuestion + 1}: ${currentData.question}`;
+            questionCounter.innerText = `ପ୍ରଶ୍ନ ${currentQuestion + 1} / ${quizData.length}`;
+            scoreDisplay.innerText = `ସ୍କୋର୍: ${score}`;
+            
+            // Update Progress Bar
+            const progress = ((currentQuestion) / quizData.length) * 100;
+            progressFill.style.width = `${progress}%`;
+
+            // Shuffle options for interactivity
+            let options = [...currentData.options];
+            let correctOptionText = currentData.options[currentData.correct];
+            
+            // Randomize order
+            options.sort(() => Math.random() - 0.5);
+            
+            optionsList.innerHTML = "";
+            options.forEach((option) => {
+                const li = document.createElement("li");
+                li.className = "option-item";
+                li.innerText = option;
+                li.onclick = () => selectOption(option, correctOptionText, li);
+                optionsList.appendChild(li);
+            });
+        }
+
+        function selectOption(selectedOption, correctOption, element) {
+            if (answered) return;
+            answered = true;
+
+            const optionItems = document.querySelectorAll(".option-item");
+
+            // Disable all options
+            optionItems.forEach(item => {
+                item.classList.add("disabled");
+                if (item.innerText === correctOption) {
+                    item.classList.add("correct");
+                }
+            });
+
+            if (selectedOption === correctOption) {
+                score++;
+                scoreDisplay.innerText = `ସ୍କୋର୍: ${score}`;
+            } else {
+                element.classList.add("incorrect");
+            }
+
+            // Show explanation
+            const currentData = quizData[currentQuestion];
+            explanationText.innerHTML = `<strong>ଠିକ୍ ଉତ୍ତର:</strong> ${correctOption}<br><br>${currentData.explanation}`;
+            explanationBox.classList.add("show");
+            
+            // Show next button or finish
+            nextBtn.style.display = "block";
+            if (currentQuestion === quizData.length - 1) {
+                nextBtn.innerText = "ଫଳାଫଳ ଦେଖନ୍ତୁ";
+            }
+        }
+
+        function nextQuestion() {
+            currentQuestion++;
+            if (currentQuestion < quizData.length) {
+                loadQuestion();
+            } else {
+                showScore();
+            }
+        }
+
+        function showScore() {
+            quizScreen.style.display = "none";
+            scoreCard.style.display = "block";
+            scoreText.innerText = `ଆପଣ ${quizData.length}ଟି ପ୍ରଶ୍ନରୁ ${score}ଟି ଠିକ୍ ଉତ୍ତର ଦେଇଛନ୍ତି!`;
+        }
+
+        function restartQuiz() {
+            currentQuestion = 0;
+            score = 0;
+            quizScreen.style.display = "block";
+            scoreCard.style.display = "none";
+            nextBtn.innerText = "ପରବର୍ତ୍ତୀ ପ୍ରଶ୍ନ";
+            loadQuestion();
+        }
+
+        // Initialize Quiz
+        loadQuestion();
+    </script>
+</body>
+</html>
