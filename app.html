@@ -2,7 +2,7 @@
 <html lang="or">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#4c1d95">
 <title>GyanSetu Odisha</title>
 
@@ -11,6 +11,7 @@
 --primary:#6d28d9;--deep:#4c1d95;--accent:#fbbf24;
 --bg:#f5f3ff;--card:#ffffff;--ink:#241746;--muted:#71658b;
 --line:#e6ddf7;--good:#15803d;--bad:#b91c1c;
+--pill-bg:#ede9fe;--pill-ink:#6d28d9;
 }
 *{box-sizing:border-box}
 body{
@@ -21,6 +22,7 @@ background-attachment:fixed;color:var(--ink);min-height:100vh;
 }
 body.dark{
 --bg:#101827;--card:#1d293b;--ink:#edf2f7;--muted:#aab7c8;--line:#344256;
+--pill-bg:#312e81;--pill-ink:#e0e7ff;
 background:linear-gradient(145deg,#111827,#1e1b4b 55%,#172554);
 background-attachment:fixed;
 }
@@ -36,25 +38,16 @@ border-bottom:4px solid #fbbf24;
 header p{margin:6px 0 0;font-size:15px;line-height:1.5;opacity:.95}
 main{max-width:680px;margin:auto;padding:18px 14px 28px}
 .screen{display:none}
-.screen.active{display:block !important;animation:up .2s}
-@keyframes up{
-from{opacity:0;transform:translateY(6px)}
-to{opacity:1;transform:none}
-}
-h2{
-font-size:23px;line-height:1.4;margin:12px 0 18px;
-text-align:center;color:#5b21b6
-}
+.screen.active{display:block;animation:up .2s}
+@keyframes up{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+h2{font-size:23px;line-height:1.4;margin:12px 0 18px;text-align:center;color:#5b21b6}
 body.dark h2{color:#c4b5fd}
 .card{
 background:var(--card);border:1px solid #e9d5ff;
 border-radius:16px;padding:16px;margin-bottom:12px;
 box-shadow:0 8px 24px rgba(76,29,149,0.08)
 }
-body.dark .card{
-border-color:#344256;
-box-shadow:0 8px 24px rgba(0,0,0,0.25)
-}
+body.dark .card{border-color:#344256;box-shadow:0 8px 24px rgba(0,0,0,0.25)}
 .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .tile{
 border:0;border-radius:13px;padding:16px 12px;color:white;
@@ -81,12 +74,8 @@ cursor:pointer;box-shadow:0 3px 9px rgba(76,29,149,0.12)
 .btn.red{background:linear-gradient(135deg,#ef4444,#be123c)}
 .btn.cyan{background:linear-gradient(135deg,#0284c7,#0369a1)}
 .btn.purple{background:linear-gradient(135deg,#9333ea,#7e22ce)}
-.btn.light{
-background:#ede9fe;color:#5b21b6;border:1px solid #ddd6fe
-}
-body.dark .btn.light{
-background:#312e81;color:#ede9fe;border-color:#4338ca
-}
+.btn.light{background:#ede9fe;color:#5b21b6;border:1px solid #ddd6fe}
+body.dark .btn.light{background:#312e81;color:#ede9fe;border-color:#4338ca}
 .btnrow{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin:10px 0}
 .btn.full{width:100%;margin-top:8px}
 .subject{
@@ -112,10 +101,9 @@ width:100%;padding:16px;border-radius:25px;margin-top:14px;
 font-size:18px;font-weight:800;
 box-shadow:0 5px 14px rgba(76,29,149,0.12);cursor:pointer
 }
-body.dark .back{
-color:#f5f3ff;border:2px solid #8b5cf6;
-background:linear-gradient(135deg,#312e81,#1d293b)
-}
+body.dark .back{color:#f5f3ff;border:2px solid #8b5cf6;background:linear-gradient(135deg,#312e81,#1d293b)}
+.back.home-alt{background:linear-gradient(135deg,#e0e7ff,#ede9fe);color:#4338ca}
+body.dark .back.home-alt{background:linear-gradient(135deg,#312e81,#1d293b);color:#f5f3ff}
 .status-pill{
 display:inline-flex;align-items:center;gap:8px;
 padding:8px 16px;margin:12px auto 4px;
@@ -124,37 +112,25 @@ border:1.5px solid #c4b5fd;border-radius:30px;
 color:#5b21b6;font-size:14px;font-weight:750;
 box-shadow:0 2px 8px rgba(124,58,237,0.1)
 }
-body.dark .status-pill{
-background:linear-gradient(135deg,#1e1b4b,#312e81);
-border-color:#6d28d9;color:#e0e7ff
-}
-.dot{
-width:9px;height:9px;background:#22c55e;
-border-radius:50%;box-shadow:0 0 8px #22c55e
-}
+body.dark .status-pill{background:linear-gradient(135deg,#1e1b4b,#312e81);border-color:#6d28d9;color:#e0e7ff}
+.dot{width:9px;height:9px;background:#22c55e;border-radius:50%;box-shadow:0 0 8px #22c55e}
 .muted{color:var(--muted);font-size:15px;line-height:1.5}
 .quiz-timer-strip{
-position:sticky;top:70px;z-index:9;
+position:sticky;top:var(--hdr,84px);z-index:9;
 display:flex;justify-content:space-between;align-items:center;
 background:linear-gradient(100deg,#4c1d95,#7c3aed);
 color:#fff;padding:10px 16px;border-radius:12px;
 margin-bottom:12px;box-shadow:0 6px 18px rgba(76,29,149,0.3)
 }
-.quiz-time-badge{
-font-size:19px;font-weight:850;color:#fde68a;
-font-family:monospace;letter-spacing:1px
-}
-.subject-group{
-background:var(--card);border:1px solid var(--line);
-border-radius:14px;padding:12px;margin-bottom:12px
-}
+.quiz-time-badge{font-size:19px;font-weight:850;color:#fde68a;font-family:monospace;letter-spacing:1px}
+.subject-group{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px;margin-bottom:12px}
 .subject-header{
 font-size:16px;font-weight:800;color:#6d28d9;
 display:flex;justify-content:space-between;align-items:center;
-padding-bottom:8px;border-bottom:1.5px dashed var(--line);
-margin-bottom:8px
+padding-bottom:8px;border-bottom:1.5px dashed var(--line);margin-bottom:8px
 }
 body.dark .subject-header{color:#c4b5fd}
+.count-badge{font-size:12px;background:var(--pill-bg);padding:2px 8px;border-radius:12px;color:var(--pill-ink)}
 .item{padding:10px 6px;border-bottom:1px solid var(--line);font-size:15px}
 .item:last-child{border-bottom:0}
 .modal-overlay{
@@ -167,9 +143,9 @@ display:none;align-items:center;justify-content:center;padding:16px
 background:var(--card);color:var(--ink);
 border-radius:18px;max-width:420px;width:100%;
 padding:24px;text-align:center;
-box-shadow:0 12px 36px rgba(0,0,0,0.35);
-border:2px solid #a78bfa
+box-shadow:0 12px 36px rgba(0,0,0,0.35);border:2px solid #a78bfa
 }
+.paused-box{margin:18px 0;padding:12px;background:var(--pill-bg);border-radius:12px;font-size:18px;font-weight:800;color:var(--pill-ink)}
 .dev-badge-card{
 margin-top:20px;padding:16px 14px;
 background:linear-gradient(135deg,rgba(109,40,217,.08),rgba(219,39,119,.08));
@@ -180,54 +156,37 @@ display:inline-block;font-size:11px;font-weight:750;
 letter-spacing:1px;color:#7c3aed;text-transform:uppercase;
 background:#ede9fe;padding:3px 10px;border-radius:20px;margin-bottom:6px
 }
-.dev-name{
-font-size:21px;font-weight:850;color:#4c1d95;
-display:flex;align-items:center;justify-content:center;gap:6px
-}
+.dev-name{font-size:21px;font-weight:850;color:#4c1d95;display:flex;align-items:center;justify-content:center;gap:6px}
 .dev-desc{font-size:13px;color:#64748b;margin-top:6px;line-height:1.4}
-body.dark .dev-badge-card{
-background:linear-gradient(135deg,rgba(139,92,246,.15),rgba(236,72,153,.15));
-border-color:#6d28d9
-}
+body.dark .dev-badge-card{background:linear-gradient(135deg,rgba(139,92,246,.15),rgba(236,72,153,.15));border-color:#6d28d9}
 body.dark .dev-tag{background:#312e81;color:#ddd6fe}
 body.dark .dev-name{color:#e0e7ff}
 body.dark .dev-desc{color:#aab7c8}
 footer{text-align:center;padding:15px;color:#6b5b86;font-size:13px}
-@media(max-width:380px){
-.btnrow{grid-template-columns:1fr}
-.grid{gap:8px}
-}
+body.dark footer{color:#aab7c8}
+@media(max-width:380px){.btnrow{grid-template-columns:1fr}.grid{gap:8px}}
 
-/* NOKIA NEON SNAKE STYLES */
+/* NOKIA NEON SNAKE */
 .nokia-snake-card{
 background:#140c2b;border:2px solid #8b5cf6;
 border-radius:22px;padding:16px;width:100%;max-width:390px;
 margin:0 auto;box-shadow:0 0 25px rgba(139,92,246,0.3);
 text-align:center;color:#f8fafc
 }
-.nokia-title{
-font-size:21px;font-weight:900;letter-spacing:1.5px;
-color:#fde047;text-shadow:0 0 12px rgba(253,224,71,0.5);
-margin:0 0 10px
-}
+.nokia-title{font-size:21px;font-weight:900;letter-spacing:1.5px;color:#fde047;text-shadow:0 0 12px rgba(253,224,71,0.5);margin:0 0 10px}
 .nokia-scoreboard{
 display:flex;justify-content:space-around;
 background:#0d0620;border:1.5px solid #3b2075;
 border-radius:14px;padding:8px;margin-bottom:12px;font-weight:800
 }
 .nokia-score-item{font-size:13px;color:#a78bfa}
-.nokia-score-num{
-font-size:20px;color:#38bdf8;font-family:monospace;display:block
-}
+.nokia-score-num{font-size:20px;color:#38bdf8;font-family:monospace;display:block}
 #nokiaCanvas{
 background:#090414;border:2.5px solid #38bdf8;
 border-radius:12px;box-shadow:0 0 16px rgba(56,189,248,0.25);
-display:block;margin:0 auto 12px;max-width:100%
+display:block;margin:0 auto 12px;max-width:100%;touch-action:none
 }
-.nokia-pad{
-display:grid;grid-template-columns:repeat(3,1fr);
-grid-template-rows:repeat(3,50px);gap:8px;width:210px;margin:10px auto
-}
+.nokia-pad{display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(3,50px);gap:8px;width:210px;margin:10px auto}
 .nokia-pad-btn{
 background:linear-gradient(135deg,#6d28d9,#4f46e5);
 border:1.5px solid #a78bfa;border-radius:12px;color:white;
@@ -237,10 +196,7 @@ cursor:pointer;user-select:none;box-shadow:0 4px 10px rgba(0,0,0,0.4)
 .nokia-pad-btn:active{transform:scale(0.94);background:#7c3aed}
 .nokia-pad-up{grid-column:2;grid-row:1}
 .nokia-pad-left{grid-column:1;grid-row:2}
-.nokia-pad-center{
-grid-column:2;grid-row:2;background:#059669;
-border-color:#34d399;font-size:15px;font-weight:800
-}
+.nokia-pad-center{grid-column:2;grid-row:2;background:#059669;border-color:#34d399;font-size:15px;font-weight:800}
 .nokia-pad-right{grid-column:3;grid-row:2}
 .nokia-pad-down{grid-column:2;grid-row:3}
 </style>
@@ -248,14 +204,14 @@ border-color:#34d399;font-size:15px;font-weight:800
 
 <body>
 
-<header>
+<header id="appHeader">
 <div class="brand">🎓 GYANSETU <span>ODISHA</span></div>
 <p>NCERT & Odisha State Board Learning Portal</p>
 </header>
 
 <main>
 
-<!-- HOME SCREEN -->
+<!-- HOME -->
 <section id="home" class="screen active">
 <h2>ସ୍ୱାଗତମ୍ | Welcome</h2>
 
@@ -272,6 +228,7 @@ border-color:#34d399;font-size:15px;font-weight:800
 <button type="button" class="btn green" onclick="shareApp()">📤 Share App</button>
 <button type="button" class="btn" onclick="checkUpdates()">🔄 Check Update</button>
 <button type="button" class="btn secondary" onclick="showScreen('studyTimer')">⏱ Study Timer</button>
+<button type="button" class="btn light" onclick="showScreen('bookmarks')">⭐ Bookmarks</button>
 <button type="button" class="btn light" onclick="toggleTheme()">🌙 Dark / Light</button>
 <button type="button" class="btn light" onclick="showScreen('about')">ℹ About / Help</button>
 </div>
@@ -284,21 +241,21 @@ border-color:#34d399;font-size:15px;font-weight:800
 </div>
 </section>
 
-<!-- CLASSES SCREEN -->
+<!-- CLASSES -->
 <section id="classes" class="screen">
 <h2 id="classTitle">Select Class</h2>
 <div class="grid" id="classGrid"></div>
 <button type="button" class="back" onclick="showScreen('home')">⬅ Home</button>
 </section>
 
-<!-- SUBJECTS SCREEN -->
+<!-- SUBJECTS -->
 <section id="subjects" class="screen">
 <h2 id="subjectTitle">Select Subject</h2>
 <div id="subjectList"></div>
 <button type="button" class="back" onclick="showScreen('classes')">⬅ Back to Classes</button>
 </section>
 
-<!-- FOLDER SCREEN -->
+<!-- FOLDER -->
 <section id="folder" class="screen">
 <h2 id="folderTitle">Study Materials</h2>
 <div class="card">
@@ -312,25 +269,25 @@ border-color:#34d399;font-size:15px;font-weight:800
 <button type="button" class="back" onclick="showScreen('subjects')">⬅ Back</button>
 </section>
 
-<!-- MCQ SETUP SCREEN -->
+<!-- MCQ SETUP -->
 <section id="mcqSetup" class="screen">
 <h2>Topic-wise MCQ Practice</h2>
 <div class="card">
 <label>1. Class</label>
 <select id="mcqClass" class="field" onchange="fillSubjects()"></select>
-
 <label>2. Subject</label>
 <select id="mcqSubject" class="field" onchange="fillTopics()"></select>
-
 <label>3. Chapter / Topic</label>
 <select id="mcqTopic" class="field"></select>
-
-<button type="button" class="btn green full" onclick="startQuiz()" style="margin-top:8px;">START QUIZ ➜</button>
+<div class="btnrow">
+<button type="button" class="btn green" onclick="startQuiz()">START QUIZ ➜</button>
+<button type="button" class="btn orange" onclick="downloadSelectedTopicMcq()">💾 Save Offline</button>
+</div>
 </div>
 <button type="button" class="back" onclick="showScreen('home')">⬅ Home</button>
 </section>
 
-<!-- OFFLINE QUIZ MENU SCREEN -->
+<!-- OFFLINE QUIZ MENU -->
 <section id="offlineQuizMenuScreen" class="screen">
 <h2>⚡ Downloaded Offline Quiz Sets</h2>
 <div class="card">
@@ -340,7 +297,7 @@ border-color:#34d399;font-size:15px;font-weight:800
 <button type="button" class="back" onclick="showScreen('home')">⬅ Home</button>
 </section>
 
-<!-- CONTENT / QUIZ / NOTE VIEWER SCREEN -->
+<!-- VIEWER (quiz / note) -->
 <section id="quizScreen" class="screen">
 
 <div id="quizTimerBar" class="quiz-timer-strip">
@@ -348,53 +305,39 @@ border-color:#34d399;font-size:15px;font-weight:800
 <span style="font-size:15px;font-weight:700;">⏱ RUNNING TIME:</span>
 <span id="quizRunningTimer" class="quiz-time-badge">00:00</span>
 </div>
-<button type="button" class="btn secondary"
-style="padding:6px 14px;font-size:13px;border-radius:8px;"
-onclick="pauseQuiz()">⏸ Pause</button>
+<button type="button" class="btn secondary" style="padding:6px 14px;font-size:13px;border-radius:8px;" onclick="pauseQuiz()">⏸ Pause</button>
 </div>
 
-<!-- Note Offline Save Toolbar inside Viewer (Quiz save toolbar completely removed) -->
 <div id="noteActionToolbar" style="display:none;margin-bottom:10px;gap:8px;">
-<button type="button" class="btn green full" onclick="saveCurrentNoteOffline()">💾 Save Note for Offline</button>
+<button type="button" id="noteSaveBtn" class="btn green full" style="display:none" onclick="saveCurrentNoteOffline()">💾 Save Note for Offline</button>
+<button type="button" id="quizSaveBtn" class="btn green full" style="display:none" onclick="saveCurrentQuizOffline()">💾 Download Quiz for Offline</button>
 </div>
 
-<div id="quizFrameContainer"
-style="width:100%;border-radius:14px;overflow:hidden;background:#fff;box-shadow:0 6px 20px rgba(0,0,0,0.1);">
-<iframe id="quizFrame"
-style="width:100%;height:72vh;border:0;display:block;"
-title="Content Viewer"></iframe>
+<div id="quizFrameContainer" style="width:100%;border-radius:14px;overflow:hidden;background:#fff;box-shadow:0 6px 20px rgba(0,0,0,0.1);">
+<iframe id="quizFrame" style="width:100%;height:72vh;border:0;display:block;" title="Content Viewer"></iframe>
 </div>
 
 <div class="btnrow" style="margin-top:14px;">
-<button type="button" id="viewerBackButton" class="back"
-style="margin-top:0;" onclick="handleViewerBack()">⬅ Back</button>
-
-<button type="button" class="back"
-style="margin-top:0;background:linear-gradient(135deg,#e0e7ff,#ede9fe);color:#4338ca;"
-onclick="goHomeFromViewer()">⌂ Home</button>
+<button type="button" id="viewerBackButton" class="back" style="margin-top:0;" onclick="handleViewerBack()">⬅ Back</button>
+<button type="button" class="back home-alt" style="margin-top:0;" onclick="goHomeFromViewer()">⌂ Home</button>
 </div>
 </section>
 
-<!-- OFFLINE SAVED NOTE VIEWER SCREEN -->
+<!-- SAVED NOTE VIEWER -->
 <section id="offlineNoteViewer" class="screen">
 <h2 id="savedNoteTitle">Saved Note</h2>
-<div class="card" id="savedNoteBody"
-style="min-height:50vh;padding:18px;line-height:1.7;"></div>
+<iframe id="savedNoteBody" title="Saved Note" style="width:100%;height:72vh;border:0;border-radius:14px;background:#fff;box-shadow:0 6px 20px rgba(0,0,0,0.1);"></iframe>
 <button type="button" class="back" onclick="showScreen('downloads')">⬅ Back to Saved Notes</button>
 </section>
 
-<!-- NOKIA NEON SNAKE GAME SCREEN -->
+<!-- SNAKE -->
 <section id="snakeGameScreen" class="screen">
 <div class="nokia-snake-card">
-<div class="nokia-title">🐍 NOKIA NEON SNAKE ⚡</div>
+<div class="nokia-title" id="nokiaTitle">🐍 NOKIA NEON SNAKE ⚡</div>
 
 <div class="nokia-scoreboard">
-<div class="nokia-score-item">
-SCORE<span class="nokia-score-num" id="nokiaScoreVal">0</span>
-</div>
-<div class="nokia-score-item">
-BEST RECORD<span class="nokia-score-num" id="nokiaHighScoreVal">0</span>
-</div>
+<div class="nokia-score-item">SCORE<span class="nokia-score-num" id="nokiaScoreVal">0</span></div>
+<div class="nokia-score-item">BEST RECORD<span class="nokia-score-num" id="nokiaHighScoreVal">0</span></div>
 </div>
 
 <canvas id="nokiaCanvas" width="300" height="300"></canvas>
@@ -416,23 +359,18 @@ BEST RECORD<span class="nokia-score-num" id="nokiaHighScoreVal">0</span>
 </div>
 </section>
 
-<!-- QUIZ PAUSE MODAL -->
+<!-- PAUSE MODAL -->
 <div id="pauseModal" class="modal-overlay">
 <div class="modal-box">
 <h3 style="color:#7c3aed;margin-top:0;font-size:22px;">⏸ Quiz Paused</h3>
 <p class="muted">ଆପଣଙ୍କ Quiz ସମୟ ସ୍ଥଗିତ ରହିଛି।</p>
-
-<div style="margin:18px 0;padding:12px;background:#ede9fe;border-radius:12px;font-size:18px;font-weight:800;color:#6d28d9;">
-ଚାଲୁଥିବା ସମୟ:
-<span id="pausedTimeText" style="color:#4c1d95;font-family:monospace;">00:00</span>
-</div>
-
+<div class="paused-box">ଚାଲୁଥିବା ସମୟ: <span id="pausedTimeText" style="font-family:monospace;">00:00</span></div>
 <button type="button" class="btn green full" onclick="resumeQuiz()">▶ RESUME QUIZ</button>
 <button type="button" class="btn red full" onclick="closePauseAndExit()">Exit Practice</button>
 </div>
 </div>
 
-<!-- DOWNLOADS SCREEN -->
+<!-- DOWNLOADS -->
 <section id="downloads" class="screen">
 <h2>📥 Saved Offline Notes</h2>
 <div class="card">
@@ -442,7 +380,7 @@ BEST RECORD<span class="nokia-score-num" id="nokiaHighScoreVal">0</span>
 <button type="button" class="back" onclick="showScreen('home')">Home</button>
 </section>
 
-<!-- BOOKMARKS SCREEN -->
+<!-- BOOKMARKS -->
 <section id="bookmarks" class="screen">
 <h2>⭐ Bookmarks</h2>
 <div id="bookmarkList"></div>
@@ -450,12 +388,11 @@ BEST RECORD<span class="nokia-score-num" id="nokiaHighScoreVal">0</span>
 <button type="button" class="back" onclick="showScreen('home')">Home</button>
 </section>
 
-<!-- STUDY TIMER SCREEN -->
+<!-- STUDY TIMER -->
 <section id="studyTimer" class="screen">
 <h2>⏱ Study Timer</h2>
-<div class="card result" style="text-align:center;">
-<div class="score" id="studyClock"
-style="font-size:42px;font-weight:850;color:#7c3aed;margin:12px 0;">00:00:00</div>
+<div class="card" style="text-align:center;">
+<div id="studyClock" style="font-size:42px;font-weight:850;color:#7c3aed;margin:12px 0;">00:00:00</div>
 <button type="button" class="btn green" onclick="startStudy()">Start</button>
 <button type="button" class="btn orange" onclick="pauseStudy()">Pause</button>
 <button type="button" class="btn red" onclick="resetStudy()">Reset</button>
@@ -463,13 +400,12 @@ style="font-size:42px;font-weight:850;color:#7c3aed;margin:12px 0;">00:00:00</di
 <button type="button" class="back" onclick="showScreen('home')">Home</button>
 </section>
 
-<!-- ABOUT SECTION -->
+<!-- ABOUT -->
 <section id="about" class="screen">
 <h2>About GyanSetu Odisha</h2>
 <div class="card">
 <h3 style="text-align:center;color:#7c3aed;margin:8px 0 6px">🎓 GyanSetu Odisha</h3>
 <p class="muted" style="text-align:center;font-size:16px">Classes VI to X ପାଇଁ ଏକ ସ୍ମାର୍ଟ ଶିକ୍ଷଣ ପୋର୍ଟାଲ୍।</p>
-
 <div class="dev-badge-card">
 <div class="dev-tag">App Creator & Educator</div>
 <div class="dev-name">👨‍🏫 Sangram Sahu</div>
@@ -486,1153 +422,881 @@ style="font-size:42px;font-weight:850;color:#7c3aed;margin:12px 0;">00:00:00</di
 <script>
 "use strict";
 
-/* BASIC CONFIGURATION */
+/* CONFIG */
 const CURRENT_VERSION = "2.0";
-
-const GITHUB_PAGES_BASE =
-"https://silusahu360.github.io/gyansetu-odishamcq/";
-
-const GITHUB_MCQ_JSON_URL =
-"https://raw.githubusercontent.com/silusahu360/gyansetu-odishamcq/main/mcq_data.json";
+const GITHUB_PAGES_BASE = "https://silusahu360.github.io/gyansetu-odishamcq/";
+const GITHUB_MCQ_JSON_URL = GITHUB_PAGES_BASE + "mcq_data.json";
 
 const classDriveFolders = {
-"CLASS VI":"https://drive.google.com/drive/folders/1KUhgA15GZ0jMPfF22XhN_0ipuayW3jhr",
-"CLASS VII":"https://drive.google.com/drive/folders/1ToIWcidnQfATl6_awNSSPRcRK1nyZWAv",
-"CLASS VIII":"https://drive.google.com/drive/folders/1gnCILN6NhsAsK2c4ljn8DbTNv4zAnMCC",
-"CLASS IX":"https://drive.google.com/drive/folders/1xC7s790hPESNNYKTDZ8jnFvgkDLHrKbD",
-"CLASS X":"https://drive.google.com/drive/folders/1KC4TAH3EzQiOdfwj9SKmttCOdhfqz0Td"
+  "CLASS VI":"https://drive.google.com/drive/folders/1KUhgA15GZ0jMPfF22XhN_0ipuayW3jhr",
+  "CLASS VII":"https://drive.google.com/drive/folders/1ToIWcidnQfATl6_awNSSPRcRK1nyZWAv",
+  "CLASS VIII":"https://drive.google.com/drive/folders/1gnCILN6NhsAsK2c4ljn8DbTNv4zAnMCC",
+  "CLASS IX":"https://drive.google.com/drive/folders/1xC7s790hPESNNYKTDZ8jnFvgkDLHrKbD",
+  "CLASS X":"https://drive.google.com/drive/folders/1KC4TAH3EzQiOdfwj9SKmttCOdhfqz0Td"
 };
 
 const subjectsByClass = {
-"CLASS VI":["ODIA","ENGLISH","MATHEMATICS","SCIENCE","SOCIAL SCIENCE","HINDI","SANSKRIT"],
-"CLASS VII":["ODIA","ENGLISH","MATHEMATICS","SCIENCE","SOCIAL SCIENCE","HINDI","SANSKRIT"],
-"CLASS VIII":["ODIA","ENGLISH","HINDI","SANSKRIT","MATHEMATICS","SCIENCE","SOCIAL SCIENCE"],
-"CLASS IX":["ODIA","ENGLISH","SANSKRIT","HINDI","MATHEMATICS","SCIENCE","GEOGRAPHY","HISTORY"],
-"CLASS X":["ODIA","ENGLISH","SANSKRIT","HINDI","MATHEMATICS","SCIENCE","GEOGRAPHY","HISTORY"]
+  "CLASS VI":["ODIA","ENGLISH","MATHEMATICS","SCIENCE","SOCIAL SCIENCE","HINDI","SANSKRIT"],
+  "CLASS VII":["ODIA","ENGLISH","MATHEMATICS","SCIENCE","SOCIAL SCIENCE","HINDI","SANSKRIT"],
+  "CLASS VIII":["ODIA","ENGLISH","HINDI","SANSKRIT","MATHEMATICS","SCIENCE","SOCIAL SCIENCE"],
+  "CLASS IX":["ODIA","ENGLISH","SANSKRIT","HINDI","MATHEMATICS","SCIENCE","GEOGRAPHY","HISTORY"],
+  "CLASS X":["ODIA","ENGLISH","SANSKRIT","HINDI","MATHEMATICS","SCIENCE","GEOGRAPHY","HISTORY"]
 };
 
 let mcqDataStore = {};
-
 let currentClass = "CLASS X";
 let currentSubject = "";
 let currentFolder = "";
 let currentViewMode = "quiz";
 let currentNoteHtmlUrl = "";
+let currentQuizUrl = "";
+let currentQuizTitle = "";
+window.classMode = "notes";
 
 let quizSeconds = 0;
 let quizTimerInterval = null;
 let isQuizPaused = false;
-
 let studySeconds = 0;
 let studyInterval = null;
 
 const $ = id => document.getElementById(id);
 
+/* SAFE STORAGE HELPERS */
+function load(key, fallback) {
+  try {
+    const v = JSON.parse(localStorage.getItem(key));
+    return v === null || v === undefined ? fallback : v;
+  } catch (e) { return fallback; }
+}
+function store(key, value) {
+  try { localStorage.setItem(key, JSON.stringify(value)); return true; }
+  catch (e) { return false; }
+}
+function esc(s) {
+  return String(s).replace(/[&<>"']/g, c =>
+    ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+}
+
+/* HEADER HEIGHT (for sticky timer bar) */
+function syncHeaderHeight() {
+  const h = $("appHeader");
+  if (h) document.documentElement.style.setProperty("--hdr", h.offsetHeight + "px");
+}
+window.addEventListener("resize", syncHeaderHeight);
+window.addEventListener("load", syncHeaderHeight);
+
 /* SCREEN MANAGEMENT */
 function showScreen(id) {
-    let target = $(id);
+  let target = $(id) || $("home");
 
-    if (!target) target = $("home");
+  /* stop snake loop whenever leaving the game */
+  if (id !== "snakeGameScreen") {
+    clearInterval(nokiaGameInterval);
+    nokiaGameInterval = null;
+  }
 
-    document.querySelectorAll(".screen").forEach(screen => {
-        screen.classList.remove("active");
-    });
+  document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
+  target.classList.add("active");
+  window.scrollTo(0, 0);
 
-    target.classList.add("active");
-    window.scrollTo(0, 0);
-
-    if (id === "bookmarks") renderBookmarks();
-    if (id === "downloads") renderSavedNotesList();
-    if (id === "offlineQuizMenuScreen") renderDownloadedQuizList();
+  if (id === "bookmarks") renderBookmarks();
+  if (id === "downloads") renderSavedNotesList();
+  if (id === "offlineQuizMenuScreen") renderDownloadedQuizList();
 }
 
 /* CLASSES */
 function showClasses(mode) {
-    window.classMode = mode;
+  window.classMode = mode;
+  $("classTitle").textContent = mode === "notes"
+    ? "Select Class · Notes Library"
+    : "Select Class · Study Materials";
+  $("classGrid").innerHTML = "";
 
-    $("classTitle").textContent =
-        mode === "notes"
-        ? "Select Class · Notes Library"
-        : "Select Class · Study Materials";
-
-    $("classGrid").innerHTML = "";
-
-    Object.keys(subjectsByClass).forEach(cls => {
-        const button = document.createElement("button");
-
-        button.type = "button";
-        button.className = "tile";
-        button.textContent = cls;
-
-        button.onclick = () => showSubjects(cls);
-
-        $("classGrid").appendChild(button);
-    });
-
-    showScreen("classes");
+  Object.keys(subjectsByClass).forEach(cls => {
+    const b = document.createElement("button");
+    b.type = "button";
+    b.className = "tile";
+    b.textContent = cls;
+    b.onclick = () => showSubjects(cls);
+    $("classGrid").appendChild(b);
+  });
+  showScreen("classes");
 }
 
 /* SUBJECTS */
 function showSubjects(cls) {
-    currentClass = cls;
+  currentClass = cls;
+  $("subjectList").innerHTML = "";
 
-    $("subjectList").innerHTML = "";
-
-    subjectsByClass[cls].forEach(subject => {
-        const button = document.createElement("button");
-
-        button.type = "button";
-        button.className = "subject";
-
-        const name = document.createElement("span");
-        name.textContent = subject;
-
-        const arrow = document.createElement("span");
-        arrow.textContent = "➜";
-
-        button.append(name, arrow);
-        button.onclick = () => openSubject(subject);
-
-        $("subjectList").appendChild(button);
-    });
-
-    showScreen("subjects");
+  subjectsByClass[cls].forEach(subject => {
+    const b = document.createElement("button");
+    b.type = "button";
+    b.className = "subject";
+    const name = document.createElement("span");
+    name.textContent = subject;
+    const arrow = document.createElement("span");
+    arrow.textContent = "➜";
+    b.append(name, arrow);
+    b.onclick = () => openSubject(subject);
+    $("subjectList").appendChild(b);
+  });
+  showScreen("subjects");
 }
 
 /* OPEN SUBJECT */
 function openSubject(sub) {
-    currentSubject = sub;
-    currentFolder = classDriveFolders[currentClass];
-
-    if (window.classMode === "notes") {
-        currentViewMode = "note";
-
-        const cleanCls = currentClass.toLowerCase().replace(/[^a-z0-9]/g, "");
-        const cleanSub = sub.toLowerCase().replace(/[^a-z0-9]/g, "");
-
-        const noteFileName = `${cleanCls}_${cleanSub}_note.html`;
-
-        currentNoteHtmlUrl = GITHUB_PAGES_BASE + noteFileName;
-
-        $("quizTimerBar").style.display = "flex";
-        $("noteActionToolbar").style.display = "flex";
-
-        $("viewerBackButton").textContent = "⬅ Back to Subjects";
-
-        showScreen("quizScreen");
-
-        $("quizFrame").srcdoc =
-            "<div style='display:flex;align-items:center;justify-content:center;height:60vh;font-family:sans-serif;color:#6d28d9;font-size:18px;'><b>Loading Note... ଅପେକ୍ଷା କରନ୍ତୁ...</b></div>";
-
-        fetch(currentNoteHtmlUrl + "?t=" + Date.now())
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error("HTTP " + response.status);
-                }
-                return response.text();
-            })
-            .then(html => {
-                $("quizFrame").srcdoc = html;
-            })
-            .catch(error => {
-                console.error(error);
-
-                $("quizFrame").srcdoc =
-                    "<div style='padding:20px;text-align:center;'>ଇଣ୍ଟରନେଟ୍ ସଂଯୋଗ ଯାଞ୍ଚ କରନ୍ତୁ କିମ୍ବା ପରେ ଚେଷ୍ଟା କରନ୍ତୁ।</div>";
-            });
-
-        return;
-    }
-
-    currentViewMode = "materials";
-
-    $("noteStatus").textContent = "";
-
-    showScreen("folder");
-}
-
-/* VIEWER BACK */
-function cleanViewerFrame() {
-    clearInterval(quizTimerInterval);
-    quizTimerInterval = null;
-
-    const toolbar = $("noteActionToolbar");
-
-    if (toolbar) {
-        toolbar.style.display = "none";
-    }
-
-    $("quizTimerBar").style.display = "flex";
-    $("pauseModal").classList.remove("active");
-}
-
-function handleViewerBack() {
-    cleanViewerFrame();
-
-    if (currentViewMode === "quiz") {
-        showScreen("mcqSetup");
-    } else if (currentViewMode === "downloaded_quiz") {
-        showScreen("offlineQuizMenuScreen");
-    } else {
-        showScreen("subjects");
-    }
-}
-
-function goHomeFromViewer() {
-    cleanViewerFrame();
-    showScreen("home");
-}
-
-/* SAVE NOTES OFFLINE */
-async function saveCurrentNoteOffline() {
-    try {
-        const response = await fetch(currentNoteHtmlUrl);
-
-        if (!response.ok) {
-            throw new Error("HTTP Error");
-        }
-
-        const htmlContent = await response.text();
-
-        const saved = JSON.parse(
-            localStorage.getItem("gs_saved_notes") || "{}"
-        );
-
-        const key = currentClass + " · " + currentSubject;
-
-        saved[key] = {
-            title: key,
-            content: htmlContent,
-            date: new Date().toLocaleDateString("or-IN")
-        };
-
-        try {
-            localStorage.setItem("gs_saved_notes", JSON.stringify(saved));
-        } catch (qErr) {
-            const keys = Object.keys(saved);
-            if (keys.length > 1) {
-                delete saved[keys[0]];
-                localStorage.setItem("gs_saved_notes", JSON.stringify(saved));
-            } else {
-                throw qErr;
-            }
-        }
-
-        alert("✅ ଏହି ନୋଟ୍ Offline ପାଇଁ Save ହୋଇଗଲା!");
-
-    } catch (error) {
-        console.error(error);
-        try {
-            const saved = JSON.parse(localStorage.getItem("gs_saved_notes") || "{}");
-            const key = currentClass + " · " + currentSubject;
-            saved[key] = {
-                title: key,
-                content: `<html><body style="font-family:sans-serif;padding:20px;"><h2>${key}</h2><p>Offline saved note container.</p></body></html>`,
-                date: new Date().toLocaleDateString("or-IN")
-            };
-            localStorage.setItem("gs_saved_notes", JSON.stringify(saved));
-            alert("✅ Note offline fallback save hela!");
-        } catch(e) {
-            alert("Storage full! Kichhi puruna data delete karantu.");
-        }
-    }
-}
-
-/* SAVED NOTES */
-function openSavedNotesScreen() {
-    showScreen("downloads");
-    renderSavedNotesList();
-}
-
-function renderSavedNotesList() {
-    const saved = JSON.parse(
-        localStorage.getItem("gs_saved_notes") || "{}"
-    );
-
-    const container = $("savedNotesList");
-    const keys = Object.keys(saved);
-
-    if (!keys.length) {
-        container.innerHTML =
-            '<div style="text-align:center;padding:16px;color:var(--muted);">କୌଣସି ନୋଟ୍ ସେଭ୍ ହୋଇନାହିଁ।</div>';
-        return;
-    }
-
-    container.innerHTML = "";
-
-    keys.forEach(key => {
-        const item = saved[key];
-
-        const row = document.createElement("div");
-        row.className = "item";
-
-        row.style.cssText =
-            "display:flex;justify-content:space-between;align-items:center;padding:12px 6px;gap:8px;";
-
-        const info = document.createElement("div");
-
-        const title = document.createElement("b");
-        title.textContent = "📖 " + item.title;
-
-        const date = document.createElement("small");
-        date.className = "muted";
-        date.textContent = item.date || "";
-
-        info.append(title, document.createElement("br"), date);
-
-        const actions = document.createElement("div");
-        actions.style.cssText = "display:flex;gap:6px;";
-
-        const openButton = document.createElement("button");
-        openButton.type = "button";
-        openButton.className = "btn green";
-        openButton.style.cssText = "padding:6px 12px;font-size:13px;";
-        openButton.textContent = "Open";
-        openButton.onclick = () => viewSavedNote(key);
-
-        const deleteButton = document.createElement("button");
-        deleteButton.type = "button";
-        deleteButton.className = "btn red";
-        deleteButton.style.cssText = "padding:6px 10px;font-size:13px;";
-        deleteButton.textContent = "✕";
-        deleteButton.onclick = () => deleteSavedNote(key);
-
-        actions.append(openButton, deleteButton);
-        row.append(info, actions);
-
-        container.appendChild(row);
-    });
-}
-
-function viewSavedNote(key) {
-    const saved = JSON.parse(
-        localStorage.getItem("gs_saved_notes") || "{}"
-    );
-
-    if (saved[key]) {
-        $("savedNoteTitle").textContent = key;
-        $("savedNoteBody").innerHTML = saved[key].content;
-
-        showScreen("offlineNoteViewer");
-    }
-}
-
-function deleteSavedNote(key) {
-    if (!confirm(key + " ନୋଟ୍ କାଢ଼ିବାକୁ ଚାହାନ୍ତି କି?")) {
-        return;
-    }
-
-    const saved = JSON.parse(
-        localStorage.getItem("gs_saved_notes") || "{}"
-    );
-
-    delete saved[key];
-
-    localStorage.setItem(
-        "gs_saved_notes",
-        JSON.stringify(saved)
-    );
-
-    renderSavedNotesList();
-}
-
-/* DOWNLOADED QUIZ MENU */
-function openOfflineQuizMenu() {
-    showScreen("offlineQuizMenuScreen");
-    renderDownloadedQuizList();
-}
-
-/* DISPLAY DOWNLOADED QUIZZES */
-function renderDownloadedQuizList() {
-    const savedMcqs = JSON.parse(
-        localStorage.getItem("gs_saved_mcqs") || "{}"
-    );
-
-    const container = $("downloadedQuizList");
-    const keys = Object.keys(savedMcqs);
-
-    if (!keys.length) {
-        container.innerHTML =
-            '<div style="text-align:center;padding:18px;color:var(--muted);">କୌଣସି Quiz Download ହୋଇନାହିଁ।</div>';
-        return;
-    }
-
-    container.innerHTML = "";
-
-    keys.forEach(key => {
-        const item = savedMcqs[key];
-
-        const row = document.createElement("div");
-        row.className = "item";
-
-        row.style.cssText =
-            "display:flex;justify-content:space-between;align-items:center;padding:12px 4px;gap:8px;";
-
-        const info = document.createElement("div");
-
-        const title = document.createElement("b");
-        title.textContent = "📝 " + (item.title || key);
-
-        const date = document.createElement("small");
-        date.className = "muted";
-        date.textContent = item.date || "";
-
-        info.append(title, document.createElement("br"), date);
-
-        const actions = document.createElement("div");
-        actions.style.cssText = "display:flex;gap:6px;";
-
-        const playButton = document.createElement("button");
-        playButton.type = "button";
-        playButton.className = "btn green";
-        playButton.style.cssText = "padding:6px 12px;font-size:13px;";
-        playButton.textContent = "Play";
-        playButton.onclick = () => openDownloadedMcq(key);
-
-        const deleteButton = document.createElement("button");
-        deleteButton.type = "button";
-        deleteButton.className = "btn red";
-        deleteButton.style.cssText = "padding:6px 10px;font-size:13px;";
-        deleteButton.textContent = "✕";
-        deleteButton.onclick = () => deleteDownloadedMcq(key);
-
-        actions.append(playButton, deleteButton);
-        row.append(info, actions);
-
-        container.appendChild(row);
-    });
-}
-
-/* OPEN DOWNLOADED QUIZ OFFLINE */
-function openDownloadedMcq(key) {
-    const savedMcqs = JSON.parse(
-        localStorage.getItem("gs_saved_mcqs") || "{}"
-    );
-
-    const item = savedMcqs[key];
-
-    if (!item || !item.content) {
-        alert("Downloaded Quiz ମିଳିଲା ନାହିଁ।");
-        return;
-    }
-
-    currentViewMode = "downloaded_quiz";
+  currentSubject = sub;
+  currentFolder = classDriveFolders[currentClass];
+
+  if (window.classMode === "notes") {
+    currentViewMode = "note";
+
+    const cleanCls = currentClass.toLowerCase().replace(/[^a-z0-9]/g, "");
+    const cleanSub = sub.toLowerCase().replace(/[^a-z0-9]/g, "");
+    currentNoteHtmlUrl = GITHUB_PAGES_BASE + cleanCls + "_" + cleanSub + "_note.html";
 
     clearInterval(quizTimerInterval);
     quizTimerInterval = null;
 
-    isQuizPaused = false;
-
-    $("pauseModal").classList.remove("active");
     $("quizTimerBar").style.display = "none";
-    $("noteActionToolbar").style.display = "none";
-
-    $("viewerBackButton").textContent = "⬅ Back to Sets";
-
-    showScreen("quizScreen");
-
-    $("quizFrame").srcdoc = item.content;
-}
-
-/* DELETE DOWNLOADED QUIZ */
-function deleteDownloadedMcq(key) {
-    if (!confirm(key + " ସେଟ୍ କାଢ଼ିବାକୁ ଚାହାନ୍ତି କି?")) {
-        return;
-    }
-
-    const savedMcqs = JSON.parse(
-        localStorage.getItem("gs_saved_mcqs") || "{}"
-    );
-
-    delete savedMcqs[key];
-
-    localStorage.setItem(
-        "gs_saved_mcqs",
-        JSON.stringify(savedMcqs)
-    );
-
-    renderDownloadedQuizList();
-
-    alert("✅ Quiz Delete ହୋଇଗଲା।");
-}
-
-/* NOKIA NEON SNAKE ENGINE */
-var nokiaCanvas = null;
-var nokiaCtx = null;
-var nokiaGridSize = 15;
-var nokiaTileCount = 20;
-
-var nokiaSnake = [
-    {x:10,y:10},
-    {x:10,y:11},
-    {x:10,y:12}
-];
-
-var nokiaDx = 0;
-var nokiaDy = -1;
-var nokiaFood = {x:5,y:5};
-var nokiaScore = 0;
-var nokiaHighScore = 0;
-
-try {
-    nokiaHighScore = parseInt(
-        localStorage.getItem("gs_snake_hi") || "0",10
-    );
-} catch(e) {}
-
-var nokiaGameInterval = null;
-var nokiaIsPaused = false;
-var nokiaSoundEnabled = true;
-var nokiaAudioCtx = null;
-
-function playNokiaBeep(freq,duration) {
-    if (!nokiaSoundEnabled) return;
-
-    try {
-        if (!nokiaAudioCtx) {
-            nokiaAudioCtx = new (
-                window.AudioContext || window.webkitAudioContext
-            )();
-        }
-
-        var osc = nokiaAudioCtx.createOscillator();
-        var gain = nokiaAudioCtx.createGain();
-
-        osc.type = "square";
-        osc.frequency.value = freq;
-
-        gain.gain.setValueAtTime(
-            0.08,nokiaAudioCtx.currentTime
-        );
-
-        osc.connect(gain);
-        gain.connect(nokiaAudioCtx.destination);
-
-        osc.start();
-        osc.stop(nokiaAudioCtx.currentTime + duration);
-
-    } catch(e) {}
-}
-
-function openSnakeGame() {
-    showScreen("snakeGameScreen");
-
-    nokiaCanvas = document.getElementById("nokiaCanvas");
-    nokiaCtx = nokiaCanvas.getContext("2d");
-
-    document.getElementById("nokiaHighScoreVal").textContent =
-        nokiaHighScore;
-
-    resetNokiaGame();
-
-    clearInterval(nokiaGameInterval);
-
-    nokiaGameInterval = setInterval(
-        updateNokiaSnake,130
-    );
-}
-
-function spawnNokiaFood() {
-    nokiaFood.x = Math.floor(
-        Math.random() * nokiaTileCount
-    );
-
-    nokiaFood.y = Math.floor(
-        Math.random() * nokiaTileCount
-    );
-
-    for (var i=0;i<nokiaSnake.length;i++) {
-        if (
-            nokiaSnake[i].x === nokiaFood.x &&
-            nokiaSnake[i].y === nokiaFood.y
-        ) {
-            spawnNokiaFood();
-            return;
-        }
-    }
-}
-
-function drawNokiaSnake() {
-    if (!nokiaCtx) return;
-
-    nokiaCtx.fillStyle = "#090414";
-    nokiaCtx.fillRect(
-        0,0,nokiaCanvas.width,nokiaCanvas.height
-    );
-
-    nokiaCtx.strokeStyle = "#160b30";
-    nokiaCtx.lineWidth = 0.5;
-
-    for (var x=0;x<nokiaCanvas.width;x+=nokiaGridSize) {
-        nokiaCtx.beginPath();
-        nokiaCtx.moveTo(x,0);
-        nokiaCtx.lineTo(x,nokiaCanvas.height);
-        nokiaCtx.stroke();
-    }
-
-    for (var y=0;y<nokiaCanvas.height;y+=nokiaGridSize) {
-        nokiaCtx.beginPath();
-        nokiaCtx.moveTo(0,y);
-        nokiaCtx.lineTo(nokiaCanvas.width,y);
-        nokiaCtx.stroke();
-    }
-
-    nokiaCtx.fillStyle = "#f43f5e";
-    nokiaCtx.shadowColor = "#f43f5e";
-    nokiaCtx.shadowBlur = 8;
-
-    nokiaCtx.fillRect(
-        nokiaFood.x*nokiaGridSize+1,
-        nokiaFood.y*nokiaGridSize+1,
-        nokiaGridSize-2,
-        nokiaGridSize-2
-    );
-
-    nokiaCtx.shadowBlur = 0;
-
-    for (var i=0;i<nokiaSnake.length;i++) {
-        if (i===0) {
-            nokiaCtx.fillStyle = "#38bdf8";
-            nokiaCtx.shadowColor = "#38bdf8";
-            nokiaCtx.shadowBlur = 10;
-        } else {
-            nokiaCtx.fillStyle = "#4ade80";
-            nokiaCtx.shadowBlur = 0;
-        }
-
-        nokiaCtx.fillRect(
-            nokiaSnake[i].x*nokiaGridSize+1,
-            nokiaSnake[i].y*nokiaGridSize+1,
-            nokiaGridSize-2,
-            nokiaGridSize-2
-        );
-    }
-
-    nokiaCtx.shadowBlur = 0;
-}
-
-function updateNokiaSnake() {
-    if (nokiaIsPaused) return;
-
-    var head = {
-        x:nokiaSnake[0].x+nokiaDx,
-        y:nokiaSnake[0].y+nokiaDy
-    };
-
-    if (head.x<0) head.x=nokiaTileCount-1;
-    if (head.x>=nokiaTileCount) head.x=0;
-    if (head.y<0) head.y=nokiaTileCount-1;
-    if (head.y>=nokiaTileCount) head.y=0;
-
-    for (var i=0;i<nokiaSnake.length;i++) {
-        if (
-            nokiaSnake[i].x===head.x &&
-            nokiaSnake[i].y===head.y
-        ) {
-            playNokiaBeep(180,0.3);
-
-            alert("💥 Game Over! ଆପଣଙ୍କ ସ୍କୋର: "+nokiaScore);
-
-            resetNokiaGame();
-            return;
-        }
-    }
-
-    nokiaSnake.unshift(head);
-
-    if (
-        head.x===nokiaFood.x &&
-        head.y===nokiaFood.y
-    ) {
-        nokiaScore+=10;
-
-        document.getElementById("nokiaScoreVal").textContent =
-            nokiaScore;
-
-        if (nokiaScore>nokiaHighScore) {
-            nokiaHighScore=nokiaScore;
-
-            document.getElementById("nokiaHighScoreVal").textContent =
-                nokiaHighScore;
-
-            try {
-                localStorage.setItem(
-                    "gs_snake_hi",nokiaHighScore
-                );
-            } catch(e) {}
-        }
-
-        playNokiaBeep(780,0.08);
-        spawnNokiaFood();
-
-    } else {
-        nokiaSnake.pop();
-    }
-
-    drawNokiaSnake();
-}
-
-function setNokiaDir(d) {
-    if (d==="UP" && nokiaDy!==1) {
-        nokiaDx=0;
-        nokiaDy=-1;
-    } else if (d==="DOWN" && nokiaDy!==-1) {
-        nokiaDx=0;
-        nokiaDy=1;
-    } else if (d==="LEFT" && nokiaDx!==1) {
-        nokiaDx=-1;
-        nokiaDy=0;
-    } else if (d==="RIGHT" && nokiaDx!==-1) {
-        nokiaDx=1;
-        nokiaDy=0;
-    }
-
-    playNokiaBeep(440,0.03);
-}
-
-function toggleNokiaPause() {
-    nokiaIsPaused = !nokiaIsPaused;
-
-    document.getElementById("nokiaPauseBtn").textContent =
-        nokiaIsPaused ? "▶" : "⏸";
-}
-
-function toggleNokiaSound() {
-    nokiaSoundEnabled = !nokiaSoundEnabled;
-
-    document.getElementById("nokiaSoundBtn").textContent =
-        nokiaSoundEnabled ? "🔊 Sound ON" : "🔇 Sound OFF";
-}
-
-function resetNokiaGame() {
-    nokiaSnake = [
-        {x:10,y:10},
-        {x:10,y:11},
-        {x:10,y:12}
-    ];
-
-    nokiaDx=0;
-    nokiaDy=-1;
-    nokiaScore=0;
-    nokiaIsPaused=false;
-
-    document.getElementById("nokiaScoreVal").textContent="0";
-    document.getElementById("nokiaPauseBtn").textContent="⏸";
-
-    spawnNokiaFood();
-    drawNokiaSnake();
-}
-
-function exitNokiaGame() {
-    clearInterval(nokiaGameInterval);
-    nokiaGameInterval=null;
-    showScreen("home");
-}
-
-/* UTILITIES */
-function sendBridge(msg) {
-    if (
-        window.AppInventor &&
-        typeof window.AppInventor.setWebViewString==="function"
-    ) {
-        window.AppInventor.setWebViewString(msg);
-        return true;
-    }
-
-    return false;
-}
-
-function openDrive() {
-    if (!currentFolder) {
-        alert("ପ୍ରଥମେ Class ଓ Subject ବାଛନ୍ତୁ।");
-        return;
-    }
-
-    if (sendBridge("OPEN_URL~"+currentFolder)) return;
-
-    window.open(currentFolder,"_blank");
-}
-
-function downloadNotes() {
-    openDrive();
-}
-
-/* BOOKMARKS */
-function bookmarkCurrent() {
-    const bookmarks = JSON.parse(
-        localStorage.getItem("gs_bookmarks") || "[]"
-    );
-
-    const value = {
-        cls:currentClass,
-        sub:currentSubject
-    };
-
-    if (!bookmarks.some(x =>
-        x.cls===value.cls && x.sub===value.sub
-    )) {
-        bookmarks.push(value);
-
-        localStorage.setItem(
-            "gs_bookmarks",
-            JSON.stringify(bookmarks)
-        );
-
-        $("noteStatus").textContent =
-            "⭐ Subject bookmarked successfully!";
-
-    } else {
-        $("noteStatus").textContent =
-            "Already in bookmarks!";
-    }
-}
-
-function renderBookmarks() {
-    const bookmarks = JSON.parse(
-        localStorage.getItem("gs_bookmarks") || "[]"
-    );
-
-    const container = $("bookmarkList");
-
-    if (!bookmarks.length) {
-        container.innerHTML =
-            '<div class="card" style="text-align:center;color:var(--muted);">No bookmarks saved yet.</div>';
-        return;
-    }
-
-    const grouped = {};
-
-    bookmarks.forEach((bookmark,index) => {
-        const key = bookmark.sub || "OTHER";
-
-        if (!grouped[key]) grouped[key]=[];
-
-        grouped[key].push({
-            ...bookmark,
-            originalIndex:index
-        });
-    });
-
-    let html = "";
-
-    Object.keys(grouped).forEach(sub => {
-        html +=
-            `<div class="subject-group">
-            <div class="subject-header">
-            <span>📖 ${sub}</span>
-            <span style="font-size:12px;background:#ede9fe;padding:2px 8px;border-radius:12px;color:#6d28d9;">
-            ${grouped[sub].length} saved
-            </span>
-            </div>`;
-
-        grouped[sub].forEach(item => {
-            html +=
-                `<div class="item" style="display:flex;justify-content:space-between;align-items:center;">
-                <div>
-                <b>${item.cls}</b><br>
-                <small class="muted">${item.sub}</small>
-                </div>
-                <div style="display:flex;gap:6px;">
-                <button type="button" class="btn green"
-                style="padding:6px 12px;font-size:13px;"
-                onclick="goToBookmarked('${item.cls}','${item.sub}')">Open</button>
-                <button type="button" class="btn red"
-                style="padding:6px 10px;font-size:13px;"
-                onclick="deleteBookmark(${item.originalIndex})">✕</button>
-                </div>
-                </div>`;
-        });
-
-        html += "</div>";
-    });
-
-    container.innerHTML = html;
-}
-
-function goToBookmarked(cls,sub) {
-    currentClass=cls;
-    window.classMode="materials";
-    openSubject(sub);
-}
-
-function deleteBookmark(index) {
-    const bookmarks = JSON.parse(
-        localStorage.getItem("gs_bookmarks") || "[]"
-    );
-
-    bookmarks.splice(index,1);
-
-    localStorage.setItem(
-        "gs_bookmarks",
-        JSON.stringify(bookmarks)
-    );
-
-    renderBookmarks();
-}
-
-function clearBookmarks() {
-    if (confirm("Clear all bookmarks?")) {
-        localStorage.removeItem("gs_bookmarks");
-        renderBookmarks();
-    }
-}
-
-/* MCQ SETUP */
-function openMcqSetup() {
-    showScreen("mcqSetup");
-
-    $("mcqClass").innerHTML =
-        Object.keys(subjectsByClass).map(cls =>
-            `<option value="${cls}">${cls}</option>`
-        ).join("");
-
-    fillSubjects();
-
-    loadRemoteMcq();
-}
-
-function fillSubjects() {
-    const cls = $("mcqClass").value;
-
-    $("mcqSubject").innerHTML =
-        (subjectsByClass[cls] || []).map(subject =>
-            `<option value="${subject}">${subject}</option>`
-        ).join("");
-
-    fillTopics();
-}
-
-/* LOAD MCQ JSON */
-async function loadRemoteMcq() {
-    try {
-        const response = await fetch(
-            GITHUB_MCQ_JSON_URL+"?t="+Date.now(),
-            {cache:"no-store"}
-        );
-
-        if (!response.ok) {
-            throw new Error("HTTP "+response.status);
-        }
-
-        mcqDataStore = await response.json();
-
-        localStorage.setItem(
-            "gs_cached_mcq_json",
-            JSON.stringify(mcqDataStore)
-        );
-
-        fillTopics();
-
-    } catch(error) {
-        console.error("MCQ JSON Error:",error);
-
-        const cachedData =
-            localStorage.getItem("gs_cached_mcq_json");
-
-        if (cachedData) {
-            try {
-                mcqDataStore=JSON.parse(cachedData);
-            } catch(e) {
-                mcqDataStore={};
-            }
-        }
-
-        fillTopics();
-    }
-}
-
-/* FILL TOPICS */
-function fillTopics() {
-    const cls = $("mcqClass").value;
-    const subject = $("mcqSubject").value;
-
-    const topicSelect = $("mcqTopic");
-
-    const list =
-        mcqDataStore[cls]?.[subject] || [];
-
-    if (Array.isArray(list) && list.length>0) {
-        topicSelect.innerHTML = list.map(item =>
-            `<option value="${item.file}">${item.title}</option>`
-        ).join("");
-
-    } else {
-        topicSelect.innerHTML =
-            '<option value="">No topics added yet</option>';
-    }
-}
-
-/* TIMER FORMAT */
-function fmtTime(seconds) {
-    return String(Math.floor(seconds/60)).padStart(2,"0")
-        +":"
-        +String(seconds%60).padStart(2,"0");
-}
-
-/* START ONLINE QUIZ */
-function startQuiz() {
-    const fileName = $("mcqTopic").value;
-
-    if (!fileName) {
-        alert("ଦୟାକରି ଏକ Topic ବାଛନ୍ତୁ।");
-        return;
-    }
-
-    currentViewMode="quiz";
-
-    const fullUrl =
-        new URL(fileName,GITHUB_PAGES_BASE).href;
-
-    $("noteActionToolbar").style.display="none";
-
-    $("quizTimerBar").style.display="flex";
-
-    $("viewerBackButton").textContent="⬅ Back to Topics";
-
-    quizSeconds=0;
-    isQuizPaused=false;
-
-    $("quizRunningTimer").textContent="00:00";
-
-    clearInterval(quizTimerInterval);
-
-    quizTimerInterval=setInterval(() => {
-        if (!isQuizPaused) {
-            quizSeconds++;
-
-            $("quizRunningTimer").textContent =
-                fmtTime(quizSeconds);
-        }
-    },1000);
-
-    $("pauseModal").classList.remove("active");
+    $("noteActionToolbar").style.display = "flex";
+    $("noteSaveBtn").style.display = "block";
+    $("quizSaveBtn").style.display = "none";
+    $("viewerBackButton").textContent = "⬅ Back to Subjects";
 
     showScreen("quizScreen");
 
     $("quizFrame").srcdoc =
-        "<div style='display:flex;align-items:center;justify-content:center;height:60vh;font-family:sans-serif;color:#6d28d9;font-size:18px;'><b>Loading Quiz... ଅପେକ୍ଷା କରନ୍ତୁ...</b></div>";
+      "<div style='display:flex;align-items:center;justify-content:center;height:60vh;font-family:sans-serif;color:#6d28d9;font-size:18px;'><b>Loading Note... ଅପେକ୍ଷା କରନ୍ତୁ...</b></div>";
 
-    fetch(fullUrl+"?t="+Date.now())
-        .then(response => {
-            if (!response.ok) {
-                throw new Error("HTTP "+response.status);
-            }
+    fetch(currentNoteHtmlUrl + "?t=" + Date.now())
+      .then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.text(); })
+      .then(html => { $("quizFrame").srcdoc = html; })
+      .catch(err => {
+        console.error(err);
+        $("quizFrame").srcdoc =
+          "<div style='padding:20px;text-align:center;font-family:sans-serif;'>ଇଣ୍ଟରନେଟ୍ ସଂଯୋଗ ଯାଞ୍ଚ କରନ୍ତୁ କିମ୍ବା ପରେ ଚେଷ୍ଟା କରନ୍ତୁ।</div>";
+      });
+    return;
+  }
 
-            return response.text();
-        })
-        .then(html => {
-            $("quizFrame").srcdoc=html;
-        })
-        .catch(error => {
-            console.error(error);
+  currentViewMode = "materials";
+  $("noteStatus").textContent = "";
+  showScreen("folder");
+}
 
-            $("quizFrame").srcdoc =
-                "<div style='padding:20px;text-align:center;'>ଇଣ୍ଟରନେଟ୍ ସଂଯୋଗ ଯାଞ୍ଚ କରନ୍ତୁ କିମ୍ବା ପରେ ଚେଷ୍ଟା କରନ୍ତୁ।</div>";
-        });
+/* VIEWER BACK */
+function cleanViewerFrame() {
+  clearInterval(quizTimerInterval);
+  quizTimerInterval = null;
+  isQuizPaused = false;
+  $("noteActionToolbar").style.display = "none";
+  $("pauseModal").classList.remove("active");
+  $("quizFrame").srcdoc = "";
+}
+
+function handleViewerBack() {
+  cleanViewerFrame();
+  if (currentViewMode === "quiz") showScreen("mcqSetup");
+  else if (currentViewMode === "downloaded_quiz") showScreen("offlineQuizMenuScreen");
+  else showScreen("subjects");
+}
+
+function goHomeFromViewer() {
+  cleanViewerFrame();
+  showScreen("home");
+}
+
+/* SAVE NOTE OFFLINE */
+async function saveCurrentNoteOffline() {
+  try {
+    const r = await fetch(currentNoteHtmlUrl + "?t=" + Date.now());
+    if (!r.ok) throw new Error("HTTP " + r.status);
+    const html = await r.text();
+
+    const saved = load("gs_saved_notes", {});
+    const key = currentClass + " · " + currentSubject;
+    saved[key] = { title: key, content: html, date: new Date().toLocaleDateString("or-IN") };
+
+    if (!store("gs_saved_notes", saved)) {
+      alert("Storage full! ପୁରୁଣା note delete କରନ୍ତୁ।");
+      return;
+    }
+    alert("✅ ନୋଟ୍ Save ହୋଇଗଲା!");
+  } catch (e) {
+    console.error(e);
+    alert("❌ Save ହେଲା ନାହିଁ। Internet ଯାଞ୍ଚ କରନ୍ତୁ।");
+  }
+}
+
+/* SAVE QUIZ OFFLINE */
+async function saveCurrentQuizOffline() {
+  try {
+    const r = await fetch(currentQuizUrl + "?t=" + Date.now());
+    if (!r.ok) throw new Error("HTTP " + r.status);
+    const html = await r.text();
+
+    const s = load("gs_saved_mcqs", {});
+    s[currentQuizTitle] = { title: currentQuizTitle, content: html, date: new Date().toLocaleDateString("or-IN") };
+
+    if (!store("gs_saved_mcqs", s)) {
+      alert("Storage full! ପୁରୁଣା quiz delete କରନ୍ତୁ।");
+      return;
+    }
+    alert("✅ Quiz Download ହୋଇଗଲା!");
+  } catch (e) {
+    console.error(e);
+    alert("❌ Download ହେଲା ନାହିଁ। Internet ଯାଞ୍ଚ କରନ୍ତୁ।");
+  }
+}
+
+/* SAVE SELECTED TOPIC QUIZ OFFLINE (from MCQ setup screen) */
+async function downloadSelectedTopicMcq() {
+  const sel = $("mcqTopic");
+  const file = sel.value;
+  if (!file) {
+    alert("ଦୟାକରି ଏକ Topic ବାଛନ୍ତୁ।");
+    return;
+  }
+  const topicName = sel.options[sel.selectedIndex].text;
+  const fullUrl = new URL(file, GITHUB_PAGES_BASE).href;
+  const key = $("mcqClass").value + " · " + $("mcqSubject").value + " · " + topicName;
+
+  try {
+    const r = await fetch(fullUrl + "?t=" + Date.now());
+    if (!r.ok) throw new Error("HTTP " + r.status);
+    const html = await r.text();
+
+    const s = load("gs_saved_mcqs", {});
+    s[key] = { title: key, content: html, date: new Date().toLocaleDateString("or-IN") };
+
+    if (!store("gs_saved_mcqs", s)) {
+      alert("Storage full! ପୁରୁଣା quiz delete କରନ୍ତୁ।");
+      return;
+    }
+    alert("✅ ଏହି Topic Offline ପାଇଁ Save ହୋଇଗଲା!");
+  } catch (e) {
+    console.error(e);
+    alert("ଡାଉନଲୋଡ୍ ବିଫଳ ହେଲା। ଇଣ୍ଟରନେଟ୍ ଯାଞ୍ଚ କରନ୍ତୁ।");
+  }
+}
+
+/* SAVED NOTES */
+function openSavedNotesScreen() {
+  showScreen("downloads");
+}
+
+function makeRow(titleText, dateText, openLabel, onOpen, onDelete) {
+  const row = document.createElement("div");
+  row.className = "item";
+  row.style.cssText = "display:flex;justify-content:space-between;align-items:center;padding:12px 6px;gap:8px;";
+
+  const info = document.createElement("div");
+  const title = document.createElement("b");
+  title.textContent = titleText;
+  const date = document.createElement("small");
+  date.className = "muted";
+  date.textContent = dateText || "";
+  info.append(title, document.createElement("br"), date);
+
+  const actions = document.createElement("div");
+  actions.style.cssText = "display:flex;gap:6px;";
+
+  const o = document.createElement("button");
+  o.type = "button";
+  o.className = "btn green";
+  o.style.cssText = "padding:6px 12px;font-size:13px;";
+  o.textContent = openLabel;
+  o.onclick = onOpen;
+
+  const d = document.createElement("button");
+  d.type = "button";
+  d.className = "btn red";
+  d.style.cssText = "padding:6px 10px;font-size:13px;";
+  d.textContent = "✕";
+  d.onclick = onDelete;
+
+  actions.append(o, d);
+  row.append(info, actions);
+  return row;
+}
+
+function renderSavedNotesList() {
+  const saved = load("gs_saved_notes", {});
+  const container = $("savedNotesList");
+  const keys = Object.keys(saved);
+
+  if (!keys.length) {
+    container.innerHTML = '<div style="text-align:center;padding:16px;color:var(--muted);">କୌଣସି ନୋଟ୍ ସେଭ୍ ହୋଇନାହିଁ।</div>';
+    return;
+  }
+  container.innerHTML = "";
+  keys.forEach(key => {
+    const item = saved[key];
+    container.appendChild(makeRow("📖 " + item.title, item.date, "Open",
+      () => viewSavedNote(key), () => deleteSavedNote(key)));
+  });
+}
+
+function viewSavedNote(key) {
+  const saved = load("gs_saved_notes", {});
+  if (saved[key]) {
+    $("savedNoteTitle").textContent = key;
+    $("savedNoteBody").srcdoc = saved[key].content;
+    showScreen("offlineNoteViewer");
+  }
+}
+
+function deleteSavedNote(key) {
+  if (!confirm(key + " ନୋଟ୍ କାଢ଼ିବାକୁ ଚାହାନ୍ତି କି?")) return;
+  const saved = load("gs_saved_notes", {});
+  delete saved[key];
+  store("gs_saved_notes", saved);
+  renderSavedNotesList();
+}
+
+/* DOWNLOADED QUIZ */
+function openOfflineQuizMenu() {
+  showScreen("offlineQuizMenuScreen");
+}
+
+function renderDownloadedQuizList() {
+  const savedMcqs = load("gs_saved_mcqs", {});
+  const container = $("downloadedQuizList");
+  const keys = Object.keys(savedMcqs);
+
+  if (!keys.length) {
+    container.innerHTML = '<div style="text-align:center;padding:18px;color:var(--muted);">କୌଣସି Quiz Download ହୋଇନାହିଁ।</div>';
+    return;
+  }
+  container.innerHTML = "";
+  keys.forEach(key => {
+    const item = savedMcqs[key];
+    container.appendChild(makeRow("📝 " + (item.title || key), item.date, "Play",
+      () => openDownloadedMcq(key), () => deleteDownloadedMcq(key)));
+  });
+}
+
+function openDownloadedMcq(key) {
+  const item = load("gs_saved_mcqs", {})[key];
+  if (!item || !item.content) {
+    alert("Downloaded Quiz ମିଳିଲା ନାହିଁ।");
+    return;
+  }
+
+  currentViewMode = "downloaded_quiz";
+  clearInterval(quizTimerInterval);
+  quizTimerInterval = null;
+  isQuizPaused = false;
+
+  $("pauseModal").classList.remove("active");
+  $("quizTimerBar").style.display = "none";
+  $("noteActionToolbar").style.display = "none";
+  $("viewerBackButton").textContent = "⬅ Back to Sets";
+
+  showScreen("quizScreen");
+  $("quizFrame").srcdoc = item.content;
+}
+
+function deleteDownloadedMcq(key) {
+  if (!confirm(key + " ସେଟ୍ କାଢ଼ିବାକୁ ଚାହାନ୍ତି କି?")) return;
+  const s = load("gs_saved_mcqs", {});
+  delete s[key];
+  store("gs_saved_mcqs", s);
+  renderDownloadedQuizList();
+}
+
+/* NOKIA NEON SNAKE */
+var nokiaCanvas = null;
+var nokiaCtx = null;
+var nokiaGridSize = 15;
+var nokiaTileCount = 20;
+var nokiaSnake = [{x:10,y:10},{x:10,y:11},{x:10,y:12}];
+var nokiaDx = 0;
+var nokiaDy = -1;
+var nokiaNext = null;
+var nokiaFood = {x:5,y:5};
+var nokiaScore = 0;
+var nokiaHighScore = parseInt(load("gs_snake_hi", 0), 10) || 0;
+var nokiaGameInterval = null;
+var nokiaIsPaused = false;
+var nokiaSoundEnabled = true;
+var nokiaAudioCtx = null;
+var nokiaOver = false;
+
+function playNokiaBeep(freq, duration) {
+  if (!nokiaSoundEnabled) return;
+  try {
+    if (!nokiaAudioCtx) {
+      nokiaAudioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    }
+    if (nokiaAudioCtx.state === "suspended") nokiaAudioCtx.resume();
+
+    var osc = nokiaAudioCtx.createOscillator();
+    var gain = nokiaAudioCtx.createGain();
+    osc.type = "square";
+    osc.frequency.value = freq;
+    gain.gain.setValueAtTime(0.08, nokiaAudioCtx.currentTime);
+    osc.connect(gain);
+    gain.connect(nokiaAudioCtx.destination);
+    osc.start();
+    osc.stop(nokiaAudioCtx.currentTime + duration);
+  } catch (e) {}
+}
+
+function openSnakeGame() {
+  showScreen("snakeGameScreen");
+  nokiaCanvas = $("nokiaCanvas");
+  nokiaCtx = nokiaCanvas.getContext("2d");
+  $("nokiaHighScoreVal").textContent = nokiaHighScore;
+
+  resetNokiaGame();
+
+  clearInterval(nokiaGameInterval);
+  nokiaGameInterval = setInterval(updateNokiaSnake, 130);
+}
+
+function spawnNokiaFood() {
+  var tries = 0;
+  do {
+    nokiaFood.x = Math.floor(Math.random() * nokiaTileCount);
+    nokiaFood.y = Math.floor(Math.random() * nokiaTileCount);
+    var onSnake = nokiaSnake.some(function (s) { return s.x === nokiaFood.x && s.y === nokiaFood.y; });
+    tries++;
+  } while (onSnake && tries < 500);
+}
+
+function drawNokiaSnake() {
+  if (!nokiaCtx) return;
+
+  nokiaCtx.fillStyle = "#090414";
+  nokiaCtx.fillRect(0, 0, nokiaCanvas.width, nokiaCanvas.height);
+
+  nokiaCtx.strokeStyle = "#160b30";
+  nokiaCtx.lineWidth = 0.5;
+  for (var x = 0; x < nokiaCanvas.width; x += nokiaGridSize) {
+    nokiaCtx.beginPath(); nokiaCtx.moveTo(x, 0); nokiaCtx.lineTo(x, nokiaCanvas.height); nokiaCtx.stroke();
+  }
+  for (var y = 0; y < nokiaCanvas.height; y += nokiaGridSize) {
+    nokiaCtx.beginPath(); nokiaCtx.moveTo(0, y); nokiaCtx.lineTo(nokiaCanvas.width, y); nokiaCtx.stroke();
+  }
+
+  nokiaCtx.fillStyle = "#f43f5e";
+  nokiaCtx.shadowColor = "#f43f5e";
+  nokiaCtx.shadowBlur = 8;
+  nokiaCtx.fillRect(nokiaFood.x * nokiaGridSize + 1, nokiaFood.y * nokiaGridSize + 1, nokiaGridSize - 2, nokiaGridSize - 2);
+  nokiaCtx.shadowBlur = 0;
+
+  for (var i = 0; i < nokiaSnake.length; i++) {
+    if (i === 0) {
+      nokiaCtx.fillStyle = "#38bdf8";
+      nokiaCtx.shadowColor = "#38bdf8";
+      nokiaCtx.shadowBlur = 10;
+    } else {
+      nokiaCtx.fillStyle = "#4ade80";
+      nokiaCtx.shadowBlur = 0;
+    }
+    nokiaCtx.fillRect(nokiaSnake[i].x * nokiaGridSize + 1, nokiaSnake[i].y * nokiaGridSize + 1, nokiaGridSize - 2, nokiaGridSize - 2);
+  }
+  nokiaCtx.shadowBlur = 0;
+}
+
+function updateNokiaSnake() {
+  if (nokiaIsPaused || nokiaOver) return;
+
+  if (nokiaNext) {
+    nokiaDx = nokiaNext.x;
+    nokiaDy = nokiaNext.y;
+    nokiaNext = null;
+  }
+
+  var head = { x: nokiaSnake[0].x + nokiaDx, y: nokiaSnake[0].y + nokiaDy };
+  if (head.x < 0) head.x = nokiaTileCount - 1;
+  if (head.x >= nokiaTileCount) head.x = 0;
+  if (head.y < 0) head.y = nokiaTileCount - 1;
+  if (head.y >= nokiaTileCount) head.y = 0;
+
+  for (var i = 0; i < nokiaSnake.length; i++) {
+    if (nokiaSnake[i].x === head.x && nokiaSnake[i].y === head.y) {
+      playNokiaBeep(180, 0.3);
+      nokiaOver = true;
+      $("nokiaTitle").textContent = "💥 GAME OVER: " + nokiaScore;
+      return;
+    }
+  }
+
+  nokiaSnake.unshift(head);
+
+  if (head.x === nokiaFood.x && head.y === nokiaFood.y) {
+    nokiaScore += 10;
+    $("nokiaScoreVal").textContent = nokiaScore;
+
+    if (nokiaScore > nokiaHighScore) {
+      nokiaHighScore = nokiaScore;
+      $("nokiaHighScoreVal").textContent = nokiaHighScore;
+      store("gs_snake_hi", nokiaHighScore);
+    }
+    playNokiaBeep(780, 0.08);
+    spawnNokiaFood();
+  } else {
+    nokiaSnake.pop();
+  }
+  drawNokiaSnake();
+}
+
+function setNokiaDir(d) {
+  var dx = nokiaNext ? nokiaNext.x : nokiaDx;
+  var dy = nokiaNext ? nokiaNext.y : nokiaDy;
+
+  if (d === "UP" && dy !== 1) nokiaNext = { x: 0, y: -1 };
+  else if (d === "DOWN" && dy !== -1) nokiaNext = { x: 0, y: 1 };
+  else if (d === "LEFT" && dx !== 1) nokiaNext = { x: -1, y: 0 };
+  else if (d === "RIGHT" && dx !== -1) nokiaNext = { x: 1, y: 0 };
+
+  playNokiaBeep(440, 0.03);
+}
+
+function toggleNokiaPause() {
+  if (nokiaOver) return;
+  nokiaIsPaused = !nokiaIsPaused;
+  $("nokiaPauseBtn").textContent = nokiaIsPaused ? "▶" : "⏸";
+}
+
+function toggleNokiaSound() {
+  nokiaSoundEnabled = !nokiaSoundEnabled;
+  $("nokiaSoundBtn").textContent = nokiaSoundEnabled ? "🔊 Sound ON" : "🔇 Sound OFF";
+}
+
+function resetNokiaGame() {
+  nokiaSnake = [{x:10,y:10},{x:10,y:11},{x:10,y:12}];
+  nokiaDx = 0;
+  nokiaDy = -1;
+  nokiaNext = null;
+  nokiaScore = 0;
+  nokiaIsPaused = false;
+  nokiaOver = false;
+
+  $("nokiaScoreVal").textContent = "0";
+  $("nokiaPauseBtn").textContent = "⏸";
+  $("nokiaTitle").textContent = "🐍 NOKIA NEON SNAKE ⚡";
+
+  spawnNokiaFood();
+  drawNokiaSnake();
+}
+
+function exitNokiaGame() {
+  showScreen("home"); /* showScreen stops the loop */
+}
+
+/* keyboard + swipe controls */
+document.addEventListener("keydown", function (e) {
+  if (!$("snakeGameScreen").classList.contains("active")) return;
+  var map = { ArrowUp: "UP", ArrowDown: "DOWN", ArrowLeft: "LEFT", ArrowRight: "RIGHT" };
+  if (map[e.key]) { e.preventDefault(); setNokiaDir(map[e.key]); }
+});
+
+(function () {
+  var sx = 0, sy = 0;
+  var c = $("nokiaCanvas");
+  c.addEventListener("touchstart", function (e) {
+    sx = e.touches[0].clientX; sy = e.touches[0].clientY;
+  }, { passive: true });
+  c.addEventListener("touchend", function (e) {
+    var dx = e.changedTouches[0].clientX - sx;
+    var dy = e.changedTouches[0].clientY - sy;
+    if (Math.max(Math.abs(dx), Math.abs(dy)) < 20) return;
+    if (Math.abs(dx) > Math.abs(dy)) setNokiaDir(dx > 0 ? "RIGHT" : "LEFT");
+    else setNokiaDir(dy > 0 ? "DOWN" : "UP");
+  }, { passive: true });
+})();
+
+/* UTILITIES */
+function sendBridge(msg) {
+  if (window.AppInventor && typeof window.AppInventor.setWebViewString === "function") {
+    window.AppInventor.setWebViewString(msg);
+    return true;
+  }
+  return false;
+}
+
+function openDrive() {
+  if (!currentFolder) {
+    alert("ପ୍ରଥମେ Class ଓ Subject ବାଛନ୍ତୁ।");
+    return;
+  }
+  if (sendBridge("OPEN_URL~" + currentFolder)) return;
+  window.open(currentFolder, "_blank");
+}
+
+function downloadNotes() { openDrive(); }
+
+/* BOOKMARKS */
+function bookmarkCurrent() {
+  const bookmarks = load("gs_bookmarks", []);
+  const value = { cls: currentClass, sub: currentSubject, mode: window.classMode || "materials" };
+
+  if (!bookmarks.some(x => x.cls === value.cls && x.sub === value.sub && (x.mode || "materials") === value.mode)) {
+    bookmarks.push(value);
+    store("gs_bookmarks", bookmarks);
+    $("noteStatus").textContent = "⭐ Subject bookmarked successfully!";
+  } else {
+    $("noteStatus").textContent = "Already in bookmarks!";
+  }
+}
+
+function renderBookmarks() {
+  const bookmarks = load("gs_bookmarks", []);
+  const container = $("bookmarkList");
+
+  if (!bookmarks.length) {
+    container.innerHTML = '<div class="card" style="text-align:center;color:var(--muted);">No bookmarks saved yet.</div>';
+    return;
+  }
+
+  const grouped = {};
+  bookmarks.forEach((b, index) => {
+    const key = b.sub || "OTHER";
+    if (!grouped[key]) grouped[key] = [];
+    grouped[key].push(Object.assign({}, b, { originalIndex: index }));
+  });
+
+  let html = "";
+  Object.keys(grouped).forEach(sub => {
+    html += '<div class="subject-group"><div class="subject-header"><span>📖 ' + esc(sub) +
+      '</span><span class="count-badge">' + grouped[sub].length + ' saved</span></div>';
+
+    grouped[sub].forEach(item => {
+      html += '<div class="item" style="display:flex;justify-content:space-between;align-items:center;">' +
+        '<div><b>' + esc(item.cls) + '</b><br><small class="muted">' + esc(item.sub) +
+        ' · ' + ((item.mode || "materials") === "notes" ? "Notes" : "Materials") + '</small></div>' +
+        '<div style="display:flex;gap:6px;">' +
+        '<button type="button" class="btn green" style="padding:6px 12px;font-size:13px;" onclick="goToBookmarked(' + item.originalIndex + ')">Open</button>' +
+        '<button type="button" class="btn red" style="padding:6px 10px;font-size:13px;" onclick="deleteBookmark(' + item.originalIndex + ')">✕</button>' +
+        '</div></div>';
+    });
+    html += "</div>";
+  });
+  container.innerHTML = html;
+}
+
+function goToBookmarked(i) {
+  const b = load("gs_bookmarks", [])[i];
+  if (!b) return;
+  currentClass = b.cls;
+  window.classMode = b.mode || "materials";
+  openSubject(b.sub);
+}
+
+function deleteBookmark(index) {
+  const bookmarks = load("gs_bookmarks", []);
+  bookmarks.splice(index, 1);
+  store("gs_bookmarks", bookmarks);
+  renderBookmarks();
+}
+
+function clearBookmarks() {
+  if (confirm("Clear all bookmarks?")) {
+    try { localStorage.removeItem("gs_bookmarks"); } catch (e) {}
+    renderBookmarks();
+  }
+}
+
+/* MCQ SETUP */
+function openMcqSetup() {
+  showScreen("mcqSetup");
+
+  $("mcqClass").innerHTML = Object.keys(subjectsByClass)
+    .map(cls => '<option value="' + cls + '">' + cls + '</option>').join("");
+
+  fillSubjects();
+
+  if (!Object.keys(mcqDataStore).length) {
+    $("mcqTopic").innerHTML = '<option value="">Loading topics... ଅପେକ୍ଷା କରନ୍ତୁ</option>';
+  }
+  loadRemoteMcq();
+}
+
+function fillSubjects() {
+  const cls = $("mcqClass").value;
+  $("mcqSubject").innerHTML = (subjectsByClass[cls] || [])
+    .map(s => '<option value="' + s + '">' + s + '</option>').join("");
+  fillTopics();
+}
+
+async function loadRemoteMcq() {
+  try {
+    const r = await fetch(GITHUB_MCQ_JSON_URL + "?t=" + Date.now(), { cache: "no-store" });
+    if (!r.ok) throw new Error("HTTP " + r.status);
+    mcqDataStore = await r.json();
+    store("gs_cached_mcq_json", mcqDataStore);
+  } catch (error) {
+    console.error("MCQ JSON Error:", error);
+    mcqDataStore = load("gs_cached_mcq_json", {});
+  }
+  fillTopics();
+}
+
+function fillTopics() {
+  const cls = $("mcqClass").value;
+  const subject = $("mcqSubject").value;
+  const topicSelect = $("mcqTopic");
+  const list = (mcqDataStore[cls] && mcqDataStore[cls][subject]) || [];
+
+  if (Array.isArray(list) && list.length > 0) {
+    topicSelect.innerHTML = list.map(item =>
+      '<option value="' + esc(item.file) + '">' + esc(item.title) + '</option>').join("");
+  } else {
+    topicSelect.innerHTML = '<option value="">No topics added yet</option>';
+  }
+}
+
+/* TIMER FORMAT */
+function fmtTime(s) {
+  return String(Math.floor(s / 60)).padStart(2, "0") + ":" + String(s % 60).padStart(2, "0");
+}
+
+/* START ONLINE QUIZ */
+function startQuiz() {
+  const fileName = $("mcqTopic").value;
+  if (!fileName) {
+    alert("ଦୟାକରି ଏକ Topic ବାଛନ୍ତୁ।");
+    return;
+  }
+
+  currentViewMode = "quiz";
+  const fullUrl = new URL(fileName, GITHUB_PAGES_BASE).href;
+
+  currentQuizUrl = fullUrl;
+  currentQuizTitle = $("mcqClass").value + " · " + $("mcqSubject").value + " · " +
+    $("mcqTopic").selectedOptions[0].text;
+
+  $("noteActionToolbar").style.display = "flex";
+  $("noteSaveBtn").style.display = "none";
+  $("quizSaveBtn").style.display = "block";
+  $("quizTimerBar").style.display = "flex";
+  $("viewerBackButton").textContent = "⬅ Back to Topics";
+
+  quizSeconds = 0;
+  isQuizPaused = false;
+  $("quizRunningTimer").textContent = "00:00";
+
+  clearInterval(quizTimerInterval);
+  quizTimerInterval = setInterval(() => {
+    if (!isQuizPaused) {
+      quizSeconds++;
+      $("quizRunningTimer").textContent = fmtTime(quizSeconds);
+    }
+  }, 1000);
+
+  $("pauseModal").classList.remove("active");
+  showScreen("quizScreen");
+
+  $("quizFrame").srcdoc =
+    "<div style='display:flex;align-items:center;justify-content:center;height:60vh;font-family:sans-serif;color:#6d28d9;font-size:18px;'><b>Loading Quiz... ଅପେକ୍ଷା କରନ୍ତୁ...</b></div>";
+
+  fetch(fullUrl + "?t=" + Date.now())
+    .then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.text(); })
+    .then(html => { $("quizFrame").srcdoc = html; })
+    .catch(err => {
+      console.error(err);
+      $("quizFrame").srcdoc =
+        "<div style='padding:20px;text-align:center;font-family:sans-serif;'>ଇଣ୍ଟରନେଟ୍ ସଂଯୋଗ ଯାଞ୍ଚ କରନ୍ତୁ କିମ୍ବା ପରେ ଚେଷ୍ଟା କରନ୍ତୁ।</div>";
+    });
 }
 
 /* QUIZ PAUSE */
 function pauseQuiz() {
-    isQuizPaused=true;
-
-    $("pausedTimeText").textContent =
-        fmtTime(quizSeconds);
-
-    $("pauseModal").classList.add("active");
+  isQuizPaused = true;
+  $("pausedTimeText").textContent = fmtTime(quizSeconds);
+  $("pauseModal").classList.add("active");
 }
 
 function resumeQuiz() {
-    isQuizPaused=false;
-    $("pauseModal").classList.remove("active");
+  isQuizPaused = false;
+  $("pauseModal").classList.remove("active");
 }
 
 function closePauseAndExit() {
-    $("pauseModal").classList.remove("active");
-
-    cleanViewerFrame();
-
-    showScreen("mcqSetup");
+  $("pauseModal").classList.remove("active");
+  cleanViewerFrame();
+  showScreen("mcqSetup");
 }
 
 /* STUDY TIMER */
 function startStudy() {
-    if (studyInterval) return;
-
-    studyInterval=setInterval(() => {
-        studySeconds++;
-        renderStudyClock();
-    },1000);
+  if (studyInterval) return;
+  studyInterval = setInterval(() => { studySeconds++; renderStudyClock(); }, 1000);
 }
 
 function pauseStudy() {
-    clearInterval(studyInterval);
-    studyInterval=null;
+  clearInterval(studyInterval);
+  studyInterval = null;
 }
 
 function resetStudy() {
-    pauseStudy();
-
-    studySeconds=0;
-
-    renderStudyClock();
+  pauseStudy();
+  studySeconds = 0;
+  renderStudyClock();
 }
 
 function renderStudyClock() {
-    $("studyClock").textContent = [
-        Math.floor(studySeconds/3600),
-        Math.floor(studySeconds/60)%60,
-        studySeconds%60
-    ].map(value =>
-        String(value).padStart(2,"0")
-    ).join(":");
+  $("studyClock").textContent = [
+    Math.floor(studySeconds / 3600),
+    Math.floor(studySeconds / 60) % 60,
+    studySeconds % 60
+  ].map(v => String(v).padStart(2, "0")).join(":");
 }
 
-/* DARK / LIGHT THEME */
+/* THEME */
 function toggleTheme() {
-    document.body.classList.toggle("dark");
-
-    localStorage.setItem(
-        "gs_dark_theme",
-        document.body.classList.contains("dark")
-            ? "1"
-            : "0"
-    );
+  document.body.classList.toggle("dark");
+  try {
+    localStorage.setItem("gs_dark_theme", document.body.classList.contains("dark") ? "1" : "0");
+  } catch (e) {}
 }
 
-/* SHARE APP - Android Native Share Sheet with APK Link */
-function shareApp() {
-    const apkDownloadUrl = "https://github.com/silusahu360/gyansetu-odishamcq/releases/download/v1.0/gyansetu.apk";
-    
-    const shareData = {
-        title: "GyanSetu Odisha",
-        text: "🎓 *GyanSetu Odisha* - NCERT & Odisha State Board Learning Portal.\n\nSmart ଶିକ୍ଷଣ ଏବଂ MCQ ଅଭ୍ୟାସ ପାଇଁ ଆପ୍‌ର APK ଫାଇଲ୍ ସିଧାସଳଖ ଡାଉନଲୋଡ୍ କରନ୍ତୁ:",
-        url: apkDownloadUrl
-    };
+/* SHARE */
+/* >>> PUT YOUR REAL APP DOWNLOAD LINK HERE <<< */
+const APP_DOWNLOAD_LINK = "https://YOUR-APP-DOWNLOAD-LINK-HERE";
 
-    if (navigator.share) {
-        navigator.share(shareData).catch((error) => {
-            console.log("Error sharing:", error);
-        });
-    } else {
-        // Fallback for browsers without native share
-        const whatsappUrl = "https://wa.me/?text=" + encodeURIComponent(shareData.text + "\n" + shareData.url);
-        window.open(whatsappUrl, "_blank");
-    }
+function shareApp() {
+  const message =
+    "🎓 ଜ୍ଞାନସେତୁ ଓଡ଼ିଶା (GyanSetu Odisha)\n" +
+    "ଷଷ୍ଠ ରୁ ଦଶମ ଶ୍ରେଣୀ ପାଇଁ NCERT ଓ ଓଡ଼ିଶା ବୋର୍ଡ ଶିକ୍ଷଣ ଆପ୍।\n" +
+    "📚 ନୋଟ୍ସ, 📝 MCQ ଅଭ୍ୟାସ ଓ 📂 ଅଧ୍ୟୟନ ସାମଗ୍ରୀ ଏକ ସ୍ଥାନରେ।\n\n" +
+    "📲 ଆପ୍ ଡାଉନଲୋଡ୍ କରିବାକୁ ଏହି ଲିଙ୍କ୍‌ରେ କ୍ଲିକ୍ କରନ୍ତୁ:\n" + APP_DOWNLOAD_LINK;
+
+  /* 1. App Inventor WebView: ask the app to open the Android share sheet */
+  if (sendBridge("SHARE~" + message)) return;
+
+  /* 2. Browser / Android WebView with Web Share support: system share sheet */
+  if (navigator.share) {
+    navigator.share({ title: "GyanSetu Odisha", text: message })
+      .catch(err => console.log(err));
+    return;
+  }
+
+  /* 3. Last resort: copy message so user can paste it anywhere */
+  try {
+    navigator.clipboard.writeText(message).then(function () {
+      alert("📋 Message copy ହୋଇଗଲା। WhatsApp ଇତ୍ୟାଦିରେ Paste କରନ୍ତୁ।");
+    });
+  } catch (e) {
+    alert("Share is not supported on this device.");
+  }
 }
 
 /* CHECK UPDATE */
 function checkUpdates() {
-    alert(
-        "You are using the latest version ("+
-        CURRENT_VERSION+")."
-    );
+  alert("You are using the latest version (" + CURRENT_VERSION + ").");
 }
 
-/* RESTORE SAVED THEME */
-if (localStorage.getItem("gs_dark_theme")==="1") {
-    document.body.classList.add("dark");
-}
+/* RESTORE THEME */
+try {
+  if (localStorage.getItem("gs_dark_theme") === "1") document.body.classList.add("dark");
+} catch (e) {}
 
+syncHeaderHeight();
 </script>
 
 </body>
