@@ -1599,28 +1599,13 @@ function toggleTheme() {
     );
 }
 
-/* SHARE APP */
+/* SHARE APP - Direct WhatsApp Share */
 function shareApp() {
     const appUrl = window.location.href;
-    const shareText = "GyanSetu Odisha - NCERT & Odisha State Board Learning Portal. Smart sikhana pain ehi app ti download karantu:";
-
-    if (navigator.share) {
-        navigator.share({
-            title: "GyanSetu Odisha",
-            text: shareText,
-            url: appUrl
-        }).then(() => {
-            console.log("Shared successfully");
-        }).catch((error) => {
-            console.log("Error sharing:", error);
-        });
-    } else {
-        navigator.clipboard.writeText(appUrl).then(() => {
-            alert("📋 App link copied! Link copy hoigala, ebe aapnankor WhatsApp re paste kari share kariparibe.");
-        }).catch(err => {
-            alert("Share Link: " + appUrl);
-        });
-    }
+    const shareText = "🎓 *GyanSetu Odisha* - NCERT & Odisha State Board Learning Portal.\n\nSmart ଶିକ୍ଷଣ ଏବଂ MCQ ଅଭ୍ୟାସ ପାଇଁ ଆପ୍‌ଟିକୁ ଏଠାରେ ଡାଉନଲୋଡ୍ କରନ୍ତୁ:\n" + appUrl;
+    
+    const whatsappUrl = "https://api.whatsapp.com/send?text=" + encodeURIComponent(shareText);
+    window.open(whatsappUrl, "_blank");
 }
 
 /* CHECK UPDATE */
