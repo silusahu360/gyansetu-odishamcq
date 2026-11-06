@@ -1599,10 +1599,12 @@ function toggleTheme() {
     );
 }
 
-/* SHARE APP - Direct WhatsApp Share */
+/* SHARE APP - Direct WhatsApp Share with APK Download Link */
 function shareApp() {
-    const appUrl = window.location.href;
-    const shareText = "🎓 *GyanSetu Odisha* - NCERT & Odisha State Board Learning Portal.\n\nSmart ଶିକ୍ଷଣ ଏବଂ MCQ ଅଭ୍ୟାସ ପାଇଁ ଆପ୍‌ଟିକୁ ଏଠାରେ ଡାଉନଲୋଡ୍ କରନ୍ତୁ:\n" + appUrl;
+    // ଆପଣଙ୍କ GitHub Releases ରୁ APK ଫାଇଲ୍ ର ଡାଉନଲୋଡ୍ ଲିଙ୍କ୍ ଏଠାରେ ଦିଆଯାଇଛି
+    const apkDownloadUrl = "https://github.com/silusahu360/gyansetu-odishamcq/releases/download/v1.0/gyansetu.apk";
+    
+    const shareText = "🎓 *GyanSetu Odisha* - NCERT & Odisha State Board Learning Portal.\n\nSmart ଶିକ୍ଷଣ ଏବଂ MCQ ଅଭ୍ୟାସ ପାଇଁ ଆପ୍‌ର APK ଫାଇଲ୍ ସିଧାସଳଖ ଡାଉନଲୋଡ୍ କରନ୍ତୁ:\n" + apkDownloadUrl;
     
     const whatsappUrl = "https://api.whatsapp.com/send?text=" + encodeURIComponent(shareText);
     window.open(whatsappUrl, "_blank");
