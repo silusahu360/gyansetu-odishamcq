@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="or">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ଦଶମ ଶ୍ରେଣୀ ଜୀବବିଜ୍ଞାନ - ଶ୍ଵସନ (Respiration) MCQ ଅଭ୍ୟାସ</title>
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --success-color: #27ae60;
+            --error-color: #e74c3c;
+            --bg-color: #f4f7f6;
+            --card-bg: #ffffff;
+            --text-color: #333333;
+        }
+        body {
+            font-family: 'Kalinga', Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .quiz-container {
+            width: 100%;
+            max-width: 800px;
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 25px;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 15px;
+        }
+        .header h1 {
+            color: #2c3e50;
+            margin: 0 0 10px 0;
+            font-size: 1.8em;
+        }
+        .header p {
+            color: #7f8c8d;
+            margin: 0;
+            font-size: 1.1em;
+        }
+        .progress-bar-container {
+            width: 100%;
+            background-color: #e0e0e0;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            overflow: hidden;
+            height: 10px;
+        }
+        .progress-bar {
+            width: 0%;
+            height: 100%;
+            background-color: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+        .quiz-info {
+            display: flex;
+            justify-content: space-between;
+            font-weight: bold;
+            color: #555;
+            margin-bottom: 15px;
+        }
+        .question-box {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+        .options-list {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 25px 0;
+        }
+        .option-item {
+            padding: 12px 18px;
+            margin-bottom: 10px;
+            background: #fafafa;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 1.05em;
+        }
+        .option-item:hover:not(.disabled) {
+            background: #ebf5fb;
+            border-color: var(--primary-color);
+        }
+        .option-item.selected {
+            background: #ebf5fb;
+            border-color: var(--primary-color);
+        }
+        .option-item.correct {
+            background: #d4efdf !important;
+            border-color: var(--success-color) !important;
+            color: #145a32;
+            font-weight: bold;
+        }
+        .option-item.incorrect {
+            background: #fadbd8 !important;
+            border-color: var(--error-color) !important;
+            color: #78281f;
+        }
+        .option-item.disabled {
+            cursor: default;
+        }
+        .btn-container {
+            display: flex;
+            justify-content: space-between;
+        }
+        .btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            font-size: 1em;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.2s;
+        }
+        .btn:hover {
+            background-color: #2980b9;
+        }
+        .btn:disabled {
+            background-color: #bdc3c7;
+            cursor: not-allowed;
+        }
+        .result-container {
+            text-align: center;
+            display: none;
+        }
+        .result-container h2 {
+            color: #2c3e50;
+            font-size: 2em;
+            margin-bottom: 15px;
+        }
+        .score-circle {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: var(--primary-color);
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2.5em;
+            font-weight: bold;
+            margin: 0 auto 20px auto;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+        }
+        .result-msg {
+            font-size: 1.2em;
+            color: #555;
+            margin-bottom: 25px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="quiz-container">
+    <div class="header">
+        <h1>ଦଶମ ଶ୍ରେଣୀ ଜୀବବିଜ୍ଞାନ</h1>
+        <p>ଅଧ୍ୟାୟ ୨: ଶ୍ଵସନ (Respiration) - MCQ ଅଭ୍ୟାସ କେନ୍ଦ୍ର</p>
+    </div>
+
+    <div id="quiz-screen">
+        <div class="quiz-info">
+            <span id="question-number">ପ୍ରଶ୍ନ ୧ / ୧୦୦</span>
+            <span id="score-display">ସ୍କୋର: ୦</span>
+        </div>
+        <div class="progress-bar-container">
+            <div class="progress-bar" id="progress-bar"></div>
+        </div>
+
+        <div class="question-box" id="question-text">ପ୍ରଶ୍ନ ଲୋଡ୍ ହେଉଛି...</div>
+        
+        <ul class="options-list" id="options-list">
+            <!-- Options will be populated via JavaScript -->
+        </ul>
+
+        <div class="btn-container">
+            <button class="btn" id="next-btn" onclick="nextQuestion()" disabled>ପରବର୍ତ୍ତୀ ପ୍ରଶ୍ନ</button>
+        </div>
+    </div>
+
+    <div class="result-container" id="result-screen">
+        <h2>ଅଭ୍ୟାସ ସମାପ୍ତ ହେଲା!</h2>
+        <div class="score-circle" id="final-score">୦/୧୦୦</div>
+        <div class="result-msg" id="result-msg">ଆପଣଙ୍କ ପ୍ରଦର୍ଶନ ଅତି ଉତ୍ତମ ରହିଛି।</div>
+        <button class="btn" onclick="restartQuiz()">ପୁନର୍ବାର ଅଭ୍ୟାସ କରନ୍ତୁ</button>
+    </div>
+</div>
+
+<script>
+const quizData = [
+    { q: "ଶ୍ଵସନ ପ୍ରକ୍ରିୟାଟି ମୁଖ୍ୟତଃ କେଉଁ ପ୍ରକାରର ପ୍ରକ୍ରିୟା ଅଟେ?", options: ["ଉପଚୟ ପ୍ରକ୍ରିୟା (Anabolism)", "ଅପଚୟ ପ୍ରକ୍ରିୟା (Catabolism)", "ସଂଶ୍ଳେଷଣ ପ୍ରକ୍ରିୟା", "ଆଲୋକଶ୍ଳେଷଣ"], correct: 1 },
+    { q: "କୋଷ ଭିତରେ କେଉଁ ସରଳ ଖାଦ୍ୟ ଜାରିତ ହୋଇ ଶକ୍ତି ମିଳିଥାଏ?", options: ["ଆମିନୋ ଅମ୍ଳ", "ଫ୍ୟାଟି ଅମ୍ଳ", "ଗ୍ଲୁକୋଜ (Glucose)", "ଗ୍ଲାଇକୋଜେନ୍"], correct: 2 },
+    { q: "ଶ୍ଵସନ ପ୍ରକ୍ରିୟାରେ ଖାଦ୍ୟ ଜାରଣ ଦ୍ୱାରା ବ୍ୟବହାରକ୍ଷମ ଶକ୍ତି କେଉଁ ରୂପରେ ସଞ୍ଚିତ ହୁଏ?", options: ["DNA", "RNA", "ATP", "NADP"], correct: 2 },
+    { q: "ଅମ୍ଳଜାନ ଉପସ୍ଥିତିରେ ହେଉଥିବା ଶ୍ଵସନକୁ କ'ଣ କୁହାଯାଏ?", options: ["ବାୟୁ ଅପଜୀବୀ ଶ୍ଵସନ", "ବାୟୁ ଉପଜୀବୀ ଶ୍ଵସନ (Aerobic respiration)", "କିଣ୍ବନ", "ଗ୍ଲାଇକୋଲିସିସ୍"], correct: 1 },
+    { q: "ଅମ୍ଳଜାନ ଅନୁପସ୍ଥିତିରେ ହେଉଥିବା ଶ୍ଵସନକୁ କ'ଣ କୁହାଯାଏ?", options: ["ବାୟୁ ଉପଜୀବୀ ଶ୍ଵସନ", "ବାୟୁ ଅପଜୀବୀ ଶ୍ଵସନ (Anaerobic respiration)", "ଜୈବିକ ଜାରଣ", "ସାଇଟ୍ରିକ୍ ଅମ୍ଳ ଚକ୍ର"], correct: 1 },
+    { q: "କୋଷୀୟ ଶ୍ଵସନ କେତୋଟି ପର୍ଯ୍ୟାୟରେ ଘଟିଥାଏ?", options: ["ଦୁଇଟି", "ତିନୋଟି", "ଚାରୋଟି", "ପାଞ୍ଚଟି"], correct: 1 },
+    { q: "ନିମ୍ନୋକ୍ତ ମଧ୍ୟରୁ କେଉଁଟି କୋଷୀୟ ଶ୍ଵସନର ପର୍ଯ୍ୟାୟ ନୁହେଁ?", options: ["ଗ୍ଲାଇକୋଲିସିସ୍", "ସାଇଟ୍ରିକ୍ ଅମ୍ଳ ଚକ୍ର", "କେଲଭିନ୍ ଚକ୍ର", "ଇଲେକଟ୍ରନ୍ ପରିବହନ ସଂସ୍ଥା"], correct: 2 },
+    { q: "ଗ୍ଲାଇକୋଲିସିସ୍ ପ୍ରକ୍ରିୟା କୋଷର କେଉଁଠାରେ ସମ୍ପାଦିତ ହୁଏ?", options: ["ମାଇଟୋକଣ୍ଡ୍ରିଆ ମାଟ୍ରିକ୍ସ", "କୋଷଜୀବକ (Cytoplasm)", "ନାଭିକ", "ରାଇବୋଜୋମ୍"], correct: 1 },
+    { q: "ସାଇଟ୍ରିକ୍ ଅମ୍ଳ ଚକ୍ର କୋଷର କେଉଁ ଅଙ୍ଗିକାରେ ସଂଗଠିତ ହୁଏ?", options: ["କୋଷଜୀବକ", "କୋଷଝିଲ୍ଲୀ", "ମାଇଟୋକଣ୍ଡ୍ରିଆର ମାଟ୍ରିକ୍ସ", "ଗଲଗୀ ବଡ଼ି"], correct: 2 },
+    { q: "ଇଲେକଟ୍ରନ୍ ପରିବହନ ସଂସ୍ଥା (ETS) ମାଇଟୋକଣ୍ଡ୍ରିଆର କେଉଁ ଅଂଶରେ ରହିଥାଏ?", options: ["ବହିଃଝିଲ୍ଲୀ", "ଅନ୍ତଃଝିଲ୍ଲୀ", "ମାଟ୍ରିକ୍ସ", "କ୍ରିଷ୍ଟି ଭିତରେ"], correct: 1 },
+    { q: "ଗ୍ଲୁକୋଜର ରାସାୟନିକ ସଂକେତ କ'ଣ?", options: ["C6H12O6", "C12H22O11", "CH3COOH", "C2H5OH"], correct: 0 },
+    { q: "ଗ୍ଲୁକୋଜ ଅଣୁରେ କେତୋଟି କାର୍ବନ ପରମାଣୁ ଥାଏ?", options: ["୩ ଟି", "୪ ଟି", "୫ ଟି", "୬ ଟି"], correct: 3 },
+    { q: "ଗ୍ଲାଇକୋଲିସିସ୍ ର ପ୍ରଥମ ସୋପାନରେ ୬-କାର୍ବନଯୁକ୍ତ ଗ୍ଲୁକୋଜ କେତୋଟି ୩-କାର୍ବନଯୁକ୍ତ ଶର୍କରାରେ ବିଭକ୍ତ ହୁଏ?", options: ["ଗୋଟିଏ", "ଦୁଇଟି", "ତିନୋଟି", "ଚାରୋଟି"], correct: 1 },
+    { q: "ଗ୍ଲାଇକୋଲିସିସ୍ ର ଶେଷରେ ୩-କାର୍ବନଯୁକ୍ତ ଶର୍କରା କେଉଁ ଅମ୍ଳରେ ପରିଣତ ହୁଏ?", options: ["ଲାକଟିକ୍ ଅମ୍ଳ", "ଇଥାନଲ୍", "ପାଇରୁଭିକ୍ ଅମ୍ଳ (Pyruvic acid)", "ସାଇଟ୍ରିକ୍ ଅମ୍ଳ"], correct: 2 },
+    { q: "ପାଇରୁଭିକ୍ ଅମ୍ଳ ଏକ କେତୋଟି କାର୍ବନଯୁକ୍ତ ଜୈବିକ ଅମ୍ଳ ଅଟେ?", options: ["୨ କାର୍ବନ", "୩ କାର୍ବନ", "୪ କାର୍ବନ", "୬ କାର୍ବନ"], correct: 1 },
+    { q: "NADH2 ର ପୂର୍ଣ୍ଣ ରୂପ କ'ଣ?", options: ["Reduced Nicotinamide Adenine Dinucleotide", "Nicotinamide Adenine Diphosphate", "Nicotinamide Adenine Dinucleotide Hydrogen", "Reduced Nicotinamide Adenine Dinucleotide Phosphate"], correct: 0 },
+    { q: "FADH2 ର ପୂର୍ଣ୍ଣ ରୂପ କ'ଣ?", options: ["Flavin Adenine Dinucleotide Hydride", "Reduced Flavin Adenine Dinucleotide", "Formyl Adenine Dinucleotide Hydrogen", "Flavin Adenine Diphosphate"], correct: 1 },
+    { q: "ଅମ୍ଳଜାନ ଅନୁପସ୍ଥିତିରେ ଇଷ୍ଟ କୋଷରେ ପାଇରୁଭିକ୍ ଅମ୍ଳ କେଉଁଥିରେ ପରିଣତ ହୁଏ?", options: ["ଲାକଟିକ୍ ଅମ୍ଳ", "ଇଥାନଲ୍ ବା ସୁରାସାର", "ଏସିଟିକ୍ ଅମ୍ଳ", "ଜଳ ଓ ଅଙ୍ଗାରକାମ୍ଳ"], correct: 1 },
+    { q: "ଇଷ୍ଟ ଦ୍ୱାରା ହେଉଥିବା ସୁରାସାର କିଣ୍ବନ (Fermentation) ରେ କେତୋଟି କାର୍ବନଯୁକ୍ତ ଇଥାନଲ୍ ସୃଷ୍ଟି ହୁଏ?", options: ["୧ କାର୍ବନ", "୨ କାର୍ବନ", "୩ କାର୍ବନ", "୪ କାର୍ବନ"], correct: 1 },
+    { q: "ପେଶୀକୋଷରେ ଅମ୍ଳଜାନ ଅଭାବରୁ ପାଇରୁଭିକ୍ ଅମ୍ଳ କେଉଁଥିରେ ପରିଣତ ହୁଏ?", options: ["ଇଥାନଲ୍", "ଲାକଟିକ୍ ଅମ୍ଳ (Lactic acid)", "ସାଇଟ୍ରିକ୍ ଅମ୍ଳ", "ଅକ୍ଟାଲୋଏସେଟିକ୍ ଅମ୍ଳ"], correct: 1 },
+    { q: "ମାଂସପେଶୀରେ କେଉଁ ଅମ୍ଳ ଜମା ହେଲେ 'ବାକୁଲା' (Cramp) ବା ମାଂସପେଶୀ ସଂକୋଚନ ହୋଇଥାଏ?", options: ["ସାଇଟ୍ରିକ୍ ଅମ୍ଳ", "ଲାକଟିକ୍ ଅମ୍ଳ", "ପାଇରୁଭିକ୍ ଅମ୍ଳ", "ହାଇଡ୍ରୋକ୍ଲୋରିକ୍ ଅମ୍ଳ"], correct: 1 },
+    { q: "ସାଇଟ୍ରିକ୍ ଅମ୍ଳ ଚକ୍ରର ଗ୍ରାହକ ଅଣୁ କେଉଁଟି ଅଟେ?", options: ["ପାଇରୁଭିକ୍ ଅମ୍ଳ", "ଅକ୍ଟାଲୋଏସେଟିକ୍ ଅମ୍ଳ (OAA)", "ଲାକଟିକ୍ ଅମ୍ଳ", "ମେଲିକ୍ ଅମ୍ଳ"], correct: 1 },
+    { q: "ଅକ୍ଟାଲୋଏସେଟିକ୍ ଅମ୍ଳ (OAA) ଏକ କେତୋଟି କାର୍ବନଯୁକ୍ତ ଅମ୍ଳ?", options: ["୨ କାର୍ବନ", "୩ କାର୍ବନ", "୪ କାର୍ବନ", "୬ କାର୍ବନ"], correct: 2 },
+    { q: "ସାଇଟ୍ରିକ୍ ଅମ୍ଳ ଚକ୍ରକୁ କିଏ ଆବିଷ୍କାର କରିଥିଲେ?", options: ["ଲୁଇସ୍ ପାଶ୍ଚର", "ସାର୍ ହାନ୍ସ କ୍ରେବସ୍", "ରବର୍ଟ ହୁକ୍", "ଗ୍ରେଗର ମେଣ୍ଡେଲ"], correct: 1 },
+    { q: "ହାନ୍ସ କ୍ରେବସ୍ କେଉଁ ମସିହାରେ ଶ୍ଵସନ କୌଶଳ ବା କ୍ରେବସ୍ ଚକ୍ର ପାଇଁ ନୋବେଲ ପୁରସ୍କାର ପାଇଥିଲେ?", options: ["୧୯୪୫", "୧୯୫୦", "୧୯୫୩", "୧୯୬୦"], correct: 2 },
+    { q: "ଗୋଟିଏ ଗ୍ଲୁକୋଜ ଅଣୁର ବାୟୁ ଉପଜୀବୀ ଶ୍ଵସନରେ କେତୋଟି ATP ଅଣୁ ମିଳିଥାଏ?", options: ["୨ ଟି", "୧୦ ଟି", "୨୮ ଟି", "୩୮ ଟି"], correct: 3 },
+    { q: "ବାୟୁ ଅପଜୀବୀ ଶ୍ଵସନରେ ଗୋଟିଏ ଗ୍ଲୁକୋଜ ଅଣୁରୁ ମାତ୍ର କେତୋଟି ATP ଅଣୁ ଉତ୍ପନ୍ନ ହୁଏ?", options: ["୨ ଟି", "୧୦ ଟି", "୨୦ ଟି", "୩୮ ଟି"], correct: 0 },
+    { q: "ମାଇଟୋକଣ୍ଡ୍ରିଆର ଅନ୍ତଃଝିଲ୍ଲୀ ମାଟ୍ରିକ୍ସ ଭିତରକୁ ଭାଙ୍ଗ ହୋଇପଶିଥିବା ଅଂଶକୁ କ'ଣ କୁହାଯାଏ?", options: ["ଷ୍ଟ୍ରୋମା", "କ୍ରିଷ୍ଟି (Cristae)", "ମାଟ୍ରିକ୍ସ", "ଥାଇଲାକଏଡ୍"], correct: 1 },
+    { q: "ମାଇଟୋକଣ୍ଡ୍ରିଆର ଭିତର ରସପୂର୍ଣ୍ଣ ଅଂଶକୁ କ'ଣ କୁହାଯାଏ?", options: ["କୋଷରସ", "ମାଟ୍ରିକ୍ସ (Matrix)", "ପ୍ଲୁରାଲ୍ କେଭିଟି", "ସାଇଟୋପ୍ଲାଜମ"], correct: 1 },
+    { q: "ATP ସିନ୍ଥେଜ୍ ନାମକ ଏନ୍‌ଜାଇମ୍ କେଉଁ ବଳକୁ ଉପଯୋଗ କରି ATP ପ୍ରସ୍ତୁତ କରେ?", options: ["ପ୍ରୋଟନ୍ ଗତି ସକ୍ଷମ ବଳ", "ମାଧ୍ୟାକର୍ଷଣ ବଳ", "ଚୁମ୍ବକୀୟ ବଳ", "ପେଶୀୟ ବଳ"], correct: 0 },
+    { q: "ଗୋଟିଏ ATP ଅଣୁ ଭାଙ୍ଗି ADP ଓ Pi ରେ ପରିଣତ ହେଲେ କେତେ ପରିମାଣର ଶକ୍ତି ନିର୍ଗତ ହୁଏ?", options: ["୧୦.୫ କିଲୋ ଜୁଲ୍", "୨୦.୫ କିଲୋ ଜୁଲ୍", "୩୦.୫ କିଲୋ ଜୁଲ୍", "୪୦.୫ କିଲୋ ଜୁଲ୍"], correct: 2 },
+    { q: "ଜୀବକୋଷର ଶକ୍ତିକେନ୍ଦ୍ର (Powerhouse) କାହାକୁ କୁହାଯାଏ?", options: ["ମାଇଟୋକଣ୍ଡ୍ରିଆ", "ରାଇବୋଜୋମ୍", "ଗଲଗୀ ବଡ଼ି", "ଲାଇସୋଜୋମ୍"], correct: 0 },
+    { q: "ପତ୍ରଯୁକ୍ତ ସବୁଜ ଉଦ୍ଭିଦ କେଉଁ ମାଧ୍ୟମରେ ପରିବେଶରୁ ଅମ୍ଳଜାନ ଗ୍ରହଣ କରେ?", options: ["ଜାଇଲେମ୍", "ଷ୍ଟୋମା ବା ଷ୍ଟୋମାଟା", "ଫ୍ଲୋଏମ୍", "କର୍ଟେକ୍ସ"], correct: 1 },
+    { q: "ନିମ୍ନମାନର ପତ୍ରବିହୀନ ଉଦ୍ଭିଦ କେଉଁ ପ୍ରକ୍ରିୟା ଦ୍ୱାରା ଅମ୍ଳଜାନ ଗ୍ରହଣ କରେ?", options: ["ଅଭିସ୍ରବଣ", "ବିସରଣ (Diffusion)", "ସକ୍ରିୟ ପରିବହନ", "ବାଷ୍ପମୋଚନ"], correct: 1 },
+    { q: "ଦିନବେଳେ ଆଲୋକଶ୍ଳେଷଣ ସମୟରେ ଉଦ୍ଭିଦରେ ଶ୍ଵସନରୁ ବାହାରୁଥିବା ଅଙ୍ଗାରକାମ୍ଳ କେଉଁଠି ବ୍ୟବହୃତ ହୁଏ?", options: ["ବାଷ୍ପମୋଚନରେ", "ଆଲୋକଶ୍ଳେଷଣ ପ୍ରକ୍ରିୟାରେ", "ଅଭିସ୍ରବଣରେ", "କିଣ୍ବନରେ"], correct: 1 },
+    { q: "ପ୍ରୋଟୋଜୋଆ, ପରିଫେରା ଓ ହାଇଡ୍ରାଜାତୀୟ ପ୍ରାଣୀମାନେ କିପରି ଶ୍ଵସକ୍ରିୟା କରନ୍ତି?", options: ["ଫୁସ୍‌ଫୁସ୍ ଦ୍ୱାରା", "ଗାଲି ଦ୍ୱାରା", "ସିଧାସଳଖ ବିସରଣ ପ୍ରକ୍ରିୟାରେ", "ଶ୍ଵାସରନ୍ଧ୍ର ଦ୍ୱାରା"], correct: 2 },
+    { q: "ଜିଆ, ଜୋକ ଓ ବେଙ୍ଗ କାହାଦ୍ୱାରା ଶ୍ଵସକ୍ରିୟା କରିପାରନ୍ତି?", options: ["ଓଦାଚର୍ମ (Skin)", "ଫୁସ୍‌ଫୁସ୍", "ଗାଲି", "ଶ୍ଵସନଳୀ"], correct: 0 },
+    { q: "'ଶୀତସୁପ୍ତି' (Hibernation) ସମୟରେ ବେଙ୍ଗ କାହାଦ୍ୱାରା ଶ୍ଵସକ୍ରିୟା ସମ୍ପାଦନ କରେ?", options: ["ଫୁସ୍‌ଫୁସ୍", "ଚର୍ମ", "ମୁଖଗହ୍ୱର", "ଗାଲି"], correct: 1 },
+    { q: "ଅସରପା ପରି କୀଟପତଙ୍ଗମାନଙ୍କର ଶ୍ଵସନ ପାଇଁ କ'ଣ ରହିଛି?", options: ["ଷ୍ଟୋମାଟା", "ଶ୍ଵାସରନ୍ଧ୍ର (Spiracle)", "କୋଟରିକା", "ଗାଲି"], correct: 1 },
+    { q: "କଙ୍କଡ଼ା, ଚିଙ୍ଗୁଡ଼ି, ଗେଣ୍ଡା ଓ ଶାମୁକା କାହା ଦ୍ୱାରା ଶ୍ଵସକ୍ରିୟା କରନ୍ତି?", options: ["ଫୁସ୍‌ଫୁସ୍", "ଚର୍ମ", "ଗାଲି (Gills)", "ଶ୍ଵସନରନ୍ଧ୍ର"], correct: 2 },
+    { q: "ସାପ, ପାରା, ବତକ, ବାଦୁଡ଼ି ଓ ମନୁଷ୍ୟ ଆଦିଙ୍କ ଶ୍ଵସକ୍ରିୟା କାହା ଦ୍ୱାରା ହୁଏ?", options: ["ଫୁସ୍‌ଫୁସ୍ (Lungs)", "ଗାଲି", "ଚର୍ମ", "ବିସରଣ"], correct: 0 },
+    { q: "କଇଁଛ, କୁମ୍ଭୀର ଓ ତିମି ପାଣିରେ ରହୁଥିଲେ ମଧ୍ୟ କାହା ଦ୍ୱାରା ଶ୍ଵସକ୍ରିୟା କରନ୍ତି?", options: ["ଗାଲି", "ଚର୍ମ", "ଫୁସ୍‌ଫୁସ୍", "ଶ୍ଵସରନ୍ଧ୍ର"], correct: 2 },
+    { q: "ବେଙ୍ଗର ଲାର୍ଭା ବା ଶୂକାବସ୍ଥା (ବେଙ୍ଗଫୁଲା) କାହା ଦ୍ୱାରା ଶ୍ଵସକ୍ରିୟା କରିଥାଏ?", options: ["ଫୁସ୍‌ଫୁସ୍", "ଗାଲି", "ଚର୍ମ", "ମଧ୍ୟଚ୍ଛଦା"], correct: 1 },
+    { q: "ମନୁଷ୍ୟ ଶ୍ଵସତନ୍ତ୍ରର ପ୍ରଥମ ଅଂଶ କେଉଁଟି ଅଟେ?", options: ["ଗ୍ରସନୀ", "ନାସାରନ୍ଧ୍ର (Nostril)", "ଶ୍ଵସନଳୀ", "ସ୍ଵରପେଟିକା"], correct: 1 },
+    { q: "ନାକପୁଡ଼ା ବା ନାସାରନ୍ଧ୍ର କାହା ଦ୍ୱାରା ଗଠିତ?", options: ["ହାଡ଼", "ଉପାସ୍ଥି (Cartilage)", "ପେଶୀ", "ସ୍ନାୟୁ"], correct: 1 },
+    { q: "ନାସାପଥ ଦେଇ ବାୟୁ ଗଲାବେଳେ ଧୂଳିକଣା ଓ ଜୀବାଣୁ କେଉଁଠାରେ ଲାଗିଯାଆନ୍ତି?", options: ["ଶ୍ଳେଷ୍ଠିକ ଝିଲ୍ଲୀ (Mucous membrane)", "ପ୍ଲୁରାଲ୍ ଝିଲ୍ଲୀ", "ଉପାସ୍ଥି", "ଭୋକଲ୍ କର୍ଡ଼"], correct: 0 },
+    { q: "ଗ୍ରସନୀର ଶେଷଭାଗରୁ କ'ଣ ଆରମ୍ଭ ହୋଇଥାଏ?", options: ["କେବଳ ଖାଦ୍ୟନଳୀ", "ଖାଦ୍ୟନଳୀ ଓ ଶ୍ଵସନଳୀ", "କେବଳ ଶ୍ଵସନଳୀ", "ନାସାପଥ"], correct: 1 },
+    { q: "ଗ୍ରସନୀର ପଛ କାନ୍ଥରେ ଥିବା ଏକଯୋଡ଼ା ଟନ୍‌ସିଲ୍ (Tonsil) କେଉଁ ପ୍ରକାର ଅଙ୍ଗ?", options: ["ସ୍ନାୟବିକ ଅଙ୍ଗ", "ଲସିକାଭ (Lymphoid) ଅଙ୍ଗ", "ପାଚକ ଅଙ୍ଗ", "ହରମୋନ୍ ଗ୍ରନ୍ଥି"], correct: 1 },
+    { q: "ଶ୍ଵସନଳୀର ଦ୍ଵାରକୁ କ'ଣ କୁହାଯାଏ?", options: ["ଗଲେଟ୍ (Gullet)", "ଗ୍ଲଟିସ୍ (Glottis)", "ଏପିଗ୍ଲଟିସ୍", "ଷ୍ଟୋମାଟା"], correct: 1 },
+    { q: "ଖାଦ୍ୟନଳୀର ଦ୍ଵାରକୁ କ'ଣ କୁହାଯାଏ?", options: ["ଗ୍ଲଟିସ୍", "ଗଲେଟ୍ (Gullet)", "ଅଧ୍ୱଜିହ୍ୱା", "ଶ୍ଵସରନ୍ଧ୍ର"], correct: 1 },
+    { q: "ଖାଦ୍ୟ ଗିଳିବା ସମୟରେ ଶ୍ଵସନଳୀର ଦ୍ଵାର କାହା ଦ୍ୱାରା ବନ୍ଦ ରହେ?", options: ["ଅଧ୍ୱଜିହ୍ୱା (Epiglottis)", "ଭୋକଲ୍ କର୍ଡ଼", "ଟନ୍‌ସିଲ୍", "ମଧ୍ୟଚ୍ଛଦା"], correct: 0 },
+    { q: "ସ୍ଵରପେଟିକାରେ ଥିବା କେଉଁଟିର କମ୍ପନ ଦ୍ୱାରା ଧ୍ୱନି ସୃଷ୍ଟି ହୁଏ?", options: ["ଜିଭ", "ସ୍ଵରତନ୍ତ୍ର ବା ଭୋକଲ୍ କର୍ଡ଼ (Vocal cord)", "ଉପାସ୍ଥି", "ଟନ୍‌ସିଲ୍"], correct: 1 },
+    { q: "ଶ୍ଵସନଳୀ ପରେ ଦୁଇଟି ଶାଖାରେ ବିଭକ୍ତ ହୋଇ କ'ଣ ସୃଷ୍ଟି କରେ?", options: ["ଶ୍ଵସନଳିକା (Bronchi)", "କୋଟରିକା", "ମଧ୍ୟଚ୍ଛଦା", "ପ୍ଲୁରା"], correct: 0 },
+    { q: "ସୂକ୍ଷ୍ମ ଶ୍ଵସନଳିକା ପରିଶେଷରେ କାହାରେ ଶେଷ ହୁଏ?", options: ["ବାୟୁ କୋଠରି ବା କୋଟରିକା (Alveoli)", "ବ୍ରୋଙ୍କସ୍", "ଗ୍ରସନୀ", "ନାସାପଥ"], correct: 0 },
+    { q: "ଫୁସ୍‌ଫୁସ୍ ଚାରିପଟେ ଥିବା ଆବରଣ ଗହ୍ୱରକୁ କ'ଣ କୁହାଯାଏ?", options: ["ପେରିକାର୍ଡିୟମ୍", "ପ୍ୟୁରାଲ୍ କେଭିଟି (Pleural cavity)", "ଉଦରଗହ୍ୱର", "ମାଟ୍ରିକ୍ସ"], correct: 1 },
+    { q: "ବକ୍ଷଗହ୍ୱର ମଧ୍ୟରେ କେତୋଟି ଫୁସ୍‌ଫୁସ୍ ରହିଛି?", options: ["ଗୋଟିଏ", "ଦୁଇଟି (ଦକ୍ଷିଣ ଓ ବାମ)", "ତିନୋଟି", "ଚାରୋଟି"], correct: 1 },
+    { q: "ହୃତ୍‌ପିଣ୍ଡରୁ ଅଙ୍ଗାରକାମ୍ଳଯୁକ୍ତ ରକ୍ତ କାହା ଦ୍ୱାରା ଫୁସ୍‌ଫୁସ୍‌କୁ ଆସିଥାଏ?", options: ["ଫୁସ୍‌ଫୁସ୍ ଧମନୀ (Pulmonary artery)", "ଫୁସ୍‌ଫୁସ୍ ଶିରା", "ମହାଧମନୀ", "କେଶିକା"], correct: 0 },
+    { q: "ଫୁସ୍‌ଫୁସ୍‌ରୁ ଅମ୍ଳଜାନଯୁକ୍ତ ରକ୍ତ କାହା ଦ୍ୱାରା ହୃତ୍‌ପିଣ୍ଡକୁ ଫେରିଯାଏ?", options: ["ଫୁସ୍‌ଫୁସ୍ ଧମନୀ", "ଫୁସ୍‌ଫୁସ୍ ଶିରା (Pulmonary vein)", "ଯକୃତ ଶିରା", "ବୃକ୍ଷକ ଧମନୀ"], correct: 1 },
+    { q: "ଜଣେ ସୁସ୍ଥ ବ୍ୟକ୍ତିର ପ୍ରଶ୍ଵାସ ଓ ନିଃଶ୍ଵାସ ହାର ପ୍ରତି ମିନିଟ୍‌କୁ ପ୍ରାୟ କେତେ ଥର?", options: ["୫ ରୁ ୧୦ ଥର", "୧୫ ରୁ ୨୦ ଥର", "୩୦ ରୁ ୪୦ ଥର", "୫୦ ରୁ ୬୦ ଥର"], correct: 1 },
+    { q: "ବକ୍ଷଗହ୍ୱର ଓ ଉଦରଗହ୍ୱରକୁ ପୃଥକ୍ କରୁଥିବା ଗମ୍ବୁଜ ଆକାରର ପେଶୀବହୁଳ ପଟ୍ଟକୁ କ'ଣ କୁହାଯାଏ?", options: ["ପଞ୍ଜରା ହାଡ଼", "ମଧ୍ୟଚ୍ଛଦା (Diaphragm)", "ଷ୍ଟର୍‌ନମ୍", "ଇଣ୍ଟରକୋଷ୍ଟାଲ୍ ପେଶୀ"], correct: 1 },
+    { q: "ଫୁସ୍‌ଫୁସ୍ ମଧ୍ୟକୁ ବାୟୁର ପ୍ରବେଶକୁ କ'ଣ କୁହାଯାଏ?", options: ["ନିଃଶ୍ଵାସ", "ପ୍ରଶ୍ଵାସ (Inspiration)", "କିଣ୍ବନ", "ବିସରଣ"], correct: 1 },
+    { q: "ଫୁସ୍‌ଫୁସ୍‌ରୁ ବାୟୁର ପ୍ରସ୍ଥାନକୁ କ'ଣ କୁହାଯାଏ?", options: ["ପ୍ରଶ୍ଵାସ", "ନିଃଶ୍ଵାସ (Expiration)", "ଗ୍ଲାଇକୋଲିସିସ୍", "ସଂବାତନ"], correct: 1 },
+    { q: "ପ୍ରଶ୍ଵାସ ସମୟରେ ଗମ୍ବୁଜାକାର ମଧ୍ୟଚ୍ଛଦା କିପରି ହୋଇଯାଏ?", options: ["ଅଧିକ ବଙ୍କା", "ସଳଖ ବା ସମତଳ", "ଗୋଲାକାର", "କୁଞ୍ଚିତ"], correct: 1 },
+    { q: "ପ୍ରଶ୍ଵାସ ଏକ କେଉଁ ପ୍ରକାର ପ୍ରକ୍ରିୟା ଅଟେ?", options: ["ସକ୍ରିୟ ପ୍ରକ୍ରିୟା", "ଶିଥୁଳନ ପ୍ରକ୍ରିୟା", "ନିଷ୍କ୍ରିୟ ପ୍ରକ୍ରିୟା", "ରାସାୟନିକ ପ୍ରକ୍ରିୟା"], correct: 0 },
+    { q: "ନିଃଶ୍ଵାସ ଏକ କେଉଁ ପ୍ରକାର ପ୍ରକ୍ରିୟା ଅଟେ?", options: ["ସକ୍ରିୟ ପ୍ରକ୍ରିୟା", "ଶିଥୁଳନ ପ୍ରକ୍ରିୟା", "ଉତ୍ତେଜକ ପ୍ରକ୍ରିୟା", "ଜାରଣ ପ୍ରକ୍ରିୟା"], correct: 1 },
+    { q: "କୋଟରିକା ଓ ରକ୍ତଜାଲକ ମଧ୍ୟରେ ଗ୍ୟାସ୍‌ଗୁଡ଼ିକ କେଉଁ ପ୍ରକ୍ରିୟା ଦ୍ୱାରା ବିନିମୟ ହୋଇଥାଏ?", options: ["ଅଭିସ୍ରବଣ", "ବିସରଣ (Diffusion)", "ସକ୍ରିୟ ପରିବହନ", "କିଣ୍ବନ"], correct: 1 },
+    { q: "ରକ୍ତର ଲୋହିତ କଣିକା (RBC) ରେ ଥିବା କେଉଁ ପଦାର୍ଥ ଅମ୍ଳଜାନ ଗ୍ରହଣ କରି ଅକ୍ସିହିମୋଗ୍ଲୋବିନ୍‌ରେ ପରିଣତ ହୁଏ?", options: ["କ୍ଲୋରୋଫିଲ୍", "ହିମୋଗ୍ଲୋବିନ୍", "ପ୍ଲାଜମା", "ମେଲାନିନ୍"], correct: 1 },
+    { q: "ବକ୍ଷଗହ୍ୱରର ଆଗପଟ କାହା ଦ୍ୱାରା ଆବଦ୍ଧ?", options: ["ମେରୁଦଣ୍ଡ", "ଷ୍ଟର୍‌ନମ୍ (Sternum)", "ମଧ୍ୟଚ୍ଛଦା", "ପଞ୍ଜରା ହାଡ଼"], correct: 1 },
+    { q: "ବକ୍ଷଗହ୍ୱରର ପଛପଟ କାହା ଦ୍ୱାରା ଆବଦ୍ଧ?", options: ["ମେରୁଦଣ୍ଡ", "ଷ୍ଟର୍‌ନମ୍", "ମଧ୍ୟଚ୍ଛଦା", "କ୍ଲାଭିକଲ୍"], correct: 0 },
+    { q: "ମାଛର ଆଖି ପଛରେ ଥିବା ଗାଲି ଆବରଣକୁ କ'ଣ କୁହାଯାଏ?", options: ["ଏପିଗ୍ଲଟିସ୍", "ଅପରକୁଲମ୍ (Operculum)", "ଗ୍ଲଟିସ୍", "ପ୍ଲୁରା"], correct: 1 },
+    { q: "ସତ୍ୟ କି ମିଥ୍ୟା: ଶ୍ଵସନ ଏକ ଅପଚୟ ପ୍ରକ୍ରିୟା ଅଟେ?", options: ["ସତ୍ୟ", "ମିଥ୍ୟା", "କିଛି କୁହାଯାଇପାରିବ ନାହିଁ", "ଉଭୟ ସତ୍ୟ ଓ ମିଥ୍ୟା"], correct: 0 },
+    { q: "ଚୂନପାଣିକୁ ଦୁଧୂଆ ବର୍ଣ୍ଣ କରୁଥିବା ଗ୍ୟାସ୍‌ଟି କେଉଁଟି?", options: ["ଅମ୍ଳଜାନ", "ଅଙ୍ଗାରକାମ୍ଳ (CO2)", "ନାଇଟ୍ରୋଜେନ୍", "ହାଇଡ୍ରୋଜେନ୍"], correct: 1 },
+    { q: "ଫଳରସ ବା ଚିନିଦ୍ରବଣରେ ଇଷ୍ଟ ପାଉଡର ମିଶାଇଲେ କେଉଁ ପ୍ରକ୍ରିୟା ଘଟେ?", options: ["ଆଲୋକଶ୍ଳେଷଣ", "କିଣ୍ବନ (Fermentation)", "ବାଷ୍ପମୋଚନ", "ଅଭିସ୍ରବଣ"], correct: 1 },
+    { q: "ଶ୍ଵସନ କ୍ରିୟାକୁ ନିୟନ୍ତ୍ରଣ କରୁଥିବା କାରକଗୁଡ଼ିକ କ'ଣ?", options: ["ଅମ୍ଳଜାନ ଓ ଅଙ୍ଗାରକାମ୍ଳର ସାନ୍ଦ୍ରତା", "ଖାଦ୍ୟ ଉପାଦାନର ପରିମାଣ", "ତାପମାତ୍ରା ଓ ବିପାଚକ", "ଉପରୋକ୍ତ ସମସ୍ତ"], correct: 3 },
+    { q: "ଇଲେକଟ୍ରନ୍ ପରିବହନ ସଂସ୍ଥା ଶେଷରେ ଅମ୍ଳଜାନ ସହିତ ମିଶି କ'ଣ ସୃଷ୍ଟି କରେ?", options: ["ଜଳ (H2O)", "ଗ୍ଲୁକୋଜ", "ପାଇରୁଭିକ୍ ଅମ୍ଳ", "ଇଥାନଲ୍"], correct: 0 },
+    { q: "ଉଦ୍ଭିଦରେ ଗ୍ୟାସ୍ ବିନିମୟ କେଉଁ ମାଧ୍ୟମରେ ହୋଇଥାଏ?", options: ["ଷ୍ଟୋମା", "ଗାଲି", "ଫୁସ୍‌ଫୁସ୍", "ଚର୍ମ"], correct: 0 },
+    { q: "କୋଷୀୟ ଶ୍ଵସନରେ ମୁଖ୍ୟ ଆଧାର ରସାୟନ (Substrate) ରୂପେ କାହାକୁ ବିବେଚନା କରାଯାଏ?", options: ["୬-କାର୍ବନଯୁକ୍ତ ଗ୍ଲୁକୋଜ ଅଣୁ", "୨-କାର୍ବନଯୁକ୍ତ ଅଣୁ", "ଲାକଟିକ୍ ଅମ୍ଳ", "ପ୍ରୋଟିନ୍"], correct: 0 },
+    { q: "ବାୟୁ ଉପଜୀବୀ ଶ୍ଵସନରେ ଗ୍ଲୁକୋଜର କ'ଣ ହୋଇଥାଏ?", options: ["ଅସମ୍ପୂର୍ଣ୍ଣ ଜାରଣ", "ସମ୍ପୂର୍ଣ୍ଣ ଜାରଣ", "ବିଜାରଣ", "କୌଣସି ଜାରଣ ହୁଏ ନାହିଁ"], correct: 1 },
+    { q: "ଜୈବିକ ଜାରଣ (Biological oxidation) ପାଇଁ କାହାର ଆବଶ୍ୟକତା ପଡ଼ିଥାଏ?", options: ["ଏନ୍‌ଜାଇମ୍ (Enzyme)", "ହରମୋନ୍", "ଭିଟାମିନ୍", "ଆଣ୍ଟିବଡ଼ି"], correct: 0 },
+    { q: "ମନୁଷ୍ୟ ଶ୍ଵସତନ୍ତ୍ରର କ୍ରମରେ ଗ୍ରସନୀ ପରେ କ'ଣ ଆସେ?", options: ["ନାସାରନ୍ଧ୍ର", "ସ୍ଵରପେଟିକା ଓ ଶ୍ଵସନଳୀ", "ଫୁସ୍‌ଫୁସ୍", "କୋଟରିକା"], correct: 1 },
+    { q: "ପେଶୀର ସଂକୋଚନ, ପୁଷ୍ଟିସାର ସଂଶ୍ଳେଷଣ ଓ ସ୍ନାୟବିକ ଆବେଗ ସଞ୍ଚରଣ ପାଇଁ କେଉଁଟି ବ୍ୟବହୃତ ହୁଏ?", options: ["ATP", "DNA", "RNA", "NAD"], correct: 0 },
+    { q: "ବାୟୁ ଉପଜୀବୀ ଶ୍ଵସନରେ କେଉଁ ଗ୍ୟାସ୍ ନିର୍ଗତ ହୁଏ?", options: ["କେବଳ ଅମ୍ଳଜାନ", "ଅଙ୍ଗାରକାମ୍ଳ ଓ ଜଳ", "କେବଳ ନାଇଟ୍ରୋଜେନ୍", "କାର୍ବନ ମନୋକ୍ଷାଇଡ୍"], correct: 1 },
+    { q: "ପ୍ଲୁରାଲ୍ ଗହ୍ୱରର ଚାପ ଫୁସ୍‌ଫୁସ୍‌ଠାରୁ ପ୍ରାୟ କେତେ କମ୍ ଥାଏ?", options: ["୧-୨ mm Hg", "୩-୪ mm Hg", "୧୦-୧୨ mm Hg", "୨୦-୨୫ mm Hg"], correct: 1 },
+    { q: "ପ୍ରଶ୍ଵାସ ସମୟରେ ବକ୍ଷଗହ୍ୱରର ଆୟତନ ପ୍ରାୟ କେତେ ପ୍ରତିଶତ ବୃଦ୍ଧିପାଏ?", options: ["୧୦%", "୨୦%", "୫୦%", "୮୦%"], correct: 1 },
+    { q: "ଅକ୍ସିହିମୋଗ୍ଲୋବିନ୍ କୋଷ ନିକଟରେ ଭାଙ୍ଗି କ'ଣ ସୃଷ୍ଟି କରେ?", options: ["ଅମ୍ଳଜାନ ଓ ହିମୋଗ୍ଲୋବିନ୍", "ଅଙ୍ଗାରକାମ୍ଳ", "ଜଳ", "ଇଥାନଲ୍"], correct: 0 },
+    { q: "ଟନ୍‌ସିଲ୍ କେଉଁ ଅଙ୍ଗର ଏକ ଅଂଶ?", options: ["ଗ୍ରସନୀ", "ପାକସ୍ଥଳୀ", "ଯକୃତ", "ବୃକ୍ଷକ"], correct: 0 },
+    { q: "ଗ୍ଲାଇକୋଲିସିସ୍ ପ୍ରକ୍ରିୟା ବାୟୁ ଉପଜୀବୀ ଓ ବାୟୁ ଅପଜୀବୀ ଉଭୟ ଶ୍ଵସନରେ ଦେଖିବାକୁ ମିଳେ କି?", options: ["ହଁ, ଉଭୟରେ ଦେଖାଯାଏ", "କେବଳ ବାୟୁ ଉପଜୀବୀରେ", "କେବଳ ବାୟୁ ଅପଜୀବୀରେ", "କେଉଁଥିରେ ନୁହେଁ"], correct: 0 },
+    { q: "ପାଇରୁଭିକ୍ ଅମ୍ଳ ମାଇଟୋକଣ୍ଡ୍ରିଆ ଭିତରକୁ ପ୍ରବେଶ କରି କେଉଁ ଶ୍ଵସନରେ ଭାଗ ନିଏ?", options: ["ବାୟୁ ଅପଜୀବୀ ଶ୍ଵସନ", "ବାୟୁ ଉପଜୀବୀ ଶ୍ଵସନ", "କିଣ୍ବନ", "ଗ୍ଲାଇକୋଲିସିସ୍"], correct: 1 },
+    { q: "ଜଳଚର ପ୍ରାଣୀମାନଙ୍କ ମଧ୍ୟରେ ଶ୍ଵସକ୍ରିୟା ସଂପାଦନ ପାଇଁ କେଉଁ ପ୍ରକ୍ରିୟା କାର୍ଯ୍ୟକରେ?", options: ["ବିସରଣ", "ସଂବାତନ", "ପରିବହନ", "ସଂକୋଚନ"], correct: 0 },
+    { q: "ପେଶୀରେ ଲାକ୍ଟିକ୍ ଅମ୍ଳ ଜମା ହେବା କାରଣରୁ କ'ଣ ହୁଏ?", options: ["ବାକୁଲା (Cramp)", "ଜ୍ୱର", "ପକ୍ଷାଘାତ", "ଅନ୍ଧାରକଳା"], correct: 0 },
+    { q: "ଇଲେକଟ୍ରନ୍ ପରିବହନ ସଂସ୍ଥାରେ ପ୍ରୋଟନ୍ (H+) ମାନେ କେଉଁଠାକୁ ସ୍ଥାନାନ୍ତରିତ ହୁଅନ୍ତି?", options: ["ମାଟ୍ରିକ୍ସ", "ଦୁଇ ଝିଲ୍ଲୀର ମଧ୍ୟବର୍ତ୍ତୀ ସ୍ଥାନ", "ନାଭିକ", "କୋଷରସ"], correct: 1 },
+    { q: "ବାୟୁ ଉପଜୀବୀ ଶ୍ଵସନ ପାଇଁ ଅପରିହାର୍ଯ୍ୟ ଗ୍ୟାସ୍ କେଉଁଟି?", options: ["ଅଙ୍ଗାରକାମ୍ଳ", "ଅମ୍ଳଜାନ (O2)", "ନାଇଟ୍ରୋଜେନ୍", "ହାଇଡ୍ରୋଜେନ୍"], correct: 1 },
+    { q: "ଫୁସ୍‌ଫୁସ୍ କେଉଁପରି ଅଙ୍ଗ ଅଟେ?", options: ["ସ୍ପଞ୍ଜପରି ନରମ", "କଠିନ ହାଡ଼ଯୁକ୍ତ", "ତରଳ ପଦାର୍ଥ", "କେବଳ ଚର୍ବିଯୁକ୍ତ"], correct: 0 },
+    { q: "ଜୀବଶରୀରରେ ଖାଦ୍ୟରୁ ଶକ୍ତି ମୁକ୍ତ ହେବା ପ୍ରକ୍ରିୟାକୁ କ'ଣ କୁହାଯାଏ?", options: ["ଶ୍ଵସନ", "ପୋଷଣ", "ପାଚନ", "ଉତ୍ସର୍ଜନ"], correct: 0 },
+    { q: "ବିଜାରିତ ସହକାରକ NADH2 ରୁ ଶକ୍ତି ମୋଚନ କେଉଁ ସଂସ୍ଥା ଦ୍ୱାରା ହୁଏ?", options: ["ଇଲେକଟ୍ରନ୍ ପରିବହନ ସଂସ୍ଥା (ETS)", "ଗ୍ଲାଇକୋଲିସିସ୍", "ସାଇଟ୍ରିକ୍ ଅମ୍ଳ ଚକ୍ର", "ପାଚନ ନଳୀ"], correct: 0 },
+    { q: "ବାୟୁ ଉପଜୀବୀ ଶ୍ଵସନର ଶେଷ ପର୍ଯ୍ୟାୟରେ ଇଲେକଟ୍ରନ୍ ଗ୍ରାହକ ଏବଂ ଜଳ ସୃଷ୍ଟି ପାଇଁ କିଏ ସାହାଯ୍ୟ କରେ?", options: ["ଅମ୍ଳଜାନ", "ନାଇଟ୍ରୋଜେନ୍", "ମିଥେନ୍", "ଆମୋନିଆ"], correct: 0 },
+    { q: "ADP ରେ ଗୋଟିଏ ଫସ୍ଫେଟ୍ ଅଣୁ (Pi) ମିଶିଲେ କ'ଣ ଗଠିତ ହୁଏ?", options: ["ATP", "AMP", "RNA", "DNA"], correct: 0 },
+    { q: "ମନୁଷ୍ୟ ଶ୍ଵସନଳୀରେ ଥିବା ଉପାସ୍ଥି ବଳୟଗୁଡ଼ିକର କାମ କ'ଣ?", options: ["ଶ୍ଵସନଳୀକୁ ବନ୍ଦ ନ କରିବା / ସବୁବେଳେ ଖୋଲା ରଖିବା", "ଖାଦ୍ୟ ଅଟକାଇବା", "ଶକ୍ତି ଦେବା", "ଧ୍ୱନି ସୃଷ୍ଟି କରିବା"], correct: 0 },
+    { q: "ଇଷ୍ଟ ଏବଂ ବ୍ୟାକ୍ଟେରିଆରେ କେଉଁ ପ୍ରକାର କିଣ୍ବନ ହୋଇଥାଏ?", options: ["ସୁରାସାର କିଣ୍ବନ", "ଲାକ୍ଟିକ୍ ଅମ୍ଳ କିଣ୍ବନ", "ସାଇଟ୍ରିକ୍ ଅମ୍ଳ କିଣ୍ବନ", "କୌଣସିଟି ନୁହେଁ"], correct: 0 },
+    { q: "ବକ୍ଷଗହ୍ୱରର ପାର୍ଶ୍ୱଦେଶ କାହା ଦ୍ୱାରା ଆବଦ୍ଧ?", options: ["ପଞ୍ଜରା ହାଡ଼ ଓ ଅନ୍ତଃ-ପଞ୍ଜରା ମାଂସପେଶୀ", "ଷ୍ଟର୍‌ନମ୍", "ମେରୁଦଣ୍ଡ", "ମଧ୍ୟଚ୍ଛଦା"], correct: 0 }
+];
+
+let currentQuestion = 0;
+let score = 0;
+let answered = false;
+
+const questionNumber = document.getElementById("question-number");
+const scoreDisplay = document.getElementById("score-display");
+const progressBar = document.getElementById("progress-bar");
+const questionText = document.getElementById("question-text");
+const optionsList = document.getElementById("options-list");
+const nextBtn = document.getElementById("next-btn");
+const quizScreen = document.getElementById("quiz-screen");
+const resultScreen = document.getElementById("result-screen");
+const finalScore = document.getElementById("final-score");
+const resultMsg = document.getElementById("result-msg");
+
+function loadQuestion() {
+    answered = false;
+    nextBtn.disabled = true;
+    
+    const q = quizData[currentQuestion];
+    questionNumber.innerText = `ପ୍ରଶ୍ନ ${currentQuestion + 1} / ${quizData.length}`;
+    scoreDisplay.innerText = `ସ୍କୋର: ${score}`;
+    progressBar.style.width = `${((currentQuestion) / quizData.length) * 100}%`;
+    
+    questionText.innerText = `${currentQuestion + 1}. ${q.q}`;
+    optionsList.innerHTML = "";
+    
+    q.options.forEach((option, index) => {
+        const li = document.createElement("li");
+        li.className = "option-item";
+        li.innerText = `(${String.fromCharCode(97 + index).toUpperCase()}) ${option}`;
+        li.onclick = () => selectOption(index, li);
+        optionsList.appendChild(li);
+    });
+}
+
+function selectOption(selectedIndex, element) {
+    if (answered) return;
+    answered = true;
+    
+    const q = quizData[currentQuestion];
+    const optionItems = optionsList.getElementsByClassName("option-item");
+    
+    if (selectedIndex === q.correct) {
+        element.classList.add("correct");
+        score++;
+        scoreDisplay.innerText = `ସ୍କୋର: ${score}`;
+    } else {
+        element.classList.add("incorrect");
+        optionItems[q.correct].classList.add("correct");
+    }
+    
+    for (let item of optionItems) {
+        item.classList.add("disabled");
+    }
+    
+    nextBtn.disabled = false;
+}
+
+function nextQuestion() {
+    currentQuestion++;
+    if (currentQuestion < quizData.length) {
+        loadQuestion();
+    } else {
+        showResult();
+    }
+}
+
+function showResult() {
+    quizScreen.style.display = "none";
+    resultScreen.style.display = "block";
+    finalScore.innerText = `${score}/${quizData.length}`;
+    
+    let percentage = (score / quizData.length) * 100;
+    if (percentage >= 90) {
+        resultMsg.innerText = "ଅତି ଉତ୍ତମ! ଆପଣଙ୍କ ପ୍ରସ୍ତୁତି ସମ୍ପୂର୍ଣ୍ଣ ପ୍ରକୃଷ୍ଟ ଅଛି।";
+    } else if (percentage >= 70) {
+        resultMsg.innerText = "ଉତ୍ତମ ପ୍ରଦର୍ଶନ! ଆଉାକିଛି ଅଭ୍ୟାସ କଲେ ଆହୁରି ଭଲ ହେବ।";
+    } else {
+        resultMsg.innerText = "ଚାପ ନ ରଖି ଅଧ୍ୟାୟଟିକୁ ଆଉଥେର ପଢ଼ି ପୁନର୍ବାର ଚେଷ୍ଟା କରନ୍ତୁ।";
+    }
+}
+
+function restartQuiz() {
+    currentQuestion = 0;
+    score = 0;
+    quizScreen.style.display = "block";
+    resultScreen.style.display = "none";
+    loadQuestion();
+}
+
+// Initial Load
+loadQuestion();
+</script>
+
+</body>
+</html>
