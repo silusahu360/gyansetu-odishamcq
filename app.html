@@ -325,7 +325,7 @@ border-color:#34d399;font-size:15px;font-weight:800
 <label>3. Chapter / Topic</label>
 <select id="mcqTopic" class="field"></select>
 
-<!-- Save Offline button removed here; Start Quiz button made full -->
+<!-- Start Quiz button only -->
 <button type="button" class="btn green full" onclick="startQuiz()" style="margin-top:8px;">START QUIZ ➜</button>
 </div>
 <button type="button" class="back" onclick="showScreen('home')">⬅ Home</button>
@@ -354,13 +354,9 @@ style="padding:6px 14px;font-size:13px;border-radius:8px;"
 onclick="pauseQuiz()">⏸ Pause</button>
 </div>
 
-<!-- Note and Quiz Offline Save Toolbar inside Viewer -->
+<!-- Note Offline Save Toolbar inside Viewer (Quiz offline save removed) -->
 <div id="noteActionToolbar" style="display:none;margin-bottom:10px;gap:8px;">
 <button type="button" class="btn green full" onclick="saveCurrentNoteOffline()">💾 Save Note for Offline</button>
-</div>
-
-<div id="mcqActionToolbar" style="display:none;margin-bottom:10px;gap:8px;">
-<button type="button" class="btn orange full" onclick="downloadCurrentQuizOffline()">💾 Save Quiz Offline</button>
 </div>
 
 <div id="quizFrameContainer"
@@ -623,7 +619,6 @@ function openSubject(sub) {
 
         $("quizTimerBar").style.display = "flex";
         $("noteActionToolbar").style.display = "flex";
-        $("mcqActionToolbar").style.display = "none";
 
         $("viewerBackButton").textContent = "⬅ Back to Subjects";
 
@@ -665,10 +660,10 @@ function cleanViewerFrame() {
     quizTimerInterval = null;
 
     const toolbar = $("noteActionToolbar");
-    if (toolbar) toolbar.style.display = "none";
 
-    const mcqToolbar = $("mcqActionToolbar");
-    if (mcqToolbar) mcqToolbar.style.display = "none";
+    if (toolbar) {
+        toolbar.style.display = "none";
+    }
 
     $("quizTimerBar").style.display = "flex";
     $("pauseModal").classList.remove("active");
@@ -743,49 +738,6 @@ async function saveCurrentNoteOffline() {
         } catch(e) {
             alert("Storage full! Kichhi puruna data delete karantu.");
         }
-    }
-}
-
-/* SAVE CURRENT QUIZ OFFLINE FROM INSIDE QUIZ VIEWER */
-async function downloadCurrentQuizOffline() {
-    let htmlContent = $("quizFrame").srcdoc || "";
-
-    if (!htmlContent || htmlContent.includes("Loading Quiz") || htmlContent.includes("ଇଣ୍ଟରନେଟ୍ ସଂଯୋଗ")) {
-        try {
-            const resp = await fetch(currentQuizUrl);
-            if (resp.ok) htmlContent = await resp.text();
-        } catch(e) {}
-    }
-
-    if (!htmlContent || htmlContent.includes("Loading Quiz")) {
-        htmlContent = `<html><body style="font-family:sans-serif;padding:20px;text-align:center;"><h2>${currentQuizTitle}</h2><p>Offline Quiz Container</p></body></html>`;
-    }
-
-    try {
-        let saved = JSON.parse(localStorage.getItem("gs_saved_mcqs") || "{}");
-        const key = $("mcqClass").value + " - " + $("mcqSubject").value + " - " + currentQuizTitle;
-
-        saved[key] = {
-            title: key,
-            content: htmlContent,
-            date: new Date().toLocaleDateString("or-IN")
-        };
-
-        try {
-            localStorage.setItem("gs_saved_mcqs", JSON.stringify(saved));
-        } catch(qErr) {
-            const keys = Object.keys(saved);
-            if (keys.length > 1) {
-                delete saved[keys[0]];
-                localStorage.setItem("gs_saved_mcqs", JSON.stringify(saved));
-            } else {
-                throw qErr;
-            }
-        }
-
-        alert("✅ Quiz ସଫଳତାର ସହିତ Offline Save ହୋଇଗଲା!");
-    } catch(err) {
-        alert("❌ Storage full ba error achi.");
     }
 }
 
@@ -904,7 +856,7 @@ function renderDownloadedQuizList() {
 
     if (!keys.length) {
         container.innerHTML =
-            '<div style="text-align:center;padding:18px;color:var(--muted);">କୌଣସି Quiz Download ହୋଇନାହିଁ。<br><br>MCQ Practice କୁ ଯାଇ Topic ବାଛନ୍ତୁ ଏବଂ Start Quiz କରନ୍ତୁ।</div>';
+            '<div style="text-align:center;padding:18px;color:var(--muted);">କୌଣସି Quiz Download ହୋଇନାହିଁ।</div>';
         return;
     }
 
@@ -977,7 +929,6 @@ function openDownloadedMcq(key) {
     $("pauseModal").classList.remove("active");
     $("quizTimerBar").style.display = "none";
     $("noteActionToolbar").style.display = "none";
-    $("mcqActionToolbar").style.display = "none";
 
     $("viewerBackButton").textContent = "⬅ Back to Sets";
 
@@ -1523,9 +1474,8 @@ function fmtTime(seconds) {
 
 /* START ONLINE QUIZ */
 function startQuiz() {
-    const topicSelect = $("mcqTopic");
-    const fileName = topicSelect.value;
-    currentQuizTitle = topicSelect.options[topicSelect.selectedIndex]?.text || "Topic MCQ";
+    const fileName = $("mcqTopic").value;
+    currentQuizTitle = $("mcqTopic").options[$("mcqTopic").selectedIndex]?.text || "Topic MCQ";
 
     if (!fileName) {
         alert("ଦୟାକରି ଏକ Topic ବାଛନ୍ତୁ।");
@@ -1534,10 +1484,11 @@ function startQuiz() {
 
     currentViewMode="quiz";
 
-    currentQuizUrl = new URL(fileName, GITHUB_PAGES_BASE).href;
+    const fullUrl =
+        new URL(fileName,GITHUB_PAGES_BASE).href;
 
     $("noteActionToolbar").style.display="none";
-    $("mcqActionToolbar").style.display="flex";
+
     $("quizTimerBar").style.display="flex";
 
     $("viewerBackButton").textContent="⬅ Back to Topics";
@@ -1565,20 +1516,22 @@ function startQuiz() {
     $("quizFrame").srcdoc =
         "<div style='display:flex;align-items:center;justify-content:center;height:60vh;font-family:sans-serif;color:#6d28d9;font-size:18px;'><b>Loading Quiz... ଅପେକ୍ଷା କରନ୍ତୁ...</b></div>";
 
-    fetch(currentQuizUrl + "?t=" + Date.now())
+    fetch(fullUrl+"?t="+Date.now())
         .then(response => {
             if (!response.ok) {
-                throw new Error("HTTP " + response.status);
+                throw new Error("HTTP "+response.status);
             }
+
             return response.text();
         })
         .then(html => {
-            $("quizFrame").srcdoc = html;
+            $("quizFrame").srcdoc=html;
         })
         .catch(error => {
             console.error(error);
+
             $("quizFrame").srcdoc =
-                `<html><body style="font-family:sans-serif;padding:20px;text-align:center;"><h2>${currentQuizTitle}</h2><p>⚠️ Live ଫାଇଲ୍ ମିଳିଲା ନାହିଁ, କିନ୍ତୁ ଆପଣ ଉପରେ ଥିବା <b>💾 Save Quiz Offline</b> ବଟନ୍ ଦବାଇ ଅଫ୍‌ଲାଇନ୍ ସେଭ୍ କରିପାରିବେ।</p></body></html>`;
+                "<div style='padding:20px;text-align:center;'>ଇଣ୍ଟରନେଟ୍ ସଂଯୋଗ ଯାଞ୍ଚ କରନ୍ତୁ କିମ୍ବା ପରେ ଚେଷ୍ଟା କରନ୍ତୁ।</div>";
         });
 }
 
