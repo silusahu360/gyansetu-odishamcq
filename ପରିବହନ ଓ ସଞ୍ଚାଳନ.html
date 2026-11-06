@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="or">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ପରିବହନ ଓ ସଞ୍ଚାଳନ - MCQ Practice App</title>
+    <style>
+        :root {
+            --primary: #4f46e5;
+            --primary-dark: #4338ca;
+            --success: #16a34a;
+            --error: #dc2626;
+            --bg-gradient: linear-gradient(135deg, #e0e7ff 0%, #f3e8ff 100%);
+            --card-bg: #ffffff;
+            --text-main: #1f2937;
+            --text-muted: #4b5563;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: var(--bg-gradient);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 600px;
+            background: var(--card-bg);
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.3s ease;
+        }
+
+        .screen {
+            padding: 24px;
+            display: none;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .screen.active {
+            display: flex;
+        }
+
+        .welcome-card {
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        .welcome-card h1 {
+            color: var(--primary);
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+
+        .welcome-card p {
+            color: var(--text-muted);
+            font-size: 1rem;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 14px 28px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.1s;
+            box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
+        }
+
+        .btn:active {
+            transform: scale(0.98);
+        }
+
+        .btn:hover {
+            background-color: var(--primary-dark);
+        }
+
+        .quiz-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #f3f4f6;
+            padding-bottom: 12px;
+        }
+
+        .progress-container {
+            flex-grow: 1;
+            background: #e5e7eb;
+            height: 10px;
+            border-radius: 5px;
+            margin: 0 15px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            background: var(--primary);
+            height: 100%;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .question-counter {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-muted);
+        }
+
+        .question-text {
+            font-size: 1.15rem;
+            font-weight: 600;
+            line-height: 1.5;
+            color: var(--text-main);
+        }
+
+        .options-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .option-btn {
+            background: #f9fafb;
+            border: 2px solid #e5e7eb;
+            padding: 14px 16px;
+            text-align: left;
+            border-radius: 12px;
+            font-size: 1rem;
+            color: var(--text-main);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .option-btn:hover:not(:disabled) {
+            background: #f3f4f6;
+            border-color: #d1d5db;
+        }
+
+        .option-btn.correct {
+            background: #dcfce7 !important;
+            border-color: var(--success) !important;
+            color: #166534 !important;
+            font-weight: 600;
+        }
+
+        .option-btn.incorrect {
+            background: #fee2e2 !important;
+            border-color: var(--error) !important;
+            color: #991b1b !important;
+            font-weight: 600;
+        }
+
+        .option-btn:disabled {
+            cursor: default;
+        }
+
+        .explanation-box {
+            background: #eff6ff;
+            border-left: 5px solid var(--primary);
+            padding: 14px;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            color: #1e40af;
+            line-height: 1.4;
+            display: none;
+        }
+
+        .explanation-box.show {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .next-btn-container {
+            display: none;
+            margin-top: 10px;
+        }
+
+        .next-btn-container.show {
+            display: block;
+        }
+
+        .fact-card {
+            background: linear-gradient(135deg, #fef08a 0%, #fed7aa 100%);
+            border-radius: 16px;
+            padding: 24px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        .fact-card h2 {
+            color: #c2410c;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        .fact-emoji {
+            font-size: 3rem;
+            margin-bottom: 10px;
+        }
+
+        .fact-text {
+            font-size: 1.1rem;
+            color: #7c2d12;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .result-card {
+            text-align: center;
+        }
+
+        .result-card h2 {
+            color: var(--primary);
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+
+        .score-display {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--success);
+            margin: 15px 0;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin: 20px 0;
+        }
+
+        .stat-box {
+            background: #f3f4f6;
+            padding: 12px;
+            border-radius: 10px;
+        }
+
+        .stat-box span {
+            display: block;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .stat-box strong {
+            font-size: 1.2rem;
+            color: var(--text-main);
+        }
+
+        .performance-msg {
+            font-style: italic;
+            color: var(--text-muted);
+            margin-bottom: 15px;
+            font-size: 1rem;
+        }
+
+        .motivational-box {
+            background: #f0fdf4;
+            border: 2px dashed #bbf7d0;
+            padding: 16px;
+            border-radius: 12px;
+            color: #166534;
+            font-size: 1rem;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div id="start-screen" class="screen active">
+        <div class="welcome-card">
+            <h1>ପରିବହନ ଓ ସଞ୍ଚାଳନ</h1>
+            <p>ଦଶମ ଶ୍ରେଣୀ ଜୀବବିଜ୍ଞାନ - ତୃତୀୟ ଅଧ୍ୟାୟର ଏକ ସମ୍ପୂର୍ଣ୍ଣ ଓ ଆକର୍ଷଣୀୟ MCQ ଅଭ୍ୟାସ ପ୍ରୟୋଗ। ଆପଣଙ୍କ ଜ୍ଞାନକୁ ପରୀକ୍ଷା କରନ୍ତୁ ଏବଂ ମଜାରେ ଶିଖନ୍ତୁ!</p>
+            <div style="font-size: 4rem; margin: 15px 0;">🌱❤️</div>
+            <button class="btn" onclick="startQuiz()">କ୍વિଜ୍ ଆରମ୍ଭ କରନ୍ତୁ (Start Quiz)</button>
+        </div>
+    </div>
+
+    <div id="quiz-screen" class="screen">
+        <div class="quiz-header">
+            <span class="question-counter" id="q-counter">ପ୍ରଶ୍ନ 1 / 50</span>
+            <div class="progress-container">
+                <div class="progress-bar" id="progress-bar"></div>
+            </div>
+        </div>
+
+        <div class="question-text" id="question-text">
+            ପ୍ରଶ୍ନ ଏଠାରେ ପ୍ରଦର୍ଶିତ ହେବ...
+        </div>
+
+        <div class="options-grid" id="options-grid"></div>
+
+        <div class="explanation-box" id="explanation-box"></div>
+
+        <div class="next-btn-container" id="next-btn-container">
+            <button class="btn" style="width: 100%;" onclick="nextQuestion()">ପରବର୍ତ୍ତୀ ପ୍ରଶ୍ନ (Next Question)</button>
+        </div>
+    </div>
+
+    <div id="fact-screen" class="screen">
+        <div class="fact-card">
+            <div class="fact-emoji" id="fact-emoji">💡</div>
+            <h2>ଜାଣିରଖିବା କଥା (Funny Fact Break!)</h2>
+            <div class="fact-text" id="fact-text">ରୋଚକ ତଥ୍ୟ ଏଠାରେ ପ୍ରଦର୍ଶିତ ହେବ...</div>
+            <button class="btn" onclick="resumeQuiz()">ଶିକ୍ଷା ଜାରି ରଖନ୍ତୁ (Continue Learning)</button>
+        </div>
+    </div>
+
+    <div id="result-screen" class="screen">
+        <div class="result-card">
+            <h2>ଅଭିନନ୍ଦନ! କ୍ବିଜ୍ ସମାପ୍ତ ହେଲା 🎉</h2>
+            <div class="score-display" id="final-score">0%</div>
+            <div class="performance-msg" id="performance-msg">ଉତ୍ତମ ପ୍ରୟାସ!</div>
+
+            <div class="stats-grid">
+                <div class="stat-box">
+                    <span>ମୋଟ ପ୍ରଶ୍ନ</span>
+                    <strong id="stat-total">50</strong>
+                </div>
+                <div class="stat-box">
+                    <span>ସଠିକ୍ ଉତ୍ତର</span>
+                    <strong id="stat-correct" style="color: var(--success);">0</strong>
+                </div>
+                <div class="stat-box">
+                    <span>ଭୁଲ୍ ଉତ୍ତର</span>
+                    <strong id="stat-incorrect" style="color: var(--error);">0</strong>
+                </div>
+                <div class="stat-box">
+                    <span>ସଠିକ୍ ପ୍ରତିଶତ</span>
+                    <strong id="stat-percentage">0%</strong>
+                </div>
+            </div>
+
+            <div class="motivational-box">
+                "Every question you practise makes you stronger. Every mistake makes you wiser. Keep learning, keep growing, and one day success will be yours!"
+            </div>
+
+            <button class="btn" onclick="restartQuiz()">ପୁନର୍ବାର ଆରମ୍ଭ କରନ୍ତୁ (Restart Quiz)</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    const questions = [
+        {
+            q: "ବହୁକୋଷୀ ପ୍ରାଣୀମାନେ ଶରୀରର ବିଭିନ୍ନ ଅଙ୍ଗ ସାହାଯ୍ୟରେ କେଉଁଗୁଡ଼ିକ ଆହରଣ କରନ୍ତି?",
+            options: ["ଖାଦ୍ୟ ଓ ଜଳ", "କେବଳ ଅମ୍ଳଜାନ", "ଖାଦ୍ୟ, ଜଳ ଓ ଅମ୍ଳଜାନ", "କେବଳ ଅଙ୍ଗାରକାମ୍ଳ"],
+            answer: 2,
+            explanation: "ବହୁକୋଷୀ ପ୍ରାଣୀ ଶରୀରର ବିଭିନ୍ନ ଅଙ୍ଗ ସାହାଯ୍ୟରେ ଖାଦ୍ୟ, ଜଳ ଓ ଅମ୍ଳଜାନ ଆହରଣ କରନ୍ତି।"
+        },
+        {
+            q: "ସବୁଜ ଉଦ୍ଭିଦମାନେ ଆଲୋକଶ୍ଳେଷଣ ପ୍ରକ୍ରିୟାରେ ସୌର ରଶ୍ମିର ଆଲୋକଶକ୍ତିକୁ କେଉଁ ଶକ୍ତିରେ ପରିବର୍ତ୍ତନ କରିଥାନ୍ତି?",
+            options: ["ଯାନ୍ତ୍ରିକ ଶକ୍ତି", "ରାସାୟନିକ ଶକ୍ତି", "ତାପଜ ଶକ୍ତି", "ବୈଦ୍ୟୁତିକ ଶକ୍ତି"],
+            answer: 1,
+            explanation: "ସବୁଜ ଉଦ୍ଭିଦ ସୌର ରଶ୍ମିର ଆଲୋକଶକ୍ତିକୁ ରାସାୟନିକ ଶକ୍ତିରେ ପରିବର୍ତ୍ତନ କରି ଶ୍ୱେତସାର ପ୍ରସ୍ତୁତ କରିଥାଏ।"
+        },
+        {
+            q: "ଉଭିଦ ମୃତ୍ତିକାରୁ ଜଳ ଓ ଦ୍ରବୀଭୂତ ଧାତବ ଲବଣ କେଉଁ ଅଙ୍ଗ ସାହାଯ୍ୟରେ ଶୋଷଣ କରିଥାଏ?",
+            options: ["ପତ୍ର", "କାଣ୍ଡ", "ଚେର", "ଫୁଲ"],
+            answer: 2,
+            explanation: "ଜଳ ଓ ଦ୍ରବୀଭୂତ ଧାତବ ଲବଣକୁ ଉଭିଦଟିଏ ମାଟି ସହିତ ସଂଯୋଗ କରୁଥିବା ଅଙ୍ଗ ଚେର (ମୂଳଲୋମ) ସାହାଯ୍ୟରେ ଶୋଷଣ କରିଥାଏ।"
+        },
+        {
+            q: "ମୂଳଲୋମର କୋଷଜୀବକ ଓ ମୃତ୍ତିକାସ୍ଥ ଦ୍ରବଣର ସାନ୍ଦ୍ରତା ମଧ୍ୟରେ ତାରତମ୍ୟ ସମତା ଆଣିବା ପାଇଁ ମୃତ୍ତିକା ଦ୍ରବଣ ମୂଳଲୋମ ଭିତରକୁ ପ୍ରବେଶ କରିବା ପ୍ରକ୍ରିୟାକୁ କ’ଣ କୁହାଯାଏ?",
+            options: ["ଉଚ୍ଛେଦନ", "ପାରସୃତି (Osmosis) କିମ୍ବା ବିପଚନ ଶକ୍ତି", "ବିସରଣ", "ସ୍ଥାନାନ୍ତରଣ"],
+            answer: 1,
+            explanation: "ଏହି ତାରତମ୍ୟରେ ସମତା ଆଣିବା ପାଇଁ ମୂଳଲୋମର କୋଷ ଭିତରକୁ ମୃତ୍ତିକାସ୍ଥ ଦ୍ରବଣ ପାରସୃତି କିମ୍ବା ବିପଚନ ଶକ୍ତି ଦ୍ୱାରା ପ୍ରବେଶ କରିଥାଏ।"
+        },
+        {
+            q: "ମୂଳଲୋମ କୋଷରେ ଜଳୀୟ ଦ୍ରବଣର ପ୍ରବେଶ ପରେ ତାହା କେଉଁ ପ୍ରକ୍ରିୟାରେ ମୂଳର ଜାଇଲେମ୍ (Xylem) କୁ ଚାଲିଯାଏ?",
+            options: ["ବିସରଣ ପ୍ରକ୍ରିୟା (Diffusion)", "ଉଚ୍ଛେଦନ", "ପାରସୃତି", "ସଂସକ୍ତି ବଳ"],
+            answer: 0,
+            explanation: "ମୂଳଲୋମ କୋଷରେ ଜଳୀୟ ଦ୍ରବଣର ପ୍ରବେଶ ପରେ ତାହା ବିସରଣ ପ୍ରକ୍ରିୟାରେ ମୂଳର ଜାଇଲେମ୍ (Xylem) କୁ ଚାଲିଯାଏ।"
+        },
+        {
+            q: "ଜାଇଲେମ୍ ଟିସୁର କେଉଁ ଉପାଦାନଗୁଡ଼ିକ ମୂଳଠାରୁ ଆରମ୍ଭ କରି ଗଛର ଅଗ୍ରଭାଗ ପର୍ଯ୍ୟନ୍ତ ଏକ ଅବିଚ୍ଛିନ୍ନ ଜଳ ପରିବହନ ସଂସ୍ଥା ଗଠନ କରନ୍ତି?",
+            options: ["ସିବ୍ ନଳୀ ଓ ସାଥୀ କୋଷ", "ବାହିକା (Vessel) ଓ ଟ୍ରାକିଡ଼୍ (Tracheid)", "ଫ୍ଲୋଏମ୍ ତନ୍ତୁ", "ପାରେଞ୍କାଇମା"],
+            answer: 1,
+            explanation: "ଜାଇଲେମ୍ ଟିସୁର ବାହିକା ଓ ଟ୍ରାକିଡ଼୍ ଇତ୍ୟାଦି ମୂଳଠାରୁ ଅଗ୍ରଭାଗ ପର୍ଯ୍ୟନ୍ତ ପରସ୍ପର ସଂଯୋଜିତ ରହି ଅବିଚ୍ଛିନ୍ନ ସଂସ୍ଥା ଗଠନ କରନ୍ତି।"
+        },
+        {
+            q: "ବଡ଼ ବଡ଼ ବୃକ୍ଷଗୁଡ଼ିକରେ ଜଳ ପରିବହନ ପାଇଁ ଗଛଟି କେଉଁ ନିଷ୍କ୍ରିୟ ଶୋଷଣ ଉପାୟ ଅବଲମ୍ବନ କରିଥାଏ?",
+            options: ["ମୂଳଜ ଚାପ", "ଉଚ୍ଛେଦନ ଟାଣ (Transpiration pull)", "କୈଶିକ ଆକର୍ଷଣ", "ସକ୍ରିୟ ଶୋଷଣ"],
+            answer: 1,
+            explanation: "ବଡ଼ ବଡ଼ ବୃକ୍ଷଗୁଡ଼ିକରେ ମୂଳର ଚାପ ଯଥେଷ୍ଟ ନହେବାରୁ ଗଛକୁ ଉଚ୍ଛେଦନ ଟାଣ (Transpiration pull) ନିଷ୍କ୍ରିୟ ଶୋଷଣ ଉପାୟ ଅବଲମ୍ବନ କରିବାକୁ ପଡ଼େ।"
+        },
+        {
+            q: "ଉଦ୍ଭିଦରେ ଉଚ୍ଛେଦନର ମୁଖ୍ୟ ଅଙ୍ଗ କ’ଣ?",
+            options: ["ତ୍ୱଚାବରଣ (Cuticle)", "ବାତରନ୍ଧ୍ର (Lenticel)", "ସ୍ତୋମ୍ (Stoma)", "ଚେର"],
+            answer: 2,
+            explanation: "ସ୍ତୋମ୍ (Stoma) ହେଉଛି ଉଭିଦରେ ଉଚ୍ଛେଦନର ମୁଖ୍ୟ ଅଙ୍ଗ।"
+        },
+        {
+            q: "କାଣ୍ଡ ଓ ଫଳରେ ଥିବା କେଉଁ ଅତିସୂକ୍ଷ୍ମ ଖୋଲା ଅଂଶ ଦ୍ୱାରା ଅଳ୍ପ ପରିମାଣର ଉଚ୍ଛେଦନ ସଂଘଟିତ ହୋଇଥାଏ?",
+            options: ["ସ୍ତୋମ୍", "ବାତରନ୍ଧ୍ର (Lenticel)", "ମୂଳଲୋମ", "ଜାଇଲେମ୍ ବାହିକା"],
+            answer: 1,
+            explanation: "ବଡ଼ ଗଛର ବଳ୍କଳରେ କାଣ୍ଡ ଓ ଫଳରେ ବାତରନ୍ଧ୍ର ଅତିସୂକ୍ଷ୍ମ ଖୋଲା ଅଂଶ ଭାବେ ବଢ଼ି ବାହାରି ଆସିଥାଏ ଏବଂ ଏହା ଦ୍ୱାରା ଅଳ୍ପ ଉଚ୍ଛେଦନ ହୁଏ।"
+        },
+        {
+            q: "ଆଲୋକଶ୍ଳେଷଣର ଉତ୍ପାଦଗୁଡ଼ିକ ତଥା ଆମିନୋଅମ୍ଳ ପରି ଉପାଦାନ ଉଭିଦର କେଉଁ ସଂବାହୀ ଟିସୁ ଦ୍ୱାରା ସ୍ଥାନାନ୍ତରିତ ହୋଇଥାଏ?",
+            options: ["ଜାଇଲେମ୍", "ଫ୍ଲୋଏମ୍ (Phloem)", "କୈଶିକ ନଳୀ", "ଟ୍ରାକିଡ଼୍"],
+            answer: 1,
+            explanation: "ଉଭିଦର ସଂବାହୀ ଟିସୁ ଫ୍ଲୋଏମ୍ (Phloem) ସାହାଯ୍ୟରେ ପୋଷକ ପଦାର୍ଥର ସ୍ଥାନାନ୍ତରଣ (Translocation) ସମ୍ପନ୍ନ ହୋଇଥାଏ।"
+        },
+        {
+            q: "ଉଦ୍ଭିଦରେ ପୋଷକର ସ୍ଥାନାନ୍ତରଣ କେଉଁ ଦିଗରେ ହୋଇପାରେ?",
+            options: ["କେବଳ ଉର୍ଦ୍ଧ୍ୱମୁଖୀ", "କେବଳ ନିମ୍ନମୁଖୀ", "ଉଭୟ ଉର୍ଦ୍ଧ୍ୱ, ପାର୍ଶ୍ୱ ଓ ନିମ୍ନମୁଖୀ", "କେବଳ ପାର୍ଶ୍ୱମୁଖୀ"],
+            answer: 2,
+            explanation: "ଉଭିଦରେ ଜଳ ପରିବହନ କେବଳ ଉର୍ଦ୍ଧ୍ୱମୁଖୀ ହୋଇଥିବାବେଳେ ପୋଷକ ପରିବହନ ଉଭୟ ଉର୍ଦ୍ଧ୍ୱ, ପାର୍ଶ୍ୱ ଓ ନିମ୍ନମୁଖୀ ହୋଇପାରେ।"
+        },
+        {
+            q: "ପୋଷକ ସଂଶ୍ଳେଷଣ ହେଉଥିବା ସ୍ଥାନକୁ କ’ଣ କୁହାଯାଏ?",
+            options: ["ଜମାଭୁକ୍ତ ଅଂଶ (Sink)", "ଉତ୍ସ (Source)", "ମୂଳଲୋମ", "ବାତରନ୍ଧ୍ର"],
+            answer: 1,
+            explanation: "ସଂଶ୍ଳେଷଣ ହେଉଥିବା ସ୍ଥାନକୁ ପୋଷକର ଉତ୍ସ (Source) ଏବଂ ବ୍ୟବହୃତ ହେଉଥିବା ସ୍ଥାନକୁ ଜମାଭୁକ୍ତ ଅଂଶ (Sink) କୁହାଯାଏ।"
+        },
+        {
+            q: "ଉଦ୍ଭିଦରେ ଜଳର ଊର୍ଦ୍ଧ୍ୱ ପରିବହନ ବ୍ୟାଖ୍ୟା କରିବା ପାଇଁ କେଉଁ ତତ୍ତ୍ୱଗୁଡ଼ିକ ଅବତାରଣା କରାଯାଇଛି?",
+            options: ["କୈଶିକ ଆକର୍ଷଣ, ମୂଳଜ ଚାପ ଓ ସଂସକ୍ତି ତତ୍ତ୍ୱ", "କେବଳ ବିସରଣ ତତ୍ତ୍ୱ", "ପାରସୃତି ଓ ସକ୍ରିୟ ଶୋଷଣ ତତ୍ତ୍ୱ", "ଉଚ୍ଛେଦନ ଓ ବାତରନ୍ଧ୍ର ତତ୍ତ୍ୱ"],
+            answer: 0,
+            explanation: "ଉଚ୍ଚ ଗଛଗୁଡ଼ିକରେ ଜଳ ପରିବହନ ପାଇଁ କୈଶିକ ଆକର୍ଷଣ, ମୂଳଜ ଚାପ ଏବଂ ସଂସକ୍ତି ତତ୍ତ୍ୱ (Cohesion theory) ଅବତାରଣା କରାଯାଇଛି।"
+        },
+        {
+            q: "0.001 ମିଲିମିଟରରୁ ଊଣା ବ୍ୟାସବିଶିଷ୍ଟ ଜାଇଲେମ୍ ନଳୀରେ କୈଶିକ ଆକର୍ଷଣ ଯୋଗୁଁ ଜଳ କେତେ ମିଟର ପର୍ଯ୍ୟନ୍ତ ଉଠିପାରେ?",
+            options: ["3 ମିଟର", "10 ମିଟର", "50 ମିଟର", "100 ମିଟର"],
+            answer: 1,
+            explanation: "0.001 ମିଲିମିଟରରୁ ଊଣା ବ୍ୟାସବିଶିଷ୍ଟ ଜାଇଲେମ୍ ନଳୀରେ ଜଳ 10 ମିଟର ପର୍ଯ୍ୟନ୍ତ ଉଠିପାରେ, ତା’ଠାରୁ ଅଧିକ ନୁହେଁ।"
+        },
+        {
+            q: "ଗଛର କଟା ଅଂଶରେ ମୂଳଜ ଚାପ (Root pressure) ମାପିବା ପାଇଁ କେଉଁ ଯନ୍ତ୍ର ଖଞ୍ଜି ଦିଆଯାଏ?",
+            options: ["ସ୍ଫିଗ୍ମୋମାନୋମିଟର", "ମାନୋମିଟର (Manometer)", "ବାରୋମିଟର", "ଥର୍ମୋମିଟର"],
+            answer: 1,
+            explanation: "ଗଛର କଟା ଅଂଶରେ ଯଦି ଗୋଟିଏ ମାନୋମିଟର (Manometer) ଖଞ୍ଜି ଦିଆଯାଏ, ତେବେ ମୂଳଜ ଚାପ ମପାଯାଇପାରେ।"
+        },
+        {
+            q: "ଜଳ ଅଣୁମାନଙ୍କ ମଧ୍ୟରେ ଥିବା ସଂସକ୍ତି ବଳ (Cohesive force) ଏବଂ ଜାଇଲେମ୍ ଭିତ୍ତି ମଧ୍ୟରେ ଥିବା କେଉଁ ବଳ ଯୋଗୁଁ ଜଳଧାରା ସହଜରେ ଛିନ୍ନ ହୁଏନାହିଁ?",
+            options: ["ସଂଲଗ୍ନ ବଳ (Adhesive force)", "ମୂଳଜ ଚାପ", "ପାରସୃତି ଚାପ", "ବିସରଣ ଚାପ"],
+            answer: 0,
+            explanation: "ଜଳ ଅଣୁ ମଧ୍ୟରେ ସଂସକ୍ତି ବଳ ଏବଂ ଜଳ ଓ ଜାଇଲେମ୍ ଭିତ୍ତି ମଧ୍ୟରେ ସଂଲଗ୍ନ ବଳ (Adhesive force) ଯୋଗୁଁ ଜଳର ଧାରା ସହଜରେ ଛିନ୍ନ ହୁଏନାହିଁ।"
+        },
+        {
+            q: "ଉଦ୍ଭିଦରେ ଜଳର ପରିବହନ ପରୀକ୍ଷଣ ପାଇଁ କେଉଁ ରଙ୍ଗ ବା କାଳି ବ୍ୟବହାର କରାଯାଇଥିଲା?",
+            options: ["ନୀଳ କାଳି", "ନାଲି କାଳି ବା ସାଫ୍ରାନିନ୍ ରଙ୍ଗ", "ହଳଦିଆ ରଙ୍ଗ", "ସବୁଜ ରଙ୍ଗ"],
+            answer: 1,
+            explanation: "ପରୀକ୍ଷଣରେ କୋନିକାଲ୍ ଫ୍ଲାସ୍କରେ ନାଲି କାଳି ବା ସାଫ୍ରାନିନ୍ ରଙ୍ଗ ମିଶାଯାଇ ହରଗୌରା ଗଛର ଚେରକୁ ବୁଡ଼ାଯାଇଥିଲା।"
+        },
+        {
+            q: "ମଣିଷ ଶରୀରରେ ରକ୍ତ ସଞ୍ଚାଳନ ପାଇଁ ବିଛେଇ ହୋଇଥିବା ରକ୍ତବାହିନୀଗୁଡ଼ିକର ମୋଟ ଦୈର୍ଘ୍ୟ ପ୍ରାୟ କେତେ?",
+            options: ["10,000 ରୁ 20,000 କିଲୋମିଟର", "96,000 ରୁ 1,60,000 କିଲୋମିଟର", "5,000 ରୁ 10,000 କିଲୋମିଟର", "2,00,000 ରୁ 5,00,000 କିଲୋମିଟର"],
+            answer: 1,
+            explanation: "ହିସାବ କରି ଦେଖାଯାଇଛି, ପ୍ରାୟ 96,000 ରୁ 1,60,000 କିଲୋମିଟର ଲମ୍ବ ନଳୀ (ରକ୍ତବାହିନୀ) ଆମ ଦେହସାରା ବିଛେଇ ହୋଇ ରହିଛି।"
+        },
+        {
+            q: "ଶିରାରେ ରକ୍ତ ପଛକୁ ଫେରି ପାରେନାହିଁ କାହିଁକି?",
+            options: ["ଧମନୀର ଚାପ ଯୋଗୁଁ", "ଶିରାରେ ଏକ ବିଶେଷ ଧରଣର କପାଟିକା (Valve) ଥିବାରୁ", "ହୃତ୍‌ପିଣ୍ଡର ପମ୍ପିଂ ଯୋଗୁଁ", "ଅଣୁଚକ୍ରିକା ଥିବାରୁ"],
+            answer: 1,
+            explanation: "ଶିରାରେ ରହିଛି ଏକ ବିଶେଷ ଧରଣର କପାଟିକା (Valve) ଯାହାଫଳରେ ରକ୍ତ ଶିରା ମଧ୍ୟରେ ପଛକୁ ଫେରି ପାରେନାହିଁ।"
+        },
+        {
+            q: "ମଣିଷ ଶରୀରରେ ରକ୍ତ କିପରି ସଞ୍ଚାଳିତ ହୁଏ ତାହା ପ୍ରଥମେ କିଏ ଆବିଷ୍କାର କରିଥିଲେ?",
+            options: ["କାର୍ଲ ଲ୍ୟାଣ୍ଡଷ୍ଟେଇନର୍", "ଉଇଲିୟମ୍ ହାର୍ଭେ (William Harvey, 1578-1657)", "ରବର୍ଟ ହୁକ୍", "ଆଣ୍ଟୋନି ଭନ୍ ଲିଉୱେନ୍ ହୁକ୍"],
+            answer: 1,
+            explanation: "ଉଇଲିୟମ୍ ହାର୍ଭେ (William Harvey, 1578-1657) ପ୍ରଥମେ ଆବିଷ୍କାର କରିଥିଲେ ଯେ ଆମ ଶରୀରରେ ରକ୍ତ କିପରି ସଞ୍ଚାଳିତ ହୁଏ।"
+        },
+        {
+            q: "ମଣିଷ ହୃତ୍‌ପିଣ୍ଡର ଓଜନ ସାଧାରଣତଃ କେତେ ହୋଇଥାଏ?",
+            options: ["100 ରୁ 150 ଗ୍ରାମ", "250 ରୁ 300 ଗ୍ରାମ", "400 ରୁ 500 ଗ୍ରାମ", "50 ରୁ 100 ଗ୍ରାମ"],
+            answer: 1,
+            explanation: "ଜଣେ ବୟଃପ୍ରାପ୍ତ ବ୍ୟକ୍ତିର ହୃତ୍‌ପିଣ୍ଡର ଲମ୍ବ ପ୍ରାୟ 12 ସେ.ମି., ଓସାର 9 ସେ.ମି. ଏବଂ ଓଜନ ପ୍ରାୟ 250 ରୁ 300 ଗ୍ରାମ।"
+        },
+        {
+            q: "ମଣିଷ ହୃତ୍‌ପିଣ୍ଡରେ କେତୋଟି ପ୍ରକୋଷ୍ଠ ରହିଛି?",
+            options: ["ଦୁଇଟି", "ତିନୋଟି", "ଚାରୋଟି", "ପାଞ୍ଚଟି"],
+            answer: 2,
+            explanation: "ହୃତ୍‌ପିଣ୍ଡରେ ଚାରୋଟି ପ୍ରକୋଷ୍ଠ ରହିଛି - ଦୁଇଟି ଅଳିନ୍ଦ (ଦକ୍ଷିଣ ଓ ବାମ) ଏବଂ ଦୁଇଟି ନିଳୟ (ଦକ୍ଷିଣ ଓ ବାମ)।"
+        },
+        {
+            q: "ଦକ୍ଷିଣ ଅଳିନ୍ଦ ଓ ଦକ୍ଷିଣ ନିଳୟ ଦ୍ଵାରରେ କେତୋଟି ପାଖୁଡ଼ାବିଶିଷ୍ଟ କପାଟିକା ଥାଏ?",
+            options: ["ଦୁଇ ପାଖୁଡ଼ାବିଶିଷ୍ଟ (Bicuspid valve)", "ତିନି ପାଖୁଡ଼ାବିଶିଷ୍ଟ (Tricuspid valve)", "ଅର୍ଦ୍ଧଚନ୍ଦ୍ରାକୃତି କପାଟିକା", "କୌଣସି କପାଟିକା ନାହିଁ"],
+            answer: 1,
+            explanation: "ଦକ୍ଷିଣ ଅଳିନ୍ଦ ଓ ଦକ୍ଷିଣ ନିଳୟ ଦ୍ଵାରରେ 3 ପାଖୁଡ଼ାବିଶିଷ୍ଟ କପାଟିକା (Tricuspid valve) ଥାଏ।"
+        },
+        {
+            q: "ବାମ ଅଳିନ୍ଦ ଓ ବାମ ନିଳୟ ଭିତରେ କେଉଁ କପାଟିକା ଥାଏ?",
+            options: ["ତିନି ପାଖୁଡ଼ାବିଶିଷ୍ଟ କପାଟିକା", "ଦୁଇ ପାଖୁଡ଼ାବିଶିଷ୍ଟ କପାଟିକା (Bicuspid valve)", "ଅର୍ଦ୍ଧଚନ୍ଦ୍ରାକୃତି କପାଟିକା", "ରକ୍ତକୈଶିକା କପାଟିକା"],
+            answer: 1,
+            explanation: "ବାମ ଅଳିନ୍ଦ ଓ ବାମ ନିଳୟ ଭିତରେ ଦୁଇ ପାଖୁଡ଼ାବିଶିଷ୍ଟ କପାଟିକା (Bicuspid valve) ଥାଏ।"
+        },
+        {
+            q: "ନିଳୟ ଓ ରକ୍ତବାହିନୀ ମଧ୍ୟସ୍ଥିତ କପାଟିକାକୁ କ’ଣ କୁହାଯାଏ?",
+            options: ["ଟ୍ରାଇକସ୍ପିଡ଼ କପାଟିକା", "ବାଇକସ୍ପିଡ଼ କପାଟିକା", "ଅର୍ଦ୍ଧଚନ୍ଦ୍ରାକୃତି କପାଟିକା (Semilunar valve)", "ମହାଧମନୀ କପାଟିକା"],
+            answer: 2,
+            explanation: "ନିଳୟ ଓ ରକ୍ତବାହିନୀ ମଧ୍ୟସ୍ଥିତ କପାଟିକାକୁ ଅର୍ଦ୍ଧଚନ୍ଦ୍ରାକୃତି କପାଟିକା (Semilunar valve) କୁହାଯାଏ।"
+        },
+        {
+            q: "ମଣିଷ ହୃତ୍‌ପିଣ୍ଡର କେଉଁ ପ୍ରକୋଷ୍ଠର ପ୍ରାଚୀର ଅଧିକ ମୋଟା ଓ ଦକ୍ଷ ଅଟେ?",
+            options: ["ଦକ୍ଷିଣ ଅଳିନ୍ଦ", "ବାମ ଅଳିନ୍ଦ", "ଦକ୍ଷିଣ ନିଳୟ", "ବାମ ନିଳୟ"],
+            answer: 3,
+            explanation: "ବାମ ନିଳୟ ଅଧିକ ଦକ୍ଷ ଓ ଏହାର ପ୍ରାଚୀର ଅଧିକ ମୋଟା କାରଣ ବାମପଟ ନିଳୟରୁ ଅମ୍ଳଜାନଯୁକ୍ତ ରକ୍ତ ମହାଧମନୀ ମଧ୍ୟଦେଇ ଶରୀରର ବିଭିନ୍ନ ଅଙ୍ଗକୁ ଯାଏ।"
+        },
+        {
+            q: "ଏକ ସୁସ୍ଥ ବ୍ୟକ୍ତିର ହୃତ୍‌ପିଣ୍ଡର ସ୍ପନ୍ଦନ ହାର ଏକ ମିନିଟ୍‌କୁ ସାଧାରଣତଃ କେତେ ଥର?",
+            options: ["60 ଥର", "72 ଥର", "80 ଥର", "90 ଥର"],
+            answer: 1,
+            explanation: "ସାଧାରଣତଃ ଏକ ସୁସ୍ଥ ବ୍ୟକ୍ତିର ହୃତ୍‌ପିଣ୍ଡର ସ୍ପନ୍ଦନ ହାର ଏକ ମିନିଟକୁ 72 ଥର।"
+        },
+        {
+            q: "ମାଛର ହୃତ୍‌ପିଣ୍ଡ କେତେ ପ୍ରକୋଷ୍ଠବିଶିଷ୍ଟ?",
+            options: ["ଗୋଟିଏ ପ୍ରକୋଷ୍ଠ", "ଦୁଇ ପ୍ରକୋଷ୍ଠବିଶିଷ୍ଟ (ଗୋଟିଏ ଅଳିନ୍ଦ ଓ ଗୋଟିଏ ନିଳୟ)", "ତିନି ପ୍ରକୋଷ୍ଠବିଶିଷ୍ଟ", "ଚାରି ପ୍ରକୋଷ୍ଠବିଶିଷ୍ଟ"],
+            answer: 1,
+            explanation: "ମାଛର ହୃତ୍‌ପିଣ୍ଡ ଦୁଇ ପ୍ରକୋଷ୍ଠବିଶିଷ୍ଟ; ଏଥିରେ ରହିଛି ଗୋଟିଏ ଅଳିନ୍ଦ ଏବଂ ଗୋଟିଏ ନିଳୟ।"
+        },
+        {
+            q: "ମାଛରେ ରକ୍ତ କେବଳ ଥରେ ମାତ୍ର ହୃତ୍‌ପିଣ୍ଡ ମଧ୍ୟଦେଇ ପ୍ରବାହିତ ହେଉଥିବାରୁ ଏ ପ୍ରକାର ସଞ୍ଚାଳନକୁ କ’ଣ କୁହାଯାଏ?",
+            options: ["ଦ୍ଵୈତ ସଞ୍ଚାଳନ (Double circulation)", "ଏକକ ସଞ୍ଚାଳନ (Single circulation)", "ଆବଦ୍ଧ ସଞ୍ଚାଳନ", "ଖୋଲା ସଞ୍ଚାଳନ"],
+            answer: 1,
+            explanation: "ରକ୍ତ କେବଳ ଥରେ ମାତ୍ର ହୃତ୍‌ପିଣ୍ଡ ମଧ୍ୟଦେଇ ପ୍ରବାହିତ ହେଉଥିବାରୁ ଏ ପ୍ରକାର ସଞ୍ଚାଳନକୁ ଏକକ ସଞ୍ଚାଳନ (Single circulation) କୁହାଯାଏ।"
+        },
+        {
+            q: "ବେଙ୍ଗ ଆଦି ଉଭୟଚରମାନଙ୍କର ହୃତ୍‌ପିଣ୍ଡ କେତେ ପ୍ରକୋଷ୍ଠବିଶିଷ୍ଟ?",
+            options: ["ଦୁଇ ପ୍ରକୋଷ୍ଠବିଶିଷ୍ଟ", "ତିନି ପ୍ରକୋଷ୍ଠବିଶିଷ୍ଟ (ଦୁଇଟି ଅଳିନ୍ଦ ଓ ଗୋଟିଏ ନିଳୟ)", "ଚାରି ପ୍ରକୋଷ୍ଠବିଶିଷ୍ଟ", "ପାଞ୍ଚ ପ୍ରକୋଷ୍ଠବିଶିଷ୍ଟ"],
+            answer: 1,
+            explanation: "ବେଙ୍ଗ ଆଦି ଉଭୟଚରରେ ହୃତ୍‌ପିଣ୍ଡ ତିନି ପ୍ରକୋଷ୍ଠବିଶିଷ୍ଟ, ଯେଉଁଥିରେ ଦୁଇଟି ଅଳିନ୍ଦ ଓ ଗୋଟିଏ ନିଳୟ ଥାଏ।"
+        },
+        {
+            q: "ମଣିଷ ତଥା ସ୍ତନ୍ୟପାୟୀ ଓ ପକ୍ଷୀମାନଙ୍କ ଶରୀରରେ ହେଉଥିବା ରକ୍ତ ସଞ୍ଚାଳନକୁ କ’ଣ କୁହାଯାଏ?",
+            options: ["ଏକକ ସଞ୍ଚାଳନ", "ଦ୍ଵୈତ ସଞ୍ଚାଳନ (Double circulation)", "ମିଶ୍ରିତ ସଞ୍ଚାଳନ", "ଖୋଲା ସଞ୍ଚାଳନ"],
+            answer: 1,
+            explanation: "ଶରୀରର କୌଣସି ଅଙ୍ଗକୁ ଥରେ ରକ୍ତ ପହଞ୍ଚିଲା ବେଳକୁ ତାହା ଦୁଇଥର ହୃତ୍‌ପିଣ୍ଡ ମଧ୍ୟଦେଇ ପ୍ରବାହିତ ହୋଇଥାଏ, ଯାହାକୁ ଦ୍ଵୈତ ସଞ୍ଚାଳନ କୁହାଯାଏ।"
+        },
+        {
+            q: "ହୃତ୍‌ପିଣ୍ଡର ସଂକୋଚନଜନିତ ଚାପକୁ କ’ଣ କୁହାଯାଏ?",
+            options: ["ଡାୟାଷ୍ଟୋଲିକ୍ ଚାପ", "ସିଷ୍ଟୋଲିକ୍ (Systolic) ଚାପ", "ମୂଳଜ ଚାପ", "ବିସରଣ ଚାପ"],
+            answer: 1,
+            explanation: "ହୃତ୍‌ପିଣ୍ଡର ସଂକୋଚନଜନିତ ଚାପକୁ ସିଷ୍ଟୋଲିକ୍ (Systolic) ଚାପ କୁହାଯାଏ।"
+        },
+        {
+            q: "ଏକ ସୁସ୍ଥ ବ୍ୟକ୍ତିର ବିଶ୍ରାମ ବେଳର ସ୍ବାଭାବିକ୍ ରକ୍ତଚାପ (Systolic / Diastolic) କେତେ ହୋଇଥାଏ?",
+            options: ["80 / 120 ମିମି ପାରଦମାନ", "120 / 80 ମିମି ପାରଦମାନ (120 mm Hg / 80 mm Hg)", "100 / 60 ମିମି ପାରଦମାନ", "140 / 90 ମିମି ପାରଦମାନ"],
+            answer: 1,
+            explanation: "ଏକ ସୁସ୍ଥ ବ୍ୟକ୍ତିର ବିଶ୍ରାମ ବେଳର ସିଷ୍ଟୋଲିକ୍ ଚାପ 120 ମିମି ପାରଦମାନ ଏବଂ ଡାୟାଷ୍ଟୋଲିକ୍ ଚାପ 80 ମିମି ପାରଦମାନ (120/80 mm Hg) ଅଟେ।"
+        },
+        {
+            q: "ରକ୍ତଚାପ ମାପିବା ଯନ୍ତ୍ରର ନାମ କ’ଣ?",
+            options: ["ମାନୋମିଟର", "ସ୍ଫିଗ୍ମୋମାନୋମିଟର (Sphygmomanometer)", "ବାରୋମିଟର", "ଥର୍ମୋମିଟର"],
+            answer: 1,
+            explanation: "ରକ୍ତଚାପ ସ୍ଫିଗ୍ମୋମାନୋମିଟର (Sphygmomanometer) ସାହାଯ୍ୟରେ ମପାଯାଏ।"
+        },
+        {
+            q: "ଧମନୀ ସଂକୁଚିତ ହେଲେ ରକ୍ତଚାପ ବଢ଼ିଯିବାର ଅବସ୍ଥାକୁ କ’ଣ କୁହାଯାଏ?",
+            options: ["ହାଇପୋଟେନ୍‌ସନ୍", "ଉଚ୍ଚ ରକ୍ତଚାପ ବା ହାଇପର୍‌ଟେନ୍‌ସନ୍ (Hypertension)", "ଆନିମିଆ", "ହିମୋଫିଲିଆ"],
+            answer: 1,
+            explanation: "କୌଣସି କାରଣରୁ ଧମନୀ ସଂକୁଚିତ ହେଲେ ରକ୍ତଚାପ ବଢ଼ିଯାଏ, ଯାହାକୁ ଉଚ୍ଚ ରକ୍ତଚାପ ବା ହାଇପର୍‌ଟେନ୍‌ସନ୍ କୁହାଯାଏ।"
+        },
+        {
+            q: "କ୍ଷତ ସ୍ଥାନରେ ଥ୍ରୋମ୍ବୋପ୍ଲାଷ୍ଟିନ୍ (Thromboplastin) ସୃଷ୍ଟି ହେବାରେ କେଉଁମାନେ ସାହାଯ୍ୟ କରନ୍ତି?",
+            options: ["କ୍ଷତ ଟିସୁ ଓ ଭାଙ୍ଗିଯାଇଥିବା ଅଣୁଚକ୍ରିକା (Platelets)", "କେବଳ ଲୋହିତ ରକ୍ତକଣିକା", "ଶ୍ୱେତରକ୍ତ କଣିକା", "ଜାଇଲେମ୍ ଓ ଫ୍ଲୋଏମ୍"],
+            answer: 0,
+            explanation: "କ୍ଷତ ଟିସୁ ଓ ଭାଙ୍ଗି ଯାଇଥିବା ଅଣୁଚକ୍ରିକା (Platelets) ବାୟୁର ସଂସ୍ପର୍ଶରେ ଆସିବା ଫଳରେ ଥ୍ରୋମ୍ବୋପ୍ଲାଷ୍ଟିନ୍ ସୃଷ୍ଟି ହୁଏ।"
+        },
+        {
+            q: "ଥ୍ରୋମ୍ବୋପ୍ଲାଷ୍ଟିନ୍, କ୍ୟାଲସିୟମ୍ ଆୟନ (Ca++) ତଥା ଏଞ୍ଜାଇମ୍ ଉପସ୍ଥିତିରେ ପ୍ରୋଥମ୍ବିନ୍ କେଉଁ ସକ୍ରିୟ ଏଞ୍ଜାଇମ୍‌ରେ ପରିଣତ ହୁଏ?",
+            options: ["ଫାଇବ୍ରିନ୍", "ଥ୍ରମ୍ବିନ୍ (Thrombin)", "ହିପାରିନ୍", "ହିରୁଡିନ୍"],
+            answer: 1,
+            explanation: "ପ୍ରୋଥମ୍ବିନ୍, ଥ୍ରମ୍ବୋପ୍ଲାଷ୍ଟିନ୍ ଓ Ca++ ପ୍ରଭାବରେ ଥ୍ରମ୍ବିନ୍ ନାମକ ସକ୍ରିୟ ଏଞ୍ଜାଇମ୍‌ରେ ପରିଣତ ହୁଏ।"
+        },
+        {
+            q: "ଥ୍ରମ୍ବିନ୍‌ର ପ୍ରଭାବରେ ଫାଇବ୍ରିନୋଜେନ୍ କେଉଁ ପଦାର୍ଥରେ ପରିଣତ ହୋଇ ରକ୍ତ ଜାଲ ତିଆରି କରେ?",
+            options: ["ପ୍ରୋଥମ୍ବିନ୍", "ଫାଇବ୍ରିନ୍ (Fibrin)", "ହିପାରିନ୍", "ପ୍ଲାଜ୍‌ମା ପ୍ରୋଟିନ୍"],
+            answer: 1,
+            explanation: "ଥ୍ରମ୍ବିନ୍ ପ୍ରଭାବରେ ଫାଇବ୍ରିନୋଜେନ୍ ଅଦ୍ରବଣୀୟ ଓ ତନ୍ତୁପରି ଫାଇବ୍ରିନ୍ (Fibrin) ରେ ପରିଣତ ହୁଏ।"
+        },
+        {
+            q: "ରକ୍ତକୁ ଶିରା ଓ ଧମନୀ ଭିତରେ ସ୍ବାଭାବିକ୍ ଅବସ୍ଥାରେ ଜମାଟ ବାନ୍ଧିବାକୁ ଦେଉ ନଥିବା ପ୍ରୋଟିନ୍ କ’ଣ?",
+            options: ["ହିପାରିନ୍ (Heparin)", "ହିରୁଡିନ୍", "ଥ୍ରମ୍ବିନ୍", "ଫାଇବ୍ରିନ୍"],
+            answer: 0,
+            explanation: "ରକ୍ତରେ କିଛି ପରିମାଣରେ ହିପାରିନ୍ (Heparin) ନାମକ ପ୍ରୋଟିନ୍ ରହିଛି ଯାହା ରକ୍ତକୁ ଜମାଟ ବାନ୍ଧିବାକୁ ଦେଉ ନାହିଁ।"
+        },
+        {
+            q: "ଜୋକ ଲାଳରେ ଥିବା କେଉଁ ପଦାର୍ଥ ରକ୍ତକୁ ଜମାଟ ବାନ୍ଧିବାକୁ ଦେଇ ନଥାଏ?",
+            options: ["ହିପାରିନ୍", "ହିରୁଡିନ୍ (Hirudin)", "ଥ୍ରୋମ୍ବୋପ୍ଲାଷ୍ଟିନ୍", "ସୋଡିୟମ୍ ଅକ୍ସାଲେଟ୍"],
+            answer: 1,
+            explanation: "ହିପାରିନ୍ ପରି ଜୋକ ଲାଳରେ ଥିବା ହିରୁଡିନ୍ (Hirudin) ମଧ୍ୟ ରକ୍ତକୁ ଜମାଟ ବାନ୍ଧିବାକୁ ଦିଏନାହିଁ।"
+        },
+        {
+            q: "ରକ୍ତବର୍ଗ (Blood group) ର ଆବଷ୍କାରକ କିଏ ଥିଲେ?",
+            options: ["ଉଇଲିୟମ୍ ହାର୍ଭେ", "କାର୍ଲ ଲ୍ୟାଣ୍ଡଷ୍ଟେଇନର୍ (Karl Landsteiner, 1868-1943)", "ରବର୍ଟ କକ୍", "ଲୁଇ ପାଶ୍ଚର"],
+            answer: 1,
+            explanation: "ପ୍ରତ୍ୟେକ ବ୍ୟକ୍ତିରେ ଏକ ନିର୍ଦ୍ଦିଷ୍ଟ ବର୍ଗର ରକ୍ତ ଥାଏ, ଏହି ତଥ୍ୟ କାର୍ଲ ଲ୍ୟାଣ୍ଡଷ୍ଟେଇନର୍ ଆବିଷ୍କାର କରିଥିଲେ ଏବଂ 1930 ମସିହାରେ ନୋବେଲ୍ ପୁରସ୍କାର ପାଇଥିଲେ।"
+        },
+        {
+            q: "ଲୋହିତ ରକ୍ତକଣିକାର ବାହ୍ୟ ଆବରଣରେ ଥିବା ପ୍ରୋଟିନ୍‌କୁ କ’ଣ କୁହାଯାଏ?",
+            options: ["ଏଣ୍ଟିବଡ଼ି (Antibody)", "ଏଣ୍ଟିଜେନ୍ (Antigen)", "ହିମୋଗ୍ଲୋବିନ୍", "ପ୍ଲାଜ୍‌ମା ପ୍ରୋଟିନ୍"],
+            answer: 1,
+            explanation: "ଲୋହିତ ରକ୍ତକଣିକାର ବାହ୍ୟ ଆବରଣରେ ଥିବା ଏହି ପ୍ରୋଟିନ୍‌କୁ ଏଣ୍ଟିଜେନ୍ (Antigen) କୁହାଯାଏ।"
+        },
+        {
+            q: "କେଉଁ ରକ୍ତବର୍ଗର ବ୍ୟକ୍ତିଙ୍କୁ 'ସର୍ବଜନ ଗ୍ରହୀତା' (Universal recipient) କୁହାଯାଏ?",
+            options: ["O ବର୍ଗ", "A ବର୍ଗ", "B ବର୍ଗ", "AB ବର୍ଗ"],
+            answer: 3,
+            explanation: "AB ବର୍ଗର ଲୋକମାନେ 'ସର୍ବଜନ ଗ୍ରହୀତା', ସମସ୍ତଙ୍କ ଠାରୁ ରକ୍ତ ଗ୍ରହଣ କରିପାରିବେ।"
+        },
+        {
+            q: "କେଉଁ ରକ୍ତବର୍ଗର ବ୍ୟକ୍ତିଙ୍କୁ 'ସର୍ବଜନ ଦାତା' (Universal donor) କୁହାଯାଏ?",
+            options: ["A ବର୍ଗ", "B ବର୍ଗ", "AB ବର୍ଗ", "O ବର୍ଗ"],
+            answer: 3,
+            explanation: "O ବର୍ଗର ବ୍ୟକ୍ତିମାନେ 'ସର୍ବଜନ ଦାତା', ସମସ୍ତଙ୍କୁ ରକ୍ତ ଦେଇ ପାରିବେ।"
+        },
+        {
+            q: "ଲ୍ୟାଣ୍ଡଷ୍ଟେଇନର୍ କେଉଁ ପ୍ରାଣୀର ଲୋହିତ ରକ୍ତକଣିକାରେ Rh ଆଣ୍ଟିଜେନ୍ ଆବିଷ୍କାର କରିଥିଲେ?",
+            options: ["ଚିମ୍ପାଞ୍ଜି", "ପାତିମାଙ୍କଡ (Rhesus monkey)", "ଗିନିପିଗ୍", "କୁକୁର"],
+            answer: 1,
+            explanation: "ସେ ପାତିମାଙ୍କଡ (Rhesus monkey) ର ଲୋହିତ ରକ୍ତକଣିକା ବାହ୍ୟ ଆବରଣରେ Rh ଆଣ୍ଟିଜେନ୍ ଥୁବାର ଦେଖିଲେ।"
+        },
+        {
+            q: "ଉଦ୍ଭିଦରେ ଜଳର ପରିବହନ କେଉଁ ସଂବାହୀ ଟିସୁ ଦ୍ୱାରା ହୋଇଥାଏ?",
+            options: ["ଫ୍ଲୋଏମ୍", "ଜାଇଲେମ୍ (Xylem)", "କୈଶିକ ନଳୀ", "କୋଷଜୀବକ"],
+            answer: 1,
+            explanation: "ଉଦ୍ଭିଦରେ ବିସରଣ ଓ ଅନ୍ୟାନ୍ୟ ପ୍ରକ୍ରିୟାଦ୍ୱାରା ଜଳ ସଂବାହୀ ଟିସୁ ଜାଇଲେମ୍ ମାଧ୍ୟମରେ ବିଭିନ୍ନ ଅଂଶକୁ ପରିବାହିତ ହୁଏ।"
+        },
+        {
+            q: "ମଣିଷ ଶରୀରରେ ହୃତ୍‌ପିଣ୍ଡରୁ ଅଙ୍ଗପ୍ରତ୍ୟଙ୍ଗକୁ ରକ୍ତ କେଉଁ ରକ୍ତବାହିନୀ ଦ୍ୱାରା ବାହିତ ହୋଇଥାଏ?",
+            options: ["ଶିରା (Vein)", "ଧମନୀ (Artery)", "ରକ୍ତକୈଶିକା", "ମହାଶିରା"],
+            answer: 1,
+            explanation: "ରକ୍ତ ମୁଖ୍ୟତଃ ହୃତ୍‌ପିଣ୍ଡରୁ ଅଙ୍ଗପ୍ରତ୍ୟଙ୍ଗକୁ ଧମନୀ ଦ୍ୱାରା ଏବଂ ଅଙ୍ଗପ୍ରତ୍ୟଙ୍ଗରୁ ହୃତ୍‌ପିଣ୍ଡ ଆଡ଼କୁ ଶିରା ଦ୍ୱାରା ବାହିତ ହୋଇଥାଏ।"
+        },
+        {
+            q: "ପତ୍ରରେ ପ୍ରସ୍ତୁତ ଶ୍ୱେତସାର କେଉଁ ଟିସୁ ମାଧ୍ୟମରେ ଗଛର ବିଭିନ୍ନ ଅଂଶକୁ ସ୍ଥାନାନ୍ତରିତ ହୋଇଥାଏ?",
+            options: ["ଜାଇଲେମ୍", "ଫ୍ଲୋଏମ୍ (Phloem)", "କୈଶିକ ନଳୀ", "ମୂଳଲୋମ"],
+            answer: 1,
+            explanation: "ପତ୍ରରେ ପ୍ରସ୍ତୁତ ଶ୍ୱେତସାର ଫ୍ଲୋଏମ୍ ଟିସୁ ମାଧ୍ୟମରେ ଗଛର ବିଭିନ୍ନ ଅଂଶକୁ ସ୍ଥାନାନ୍ତରିତ ହୋଇଥାଏ।"
+        },
+        {
+            q: "ଉଚ୍ଛେଦନ ଦ୍ୱାରା ଉଦ୍ଭିଦର କ’ଣ ନିୟନ୍ତ୍ରିତ ହୋଇଥାଏ?",
+            options: ["ତାପମାତ୍ରା", "ଖାଦ୍ୟ ପ୍ରସ୍ତୁତି", "ଆଲୋକଶ୍ଳେଷଣ", "ଶ୍ୱାସକ୍ରିୟା"],
+            answer: 0,
+            explanation: "ଉଦ୍ଭିଦ ଶରୀରରେ ଜଳର ଏକ ନିରବଚ୍ଛିନ୍ନ ସଂସ୍ଥା ଗଠିତ ହେବାରୁ ଏହା ଉଦ୍ଭିଦର ତାପମାତ୍ରା ନିୟନ୍ତ୍ରଣ କରେ।"
+        }
+    ];
+
+    const funnyFacts = [
+        {
+            emoji: "🦒",
+            text: "ଗିରାଫ୍ (Giraffe) ର ବେଢ଼ ବହୁତ ଲମ୍ବା ଥିବାରୁ ଏହାର ମସ୍ତିଷ୍କକୁ ରକ୍ତ ପହଞ୍ଚାଇବା ପାଇଁ ହୃତ୍‌ପିଣ୍ଡକୁ ବହୁତ ଜୋର୍‌ରେ ପମ୍ପ କରିବାକୁ ପଡ଼େ! ଏହାର ରକ୍ତଚାପ ମଣିଷଠାରୁ ପ୍ରାୟ ଦିଗୁଣ ହୋଇଥାଏ!"
+        },
+        {
+            emoji: "🐳",
+            text: "ନୀଳତିମି (Blue Whale) ହେଉଛି ପୃଥିବୀର ସବୁଠାରୁ ବଡ଼ ପ୍ରାଣୀ, ଏବଂ ଏହାର ହୃତ୍‌ପିଣ୍ଡଟି ଗୋଟିଏ ଛୋଟ କାର୍ (Car) ପରି ବଡ଼ ହୋଇଥାଏ! ଏହାର ଓଜନ ପ୍ରାୟ 400 କିଲୋଗ୍ରାମ!"
+        },
+        {
+            emoji: "🌳",
+            text: "ବଡ଼ ବଡ଼ ରେଡ୍‌ଉଡ୍ (Redwood) ଗଛଗୁଡ଼ିକ ମାଟିରୁ ପ୍ରାୟ 100 ମିଟର (30 ମହଲା କୋଠା ସମାନ) ଉଚ୍ଚତାକୁ କୌଣସି ପମ୍ପ୍ ବିନା କେବଳ ଉଚ୍ଛେଦନ ଟାଣ (Transpiration pull) ଦ୍ୱାରା ଜଳ ଉଠାଇଥାନ୍ତି!"
+        },
+        {
+            emoji: "🐙",
+            text: "ଅକ୍ଟୋପସ୍ (Octopus) ପାଖରେ ଗୋଟିଏ କି ଦୁଇଟି ନୁହେଁ, ମୋଟ ତିନୋଟି ହୃତ୍‌ପିଣ୍ଡ ଥାଏ! ଦୁଇଟି ହୃତ୍‌ପିଣ୍ଡ ଗାଲିକୁ ରକ୍ତ ପଠାଏ ଏବଂ ଗୋଟିଏ ସମଗ୍ର ଶରୀରକୁ ରକ୍ତ ଯୋଗାଏ।"
+        }
+    ];
+
+    let currentQuestionIndex = 0;
+    let score = 0;
+    let incorrectCount = 0;
+    let answered = false;
+    let randomizedQuestions = [];
+    let factCounter = 0;
+
+    function shuffleArray(array) {
+        let currentIndex = array.length, randomIndex;
+        while (currentIndex !== 0) {
+            randomIndex = Math.floor(Math.random() * currentIndex);
+            currentIndex--;
+            [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
+        }
+        return array;
+    }
+
+    function startQuiz() {
+        randomizedQuestions = shuffleArray([...questions]);
+        currentQuestionIndex = 0;
+        score = 0;
+        incorrectCount = 0;
+        factCounter = 0;
+        document.getElementById('start-screen').classList.remove('active');
+        document.getElementById('quiz-screen').classList.add('active');
+        loadQuestion();
+    }
+
+    function loadQuestion() {
+        answered = false;
+        document.getElementById('explanation-box').classList.remove('show');
+        document.getElementById('next-btn-container').classList.remove('show');
+
+        const q = randomizedQuestions[currentQuestionIndex];
+        document.getElementById('q-counter').innerText = `ପ୍ରଶ୍ନ ${currentQuestionIndex + 1} / ${randomizedQuestions.length}`;
+        
+        const progressPercent = ((currentQuestionIndex) / randomizedQuestions.length) * 100;
+        document.getElementById('progress-bar').style.width = `${progressPercent}%`;
+
+        document.getElementById('question-text').innerText = q.q;
+
+        const optionsGrid = document.getElementById('options-grid');
+        optionsGrid.innerHTML = '';
+
+        q.options.forEach((opt, index) => {
+            const btn = document.createElement('button');
+            btn.className = 'option-btn';
+            btn.innerText = `${['A', 'B', 'C', 'D'][index]}. ${opt}`;
+            btn.onclick = () => selectOption(index, btn);
+            optionsGrid.appendChild(btn);
+        });
+    }
+
+    function selectOption(selectedIndex, selectedBtn) {
+        if (answered) return;
+        answered = true;
+
+        const q = randomizedQuestions[currentQuestionIndex];
+        const optionButtons = document.querySelectorAll('.option-btn');
+
+        if (selectedIndex === q.answer) {
+            selectedBtn.classList.add('correct');
+            score++;
+        } else {
+            selectedBtn.classList.add('incorrect');
+            optionButtons[q.answer].classList.add('correct');
+            incorrectCount++;
+        }
+
+        optionButtons.forEach(btn => btn.disabled = true);
+
+        const expBox = document.getElementById('explanation-box');
+        expBox.innerHTML = `<strong>ସ୍ପଷ୍ଟୀକରଣ:</strong> ${q.explanation}`;
+        expBox.classList.add('show');
+
+        document.getElementById('next-btn-container').classList.add('show');
+    }
+
+    function nextQuestion() {
+        currentQuestionIndex++;
+        factCounter++;
+
+        if (currentQuestionIndex >= randomizedQuestions.length) {
+            showResult();
+        } else if (factCounter === 20) {
+            factCounter = 0;
+            showFunnyFact();
+        } else {
+            loadQuestion();
+        }
+    }
+
+    function showFunnyFact() {
+        document.getElementById('quiz-screen').classList.remove('active');
+        const randomFact = funnyFacts[Math.floor(Math.random() * funnyFacts.length)];
+        document.getElementById('fact-emoji').innerText = randomFact.emoji;
+        document.getElementById('fact-text').innerText = randomFact.text;
+        document.getElementById('fact-screen').classList.add('active');
+    }
+
+    function resumeQuiz() {
+        document.getElementById('fact-screen').classList.remove('active');
+        document.getElementById('quiz-screen').classList.add('active');
+        loadQuestion();
+    }
+
+    function showResult() {
+        document.getElementById('quiz-screen').classList.remove('active');
+        document.getElementById('result-screen').classList.add('active');
+
+        const total = randomizedQuestions.length;
+        const percentage = Math.round((score / total) * 100);
+
+        document.getElementById('final-score').innerText = `${percentage}%`;
+        document.getElementById('stat-total').innerText = total;
+        document.getElementById('stat-correct').innerText = score;
+        document.getElementById('stat-incorrect').innerText = incorrectCount;
+        document.getElementById('stat-percentage').innerText = `${percentage}%`;
+
+        let msg = "ଉତ୍ତମ ପ୍ରୟାସ! ଆଉ ଟିକିଏ ପରିଶ୍ରମ କରନ୍ତୁ।";
+        if (percentage >= 80) {
+            msg = "ଚମତ୍କାର ପ୍ରଦର୍ଶନ! ଆପଣ ଅଧ୍ୟାୟଟିକୁ ଭଲଭାବେ ବୁଝିଛନ୍ତି! 🌟";
+        } else if (percentage >= 50) {
+            msg = "ଭଲ ପ୍ରୟାସ! ଆଉ ଅଳ୍ପ ଅଭ୍ୟାସ କଲେ ଆପଣ ଆହୁରି ଭଲ କରିବେ। 👍";
+        }
+        document.getElementById('performance-msg').innerText = msg;
+    }
+
+    function restartQuiz() {
+        document.getElementById('result-screen').classList.remove('active');
+        document.getElementById('start-screen').classList.add('active');
+    }
+</script>
+
+</body>
+</html>
