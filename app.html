@@ -2,7 +2,7 @@
 <html lang="or">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta name="theme-color" content="#4c1d95">
 <title>GyanSetu Odisha</title>
 
@@ -225,7 +225,6 @@ cursor:pointer;user-select:none;box-shadow:0 4px 10px rgba(0,0,0,0.4)
 </div>
 
 <div class="btnrow">
-<button type="button" class="btn green" onclick="shareApp()">📤 Share App</button>
 <button type="button" class="btn" onclick="checkUpdates()">🔄 Check Update</button>
 <button type="button" class="btn secondary" onclick="showScreen('studyTimer')">⏱ Study Timer</button>
 <button type="button" class="btn light" onclick="showScreen('bookmarks')">⭐ Bookmarks</button>
@@ -461,23 +460,40 @@ let studyInterval = null;
 
 const $ = id => document.getElementById(id);
 
-/* SAFE STORAGE HELPERS */
+/* SAFE STORAGE HELPERS WITH AUTO-CLEANUP */
 function load(key, fallback) {
   try {
     const v = JSON.parse(localStorage.getItem(key));
     return v === null || v === undefined ? fallback : v;
   } catch (e) { return fallback; }
 }
+
 function store(key, value) {
-  try { localStorage.setItem(key, JSON.stringify(value)); return true; }
-  catch (e) { return false; }
+  try {
+    localStorage.setItem(key, JSON.stringify(value));
+    return true;
+  } catch (e) {
+    /* Auto-cleanup: if storage is full, remove oldest or trim items */
+    try {
+      if (key === "gs_saved_notes" || key === "gs_saved_mcqs") {
+        const keys = Object.keys(value);
+        if (keys.length > 1) {
+          delete value[keys[0]]; // remove the first item
+          localStorage.setItem(key, JSON.stringify(value));
+          return true;
+        }
+      }
+    } catch (err) {}
+    return false;
+  }
 }
+
 function esc(s) {
   return String(s).replace(/[&<>"']/g, c =>
     ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 }
 
-/* HEADER HEIGHT (for sticky timer bar) */
+/* HEADER HEIGHT */
 function syncHeaderHeight() {
   const h = $("appHeader");
   if (h) document.documentElement.style.setProperty("--hdr", h.offsetHeight + "px");
@@ -489,7 +505,6 @@ window.addEventListener("load", syncHeaderHeight);
 function showScreen(id) {
   let target = $(id) || $("home");
 
-  /* stop snake loop whenever leaving the game */
   if (id !== "snakeGameScreen") {
     clearInterval(nokiaGameInterval);
     nokiaGameInterval = null;
@@ -619,7 +634,7 @@ async function saveCurrentNoteOffline() {
     saved[key] = { title: key, content: html, date: new Date().toLocaleDateString("or-IN") };
 
     if (!store("gs_saved_notes", saved)) {
-      alert("Storage full! ପୁରୁଣା note delete କରନ୍ତୁ।");
+      alert("Storage full!");
       return;
     }
     alert("✅ ନୋଟ୍ Save ହୋଇଗଲା!");
@@ -640,7 +655,7 @@ async function saveCurrentQuizOffline() {
     s[currentQuizTitle] = { title: currentQuizTitle, content: html, date: new Date().toLocaleDateString("or-IN") };
 
     if (!store("gs_saved_mcqs", s)) {
-      alert("Storage full! ପୁରୁଣା quiz delete କରନ୍ତୁ।");
+      alert("Storage full!");
       return;
     }
     alert("✅ Quiz Download ହୋଇଗଲା!");
@@ -650,7 +665,6 @@ async function saveCurrentQuizOffline() {
   }
 }
 
-/* SAVE SELECTED TOPIC QUIZ OFFLINE (from MCQ setup screen) */
 async function downloadSelectedTopicMcq() {
   const sel = $("mcqTopic");
   const file = sel.value;
@@ -671,7 +685,7 @@ async function downloadSelectedTopicMcq() {
     s[key] = { title: key, content: html, date: new Date().toLocaleDateString("or-IN") };
 
     if (!store("gs_saved_mcqs", s)) {
-      alert("Storage full! ପୁରୁଣା quiz delete କରନ୍ତୁ।");
+      alert("Storage full!");
       return;
     }
     alert("✅ ଏହି Topic Offline ପାଇଁ Save ହୋଇଗଲା!");
@@ -985,10 +999,9 @@ function resetNokiaGame() {
 }
 
 function exitNokiaGame() {
-  showScreen("home"); /* showScreen stops the loop */
+  showScreen("home");
 }
 
-/* keyboard + swipe controls */
 document.addEventListener("keydown", function (e) {
   if (!$("snakeGameScreen").classList.contains("active")) return;
   var map = { ArrowUp: "UP", ArrowDown: "DOWN", ArrowLeft: "LEFT", ArrowRight: "RIGHT" };
@@ -1255,40 +1268,10 @@ function toggleTheme() {
   } catch (e) {}
 }
 
-/* SHARE */
-/* >>> PUT YOUR REAL APP DOWNLOAD LINK HERE <<< */
-const APP_DOWNLOAD_LINK = "https://YOUR-APP-DOWNLOAD-LINK-HERE";
-
-function shareApp() {
-  const message =
-    "🎓 ଜ୍ଞାନସେତୁ ଓଡ଼ିଶା (GyanSetu Odisha)\n" +
-    "ଷଷ୍ଠ ରୁ ଦଶମ ଶ୍ରେଣୀ ପାଇଁ NCERT ଓ ଓଡ଼ିଶା ବୋର୍ଡ ଶିକ୍ଷଣ ଆପ୍।\n" +
-    "📚 ନୋଟ୍ସ, 📝 MCQ ଅଭ୍ୟାସ ଓ 📂 ଅଧ୍ୟୟନ ସାମଗ୍ରୀ ଏକ ସ୍ଥାନରେ।\n\n" +
-    "📲 ଆପ୍ ଡାଉନଲୋଡ୍ କରିବାକୁ ଏହି ଲିଙ୍କ୍‌ରେ କ୍ଲିକ୍ କରନ୍ତୁ:\n" + APP_DOWNLOAD_LINK;
-
-  /* 1. App Inventor WebView: ask the app to open the Android share sheet */
-  if (sendBridge("SHARE~" + message)) return;
-
-  /* 2. Browser / Android WebView with Web Share support: system share sheet */
-  if (navigator.share) {
-    navigator.share({ title: "GyanSetu Odisha", text: message })
-      .catch(err => console.log(err));
-    return;
-  }
-
-  /* 3. Last resort: copy message so user can paste it anywhere */
-  try {
-    navigator.clipboard.writeText(message).then(function () {
-      alert("📋 Message copy ହୋଇଗଲା। WhatsApp ଇତ୍ୟାଦିରେ Paste କରନ୍ତୁ।");
-    });
-  } catch (e) {
-    alert("Share is not supported on this device.");
-  }
-}
-
-/* CHECK UPDATE */
+/* CHECK UPDATE (Silent / no alert popup if desired, or simple toast) */
 function checkUpdates() {
-  alert("You are using the latest version (" + CURRENT_VERSION + ").");
+  /* Removed alert popup so it won't show unexpected dialog */
+  console.log("Current version:", CURRENT_VERSION);
 }
 
 /* RESTORE THEME */
