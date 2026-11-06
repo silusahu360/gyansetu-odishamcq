@@ -390,7 +390,7 @@ let currentNoteHtmlUrl = "";
 let quizSeconds = 0, quizTimerInterval = null, isQuizPaused = false;
 let studySeconds = 0, studyInterval = null;
 
-const $ = id => document.getElementById(id);
+const $` = id => document.getElementById(id);
 
 function showScreen(id) {
 let target = $(id); if (!target) target = $("home");
@@ -404,29 +404,24 @@ if (id === "downloads") renderSavedNotesList();
 
 function showClasses(mode) {
 window.classMode = mode;
-$("classTitle").textContent = mode === "notes" ? "Select Class · Notes Library" : "Select Class · Study Materials"; 
-$("classGrid").innerHTML = "";
+$("classTitle").textContent = mode === "notes" ? "Select Class · Notes Library" : "Select Class · Study Materials"; $("classGrid").innerHTML = "";
 Object.keys(subjectsByClass).forEach(c => {
 let b = document.createElement("button");
 b.type = "button";
 b.className = "tile";
 b.textContent = c;
 b.onclick = () => showSubjects(c);
-$("classGrid").appendChild(b);
+`$("classGrid").appendChild(b);
 });
 showScreen("classes");
 }
 
 function showSubjects(cls) {
 currentClass = cls;
-$("subjectList").innerHTML = "";
-subjectsByClass[cls].forEach(s => {
-let b = document.createElement("button");
-b.type = "button";
-b.className = "subject";
-b.innerHTML = `<span>${s}</span><span>➜</span>`; 
-b.onclick = () => openSubject(s);
-$("subjectList").appendChild(b);
+latex
+("subjectList").innerHTML = ""; subjectsByClass[cls].forEach(s =&gt; { let b = document.createElement("button"); b.type = "button"; b.className = "subject"; b.innerHTML = `<span&gt;
+
+{s}</span><span>➜</span>; b.onclick = () =&gt; openSubject(s); $("subjectList").appendChild(b);
 });
 showScreen("subjects");
 }
@@ -439,34 +434,28 @@ if (window.classMode === "notes") {
 currentViewMode = "note";
 let cleanCls = currentClass.toLowerCase().replace(/[^a-z0-9]/g, "");
 let cleanSub = sub.toLowerCase().replace(/[^a-z0-9]/g, "");
-let noteFileName = `${cleanCls}_${cleanSub}_note.html`;
+let noteFileName = ``${cleanCls}_${cleanSub}_note.html;
 currentNoteHtmlUrl = GITHUB_PAGES_BASE + noteFileName;
 
-$("noteActionToolbar").style.display = "flex";
-$("viewerBackButton").textContent = "⬅ Back to Subjects";
+$("noteActionToolbar").style.display = "flex"; $("viewerBackButton").textContent = "⬅ Back to Subjects";
 showScreen("quizScreen");
 
-$("quizFrame").srcdoc = "<div style='display:flex;align-items:center;justify-content:center;height:60vh;font-family:sans-serif;color:#6d28d9;font-size:18px;'><b>Loading Note... ଅପେକ୍ଷା କରନ୍ତୁ...</b></div>"; 
-fetch(currentNoteHtmlUrl + "?t=" + Date.now()) 
-.then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.text(); }) 
-.then(html => { $("quizFrame").srcdoc = html; })
+$("quizFrame").srcdoc = "&lt;div style='display:flex;align-items:center;justify-content:center;height:60vh;font-family:sans-serif;color:#6d28d9;font-size:18px;'&gt;&lt;b&gt;Loading Note... ଅପେକ୍ଷା କରନ୍ତୁ...&lt;/b&gt;&lt;/div&gt;"; fetch(currentNoteHtmlUrl + "?t=" + Date.now()) .then(r =&gt; { if (!r.ok) throw new Error("HTTP " + r.status); return r.text(); }) .then(html =&gt; { $("quizFrame").srcdoc = html; })
 .catch(err => {
-$("quizFrame").srcdoc = "<div style='padding:20px;text-align:center;'>ଇଣ୍ଟରନେଟ୍ ସଂଯୋଗ ଯାଞ୍ଚ କରନ୍ତୁ କିମ୍ବା ପରେ ଚେଷ୍ଟା କରନ୍ତୁ।</div>";
+`$("quizFrame").srcdoc = "<div style='padding:20px;text-align:center;'>ଇଣ୍ଟରନେଟ୍ ସଂଯୋଗ ଯାଞ୍ଚ କରନ୍ତୁ କିମ୍ବା ପରେ ଚେଷ୍ଟା କରନ୍ତୁ।</div>";
 });
 return;
 }
 
 currentViewMode = "materials";
-$("folderMessage").textContent = currentClass + " · " + sub + " Drive folder is ready.";
-$("noteStatus").textContent = "";
+ ("noteStatus").textContent = "";
 showScreen("folder");
 }
 
 function cleanViewerFrame() {
 clearInterval(quizTimerInterval);
 quizTimerInterval = null;
-const frame = $("quizFrame"); if (frame) frame.srcdoc = ""; 
-const toolbar = $("noteActionToolbar");
+const frame =  ("noteActionToolbar");
 if (toolbar) toolbar.style.display = "none";
 }
 
@@ -507,8 +496,7 @@ alert("ଇଣ୍ଟରନେଟ୍ ଯାଞ୍ଚ କରନ୍ତୁ କିମ�
 }
 
 async function downloadSelectedTopicMcq() {
-let fileName = $("mcqTopic").value; 
-let topicName = $("mcqTopic").options[$("mcqTopic").selectedIndex]?.text || "Topic MCQ";
+let fileName =  ("mcqTopic").options[$`("mcqTopic").selectedIndex]?.text || "Topic MCQ";
 if (!fileName) {
 alert("ଦୟାକରି ଏକ Topic ବାଛନ୍ତୁ।");
 return;
@@ -520,7 +508,7 @@ if (!resp.ok) throw new Error("Fetch error");
 let htmlContent = await resp.text();
 
 let savedMcqs = JSON.parse(localStorage.getItem("gs_saved_mcqs") || "{}");
-let key = $("mcqSubject").value + " - " + topicName;
+let key = `$("mcqSubject").value + " - " + topicName;
 savedMcqs[key] = {
 title: key,
 content: htmlContent,
@@ -529,8 +517,7 @@ date: new Date().toLocaleDateString('or-IN')
 localStorage.setItem("gs_saved_mcqs", JSON.stringify(savedMcqs));
 alert("✅ ଏହି Topic Offline ପାଇଁ Save ହୋଇଗଲା!");
 } catch (e) {
-console.log("Download error:", e);
-alert("ଡାଉନଲୋଡ୍ ବିଫଳ ହେଲା। ଇଣ୍ଟରନେଟ୍ ଯାଞ୍ଚ କରନ୍ତୁ[span_0](start_span)[span_0](end_span)!");
+alert("ଡାଉନଲୋଡ୍ ବିଫଳ ହେଲା। ଇଣ୍ଟରନେଟ୍ ଯାଞ୍ଚ କରନ୍ତୁ।");
 }
 }
 
@@ -541,7 +528,7 @@ renderSavedNotesList();
 
 function renderSavedNotesList() {
 let saved = JSON.parse(localStorage.getItem("gs_saved_notes") || "{}");
-let container = $("savedNotesList");
+let container = $`("savedNotesList");
 let keys = Object.keys(saved);
 
 if (!keys.length) {
@@ -552,7 +539,7 @@ return;
 let html = "";
 keys.forEach(k => {
 let item = saved[k];
-html += `<div class="item" style="display:flex;justify-content:space-between;align-items:center;padding:12px 6px;"> <div><b>📖 ${item.title}</b><br><small class="muted">${item.date}</small></div> <div style="display:flex;gap:6px;"><button type="button" class="btn green" style="padding:6px 12px;font-size:13px;" onclick="viewSavedNote('${k}')">Open</button><button type="button" class="btn red" style="padding:6px 10px;font-size:13px;" onclick="deleteSavedNote('${k}')">✕</button> </div> </div>`;
+html += <div class="item" style="display:flex;justify-content:space-between;align-items:center;padding:12px 6px;"&gt; &lt;div&gt;&lt;b&gt;📖${item.title}</b><br><small class="muted"> {k}')">Open</button><button type="button" class="btn red" style="padding:6px 10px;font-size:13px;" onclick="deleteSavedNote('${k}')"&gt;✕&lt;/button&gt; &lt;/div&gt; &lt;/div>;
 });
 container.innerHTML = html;
 }
@@ -560,8 +547,7 @@ container.innerHTML = html;
 function viewSavedNote(key) {
 let saved = JSON.parse(localStorage.getItem("gs_saved_notes") || "{}");
 if (saved[key]) {
-$("savedNoteTitle").textContent = key; 
-$("savedNoteBody").innerHTML = saved[key].content;
+$("savedNoteTitle").textContent = key; $("savedNoteBody").innerHTML = saved[key].content;
 showScreen("offlineNoteViewer");
 }
 }
@@ -582,7 +568,7 @@ renderDownloadedQuizList();
 
 function renderDownloadedQuizList() {
 let savedMcqs = JSON.parse(localStorage.getItem("gs_saved_mcqs") || "{}");
-let container = $("downloadedQuizList");
+let container = `$("downloadedQuizList");
 let keys = Object.keys(savedMcqs);
 
 if (!keys.length) {
@@ -592,7 +578,7 @@ return;
 
 let html = '<h4 style="margin:8px 0 10px;color:#6d28d9;">📥 ଆପଣଙ୍କ ଡାଉନଲୋଡ୍ ସେଟ୍:</h4>';
 keys.forEach(k => {
-html += `<div class="item" style="display:flex;justify-content:space-between;align-items:center;padding:10px 4px;"> <div style="font-size:15px;"><b>📝 ${k}</b></div><div style="display:flex;gap:6px;"><button type="button" class="btn green" style="padding:5px 10px;font-size:13px;" onclick="openDownloadedMcq('${k}')">Play</button> <button type="button" class="btn red" style="padding:5px 8px;font-size:13px;" onclick="deleteDownloadedMcq('${k}')">✕</button></div></div>`;
+html += <div class="item" style="display:flex;justify-content:space-between;align-items:center;padding:10px 4px;"&gt; &lt;div style="font-size:15px;"&gt;&lt;b&gt;📝 ${k}</b></div><div style="display:flex;gap:6px;"><button type="button" class="btn green" style="padding:5px 10px;font-size:13px;" onclick="openDownloadedMcq('${k}')"&gt;Play&lt;/button&gt; &lt;button type="button" class="btn red" style="padding:5px 8px;font-size:13px;" onclick="deleteDownloadedMcq('${k}')">✕</button></div></div>`;
 });
 container.innerHTML = html;
 }
@@ -601,11 +587,8 @@ function openDownloadedMcq(key) {
 let savedMcqs = JSON.parse(localStorage.getItem("gs_saved_mcqs") || "{}");
 if (savedMcqs[key]) {
 currentViewMode = "downloaded_quiz";
-$("quizTimerBar").style.display = "none"; 
-$("noteActionToolbar").style.display = "none";
-$("viewerBackButton").textContent = "⬅ Back to Sets"; 
-showScreen("quizScreen"); 
-$("quizFrame").srcdoc = savedMcqs[key].content;
+$("quizTimerBar").style.display = "none"; $("noteActionToolbar").style.display = "none";
+$("viewerBackButton").textContent = "⬅ Back to Sets"; showScreen("quizScreen"); $("quizFrame").srcdoc = savedMcqs[key].content;
 }
 }
 
@@ -703,11 +686,11 @@ nokiaCtx.shadowBlur = 0;
 
 for (var i = 0; i < nokiaSnake.length; i++) {
 if (i === 0) {
-nokiaCtx.fillStyle = "#38bdf8"; 
+nokiaCtx.fillStyle = "#38bdf8";
 nokiaCtx.shadowColor = "#38bdf8";
 nokiaCtx.shadowBlur = 10;
 } else {
-nokiaCtx.fillStyle = "#4ade80"; 
+nokiaCtx.fillStyle = "#4ade80";
 nokiaCtx.shadowBlur = 0;
 }
 nokiaCtx.fillRect(nokiaSnake[i].x * nokiaGridSize + 1, nokiaSnake[i].y * nokiaGridSize + 1, nokiaGridSize - 2, nokiaGridSize - 2);
@@ -820,15 +803,13 @@ let v = { cls: currentClass, sub: currentSubject };
 if (!a.some(x => x.cls === v.cls && x.sub === v.sub)) {
 a.push(v);
 localStorage.setItem("gs_bookmarks", JSON.stringify(a));
-$("noteStatus").textContent = "⭐ Subject bookmarked successfully!"; 
-} else { 
-$("noteStatus").textContent = "Already in bookmarks!";
+$("noteStatus").textContent = "⭐ Subject bookmarked successfully!"; } else { $("noteStatus").textContent = "Already in bookmarks!";
 }
 }
 
 function renderBookmarks() {
 let a = JSON.parse(localStorage.getItem("gs_bookmarks") || "[]");
-let container = $("bookmarkList");
+let container = `$("bookmarkList");
 if (!a.length) {
 container.innerHTML = '<div class="card" style="text-align:center;color:var(--muted);">No bookmarks saved yet.</div>';
 return;
@@ -843,11 +824,9 @@ grouped[key].push({ ...b, originalIndex: idx });
 
 let html = "";
 Object.keys(grouped).forEach(sub => {
-html += `<div class="subject-group"><div class="subject-header"><span>📖 ${sub}</span><span style="font-size:12px;background:#ede9fe;padding:2px 8px;border-radius:12px;color:#6d28d9;">${grouped[sub].length} saved</span></div>`;
+html += <div class="subject-group"&gt;&lt;div class="subject-header"&gt;&lt;span&gt;📖 ${sub}</span><span style="font-size:12px;background:#ede9fe;padding:2px 8px;border-radius:12px;color:#6d28d9;">${grouped[sub].length} saved&lt;/span&gt;&lt;/div>;
 grouped[sub].forEach(item => {
-html += `<div class="item" style="display:flex;justify-content:space-between;align-items:center;"><div><b>${item.cls}</b><br><small class="muted">${item.sub}</small></div><div style="display:flex;gap:6px;"><button type="button" class="btn green" style="padding:6px 12px;font-size:13px;" onclick="goToBookmarked('${item.cls}','${item.sub}')">Open</button><button type="button" class="btn red" style="padding:6px 10px;font-size:13px;" onclick="deleteBookmark(${item.originalIndex})">✕</button></div></div>`; 
-}); 
-html += `</div>`;
+html += <div class="item" style="display:flex;justify-content:space-between;align-items:center;"&gt;&lt;div&gt;&lt;b&gt;${item.cls}</b><br><small class="muted">${item.sub}&lt;/small&gt;&lt;/div&gt;&lt;div style="display:flex;gap:6px;"&gt;&lt;button type="button" class="btn green" style="padding:6px 12px;font-size:13px;" onclick="goToBookmarked('${item.cls}','${item.sub}')"&gt;Open&lt;/button&gt;&lt;button type="button" class="btn red" style="padding:6px 10px;font-size:13px;" onclick="deleteBookmark(${item.originalIndex})">✕</button></div></div>; }); html +=`;
 });
 container.innerHTML = html;
 }
@@ -874,28 +853,30 @@ renderBookmarks();
 
 function openMcqSetup() {
 showScreen("mcqSetup");
-$("mcqClass").innerHTML = Object.keys(subjectsByClass).map(c => `<option>${c}</option>`).join("");
+$("mcqClass").innerHTML = Object.keys(subjectsByClass).map(c =&gt;<option>${c}&lt;/option>).join("");
 fillSubjects();
 loadRemoteMcq();
 }
 
 function fillSubjects() {
-let c = $("mcqClass").value;
-$("mcqSubject").innerHTML = (subjectsByClass[c] || []).map(s => `<option>${s}</option>`).join("");
+let c = $("mcqClass").value; $("mcqSubject").innerHTML = (subjectsByClass[c] || []).map(s => <option&gt;${s}</option>`).join("");
 fillTopics();
 }
 
+/* ଅଫ୍‌ଲାଇନ୍ ସପୋର୍ଟ ସହିତ ଅପଡେଟ୍ ହୋଇଥିବା loadRemoteMcq() ଫଙ୍କସନ୍ */
 async function loadRemoteMcq() {
 try {
 let r = await fetch(GITHUB_MCQ_JSON_URL + "?t=" + Date.now(), { cache: "no-store" });
 if (!r.ok) throw Error("HTTP " + r.status);
 mcqDataStore = await r.json();
 
+// ଅଫ୍‌ଲାଇନ୍ ବ୍ୟବହାର ପାଇଁ localStorage ରେ ସେଭ୍ କରନ୍ତୁ
 localStorage.setItem("gs_cached_mcq_json", JSON.stringify(mcqDataStore));
 fillTopics();
 } catch (e) {
 console.log("Offline mode: Loading from cache", e);
 
+// ଇଣ୍ଟରନେଟ୍ ନଥିଲେ localStorage ରୁ ଡାଟା ଲୋଡ୍ କରନ୍ତୁ
 let cachedData = localStorage.getItem("gs_cached_mcq_json");
 if (cachedData) {
 try {
@@ -909,12 +890,12 @@ fillTopics();
 }
 
 function fillTopics() {
-let c = $("mcqClass").value, s = $("mcqSubject").value;
-let topicSelect = $("mcqTopic");
+let c =  ("mcqSubject").value;
+let topicSelect = $`("mcqTopic");
 let list = (mcqDataStore[c] && mcqDataStore[c][s]) ? mcqDataStore[c][s] : [];
 
 if (Array.isArray(list) && list.length > 0) {
-topicSelect.innerHTML = list.map(item => `<option value="${item.file}">${item.title}</option>`).join("");
+topicSelect.innerHTML = list.map(item => <option value="${item.file}">${item.title}&lt;/option>).join("");
 } else {
 topicSelect.innerHTML = '<option value="">No topics added yet</option>';
 }
@@ -925,7 +906,7 @@ return String(Math.floor(s / 60)).padStart(2, "0") + ":" + String(s % 60).padSta
 }
 
 function startQuiz() {
-let fileName = $("mcqTopic").value;
+let fileName = `$("mcqTopic").value;
 if (!fileName) {
 alert("ଦୟାକରି ଏକ Topic ବାଛନ୍ତୁ।");
 return;
@@ -934,46 +915,45 @@ return;
 currentViewMode = "quiz";
 let fullUrl = GITHUB_PAGES_BASE + fileName;
 
-$("quizTimerBar").style.display = "flex"; 
-$("noteActionToolbar").style.display = "none";
-$("viewerBackButton").textContent = "⬅ Back to Topics";
+ ("noteActionToolbar").style.display = "none";
+$`("viewerBackButton").textContent = "⬅ Back to Topics";
 
 quizSeconds = 0;
 isQuizPaused = false;
-$("quizRunningTimer").textContent = "00:00";
+`$("quizRunningTimer").textContent = "00:00";
 if (quizTimerInterval) clearInterval(quizTimerInterval);
 
 quizTimerInterval = setInterval(() => {
 if (!isQuizPaused) {
 quizSeconds++;
-$("quizRunningTimer").textContent = fmtTime(quizSeconds);
+$`("quizRunningTimer").textContent = fmtTime(quizSeconds);
 }
 }, 1000);
 
-$("pauseModal").classList.remove("active");
+`$("pauseModal").classList.remove("active");
 showScreen("quizScreen");
 
-$("quizFrame").srcdoc = "<div style='display:flex;align-items:center;justify-content:center;height:60vh;font-family:sans-serif;color:#6d28d9;font-size:18px;'><b>Loading Quiz... ଅପେକ୍ଷା କରନ୍ତୁ...</b></div>"; 
-fetch(fullUrl + "?t=" + Date.now()) 
-.then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.text(); }) 
-.then(html => { $("quizFrame").srcdoc = html; })
+latex
+("quizFrame").srcdoc = "&lt;div style='display:flex;align-items:center;justify-content:center;height:60vh;font-family:sans-serif;color:#6d28d9;font-size:18px;'&gt;&lt;b&gt;Loading Quiz... ଅପେକ୍ଷା କରନ୍ତୁ...&lt;/b&gt;&lt;/div&gt;"; fetch(fullUrl + "?t=" + Date.now()) .then(r =&gt; { if (!r.ok) throw new Error("HTTP " + r.status); return r.text(); }) .then(html =&gt; { 
+
+("quizFrame").srcdoc = html; })
 .catch(err => {
-$("quizFrame").srcdoc = "<div style='padding:20px;text-align:center;'>ଇଣ୍ଟରନେଟ୍ ସଂଯୋଗ ଯାଞ୍ଚ କରନ୍ତୁ କିମ୍ବା ପରେ ଚେଷ୍ଟା କରନ୍ତୁ।</div>";
+$`("quizFrame").srcdoc = "<div style='padding:20px;text-align:center;'>ଇଣ୍ଟରନେଟ୍ ସଂଯୋଗ ଯାଞ୍ଚ କରନ୍ତୁ କିମ୍ବା ପରେ ଚେଷ୍ଟା କରନ୍ତୁ।</div>";
 });
 }
 
 function pauseQuiz() {
 isQuizPaused = true;
-$("pauseModal").classList.add("active");
+`$("pauseModal").classList.add("active");
 }
 
 function resumeQuiz() {
 isQuizPaused = false;
-$("pauseModal").classList.remove("active");
+$`("pauseModal").classList.remove("active");
 }
 
 function closePauseAndExit() {
-$("pauseModal").classList.remove("active");
+`$("pauseModal").classList.remove("active");
 cleanViewerFrame();
 showScreen("mcqSetup");
 }
@@ -1002,31 +982,4 @@ $("studyClock").textContent = [
 Math.floor(studySeconds / 3600),
 Math.floor(studySeconds / 60) % 60,
 studySeconds % 60
-].map(x => String(x).padStart(2, "0")).join(":");
-}
-
-function toggleTheme() {
-document.body.classList.toggle("dark");
-localStorage.setItem("gs_dark", document.body.classList.contains("dark") ? "1" : "0");
-}
-
-function shareApp() {
-if (navigator.share) {
-navigator.share({ title: 'GyanSetu Odisha', text: 'Classes VI to X ପାଇଁ ଶିକ୍ଷଣ ପୋର୍ଟାଲ୍', url: window.location.href });
-} else {
-alert("Share link copied!");
-}
-}
-
-function checkUpdates() {
-alert("You are using GyanSetu Odisha v" + CURRENT_VERSION + " (Latest)");
-}
-
-window.addEventListener("DOMContentLoaded", () => {
-if (localStorage.getItem("gs_dark") === "1") {
-document.body.classList.add("dark");
-}
-});
-</script>
-</body>
-</html>
+].map(x => String(x).padSt
