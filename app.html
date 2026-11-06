@@ -2,7 +2,7 @@
 <html lang="or">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#4c1d95">
 <title>GyanSetu Odisha</title>
 
@@ -225,6 +225,7 @@ cursor:pointer;user-select:none;box-shadow:0 4px 10px rgba(0,0,0,0.4)
 </div>
 
 <div class="btnrow">
+<button type="button" class="btn green" onclick="shareApp()">📤 Share App</button>
 <button type="button" class="btn" onclick="checkUpdates()">🔄 Check Update</button>
 <button type="button" class="btn secondary" onclick="showScreen('studyTimer')">⏱ Study Timer</button>
 <button type="button" class="btn light" onclick="showScreen('bookmarks')">⭐ Bookmarks</button>
@@ -460,31 +461,28 @@ let studyInterval = null;
 
 const $ = id => document.getElementById(id);
 
-/* SAFE STORAGE HELPERS WITH AUTO-CLEANUP */
+/* SAFE STORAGE HELPERS (Fallback memory added for Offline APK stability) */
+const memoryFallback = {};
 function load(key, fallback) {
   try {
-    const v = JSON.parse(localStorage.getItem(key));
-    return v === null || v === undefined ? fallback : v;
-  } catch (e) { return fallback; }
+    const item = localStorage.getItem(key);
+    if (item === null || item === undefined) {
+      return memoryFallback[key] !== undefined ? memoryFallback[key] : fallback;
+    }
+    return JSON.parse(item);
+  } catch (e) {
+    return memoryFallback[key] !== undefined ? memoryFallback[key] : fallback;
+  }
 }
 
 function store(key, value) {
   try {
     localStorage.setItem(key, JSON.stringify(value));
+    memoryFallback[key] = value;
     return true;
   } catch (e) {
-    /* Auto-cleanup: if storage is full, remove oldest or trim items */
-    try {
-      if (key === "gs_saved_notes" || key === "gs_saved_mcqs") {
-        const keys = Object.keys(value);
-        if (keys.length > 1) {
-          delete value[keys[0]]; // remove the first item
-          localStorage.setItem(key, JSON.stringify(value));
-          return true;
-        }
-      }
-    } catch (err) {}
-    return false;
+    memoryFallback[key] = value;
+    return true;
   }
 }
 
@@ -590,7 +588,7 @@ function openSubject(sub) {
       .catch(err => {
         console.error(err);
         $("quizFrame").srcdoc =
-          "<div style='padding:20px;text-align:center;font-family:sans-serif;'>ଇଣ୍ଟରନେଟ୍ ସଂଯୋଗ ଯାଞ୍ଚ କରନ୍ତୁ କିମ୍ବା ପରେ ଚେଷ୍ଟା କରନ୍ତୁ।</div>";
+          "<div style='padding:20px;text-align:center;font-family:sans-serif;'>ଇଣ୍ଟରନେଟ୍ ସଂଯୋଗ ନାହିଁ କିମ୍ବା ଏହି ନୋଟ୍ ଅଫଲାଇନ୍‌ରେ ସେଭ୍ ହୋଇନାହିଁ। Saved Notes ରୁ ଚେଷ୍ଟା କରନ୍ତୁ।</div>";
       });
     return;
   }
@@ -633,14 +631,11 @@ async function saveCurrentNoteOffline() {
     const key = currentClass + " · " + currentSubject;
     saved[key] = { title: key, content: html, date: new Date().toLocaleDateString("or-IN") };
 
-    if (!store("gs_saved_notes", saved)) {
-      alert("Storage full!");
-      return;
-    }
-    alert("✅ ନୋଟ୍ Save ହୋଇଗଲା!");
+    store("gs_saved_notes", saved);
+    alert("✅ ନୋଟ୍ ସଫଳତା ସହ Save ହୋଇଗଲା!");
   } catch (e) {
     console.error(e);
-    alert("❌ Save ହେଲା ନାହିଁ। Internet ଯାଞ୍ଚ କରନ୍ତୁ।");
+    alert("❌ Save ହେଲା ନାହିଁ। Internet ସଂଯୋଗ ଯାଞ୍ଚ କରନ୍ତୁ।");
   }
 }
 
@@ -654,17 +649,15 @@ async function saveCurrentQuizOffline() {
     const s = load("gs_saved_mcqs", {});
     s[currentQuizTitle] = { title: currentQuizTitle, content: html, date: new Date().toLocaleDateString("or-IN") };
 
-    if (!store("gs_saved_mcqs", s)) {
-      alert("Storage full!");
-      return;
-    }
-    alert("✅ Quiz Download ହୋଇଗଲା!");
+    store("gs_saved_mcqs", s);
+    alert("✅ Quiz ସଫଳତା ସହ Download ହୋଇଗଲା!");
   } catch (e) {
     console.error(e);
-    alert("❌ Download ହେଲା ନାହିଁ। Internet ଯାଞ୍ଚ କରନ୍ତୁ।");
+    alert("❌ Download ହେଲା ନାହିଁ। Internet ସଂଯୋଗ ଯାଞ୍ଚ କରନ୍ତୁ।");
   }
 }
 
+/* SAVE SELECTED TOPIC QUIZ OFFLINE */
 async function downloadSelectedTopicMcq() {
   const sel = $("mcqTopic");
   const file = sel.value;
@@ -684,14 +677,11 @@ async function downloadSelectedTopicMcq() {
     const s = load("gs_saved_mcqs", {});
     s[key] = { title: key, content: html, date: new Date().toLocaleDateString("or-IN") };
 
-    if (!store("gs_saved_mcqs", s)) {
-      alert("Storage full!");
-      return;
-    }
-    alert("✅ ଏହି Topic Offline ପାଇଁ Save ହୋଇଗଲା!");
+    store("gs_saved_mcqs", s);
+    alert("✅ ଏହି Topic ଅଫଲାଇନ୍ ପାଇଁ Save ହୋଇଗଲା!");
   } catch (e) {
     console.error(e);
-    alert("ଡାଉନଲୋଡ୍ ବିଫଳ ହେଲା। ଇଣ୍ଟରନେଟ୍ ଯାଞ୍ଚ କରନ୍ତୁ।");
+    alert("ଡାଉନଲୋଡ୍ ବିଫଳ ହେଲା। ଇଣ୍ଟରନେଟ୍ ସଂଯୋଗ ଯାଞ୍ଚ କରନ୍ତୁ।");
   }
 }
 
@@ -1159,7 +1149,7 @@ function fillTopics() {
     topicSelect.innerHTML = list.map(item =>
       '<option value="' + esc(item.file) + '">' + esc(item.title) + '</option>').join("");
   } else {
-    topicSelect.innerHTML = '<option value="">No topics added yet</option>';
+    topicSelect.innerHTML = '<option value="">No topics available offline</option>';
   }
 }
 
@@ -1213,7 +1203,7 @@ function startQuiz() {
     .catch(err => {
       console.error(err);
       $("quizFrame").srcdoc =
-        "<div style='padding:20px;text-align:center;font-family:sans-serif;'>ଇଣ୍ଟରନେଟ୍ ସଂଯୋଗ ଯାଞ୍ଚ କରନ୍ତୁ କିମ୍ବା ପରେ ଚେଷ୍ଟା କରନ୍ତୁ।</div>";
+        "<div style='padding:20px;text-align:center;font-family:sans-serif;'>ଇଣ୍ଟରନେଟ୍ ସଂଯୋଗ ନାହିଁ। ଏହି Quiz କୁ ପୂର୍ବରୁ 'Save Offline' କରନ୍ତୁ।</div>";
     });
 }
 
@@ -1263,21 +1253,44 @@ function renderStudyClock() {
 /* THEME */
 function toggleTheme() {
   document.body.classList.toggle("dark");
-  try {
-    localStorage.setItem("gs_dark_theme", document.body.classList.contains("dark") ? "1" : "0");
-  } catch (e) {}
+  store("gs_dark_theme", document.body.classList.contains("dark") ? "1" : "0");
 }
 
-/* CHECK UPDATE (Silent / no alert popup if desired, or simple toast) */
+/* SHARE */
+const APP_DOWNLOAD_LINK = "https://YOUR-APP-DOWNLOAD-LINK-HERE";
+
+function shareApp() {
+  const message =
+    "🎓 ଜ୍ଞାନସେତୁ ଓଡ଼ିଶା (GyanSetu Odisha)\n" +
+    "ଷଷ୍ଠ ରୁ ଦଶମ ଶ୍ରେଣୀ ପାଇଁ NCERT ଓ ଓଡ଼ିଶା ବୋର୍ଡ ଶିକ୍ଷଣ ଆପ୍。\n" +
+    "📚 ନୋଟ୍ସ, 📝 MCQ ଅଭ୍ୟାସ ଓ 📂 ଅଧ୍ୟୟନ ସାମଗ୍ରୀ ଏକ ସ୍ଥାନରେ।\n\n" +
+    "📲 ଆପ୍ ଡାଉନଲୋଡ୍ କରିବାକୁ ଏହି ଲିଙ୍କ୍‌ରେ କ୍ଲିକ୍ କରନ୍ତୁ:\n" + APP_DOWNLOAD_LINK;
+
+  if (sendBridge("SHARE~" + message)) return;
+
+  if (navigator.share) {
+    navigator.share({ title: "GyanSetu Odisha", text: message }).catch(err => {});
+    return;
+  }
+
+  try {
+    navigator.clipboard.writeText(message).then(() => {
+      alert("📋 Message copy ହୋଇଗଲା।");
+    });
+  } catch (e) {
+    alert("Share is not supported.");
+  }
+}
+
+/* CHECK UPDATE */
 function checkUpdates() {
-  /* Removed alert popup so it won't show unexpected dialog */
-  console.log("Current version:", CURRENT_VERSION);
+  alert("You are using the latest version (" + CURRENT_VERSION + ").");
 }
 
 /* RESTORE THEME */
-try {
-  if (localStorage.getItem("gs_dark_theme") === "1") document.body.classList.add("dark");
-} catch (e) {}
+if (load("gs_dark_theme", "0") === "1") {
+  document.body.classList.add("dark");
+}
 
 syncHeaderHeight();
 </script>
