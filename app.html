@@ -744,8 +744,7 @@ async function downloadSelectedTopicMcq() {
         htmlContent = await response.text();
     } catch (error) {
         console.warn("Network fetch failed, using fallback container:", error);
-        // ଇଣ୍ଟରନେଟ୍ କିମ୍ବା ଲିଙ୍କ୍ ଫେଲ୍ ହେଲେ ମଧ୍ୟ ଆପ୍ ଯେପରି ଅଫ୍‌ଲାଇନ୍ ସେଭ୍ କରିପାରିବ
-        htmlContent = `<html><body style="font-family:sans-serif;padding:20px;text-align:center;"><h2>${topicName}</h2><p>⚠️ Live ଫାଇଲ୍ ଡାଉନଲୋଡ୍ ହୋଇପାରିଲା ନାହିଁ, କିନ୍ତୁ ଏହା ଅଫ୍‌ଲାଇନ୍ ପ୍ରିଭ୍ୟୁ ପାଇଁ ସେଭ୍ ହୋଇଛି।</p></body></html>`;
+        htmlContent = `<html><body style="font-family:sans-serif;padding:20px;text-align:center;"><h2>${topicName}</h2><p>⚠️ Live ଫାଇଲ୍ ମିଳିଲା ନାହିଁ, କିନ୍ତୁ ଏହା ଅଫ୍‌ଲାଇନ୍ ସେଭ୍ ହୋଇଛି।</p></body></html>`;
     }
 
     try {
