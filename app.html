@@ -1599,17 +1599,23 @@ function toggleTheme() {
     );
 }
 
-/* SHARE APP - WebView Compatible WhatsApp Share with APK Download Link */
+/* SHARE APP - Android Native Share Sheet with APK Link */
 function shareApp() {
     const apkDownloadUrl = "https://github.com/silusahu360/gyansetu-odishamcq/releases/download/v1.0/gyansetu.apk";
     
-    const shareText = "🎓 *GyanSetu Odisha* - NCERT & Odisha State Board Learning Portal.\n\nSmart ଶିକ୍ଷଣ ଏବଂ MCQ ଅଭ୍ୟାସ ପାଇଁ ଆପ୍‌ର APK ଫାଇଲ୍ ସିଧାସଳଖ ଡାଉନଲୋଡ୍ କରନ୍ତୁ:\n" + apkDownloadUrl;
-    
-    const whatsappUrl = "https://wa.me/?text=" + encodeURIComponent(shareText);
-    
-    if (window.AppInventor && typeof window.AppInventor.setWebViewString === "function") {
-        window.AppInventor.setWebViewString("OPEN_URL~" + whatsappUrl);
+    const shareData = {
+        title: "GyanSetu Odisha",
+        text: "🎓 *GyanSetu Odisha* - NCERT & Odisha State Board Learning Portal.\n\nSmart ଶିକ୍ଷଣ ଏବଂ MCQ ଅଭ୍ୟାସ ପାଇଁ ଆପ୍‌ର APK ଫାଇଲ୍ ସିଧାସଳଖ ଡାଉନଲୋଡ୍ କରନ୍ତୁ:",
+        url: apkDownloadUrl
+    };
+
+    if (navigator.share) {
+        navigator.share(shareData).catch((error) => {
+            console.log("Error sharing:", error);
+        });
     } else {
+        // Fallback for browsers without native share
+        const whatsappUrl = "https://wa.me/?text=" + encodeURIComponent(shareData.text + "\n" + shareData.url);
         window.open(whatsappUrl, "_blank");
     }
 }
