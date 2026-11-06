@@ -528,7 +528,8 @@ date: new Date().toLocaleDateString('or-IN')
 localStorage.setItem("gs_saved_mcqs", JSON.stringify(savedMcqs));
 alert("✅ ଏହି Topic Offline ପାଇଁ Save ହୋଇଗଲା!");
 } catch (e) {
-alert("ଡାଉନଲୋଡ୍ ବିଫଳ ହେଲା। ଇଣ୍ଟରନେଟ୍ ଯାଞ୍ଚ କରନ୍ତୁ।");
+// ଇଣ୍ଟରନେଟ୍ ନଥିଲେ କିମ୍ବା ଫାଇଲ୍ ନ ମିଳିଲେ ଆପ୍ ଯେପରି କ୍ରାସ୍ ନ ହୁଏ
+alert("⚠️ ଡାଉନଲୋଡ୍ ବିଫଳ ହେଲା। ଦୟାକରି ଇଣ୍ଟରନେଟ୍ ସଂଯୋଗ ଯାଞ୍ଚ କରନ୍ତୁ କିମ୍ବା GitHub ରେ ଫାଇଲ୍ ଉପଲବ୍ଧ ଅଛି କਿ ନାହିଁ ଦେଖନ୍ତୁ।");
 }
 } 
 
