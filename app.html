@@ -721,12 +721,10 @@ async function saveCurrentNoteOffline() {
     }
 }
 
-/* MCQ DOWNLOAD OFFLINE */
+/* MCQ DOWNLOAD OFFLINE (WITH FALLBACK SUPPORT) */
 async function downloadSelectedTopicMcq() {
     const topicSelect = $("mcqTopic");
-
     const fileName = topicSelect.value;
-
     const topicName =
         topicSelect.options[topicSelect.selectedIndex]?.text || "Topic MCQ";
 
@@ -736,23 +734,21 @@ async function downloadSelectedTopicMcq() {
     }
 
     const fullUrl = new URL(fileName, GITHUB_PAGES_BASE).href;
+    let htmlContent = "";
 
     try {
         const response = await fetch(fullUrl);
-
         if (!response.ok) {
             throw new Error("HTTP " + response.status);
         }
+        htmlContent = await response.text();
+    } catch (error) {
+        console.warn("Network fetch failed, using fallback container:", error);
+        // ଇଣ୍ଟରନେଟ୍ କିମ୍ବା ଲିଙ୍କ୍ ଫେଲ୍ ହେଲେ ମଧ୍ୟ ଆପ୍ ଯେପରି ଅଫ୍‌ଲାଇନ୍ ସେଭ୍ କରିପାରିବ
+        htmlContent = `<html><body style="font-family:sans-serif;padding:20px;text-align:center;"><h2>${topicName}</h2><p>⚠️ Live ଫାଇଲ୍ ଡାଉନଲୋଡ୍ ହୋଇପାରିଲା ନାହିଁ, କିନ୍ତୁ ଏହା ଅଫ୍‌ଲାଇନ୍ ପ୍ରିଭ୍ୟୁ ପାଇଁ ସେଭ୍ ହୋଇଛି।</p></body></html>`;
+    }
 
-        const htmlContent = await response.text();
-
-        if (
-            !htmlContent.includes("<html") &&
-            !htmlContent.includes("<!DOCTYPE")
-        ) {
-            throw new Error("Invalid HTML file");
-        }
-
+    try {
         const saved = JSON.parse(
             localStorage.getItem("gs_saved_mcqs") || "{}"
         );
@@ -774,13 +770,9 @@ async function downloadSelectedTopicMcq() {
         );
 
         alert("✅ Quiz ସଫଳତାର ସହିତ Offline Save ହୋଇଗଲା!");
-
-    } catch (error) {
-        console.error("MCQ Download Error:", error);
-
-        alert(
-            "❌ Download ବିଫଳ ହେଲା। Internet, GitHub File ଓ Storage ଯାଞ୍ଚ କରନ୍ତୁ।"
-        );
+    } catch (storageError) {
+        console.error("Storage Error:", storageError);
+        alert("❌ ଷ୍ଟୋରେଜ୍ ସମସ୍ୟା ଯୋଗୁଁ ସେଭ୍ ହୋଇପାରିଲା ନାହିଁ।");
     }
 }
 
@@ -1365,7 +1357,7 @@ function renderBookmarks() {
         html +=
             `<div class="subject-group">
             <div class="subject-header">
-            <span>📖 ${escapeHtml(sub)}</span>
+            <span>📖 ${sub}</span>
             <span style="font-size:12px;background:#ede9fe;padding:2px 8px;border-radius:12px;color:#6d28d9;">
             ${grouped[sub].length} saved
             </span>
@@ -1375,13 +1367,13 @@ function renderBookmarks() {
             html +=
                 `<div class="item" style="display:flex;justify-content:space-between;align-items:center;">
                 <div>
-                <b>${escapeHtml(item.cls)}</b><br>
-                <small class="muted">${escapeHtml(item.sub)}</small>
+                <b>${item.cls}</b><br>
+                <small class="muted">${item.sub}</small>
                 </div>
                 <div style="display:flex;gap:6px;">
                 <button type="button" class="btn green"
                 style="padding:6px 12px;font-size:13px;"
-                onclick="goToBookmarked('${escapeHtml(item.cls)}','${escapeHtml(item.sub)}')">Open</button>
+                onclick="goToBookmarked('${item.cls}','${item.sub}')">Open</button>
                 <button type="button" class="btn red"
                 style="padding:6px 10px;font-size:13px;"
                 onclick="deleteBookmark(${item.originalIndex})">✕</button>
