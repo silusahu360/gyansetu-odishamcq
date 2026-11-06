@@ -325,10 +325,8 @@ border-color:#34d399;font-size:15px;font-weight:800
 <label>3. Chapter / Topic</label>
 <select id="mcqTopic" class="field"></select>
 
-<div class="btnrow">
-<button type="button" class="btn green" onclick="startQuiz()">START QUIZ ➜</button>
-<button type="button" class="btn orange" onclick="downloadSelectedTopicMcq()">💾 Save Offline</button>
-</div>
+<!-- Save Offline button removed here; Start Quiz button made full -->
+<button type="button" class="btn green full" onclick="startQuiz()" style="margin-top:8px;">START QUIZ ➜</button>
 </div>
 <button type="button" class="back" onclick="showScreen('home')">⬅ Home</button>
 </section>
@@ -356,8 +354,13 @@ style="padding:6px 14px;font-size:13px;border-radius:8px;"
 onclick="pauseQuiz()">⏸ Pause</button>
 </div>
 
+<!-- Note and Quiz Offline Save Toolbar inside Viewer -->
 <div id="noteActionToolbar" style="display:none;margin-bottom:10px;gap:8px;">
 <button type="button" class="btn green full" onclick="saveCurrentNoteOffline()">💾 Save Note for Offline</button>
+</div>
+
+<div id="mcqActionToolbar" style="display:none;margin-bottom:10px;gap:8px;">
+<button type="button" class="btn orange full" onclick="downloadCurrentQuizOffline()">💾 Save Quiz Offline</button>
 </div>
 
 <div id="quizFrameContainer"
@@ -520,6 +523,8 @@ let currentSubject = "";
 let currentFolder = "";
 let currentViewMode = "quiz";
 let currentNoteHtmlUrl = "";
+let currentQuizUrl = "";
+let currentQuizTitle = "";
 
 let quizSeconds = 0;
 let quizTimerInterval = null;
@@ -616,8 +621,9 @@ function openSubject(sub) {
 
         currentNoteHtmlUrl = GITHUB_PAGES_BASE + noteFileName;
 
-        $("quizTimerBar").style.display = "none";
+        $("quizTimerBar").style.display = "flex";
         $("noteActionToolbar").style.display = "flex";
+        $("mcqActionToolbar").style.display = "none";
 
         $("viewerBackButton").textContent = "⬅ Back to Subjects";
 
@@ -659,10 +665,10 @@ function cleanViewerFrame() {
     quizTimerInterval = null;
 
     const toolbar = $("noteActionToolbar");
+    if (toolbar) toolbar.style.display = "none";
 
-    if (toolbar) {
-        toolbar.style.display = "none";
-    }
+    const mcqToolbar = $("mcqActionToolbar");
+    if (mcqToolbar) mcqToolbar.style.display = "none";
 
     $("quizTimerBar").style.display = "flex";
     $("pauseModal").classList.remove("active");
@@ -724,7 +730,6 @@ async function saveCurrentNoteOffline() {
 
     } catch (error) {
         console.error(error);
-        // Fallback note container so it never fails completely
         try {
             const saved = JSON.parse(localStorage.getItem("gs_saved_notes") || "{}");
             const key = currentClass + " · " + currentSubject;
@@ -741,47 +746,24 @@ async function saveCurrentNoteOffline() {
     }
 }
 
-/* ROBUST OFFLINE MCQ SAVE WITH ABSOLUTE ZERO CRASH */
-async function downloadSelectedTopicMcq() {
-    const cls = $("mcqClass").value;
-    const subj = $("mcqSubject").value;
-    const topicSelect = $("mcqTopic");
-    const fileName = topicSelect.value;
-    const topicName = topicSelect.options[topicSelect.selectedIndex]?.text || "Topic MCQ";
+/* SAVE CURRENT QUIZ OFFLINE FROM INSIDE QUIZ VIEWER */
+async function downloadCurrentQuizOffline() {
+    let htmlContent = $("quizFrame").srcdoc || "";
 
-    if (!fileName) {
-        alert("ଦୟାକରି ଏକ Topic ବାଛନ୍ତୁ।");
-        return;
-    }
-
-    let htmlContent = "";
-    const fullUrl = new URL(fileName, GITHUB_PAGES_BASE).href;
-
-    // 1. Try fetching live from GitHub
-    try {
-        const response = await fetch(fullUrl);
-        if (response.ok) {
-            htmlContent = await response.text();
-        }
-    } catch (e) {
-        console.log("Live fetch skipped/failed, using built-in offline safe template.");
-    }
-
-    // 2. If live fetch failed or empty, build standard interactive safe HTML container from store
-    if (!htmlContent || htmlContent.length < 20) {
-        htmlContent = `<html><head><meta charset="UTF-8"><style>body{font-family:sans-serif;padding:16px;background:#f5f3ff;color:#241746;}</style></head><body><h2>📝 ${topicName} (${subj})</h2><div style="background:#fff;padding:16px;border-radius:12px;box-shadow:0 4px 12px rgba(0,0,0,0.08);"><h3>Offline Practice Mode</h3><p>Aapana ehi topic offline abhyas karuchanti. Sahi question gudaik ehi sthanare uplabdha achi.</p><hr><p><b>Q1. (Sample Offline Question)</b><br>GyanSetu Odisha app re offline mode kin pari kam kare?<br>A) Manual Save<br>B) Auto Cache<br>C) Both A & B<br><b>Ans: C</b></p></div></body></html>`;
-    }
-
-    // 3. Save to localStorage with automatic old-key trimming if quota exceeded
-    try {
-        let saved = {};
+    if (!htmlContent || htmlContent.includes("Loading Quiz") || htmlContent.includes("ଇଣ୍ଟରନେଟ୍ ସଂଯୋଗ")) {
         try {
-            saved = JSON.parse(localStorage.getItem("gs_saved_mcqs") || "{}");
-        } catch(err) {
-            saved = {};
-        }
+            const resp = await fetch(currentQuizUrl);
+            if (resp.ok) htmlContent = await resp.text();
+        } catch(e) {}
+    }
 
-        const key = cls + " - " + subj + " - " + topicName;
+    if (!htmlContent || htmlContent.includes("Loading Quiz")) {
+        htmlContent = `<html><body style="font-family:sans-serif;padding:20px;text-align:center;"><h2>${currentQuizTitle}</h2><p>Offline Quiz Container</p></body></html>`;
+    }
+
+    try {
+        let saved = JSON.parse(localStorage.getItem("gs_saved_mcqs") || "{}");
+        const key = $("mcqClass").value + " - " + $("mcqSubject").value + " - " + currentQuizTitle;
 
         saved[key] = {
             title: key,
@@ -789,33 +771,21 @@ async function downloadSelectedTopicMcq() {
             date: new Date().toLocaleDateString("or-IN")
         };
 
-        let savedString = "";
         try {
-            savedString = JSON.stringify(saved);
-        } catch(stringifyErr) {
-            saved = {}; // reset if corrupted
-            saved[key] = { title: key, content: htmlContent, date: new Date().toLocaleDateString("or-IN") };
-            savedString = JSON.stringify(saved);
-        }
-
-        try {
-            localStorage.setItem("gs_saved_mcqs", savedString);
-        } catch (quotaExceeded) {
-            // Trim oldest entry and retry
+            localStorage.setItem("gs_saved_mcqs", JSON.stringify(saved));
+        } catch(qErr) {
             const keys = Object.keys(saved);
             if (keys.length > 1) {
                 delete saved[keys[0]];
                 localStorage.setItem("gs_saved_mcqs", JSON.stringify(saved));
             } else {
-                throw quotaExceeded;
+                throw qErr;
             }
         }
 
-        alert("✅ Quiz safalata sahita Offline Save hoigala!");
-
-    } catch (err) {
-        console.error("Critical storage error:", err);
-        alert("❌ Storage full ba error achi. Kichhi puruna downloaded quiz delete kariki punibara chesta karantu.");
+        alert("✅ Quiz ସଫଳତାର ସହିତ Offline Save ହୋଇଗଲା!");
+    } catch(err) {
+        alert("❌ Storage full ba error achi.");
     }
 }
 
@@ -934,7 +904,7 @@ function renderDownloadedQuizList() {
 
     if (!keys.length) {
         container.innerHTML =
-            '<div style="text-align:center;padding:18px;color:var(--muted);">କୌଣସି Quiz Download ହୋଇନାହିଁ।<br><br>MCQ Practice କୁ ଯାଇ Topic ବାଛନ୍ତୁ ଏବଂ Save Offline ଦବାନ୍ତୁ।</div>';
+            '<div style="text-align:center;padding:18px;color:var(--muted);">କୌଣସି Quiz Download ହୋଇନାହିଁ。<br><br>MCQ Practice କୁ ଯାଇ Topic ବାଛନ୍ତୁ ଏବଂ Start Quiz କରନ୍ତୁ।</div>';
         return;
     }
 
@@ -1007,6 +977,7 @@ function openDownloadedMcq(key) {
     $("pauseModal").classList.remove("active");
     $("quizTimerBar").style.display = "none";
     $("noteActionToolbar").style.display = "none";
+    $("mcqActionToolbar").style.display = "none";
 
     $("viewerBackButton").textContent = "⬅ Back to Sets";
 
@@ -1552,7 +1523,9 @@ function fmtTime(seconds) {
 
 /* START ONLINE QUIZ */
 function startQuiz() {
-    const fileName = $("mcqTopic").value;
+    const topicSelect = $("mcqTopic");
+    const fileName = topicSelect.value;
+    currentQuizTitle = topicSelect.options[topicSelect.selectedIndex]?.text || "Topic MCQ";
 
     if (!fileName) {
         alert("ଦୟାକରି ଏକ Topic ବାଛନ୍ତୁ।");
@@ -1561,11 +1534,10 @@ function startQuiz() {
 
     currentViewMode="quiz";
 
-    const fullUrl =
-        new URL(fileName,GITHUB_PAGES_BASE).href;
+    currentQuizUrl = new URL(fileName, GITHUB_PAGES_BASE).href;
 
     $("noteActionToolbar").style.display="none";
-
+    $("mcqActionToolbar").style.display="flex";
     $("quizTimerBar").style.display="flex";
 
     $("viewerBackButton").textContent="⬅ Back to Topics";
@@ -1593,22 +1565,20 @@ function startQuiz() {
     $("quizFrame").srcdoc =
         "<div style='display:flex;align-items:center;justify-content:center;height:60vh;font-family:sans-serif;color:#6d28d9;font-size:18px;'><b>Loading Quiz... ଅପେକ୍ଷା କରନ୍ତୁ...</b></div>";
 
-    fetch(fullUrl+"?t="+Date.now())
+    fetch(currentQuizUrl + "?t=" + Date.now())
         .then(response => {
             if (!response.ok) {
-                throw new Error("HTTP "+response.status);
+                throw new Error("HTTP " + response.status);
             }
-
             return response.text();
         })
         .then(html => {
-            $("quizFrame").srcdoc=html;
+            $("quizFrame").srcdoc = html;
         })
         .catch(error => {
             console.error(error);
-
             $("quizFrame").srcdoc =
-                "<div style='padding:20px;text-align:center;'>ଇଣ୍ଟରନେଟ୍ ସଂଯୋଗ ଯାଞ୍ଚ କରନ୍ତୁ କିମ୍ବା ପରେ ଚେଷ୍ଟା କରନ୍ତୁ।</div>";
+                `<html><body style="font-family:sans-serif;padding:20px;text-align:center;"><h2>${currentQuizTitle}</h2><p>⚠️ Live ଫାଇଲ୍ ମିଳିଲା ନାହିଁ, କିନ୍ତୁ ଆପଣ ଉପରେ ଥିବା <b>💾 Save Quiz Offline</b> ବଟନ୍ ଦବାଇ ଅଫ୍‌ଲାଇନ୍ ସେଭ୍ କରିପାରିବେ।</p></body></html>`;
         });
 }
 
