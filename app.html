@@ -529,7 +529,8 @@ date: new Date().toLocaleDateString('or-IN')
 localStorage.setItem("gs_saved_mcqs", JSON.stringify(savedMcqs));
 alert("✅ ଏହି Topic Offline ପାଇଁ Save ହୋଇଗଲା!");
 } catch (e) {
-alert("ଡାଉନଲୋଡ୍ ବିଫଳ ହେଲା। ଇଣ୍ଟରନେଟ୍ ଯାଞ୍ଚ କରନ୍ତୁ।");
+console.log("Download error:", e);
+alert("ଡାଉନଲୋଡ୍ ବିଫଳ ହେଲା। ଇଣ୍ଟରନେଟ୍ ଯାଞ୍ଚ କରନ୍ତୁ[span_0](start_span)[span_0](end_span)!");
 }
 }
 
@@ -884,20 +885,17 @@ $("mcqSubject").innerHTML = (subjectsByClass[c] || []).map(s => `<option>${s}</o
 fillTopics();
 }
 
-/* ଅଫ୍‌ଲାଇନ୍ ସପୋର୍ଟ ସହିତ ଅପଡେଟ୍ ହୋଇଥିବା loadRemoteMcq() ଫଙ୍କସନ୍ */
 async function loadRemoteMcq() {
 try {
 let r = await fetch(GITHUB_MCQ_JSON_URL + "?t=" + Date.now(), { cache: "no-store" });
 if (!r.ok) throw Error("HTTP " + r.status);
 mcqDataStore = await r.json();
 
-// ଅଫ୍‌ଲାଇନ୍ ବ୍ୟବହାର ପାଇଁ localStorage ରେ ସେଭ୍ କରନ୍ତୁ
 localStorage.setItem("gs_cached_mcq_json", JSON.stringify(mcqDataStore));
 fillTopics();
 } catch (e) {
 console.log("Offline mode: Loading from cache", e);
 
-// ଇଣ୍ଟରନେଟ୍ ନଥିଲେ localStorage ରୁ ଡାଟା ଲୋଡ୍ କରନ୍ତୁ
 let cachedData = localStorage.getItem("gs_cached_mcq_json");
 if (cachedData) {
 try {
