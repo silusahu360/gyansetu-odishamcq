@@ -1,0 +1,1263 @@
+<!DOCTYPE html>
+<html lang="or">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ରେଚନ (Excretion) - Interactive MCQ Quiz</title>
+    <style>
+        :root {
+            --primary: #4f46e5;
+            --primary-light: #6366f1;
+            --secondary: #06b6d4;
+            --success: #10b981;
+            --error: #ef4444;
+            --background: #f8fafc;
+            --card-bg: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #e0f2fe 0%, #f0fdf4 100%);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 600px;
+            background: var(--card-bg);
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        /* Header */
+        .app-header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .app-header h1 {
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+        }
+
+        .app-header p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        /* Screens */
+        .screen {
+            padding: 20px;
+            display: none;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .screen.active {
+            display: flex;
+        }
+
+        /* Welcome Screen */
+        .welcome-content {
+            text-align: center;
+            padding: 30px 10px;
+        }
+
+        .welcome-content h2 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+        }
+
+        .welcome-content p {
+            color: var(--text-muted);
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+
+        /* Buttons */
+        .btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
+            text-align: center;
+        }
+
+        .btn:hover {
+            background: var(--primary-light);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(79, 70, 229, 0.4);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        /* Quiz Header & Progress */
+        .quiz-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+
+        .progress-bar-container {
+            width: 100%;
+            height: 8px;
+            background: #e2e8f0;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: var(--secondary);
+            width: 0%;
+            transition: width 0.4s ease;
+        }
+
+        /* Question Card */
+        .question-card {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-main);
+            line-height: 1.5;
+            background: #f8fafc;
+            padding: 15px;
+            border-radius: 12px;
+            border-left: 5px solid var(--primary);
+        }
+
+        /* Options */
+        .options-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .option-btn {
+            background: white;
+            border: 2px solid #e2e8f0;
+            padding: 14px 16px;
+            text-align: left;
+            border-radius: 10px;
+            font-size: 0.95rem;
+            color: var(--text-main);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-weight: 500;
+        }
+
+        .option-btn:hover:not(:disabled) {
+            border-color: var(--primary);
+            background: #eef2ff;
+        }
+
+        .option-btn.correct {
+            background: #d1fae5 !important;
+            border-color: var(--success) !important;
+            color: #065f46 !important;
+        }
+
+        .option-btn.incorrect {
+            background: #fee2e2 !important;
+            border-color: var(--error) !important;
+            color: #991b1b !important;
+        }
+
+        .option-btn:disabled {
+            cursor: default;
+        }
+
+        /* Explanation Box */
+        .explanation-box {
+            background: #f1f5f9;
+            border-left: 4px solid var(--secondary);
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            color: var(--text-main);
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .explanation-box.show {
+            display: block;
+        }
+
+        /* Funny Fact Screen */
+        .fact-card {
+            background: linear-gradient(135deg, #fef08a, #fed7aa);
+            border-radius: 16px;
+            padding: 25px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            animation: bounceIn 0.5s ease;
+        }
+
+        .fact-card h3 {
+            color: #b45309;
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+        }
+
+        .fact-card p {
+            font-size: 1.05rem;
+            color: #78350f;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .emoji-icon {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        /* Result Screen */
+        .result-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin: 15px 0;
+        }
+
+        .stat-box {
+            background: #f8fafc;
+            padding: 15px;
+            border-radius: 12px;
+            text-align: center;
+            border: 1px solid #e2e8f0;
+        }
+
+        .stat-box h4 {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 5px;
+        }
+
+        .stat-box p {
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        .performance-msg {
+            background: #e0f2fe;
+            color: #0369a1;
+            padding: 15px;
+            border-radius: 12px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .motivational-quote {
+            font-style: italic;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            padding: 0 10px;
+            line-height: 1.5;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes bounceIn {
+            0% { transform: scale(0.9); opacity: 0; }
+            60% { transform: scale(1.03); opacity: 1; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- Header -->
+    <div class="app-header">
+        <h1>ଜୀବ ବିଜ୍ଞାନ: ରେଚନ (Excretion)</h1>
+        <p>ଦଶମ ଶ୍ରେଣୀ ଅଧ୍ୟାୟ - ୪</p>
+    </div>
+
+    <!-- 1. Welcome Screen -->
+    <div id="welcome-screen" class="screen active">
+        <div class="welcome-content">
+            <span class="emoji-icon">🧠💧</span>
+            <h2>ରେଚନ ତନ୍ତ୍ର ପ୍ରାକ୍ଟିସ୍ କୁ ସ୍ଵାଗତ!</h2>
+            <p>ଏହି ଆପ୍ଲିକେସନ୍ ମାଧ୍ୟମରେ ଆପଣ ଦଶମ ଶ୍ରେଣୀ ଜୀବବିଜ୍ଞାନର 'ରେଚନ' ଅଧ୍ୟାୟର ସମସ୍ତ ଗୁରୁତ୍ୱପୂର୍ଣ୍ଣ ପ୍ରଶ୍ନ (MCQs) ଅଭ୍ୟାସ କରିପାରିବେ। ପ୍ରତ୍ୟେକ ୨୦ଟି ପ୍ରଶ୍ନ ପରେ ରହିଛି ଏକ ମଜାଦାର ତଥ୍ୟ!</p>
+            <button class="btn" onclick="startQuiz()">କ୍ୱିଜ୍ ଆରମ୍ଭ କରନ୍ତୁ (Start Quiz)</button>
+        </div>
+    </div>
+
+    <!-- 2. Quiz Screen -->
+    <div id="quiz-screen" class="screen">
+        <div class="quiz-info">
+            <span id="question-indicator">ପ୍ରଶ୍ନ 1/60</span>
+            <span id="score-indicator">ସ୍କୋର୍: 0</span>
+        </div>
+        <div class="progress-bar-container">
+            <div id="progress-bar" class="progress-bar"></div>
+        </div>
+
+        <div id="question-card" class="question-card">
+            <!-- Question text goes here -->
+        </div>
+
+        <div class="options-container" id="options-container">
+            <!-- Options go here -->
+        </div>
+
+        <div id="explanation-box" class="explanation-box">
+            <!-- Explanation goes here -->
+        </div>
+
+        <button id="next-btn" class="btn" style="display: none;" onclick="nextQuestion()">ପରବର୍ତ୍ତୀ ପ୍ରଶ୍ନ (Next)</button>
+    </div>
+
+    <!-- 3. Funny Fact Screen -->
+    <div id="fact-screen" class="screen">
+        <div class="fact-card">
+            <span id="fact-emoji" class="emoji-icon">🌟</span>
+            <h3>ମଜାଦାର ଓ ଶିକ୍ଷଣୀୟ ତଥ୍ୟ!</h3>
+            <p id="fact-text">ତଥ୍ୟ ଏଠାରେ ପ୍ରଦର୍ଶିତ ହେବ...</p>
+            <button class="btn" onclick="resumeQuiz()">ଶିକ୍ଷା ଜାରି ରଖନ୍ତୁ (Continue Learning)</button>
+        </div>
+    </div>
+
+    <!-- 4. Result Screen -->
+    <div id="result-screen" class="screen">
+        <div style="text-align: center;">
+            <span class="emoji-icon">🏆</span>
+            <h2 style="color: var(--primary); margin-bottom: 5px;">କ୍ୱିଜ୍ ସମାପ୍ତ!</h2>
+            <p style="color: var(--text-muted); font-size: 0.9rem;">ଆପଣଙ୍କର ପ୍ରଦର୍ଶନ ନିମ୍ନରେ ଦିଆଗଲା</p>
+        </div>
+
+        <div class="result-stats">
+            <div class="stat-box">
+                <h4>ମୋଟ ପ୍ରଶ୍ନ</h4>
+                <p id="res-total">60</p>
+            </div>
+            <div class="stat-box">
+                <h4>ସଠିକ୍ ଉତ୍ତର</h4>
+                <p id="res-correct" style="color: var(--success);">0</p>
+            </div>
+            <div class="stat-box">
+                <h4>ଭୁଲ୍ ଉତ୍ତର</h4>
+                <p id="res-incorrect" style="color: var(--error);">0</p>
+            </div>
+            <div class="stat-box">
+                <h4>ଫାଇନାଲ୍ ଶତକଡ଼ା</h4>
+                <p id="res-percentage">0%</p>
+            </div>
+        </div>
+
+        <div id="performance-msg" class="performance-msg">
+            ଅଭିନନ୍ଦନ! ଆପଣ କ୍ୱିଜ୍ ସମ୍ପୂର୍ଣ୍ଣ କରିଛନ୍ତି।
+        </div>
+
+        <div class="motivational-quote">
+            "Every question you practise makes you stronger. Every mistake makes you wiser. Keep learning, keep growing, and one day success will be yours!"
+        </div>
+
+        <button class="btn" onclick="restartQuiz()">ପୁନର୍ବାର ଆରମ୍ଭ କରନ୍ତୁ (Restart Quiz)</button>
+    </div>
+</div>
+
+<script>
+    // Complete Question Bank based strictly on Chapter 4 (Excretion)
+    const questionsData = [
+        {
+            q: "ଶରୀରର ବିଭିନ୍ନ ଚୟାପଚୟ ପ୍ରକ୍ରିୟାରୁ ଜାତ ହେଉଥିବା ବର୍ଜ୍ୟବସ୍ତୁ ଶରୀର ପାଇଁ କିପରି?",
+            options: [
+                "କ, ଖ ଉଭୟ",
+                "କ. ଅଦରକାରୀ, ଖ. ହାନିକାରକ",
+                "କେବଳ ଲାଭଦାୟକ",
+                "ଶରୀର ପାଇଁ ଅତ୍ୟନ୍ତ ଆବଶ୍ୟକ"
+            ],
+            answer: 1,
+            explanation: "ଶରୀରରେ ହେଉଥିବା ବିଭିନ୍ନ ଚୟାପଚୟ ପ୍ରକ୍ରିୟାରୁ ଜାତ ହେଉଥିବା ବର୍ଜ୍ୟବସ୍ତୁ (Waste product) ଶରୀର ପାଇଁ ଅଦରକାରୀ ଓ ହାନିକାରକ ଅଟେ।"
+        },
+        {
+            q: "ଶରୀରର ଭିତର ପରିବେଶକୁ ପ୍ରଦୂଷଣମୁକ୍ତ ରଖି କୋଷୀୟ କାର୍ଯ୍ୟକଳାପର ସନ୍ତୁଳନ ବଜାୟ ରଖୁଥିବା ପ୍ରକ୍ରିୟାକୁ କ'ଣ କୁହାଯାଏ?",
+            options: [
+                "ଶ୍ୱସକ୍ରିୟା",
+                "ପାଚନ କ୍ରିୟା",
+                "ରେଚନ",
+                "ଉଚ୍ଛେଦନ"
+            ],
+            answer: 2,
+            explanation: "ବର୍ଜ୍ୟବସ୍ତୁ ନିଷ୍କାସିତ କରି ଶରୀର ଭିତର ପରିବେଶକୁ ପ୍ରଦୂଷଣମୁକ୍ତ ରଖିବା ଏବଂ କୋଷୀୟ କାର୍ଯ୍ୟକଳାପର ସନ୍ତୁଳନ ବଜାୟ ରଖିବା ପ୍ରକ୍ରିୟାକୁ ରେଚନ କୁହାଯାଏ।"
+        },
+        {
+            q: "ଶରୀରରେ ପୁଷ୍ଟିସାର ଚୟାପଚୟ ଫଳରେ କେଉଁ ଗ୍ୟାସୀୟ ପଦାର୍ଥ ନିର୍ଗତ ହୋଇଥାଏ?",
+            options: [
+                "ଅଙ୍ଗାରକାମ୍ଳ",
+                "ଏମୋନିଆ",
+                "ନାଇଟ୍ରୋଜେନ୍",
+                "ଅମ୍ଳଜାନ"
+            ],
+            answer: 1,
+            explanation: "ଶରୀରରେ ପୁଷ୍ଟିସାର (protein) ଚୟାପଚୟ ଫଳରେ ଏମୋନିଆ ନିର୍ଗତ ହୋଇଥାଏ, ଯାହା ଏକ ଗ୍ୟାସୀୟ ପଦାର୍ଥ ଏବଂ ଜଳରେ ଅତିମାତ୍ରାରେ ଦ୍ରବଣୀୟ।"
+        },
+        {
+            q: "ଜଳଚର ପ୍ରାଣୀମାନେ ଶରୀରରେ ଉତ୍ପନ୍ନ ଏମୋନିଆକୁ କେଉଁ ପ୍ରକ୍ରିୟା ଦ୍ୱାରା ନିଷ୍କାସିତ କରନ୍ତି?",
+            options: [
+                "ପରିସ୍ରବଣ ପ୍ରକ୍ରିୟା",
+                "ବିସରଣ ପ୍ରକ୍ରିୟା",
+                "ପୁନଃଶୋଷଣ ପ୍ରକ୍ରିୟା",
+                "ସକ୍ରିୟ ପରିବହନ"
+            ],
+            answer: 1,
+            explanation: "ଜଳଚର ପ୍ରାଣୀ ଶରୀରରୁ ଉତ୍ପନ୍ନ ହେଉଥିବା ଏମୋନିଆକୁ ବିସରଣ (Diffusion) ପ୍ରକ୍ରିୟା ଦ୍ୱାରା ସିଧାସଳଖ ଜଳୀୟ ପରିବେଶକୁ ନିଷ୍କାସିତ କରିଥାନ୍ତି।"
+        },
+        {
+            q: "ସ୍ଥଳଚର ପ୍ରାଣୀମାନେ ଏମୋନିଆକୁ କେଉଁ ପଦାର୍ଥରେ ପରିଣତ କରି ନିଷ୍କାସିତ କରନ୍ତି?",
+            options: [
+                "ଗ୍ଲୁକୋଜ ଓ ଏମିନୋ ଏସିଡ୍",
+                "ୟୁରିଆ ବା ୟୁରିକ୍ ଏସିଡ୍",
+                "କ୍ରିଏଟିନିନ୍ ଓ ଲବଣ",
+                "ପିତ୍ତରସ"
+            ],
+            answer: 1,
+            explanation: "ସ୍ଥଳଚର ପ୍ରାଣୀମାନେ ଏମୋନିଆକୁ ୟୁରିଆ (Urea) ବା ୟୁରିକ୍ ଏସିଡ୍ (Uric acid) ରେ ପରିଣତ କରି ଶରୀରରୁ ନିଷ୍କାସିତ କରିଥାନ୍ତି।"
+        },
+        {
+            q: "ନିମ୍ନୋକ୍ତ ପ୍ରାଣୀମାନଙ୍କ ମଧ୍ୟରୁ କେଉଁମାନେ ଶରୀରରୁ ମୁଖ୍ୟତଃ ୟୁରିଆ ତ୍ୟାଗ କରିଥାନ୍ତି?",
+            options: [
+                "ପକ୍ଷୀ ଓ ସରୀସୃପ",
+                "ପତଙ୍ଗ ଓ ସରୀସୃପ",
+                "ମଣିଷ, ସ୍ତନ୍ୟପାୟୀ, ବେଙ୍ଗ ଜାତୀୟ ଉଭୟଚର ଓ ସାର୍କ୍ ଜାତୀୟ ମାଛ",
+                "କେବଳ ଜଳଚର ପ୍ରାଣୀ"
+            ],
+            answer: 2,
+            explanation: "ମଣିଷ ତଥା ଅନ୍ୟ ସମସ୍ତ ସ୍ତନ୍ୟପାୟୀ ପ୍ରାଣୀ, ବେଙ୍ଗ ଜାତୀୟ ଉଭୟଚର, ଓ ସାର୍କ୍ ଜାତୀୟ ମାଛ ଶରୀରରୁ ୟୁରିଆ ତ୍ୟାଗ କରନ୍ତି।"
+        },
+        {
+            q: "ନିମ୍ନୋକ୍ତ ପ୍ରାଣୀମାନଙ୍କ ମଧ୍ୟରୁ କେଉଁମାନେ ଶରୀରରୁ ୟୁରିକ୍ ଏସିଡ୍ ନିଷ୍କାସନ କରିଥାନ୍ତି?",
+            options: [
+                "ପକ୍ଷୀ, ସରୀସୃପ ଓ ପତଙ୍ଗ",
+                "ମଣିଷ ଓ ସ୍ତନ୍ୟପାୟୀ",
+                "ବେଙ୍ଗ ଓ ସାର୍କ୍ ମାଛ",
+                "ଜିଆ ଓ ଜୋକ"
+            ],
+            answer: 0,
+            explanation: "ପକ୍ଷୀ, ସରୀସୃପ ଓ ପତଙ୍ଗମାନେ ଶରୀରରୁ ୟୁରିକ୍ ଏସିଡ୍ ନିଷ୍କାସନ କରିଥାନ୍ତି।"
+        },
+        {
+            q: "ମେରୁଦଣ୍ଡୀ ପ୍ରାଣୀମାନଙ୍କ କେଉଁ ଅଙ୍ଗରେ ଏମୋନିଆ ସହ ଅଙ୍ଗାରକାମ୍ଳର ରାସାୟନିକ ସଂଯୋଗ ହୋଇ ୟୁରିଆ ଉତ୍ପନ୍ନ ହୁଏ?",
+            options: [
+                "ବୃକ୍‌କ (Kidney)",
+                "ଯକୃତ୍ (Liver)",
+                "ମୂତ୍ରାଶୟ",
+                "ଫୁସଫୁସ"
+            ],
+            answer: 1,
+            explanation: "ମେରୁଦଣ୍ଡୀ ପ୍ରାଣୀମାନଙ୍କ ଯକୃତ୍‌ରେ ଏମୋନିଆ ସହ ଅଙ୍ଗାରକାମ୍ଳର ରାସାୟନିକ ସଂଯୋଗ ହୋଇ ୟୁରିଆ ଉତ୍ପନ୍ନ ହୋଇଥାଏ।"
+        },
+        {
+            q: "ୟୁରିଆର ରାସାୟନିକ ସଂକେତ (Chemical Formula) କ'ଣ ଅଟେ?",
+            options: [
+                "NH3",
+                "CO2",
+                "NH2-CO-NH2",
+                "CH4"
+            ],
+            answer: 2,
+            explanation: "ୟୁରିଆର ରାସାୟନିକ ସଂକେତ ହେଉଛି NH2-CO-NH2।"
+        },
+        {
+            q: "ପତଙ୍ଗ ଓ ସରୀସୃପମାନଙ୍କରେ ତିଆରି ହେଉଥିବା ୟୁରିକ୍ ଏସିଡ୍ ଜଳରେ କିପରି?",
+            options: [
+                "ଅତିମାତ୍ରାରେ ଦ୍ରବଣୀୟ",
+                "ପ୍ରାୟ ଅଦ୍ରବଣୀୟ",
+                "ସଂପୂର୍ଣ୍ଣ ଦ୍ରବଣୀୟ",
+                "ଗ୍ୟାସୀୟ ଅବସ୍ଥାରେ ରହେ"
+            ],
+            answer: 1,
+            explanation: "ପତଙ୍ଗ ଓ ସରୀସୃପମାନଙ୍କରେ ଏମୋନିଆରୁ ୟୁରିକ୍ ଏସିଡ୍ ତିଆରି ହୋଇଥାଏ, ଯାହା ଜଳରେ ପ୍ରାୟ ଅଦ୍ରବଣୀୟ।"
+        },
+        {
+            q: "ଏମିବା ପରି ଏକକୋଷୀ ପ୍ରାଣୀମାନଙ୍କର ରେଚନ ପ୍ରକ୍ରିୟା କାହା ଦ୍ୱାରା ସମ୍ପାଦିତ ହୋଇଥାଏ?",
+            options: [
+                "ଶିଖା କୋଷ (Flame cells)",
+                "ନେଫ୍ରିଡ଼ିଆ (Nephridia)",
+                "ପ୍ଲାଜ୍‌ମା ଝିଲ୍ଲୀ ଓ କିଛି ପରିମାଣରେ ସଂକୋଚିକିଧାନୀ (Contractile vacuole)",
+                "ମାଲପିଝିଆନ୍ ନଳିକା"
+            ],
+            answer: 2,
+            explanation: "ଏମିବା ପରି ଏକକୋଷୀ ପ୍ରାଣୀମାନଙ୍କର ରେଚନ ପ୍ରକ୍ରିୟା ପ୍ଲାଜ୍‌ମା ଝିଲ୍ଲୀ ଓ କିଛି ପରିମାଣରେ ସଂକୋଚିକିଧାନୀ (Contractile vacuole) ଦ୍ୱାରା ସମ୍ପାଦିତ ହୋଇଥାଏ।"
+        },
+        {
+            q: "ଚେପ୍‌ଟା କୃମିମାନଙ୍କଠାରେ ରେଚନ ଅଙ୍ଗଭାବେ କେଉଁ କୋଷ କାର୍ଯ୍ୟ କରିଥାଏ?",
+            options: [
+                "ନେଫ୍ରିଡ଼ିଆ",
+                "ଶିଖା କୋଷ (Flame cells)",
+                "ମାଲପିଝିଆନ୍ ନଳିକା",
+                "ସ୍ୱେଦଗ୍ରନ୍ଥି"
+            ],
+            answer: 1,
+            explanation: "ଚେପ୍‌ଟା କୃମିମାନଙ୍କଠାରେ ଶିଖା କୋଷ (Flame cells) ରେଚନ ଅଙ୍ଗଭାବେ କାର୍ଯ୍ୟ କରିଥାଏ।"
+        },
+        {
+            q: "ଜିଆ ଓ ଜୋକ ପରି ପ୍ରାଣୀମାନଙ୍କରେ ଅନ୍ୟତମ ରେଚନ ଅଙ୍ଗ କ'ଣ ଅଟେ?",
+            options: [
+                "ନେଫ୍ରିଡ଼ିଆ (Nephridia)",
+                "ଶିଖା କୋଷ",
+                "ମାଲପିଝିଆନ୍ ନଳିକା",
+                "ବୃକ୍‌କ"
+            ],
+            answer: 0,
+            explanation: "ଜିଆ, ଜୋକ ପରି ପ୍ରାଣୀମାନଙ୍କରେ ନେଫ୍ରିଡ଼ିଆ (Nephridia) ଅନ୍ୟତମ ରେଚନ ଅଙ୍ଗ।"
+        },
+        {
+            q: "ଝିଣ୍ଟିକା ଆଦି ପତଙ୍ଗରେ ରେଚନ ଅଙ୍ଗରୂପେ କେଉଁଟି କାର୍ଯ୍ୟ କରିଥାଏ?",
+            options: [
+                "ଶିଖା କୋଷ",
+                "ନେଫ୍ରିଡ଼ିଆ",
+                "ମାଲପିଝିଆନ୍ ନଳିକା (Malpighian tubules)",
+                "ସଂକୋଚିକିଧାନୀ"
+            ],
+            answer: 2,
+            explanation: "ଝିଣ୍ଟିକା ଆଦି ପତଙ୍ଗରେ ମାଲପିଝିଆନ୍ ନଳିକା (Malpighian tubules) ରେଚନ ଅଙ୍ଗରୂପେ କାର୍ଯ୍ୟ କରିଥାଏ।"
+        },
+        {
+            q: "ମଣିଷର ମଧ୍ୟଚ୍ଛଦାର (Diaphragm) ଠିକ୍ ତଳକୁ ଉଦର ଗହ୍ବର ଭିତରେ ମେରୁଦଣ୍ଡର ଉଭୟ ପାର୍ଶ୍ୱରେ କେତୋଟି ବୃକ୍‌କ ରହିଛି?",
+            options: [
+                "ଗୋଟିଏ",
+                "ଦୁଇଟି",
+                "ତିନୋଟି",
+                "ଚାରୋଟି"
+            ],
+            answer: 1,
+            explanation: "ମଣିଷର ମଧ୍ୟଚ୍ଛଦାର ଠିକ୍ ତଳକୁ ଉଦର ଗହ୍ବର ଭିତରେ ମେରୁଦଣ୍ଡର ଉଭୟ ପାର୍ଶ୍ୱରେ ଦୁଇଟି ବୃକ୍‌କ ରହିଛି।"
+        },
+        {
+            q: "ସୁସ୍ଥ ବୟଃପ୍ରାପ୍ତ ବ୍ୟକ୍ତିର ବୃକ୍‌କର ଆକୃତି କିପରି ଏବଂ ଏହାର ଲମ୍ବ ପ୍ରାୟ କେତେ?",
+            options: [
+                "ଗୋଲାକାର, ଲମ୍ବ 5 ସେ.ମି.",
+                "ଶିମ୍ବ ମଞ୍ଜିପରି, ଲମ୍ବ ପ୍ରାୟ 10 ରୁ 12 ସେ.ମି.",
+                "ତ୍ରିକୋଣାକାର, ଲମ୍ବ 15 ସେ.ମି.",
+                "ଡିମ୍ବାକାର, ଲମ୍ବ 3 ସେ.ମି."
+            ],
+            answer: 1,
+            explanation: "ବୃକ୍‌କର ଆକୃତି ପ୍ରାୟ ଶିମ୍ବ ମଞ୍ଜିପରି। ସୁସ୍ଥ ବୟଃପ୍ରାପ୍ତ ବ୍ୟକ୍ତିର ବୃକ୍‌କର ଲମ୍ବ ପ୍ରାୟ 10 ରୁ 12 ସେ.ମି., ଚଉଡ଼ା ପ୍ରାୟ 5 ରୁ 7 ସେ.ମି. ଓ ମୋଟେଇ ପ୍ରାୟ 3 ସେ.ମି.।"
+        },
+        {
+            q: "ବୃକ୍‌କର ଭିତର ପାଖରେ ଥିବା ଖାଲୁଆ ସ୍ଥାନଟିକୁ କ'ଣ କୁହାଯାଏ?",
+            options: [
+                "କର୍ଟେକ୍ସ (Cortex)",
+                "ମେଡ୍ୟୁଲା (Medulla)",
+                "ହାଇଲମ୍ (Hilum)",
+                "ଗବିଣୀ ବସ୍ତି (Pelvis)"
+            ],
+            answer: 2,
+            explanation: "ବୃକ୍‌କର ଭିତର ପାଖରେ ଥିବା ଖାଲୁଆ ସ୍ଥାନଟିକୁ ହାଇଲମ୍ (Hilum) କୁହାଯାଏ।"
+        },
+        {
+            q: "ହାଇଲମ୍ ମଧ୍ୟଦେଇ କେଉଁଗୁଡ଼ିକ ବୃକ୍‌କ ସହିତ ସଂଯୁକ୍ତ ହୋଇଥାଏ?",
+            options: [
+                "କେବଳ ମୂତ୍ରସାରଣୀ",
+                "ବୃକ୍‌କୀୟ ଶିରା, ଧମନୀ ଓ ମୂତ୍ରସାରଣୀ (Ureter)",
+                "କେବଳ ବୃକ୍‌କୀୟ ଧମନୀ",
+                "କେବଳ ଯକୃତ ନଳୀ"
+            ],
+            answer: 1,
+            explanation: "ହାଇଲମ୍ ମଧ୍ୟଦେଇ ବୃକ୍‌କୀୟ ଶିରା, ଧମନୀ ଓ ମୂତ୍ରସାରଣୀ (Ureter) ବୃକ୍‌କ ସହିତ ସଂଯୁକ୍ତ ହୋଇଥାଏ।"
+        },
+        {
+            q: "ପ୍ରତ୍ୟେକ ବୃକ୍‌କ ଭିତରେ କେତେ ଲକ୍ଷରୁ ଅଧିକ ଅତି ସୂକ୍ଷ୍ମ ବୃକ୍‌କୀୟ ନଳିକା ବା ନେଫ୍ରନ୍ ରହିଛି?",
+            options: [
+                "1 ଲକ୍ଷ",
+                "5 ଲକ୍ଷ",
+                "10 ଲକ୍ଷ",
+                "50 ଲକ୍ଷ"
+            ],
+            answer: 2,
+            explanation: "ପ୍ରତ୍ୟେକ ବୃକ୍‌କ ଭିତରେ ରହିଛି 10 ଲକ୍ଷରୁ ଅଧିକ ଅତି ସୂକ୍ଷ୍ମ ବୃକ୍‌କୀୟ ନଳିକା (Renal tubules) ବା ମୂତ୍ରଜନ ନଳିକା (Uriniferous tubules) ବା ନେଫ୍ରନ୍ (Nephron)।"
+        },
+        {
+            q: "ନେଫ୍ରନ୍‌ର କପ୍ ବା ଗିନା ଆକୃତିର ପାର୍ଶ୍ୱକୁ କ'ଣ କୁହାଯାଏ?",
+            options: [
+                "ଗ୍ଲୋମେରୁଲସ୍",
+                "ବାଓମ୍ୟାନ୍ସ କ୍ୟାପସୁଲ୍ (Bowman's capsule)",
+                "ଏଫରେଣ୍ଟ ଉପଧମନୀ",
+                "ଗବିଣୀ ବସ୍ତି"
+            ],
+            answer: 1,
+            explanation: "ନେଫ୍ରନ୍‌ର କପ୍ ବା ଗିନା ଆକୃତିର ପାର୍ଶ୍ୱଟିକୁ ବାଓମ୍ୟାନ୍ସ କ୍ୟାପସୁଲ୍ (Bowman's capsule) କୁହାଯାଏ।"
+        },
+        {
+            q: "ବାଓମ୍ୟାନ୍ସ କ୍ୟାପସୁଲ୍ ନାମଟି କାଉଙ୍କ ନାମାନୁସାରେ ହୋଇଛି?",
+            options: [
+                "William Bowman (1816-1892)",
+                "Marcelo Malpighii (1628-1694)",
+                "Robert Hooke",
+                "Gregor Mendel"
+            ],
+            answer: 0,
+            explanation: "ବାଓମ୍ୟାନ୍ସ କ୍ୟାପସୁଲ୍ ୱିଲିୟମ୍ ବାଓମ୍ୟାନ୍ (William Bowman, 1816-1892)ଙ୍କ ନାମରୁ ନାମିତ।"
+        },
+        {
+            q: "ନେଫ୍ରନ୍ ସହ ସଂଯୁକ୍ତ ହୋଇ ରହିଥିବା ବୃକ୍‌କୀୟ ଧମନୀର ସୂକ୍ଷ୍ମ ଶାଖାକୁ କ'ଣ କୁହାଯାଏ?",
+            options: [
+                "ଇଫରେଣ୍ଟ ଉପଧମନୀ",
+                "ଏଫରେଣ୍ଟ (ଅନ୍ତର୍ବାହୀ) ଉପଧମନୀ (Afferent arteriole)",
+                "ବୃକ୍‌କୀୟ ଶିରା",
+                "ମୂତ୍ରସାରଣୀ"
+            ],
+            answer: 1,
+            explanation: "ପ୍ରତି ନେଫ୍ରନ୍ ସହ ସଂଯୁକ୍ତ ହୋଇ ରହିଛି ବୃକ୍‌କୀୟ ଧମନୀର ଗୋଟିଏ ଲେଖାଏଁ ସୂକ୍ଷ୍ମ ଶାଖା ଯାହାକୁ ଏଫରେଣ୍ଟ (ଅନ୍ତର୍ବାହୀ) ଉପଧମନୀ (Afferent arteriole) କୁହାଯାଏ।"
+        },
+        {
+            q: "ଗ୍ଲୋମେରୁଲସ୍ (Glomerulus) କାହାକୁ ନେଇ ଗଠିତ?",
+            options: [
+                "କୈଶିକନଳୀର ଗୁଚ୍ଛ",
+                "କେବଳ ବାଓମ୍ୟାନ୍ସ କ୍ୟାପସୁଲ୍",
+                "ମୂତ୍ର ସଂଗ୍ରହନଳିକା",
+                "ଗବିଣୀ ବସ୍ତି"
+            ],
+            answer: 0,
+            explanation: "ଏଫରେଣ୍ଟ ଓ ଇଫରେଣ୍ଟ ଉପଧମନୀ ସହ ସଂଶ୍ଳିଷ୍ଟ କୈଶିକନଳୀର ଏହି ଗୁଚ୍ଛକୁ କୈଶିକଗୁଚ୍ଛ ବା ଗ୍ଲୋମେରୁଲସ୍ (Glomerulus) କୁହାଯାଏ।"
+        },
+        {
+            q: "ଗ୍ଲୋମେରୁଲସ୍ ଓ ବାଓମ୍ୟାନ୍ସ କ୍ୟାପସୁଲ୍ ମିଶି କ'ଣ ଗଠନ କରନ୍ତି?",
+            options: [
+                "ମାଲପିଝିଆନ୍ ପିଣ୍ଡ ବା ରିନାଲ୍ କର୍ପସ୍‌ଲ୍ (Malpighian body or renal corpuscle)",
+                "ନେଫ୍ରିଡ଼ିଆ",
+                "ଗବିଣୀ ବସ୍ତି",
+                "ମୂତ୍ରାଶୟ"
+            ],
+            answer: 0,
+            explanation: "ଗ୍ଲୋମେରୁଲସ୍ ଓ ବାଓମ୍ୟାନ୍ସ କ୍ୟାପସୁଲ୍ ମିଶି ମାଲପିଝିଆନ୍ ପିଣ୍ଡ ବା ରିନାଲ୍ କର୍ପସ୍‌ଲ୍ ଗଠନ କରନ୍ତି।"
+        },
+        {
+            q: "ମାଲପିଝିଆନ୍ ପିଣ୍ଡ ନାମଟି କାଉଙ୍କ ନାମାନୁସାରେ ନାମିତ ହୋଇଛି?",
+            options: [
+                "William Bowman",
+                "Marcelo Malpighii (1628-1694)",
+                "Robert Brown",
+                "Charles Darwin"
+            ],
+            answer: 1,
+            explanation: "ମାଲପିଝିଆନ୍ ପିଣ୍ଡ ମାର୍ସେଲୋ ମାଲପିଝି (Marcelo Malpighii, 1628-1694)ଙ୍କ ନାମାନୁସାରେ ନାମିତ।"
+        },
+        {
+            q: "ବୃକ୍‌କୀୟ ନଳିକାର ଶେଷ ମୁଣ୍ଡଟି କେଉଁଥିରେ ପଶିଥାଏ?",
+            options: [
+                "ମୂତ୍ର ସଂଗ୍ରହନଳିକା (Collecting duct)",
+                "ଗ୍ଲୋମେରୁଲସ୍",
+                "ଏଫରେଣ୍ଟ ଉପଧମନୀ",
+                "ବୃକ୍‌କୀୟ ଧମନୀ"
+            ],
+            answer: 0,
+            explanation: "ବୃକ୍‌କୀୟ ନଳିକାର କେତେକ ଅଂଶ ବୃକ୍‌କ ଭିତରେ ଗୁଡ଼େଇ ରହି ଶେଷ ମୁଣ୍ଡଟି ମୂତ୍ର ସଂଗ୍ରହନଳିକା (Collecting duct) ମଧ୍ୟରେ ପଶିଥାଏ।"
+        },
+        {
+            q: "ବୃକ୍‌କ ଭିତରେ ମୂତ୍ର ସଂଗ୍ରହନଳିକାଗୁଡ଼ିକ ଏକାଠି ହୋଇ କେଉଁ ଗହ୍ଵର ଭିତରକୁ ଖୋଲିଥାନ୍ତି?",
+            options: [
+                "ହାଇଲମ୍",
+                "ଗବିଣୀ ବସ୍ତି (Pelvis of ureter)",
+                "ବାଓମ୍ୟାନ୍ସ କ୍ୟାପସୁଲ୍",
+                "କର୍ଟେକ୍ସ"
+            ],
+            answer: 1,
+            explanation: "ମୂତ୍ର ସଂଗ୍ରହ ନଳିକାଗୁଡ଼ିକ ଏକାଠି ହୋଇ ବୃକ୍‌କ ଭିତରେ ଥିବା ଏକ ଗହ୍ଵର ଭିତରକୁ ଖୋଲିଥାନ୍ତି, ଯାହାର ନାମ ଗବିଣୀ ବସ୍ତି (Pelvis of ureter)।"
+        },
+        {
+            q: "ପ୍ରତ୍ୟେକ ବୃକ୍‌କରୁ ବାହାରିଥିବା ମୂତ୍ରସାରଣୀ (Ureter) କେଉଁଠାକୁ ଯାଇଥାଏ?",
+            options: [
+                "ଯକୃତ୍",
+                "ମୂତ୍ରାଶୟ (Urinary bladder)",
+                "ଫୁସଫୁସ",
+                "ହୃତ୍‌ପିଣ୍ଡ"
+            ],
+            answer: 1,
+            explanation: "ପ୍ରତ୍ୟେକ ବୃକ୍‌କରୁ ଗୋଟିଏ ଲେଖାଏଁ ମୂତ୍ରସାରଣୀ ବାହାରି ତଳିପେଟରେ ଥିବା ମୂତ୍ରାଶୟ (Urinary bladder) ଭିତରେ ପଶିଥାଏ।"
+        },
+        {
+            q: "ମୂତ୍ରାଶୟରେ ସଞ୍ଚିତ ହୋଇ ରହୁଥିବା ମୂତ୍ର ପରିସ୍ରା କଲାବେଳେ କେଉଁ ମାର୍ଗ ଦେଇ ନିଷ୍କାସିତ ହୁଏ?",
+            options: [
+                "ମୂତ୍ରସାରଣୀ",
+                "ମୂତ୍ରମାର୍ଗ (Urethra)",
+                "ଏଫରେଣ୍ଟ ଉପଧମନୀ",
+                "ଗବିଣୀ ବସ୍ତି"
+            ],
+            answer: 1,
+            explanation: "ମୂତ୍ରାଶୟରେ ମୂତ୍ର ସଞ୍ଚିତ ହୋଇ ରହେ ଓ ପରିସ୍ରା କଲାବେଳେ ତାହା ମୂତ୍ରମାର୍ଗ (Urethra) ଦେଇ ନିଷ୍କାସିତ ହୋଇଥାଏ।"
+        },
+        {
+            q: "ଗ୍ଲୋମେରୁଲସ୍‌ରେ ରକ୍ତଛଣା କାର୍ଯ୍ୟ ସମୟରେ ରକ୍ତର କେଉଁ ଉପାଦାନଗୁଡ଼ିକ ପରିସ୍ରତ ହୋଇପାରେ ନାହିଁ?",
+            options: [
+                "ଜଳ ଓ ଲବଣ",
+                "ଗ୍ଲୁକୋଜ ଓ ଏମିନୋ ଏସିଡ୍",
+                "ରକ୍ତ କଣିକା ଓ କିଛି ବଡ଼ ଅଣୁବିଶିଷ୍ଟ ପ୍ରୋଟିନ୍",
+                "ୟୁରିଆ ଓ ୟୁରିକ୍ ଏସିଡ୍"
+            ],
+            answer: 2,
+            explanation: "ଗ୍ଲୋମେରୁଲସ୍ ଭିତରେ ଥିବା ଅତି ସୂକ୍ଷ୍ମ ରନ୍ଧ୍ରଦେଇ ରକ୍ତରେ ଥିବା ରକ୍ତ କଣିକା ଓ କିଛି ବଡ଼ ଅଣୁବିଶିଷ୍ଟ ପ୍ରୋଟିନ୍ ପରିସ୍ରତ ହୋଇପାରେ ନାହିଁ।"
+        },
+        {
+            q: "ବୃକ୍‌କୀୟ ନଳିକାରୁ ଗ୍ଲୁକୋଜ ଓ ଏମିନୋ ଏସିଡ୍ ଭଳି ଉପାଦାନ କେଉଁଠାକୁ ପୁନଃଶୋଷିତ ହୋଇଥାଏ?",
+            options: [
+                "ମୂତ୍ରାଶୟ",
+                "ନଳିକାକୁ ଘେରି ରହିଥିବା କୈଶିକ ରକ୍ତନଳୀ ଭିତରକୁ",
+                "ଗବିଣୀ ବସ୍ତି",
+                "ମୂତ୍ରମାର୍ଗ"
+            ],
+            answer: 1,
+            explanation: "ଗ୍ଲୁକୋଜ ଓ ଏମିନୋ ଏସିଡ୍ ଭଳି ଉପାଦାନ ଅଧିକ ଉପଯୋଗୀ ହୋଇଥିବାରୁ ସେଗୁଡ଼ିକ ବୃକ୍‌କୀୟ ନଳିକାକୁ ଘେରି ରହିଥିବା କୈଶିକ ରକ୍ତନଳୀ ଭିତରକୁ ପୁନଃଶୋଷିତ ହୋଇଥାଏ।"
+        },
+        {
+            q: "ସୁସ୍ଥ ବ୍ୟକ୍ତିର ପରିସ୍ରା ରଙ୍ଗ ଈଷତ୍ ହଳଦିଆ ହେବାର କାରଣ କ'ଣ?",
+            options: [
+                "ଗ୍ଲୁକୋଜ ରହିବା ଯୋଗୁଁ",
+                "ୟୁରୋକ୍ରୋମ (Urochrome) ନାମକ ବର୍ଣ୍ଣକଣା ଥିବା ହେତୁ",
+                "ଅଧିକ ଲବଣ ଥିବା ଯୋଗୁଁ",
+                "ପ୍ରୋଟିନ୍ ଥିବା ଯୋଗୁଁ"
+            ],
+            answer: 1,
+            explanation: "ମୂତ୍ରରେ ୟୁରୋକ୍ରୋମ (Urochrome) ନାମକ ବର୍ଣ୍ଣକଣା ଥିବା ହେତୁ ଜଣେ ସୁସ୍ଥ ବ୍ୟକ୍ତିର ପରିସ୍ରା ରଙ୍ଗ ଈଷତ୍ ହଳଦିଆ।"
+        },
+        {
+            q: "ସୁସ୍ଥ ଲୋକର ମୂତ୍ରରେ ନିମ୍ନୋକ୍ତ ମଧ୍ୟରୁ କେଉଁଟି ନ ଥାଏ?",
+            options: [
+                "ଜଳ ଓ ୟୁରିଆ",
+                "ଲବଣ ଓ କ୍ରିଏଟିନିନ୍",
+                "ଗ୍ଲୁକୋଜ, ପ୍ରୋଟିନ୍ ବା କୌଣସି ରକ୍ତକଣିକା",
+                "ୟୁରିକ୍ ଏସିଡ୍"
+            ],
+            answer: 2,
+            explanation: "ସୁସ୍ଥ ଲୋକର ମୂତ୍ରରେ ଗ୍ଲୁକୋଜ, ପ୍ରୋଟିନ୍ ବା କୌଣସି ରକ୍ତକଣିକା ନ ଥାଏ। ଏଗୁଡ଼ିକ ଥିଲେ ତାହା ରୋଗର ସୂଚନା ଦିଏ।"
+        },
+        {
+            q: "ବୃକ୍‌କର ଅନ୍ୟ ଏକ କାର୍ଯ୍ୟ କେଉଁ ହରମୋନ୍ କ୍ଷରଣ କରି ଲୋହିତ ରକ୍ତ କଣିକା ତିଆରି କରିବାରେ ସାହାଯ୍ୟ କରିବା ଅଟେ?",
+            options: [
+                "ଇନ୍‌ସୁଲିନ୍",
+                "ଏରିଥ୍ରୋପୋଇଏଟିନ୍ (Erythropoietin)",
+                "ଥାଇରକ୍ସିନ୍",
+                "ଆଡ୍ରିନାଲିନ୍"
+            ],
+            answer: 1,
+            explanation: "ବୃକ୍‌କ ଏରିଥ୍ରୋପୋଇଏଟିନ୍ (Erythropoietin) ନାମକ ହରମୋନ୍‌ କ୍ଷରଣ କରି ଲୋହିତ ରକ୍ତ କଣିକା ତିଆରି କରିବାରେ ସାହାଯ୍ୟ କରିଥାଏ।"
+        },
+        {
+            q: "ବୃକ୍‌କ ଶରୀରର ଅନ୍ତଃପରିବେଶରେ ସନ୍ତୁଳନ ବଜାୟ ରଖିବା ପାଇଁ କେଉଁ ଚାରୋଟି ପ୍ରକ୍ରିୟା ସମ୍ପାଦନ କରେ?",
+            options: [
+                "ପାଚନ, ଅବଶୋଷଣ, ଶ୍ୱସନ, ମଳତ୍ୟାଗ",
+                "ପରିସ୍ରବଣ (Filtration), ପୁନଃଶୋଷଣ (Reabsorption), ସ୍ୱ୍ରାବ (Secretion) ଓ ନିଷ୍କାସନ (Excretion)",
+                "ବିସରଣ, ଆସମୋସିସ୍, ଘନନ, ପ୍ରସାରଣ",
+                "ସଂକୋଚନ, ପ୍ରସାରଣ, ଛଣା, ସଞ୍ଚୟ"
+            ],
+            answer: 1,
+            explanation: "ପରିସ୍ରବଣ (Filtration), ପୁନଃଶୋଷଣ (Reabsorption), ସ୍ୱ୍ରାବ (Secretion) ଓ ନିଷ୍କାସନ (Excretion) - ଏହି ଚାରୋଟି ପ୍ରକ୍ରିୟା ମାଧ୍ୟମରେ ବୃକ୍‌କ ସନ୍ତୁଳନ ବଜାୟ ରଖେ।"
+        },
+        {
+            q: "ଚର୍ମରେ ଥିବା କେଉଁ ଗ୍ରନ୍ଥି ମାଧ୍ୟମରେ ଝାଳ ତିଆରି ହୋଇଥାଏ?",
+            options: [
+                "ତୈଳ ଗ୍ରନ୍ଥି",
+                "ସ୍ୱେଦଗ୍ରନ୍ଥି (Sweat gland)",
+                "ଲାଳ ଗ୍ରନ୍ଥି",
+                "ଯକୃତ୍ ଗ୍ରନ୍ଥି"
+            ],
+            answer: 1,
+            explanation: "ଝାଳ ତିଆରି ଚର୍ମର ଅନ୍ୟତମ କାର୍ଯ୍ୟ, ଏଥିପାଇଁ ଚର୍ମରେ ରହିଛି ସ୍ୱେଦଗ୍ରନ୍ଥି।"
+        },
+        {
+            q: "ଝାଳ ବାଷ୍ପୀଭୂତ ହେବା ଫଳରେ ଶରୀରରେ କ'ଣ ହୋଇଥାଏ?",
+            options: [
+                "ଶରୀର ଗରମ ହୁଏ",
+                "ଶରୀର ଶୀତଳ ହୋଇଥାଏ",
+                "ଶରୀରରେ ଶକ୍ତି ବୃଦ୍ଧି ପାଏ",
+                "ରକ୍ତଚାପ ବଢ଼େ"
+            ],
+            answer: 1,
+            explanation: "ଝାଳ ବାଷ୍ପୀଭୂତ ହେବା ଫଳରେ ଶରୀର ଶୀତଳ ହୋଇଥାଏ।"
+        },
+        {
+            q: "ଯକୃତରୁ ବର୍ଜ୍ୟବସ୍ତୁ (ଯଥା- ଔଷଧର ଅବଶିଷ୍ଟ୍ୟଶ, ମାତ୍ରାଧିକ ଭିଟାମିନ୍, ବର୍ଣ୍ଣକଣା) କେଉଁ ରସ ସହ ମିଶି ଖାଦ୍ୟନଳୀ ଦ୍ୱାରା ନିଷ୍କାସିତ ହୁଏ?",
+            options: [
+                "ଅଗ୍ନାଶୟ ରସ",
+                "ପିତ୍ତରସ (Bile juice)",
+                "ଲାଳ",
+                "ଜଠର ରସ"
+            ],
+            answer: 1,
+            explanation: "ଚୟାପଚୟରୁ ଉତ୍ପାଦିତ ବର୍ଜ୍ୟ ଯଥା ଔଷଧର ଅବଶିଷ୍ଟ୍ୟଶ, ମାତ୍ରାଧିକ ଭିଟାମିନ୍ ଇତ୍ୟାଦି ପିତ୍ତରସ ସହ ମିଶି ଖାଦ୍ୟନଳୀ ଭିତରକୁ ଯାଇ ପରେ ମଳ ସହ ନିଷ୍କାସିତ ହୋଇଥାଏ।"
+        },
+        {
+            q: "ନିଃଶ୍ୱାସ ଛାଡ଼ିଲା ବେଳେ ଫୁସଫୁସରୁ କେଉଁ ବର୍ଜ୍ୟବସ୍ତୁ ନିଷ୍କାସିତ ହୋଇଥାଏ?",
+            options: [
+                "ଅମ୍ଳଜାନ ଓ ନାଇଟ୍ରୋଜେନ୍",
+                "ଅଙ୍ଗାରକାମ୍ଳ ଓ ଜଳୀୟ ବାଷ୍ପ",
+                "ଏମୋନିଆ ଓ ୟୁରିଆ",
+                "କେବଳ ଅଙ୍ଗାରକାମ୍ଳ"
+            ],
+            answer: 1,
+            explanation: "ନିଃଶ୍ୱାସ ଛାଡ଼ିଲା ବେଳେ ଫୁସଫୁସରୁ ଶରୀରରେ ଉତ୍ପନ୍ନ ଅଙ୍ଗାରକାମ୍ଳ ଓ ଜଳୀୟ ବାଷ୍ପ ନିଷ୍କାସିତ ହୋଇଥାଏ।"
+        },
+        {
+            q: "ଉଦ୍ଭିଦରେ ରେଚନ ପାଇଁ ପ୍ରାଣୀପରି କ'ଣ ରହିଥାଏ?",
+            options: [
+                "ବୃକ୍‌କ",
+                "ସ୍ୱତନ୍ତ୍ର ରେଚନ ଅଙ୍ଗ ନଥାଏ",
+                "ମୂତ୍ରାଶୟ",
+                "ମାଲପିଝିଆନ୍ ନଳିକା"
+            ],
+            answer: 1,
+            explanation: "ଉଦ୍ଭିଦରେ ରେଚନ ପାଇଁ ପ୍ରାଣୀପରି ସ୍ୱତନ୍ତ୍ର ରେଚନ ଅଙ୍ଗ ନଥାଏ।"
+        },
+        {
+            q: "ଖଇର ବା ଟାନିନ୍, ରେଜିନ୍, ଗମ୍ ଏବଂ କ୍ଷୀର ଉଦ୍ଭିଦର କେଉଁ ପ୍ରକାରର ପଦାର୍ଥ ଅଟନ୍ତି?",
+            options: [
+                "ଉପଯୋଗୀ ଖାଦ୍ୟସାର",
+                "ଚୟାପଚୟ ପ୍ରକ୍ରିୟାରେ ଜାତ ଉପଜାତ ବର୍ଜ୍ୟବସ୍ତୁ",
+                "କେବଳ ଭିଟାମିନ୍",
+                "ହର୍ମୋନ୍"
+            ],
+            answer: 1,
+            explanation: "ଚୟାପଚୟ ପ୍ରକ୍ରିୟାରେ ଜାତ ବିଭିନ୍ନ ଉପଜାତ ପଦାର୍ଥ ଉଦ୍ଭିଦର କେତେକ ବିଶେଷ ଅଂଶରେ ଗଚ୍ଛିତ ହୋଇ ରହେ, ଯଥା- ଟାନିନ୍, ରେଜିନ୍, ଗମ୍, କ୍ଷୀର।"
+        },
+        {
+            q: "ତେନ୍ତୁଳି ଓ ଲେମ୍ବୁରେ କ୍ରମଶଃ କେଉଁ ଅମ୍ଳ ରହିଥାଏ?",
+            options: [
+                "ସାଇଟ୍ରିକ୍ ଅମ୍ଳ ଓ ଟାର୍ଟାରିକ ଅମ୍ଳ",
+                "ଟାର୍ଟାରିକ ଅମ୍ଳ ଓ ସାଇଟ୍ରିକ୍ ଅମ୍ଳ",
+                "ଆସେଟିକ୍ ଅମ୍ଳ ଓ ସାଇଟ୍ରିକ୍ ଅମ୍ଳ",
+                "ଲାକ୍ଟିକ୍ ଅମ୍ଳ ଓ ଟାର୍ଟାରିକ ଅମ୍ଳ"
+            ],
+            answer: 1,
+            explanation: "ତେନ୍ତୁଳି ଓ ଲେମ୍ବୁରେ ଥିବା ଅମ୍ଳ ଯଥାକ୍ରମେ ଟାର୍ଟାରିକ ଅମ୍ଳ (Tartaric acid) ଓ ସାଇଟ୍ରିକ୍ ଅମ୍ଳ (Citric acid) ଅଟେ।"
+        },
+        {
+            q: "ସିନ୍‌କୋନା ଗଛ ଓ ତମାଖୁ ପତ୍ରରେ କ୍ରମଶଃ କେଉଁ ଉପକ୍ଷାର (Alkaloid) ରହିଥାଏ?",
+            options: [
+                "ନିକୋଟିନ୍ ଓ କୁଇନାଇନ୍",
+                "କୁଇନାଇନ୍ ଓ ନିକୋଟିନ୍",
+                "ମର୍ଫିନ୍ ଓ କୋଡିନ୍",
+                "ଟାନିନ୍ ଓ ରେଜିନ୍"
+            ],
+            answer: 1,
+            explanation: "ସିନ୍‌କୋନା ଗଛରେ ଥିବା କୁଇନାଇନ୍ (Quinine) ଏବଂ ତମାଖୁ ପତ୍ରରେ ଥିବା ନିକୋଟିନ୍ (Nicotine) ପରି ଉପକ୍ଷାର ରହିଥାଏ।"
+        },
+        {
+            q: "ଉଦ୍ଭିଦ ଶରୀରରେ ଥିବା ବଳକା ପାଣି କେଉଁ ପ୍ରକ୍ରିୟାରେ ବାହାରିଯାଇଥାଏ?",
+            options: [
+                "ପରିସ୍ରବଣ",
+                "ଉଚ୍ଛେଦନ (Transpiration)",
+                "ବିସରଣ",
+                "ପୁନଃଶୋଷଣ"
+            ],
+            answer: 1,
+            explanation: "ଉଦ୍ଭିଦ ଶରୀରରେ ଥିବା ବଳକା ପାଣି ଉଚ୍ଛେଦନ ପ୍ରକ୍ରିୟାରେ ବାହାରିଯାଇଥାଏ।"
+        },
+        {
+            q: "ଉଦ୍ଭିଦରେ ଷ୍ଟୋମାଟା (Stomata) ଶ୍ୱାସକ୍ରିୟା ସମ୍ପାଦନ କରିବା ସହିତ ଆଉ କେଉଁ ଭଳି କାମ କରିଥାଏ?",
+            options: [
+                "ରେଚନ ଅଙ୍ଗଭଳି",
+                "ଯକୃତଭଳି",
+                "ବୃକ୍‌କଭଳି",
+                "ମୂତ୍ରାଶୟଭଳି"
+            ],
+            answer: 0,
+            explanation: "ଉଦ୍ଭିଦରେ ଷ୍ଟୋମାଟା ଶ୍ଵାସକ୍ରିୟା ସମ୍ପାଦନ କରିବା ସହିତ ଏକ ରେଚନ ଅଙ୍ଗଭଳି କାମ କରିଥାଏ।"
+        },
+        {
+            q: "ରେଜିନ୍ ଓ ଟାନିନ୍ ପରି ବର୍ଜ୍ୟବସ୍ତୁଗୁଡ଼ିକ ଉଦ୍ଭିଦର କେଉଁଠାରେ ସଂଗୃହୀତ ହୋଇଥାଏ?",
+            options: [
+                "ପରିପକ୍ଵ ଜାଇଲେମ୍‌ରେ (Mature xylem)",
+                "କେବଳ ପତ୍ରରେ",
+                "ମୂଳର ଅଗ୍ରଭାଗରେ",
+                "ଫୁଲରେ"
+            ],
+            answer: 0,
+            explanation: "ରେଜିନ୍ ଓ ଟାନିନ୍ ପରି ବର୍ଜ୍ୟବସ୍ତୁଗୁଡ଼ିକ ପରିପକ୍ଵ ଜାଇଲେମ୍‌ରେ ମଧ୍ୟ ସଂଗୃହୀତ ହୋଇଥାଏ।"
+        },
+        {
+            q: "ଚେପ୍‌ଟା କୃମିମାନଙ୍କର ରେଚନ ଅଙ୍ଗ ନାମ କ'ଣ?",
+            options: [
+                "ନେଫ୍ରିଡ଼ିଆ",
+                "ଶିଖାକୋଷ (Flame cell)",
+                "ମାଲପିଝିଆନ୍ ନଳିକା",
+                "ସ୍ୱେଦଗ୍ରନ୍ଥି"
+            ],
+            answer: 1,
+            explanation: "ଶିଖାକୋଷ ଚେପ୍‌ଟା କୃମିମାନଙ୍କର ରେଚନ ଅଙ୍ଗ ଭାବରେ କାର୍ଯ୍ୟ କରେ।"
+        },
+        {
+            q: "ମଣିଷର କେଉଁଠାରେ ଏମୋନିଆ ୟୁରିଆରେ ପରିଣତ ହୁଏ?",
+            options: [
+                "ବୃକ୍‌କରେ",
+                "ଯକୃତ୍‌ରେ (Liver)",
+                "ମୂତ୍ରାଶୟରେ",
+                "ଫୁସଫୁସରେ"
+            ],
+            answer: 1,
+            explanation: "ମଣିଷର ଯକୃତ୍‌ରେ ଏମୋନିଆ ୟୁରିଆରେ ପରିଣତ ହୁଏ।"
+        },
+        {
+            q: "ବୃକକ୍‌ରୁ ନିଃସୃତ କେଉଁ ହରମୋନ୍ ଲୋହିତ ରକ୍ତ କଣିକା ତିଆରି କରିବାରେ ସାହାଯ୍ୟ କରିଥାଏ?",
+            options: [
+                "ଇନ୍‌ସୁଲିନ୍",
+                "ଏରିଥ୍ରୋପୋଇଏଟିନ୍ (Erythropoietin)",
+                "ଥାଇରକ୍ସିନ୍",
+                "ଆଡ୍ରିନାଲିନ୍"
+            ],
+            answer: 1,
+            explanation: "ବୃକକ୍‌ରୁ ନିଃସୃତ ଏରିଥ୍ରୋପୋଇଏଟିନ୍ ହରମୋନ୍ ଲୋହିତ ରକ୍ତ କଣିକା ତିଆରି କରିବାରେ ସାହାଯ୍ୟ କରିଥାଏ।"
+        },
+        {
+            q: "ତେନ୍ତୁଳିରେ କେଉଁ ଅମ୍ଳ ଥାଏ?",
+            options: [
+                "ସାଇଟ୍ରିକ୍ ଅମ୍ଳ",
+                "ଟାର୍ଟାରିକ ଅମ୍ଳ (Tartaric acid)",
+                "ଲାକ୍ଟିକ୍ ଅମ୍ଳ",
+                "ଫର୍ମିକ୍ ଅମ୍ଳ"
+            ],
+            answer: 1,
+            explanation: "ତେନ୍ତୁଳିରେ ଟାର୍ଟାରିକ ଅମ୍ଳ ଥାଏ।"
+        },
+        {
+            q: "ଜିଆ ଓ ଜୋକଗୁଡ଼ିକର କେଉଁଟି ରେଚନ ଅଙ୍ଗ ଭାବରେ କାର୍ଯ୍ୟ କରେ?",
+            options: [
+                "ଶିଖାକୋଷ",
+                "ନେଫ୍ରିଡ଼ିଆ (Nephridia)",
+                "ମାଲପିଝିଆନ୍ ନଳିକା",
+                "ସ୍ୱେଦଗ୍ରନ୍ଥି"
+            ],
+            answer: 1,
+            explanation: "ଜିଆ ଓ ଜୋକଗୁଡ଼ିକର ନେଫ୍ରିଡ଼ିଆ ରେଚନ ଅଙ୍ଗ ଭାବରେ କାର୍ଯ୍ୟ କରେ।"
+        },
+        {
+            q: "ବିହଙ୍ଗ ଓ ସରୀସୃପମାନେ ଏମୋନିଆକୁ କେଉଁ ପଦାର୍ଥରେ ପରିଣତ କରି ନିଷ୍କାସିତ କରିଥାନ୍ତି?",
+            options: [
+                "ୟୁରିଆ",
+                "ୟୁରିକ୍ ଏସିଡ୍ (Uric acid)",
+                "ଗ୍ଲୁକୋଜ",
+                "ଅମୋନିୟମ୍ କ୍ଲୋରାଇଡ୍"
+            ],
+            answer: 1,
+            explanation: "ବିହଙ୍ଗ ଓ ସରୀସୃପମାନେ ଏମୋନିଆକୁ ୟୁରିକ୍ ଏସିଡ୍‌ରେ ପରିଣତ କରି ଶରୀରରୁ ନିଷ୍କାସିତ କରିଥାନ୍ତି।"
+        },
+        {
+            q: "ବୃକ୍‌କରେ ଥିବା ଅତିସୂକ୍ଷ୍ମ ନଳିକାଗୁଡ଼ିକୁ କ'ଣ କୁହାଯାଏ?",
+            options: [
+                "ମୂତ୍ରସାରଣୀ",
+                "ବୃକ୍‌କୀୟ ନଳିକା ବା ନେଫ୍ରନ୍ (Renal tubules / Nephron)",
+                "ଏଫରେଣ୍ଟ ଉପଧମନୀ",
+                "ଗ୍ଲୋମେରୁଲସ୍"
+            ],
+            answer: 1,
+            explanation: "ବୃକ୍‌କରେ ଥିବା ଅତିସୂକ୍ଷ୍ମ ନଳିକାଗୁଡ଼ିକୁ ବୃକ୍‌କୀୟ ନଳିକା ବା ନେଫ୍ରନ୍ କୁହାଯାଏ।"
+        },
+        {
+            q: "ଝିଣ୍ଟିକା ଆଦି ପତଙ୍ଗମାନଙ୍କରେ କେଉଁଟି ରେଚନ ଅଙ୍ଗରୂପେ କାର୍ଯ୍ୟକରେ?",
+            options: [
+                "ନେଫ୍ରିଡ଼ିଆ",
+                "ମାଲପିଝିଆନ୍ ନଳିକା (Malpighian tubules)",
+                "ଶିଖାକୋଷ",
+                "ସ୍ୱେଦଗ୍ରନ୍ଥି"
+            ],
+            answer: 1,
+            explanation: "ମାଲପିଝିଆନ୍ ନଳିକା ଝିଣ୍ଟିକା ଆଦି ପତଙ୍ଗମାନଙ୍କରେ ରେଚନ ଅଙ୍ଗରୂପେ କାର୍ଯ୍ୟକରେ।"
+        },
+        {
+            q: "ଜଳଚର ପ୍ରାଣୀ ଶରୀରରେ ଉତ୍ପନ୍ନ ଏମୋନିଆକୁ କେଉଁ ପ୍ରକ୍ରିୟା ଦ୍ୱାରା ଶରୀରରୁ ନିଷ୍କାସିତ କରିଥାନ୍ତି?",
+            options: [
+                "ବିସରଣ ପ୍ରକ୍ରିୟା (Diffusion)",
+                "ପରିସ୍ରବଣ",
+                "ପୁନଃଶୋଷଣ",
+                "ଘନନ"
+            ],
+            answer: 0,
+            explanation: "ଜଳଚର ପ୍ରାଣୀ ଶରୀରରେ ଉତ୍ପନ୍ନ ଏମୋନିଆକୁ ବିସରଣ ପ୍ରକ୍ରିୟା ଦ୍ୱାରା ଶରୀରରୁ ନିଷ୍କାସିତ କରିଥାନ୍ତି।"
+        },
+        {
+            q: "ତମାଖୁ ପତ୍ରରେ ଥିବା ନିକୋଟିନ୍ ଏକ ପ୍ରକାରର କ'ଣ ଅଟେ?",
+            options: [
+                "ଭିଟାମିନ୍",
+                "ଉପକ୍ଷାର (Alkaloid)",
+                "ପ୍ରୋଟିନ୍",
+                "କାର୍ବୋହାଇଡ୍ରେଟ୍"
+            ],
+            answer: 1,
+            explanation: "ତମାଖୁ ପତ୍ରରେ ଥିବା ନିକୋଟିନ୍ ଏକ ପ୍ରକାରର ଉପକ୍ଷାର (Alkaloid) ଅଟେ।"
+        },
+        {
+            q: "ପରିପକ୍ଵ ଜାଇଲେମ୍‌ରେ ରେଜିନ୍ ଓ ଅନ୍ୟ କେଉଁ ପଦାର୍ଥ ବର୍ଜ୍ୟବସ୍ତୁରୂପେ ସଂଗୃହୀତ ହୋଇଥାଏ?",
+            options: [
+                "ଟାନିନ୍ (Tanin)",
+                "ଗ୍ଲୁକୋଜ",
+                "ଷ୍ଟାର୍ଚ",
+                "ସେଲୁଲୋଜ"
+            ],
+            answer: 0,
+            explanation: "ପରିପକ୍ଵ ଜାଇଲେମ୍‌ରେ ରେଜିନ୍ ଓ ଟାନିନ୍ ପରି ବର୍ଜ୍ୟବସ୍ତୁ ସଂଗୃହୀତ ହୋଇଥାଏ।"
+        },
+        {
+            q: "ମଣିଷର ରେଚନ ତନ୍ତ୍ର ନିମ୍ନୋକ୍ତ ମଧ୍ୟରୁ କାହାକୁ ନେଇ ଗଠିତ ନୁହେଁ?",
+            options: [
+                "ବୃକ୍‌କ",
+                "ମୂତ୍ରସାରଣୀ",
+                "ମୂତ୍ରାଶୟ",
+                "ଯକୃତ୍ (ମୁଖ୍ୟ ରେଚନ ତନ୍ତ୍ର ଅର୍ଗଗାନ୍ ଭାବେ ବୃକ୍‌କ, ମୂତ୍ରସାରଣୀ, ମୂତ୍ରାଶୟ ଅନ୍ତର୍ଭୁକ୍ତ)"
+            ],
+            answer: 3,
+            explanation: "ମଣିଷର ରେଚନ ତନ୍ତ୍ର ବୃକ୍‌କ, ମୂତ୍ରସାରଣୀ, ମୂତ୍ରାଶୟ ଆଦିକୁ ନେଇ ଗଠିତ (ଯକୃତ୍ ଏକ ସହାୟକ ଅଙ୍ଗ)।"
+        },
+        {
+            q: "ବାଓମ୍ୟାନ୍ସ କ୍ୟାପସୁଲ୍ ଭିତରେ କ'ଣ ରହିଥାଏ?",
+            options: [
+                "ଗ୍ଲୋମେରୁଲସ୍ (Glomerulus)",
+                "ଗବିଣୀ ବସ୍ତି",
+                "ମୂତ୍ରସାରଣୀ",
+                "ମୂତ୍ରମାର୍ଗ"
+            ],
+            answer: 0,
+            explanation: "ପ୍ରତ୍ୟେକ ବାଓମ୍ୟାନ୍ସ କ୍ୟାପସୁଲ୍ ମଧ୍ୟରେ ଗ୍ଲୋମେରୁଲସ୍ ରହିଛି।"
+        },
+        {
+            q: "ବୃକ୍‌କ ଛଡ଼ା ଆଉ କେଉଁ ଦୁଇଟି ଅଙ୍ଗ ମଣିଷ ଶରୀରରେ ବର୍ଜ୍ୟବସ୍ତୁ ନିଷ୍କାସନରେ ସହାୟତା କରିଥାନ୍ତି?",
+            options: [
+                "ହୃତ୍‌ପିଣ୍ଡ ଓ ଫୁସଫୁସ",
+                "ଯକୃତ୍ ଓ ଚର୍ମ (Liver and Skin)",
+                "ଆଖି ଓ କାନ",
+                "ପାକସ୍ଥଳୀ ଓ ଅନ୍ତନଳୀ"
+            ],
+            answer: 1,
+            explanation: "ବୃକ୍‌କ ଛଡ଼ା ଯକୃତ୍ ଓ ଚର୍ମ ବର୍ଜ୍ୟବସ୍ତୁ ନିଷ୍କାସନରେ ସହାୟତା କରିଥାନ୍ତି।"
+        },
+        {
+            q: "ନେଫ୍ରନ୍‌ର ଅଂଶବିଶେଷ 'ମାଲ୍‌ପିଝିଆନ୍ ପିଣ୍ଡ' କାହାକୁ କୁହାଯାଏ?",
+            options: [
+                "କେବଳ ବାଓମ୍ୟାନ୍ସ କ୍ୟାପସୁଲ୍",
+                "ଗ୍ଲୋମେରୁଲସ୍ ଓ ବାଓମ୍ୟାନ୍ସ କ୍ୟାପସୁଲ୍ ମିଶି",
+                "କେବଳ ଗ୍ଲୋମେରୁଲସ୍",
+                "ବୃକ୍‌କୀୟ ନଳିକା"
+            ],
+            answer: 1,
+            explanation: "ଗ୍ଲୋମେରୁଲସ୍ ଓ ବାଓମ୍ୟାନ୍ସ କ୍ୟାପସୁଲ୍ ମିଶି ମାଲ୍‌ପିଝିଆନ୍ ପିଣ୍ଡ ଗଠନ କରନ୍ତି।"
+        },
+        {
+            q: "ମୂତ୍ରରେ ନିଷ୍କାସିତ ହେଉଥିବା ପଦାର୍ଥମାନଙ୍କ ଭିତରେ ପ୍ରଧାନ କ'ଣ ଅଟେ?",
+            options: [
+                "ଜଳ, ୟୁରିଆ, କ୍ରିଏଟିନିନ୍ ଓ ବିଭିନ୍ନ ପ୍ରକାରର ଲବଣ",
+                "କେବଳ ଗ୍ଲୁକୋଜ",
+                "କେବଳ ପ୍ରୋଟିନ୍",
+                "କେବଳ ଭିଟାମିନ୍"
+            ],
+            answer: 0,
+            explanation: "ମୂତ୍ରରେ ନିଷ୍କାସିତ ହେଉଥିବା ପଦାର୍ଥ ଭିତରେ ଜଳ, ୟୁରିଆ, କ୍ରିଏଟିନିନ୍, ବିଭିନ୍ନ ପ୍ରକାରର ଲବଣ ପ୍ରଧାନ।"
+        },
+        {
+            q: "ଉଦ୍ଭିଦରେ ବର୍ଜ୍ୟବସ୍ତୁ ସଂଗ୍ରହ ସମ୍ପର୍କରେ କେଉଁଟି ସଠିକ୍?",
+            options: [
+                "ବର୍ଜ୍ୟବସ୍ତୁଭରା ପତ୍ର ଶୁଖି ଝଡ଼ିପଡ଼େ",
+                "ସବୁ ବର୍ଜ୍ୟବସ୍ତୁ ଚିରଦିନ ପାଇଁ ପତ୍ରରେ ରହିଥାଏ",
+                "ଉଦ୍ଭିଦର କୌଣସି ବର୍ଜ୍ୟବସ୍ତୁ ନଥାଏ",
+                "ବର୍ଜ୍ୟବସ୍ତୁ କେବଳ ଫୁଲରେ ଜମା ହୁଏ"
+            ],
+            answer: 0,
+            explanation: "ଅନେକ ଉଦ୍ଭିଦରେ ବର୍ଜ୍ୟବସ୍ତୁ ପତ୍ରରେ ସଂଗୃହୀତ ହୁଏ ଏବଂ ପରେ ବର୍ଜ୍ୟବସ୍ତୁଭରା ପତ୍ର ଶୁଖି ଝଡ଼ିପଡ଼େ।"
+        }
+    ];
+
+    // Funny Facts Database (triggered every 20 questions)
+    const funnyFacts = [
+        {
+            emoji: "🫘",
+            title: "ଆଶ୍ଚର୍ଯ୍ୟଜନକ ବୃକ୍‌କ ତଥ୍ୟ!",
+            text: "ଆପଣ ଜାଣିଛନ୍ତି କି? ଆପଣଙ୍କ ବୃକ୍‌କ ଦିନକୁ ପ୍ରାୟ ୧୮୦ ଲିଟର ରକ୍ତ ଛାଣିଥାଏ! କିନ୍ତୁ ସେଥିରୁ ମାତ୍ର ପ୍ରାୟ ୧.୫ ଲିଟର ମୂତ୍ର ଆକାରରେ ବାହାରକୁ ଆସେ, ଏବଂ ବାକି ସବୁ ପୁନଃଶୋଷିତ ହୋଇଯାଏ!"
+        },
+        {
+            emoji: "🦒",
+            title: "ପ୍ରାଣୀ ଜଗତର ମଜାଦାର କଥା!",
+            text: "ଜିରାଫ୍ ଏବଂ ଅନ୍ୟ କିଛି ସ୍ତନ୍ୟପାୟୀ ପ୍ରାଣୀ ମଣିଷ ପରି ୟୁରିଆ ତିଆରି କରି ମୂତ୍ର ମାଧ୍ୟମରେ ନିଷ୍କାସନ କରନ୍ତି। କିନ୍ତୁ କୀଟପତଙ୍ଗମାନେ ଜଳ ସଞ୍ଚୟ କରିବା ପାଇଁ ଶୁଖିଲା ୟୁରିକ୍ ଏସିଡ୍ ଛାଡ଼ନ୍ତି!"
+        },
+        {
+            emoji: "🌳",
+            title: "ଉଦ୍ଭିଦର ଚତୁର ଉପାୟ!",
+            text: "ଉଦ୍ଭିଦମାନଙ୍କର ଆମ ପରି ବୃକ୍‌କ ନାହିଁ, ତେଣୁ ସେମାନେ ନିଜର ବର୍ଜ୍ୟବସ୍ତୁ (ଯେପରିକି ରେଜିନ୍, ଟାନିନ୍) ପରିପକ୍ଵ ଜାଇଲେମ୍‌ରେ ଜମା କରନ୍ତି କିମ୍ବା ପୁରୁଣା ପତ୍ରକୁ ଝଡ଼ାଇ ଦେଇ ସଫା ହୋଇଯାଆନ୍ତି!"
+        }
+    ];
+
+    let currentQuestionIndex = 0;
+    let score = 0;
+    let correctCount = 0;
+    let incorrectCount = 0;
+    let answered = false;
+
+    // DOM Elements
+    const welcomeScreen = document.getElementById('welcome-screen');
+    const quizScreen = document.getElementById('quiz-screen');
+    const factScreen = document.getElementById('fact-screen');
+    const resultScreen = document.getElementById('result-screen');
+
+    const questionIndicator = document.getElementById('question-indicator');
+    const scoreIndicator = document.getElementById('score-indicator');
+    const progressBar = document.getElementById('progress-bar');
+    const questionCard = document.getElementById('question-card');
+    const optionsContainer = document.getElementById('options-container');
+    const explanationBox = document.getElementById('explanation-box');
+    const nextBtn = document.getElementById('next-btn');
+
+    const factEmoji = document.getElementById('fact-emoji');
+    const factText = document.getElementById('fact-text');
+
+    const resTotal = document.getElementById('res-total');
+    const resCorrect = document.getElementById('res-correct');
+    const resIncorrect = document.getElementById('res-incorrect');
+    const resPercentage = document.getElementById('res-percentage');
+    const performanceMsg = document.getElementById('performance-msg');
+
+    function startQuiz() {
+        currentQuestionIndex = 0;
+        score = 0;
+        correctCount = 0;
+        incorrectCount = 0;
+        welcomeScreen.classList.remove('active');
+        quizScreen.classList.add('active');
+        loadQuestion();
+    }
+
+    function loadQuestion() {
+        answered = false;
+        explanationBox.classList.remove('show');
+        nextBtn.style.display = 'none';
+
+        const q = questionsData[currentQuestionIndex];
+        questionIndicator.textContent = `ପ୍ରଶ୍ନ ${currentQuestionIndex + 1}/${questionsData.length}`;
+        scoreIndicator.textContent = `ସ୍କୋର୍: ${score}`;
+        progressBar.style.width = `${((currentQuestionIndex) / questionsData.length) * 100}%`;
+
+        questionCard.textContent = q.q;
+        optionsContainer.innerHTML = '';
+
+        q.options.forEach((opt, idx) => {
+            const btn = document.createElement('button');
+            btn.className = 'option-btn';
+            btn.textContent = `${String.fromCharCode(65 + idx)}. ${opt}`;
+            btn.onclick = () => selectOption(idx, btn);
+            optionsContainer.appendChild(btn);
+        });
+    }
+
+    function selectOption(selectedIndex, selectedBtn) {
+        if (answered) return;
+        answered = true;
+
+        const q = questionsData[currentQuestionIndex];
+        const optionButtons = optionsContainer.getElementsByClassName('option-btn');
+
+        if (selectedIndex === q.answer) {
+            selectedBtn.classList.add('correct');
+            score += 10;
+            correctCount++;
+        } else {
+            selectedBtn.classList.add('incorrect');
+            optionButtons[q.answer].classList.add('correct');
+            incorrectCount++;
+        }
+
+        // Disable all options
+        Array.from(optionButtons).forEach(btn => btn.disabled = true);
+
+        // Show Explanation
+        explanationBox.innerHTML = `<strong>ବ୍ୟାଖ୍ୟା:</strong> ${q.explanation}`;
+        explanationBox.classList.add('show');
+        nextBtn.style.display = 'block';
+        scoreIndicator.textContent = `ସ୍କୋର୍: ${score}`;
+    }
+
+    function nextQuestion() {
+        currentQuestionIndex++;
+
+        // Check for Funny Fact Break after every 20 questions
+        if (currentQuestionIndex > 0 && currentQuestionIndex % 20 === 0 && currentQuestionIndex < questionsData.length) {
+            showFunnyFact();
+            return;
+        }
+
+        if (currentQuestionIndex < questionsData.length) {
+            loadQuestion();
+        } else {
+            showResults();
+        }
+    }
+
+    function showFunnyFact() {
+        quizScreen.classList.remove('active');
+        factScreen.classList.add('active');
+
+        const factIndex = Math.floor(currentQuestionIndex / 20) - 1;
+        const currentFact = funnyFacts[factIndex] || funnyFacts[0];
+
+        factEmoji.textContent = currentFact.emoji;
+        factText.textContent = currentFact.text;
+    }
+
+    function resumeQuiz() {
+        factScreen.classList.remove('active');
+        quizScreen.classList.add('active');
+        loadQuestion();
+    }
+
+    function showResults() {
+        quizScreen.classList.remove('active');
+        resultScreen.classList.add('active');
+
+        resTotal.textContent = questionsData.length;
+        resCorrect.textContent = correctCount;
+        resIncorrect.textContent = incorrectCount;
+
+        const percentage = Math.round((correctCount / questionsData.length) * 100);
+        resPercentage.textContent = `${percentage}%`;
+
+        if (percentage >= 80) {
+        performancemsg.textContent = "ଅତି ଉତ୍ତମ! ଆପଣ ଏହି ଅଧ୍ୟାୟକୁ ବହୁତ ଭଲ ଭାବରେ ବୁଝିଛନ୍ତି!";
+        } else if (percentage >= 50) {
+            performancemsg.textContent = "ଭଲ ପ୍ରଦର୍ଶନ! ଆଉଥ୍‌ର ପଢ଼ିଲେ ଆପଣ ଆହୁରି ଭଲ କରିପାରିବେ!";
+        } else {
+            performancemsg.textContent = "ଚେଷ୍ଟା ଜାରି ରଖନ୍ତୁ! ଅଧ୍ୟାୟଟିକୁ ପୁନର୍ବାର ପଢ଼ି କ୍ୱିଜ୍ ଦିଅନ୍ତୁ!";
+        }
+    }
+
+    function restartQuiz() {
+        resultScreen.classList.remove('active');
+        welcomeScreen.classList.add('active');
+    }
+</script>
+
+</body>
+</html>
