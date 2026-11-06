@@ -325,7 +325,6 @@ border-color:#34d399;font-size:15px;font-weight:800
 <label>3. Chapter / Topic</label>
 <select id="mcqTopic" class="field"></select>
 
-<!-- Start Quiz button only -->
 <button type="button" class="btn green full" onclick="startQuiz()" style="margin-top:8px;">START QUIZ ➜</button>
 </div>
 <button type="button" class="back" onclick="showScreen('home')">⬅ Home</button>
@@ -354,7 +353,7 @@ style="padding:6px 14px;font-size:13px;border-radius:8px;"
 onclick="pauseQuiz()">⏸ Pause</button>
 </div>
 
-<!-- Note Offline Save Toolbar inside Viewer (Quiz offline save removed) -->
+<!-- Note Offline Save Toolbar inside Viewer (Quiz save toolbar completely removed) -->
 <div id="noteActionToolbar" style="display:none;margin-bottom:10px;gap:8px;">
 <button type="button" class="btn green full" onclick="saveCurrentNoteOffline()">💾 Save Note for Offline</button>
 </div>
@@ -519,8 +518,6 @@ let currentSubject = "";
 let currentFolder = "";
 let currentViewMode = "quiz";
 let currentNoteHtmlUrl = "";
-let currentQuizUrl = "";
-let currentQuizTitle = "";
 
 let quizSeconds = 0;
 let quizTimerInterval = null;
@@ -1475,7 +1472,6 @@ function fmtTime(seconds) {
 /* START ONLINE QUIZ */
 function startQuiz() {
     const fileName = $("mcqTopic").value;
-    currentQuizTitle = $("mcqTopic").options[$("mcqTopic").selectedIndex]?.text || "Topic MCQ";
 
     if (!fileName) {
         alert("ଦୟାକରି ଏକ Topic ବାଛନ୍ତୁ।");
