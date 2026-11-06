@@ -708,20 +708,27 @@ async function saveCurrentNoteOffline() {
             date: new Date().toLocaleDateString("or-IN")
         };
 
-        localStorage.setItem(
-            "gs_saved_notes",
-            JSON.stringify(saved)
-        );
+        try {
+            localStorage.setItem("gs_saved_notes", JSON.stringify(saved));
+        } catch (qErr) {
+            const keys = Object.keys(saved);
+            if (keys.length > 1) {
+                delete saved[keys[0]];
+                localStorage.setItem("gs_saved_notes", JSON.stringify(saved));
+            } else {
+                throw qErr;
+            }
+        }
 
         alert("✅ ଏହି ନୋଟ୍ Offline ପାଇଁ Save ହୋଇଗଲା!");
 
     } catch (error) {
         console.error(error);
-        alert("ଇଣ୍ଟରନେଟ୍ ଯାଞ୍ଚ କରନ୍ତୁ କିମ୍ବା ପରେ ଚେଷ୍ଟା କରନ୍ତୁ।");
+        alert("ଷ୍ଟୋରେଜ୍ ପୂର୍ ହୋଇଯାଇଛି କିମ୍ବା ଇଣ୍ଟରନେଟ୍ ସମସ୍ୟା ଅଛି।");
     }
 }
 
-/* MCQ DOWNLOAD OFFLINE (WITH FALLBACK SUPPORT) */
+/* MCQ DOWNLOAD OFFLINE (WITH STORAGE CLEANUP FALLBACK) */
 async function downloadSelectedTopicMcq() {
     const topicSelect = $("mcqTopic");
     const fileName = topicSelect.value;
@@ -744,7 +751,7 @@ async function downloadSelectedTopicMcq() {
         htmlContent = await response.text();
     } catch (error) {
         console.warn("Network fetch failed, using fallback container:", error);
-        htmlContent = `<html><body style="font-family:sans-serif;padding:20px;text-align:center;"><h2>${topicName}</h2><p>⚠️ Live ଫାଇଲ୍ ମିଳିଲା ନାହିଁ, କିନ୍ତୁ ଏହା ଅଫ୍‌ଲାଇନ୍ ସେଭ୍ ହୋଇଛି।</p></body></html>`;
+        htmlContent = `<html><body style="font-family:sans-serif;padding:20px;text-align:center;"><h2>${topicName}</h2><p>⚠️ Offline Preview Mode (Live file not fetched)</p></body></html>`;
     }
 
     try {
@@ -763,15 +770,26 @@ async function downloadSelectedTopicMcq() {
             date: new Date().toLocaleDateString("or-IN")
         };
 
-        localStorage.setItem(
-            "gs_saved_mcqs",
-            JSON.stringify(saved)
-        );
+        try {
+            localStorage.setItem(
+                "gs_saved_mcqs",
+                JSON.stringify(saved)
+            );
+        } catch (quotaError) {
+            console.warn("Storage full, clearing oldest and retrying...");
+            const keys = Object.keys(saved);
+            if (keys.length > 1) {
+                delete saved[keys[0]];
+                localStorage.setItem("gs_saved_mcqs", JSON.stringify(saved));
+            } else {
+                throw quotaError;
+            }
+        }
 
         alert("✅ Quiz ସଫଳତାର ସହିତ Offline Save ହୋଇଗଲା!");
     } catch (storageError) {
         console.error("Storage Error:", storageError);
-        alert("❌ ଷ୍ଟୋରେଜ୍ ସମସ୍ୟା ଯୋଗୁଁ ସେଭ୍ ହୋଇପାରିଲା ନାହିଁ।");
+        alert("❌ ଫୋନ୍‌ରେ Storage କମ୍ ଥିବାରୁ Save ହୋଇପାରିଲା ନାହିଁ। କିଛି ପୁରୁଣା Saved ଡିଲିଟ୍ କରନ୍ତୁ।");
     }
 }
 
