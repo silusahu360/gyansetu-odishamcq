@@ -4,7 +4,31 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#4c1d95">
-<title>GyanSetu Odisha</title>
+<title>GyanSetu Odisha — Chrome Test</title>
+
+<!--
+  ═══════════════════════════════════════════════════════════════
+  CHROME TEST BUILD
+  ═══════════════════════════════════════════════════════════════
+  In Chrome, localStorage persists across page reloads AND browser
+  restarts. Use this file to verify all save/persist logic BEFORE
+  building the APK.
+
+  APK PERSISTENCE NOTE:
+  In the App Inventor WebViewer, localStorage is wiped on every
+  app launch. Persistence there relies on the TinyDB bridge blocks
+  in your .aia file. This file's bridge code is identical — so if
+  it works here (via localStorage), the .aia just needs the two
+  blocks described in the deployment guide.
+
+  ✓ Save note → appears in Saved Notes
+  ✓ Save quiz → appears in Downloaded Quiz
+  ✓ Reload page → all saves still there
+  ✓ Close tab → reopen file → all saves still there
+  ✓ Delete save → reload → stays deleted
+  ✓ Offline save (cached HTML) works
+  ═══════════════════════════════════════════════════════════════
+-->
 
 <style>
 :root{
@@ -167,7 +191,6 @@ footer{text-align:center;padding:15px;color:#6b5b86;font-size:13px}
 body.dark footer{color:#aab7c8}
 @media(max-width:380px){.btnrow{grid-template-columns:1fr}.grid{gap:8px}}
 
-/* NOKIA NEON SNAKE */
 .nokia-snake-card{
 background:#140c2b;border:2px solid #8b5cf6;
 border-radius:22px;padding:16px;width:100%;max-width:390px;
@@ -207,15 +230,13 @@ cursor:pointer;user-select:none;box-shadow:0 4px 10px rgba(0,0,0,0.4)
 
 <header id="appHeader">
 <div class="brand">🎓 GYANSETU <span>ODISHA</span></div>
-<p>NCERT & Odisha State Board Learning Portal</p>
+<p>NCERT & Odisha State Board Learning Portal — Chrome Test</p>
 </header>
 
 <main>
 
-<!-- HOME -->
 <section id="home" class="screen active">
 <h2>ସ୍ୱାଗତମ୍ | Welcome</h2>
-
 <div class="grid">
 <button type="button" class="tile" onclick="showClasses('notes')">📚 Notes Library</button>
 <button type="button" class="tile" onclick="openMcqSetup()">📝 MCQ Practice</button>
@@ -224,7 +245,6 @@ cursor:pointer;user-select:none;box-shadow:0 4px 10px rgba(0,0,0,0.4)
 <button type="button" class="tile" onclick="openOfflineQuizMenu()">⚡ Downloaded Quiz</button>
 <button type="button" class="tile" onclick="openSnakeGame()">🎮 Mind Fresh</button>
 </div>
-
 <div class="btnrow">
 <button type="button" class="btn green" onclick="shareApp()">📤 Share App</button>
 <button type="button" class="btn secondary" onclick="showScreen('studyTimer')">⏱ Study Timer</button>
@@ -232,7 +252,7 @@ cursor:pointer;user-select:none;box-shadow:0 4px 10px rgba(0,0,0,0.4)
 <button type="button" class="btn light" onclick="toggleTheme()">🌙 Dark / Light</button>
 <button type="button" class="btn light span2" onclick="showScreen('about')">ℹ About / Help</button>
 </div>
-
+<button type="button" class="btn cyan full" onclick="storageCheck()">🔍 Storage Check (Chrome test only)</button>
 <div style="text-align:center;">
 <div id="homeStatusPill" class="status-pill">
 <span class="dot"></span>
@@ -241,21 +261,18 @@ cursor:pointer;user-select:none;box-shadow:0 4px 10px rgba(0,0,0,0.4)
 </div>
 </section>
 
-<!-- CLASSES -->
 <section id="classes" class="screen">
 <h2 id="classTitle">Select Class</h2>
 <div class="grid" id="classGrid"></div>
 <button type="button" class="back" onclick="showScreen('home')">⬅ Home</button>
 </section>
 
-<!-- SUBJECTS -->
 <section id="subjects" class="screen">
 <h2 id="subjectTitle">Select Subject</h2>
 <div id="subjectList"></div>
 <button type="button" class="back" onclick="showScreen('classes')">⬅ Back to Classes</button>
 </section>
 
-<!-- FOLDER -->
 <section id="folder" class="screen">
 <h2 id="folderTitle">Study Materials</h2>
 <div class="card">
@@ -269,7 +286,6 @@ cursor:pointer;user-select:none;box-shadow:0 4px 10px rgba(0,0,0,0.4)
 <button type="button" class="back" onclick="showScreen('subjects')">⬅ Back</button>
 </section>
 
-<!-- MCQ SETUP -->
 <section id="mcqSetup" class="screen">
 <h2>Topic-wise MCQ Practice</h2>
 <div class="card">
@@ -287,7 +303,6 @@ cursor:pointer;user-select:none;box-shadow:0 4px 10px rgba(0,0,0,0.4)
 <button type="button" class="back" onclick="showScreen('home')">⬅ Home</button>
 </section>
 
-<!-- OFFLINE QUIZ MENU -->
 <section id="offlineQuizMenuScreen" class="screen">
 <h2>⚡ Downloaded Offline Quiz Sets</h2>
 <div class="card">
@@ -297,54 +312,41 @@ cursor:pointer;user-select:none;box-shadow:0 4px 10px rgba(0,0,0,0.4)
 <button type="button" class="back" onclick="showScreen('home')">⬅ Home</button>
 </section>
 
-<!-- VIEWER -->
 <section id="quizScreen" class="screen">
-
 <div id="quizTimerBar" class="quiz-timer-strip">
 <div style="display:flex;align-items:center;gap:8px;">
 <span style="font-size:15px;font-weight:700;">⏱ RUNNING TIME:</span>
 <span id="quizRunningTimer" class="quiz-time-badge">00:00</span>
 </div>
-<!-- FIX C: honest label — iframe scripts cannot be paused -->
 <button type="button" class="btn secondary" style="padding:6px 14px;font-size:13px;border-radius:8px;" onclick="pauseQuiz()">👁 Hide Quiz</button>
 </div>
-
 <div id="noteActionToolbar" style="display:none;margin-bottom:10px;gap:8px;">
 <button type="button" id="noteSaveBtn" class="btn green full" style="display:none" onclick="saveCurrentNoteOffline()">💾 Save Note for Offline</button>
 <button type="button" id="quizSaveBtn" class="btn green full" style="display:none" onclick="saveCurrentQuizOffline()">💾 Download Quiz for Offline</button>
 </div>
-
-<!-- FIX B: no sandbox — content is from your own GitHub repo and needs
-     fetch/localStorage/CORS to work. Sandboxing broke real quizzes. -->
 <div id="quizFrameContainer" style="width:100%;border-radius:14px;overflow:hidden;background:#fff;box-shadow:0 6px 20px rgba(0,0,0,0.1);">
 <iframe id="quizFrame" style="width:100%;height:72vh;border:0;display:block;" title="Content Viewer"></iframe>
 </div>
-
 <div class="btnrow" style="margin-top:14px;">
 <button type="button" id="viewerBackButton" class="back" style="margin-top:0;" onclick="handleViewerBack()">⬅ Back</button>
 <button type="button" class="back home-alt" style="margin-top:0;" onclick="goHomeFromViewer()">⌂ Home</button>
 </div>
 </section>
 
-<!-- SAVED NOTE VIEWER -->
 <section id="offlineNoteViewer" class="screen">
 <h2 id="savedNoteTitle">Saved Note</h2>
 <iframe id="savedNoteBody" title="Saved Note" style="width:100%;height:72vh;border:0;border-radius:14px;background:#fff;box-shadow:0 6px 20px rgba(0,0,0,0.1);"></iframe>
 <button type="button" class="back" onclick="showScreen('downloads')">⬅ Back to Saved Notes</button>
 </section>
 
-<!-- SNAKE -->
 <section id="snakeGameScreen" class="screen">
 <div class="nokia-snake-card">
 <div class="nokia-title" id="nokiaTitle">🐍 NOKIA NEON SNAKE ⚡</div>
-
 <div class="nokia-scoreboard">
 <div class="nokia-score-item">SCORE<span class="nokia-score-num" id="nokiaScoreVal">0</span></div>
 <div class="nokia-score-item">BEST RECORD<span class="nokia-score-num" id="nokiaHighScoreVal">0</span></div>
 </div>
-
 <canvas id="nokiaCanvas" width="300" height="300"></canvas>
-
 <div class="nokia-pad">
 <button type="button" class="nokia-pad-btn nokia-pad-up" onclick="setNokiaDir('UP')">▲</button>
 <button type="button" class="nokia-pad-btn nokia-pad-left" onclick="setNokiaDir('LEFT')">◀</button>
@@ -352,17 +354,14 @@ cursor:pointer;user-select:none;box-shadow:0 4px 10px rgba(0,0,0,0.4)
 <button type="button" class="nokia-pad-btn nokia-pad-right" onclick="setNokiaDir('RIGHT')">▶</button>
 <button type="button" class="nokia-pad-btn nokia-pad-down" onclick="setNokiaDir('DOWN')">▼</button>
 </div>
-
 <div class="btnrow" style="margin-top:10px;">
 <button type="button" class="btn cyan" onclick="resetNokiaGame()">🔄 Restart</button>
 <button type="button" class="btn purple" onclick="toggleNokiaSound()" id="nokiaSoundBtn">🔊 Sound ON</button>
 </div>
-
 <button type="button" class="back" onclick="exitNokiaGame()">⬅ Return to Home</button>
 </div>
 </section>
 
-<!-- HIDE-QUIZ MODAL -->
 <div id="pauseModal" class="modal-overlay">
 <div class="modal-box">
 <h3 style="color:#7c3aed;margin-top:0;font-size:22px;">👁 Quiz Hidden</h3>
@@ -373,7 +372,6 @@ cursor:pointer;user-select:none;box-shadow:0 4px 10px rgba(0,0,0,0.4)
 </div>
 </div>
 
-<!-- DOWNLOADS -->
 <section id="downloads" class="screen">
 <h2>📥 Saved Offline Notes</h2>
 <div class="card">
@@ -383,7 +381,6 @@ cursor:pointer;user-select:none;box-shadow:0 4px 10px rgba(0,0,0,0.4)
 <button type="button" class="back" onclick="showScreen('home')">Home</button>
 </section>
 
-<!-- BOOKMARKS -->
 <section id="bookmarks" class="screen">
 <h2>⭐ Bookmarks</h2>
 <div id="bookmarkList"></div>
@@ -391,7 +388,6 @@ cursor:pointer;user-select:none;box-shadow:0 4px 10px rgba(0,0,0,0.4)
 <button type="button" class="back" onclick="showScreen('home')">Home</button>
 </section>
 
-<!-- STUDY TIMER -->
 <section id="studyTimer" class="screen">
 <h2>⏱ Study Timer</h2>
 <div class="card" style="text-align:center;">
@@ -403,7 +399,6 @@ cursor:pointer;user-select:none;box-shadow:0 4px 10px rgba(0,0,0,0.4)
 <button type="button" class="back" onclick="showScreen('home')">Home</button>
 </section>
 
-<!-- ABOUT -->
 <section id="about" class="screen">
 <h2>About GyanSetu Odisha</h2>
 <div class="card">
@@ -425,7 +420,6 @@ cursor:pointer;user-select:none;box-shadow:0 4px 10px rgba(0,0,0,0.4)
 <script>
 "use strict";
 
-/* CONFIG */
 const GITHUB_PAGES_BASE = "https://silusahu360.github.io/gyansetu-odishamcq/";
 const GITHUB_MCQ_JSON_URL = GITHUB_PAGES_BASE + "mcq_data.json";
 const APP_DOWNLOAD_LINK = "https://github.com/silusahu360/gyansetu-odishamcq/releases/download/v1.0.0/GYANSETU_ODISHA.apk";
@@ -468,11 +462,6 @@ var nokiaGameInterval = null;
 
 const $ = id => document.getElementById(id);
 
-/* ==========================================================
-   STORAGE — dual-write to localStorage AND TinyDB bridge
-   FIX A: bridge push now runs unconditionally when available,
-          so APK TinyDB never falls behind localStorage.
-   ========================================================== */
 const memoryFallback = {};
 const lastBridgeJson = {};
 const pendingBridge = {};
@@ -502,6 +491,7 @@ function hydrateFromApp() {
       if (raw && raw.indexOf("DATA~") === 0) {
         const obj = JSON.parse(raw.substring(5));
         Object.keys(obj).forEach(function (k) {
+          if (bridgeKeys[k] && memoryFallback[k] !== undefined) return;
           memoryFallback[k] = obj[k];
           bridgeKeys[k] = true;
           try { lastBridgeJson[k] = JSON.stringify(obj[k]); } catch (e) {}
@@ -517,22 +507,42 @@ function hydrateFromApp() {
 }
 hydrateFromApp();
 
-/* Debounced bridge push — flushes 100ms after last change */
+(function hydrateWithRetry() {
+  let attempts = 0;
+  const retry = setInterval(() => {
+    attempts++;
+    hydrateFromApp();
+    if (attempts >= 10 || Object.keys(bridgeKeys).length > 0) {
+      clearInterval(retry);
+    }
+  }, 300);
+})();
+
 function pushToApp() {
   clearTimeout(pushTimer);
-  pushTimer = setTimeout(function () {
-    const keys = Object.keys(pendingBridge);
-    if (!keys.length) return;
-    const payload = {};
-    keys.forEach(k => { payload[k] = pendingBridge[k]; delete pendingBridge[k]; });
-    try {
-      window.AppInventor.setWebViewString("SAVE~" + JSON.stringify(payload));
-    } catch (e) {
-      console.error("Push error:", e);
-      keys.forEach(k => { pendingBridge[k] = payload[k]; });
-    }
-  }, 100);
+  pushTimer = setTimeout(flushNow, 100);
 }
+
+function flushNow() {
+  clearTimeout(pushTimer);
+  const keys = Object.keys(pendingBridge);
+  if (!keys.length) return;
+  const payload = {};
+  keys.forEach(k => { payload[k] = pendingBridge[k]; delete pendingBridge[k]; });
+  if (!hasBridge()) return;
+  try {
+    window.AppInventor.setWebViewString("SAVE~" + JSON.stringify(payload));
+  } catch (e) {
+    console.error("Flush error:", e);
+    keys.forEach(k => { pendingBridge[k] = payload[k]; });
+  }
+}
+
+window.addEventListener("pagehide", flushNow);
+window.addEventListener("beforeunload", flushNow);
+document.addEventListener("visibilitychange", function () {
+  if (document.visibilityState === "hidden") flushNow();
+});
 
 function load(key, fallback) {
   if (bridgeKeys[key]) return memoryFallback[key];
@@ -545,8 +555,6 @@ function load(key, fallback) {
   return memoryFallback[key] !== undefined ? memoryFallback[key] : fallback;
 }
 
-/* FIX A: dual-write. localStorage AND bridge both updated.
-   Returns true if data landed in at least one store. */
 function store(key, value) {
   memoryFallback[key] = value;
   lastStoreError = "";
@@ -583,6 +591,24 @@ function store(key, value) {
   return ok;
 }
 
+/* Diagnostic — Chrome test only */
+function storageCheck() {
+  const s = load("gs_saved_notes", {});
+  const q = load("gs_saved_mcqs", {});
+  const info = {
+    "localStorage available": hasLocalStorage,
+    "App Inventor bridge": hasBridge(),
+    "Bridge keys loaded": Object.keys(bridgeKeys).length ? Object.keys(bridgeKeys) : "(none)",
+    "Pending pushes": Object.keys(pendingBridge).length ? Object.keys(pendingBridge) : "(none)",
+    "Saved notes": Object.keys(s).length,
+    "Saved quizzes": Object.keys(q).length,
+    "Note keys": Object.keys(s).length ? Object.keys(s) : "(empty)",
+    "Quiz keys": Object.keys(q).length ? Object.keys(q) : "(empty)",
+    "Last store error": lastStoreError || "(none)"
+  };
+  alert(JSON.stringify(info, null, 2));
+}
+
 function esc(s) {
   return String(s).replace(/[&<>"']/g, c =>
     ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
@@ -605,7 +631,6 @@ function syncHeaderHeight() {
 window.addEventListener("resize", syncHeaderHeight);
 window.addEventListener("load", syncHeaderHeight);
 
-/* SCREEN MANAGEMENT */
 function showScreen(id) {
   let target = $(id) || $("home");
   if (id !== "snakeGameScreen") {
@@ -621,7 +646,6 @@ function showScreen(id) {
   if (id === "offlineQuizMenuScreen") renderDownloadedQuizList();
 }
 
-/* CLASSES */
 function showClasses(mode) {
   window.classMode = mode;
   $("classTitle").textContent = mode === "notes"
@@ -639,7 +663,6 @@ function showClasses(mode) {
   showScreen("classes");
 }
 
-/* SUBJECTS */
 function showSubjects(cls) {
   currentClass = cls;
   $("subjectList").innerHTML = "";
@@ -658,7 +681,6 @@ function showSubjects(cls) {
   showScreen("subjects");
 }
 
-/* OPEN SUBJECT */
 function openSubject(sub) {
   currentSubject = sub;
   currentFolder = classDriveFolders[currentClass];
@@ -709,7 +731,6 @@ function openSubject(sub) {
   showScreen("folder");
 }
 
-/* VIEWER BACK */
 function cleanViewerFrame() {
   clearInterval(quizTimerInterval);
   quizTimerInterval = null;
@@ -735,7 +756,6 @@ function goHomeFromViewer() {
   showScreen("home");
 }
 
-/* SAVE NOTE OFFLINE — uses cache, works after connection drops */
 async function saveCurrentNoteOffline() {
   try {
     if (!currentNoteHtml) {
@@ -750,6 +770,7 @@ async function saveCurrentNoteOffline() {
       date: new Date().toLocaleDateString("or-IN")
     };
     if (store("gs_saved_notes", saved)) {
+      flushNow();
       alert("✅ ନୋଟ୍ ସଫଳତା ସହ Save ହୋଇଗଲା!");
     } else {
       alert(MSG_STORAGE_FULL + "\n\n" + lastStoreError);
@@ -760,7 +781,6 @@ async function saveCurrentNoteOffline() {
   }
 }
 
-/* SAVE QUIZ OFFLINE — uses cache */
 async function saveCurrentQuizOffline() {
   try {
     if (!currentQuizTitle || !currentQuizHtml) {
@@ -774,6 +794,7 @@ async function saveCurrentQuizOffline() {
       date: new Date().toLocaleDateString("or-IN")
     };
     if (store("gs_saved_mcqs", s)) {
+      flushNow();
       alert("✅ Quiz ସଫଳତା ସହ Download ହୋଇଗଲା!");
     } else {
       alert(MSG_STORAGE_FULL + "\n\n" + lastStoreError);
@@ -784,7 +805,6 @@ async function saveCurrentQuizOffline() {
   }
 }
 
-/* SAVE SELECTED TOPIC FROM MCQ SETUP SCREEN */
 async function downloadSelectedTopicMcq() {
   const sel = $("mcqTopic");
   const file = sel.value;
@@ -803,6 +823,7 @@ async function downloadSelectedTopicMcq() {
     const s = load("gs_saved_mcqs", {});
     s[key] = { title: key, content: html, date: new Date().toLocaleDateString("or-IN") };
     if (store("gs_saved_mcqs", s)) {
+      flushNow();
       alert("✅ ଏହି Topic ଅଫଲାଇନ୍ ପାଇଁ Save ହୋଇଗଲା!");
     } else {
       alert(MSG_STORAGE_FULL + "\n\n" + lastStoreError);
@@ -813,7 +834,6 @@ async function downloadSelectedTopicMcq() {
   }
 }
 
-/* SAVED NOTES */
 function openSavedNotesScreen() {
   showScreen("downloads");
 }
@@ -901,11 +921,12 @@ function deleteSavedNote(key) {
   delete saved[key];
   if (!store("gs_saved_notes", saved)) {
     alert("⚠ ସ୍ଥାୟୀ ଭାବରେ ଡିଲିଟ୍ ହେଲା ନାହିଁ।\n" + lastStoreError);
+  } else {
+    flushNow();
   }
   renderSavedNotesList();
 }
 
-/* DOWNLOADED QUIZ */
 function openOfflineQuizMenu() {
   showScreen("offlineQuizMenuScreen");
 }
@@ -974,11 +995,12 @@ function deleteDownloadedMcq(key) {
   delete s[key];
   if (!store("gs_saved_mcqs", s)) {
     alert("⚠ ସ୍ଥାୟୀ ଭାବରେ ଡିଲିଟ୍ ହେଲା ନାହିଁ।\n" + lastStoreError);
+  } else {
+    flushNow();
   }
   renderDownloadedQuizList();
 }
 
-/* NOKIA NEON SNAKE */
 var nokiaCanvas = null;
 var nokiaCtx = null;
 var nokiaGridSize = 15;
@@ -1170,7 +1192,6 @@ document.addEventListener("keydown", function (e) {
   }, { passive: true });
 })();
 
-/* UTILITIES */
 function sendBridge(msg) {
   if (window.AppInventor && typeof window.AppInventor.setWebViewString === "function") {
     window.AppInventor.setWebViewString(msg);
@@ -1204,6 +1225,7 @@ function downloadNotes() {
       const saved = load("gs_saved_notes", {});
       saved[key] = { title: key, content: html, date: new Date().toLocaleDateString("or-IN") };
       if (store("gs_saved_notes", saved)) {
+        flushNow();
         $("noteStatus").textContent = "✅ ନୋଟ୍ ଅଫଲାଇନ୍ ସେଭ୍ ହୋଇଗଲା!";
       } else {
         $("noteStatus").textContent = MSG_STORAGE_FULL + " " + lastStoreError;
@@ -1219,13 +1241,13 @@ function downloadNotes() {
     });
 }
 
-/* BOOKMARKS */
 function bookmarkCurrent() {
   const bookmarks = load("gs_bookmarks", []);
   const value = { cls: currentClass, sub: currentSubject, mode: window.classMode || "materials" };
   if (!bookmarks.some(x => x.cls === value.cls && x.sub === value.sub && (x.mode || "materials") === value.mode)) {
     bookmarks.push(value);
     if (store("gs_bookmarks", bookmarks)) {
+      flushNow();
       $("noteStatus").textContent = "⭐ Subject bookmarked successfully!";
     } else {
       $("noteStatus").textContent = "⚠ Bookmark could not be saved permanently. " + lastStoreError;
@@ -1279,17 +1301,18 @@ function deleteBookmark(index) {
   const bookmarks = load("gs_bookmarks", []);
   bookmarks.splice(index, 1);
   store("gs_bookmarks", bookmarks);
+  flushNow();
   renderBookmarks();
 }
 
 function clearBookmarks() {
   if (confirm("Clear all bookmarks?")) {
     store("gs_bookmarks", []);
+    flushNow();
     renderBookmarks();
   }
 }
 
-/* MCQ SETUP */
 function openMcqSetup() {
   showScreen("mcqSetup");
   const prevClass = $("mcqClass").value;
@@ -1352,7 +1375,6 @@ function fmtTime(s) {
   return String(Math.floor(s / 60)).padStart(2, "0") + ":" + String(s % 60).padStart(2, "0");
 }
 
-/* START ONLINE QUIZ */
 function startQuiz() {
   const fileName = $("mcqTopic").value;
   if (!fileName) {
@@ -1410,7 +1432,6 @@ function startQuiz() {
     });
 }
 
-/* HIDE QUIZ (not a true pause — iframe scripts keep running) */
 function pauseQuiz() {
   isQuizPaused = true;
   $("pausedTimeText").textContent = fmtTime(quizSeconds);
@@ -1428,7 +1449,6 @@ function closePauseAndExit() {
   showScreen("mcqSetup");
 }
 
-/* STUDY TIMER */
 function startStudy() {
   if (studyInterval) return;
   studyInterval = setInterval(() => { studySeconds++; renderStudyClock(); }, 1000);
@@ -1450,13 +1470,11 @@ function renderStudyClock() {
   ].map(v => String(v).padStart(2, "0")).join(":");
 }
 
-/* THEME */
 function toggleTheme() {
   document.body.classList.toggle("dark");
   store("gs_dark_theme", document.body.classList.contains("dark") ? "1" : "0");
 }
 
-/* SHARE */
 function shareApp() {
   const message =
     "🎓 ଜ୍ଞାନସେତୁ ଓଡ଼ିଶା (GyanSetu Odisha)\n" +
@@ -1478,7 +1496,6 @@ function shareApp() {
   }
 }
 
-/* RESTORE THEME */
 if (load("gs_dark_theme", "0") === "1") {
   document.body.classList.add("dark");
 }
