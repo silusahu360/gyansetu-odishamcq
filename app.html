@@ -5,34 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#4c1d95">
 <title>GyanSetu Odisha</title>
-
 <style>
-:root{
---primary:#6d28d9;--deep:#4c1d95;--accent:#fbbf24;
---bg:#f5f3ff;--card:#ffffff;--ink:#241746;--muted:#71658b;
---line:#e6ddf7;--good:#15803d;--bad:#b91c1c;
---pill-bg:#ede9fe;--pill-ink:#6d28d9;
-}
+:root{--primary:#6d28d9;--deep:#4c1d95;--accent:#fbbf24;--bg:#f5f3ff;--card:#ffffff;--ink:#241746;--muted:#71658b;--line:#e6ddf7;--good:#15803d;--bad:#b91c1c;--pill-bg:#ede9fe;--pill-ink:#6d28d9;}
 *{box-sizing:border-box}
-body{
-margin:0;font-family:system-ui,-apple-system,"Noto Sans Oriya","Noto Sans",sans-serif;
-font-size:17px;line-height:1.55;
-background:linear-gradient(145deg,#fdf2f8 0%,#f3e8ff 45%,#e0f2fe 100%);
-background-attachment:fixed;color:var(--ink);min-height:100vh;
-}
-body.dark{
---bg:#101827;--card:#1d293b;--ink:#edf2f7;--muted:#aab7c8;--line:#344256;
---pill-bg:#312e81;--pill-ink:#e0e7ff;
-background:linear-gradient(145deg,#111827,#1e1b4b 55%,#172554);
-background-attachment:fixed;
-}
-header{
-background:linear-gradient(115deg,#4c1d95 0%,#7c3aed 42%,#db2777 100%);
-color:#fff;text-align:center;padding:18px 12px;
-position:sticky;top:0;z-index:5;
-box-shadow:0 4px 14px rgba(0,0,0,0.15);
-border-bottom:4px solid #fbbf24;
-}
+body{margin:0;font-family:system-ui,-apple-system,"Noto Sans Oriya","Noto Sans",sans-serif;font-size:17px;line-height:1.55;background:linear-gradient(145deg,#fdf2f8 0%,#f3e8ff 45%,#e0f2fe 100%);background-attachment:fixed;color:var(--ink);min-height:100vh;}
+body.dark{--bg:#101827;--card:#1d293b;--ink:#edf2f7;--muted:#aab7c8;--line:#344256;--pill-bg:#312e81;--pill-ink:#e0e7ff;background:linear-gradient(145deg,#111827,#1e1b4b 55%,#172554);background-attachment:fixed;}
+header{background:linear-gradient(115deg,#4c1d95 0%,#7c3aed 42%,#db2777 100%);color:#fff;text-align:center;padding:18px 12px;position:sticky;top:0;z-index:5;box-shadow:0 4px 14px rgba(0,0,0,0.15);border-bottom:4px solid #fbbf24;}
 .brand{font-size:clamp(22px,5vw,30px);font-weight:850}
 .brand span{color:#fde68a}
 header p{margin:6px 0 0;font-size:15px;line-height:1.5;opacity:.95}
@@ -42,32 +20,15 @@ main{max-width:680px;margin:auto;padding:18px 14px 28px}
 @keyframes up{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
 h2{font-size:23px;line-height:1.4;margin:12px 0 18px;text-align:center;color:#5b21b6}
 body.dark h2{color:#c4b5fd}
-.card{
-background:var(--card);border:1px solid #e9d5ff;
-border-radius:16px;padding:16px;margin-bottom:12px;
-box-shadow:0 8px 24px rgba(76,29,149,0.08)
-}
+.card{background:var(--card);border:1px solid #e9d5ff;border-radius:16px;padding:16px;margin-bottom:12px;box-shadow:0 8px 24px rgba(76,29,149,0.08)}
 body.dark .card{border-color:#344256;box-shadow:0 8px 24px rgba(0,0,0,0.25)}
 .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.tile{
-border:0;border-radius:13px;padding:16px 12px;color:white;
-font-size:17px;line-height:1.4;font-weight:750;
-background:linear-gradient(135deg,#2563eb,#7c3aed);
-min-height:68px;cursor:pointer;
-box-shadow:0 5px 14px rgba(76,29,149,0.15);
-transition:transform .15s,filter .15s;
-display:flex;align-items:center;justify-content:center;text-align:center;
-}
+.tile{border:0;border-radius:13px;padding:16px 12px;color:white;font-size:17px;line-height:1.4;font-weight:750;background:linear-gradient(135deg,#2563eb,#7c3aed);min-height:68px;cursor:pointer;box-shadow:0 5px 14px rgba(76,29,149,0.15);transition:transform .15s,filter .15s;display:flex;align-items:center;justify-content:center;text-align:center;}
 .tile:nth-child(2n){background:linear-gradient(135deg,#0f9f8f,#047857)}
 .tile:nth-child(3n){background:linear-gradient(135deg,#f97316,#db2777)}
 .tile:nth-child(4n){background:linear-gradient(135deg,#0891b2,#2563eb)}
 .tile:active,.btn:active{transform:scale(.98);filter:brightness(.96)}
-.btn{
-border:0;border-radius:10px;padding:14px 16px;
-background:linear-gradient(135deg,#6d28d9,#4f46e5);
-color:white;font-weight:700;font-size:16px;line-height:1.4;
-cursor:pointer;box-shadow:0 3px 9px rgba(76,29,149,0.12)
-}
+.btn{border:0;border-radius:10px;padding:14px 16px;background:linear-gradient(135deg,#6d28d9,#4f46e5);color:white;font-weight:700;font-size:16px;line-height:1.4;cursor:pointer;box-shadow:0 3px 9px rgba(76,29,149,0.12)}
 .btn.secondary{background:linear-gradient(135deg,#64748b,#475569)}
 .btn.green{background:linear-gradient(135deg,#10b981,#047857)}
 .btn.orange{background:linear-gradient(135deg,#f59e0b,#ea580c)}
@@ -80,86 +41,35 @@ body.dark .btn.light{background:#312e81;color:#ede9fe;border-color:#4338ca}
 .btnrow .span2{grid-column:1 / -1}
 .btnrow3{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin:14px 0 4px}
 .btn.full{width:100%;margin-top:8px}
-.subject{
-display:flex;align-items:center;justify-content:space-between;
-gap:10px;text-align:left;width:100%;margin:8px 0;
-background:var(--card);color:var(--ink);
-border:1px solid var(--line);border-left:5px solid #8b5cf6;
-border-radius:12px;padding:16px;font-size:16px;font-weight:700;
-box-shadow:0 4px 12px rgba(76,29,149,0.06);cursor:pointer
-}
+.subject{display:flex;align-items:center;justify-content:space-between;gap:10px;text-align:left;width:100%;margin:8px 0;background:var(--card);color:var(--ink);border:1px solid var(--line);border-left:5px solid #8b5cf6;border-radius:12px;padding:16px;font-size:16px;font-weight:700;box-shadow:0 4px 12px rgba(76,29,149,0.06);cursor:pointer}
 .subject:nth-child(3n+2){border-left-color:#0d9488}
 .subject:nth-child(3n){border-left-color:#f97316}
-.field{
-width:100%;padding:12px;border:1.5px solid #d8b4fe;
-border-radius:9px;background:var(--card);color:var(--ink);
-margin:5px 0 12px;font-size:15px
-}
+.field{width:100%;padding:12px;border:1.5px solid #d8b4fe;border-radius:9px;background:var(--card);color:var(--ink);margin:5px 0 12px;font-size:15px}
 .field:focus{outline:2px solid #a78bfa;border-color:#7c3aed}
-.back{
-border:2px solid #a78bfa;color:#4c1d95;
-background:linear-gradient(135deg,#fff7ed,#ede9fe);
-width:100%;padding:16px;border-radius:25px;margin-top:14px;
-font-size:18px;font-weight:800;
-box-shadow:0 5px 14px rgba(76,29,149,0.12);cursor:pointer
-}
+.back{border:2px solid #a78bfa;color:#4c1d95;background:linear-gradient(135deg,#fff7ed,#ede9fe);width:100%;padding:16px;border-radius:25px;margin-top:14px;font-size:18px;font-weight:800;box-shadow:0 5px 14px rgba(76,29,149,0.12);cursor:pointer}
 body.dark .back{color:#f5f3ff;border:2px solid #8b5cf6;background:linear-gradient(135deg,#312e81,#1d293b)}
 .back.home-alt{background:linear-gradient(135deg,#e0e7ff,#ede9fe);color:#4338ca}
 body.dark .back.home-alt{background:linear-gradient(135deg,#312e81,#1d293b);color:#f5f3ff}
-.status-pill{
-display:inline-flex;align-items:center;gap:8px;
-padding:8px 16px;margin:12px auto 4px;
-background:linear-gradient(135deg,#ede9fe,#fdf4ff);
-border:1.5px solid #c4b5fd;border-radius:30px;
-color:#5b21b6;font-size:14px;font-weight:750;
-box-shadow:0 2px 8px rgba(124,58,237,0.1)
-}
+.status-pill{display:inline-flex;align-items:center;gap:8px;padding:8px 16px;margin:12px auto 4px;background:linear-gradient(135deg,#ede9fe,#fdf4ff);border:1.5px solid #c4b5fd;border-radius:30px;color:#5b21b6;font-size:14px;font-weight:750;box-shadow:0 2px 8px rgba(124,58,237,0.1)}
 body.dark .status-pill{background:linear-gradient(135deg,#1e1b4b,#312e81);border-color:#6d28d9;color:#e0e7ff}
 .dot{width:9px;height:9px;background:#22c55e;border-radius:50%;box-shadow:0 0 8px #22c55e}
 .muted{color:var(--muted);font-size:15px;line-height:1.5}
-.quiz-timer-strip{
-position:sticky;top:var(--hdr,84px);z-index:9;
-display:flex;justify-content:space-between;align-items:center;
-background:linear-gradient(100deg,#4c1d95,#7c3aed);
-color:#fff;padding:10px 16px;border-radius:12px;
-margin-bottom:12px;box-shadow:0 6px 18px rgba(76,29,149,0.3)
-}
+.quiz-timer-strip{position:sticky;top:var(--hdr,84px);z-index:9;display:flex;justify-content:space-between;align-items:center;background:linear-gradient(100deg,#4c1d95,#7c3aed);color:#fff;padding:10px 16px;border-radius:12px;margin-bottom:12px;box-shadow:0 6px 18px rgba(76,29,149,0.3)}
 .quiz-time-badge{font-size:19px;font-weight:850;color:#fde68a;font-family:monospace;letter-spacing:1px}
 .subject-group{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px;margin-bottom:12px}
-.subject-header{
-font-size:16px;font-weight:800;color:#6d28d9;
-display:flex;justify-content:space-between;align-items:center;
-padding-bottom:8px;border-bottom:1.5px dashed var(--line);margin-bottom:8px
-}
+.subject-header{font-size:16px;font-weight:800;color:#6d28d9;display:flex;justify-content:space-between;align-items:center;padding-bottom:8px;border-bottom:1.5px dashed var(--line);margin-bottom:8px}
 body.dark .subject-header{color:#c4b5fd}
 .count-badge{font-size:12px;background:var(--pill-bg);padding:2px 8px;border-radius:12px;color:var(--pill-ink)}
 .item{padding:10px 6px;border-bottom:1px solid var(--line);font-size:15px}
 .item:last-child{border-bottom:0}
-.modal-overlay{
-position:fixed;top:0;left:0;right:0;bottom:0;
-background:rgba(15,23,42,0.85);z-index:99;
-display:none;align-items:center;justify-content:center;padding:16px
-}
+.modal-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(15,23,42,0.85);z-index:99;display:none;align-items:center;justify-content:center;padding:16px}
 .modal-overlay.top{z-index:120}
 .modal-overlay.active{display:flex}
-.modal-box{
-background:var(--card);color:var(--ink);
-border-radius:18px;max-width:420px;width:100%;
-padding:24px;text-align:center;
-box-shadow:0 12px 36px rgba(0,0,0,0.35);border:2px solid #a78bfa
-}
+.modal-box{background:var(--card);color:var(--ink);border-radius:18px;max-width:420px;width:100%;padding:24px;text-align:center;box-shadow:0 12px 36px rgba(0,0,0,0.35);border:2px solid #a78bfa}
 .msg-text{font-size:18px;font-weight:700;margin:6px 0 18px;white-space:pre-line;line-height:1.5;word-break:break-word}
 .paused-box{margin:18px 0;padding:12px;background:var(--pill-bg);border-radius:12px;font-size:18px;font-weight:800;color:var(--pill-ink)}
-.dev-badge-card{
-margin-top:20px;padding:16px 14px;
-background:linear-gradient(135deg,rgba(109,40,217,.08),rgba(219,39,119,.08));
-border:1.5px solid #c4b5fd;border-radius:14px;text-align:center
-}
-.dev-tag{
-display:inline-block;font-size:11px;font-weight:750;
-letter-spacing:1px;color:#7c3aed;text-transform:uppercase;
-background:#ede9fe;padding:3px 10px;border-radius:20px;margin-bottom:6px
-}
+.dev-badge-card{margin-top:20px;padding:16px 14px;background:linear-gradient(135deg,rgba(109,40,217,.08),rgba(219,39,119,.08));border:1.5px solid #c4b5fd;border-radius:14px;text-align:center}
+.dev-tag{display:inline-block;font-size:11px;font-weight:750;letter-spacing:1px;color:#7c3aed;text-transform:uppercase;background:#ede9fe;padding:3px 10px;border-radius:20px;margin-bottom:6px}
 .dev-name{font-size:21px;font-weight:850;color:#4c1d95;display:flex;align-items:center;justify-content:center;gap:6px}
 .dev-desc{font-size:13px;color:#64748b;margin-top:6px;line-height:1.4}
 body.dark .dev-badge-card{background:linear-gradient(135deg,rgba(139,92,246,.15),rgba(236,72,153,.15));border-color:#6d28d9}
@@ -170,41 +80,42 @@ footer{text-align:center;padding:15px;color:#6b5b86;font-size:13px}
 body.dark footer{color:#aab7c8}
 @media(max-width:380px){.btnrow{grid-template-columns:1fr}.grid{gap:8px}.btnrow3{grid-template-columns:1fr}}
 
-.nokia-snake-card{
-background:#140c2b;border:2px solid #8b5cf6;
-border-radius:22px;padding:16px;width:100%;max-width:390px;
-margin:0 auto;box-shadow:0 0 25px rgba(139,92,246,0.3);
-text-align:center;color:#f8fafc
-}
+/* LIVE CLOCK CSS */
+.live-clock-container{text-align:center;margin:-8px 0 16px;}
+.live-clock-box{display:inline-flex;align-items:center;gap:8px;background:var(--card);border:1.5px solid #c4b5fd;padding:8px 18px;border-radius:30px;font-family:monospace;font-size:16px;font-weight:850;color:#6d28d9;box-shadow:0 4px 12px rgba(76,29,149,0.1);}
+body.dark .live-clock-box{background:#1d293b;border-color:#6d28d9;color:#e0e7ff;}
+#liveTime{color:#db2777;font-size:18px;}
+body.dark #liveTime{color:#f472b6;}
+
+/* SNAKE GAME CSS */
+.nokia-snake-card{background:#140c2b;border:2px solid #8b5cf6;border-radius:22px;padding:16px;width:100%;max-width:390px;margin:0 auto;box-shadow:0 0 25px rgba(139,92,246,0.3);text-align:center;color:#f8fafc}
 .nokia-title{font-size:21px;font-weight:900;letter-spacing:1.5px;color:#fde047;text-shadow:0 0 12px rgba(253,224,71,0.5);margin:0 0 10px}
-.nokia-scoreboard{
-display:flex;justify-content:space-around;
-background:#0d0620;border:1.5px solid #3b2075;
-border-radius:14px;padding:8px;margin-bottom:12px;font-weight:800
-}
+.nokia-scoreboard{display:flex;justify-content:space-around;background:#0d0620;border:1.5px solid #3b2075;border-radius:14px;padding:8px;margin-bottom:12px;font-weight:800}
 .nokia-score-item{font-size:13px;color:#a78bfa}
 .nokia-score-num{font-size:20px;color:#38bdf8;font-family:monospace;display:block}
-#nokiaCanvas{
-background:#090414;border:2.5px solid #38bdf8;
-border-radius:12px;box-shadow:0 0 16px rgba(56,189,248,0.25);
-display:block;margin:0 auto 12px;max-width:100%;touch-action:none
-}
+#nokiaCanvas{background:#090414;border:2.5px solid #38bdf8;border-radius:12px;box-shadow:0 0 16px rgba(56,189,248,0.25);display:block;margin:0 auto 12px;max-width:100%;touch-action:none}
 .nokia-pad{display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(3,50px);gap:8px;width:210px;margin:10px auto}
-.nokia-pad-btn{
-background:linear-gradient(135deg,#6d28d9,#4f46e5);
-border:1.5px solid #a78bfa;border-radius:12px;color:white;
-font-size:22px;display:flex;align-items:center;justify-content:center;
-cursor:pointer;user-select:none;box-shadow:0 4px 10px rgba(0,0,0,0.4)
-}
+.nokia-pad-btn{background:linear-gradient(135deg,#6d28d9,#4f46e5);border:1.5px solid #a78bfa;border-radius:12px;color:white;font-size:22px;display:flex;align-items:center;justify-content:center;cursor:pointer;user-select:none;box-shadow:0 4px 10px rgba(0,0,0,0.4)}
 .nokia-pad-btn:active{transform:scale(0.94);background:#7c3aed}
 .nokia-pad-up{grid-column:2;grid-row:1}
 .nokia-pad-left{grid-column:1;grid-row:2}
 .nokia-pad-center{grid-column:2;grid-row:2;background:#059669;border-color:#34d399;font-size:15px;font-weight:800}
 .nokia-pad-right{grid-column:3;grid-row:2}
 .nokia-pad-down{grid-column:2;grid-row:3}
+
+/* STUDY GARDEN CSS */
+.garden-sky{background:linear-gradient(180deg,#bae6fd 0%,#e0f2fe 100%);border-radius:16px 16px 0 0;padding:20px;text-align:center;border:1px solid #bae6fd;border-bottom:0;min-height:160px;display:flex;flex-direction:column;justify-content:flex-end;}
+body.dark .garden-sky{background:linear-gradient(180deg,#0f172a 0%,#1e293b 100%);border-color:#334155;}
+.garden-soil{background:#a16207;border-radius:0 0 16px 16px;height:40px;border:1px solid #854d0e;border-top:4px solid #713f12;box-shadow:inset 0 4px 10px rgba(0,0,0,0.2);}
+body.dark .garden-soil{background:#451a03;border-color:#78350f;border-top-color:#451a03;}
+.gd-plants{font-size:40px;line-height:1.2;letter-spacing:4px;}
+.pg-stat-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:12px;}
+.pg-stat{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 8px;text-align:center;box-shadow:0 4px 12px rgba(76,29,149,.06);}
+.pg-stat-num{font-size:20px;font-weight:850;color:#6d28d9;}
+body.dark .pg-stat-num{color:#c4b5fd;}
+.pg-stat-label{font-size:12px;color:var(--muted);margin-top:4px;font-weight:600;}
 </style>
 </head>
-
 <body>
 
 <header id="appHeader">
@@ -213,16 +124,23 @@ cursor:pointer;user-select:none;box-shadow:0 4px 10px rgba(0,0,0,0.4)
 </header>
 
 <main>
-
 <section id="home" class="screen active">
 <h2>ସ୍ୱାଗତମ୍ | Welcome</h2>
+
+<!-- LIVE CLOCK ADDED HERE -->
+<div class="live-clock-container">
+  <div class="live-clock-box">
+    <span>📅 <span id="liveDate">--/--/----</span></span> |
+    <span>⏰ <span id="liveTime">--:--:--</span></span>
+  </div>
+</div>
+
 <div class="grid">
-<button type="button" class="tile" onclick="showClasses('notes')">📚 Notes Library</button>
 <button type="button" class="tile" onclick="openMcqSetup()">📝 MCQ Practice</button>
-<button type="button" class="tile" onclick="showClasses('materials')">📂 Study Materials</button>
-<button type="button" class="tile" onclick="openSavedNotesScreen()">📥 Saved Notes</button>
+<button type="button" class="tile" onclick="showClasses()">📂 Study Materials</button>
 <button type="button" class="tile" onclick="openOfflineQuizMenu()">⚡ Downloaded Quiz</button>
 <button type="button" class="tile" onclick="openSnakeGame()">🎮 Mind Fresh</button>
+<button type="button" class="tile" style="grid-column:1 / -1; background:linear-gradient(135deg,#10b981,#047857);" onclick="openGarden()">🌱 Study Garden (ଅଧ୍ୟୟନ ବଗିଚା)</button>
 </div>
 <div class="btnrow">
 <button type="button" class="btn green" onclick="shareApp()">📤 Share App</button>
@@ -257,8 +175,6 @@ cursor:pointer;user-select:none;box-shadow:0 4px 10px rgba(0,0,0,0.4)
 <div class="card">
 <p id="folderMessage" class="muted">Google Drive folder is ready for your chapters.</p>
 <button type="button" class="btn full" onclick="openDrive()">📂 Open Google Drive</button>
-<button type="button" class="btn green full" onclick="downloadNotes()">💾 Save Note Offline</button>
-<button type="button" class="btn secondary full" onclick="openSavedNotesScreen()">📱 Open Saved Notes</button>
 <button type="button" class="btn light full" onclick="bookmarkCurrent()">⭐ Bookmark this Subject</button>
 <p id="noteStatus" style="font-size:14px;color:var(--muted);margin-top:10px;text-align:center;"></p>
 </div>
@@ -300,7 +216,6 @@ cursor:pointer;user-select:none;box-shadow:0 4px 10px rgba(0,0,0,0.4)
 <button type="button" class="btn secondary" style="padding:6px 14px;font-size:13px;border-radius:8px;" onclick="pauseQuiz()">👁 Hide Quiz</button>
 </div>
 <div id="noteActionToolbar" style="display:none;margin-bottom:10px;gap:8px;">
-<button type="button" id="noteSaveBtn" class="btn green full" style="display:none" onclick="saveCurrentNoteOffline()">💾 Save Note for Offline</button>
 <button type="button" id="quizSaveBtn" class="btn green full" style="display:none" onclick="saveCurrentQuizOffline()">💾 Download Quiz for Offline</button>
 </div>
 <div id="quizFrameContainer" style="width:100%;border-radius:14px;overflow:hidden;background:#fff;box-shadow:0 6px 20px rgba(0,0,0,0.1);">
@@ -310,12 +225,6 @@ cursor:pointer;user-select:none;box-shadow:0 4px 10px rgba(0,0,0,0.4)
 <button type="button" id="viewerBackButton" class="back" style="margin-top:0;" onclick="handleViewerBack()">⬅ Back</button>
 <button type="button" class="back home-alt" style="margin-top:0;" onclick="goHomeFromViewer()">⌂ Home</button>
 </div>
-</section>
-
-<section id="offlineNoteViewer" class="screen">
-<h2 id="savedNoteTitle">Saved Note</h2>
-<iframe id="savedNoteBody" title="Saved Note" style="width:100%;height:72vh;border:0;border-radius:14px;background:#fff;box-shadow:0 6px 20px rgba(0,0,0,0.1);"></iframe>
-<button type="button" class="back" onclick="showScreen('downloads')">⬅ Back to Saved Notes</button>
 </section>
 
 <section id="snakeGameScreen" class="screen">
@@ -341,17 +250,39 @@ cursor:pointer;user-select:none;box-shadow:0 4px 10px rgba(0,0,0,0.4)
 </div>
 </section>
 
+<section id="gardenScreen" class="screen">
+<h2>🌱 ମୋ ବଗିଚା</h2>
+<div style="margin-bottom:12px;">
+  <div class="garden-sky">
+    <div id="gdPlants" class="gd-plants">🟫 (ଏବେ କୌଣସି ଗଛ ନାହିଁ)</div>
+  </div>
+  <div class="garden-soil"></div>
+</div>
+
+<div class="pg-stat-grid">
+  <div class="pg-stat"><div class="pg-stat-num">🔥 <span id="gdStreak">0</span></div><div class="pg-stat-label">Streak (ଦିନ)</div></div>
+  <div class="pg-stat"><div class="pg-stat-num">📅 <span id="gdTotalDays">0</span></div><div class="pg-stat-label">ମୋଟ ଦିନ</div></div>
+  <div class="pg-stat"><div class="pg-stat-num">🌳 <span id="gdPlantCount">0</span></div><div class="pg-stat-label">ଗଛ ସଂଖ୍ୟା</div></div>
+</div>
+
+<div class="card">
+  <h3 style="margin-top:0;color:#5b21b6;font-size:17px;">🏆 ସଫଳତା (Badges)</h3>
+  <div id="gdBadgeDisplay" style="font-size:28px;line-height:1.8;text-align:center;">ଏବେ ପର୍ଯ୍ୟନ୍ତ କୌଣସି ସଫଳତା ନାହିଁ</div>
+</div>
+
+<button type="button" class="back" onclick="showScreen('home')">⬅ Home</button>
+</section>
+
 <div id="pauseModal" class="modal-overlay">
 <div class="modal-box">
 <h3 style="color:#7c3aed;margin-top:0;font-size:22px;">👁 Quiz Hidden</h3>
-<p class="muted">Quiz ଭିତରେ ଚାଲୁ ଅଛି, କେବଳ app timer ସ୍ଥଗିତ ଅଛି।<br>The quiz keeps running inside — only this strip's timer is paused.</p>
+<p class="muted">Quiz ଭିତରେ ଚାଲୁ ଅଛି, କେବଳ app timer ସ୍ଥଗିତ ଅଛି।</p>
 <div class="paused-box">App timer: <span id="pausedTimeText" style="font-family:monospace;">00:00</span></div>
 <button type="button" class="btn green full" onclick="resumeQuiz()">▶ RETURN TO QUIZ</button>
 <button type="button" class="btn red full" onclick="closePauseAndExit()">Exit Practice</button>
 </div>
 </div>
 
-<!-- UPDATE MODAL POPUP -->
 <div id="updateModal" class="modal-overlay">
 <div class="modal-box">
 <h3 style="color:#7c3aed;margin-top:0;font-size:22px;">🚀 New Update Available!</h3>
@@ -361,7 +292,6 @@ cursor:pointer;user-select:none;box-shadow:0 4px 10px rgba(0,0,0,0.4)
 </div>
 </div>
 
-<!-- CUSTOM MESSAGE POPUP (replaces alert) -->
 <div id="msgModal" class="modal-overlay top">
 <div class="modal-box">
 <p id="msgModalText" class="msg-text"></p>
@@ -369,7 +299,6 @@ cursor:pointer;user-select:none;box-shadow:0 4px 10px rgba(0,0,0,0.4)
 </div>
 </div>
 
-<!-- CUSTOM CONFIRM POPUP (replaces confirm) -->
 <div id="confirmModal" class="modal-overlay top">
 <div class="modal-box">
 <p id="confirmText" class="msg-text"></p>
@@ -379,15 +308,6 @@ cursor:pointer;user-select:none;box-shadow:0 4px 10px rgba(0,0,0,0.4)
 </div>
 </div>
 </div>
-
-<section id="downloads" class="screen">
-<h2>📥 Saved Offline Notes</h2>
-<div class="card">
-<p class="muted" style="margin-top:0;">ନେଟ୍ ନଥିଲେ ମଧ୍ୟ ସେଭ୍ ହୋଇଥିବା ନୋଟ୍ ପଢ଼ିପାରିବେ।</p>
-<div id="savedNotesList"></div>
-</div>
-<button type="button" class="back" onclick="showScreen('home')">Home</button>
-</section>
 
 <section id="bookmarks" class="screen">
 <h2>⭐ Bookmarks</h2>
@@ -430,10 +350,40 @@ cursor:pointer;user-select:none;box-shadow:0 4px 10px rgba(0,0,0,0.4)
 <script>
 "use strict";
 
-/* ==========================================================
-   CUSTOM POPUPS — alert() / confirm() replacement
-   (hides the "The page at ... says:" browser header)
-   ========================================================== */
+/* ==================== LIVE CLOCK LOGIC ==================== */
+function updateLiveClock() {
+  const now = new Date();
+  
+  // Date
+  const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+  const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  
+  const dayName = days[now.getDay()];
+  const dateNum = String(now.getDate()).padStart(2, '0');
+  const monthName = months[now.getMonth()];
+  const year = now.getFullYear();
+  
+  // Time
+  let hours = now.getHours();
+  const ampm = hours >= 12 ? 'PM' : 'AM';
+  hours = hours % 12;
+  hours = hours ? hours : 12;
+  const hoursStr = String(hours).padStart(2, '0');
+  const minutesStr = String(now.getMinutes()).padStart(2, '0');
+  const secondsStr = String(now.getSeconds()).padStart(2, '0');
+  
+  const dateEl = document.getElementById("liveDate");
+  const timeEl = document.getElementById("liveTime");
+  
+  if (dateEl) dateEl.textContent = `${dayName}, ${dateNum} ${monthName} ${year}`;
+  if (timeEl) timeEl.textContent = `${hoursStr}:${minutesStr}:${secondsStr} ${ampm}`;
+}
+
+// Start clock
+setInterval(updateLiveClock, 1000);
+updateLiveClock();
+
+/* ==================== CUSTOM POPUPS ==================== */
 window.alert = function (msg) {
   var m = document.getElementById("msgModal");
   var t = document.getElementById("msgModalText");
@@ -441,9 +391,7 @@ window.alert = function (msg) {
   t.textContent = String(msg);
   m.classList.add("active");
 };
-function closeMsg() {
-  document.getElementById("msgModal").classList.remove("active");
-}
+function closeMsg() { document.getElementById("msgModal").classList.remove("active"); }
 
 var confirmCallback = null;
 function askConfirm(msg, onYes) {
@@ -461,7 +409,6 @@ function confirmAnswer(yes) {
 const CURRENT_APP_VERSION = "v1.0.0";
 const GITHUB_PAGES_BASE = "https://silusahu360.github.io/gyansetu-odishamcq/";
 const GITHUB_MCQ_JSON_URL = GITHUB_PAGES_BASE + "mcq_data.json";
-// version info JSON file hosted on GitHub
 const GITHUB_VERSION_JSON_URL = GITHUB_PAGES_BASE + "version.json";
 let APP_DOWNLOAD_LINK = "https://github.com/silusahu360/gyansetu-odishamcq/releases/download/v1.0.0/GYANSETU_ODISHA.apk";
 
@@ -486,12 +433,9 @@ let currentClass = "CLASS X";
 let currentSubject = "";
 let currentFolder = "";
 let currentViewMode = "quiz";
-let currentNoteHtmlUrl = "";
-let currentNoteHtml = "";
 let currentQuizUrl = "";
 let currentQuizTitle = "";
 let currentQuizHtml = "";
-window.classMode = "notes";
 
 let quizSeconds = 0;
 let quizTimerInterval = null;
@@ -503,9 +447,6 @@ var nokiaGameInterval = null;
 
 const $ = id => document.getElementById(id);
 
-/* ==========================================================
-   STORAGE — dual-write to localStorage + App Inventor TinyDB
-   ========================================================== */
 const memoryFallback = {};
 const lastBridgeJson = {};
 const pendingBridge = {};
@@ -520,13 +461,9 @@ try {
     window.localStorage.removeItem("__gs_test__");
     hasLocalStorage = true;
   }
-} catch (e) {
-  hasLocalStorage = false;
-}
+} catch (e) { hasLocalStorage = false; }
 
-function hasBridge() {
-  return !!(window.AppInventor && typeof window.AppInventor.setWebViewString === "function");
-}
+function hasBridge() { return !!(window.AppInventor && typeof window.AppInventor.setWebViewString === "function"); }
 
 function hydrateFromApp() {
   try {
@@ -535,39 +472,29 @@ function hydrateFromApp() {
       if (raw && raw.indexOf("DATA~") === 0) {
         const obj = JSON.parse(raw.substring(5));
         Object.keys(obj).forEach(function (k) {
-          if (bridgeKeys[k] && memoryFallback[k] !== undefined) {
-            return;
-          }
+          if (bridgeKeys[k] && memoryFallback[k] !== undefined) return;
           memoryFallback[k] = obj[k];
           bridgeKeys[k] = true;
           try { lastBridgeJson[k] = JSON.stringify(obj[k]); } catch (e) {}
-          if (hasLocalStorage) {
-            try { localStorage.setItem(k, JSON.stringify(obj[k])); } catch (e) {}
-          }
+          if (hasLocalStorage) { try { localStorage.setItem(k, JSON.stringify(obj[k])); } catch (e) {} }
         });
       }
     }
-  } catch (e) {
-    console.error("Hydrate error:", e);
-  }
+  } catch (e) { console.error("Hydrate error:", e); }
 }
 hydrateFromApp();
 
-// After App Inventor data arrives, re-apply saved theme and snake high score
 function applyStoredPrefs() {
   try {
     var dark = load("gs_dark_theme", "0") === "1";
     document.body.classList.toggle("dark", dark);
-
     var storedHi = parseInt(load("gs_snake_hi", 0), 10) || 0;
     if (storedHi > nokiaHighScore) {
       nokiaHighScore = storedHi;
       var hs = document.getElementById("nokiaHighScoreVal");
       if (hs) hs.textContent = nokiaHighScore;
     }
-  } catch (e) {
-    console.error("Prefs error:", e);
-  }
+  } catch (e) { console.error("Prefs error:", e); }
 }
 
 (function hydrateWithRetry() {
@@ -575,42 +502,27 @@ function applyStoredPrefs() {
   const retry = setInterval(() => {
     attempts++;
     hydrateFromApp();
-    if (Object.keys(bridgeKeys).length > 0) {
-      applyStoredPrefs();
-    }
-    if (attempts >= 10 || Object.keys(bridgeKeys).length > 0) {
-      clearInterval(retry);
-    }
+    if (Object.keys(bridgeKeys).length > 0) applyStoredPrefs();
+    if (attempts >= 10 || Object.keys(bridgeKeys).length > 0) clearInterval(retry);
   }, 300);
 })();
 
-function pushToApp() {
-  clearTimeout(pushTimer);
-  pushTimer = setTimeout(flushNow, 100);
-}
+function pushToApp() { clearTimeout(pushTimer); pushTimer = setTimeout(flushNow, 100); }
 
 function flushNow() {
   clearTimeout(pushTimer);
   const keys = Object.keys(pendingBridge);
   if (!keys.length) return;
-
   const payload = {};
   keys.forEach(k => { payload[k] = pendingBridge[k]; delete pendingBridge[k]; });
-
   if (!hasBridge()) return;
-  try {
-    window.AppInventor.setWebViewString("SAVE~" + JSON.stringify(payload));
-  } catch (e) {
-    console.error("Flush error:", e);
-    keys.forEach(k => { pendingBridge[k] = payload[k]; });
-  }
+  try { window.AppInventor.setWebViewString("SAVE~" + JSON.stringify(payload)); }
+  catch (e) { console.error("Flush error:", e); keys.forEach(k => { pendingBridge[k] = payload[k]; }); }
 }
 
 window.addEventListener("pagehide", flushNow);
 window.addEventListener("beforeunload", flushNow);
-document.addEventListener("visibilitychange", function () {
-  if (document.visibilityState === "hidden") flushNow();
-});
+document.addEventListener("visibilitychange", function () { if (document.visibilityState === "hidden") flushNow(); });
 
 function load(key, fallback) {
   if (bridgeKeys[key]) return memoryFallback[key];
@@ -627,48 +539,23 @@ function store(key, value) {
   memoryFallback[key] = value;
   lastStoreError = "";
   let ok = false;
-
   if (hasLocalStorage) {
-    try {
-      localStorage.setItem(key, JSON.stringify(value));
-      ok = true;
-    } catch (e) {
-      lastStoreError = (e && e.name ? e.name : "Error") + ": " +
-                       (e && e.message ? e.message : "");
-    }
+    try { localStorage.setItem(key, JSON.stringify(value)); ok = true; }
+    catch (e) { lastStoreError = (e.name || "Error") + ": " + (e.message || ""); }
   }
-
   if (hasBridge()) {
     bridgeKeys[key] = true;
     let s = null;
     try { s = JSON.stringify(value); } catch (e) {}
-    if (s === null) {
-      if (!ok) lastStoreError = "Value could not be converted to JSON";
-      return ok;
-    }
-    if (lastBridgeJson[key] !== s) {
-      lastBridgeJson[key] = s;
-      pendingBridge[key] = value;
-      pushToApp();
-    }
-    ok = true;
-    lastStoreError = "";
+    if (s === null) { if (!ok) lastStoreError = "JSON error"; return ok; }
+    if (lastBridgeJson[key] !== s) { lastBridgeJson[key] = s; pendingBridge[key] = value; pushToApp(); }
+    ok = true; lastStoreError = "";
   }
-
   if (!ok && !lastStoreError) lastStoreError = "No storage available";
   return ok;
 }
 
-/* ==========================================================
-   AUTOMATIC APP UPDATE CHECKER & DOWNLOADER
-   ========================================================== */
-function parseVer(v) {
-  return String(v || "").replace(/^[^\d]*/, "").split(".").map(function (n) {
-    return parseInt(n, 10) || 0;
-  });
-}
-
-// true only if `remote` is strictly newer than `local`
+function parseVer(v) { return String(v || "").replace(/^[^\d]*/, "").split(".").map(n => parseInt(n, 10) || 0); }
 function isNewerVersion(remote, local) {
   var a = parseVer(remote), b = parseVer(local);
   var len = Math.max(a.length, b.length);
@@ -681,18 +568,13 @@ function isNewerVersion(remote, local) {
 }
 
 async function checkForAppUpdate(manualCheck = false) {
-  if (manualCheck) {
-    $("homeStatus").textContent = "Checking for updates...";
-  }
+  if (manualCheck) $("homeStatus").textContent = "Checking for updates...";
   try {
     const res = await fetch(GITHUB_VERSION_JSON_URL + "?t=" + Date.now(), { cache: "no-store" });
     if (!res.ok) throw new Error("Update check failed");
     const data = await res.json();
-
     if (data.version && isNewerVersion(data.version, CURRENT_APP_VERSION)) {
-      if (data.apkUrl) {
-        APP_DOWNLOAD_LINK = data.apkUrl;
-      }
+      if (data.apkUrl) APP_DOWNLOAD_LINK = data.apkUrl;
       $("updateMessage").textContent = "ଜ୍ଞାନସେତୁ ଓଡ଼ିଶାର ଏକ ନୂତନ ଭର୍ସନ୍ (" + data.version + ") ଉପଲବ୍ଧ ଅଛି। " + (data.notes || "");
       $("updateModal").classList.add("active");
       if (manualCheck) $("homeStatus").textContent = "New update found! (" + data.version + ")";
@@ -705,7 +587,7 @@ async function checkForAppUpdate(manualCheck = false) {
   } catch (err) {
     console.error("Update check error:", err);
     if (manualCheck) {
-      alert("❌ ଅପଡେଟ୍ ଯାଞ୍ଚ କରିବାରେ ବିଫଳ। ଇଣ୍ଟରନେଟ୍ ସଂଯୋଗ ଯାଞ୍ଚ କରନ୍ତୁ।");
+      alert("❌ ଅପଡେଟ୍ ଯାଞ୍ଚ କରିବାରେ ବିଫଳ।");
       $("homeStatus").textContent = "Update check failed.";
     }
   }
@@ -713,33 +595,29 @@ async function checkForAppUpdate(manualCheck = false) {
 
 function performAppUpdate() {
   $("updateModal").classList.remove("active");
-  // Inside the app: ask App Inventor to download; otherwise open browser
   if (sendBridge("DOWNLOAD_APK~" + APP_DOWNLOAD_LINK)) return;
   window.open(APP_DOWNLOAD_LINK, "_blank");
 }
 
-// Auto update check on app open
 window.addEventListener("load", function() {
   syncHeaderHeight();
   $("homeStatus").textContent = "Ready to learn. (" + CURRENT_APP_VERSION + ")";
   setTimeout(() => { checkForAppUpdate(false); }, 2000);
+  setTimeout(() => { checkDailyGarden(); }, 1000); 
 });
 
-function esc(s) {
-  return String(s).replace(/[&<>"']/g, c =>
-    ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-}
+function esc(s) { return String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c])); }
 
 function withBase(html) {
   const tag = '<base href="' + GITHUB_PAGES_BASE + '">';
   html = String(html || "");
-  // <head ...> only (does not match <header>)
+  if (/<base[\s>]/i.test(html)) return html;
   if (/<head(\s[^>]*)?>/i.test(html)) return html.replace(/<head(\s[^>]*)?>/i, m => m + tag);
   if (/<html[^>]*>/i.test(html)) return html.replace(/<html[^>]*>/i, m => m + "<head>" + tag + "</head>");
   return tag + html;
 }
 
-const MSG_STORAGE_FULL = "❌ Phone storage ପୂର୍ଣ୍ଣ ବା blocked ଅଛି। Save ହେଲା ନାହିଁ (ଏହି session ପାଇଁ ମାତ୍ର ରହିବ)।";
+const MSG_STORAGE_FULL = "❌ Phone storage ପୂର୍ଣ୍ଣ ବା blocked ଅଛି।";
 
 function syncHeaderHeight() {
   const h = $("appHeader");
@@ -749,24 +627,17 @@ window.addEventListener("resize", syncHeaderHeight);
 
 function showScreen(id) {
   let target = $(id) || $("home");
-  if (id !== "snakeGameScreen") {
-    clearInterval(nokiaGameInterval);
-    nokiaGameInterval = null;
-  }
+  if (id !== "snakeGameScreen") { clearInterval(nokiaGameInterval); nokiaGameInterval = null; }
   document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
   target.classList.add("active");
   window.scrollTo(0, 0);
-
   if (id === "bookmarks") renderBookmarks();
-  if (id === "downloads") renderSavedNotesList();
   if (id === "offlineQuizMenuScreen") renderDownloadedQuizList();
+  if (id === "gardenScreen") renderGarden();
 }
 
-function showClasses(mode) {
-  window.classMode = mode;
-  $("classTitle").textContent = mode === "notes"
-    ? "Select Class · Notes Library"
-    : "Select Class · Study Materials";
+function showClasses() {
+  $("classTitle").textContent = "Select Class · Study Materials";
   $("classGrid").innerHTML = "";
   Object.keys(subjectsByClass).forEach(cls => {
     const b = document.createElement("button");
@@ -800,61 +671,14 @@ function showSubjects(cls) {
 function openSubject(sub) {
   currentSubject = sub;
   currentFolder = classDriveFolders[currentClass];
-
-  if (window.classMode === "notes") {
-    currentViewMode = "note";
-    const cleanCls = currentClass.toLowerCase().replace(/[^a-z0-9]/g, "");
-    const cleanSub = sub.toLowerCase().replace(/[^a-z0-9]/g, "");
-    currentNoteHtmlUrl = GITHUB_PAGES_BASE + cleanCls + "_" + cleanSub + "_note.html";
-    currentNoteHtml = "";
-
-    clearInterval(quizTimerInterval);
-    quizTimerInterval = null;
-
-    $("quizTimerBar").style.display = "none";
-    $("noteActionToolbar").style.display = "flex";
-    $("noteSaveBtn").style.display = "block";
-    $("quizSaveBtn").style.display = "none";
-    $("viewerBackButton").textContent = "⬅ Back to Subjects";
-
-    showScreen("quizScreen");
-    $("quizFrame").srcdoc =
-      "<div style='display:flex;align-items:center;justify-content:center;height:60vh;font-family:sans-serif;color:#6d28d9;font-size:18px;'><b>Loading Note... ଅପେକ୍ଷା କରନ୍ତୁ...</b></div>";
-
-    fetch(currentNoteHtmlUrl + "?t=" + Date.now())
-      .then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.text(); })
-      .then(html => {
-        currentNoteHtml = html;
-        $("quizFrame").srcdoc = withBase(html);
-      })
-      .catch(err => {
-        console.error(err);
-        const key = currentClass + " · " + currentSubject;
-        const saved = load("gs_saved_notes", {})[key];
-        if (saved && saved.content) {
-          currentNoteHtml = saved.content;
-          $("quizFrame").srcdoc = withBase(saved.content);
-        } else {
-          $("quizFrame").srcdoc =
-            "<div style='padding:20px;text-align:center;font-family:sans-serif;'>ଇଣ୍ଟରନେଟ୍ ସଂଯୋଗ ନାହିଁ କିମ୍ବା ଏହି ନୋଟ୍ ଅଫଲାଇନ୍‌ରେ ସେଭ୍ ହୋଇନାହିଁ।</div>";
-        }
-      });
-    return;
-  }
-
   currentViewMode = "materials";
   $("noteStatus").textContent = "";
   showScreen("folder");
 }
 
 function cleanViewerFrame() {
-  clearInterval(quizTimerInterval);
-  quizTimerInterval = null;
-  isQuizPaused = false;
-  currentNoteHtml = "";
-  currentQuizHtml = "";
-  currentQuizTitle = "";
-  currentQuizUrl = "";
+  clearInterval(quizTimerInterval); quizTimerInterval = null;
+  isQuizPaused = false; currentQuizHtml = ""; currentQuizTitle = ""; currentQuizUrl = "";
   $("noteActionToolbar").style.display = "none";
   $("pauseModal").classList.remove("active");
   $("quizFrame").srcdoc = "";
@@ -867,258 +691,166 @@ function handleViewerBack() {
   else showScreen("subjects");
 }
 
-function goHomeFromViewer() {
-  cleanViewerFrame();
-  showScreen("home");
-}
-
-async function saveCurrentNoteOffline() {
-  try {
-    if (!currentNoteHtml) {
-      alert("❌ ନୋଟ୍ ଏବେ ଲୋଡ୍ ହୋଇନାହିଁ। ପ୍ରଥମେ ନୋଟ୍ ଖୋଲନ୍ତୁ।");
-      return;
-    }
-    const saved = load("gs_saved_notes", {});
-    const key = currentClass + " · " + currentSubject;
-    saved[key] = {
-      title: key,
-      content: currentNoteHtml,
-      date: new Date().toLocaleDateString("or-IN")
-    };
-    if (store("gs_saved_notes", saved)) {
-      flushNow();
-      alert("✅ ନୋଟ୍ ସଫଳତା ସହ Save ହୋଇଗଲା!");
-    } else {
-      alert(MSG_STORAGE_FULL + "\n\n" + lastStoreError);
-    }
-  } catch (e) {
-    console.error(e);
-    alert("❌ Save ହେଲା ନାହିଁ: " + e.message);
-  }
-}
+function goHomeFromViewer() { cleanViewerFrame(); showScreen("home"); }
 
 async function saveCurrentQuizOffline() {
   try {
-    if (!currentQuizTitle || !currentQuizHtml) {
-      alert("❌ Quiz ଏବେ ଲୋଡ୍ ହୋଇନାହିଁ। ପ୍ରଥମେ Quiz ଆରମ୍ଭ କରନ୍ତୁ।");
-      return;
-    }
+    if (!currentQuizTitle || !currentQuizHtml) { alert("❌ Quiz ଏବେ ଲୋଡ୍ ହୋଇନାହିଁ।"); return; }
     const s = load("gs_saved_mcqs", {});
-    s[currentQuizTitle] = {
-      title: currentQuizTitle,
-      content: currentQuizHtml,
-      date: new Date().toLocaleDateString("or-IN")
-    };
-    if (store("gs_saved_mcqs", s)) {
-      flushNow();
-      alert("✅ Quiz ସଫଳତା ସହ Download ହୋଇଗଲା!");
-    } else {
-      alert(MSG_STORAGE_FULL + "\n\n" + lastStoreError);
-    }
-  } catch (e) {
-    console.error(e);
-    alert("❌ Download ହେଲା ନାହିଁ: " + e.message);
-  }
+    s[currentQuizTitle] = { title: currentQuizTitle, content: currentQuizHtml, date: new Date().toLocaleDateString("or-IN") };
+    if (store("gs_saved_mcqs", s)) { flushNow(); alert("✅ Quiz ସଫଳତା ସହ Download ହୋଇଗଲା!"); }
+    else { alert(MSG_STORAGE_FULL + "\n\n" + lastStoreError); }
+  } catch (e) { console.error(e); alert("❌ Download ହେଲା ନାହିଁ: " + e.message); }
 }
 
 async function downloadSelectedTopicMcq() {
-  const sel = $("mcqTopic");
-  const file = sel.value;
-  if (!file) {
-    alert("ଦୟାକରି ଏକ Topic ବାଛନ୍ତୁ।");
-    return;
-  }
+  const sel = $("mcqTopic"); const file = sel.value;
+  if (!file) { alert("ଦୟାକରି ଏକ Topic ବାଛନ୍ତୁ।"); return; }
   const topicName = sel.options[sel.selectedIndex].text;
   const fullUrl = new URL(file, GITHUB_PAGES_BASE).href;
   const key = $("mcqClass").value + " · " + $("mcqSubject").value + " · " + topicName;
-
   try {
     const r = await fetch(fullUrl + "?t=" + Date.now());
     if (!r.ok) throw new Error("HTTP " + r.status);
     const html = await r.text();
     const s = load("gs_saved_mcqs", {});
     s[key] = { title: key, content: html, date: new Date().toLocaleDateString("or-IN") };
-    if (store("gs_saved_mcqs", s)) {
-      flushNow();
-      alert("✅ ଏହି Topic ଅଫଲାଇନ୍ ପାଇଁ Save ହୋଇଗଲା!");
-    } else {
-      alert(MSG_STORAGE_FULL + "\n\n" + lastStoreError);
-    }
-  } catch (e) {
-    console.error(e);
-    alert("ଡାଉନଲୋଡ୍ ବିଫଳ ହେଲା। ଇଣ୍ଟରନେଟ୍ ସଂଯୋଗ ଯାଞ୍ଚ କରନ୍ତୁ।");
-  }
+    if (store("gs_saved_mcqs", s)) { flushNow(); alert("✅ ଏହି Topic ଅଫଲାଇନ୍ ପାଇଁ Save ହୋଇଗଲା!"); }
+    else { alert(MSG_STORAGE_FULL + "\n\n" + lastStoreError); }
+  } catch (e) { console.error(e); alert("ଡାଉନଲୋଡ୍ ବିଫଳ ହେଲା। ଇଣ୍ଟରନେଟ୍ ଯାଞ୍ଚ କରନ୍ତୁ।"); }
 }
 
-function openSavedNotesScreen() {
-  showScreen("downloads");
-}
-
-function fmtBytes(n) {
-  if (n < 1024) return n + " B";
-  if (n < 1048576) return (n / 1024).toFixed(1) + " KB";
-  return (n / 1048576).toFixed(2) + " MB";
-}
+function fmtBytes(n) { if (n < 1024) return n + " B"; if (n < 1048576) return (n / 1024).toFixed(1) + " KB"; return (n / 1048576).toFixed(2) + " MB"; }
 function byteSize(s) { return fmtBytes(new Blob([String(s || "")]).size); }
 
 function makeRow(titleText, dateText, openLabel, onOpen, onDelete, sizeText) {
-  const row = document.createElement("div");
-  row.className = "item";
+  const row = document.createElement("div"); row.className = "item";
   row.style.cssText = "display:flex;justify-content:space-between;align-items:center;padding:12px 6px;gap:8px;";
-
   const info = document.createElement("div");
-  const title = document.createElement("b");
-  title.textContent = titleText;
-  const date = document.createElement("small");
-  date.className = "muted";
-  date.textContent = (dateText || "") + (sizeText ? " · " + sizeText : "");
+  const title = document.createElement("b"); title.textContent = titleText;
+  const date = document.createElement("small"); date.className = "muted"; date.textContent = (dateText || "") + (sizeText ? " · " + sizeText : "");
   info.append(title, document.createElement("br"), date);
-
-  const actions = document.createElement("div");
-  actions.style.cssText = "display:flex;gap:6px;";
-
-  const o = document.createElement("button");
-  o.type = "button";
-  o.className = "btn green";
-  o.style.cssText = "padding:6px 12px;font-size:13px;";
-  o.textContent = openLabel;
-  o.onclick = onOpen;
-
-  const d = document.createElement("button");
-  d.type = "button";
-  d.className = "btn red";
-  d.style.cssText = "padding:6px 10px;font-size:13px;";
-  d.textContent = "✕";
-  d.onclick = onDelete;
-
-  actions.append(o, d);
-  row.append(info, actions);
-  return row;
+  const actions = document.createElement("div"); actions.style.cssText = "display:flex;gap:6px;";
+  const o = document.createElement("button"); o.type = "button"; o.className = "btn green"; o.style.cssText = "padding:6px 12px;font-size:13px;"; o.textContent = openLabel; o.onclick = onOpen;
+  const d = document.createElement("button"); d.type = "button"; d.className = "btn red"; d.style.cssText = "padding:6px 10px;font-size:13px;"; d.textContent = "✕"; d.onclick = onDelete;
+  actions.append(o, d); row.append(info, actions); return row;
 }
 
-function renderSavedNotesList() {
-  const saved = load("gs_saved_notes", {});
-  const container = $("savedNotesList");
-  const keys = Object.keys(saved);
-
-  if (!keys.length) {
-    container.innerHTML = '<div style="text-align:center;padding:16px;color:var(--muted);">କୌଣସି ନୋଟ୍ ସେଭ୍ ହୋଇନାହିଁ।</div>';
-    return;
-  }
-
-  let totalBytes = 0;
-  container.innerHTML = "";
-  keys.forEach(key => {
-    const item = saved[key];
-    totalBytes += new Blob([String(item.content || "")]).size;
-    container.appendChild(makeRow("📖 " + item.title, item.date, "Open",
-      () => viewSavedNote(key), () => deleteSavedNote(key), byteSize(item.content)));
-  });
-
-  const head = document.createElement("div");
-  head.className = "muted";
-  head.style.cssText = "text-align:center;padding:4px 0 10px;font-size:13px;";
-  head.textContent = "Total storage used: " + fmtBytes(totalBytes);
-  container.prepend(head);
-}
-
-function viewSavedNote(key) {
-  const saved = load("gs_saved_notes", {});
-  if (saved[key]) {
-    $("savedNoteTitle").textContent = key;
-    $("savedNoteBody").srcdoc = withBase(saved[key].content);
-    showScreen("offlineNoteViewer");
-  }
-}
-
-function deleteSavedNote(key) {
-  askConfirm(key + " ନୋଟ୍ କାଢ଼ିବାକୁ ଚାହାନ୍ତି କି?", function () {
-    const saved = load("gs_saved_notes", {});
-    delete saved[key];
-    if (!store("gs_saved_notes", saved)) {
-      alert("⚠ ସ୍ଥାୟୀ ଭାବରେ ଡିଲିଟ୍ ହେଲା ନାହିଁ।\n" + lastStoreError);
-    } else {
-      flushNow();
-    }
-    renderSavedNotesList();
-  });
-}
-
-function openOfflineQuizMenu() {
-  showScreen("offlineQuizMenuScreen");
-}
+function openOfflineQuizMenu() { showScreen("offlineQuizMenuScreen"); }
 
 function renderDownloadedQuizList() {
-  const savedMcqs = load("gs_saved_mcqs", {});
-  const container = $("downloadedQuizList");
-  const keys = Object.keys(savedMcqs);
-
-  if (!keys.length) {
-    container.innerHTML = '<div style="text-align:center;padding:18px;color:var(--muted);">କୌଣସି Quiz Download ହୋଇନାହିଁ।</div>';
-    return;
-  }
-
-  let totalBytes = 0;
-  container.innerHTML = "";
+  const savedMcqs = load("gs_saved_mcqs", {}); const container = $("downloadedQuizList"); const keys = Object.keys(savedMcqs);
+  if (!keys.length) { container.innerHTML = '<div style="text-align:center;padding:18px;color:var(--muted);">କୌଣସି Quiz Download ହୋଇନାହିଁ।</div>'; return; }
+  let totalBytes = 0; container.innerHTML = "";
   keys.forEach(key => {
-    const item = savedMcqs[key];
-    totalBytes += new Blob([String(item.content || "")]).size;
-    container.appendChild(makeRow("📝 " + (item.title || key), item.date, "Play",
-      () => openDownloadedMcq(key), () => deleteDownloadedMcq(key), byteSize(item.content)));
+    const item = savedMcqs[key]; totalBytes += new Blob([String(item.content || "")]).size;
+    container.appendChild(makeRow("📝 " + (item.title || key), item.date, "Play", () => openDownloadedMcq(key), () => deleteDownloadedMcq(key), byteSize(item.content)));
   });
-
-  const head = document.createElement("div");
-  head.className = "muted";
-  head.style.cssText = "text-align:center;padding:4px 0 10px;font-size:13px;";
-  head.textContent = "Total storage used: " + fmtBytes(totalBytes);
-  container.prepend(head);
+  const head = document.createElement("div"); head.className = "muted"; head.style.cssText = "text-align:center;padding:4px 0 10px;font-size:13px;"; head.textContent = "Total storage used: " + fmtBytes(totalBytes); container.prepend(head);
 }
 
 function openDownloadedMcq(key) {
   const item = load("gs_saved_mcqs", {})[key];
-  if (!item || !item.content) {
-    alert("Downloaded Quiz ମିଳିଲା ନାହିଁ।");
-    return;
-  }
-
-  currentViewMode = "downloaded_quiz";
-  currentQuizHtml = "";
-  currentQuizTitle = "";
-  currentQuizUrl = "";
-  isQuizPaused = false;
-
-  quizSeconds = 0;
-  $("quizRunningTimer").textContent = "00:00";
+  if (!item || !item.content) { alert("Downloaded Quiz ମିଳିଲା ନାହିଁ।"); return; }
+  currentViewMode = "downloaded_quiz"; currentQuizHtml = ""; currentQuizTitle = ""; currentQuizUrl = ""; isQuizPaused = false;
+  quizSeconds = 0; $("quizRunningTimer").textContent = "00:00";
   clearInterval(quizTimerInterval);
-  quizTimerInterval = setInterval(() => {
-    if (!isQuizPaused) {
-      quizSeconds++;
-      $("quizRunningTimer").textContent = fmtTime(quizSeconds);
-    }
-  }, 1000);
-
-  $("pauseModal").classList.remove("active");
-  $("quizTimerBar").style.display = "flex";
-  $("noteActionToolbar").style.display = "none";
-  $("viewerBackButton").textContent = "⬅ Back to Sets";
-
-  showScreen("quizScreen");
-  $("quizFrame").srcdoc = withBase(item.content);
+  quizTimerInterval = setInterval(() => { if (!isQuizPaused) { quizSeconds++; $("quizRunningTimer").textContent = fmtTime(quizSeconds); } }, 1000);
+  $("pauseModal").classList.remove("active"); $("quizTimerBar").style.display = "flex"; $("noteActionToolbar").style.display = "none"; $("viewerBackButton").textContent = "⬅ Back to Sets";
+  showScreen("quizScreen"); $("quizFrame").srcdoc = withBase(item.content);
 }
 
 function deleteDownloadedMcq(key) {
   askConfirm(key + " ସେଟ୍ କାଢ଼ିବାକୁ ଚାହାନ୍ତି କି?", function () {
-    const s = load("gs_saved_mcqs", {});
-    delete s[key];
-    if (!store("gs_saved_mcqs", s)) {
-      alert("⚠ ସ୍ଥାୟୀ ଭାବରେ ଡିଲିଟ୍ ହେଲା ନାହିଁ।\n" + lastStoreError);
-    } else {
-      flushNow();
-    }
+    const s = load("gs_saved_mcqs", {}); delete s[key];
+    if (!store("gs_saved_mcqs", s)) alert("⚠ ଡିଲିଟ୍ ହେଲା ନାହିଁ।\n" + lastStoreError); else flushNow();
     renderDownloadedQuizList();
   });
 }
 
+/* ==================== STUDY GARDEN LOGIC ==================== */
+function checkDailyGarden() {
+  const d = new Date();
+  const today = d.getFullYear() + "-" + String(d.getMonth()+1).padStart(2,'0') + "-" + String(d.getDate()).padStart(2,'0');
+  const yesterdayDate = new Date(Date.now() - 86400000);
+  const yesterday = yesterdayDate.getFullYear() + "-" + String(yesterdayDate.getMonth()+1).padStart(2,'0') + "-" + String(yesterdayDate.getDate()).padStart(2,'0');
+  
+  let garden = load("gs_garden", { streak: 0, lastOpenDate: "", totalDays: 0, plants: [], badges: [] });
+  
+  if (garden.lastOpenDate === today) return; // Already updated today
+  
+  if (garden.lastOpenDate === yesterday) {
+    garden.streak++;
+  } else if (garden.lastOpenDate === "") {
+    garden.streak = 1;
+  } else {
+    garden.streak = 1; // Broken streak
+  }
+  
+  garden.lastOpenDate = today;
+  garden.totalDays++;
+  
+  // Grow plant
+  if (!garden.plants || garden.plants.length === 0) {
+    garden.plants = [{ id: Date.now(), days: 1, bloomed: false }];
+  } else {
+    let last = garden.plants[garden.plants.length - 1];
+    last.days++;
+    if (last.days >= 30) last.bloomed = true;
+    
+    // New plant every 30 days
+    if (last.days > 30 && last.days % 30 === 0) {
+      garden.plants.push({ id: Date.now(), days: 1, bloomed: false });
+    }
+  }
+  
+  // Badges
+  const newBadges = [];
+  if (garden.totalDays >= 1 && !garden.badges.includes("first_day")) newBadges.push("first_day");
+  if (garden.streak >= 7 && !garden.badges.includes("week")) newBadges.push("week");
+  if (garden.streak >= 30 && !garden.badges.includes("month")) newBadges.push("month");
+  if (garden.plants.some(p => p.bloomed) && !garden.badges.includes("first_bloom")) newBadges.push("first_bloom");
+  
+  if (newBadges.length > 0) {
+    garden.badges = garden.badges.concat(newBadges);
+    setTimeout(() => {
+      let badgeNames = newBadges.map(b => b === 'first_day' ? '🌱 ପ୍ରଥମ ପାଣି' : b === 'week' ? '🔥 ୭ ଦିନ ସ୍ଟ୍ରିକ୍' : b === 'month' ? '🌟 ୩୦ ଦିନ ସ୍ଟ୍ରିକ୍' : '🌸 ପ୍ରଥମ ଫୁଲ').join("\n");
+      alert("🏆 ନୂଆ ସଫଳତା ମିଳିଲା!\n\n" + badgeNames);
+    }, 1500);
+  }
+  
+  store("gs_garden", garden);
+  flushNow();
+  if ($("gardenScreen").classList.contains("active")) renderGarden();
+}
+
+function openGarden() {
+  renderGarden();
+  showScreen("gardenScreen");
+}
+
+function renderGarden() {
+  let garden = load("gs_garden", { streak: 0, lastOpenDate: "", totalDays: 0, plants: [], badges: [] });
+  $("gdStreak").textContent = garden.streak;
+  $("gdTotalDays").textContent = garden.totalDays;
+  $("gdPlantCount").textContent = garden.plants.length;
+  
+  let plantsHtml = "";
+  garden.plants.forEach(p => {
+    if (p.bloomed) plantsHtml += "🌸";
+    else if (p.days >= 14) plantsHtml += "🌳";
+    else if (p.days >= 7) plantsHtml += "🌿";
+    else plantsHtml += "🌱";
+  });
+  if (!plantsHtml) plantsHtml = "🟫 (ଏବେ କୌଣସି ଗଛ ନାହିଁ)";
+  $("gdPlants").textContent = plantsHtml;
+
+  let badgesHtml = garden.badges.map(b => b === 'first_day' ? '🌱' : b === 'week' ? '🔥' : b === 'month' ? '🌟' : '🌸').join(" ");
+  if (!badgesHtml) badgesHtml = "<span style='font-size:14px;color:gray;'>ଏବେ ପର୍ଯ୍ୟନ୍ତ କୌଣସି ସଫଳତା ନାହିଁ</span>";
+  $("gdBadgeDisplay").innerHTML = badgesHtml;
+}
+
+/* ==================== SNAKE GAME ==================== */
 var nokiaCanvas = null;
 var nokiaCtx = null;
 var nokiaGridSize = 15;
@@ -1138,73 +870,48 @@ var nokiaOver = false;
 function playNokiaBeep(freq, duration) {
   if (!nokiaSoundEnabled) return;
   try {
-    if (!nokiaAudioCtx) {
-      nokiaAudioCtx = new (window.AudioContext || window.webkitAudioContext)();
-    }
+    if (!nokiaAudioCtx) nokiaAudioCtx = new (window.AudioContext || window.webkitAudioContext)();
     if (nokiaAudioCtx.state === "suspended") nokiaAudioCtx.resume();
     var osc = nokiaAudioCtx.createOscillator();
     var gain = nokiaAudioCtx.createGain();
-    osc.type = "square";
-    osc.frequency.value = freq;
+    osc.type = "square"; osc.frequency.value = freq;
     gain.gain.setValueAtTime(0.08, nokiaAudioCtx.currentTime);
-    osc.connect(gain);
-    gain.connect(nokiaAudioCtx.destination);
-    osc.start();
-    osc.stop(nokiaAudioCtx.currentTime + duration);
+    osc.connect(gain); gain.connect(nokiaAudioCtx.destination);
+    osc.start(); osc.stop(nokiaAudioCtx.currentTime + duration);
   } catch (e) {}
 }
 
 function openSnakeGame() {
   showScreen("snakeGameScreen");
-  nokiaCanvas = $("nokiaCanvas");
-  nokiaCtx = nokiaCanvas.getContext("2d");
-  applyStoredPrefs();
-  $("nokiaHighScoreVal").textContent = nokiaHighScore;
+  nokiaCanvas = $("nokiaCanvas"); nokiaCtx = nokiaCanvas.getContext("2d");
+  applyStoredPrefs(); $("nokiaHighScoreVal").textContent = nokiaHighScore;
   resetNokiaGame();
   clearInterval(nokiaGameInterval);
   nokiaGameInterval = setInterval(updateNokiaSnake, 130);
 }
 
 function spawnNokiaFood() {
-  var tries = 0;
-  var onSnake;
+  var tries = 0, onSnake;
   do {
     nokiaFood.x = Math.floor(Math.random() * nokiaTileCount);
     nokiaFood.y = Math.floor(Math.random() * nokiaTileCount);
-    onSnake = nokiaSnake.some(function (s) { return s.x === nokiaFood.x && s.y === nokiaFood.y; });
+    onSnake = nokiaSnake.some(s => s.x === nokiaFood.x && s.y === nokiaFood.y);
     tries++;
   } while (onSnake && tries < 500);
 }
 
 function drawNokiaSnake() {
   if (!nokiaCtx) return;
-  nokiaCtx.fillStyle = "#090414";
-  nokiaCtx.fillRect(0, 0, nokiaCanvas.width, nokiaCanvas.height);
-
-  nokiaCtx.strokeStyle = "#160b30";
-  nokiaCtx.lineWidth = 0.5;
-  for (var x = 0; x < nokiaCanvas.width; x += nokiaGridSize) {
-    nokiaCtx.beginPath(); nokiaCtx.moveTo(x, 0); nokiaCtx.lineTo(x, nokiaCanvas.height); nokiaCtx.stroke();
-  }
-  for (var y = 0; y < nokiaCanvas.height; y += nokiaGridSize) {
-    nokiaCtx.beginPath(); nokiaCtx.moveTo(0, y); nokiaCtx.lineTo(nokiaCanvas.width, y); nokiaCtx.stroke();
-  }
-
-  nokiaCtx.fillStyle = "#f43f5e";
-  nokiaCtx.shadowColor = "#f43f5e";
-  nokiaCtx.shadowBlur = 8;
+  nokiaCtx.fillStyle = "#090414"; nokiaCtx.fillRect(0, 0, nokiaCanvas.width, nokiaCanvas.height);
+  nokiaCtx.strokeStyle = "#160b30"; nokiaCtx.lineWidth = 0.5;
+  for (var x = 0; x < nokiaCanvas.width; x += nokiaGridSize) { nokiaCtx.beginPath(); nokiaCtx.moveTo(x, 0); nokiaCtx.lineTo(x, nokiaCanvas.height); nokiaCtx.stroke(); }
+  for (var y = 0; y < nokiaCanvas.height; y += nokiaGridSize) { nokiaCtx.beginPath(); nokiaCtx.moveTo(0, y); nokiaCtx.lineTo(nokiaCanvas.width, y); nokiaCtx.stroke(); }
+  nokiaCtx.fillStyle = "#f43f5e"; nokiaCtx.shadowColor = "#f43f5e"; nokiaCtx.shadowBlur = 8;
   nokiaCtx.fillRect(nokiaFood.x * nokiaGridSize + 1, nokiaFood.y * nokiaGridSize + 1, nokiaGridSize - 2, nokiaGridSize - 2);
   nokiaCtx.shadowBlur = 0;
-
   for (var i = 0; i < nokiaSnake.length; i++) {
-    if (i === 0) {
-      nokiaCtx.fillStyle = "#38bdf8";
-      nokiaCtx.shadowColor = "#38bdf8";
-      nokiaCtx.shadowBlur = 10;
-    } else {
-      nokiaCtx.fillStyle = "#4ade80";
-      nokiaCtx.shadowBlur = 0;
-    }
+    if (i === 0) { nokiaCtx.fillStyle = "#38bdf8"; nokiaCtx.shadowColor = "#38bdf8"; nokiaCtx.shadowBlur = 10; }
+    else { nokiaCtx.fillStyle = "#4ade80"; nokiaCtx.shadowBlur = 0; }
     nokiaCtx.fillRect(nokiaSnake[i].x * nokiaGridSize + 1, nokiaSnake[i].y * nokiaGridSize + 1, nokiaGridSize - 2, nokiaGridSize - 2);
   }
   nokiaCtx.shadowBlur = 0;
@@ -1212,41 +919,25 @@ function drawNokiaSnake() {
 
 function updateNokiaSnake() {
   if (nokiaIsPaused || nokiaOver) return;
-  if (nokiaNext) {
-    nokiaDx = nokiaNext.x;
-    nokiaDy = nokiaNext.y;
-    nokiaNext = null;
-  }
+  if (nokiaNext) { nokiaDx = nokiaNext.x; nokiaDy = nokiaNext.y; nokiaNext = null; }
   var head = { x: nokiaSnake[0].x + nokiaDx, y: nokiaSnake[0].y + nokiaDy };
-  if (head.x < 0) head.x = nokiaTileCount - 1;
-  if (head.x >= nokiaTileCount) head.x = 0;
-  if (head.y < 0) head.y = nokiaTileCount - 1;
-  if (head.y >= nokiaTileCount) head.y = 0;
-
+  if (head.x < 0) head.x = nokiaTileCount - 1; if (head.x >= nokiaTileCount) head.x = 0;
+  if (head.y < 0) head.y = nokiaTileCount - 1; if (head.y >= nokiaTileCount) head.y = 0;
   var eating = (head.x === nokiaFood.x && head.y === nokiaFood.y);
   var body = eating ? nokiaSnake : nokiaSnake.slice(0, -1);
   for (var i = 0; i < body.length; i++) {
     if (body[i].x === head.x && body[i].y === head.y) {
-      playNokiaBeep(180, 0.3);
-      nokiaOver = true;
-      $("nokiaTitle").textContent = "💥 GAME OVER: " + nokiaScore;
-      return;
+      playNokiaBeep(180, 0.3); nokiaOver = true; $("nokiaTitle").textContent = "💥 GAME OVER: " + nokiaScore; return;
     }
   }
   nokiaSnake.unshift(head);
   if (eating) {
-    nokiaScore += 10;
-    $("nokiaScoreVal").textContent = nokiaScore;
+    nokiaScore += 10; $("nokiaScoreVal").textContent = nokiaScore;
     if (nokiaScore > nokiaHighScore) {
-      nokiaHighScore = nokiaScore;
-      $("nokiaHighScoreVal").textContent = nokiaHighScore;
-      store("gs_snake_hi", nokiaHighScore);
+      nokiaHighScore = nokiaScore; $("nokiaHighScoreVal").textContent = nokiaHighScore; store("gs_snake_hi", nokiaHighScore);
     }
-    playNokiaBeep(780, 0.08);
-    spawnNokiaFood();
-  } else {
-    nokiaSnake.pop();
-  }
+    playNokiaBeep(780, 0.08); spawnNokiaFood();
+  } else { nokiaSnake.pop(); }
   drawNokiaSnake();
 }
 
@@ -1261,8 +952,7 @@ function setNokiaDir(d) {
 }
 
 function toggleNokiaPause() {
-  if (nokiaOver) return;
-  nokiaIsPaused = !nokiaIsPaused;
+  if (nokiaOver) return; nokiaIsPaused = !nokiaIsPaused;
   $("nokiaPauseBtn").textContent = nokiaIsPaused ? "▶" : "⏸";
 }
 
@@ -1272,23 +962,14 @@ function toggleNokiaSound() {
 }
 
 function resetNokiaGame() {
-  nokiaSnake = [{x:10,y:10},{x:10,y:11},{x:10,y:12}];
-  nokiaDx = 0;
-  nokiaDy = -1;
-  nokiaNext = null;
-  nokiaScore = 0;
-  nokiaIsPaused = false;
-  nokiaOver = false;
-  $("nokiaScoreVal").textContent = "0";
-  $("nokiaPauseBtn").textContent = "⏸";
+  nokiaSnake = [{x:10,y:10},{x:10,y:11},{x:10,y:12}]; nokiaDx = 0; nokiaDy = -1; nokiaNext = null;
+  nokiaScore = 0; nokiaIsPaused = false; nokiaOver = false;
+  $("nokiaScoreVal").textContent = "0"; $("nokiaPauseBtn").textContent = "⏸";
   $("nokiaTitle").textContent = "🐍 NOKIA NEON SNAKE ⚡";
-  spawnNokiaFood();
-  drawNokiaSnake();
+  spawnNokiaFood(); drawNokiaSnake();
 }
 
-function exitNokiaGame() {
-  showScreen("home");
-}
+function exitNokiaGame() { showScreen("home"); }
 
 document.addEventListener("keydown", function (e) {
   if (!$("snakeGameScreen").classList.contains("active")) return;
@@ -1297,107 +978,50 @@ document.addEventListener("keydown", function (e) {
 });
 
 (function () {
-  var sx = 0, sy = 0;
-  var c = $("nokiaCanvas");
-  c.addEventListener("touchstart", function (e) {
-    sx = e.touches[0].clientX; sy = e.touches[0].clientY;
-  }, { passive: true });
+  var sx = 0, sy = 0; var c = $("nokiaCanvas"); if (!c) return;
+  c.addEventListener("touchstart", function (e) { sx = e.touches[0].clientX; sy = e.touches[0].clientY; }, { passive: true });
   c.addEventListener("touchend", function (e) {
-    var dx = e.changedTouches[0].clientX - sx;
-    var dy = e.changedTouches[0].clientY - sy;
+    var dx = e.changedTouches[0].clientX - sx; var dy = e.changedTouches[0].clientY - sy;
     if (Math.max(Math.abs(dx), Math.abs(dy)) < 20) return;
-    if (Math.abs(dx) > Math.abs(dy)) setNokiaDir(dx > 0 ? "RIGHT" : "LEFT");
-    else setNokiaDir(dy > 0 ? "DOWN" : "UP");
+    if (Math.abs(dx) > Math.abs(dy)) setNokiaDir(dx > 0 ? "RIGHT" : "LEFT"); else setNokiaDir(dy > 0 ? "DOWN" : "UP");
   }, { passive: true });
 })();
 
+/* ==================== UTILS ==================== */
 function sendBridge(msg) {
   if (window.AppInventor && typeof window.AppInventor.setWebViewString === "function") {
-    window.AppInventor.setWebViewString(msg);
-    return true;
+    window.AppInventor.setWebViewString(msg); return true;
   }
   return false;
 }
 
 function openDrive() {
-  if (!currentFolder) {
-    alert("ପ୍ରଥମେ Class ଓ Subject ବାଛନ୍ତୁ।");
-    return;
-  }
+  if (!currentFolder) { alert("ପ୍ରଥମେ Class ଓ Subject ବାଛନ୍ତୁ।"); return; }
   if (sendBridge("OPEN_URL~" + currentFolder)) return;
   window.open(currentFolder, "_blank");
 }
 
-function downloadNotes() {
-  if (!currentClass || !currentSubject) {
-    alert("ପ୍ରଥମେ Class ଓ Subject ବାଛନ୍ତୁ।");
-    return;
-  }
-  const cleanCls = currentClass.toLowerCase().replace(/[^a-z0-9]/g, "");
-  const cleanSub = currentSubject.toLowerCase().replace(/[^a-z0-9]/g, "");
-  const noteUrl = GITHUB_PAGES_BASE + cleanCls + "_" + cleanSub + "_note.html";
-  const key = currentClass + " · " + currentSubject;
-
-  fetch(noteUrl + "?t=" + Date.now())
-    .then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.text(); })
-    .then(html => {
-      const saved = load("gs_saved_notes", {});
-      saved[key] = { title: key, content: html, date: new Date().toLocaleDateString("or-IN") };
-      if (store("gs_saved_notes", saved)) {
-        flushNow();
-        $("noteStatus").textContent = "✅ ନୋଟ୍ ଅଫଲାଇନ୍ ସେଭ୍ ହୋଇଗଲା!";
-      } else {
-        $("noteStatus").textContent = MSG_STORAGE_FULL + " " + lastStoreError;
-      }
-    })
-    .catch(() => {
-      const saved = load("gs_saved_notes", {})[key];
-      if (saved) {
-        $("noteStatus").textContent = "ℹ ଏହି ନୋଟ୍ ପୂର୍ବରୁ ସେଭ୍ ଅଛି।";
-      } else {
-        $("noteStatus").textContent = "❌ ଡାଉନଲୋଡ୍ ବିଫଳ। ଇଣ୍ଟରନେଟ୍ ଯାଞ୍ଚ କରନ୍ତୁ।";
-      }
-    });
-}
-
 function bookmarkCurrent() {
   const bookmarks = load("gs_bookmarks", []);
-  const value = { cls: currentClass, sub: currentSubject, mode: window.classMode || "materials" };
-  if (!bookmarks.some(x => x.cls === value.cls && x.sub === value.sub && (x.mode || "materials") === value.mode)) {
+  const value = { cls: currentClass, sub: currentSubject };
+  if (!bookmarks.some(x => x.cls === value.cls && x.sub === value.sub)) {
     bookmarks.push(value);
-    if (store("gs_bookmarks", bookmarks)) {
-      flushNow();
-      $("noteStatus").textContent = "⭐ Subject bookmarked successfully!";
-    } else {
-      $("noteStatus").textContent = "⚠ Bookmark could not be saved permanently. " + lastStoreError;
-    }
-  } else {
-    $("noteStatus").textContent = "Already in bookmarks!";
-  }
+    if (store("gs_bookmarks", bookmarks)) { flushNow(); $("noteStatus").textContent = "⭐ Subject bookmarked successfully!"; }
+    else { $("noteStatus").textContent = "⚠ Bookmark could not be saved. " + lastStoreError; }
+  } else { $("noteStatus").textContent = "Already in bookmarks!"; }
 }
 
 function renderBookmarks() {
-  const bookmarks = load("gs_bookmarks", []);
-  const container = $("bookmarkList");
-  if (!bookmarks.length) {
-    container.innerHTML = '<div class="card" style="text-align:center;color:var(--muted);">No bookmarks saved yet.</div>';
-    return;
-  }
+  const bookmarks = load("gs_bookmarks", []); const container = $("bookmarkList");
+  if (!bookmarks.length) { container.innerHTML = '<div class="card" style="text-align:center;color:var(--muted);">No bookmarks saved yet.</div>'; return; }
   const grouped = {};
-  bookmarks.forEach((b, index) => {
-    const key = b.sub || "OTHER";
-    if (!grouped[key]) grouped[key] = [];
-    grouped[key].push(Object.assign({}, b, { originalIndex: index }));
-  });
-
+  bookmarks.forEach((b, index) => { const key = b.sub || "OTHER"; if (!grouped[key]) grouped[key] = []; grouped[key].push(Object.assign({}, b, { originalIndex: index })); });
   let html = "";
   Object.keys(grouped).forEach(sub => {
-    html += '<div class="subject-group"><div class="subject-header"><span>📖 ' + esc(sub) +
-      '</span><span class="count-badge">' + grouped[sub].length + ' saved</span></div>';
+    html += '<div class="subject-group"><div class="subject-header"><span>📖 ' + esc(sub) + '</span><span class="count-badge">' + grouped[sub].length + ' saved</span></div>';
     grouped[sub].forEach(item => {
       html += '<div class="item" style="display:flex;justify-content:space-between;align-items:center;">' +
-        '<div><b>' + esc(item.cls) + '</b><br><small class="muted">' + esc(item.sub) +
-        ' · ' + ((item.mode || "materials") === "notes" ? "Notes" : "Materials") + '</small></div>' +
+        '<div><b>' + esc(item.cls) + '</b><br><small class="muted">' + esc(item.sub) + '</small></div>' +
         '<div style="display:flex;gap:6px;">' +
         '<button type="button" class="btn green" style="padding:6px 12px;font-size:13px;" onclick="goToBookmarked(' + item.originalIndex + ')">Open</button>' +
         '<button type="button" class="btn red" style="padding:6px 10px;font-size:13px;" onclick="deleteBookmark(' + item.originalIndex + ')">✕</button>' +
@@ -1409,53 +1033,35 @@ function renderBookmarks() {
 }
 
 function goToBookmarked(i) {
-  const b = load("gs_bookmarks", [])[i];
-  if (!b) return;
-  window.classMode = b.mode || "materials";
-  showSubjects(b.cls);
-  openSubject(b.sub);
+  const b = load("gs_bookmarks", [])[i]; if (!b) return;
+  showSubjects(b.cls); openSubject(b.sub);
 }
 
 function deleteBookmark(index) {
-  const bookmarks = load("gs_bookmarks", []);
-  bookmarks.splice(index, 1);
-  store("gs_bookmarks", bookmarks);
-  flushNow();
-  renderBookmarks();
+  const bookmarks = load("gs_bookmarks", []); bookmarks.splice(index, 1);
+  store("gs_bookmarks", bookmarks); flushNow(); renderBookmarks();
 }
 
 function clearBookmarks() {
-  askConfirm("Clear all bookmarks?", function () {
-    store("gs_bookmarks", []);
-    flushNow();
-    renderBookmarks();
-  });
+  askConfirm("Clear all bookmarks?", function () { store("gs_bookmarks", []); flushNow(); renderBookmarks(); });
 }
 
 function openMcqSetup() {
   showScreen("mcqSetup");
-  const prevClass = $("mcqClass").value;
-  const prevSubject = $("mcqSubject").value;
-
-  $("mcqClass").innerHTML = Object.keys(subjectsByClass)
-    .map(cls => '<option value="' + cls + '">' + cls + '</option>').join("");
-
+  const prevClass = $("mcqClass").value; const prevSubject = $("mcqSubject").value;
+  $("mcqClass").innerHTML = Object.keys(subjectsByClass).map(cls => '<option value="' + cls + '">' + cls + '</option>').join("");
   if (prevClass && subjectsByClass[prevClass]) $("mcqClass").value = prevClass;
   fillSubjects();
   if (prevSubject && (subjectsByClass[$("mcqClass").value] || []).indexOf(prevSubject) !== -1) {
-    $("mcqSubject").value = prevSubject;
-    fillTopics();
+    $("mcqSubject").value = prevSubject; fillTopics();
   }
-  if (!Object.keys(mcqDataStore).length) {
-    $("mcqTopic").innerHTML = '<option value="">Loading topics... ଅପେକ୍ଷା କରନ୍ତୁ</option>';
-  }
+  if (!Object.keys(mcqDataStore).length) { $("mcqTopic").innerHTML = '<option value="">Loading topics...</option>'; }
   loadRemoteMcq();
 }
 
 function fillSubjects() {
   const cls = $("mcqClass").value;
-  $("mcqSubject").innerHTML = (subjectsByClass[cls] || [])
-    .map(s => '<option value="' + s + '">' + s + '</option>').join("");
+  $("mcqSubject").innerHTML = (subjectsByClass[cls] || []).map(s => '<option value="' + s + '">' + s + '</option>').join("");
   fillTopics();
 }
 
@@ -1463,14 +1069,11 @@ async function loadRemoteMcq() {
   try {
     const r = await fetch(GITHUB_MCQ_JSON_URL + "?t=" + Date.now(), { cache: "no-store" });
     if (!r.ok) throw new Error("HTTP " + r.status);
-    mcqDataStore = await r.json();
-    store("gs_cached_mcq_json", mcqDataStore);
+    mcqDataStore = await r.json(); store("gs_cached_mcq_json", mcqDataStore);
   } catch (error) {
-    console.error("MCQ JSON Error:", error);
-    mcqDataStore = load("gs_cached_mcq_json", {});
+    console.error("MCQ JSON Error:", error); mcqDataStore = load("gs_cached_mcq_json", {});
   }
-  const prevTopic = $("mcqTopic").value;
-  fillTopics();
+  const prevTopic = $("mcqTopic").value; fillTopics();
   if (prevTopic) {
     const has = Array.prototype.some.call($("mcqTopic").options, o => o.value === prevTopic);
     if (has) $("mcqTopic").value = prevTopic;
@@ -1478,147 +1081,62 @@ async function loadRemoteMcq() {
 }
 
 function fillTopics() {
-  const cls = $("mcqClass").value;
-  const subject = $("mcqSubject").value;
-  const topicSelect = $("mcqTopic");
+  const cls = $("mcqClass").value; const subject = $("mcqSubject").value; const topicSelect = $("mcqTopic");
   const list = (mcqDataStore[cls] && mcqDataStore[cls][subject]) || [];
   if (Array.isArray(list) && list.length > 0) {
-    topicSelect.innerHTML = list.map(item =>
-      '<option value="' + esc(item.file) + '">' + esc(item.title) + '</option>').join("");
-  } else {
-    topicSelect.innerHTML = '<option value="">No topics available offline</option>';
-  }
+    topicSelect.innerHTML = list.map(item => '<option value="' + esc(item.file) + '">' + esc(item.title) + '</option>').join("");
+  } else { topicSelect.innerHTML = '<option value="">No topics available offline</option>'; }
 }
 
-function fmtTime(s) {
-  return String(Math.floor(s / 60)).padStart(2, "0") + ":" + String(s % 60).padStart(2, "0");
-}
+function fmtTime(s) { return String(Math.floor(s / 60)).padStart(2, "0") + ":" + String(s % 60).padStart(2, "0"); }
 
 function startQuiz() {
-  const fileName = $("mcqTopic").value;
-  if (!fileName) {
-    alert("ଦୟାକରି ଏକ Topic ବାଛନ୍ତୁ।");
-    return;
-  }
-
+  const fileName = $("mcqTopic").value; if (!fileName) { alert("ଦୟାକରି ଏକ Topic ବାଛନ୍ତୁ।"); return; }
   currentViewMode = "quiz";
-  const fullUrl = new URL(fileName, GITHUB_PAGES_BASE).href;
-  currentQuizUrl = fullUrl;
-  currentQuizTitle = $("mcqClass").value + " · " + $("mcqSubject").value + " · " +
-    $("mcqTopic").selectedOptions[0].text;
+  const fullUrl = new URL(fileName, GITHUB_PAGES_BASE).href; currentQuizUrl = fullUrl;
+  currentQuizTitle = $("mcqClass").value + " · " + $("mcqSubject").value + " · " + $("mcqTopic").selectedOptions[0].text;
   currentQuizHtml = "";
-
-  $("noteActionToolbar").style.display = "flex";
-  $("noteSaveBtn").style.display = "none";
-  $("quizSaveBtn").style.display = "block";
-  $("quizTimerBar").style.display = "flex";
-  $("viewerBackButton").textContent = "⬅ Back to Topics";
-
-  quizSeconds = 0;
-  isQuizPaused = false;
-  $("quizRunningTimer").textContent = "00:00";
-
+  $("noteActionToolbar").style.display = "flex"; $("quizSaveBtn").style.display = "block";
+  $("quizTimerBar").style.display = "flex"; $("viewerBackButton").textContent = "⬅ Back to Topics";
+  quizSeconds = 0; isQuizPaused = false; $("quizRunningTimer").textContent = "00:00";
   clearInterval(quizTimerInterval);
-  quizTimerInterval = setInterval(() => {
-    if (!isQuizPaused) {
-      quizSeconds++;
-      $("quizRunningTimer").textContent = fmtTime(quizSeconds);
-    }
-  }, 1000);
-
-  $("pauseModal").classList.remove("active");
-  showScreen("quizScreen");
-
-  $("quizFrame").srcdoc =
-    "<div style='display:flex;align-items:center;justify-content:center;height:60vh;font-family:sans-serif;color:#6d28d9;font-size:18px;'><b>Loading Quiz... ଅପେକ୍ଷା କରନ୍ତୁ...</b></div>";
-
+  quizTimerInterval = setInterval(() => { if (!isQuizPaused) { quizSeconds++; $("quizRunningTimer").textContent = fmtTime(quizSeconds); } }, 1000);
+  $("pauseModal").classList.remove("active"); showScreen("quizScreen");
+  $("quizFrame").srcdoc = "<div style='display:flex;align-items:center;justify-content:center;height:60vh;font-family:sans-serif;color:#6d28d9;font-size:18px;'><b>Loading Quiz...</b></div>";
   fetch(fullUrl + "?t=" + Date.now())
     .then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.text(); })
-    .then(html => {
-      currentQuizHtml = html;
-      $("quizFrame").srcdoc = withBase(html);
-    })
+    .then(html => { currentQuizHtml = html; $("quizFrame").srcdoc = withBase(html); })
     .catch(err => {
       console.error(err);
       const saved = load("gs_saved_mcqs", {})[currentQuizTitle];
-      if (saved && saved.content) {
-        currentQuizHtml = saved.content;
-        $("quizFrame").srcdoc = withBase(saved.content);
-      } else {
-        $("quizFrame").srcdoc =
-          "<div style='padding:20px;text-align:center;font-family:sans-serif;'>ଇଣ୍ଟରନେଟ୍ ସଂଯୋଗ ନାହିଁ। ଏହି Quiz କୁ ପୂର୍ବରୁ 'Save Offline' କରନ୍ତୁ।</div>";
-      }
+      if (saved && saved.content) { currentQuizHtml = saved.content; $("quizFrame").srcdoc = withBase(saved.content); }
+      else { $("quizFrame").srcdoc = "<div style='padding:20px;text-align:center;font-family:sans-serif;'>ଇଣ୍ଟରନେଟ୍ ସଂଯୋଗ ନାହିଁ।</div>"; }
     });
 }
 
-function pauseQuiz() {
-  isQuizPaused = true;
-  $("pausedTimeText").textContent = fmtTime(quizSeconds);
-  $("pauseModal").classList.add("active");
-}
+function pauseQuiz() { isQuizPaused = true; $("pausedTimeText").textContent = fmtTime(quizSeconds); $("pauseModal").classList.add("active"); }
+function resumeQuiz() { isQuizPaused = false; $("pauseModal").classList.remove("active"); }
+function closePauseAndExit() { $("pauseModal").classList.remove("active"); cleanViewerFrame(); showScreen("mcqSetup"); }
 
-function resumeQuiz() {
-  isQuizPaused = false;
-  $("pauseModal").classList.remove("active");
-}
-
-function closePauseAndExit() {
-  $("pauseModal").classList.remove("active");
-  cleanViewerFrame();
-  showScreen("mcqSetup");
-}
-
-function startStudy() {
-  if (studyInterval) return;
-  studyInterval = setInterval(() => { studySeconds++; renderStudyClock(); }, 1000);
-}
-function pauseStudy() {
-  clearInterval(studyInterval);
-  studyInterval = null;
-}
-function resetStudy() {
-  pauseStudy();
-  studySeconds = 0;
-  renderStudyClock();
-}
+function startStudy() { if (studyInterval) return; studyInterval = setInterval(() => { studySeconds++; renderStudyClock(); }, 1000); }
+function pauseStudy() { clearInterval(studyInterval); studyInterval = null; }
+function resetStudy() { pauseStudy(); studySeconds = 0; renderStudyClock(); }
 function renderStudyClock() {
-  $("studyClock").textContent = [
-    Math.floor(studySeconds / 3600),
-    Math.floor(studySeconds / 60) % 60,
-    studySeconds % 60
-  ].map(v => String(v).padStart(2, "0")).join(":");
+  $("studyClock").textContent = [Math.floor(studySeconds / 3600), Math.floor(studySeconds / 60) % 60, studySeconds % 60].map(v => String(v).padStart(2, "0")).join(":");
 }
 
-function toggleTheme() {
-  document.body.classList.toggle("dark");
-  store("gs_dark_theme", document.body.classList.contains("dark") ? "1" : "0");
-}
+function toggleTheme() { document.body.classList.toggle("dark"); store("gs_dark_theme", document.body.classList.contains("dark") ? "1" : "0"); }
 
 function shareApp() {
-  const message =
-    "🎓 ଜ୍ଞାନସେତୁ ଓଡ଼ିଶା (GyanSetu Odisha)\n" +
-    "ଷଷ୍ଠ ରୁ ଦଶମ ଶ୍ରେଣୀ ପାଇଁ NCERT ଓ ଓଡ଼ିଶା ବୋର୍ଡ ଶିକ୍ଷଣ ଆପ୍।\n" +
-    "📚 ନୋଟ୍ସ, 📝 MCQ ଅଭ୍ୟାସ ଓ 📂 ଅଧ୍ୟୟନ ସାମଗ୍ରୀ ଏକ ସ୍ଥାନରେ।\n\n" +
-    "📲 ଆପ୍ ଡାଉନଲୋଡ୍ କରିବାକୁ ଏହି ଲିଙ୍କ୍‌ରେ କ୍ଲିକ୍ କରନ୍ତୁ:\n" + APP_DOWNLOAD_LINK;
-
+  const message = "🎓 ଜ୍ଞାନସେତୁ ଓଡ଼ିଶା (GyanSetu Odisha)\nଷଷ୍ଠ ରୁ ଦଶମ ଶ୍ରେଣୀ ପାଇଁ NCERT ଓ ଓଡ଼ିଶା ବୋର୍ଡ ଶିକ୍ଷଣ ଆପ୍।\n📚 ନୋଟ୍ସ, 📝 MCQ ଅଭ୍ୟାସ ଓ 📂 ଅଧ୍ୟୟନ ସାମଗ୍ରୀ ଏକ ସ୍ଥାନରେ।\n\n📲 ଆପ୍ ଡାଉନଲୋଡ୍ କରିବାକୁ ଏହି ଲିଙ୍କ୍‌ରେ କ୍ଲିକ୍ କରନ୍ତୁ:\n" + APP_DOWNLOAD_LINK;
   if (sendBridge("SHARE~" + message)) return;
-  if (navigator.share) {
-    navigator.share({ title: "GyanSetu Odisha", text: message }).catch(function () {});
-    return;
-  }
+  if (navigator.share) { navigator.share({ title: "GyanSetu Odisha", text: message }).catch(function () {}); return; }
   if (navigator.clipboard && navigator.clipboard.writeText) {
-    navigator.clipboard.writeText(message)
-      .then(function () { alert("📋 Message copy ହୋଇଗଲା।"); })
-      .catch(function () { alert("Share is not supported."); });
-  } else {
-    alert("Share is not supported.");
-  }
+    navigator.clipboard.writeText(message).then(function () { alert("📋 Message copy ହୋଇଗଲା।"); }).catch(function () { alert("Share is not supported."); });
+  } else { alert("Share is not supported."); }
 }
 
-if (load("gs_dark_theme", "0") === "1") {
-  document.body.classList.add("dark");
-}
+if (load("gs_dark_theme", "0") === "1") { document.body.classList.add("dark"); }
 </script>
-
 </body>
 </html>
