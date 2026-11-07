@@ -4,31 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#4c1d95">
-<title>GyanSetu Odisha — Chrome Test</title>
-
-<!--
-  ═══════════════════════════════════════════════════════════════
-  CHROME TEST BUILD
-  ═══════════════════════════════════════════════════════════════
-  In Chrome, localStorage persists across page reloads AND browser
-  restarts. Use this file to verify all save/persist logic BEFORE
-  building the APK.
-
-  APK PERSISTENCE NOTE:
-  In the App Inventor WebViewer, localStorage is wiped on every
-  app launch. Persistence there relies on the TinyDB bridge blocks
-  in your .aia file. This file's bridge code is identical — so if
-  it works here (via localStorage), the .aia just needs the two
-  blocks described in the deployment guide.
-
-  ✓ Save note → appears in Saved Notes
-  ✓ Save quiz → appears in Downloaded Quiz
-  ✓ Reload page → all saves still there
-  ✓ Close tab → reopen file → all saves still there
-  ✓ Delete save → reload → stays deleted
-  ✓ Offline save (cached HTML) works
-  ═══════════════════════════════════════════════════════════════
--->
+<title>GyanSetu Odisha</title>
 
 <style>
 :root{
@@ -230,7 +206,7 @@ cursor:pointer;user-select:none;box-shadow:0 4px 10px rgba(0,0,0,0.4)
 
 <header id="appHeader">
 <div class="brand">🎓 GYANSETU <span>ODISHA</span></div>
-<p>NCERT & Odisha State Board Learning Portal — Chrome Test</p>
+<p>NCERT & Odisha State Board Learning Portal</p>
 </header>
 
 <main>
@@ -252,7 +228,6 @@ cursor:pointer;user-select:none;box-shadow:0 4px 10px rgba(0,0,0,0.4)
 <button type="button" class="btn light" onclick="toggleTheme()">🌙 Dark / Light</button>
 <button type="button" class="btn light span2" onclick="showScreen('about')">ℹ About / Help</button>
 </div>
-<button type="button" class="btn cyan full" onclick="storageCheck()">🔍 Storage Check (Chrome test only)</button>
 <div style="text-align:center;">
 <div id="homeStatusPill" class="status-pill">
 <span class="dot"></span>
@@ -462,6 +437,9 @@ var nokiaGameInterval = null;
 
 const $ = id => document.getElementById(id);
 
+/* ==========================================================
+   STORAGE — dual-write to localStorage + App Inventor TinyDB
+   ========================================================== */
 const memoryFallback = {};
 const lastBridgeJson = {};
 const pendingBridge = {};
@@ -491,7 +469,11 @@ function hydrateFromApp() {
       if (raw && raw.indexOf("DATA~") === 0) {
         const obj = JSON.parse(raw.substring(5));
         Object.keys(obj).forEach(function (k) {
-          if (bridgeKeys[k] && memoryFallback[k] !== undefined) return;
+          // Don't overwrite newer in-memory data with stale incoming data
+          // unless we haven't seen this key before
+          if (bridgeKeys[k] && memoryFallback[k] !== undefined) {
+            return;
+          }
           memoryFallback[k] = obj[k];
           bridgeKeys[k] = true;
           try { lastBridgeJson[k] = JSON.stringify(obj[k]); } catch (e) {}
@@ -507,37 +489,45 @@ function hydrateFromApp() {
 }
 hydrateFromApp();
 
+/* FIX C: retry for 3 seconds — App Inventor may set WebViewString
+   AFTER the page has already started executing */
 (function hydrateWithRetry() {
   let attempts = 0;
   const retry = setInterval(() => {
     attempts++;
     hydrateFromApp();
+    // Stop early if we've already received data
     if (attempts >= 10 || Object.keys(bridgeKeys).length > 0) {
       clearInterval(retry);
     }
   }, 300);
 })();
 
+/* Debounced push — used for background saves (theme, etc.) */
 function pushToApp() {
   clearTimeout(pushTimer);
   pushTimer = setTimeout(flushNow, 100);
 }
 
+/* FIX A: immediate flush — call after critical saves */
 function flushNow() {
   clearTimeout(pushTimer);
   const keys = Object.keys(pendingBridge);
   if (!keys.length) return;
+
   const payload = {};
   keys.forEach(k => { payload[k] = pendingBridge[k]; delete pendingBridge[k]; });
+
   if (!hasBridge()) return;
   try {
     window.AppInventor.setWebViewString("SAVE~" + JSON.stringify(payload));
   } catch (e) {
     console.error("Flush error:", e);
-    keys.forEach(k => { pendingBridge[k] = payload[k]; });
+    keys.forEach(k => { pendingBridge[k] = payload[k]; });   // retry later
   }
 }
 
+/* FIX B: flush pending data when the page/app is closing */
 window.addEventListener("pagehide", flushNow);
 window.addEventListener("beforeunload", flushNow);
 document.addEventListener("visibilitychange", function () {
@@ -589,24 +579,6 @@ function store(key, value) {
 
   if (!ok && !lastStoreError) lastStoreError = "No storage available";
   return ok;
-}
-
-/* Diagnostic — Chrome test only */
-function storageCheck() {
-  const s = load("gs_saved_notes", {});
-  const q = load("gs_saved_mcqs", {});
-  const info = {
-    "localStorage available": hasLocalStorage,
-    "App Inventor bridge": hasBridge(),
-    "Bridge keys loaded": Object.keys(bridgeKeys).length ? Object.keys(bridgeKeys) : "(none)",
-    "Pending pushes": Object.keys(pendingBridge).length ? Object.keys(pendingBridge) : "(none)",
-    "Saved notes": Object.keys(s).length,
-    "Saved quizzes": Object.keys(q).length,
-    "Note keys": Object.keys(s).length ? Object.keys(s) : "(empty)",
-    "Quiz keys": Object.keys(q).length ? Object.keys(q) : "(empty)",
-    "Last store error": lastStoreError || "(none)"
-  };
-  alert(JSON.stringify(info, null, 2));
 }
 
 function esc(s) {
@@ -770,7 +742,7 @@ async function saveCurrentNoteOffline() {
       date: new Date().toLocaleDateString("or-IN")
     };
     if (store("gs_saved_notes", saved)) {
-      flushNow();
+      flushNow();   // FIX A: immediate push to TinyDB
       alert("✅ ନୋଟ୍ ସଫଳତା ସହ Save ହୋଇଗଲା!");
     } else {
       alert(MSG_STORAGE_FULL + "\n\n" + lastStoreError);
@@ -794,7 +766,7 @@ async function saveCurrentQuizOffline() {
       date: new Date().toLocaleDateString("or-IN")
     };
     if (store("gs_saved_mcqs", s)) {
-      flushNow();
+      flushNow();   // FIX A
       alert("✅ Quiz ସଫଳତା ସହ Download ହୋଇଗଲା!");
     } else {
       alert(MSG_STORAGE_FULL + "\n\n" + lastStoreError);
@@ -823,7 +795,7 @@ async function downloadSelectedTopicMcq() {
     const s = load("gs_saved_mcqs", {});
     s[key] = { title: key, content: html, date: new Date().toLocaleDateString("or-IN") };
     if (store("gs_saved_mcqs", s)) {
-      flushNow();
+      flushNow();   // FIX A
       alert("✅ ଏହି Topic ଅଫଲାଇନ୍ ପାଇଁ Save ହୋଇଗଲା!");
     } else {
       alert(MSG_STORAGE_FULL + "\n\n" + lastStoreError);
@@ -922,7 +894,7 @@ function deleteSavedNote(key) {
   if (!store("gs_saved_notes", saved)) {
     alert("⚠ ସ୍ଥାୟୀ ଭାବରେ ଡିଲିଟ୍ ହେଲା ନାହିଁ।\n" + lastStoreError);
   } else {
-    flushNow();
+    flushNow();   // FIX A
   }
   renderSavedNotesList();
 }
@@ -996,7 +968,7 @@ function deleteDownloadedMcq(key) {
   if (!store("gs_saved_mcqs", s)) {
     alert("⚠ ସ୍ଥାୟୀ ଭାବରେ ଡିଲିଟ୍ ହେଲା ନାହିଁ।\n" + lastStoreError);
   } else {
-    flushNow();
+    flushNow();   // FIX A
   }
   renderDownloadedQuizList();
 }
@@ -1225,7 +1197,7 @@ function downloadNotes() {
       const saved = load("gs_saved_notes", {});
       saved[key] = { title: key, content: html, date: new Date().toLocaleDateString("or-IN") };
       if (store("gs_saved_notes", saved)) {
-        flushNow();
+        flushNow();   // FIX A
         $("noteStatus").textContent = "✅ ନୋଟ୍ ଅଫଲାଇନ୍ ସେଭ୍ ହୋଇଗଲା!";
       } else {
         $("noteStatus").textContent = MSG_STORAGE_FULL + " " + lastStoreError;
@@ -1247,7 +1219,7 @@ function bookmarkCurrent() {
   if (!bookmarks.some(x => x.cls === value.cls && x.sub === value.sub && (x.mode || "materials") === value.mode)) {
     bookmarks.push(value);
     if (store("gs_bookmarks", bookmarks)) {
-      flushNow();
+      flushNow();   // FIX A
       $("noteStatus").textContent = "⭐ Subject bookmarked successfully!";
     } else {
       $("noteStatus").textContent = "⚠ Bookmark could not be saved permanently. " + lastStoreError;
