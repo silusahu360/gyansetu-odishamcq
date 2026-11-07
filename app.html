@@ -461,35 +461,101 @@ let studyInterval = null;
 
 const $ = id => document.getElementById(id);
 
-/* SAFE STORAGE HELPERS
-   store() returns true only when data was really written to localStorage.
-   If it fails (quota full / blocked), data is kept in memory for this session only,
-   false is returned, and the real error is saved in lastStoreError. */
+/* ==========================================================
+   STORAGE (works in normal browsers AND in MIT App Inventor)
+   1) If localStorage works, it is used.
+   2) If localStorage is blocked (App Inventor WebViewer), data is kept in
+      memory and sent to the app as "SAVE~{json}". The app stores it in
+      TinyDB and gives it back on start as "DATA~{json}" in WebViewString.
+   ========================================================== */
 const memoryFallback = {};
+const lastBridgeJson = {};
 let lastStoreError = "";
+let pushTimer = null;
+
+let hasLocalStorage = false;
+try {
+  if (window.localStorage && typeof window.localStorage.setItem === "function") {
+    window.localStorage.setItem("__gs_test__", "1");
+    window.localStorage.removeItem("__gs_test__");
+    hasLocalStorage = true;
+  }
+} catch (e) {
+  hasLocalStorage = false;
+}
+
+function hasBridge() {
+  return !!(window.AppInventor && typeof window.AppInventor.setWebViewString === "function");
+}
+
+/* Read the saved data that the app gave us at start */
+function hydrateFromApp() {
+  try {
+    if (window.AppInventor && typeof window.AppInventor.getWebViewString === "function") {
+      const raw = window.AppInventor.getWebViewString();
+      if (raw && raw.indexOf("DATA~") === 0) {
+        const obj = JSON.parse(raw.substring(5));
+        Object.keys(obj).forEach(function (k) {
+          memoryFallback[k] = obj[k];
+          try { lastBridgeJson[k] = JSON.stringify(obj[k]); } catch (e) {}
+        });
+      }
+    }
+  } catch (e) {
+    console.error("Hydrate error:", e);
+  }
+}
+hydrateFromApp();
+
+/* Send everything to the app (waits 400 ms so many saves become one) */
+function pushToApp() {
+  clearTimeout(pushTimer);
+  pushTimer = setTimeout(function () {
+    try {
+      window.AppInventor.setWebViewString("SAVE~" + JSON.stringify(memoryFallback));
+    } catch (e) {
+      console.error("Push error:", e);
+    }
+  }, 400);
+}
 
 function load(key, fallback) {
   try {
-    const item = localStorage.getItem(key);
-    if (item === null || item === undefined) {
-      return memoryFallback[key] !== undefined ? memoryFallback[key] : fallback;
+    if (hasLocalStorage) {
+      const item = localStorage.getItem(key);
+      if (item !== null && item !== undefined) return JSON.parse(item);
     }
-    return JSON.parse(item);
-  } catch (e) {
-    return memoryFallback[key] !== undefined ? memoryFallback[key] : fallback;
-  }
+  } catch (e) {}
+  return memoryFallback[key] !== undefined ? memoryFallback[key] : fallback;
 }
 
+/* store() returns true only if the data is really saved (localStorage or app) */
 function store(key, value) {
   memoryFallback[key] = value;
-  try {
-    localStorage.setItem(key, JSON.stringify(value));
+
+  if (hasLocalStorage) {
+    try {
+      localStorage.setItem(key, JSON.stringify(value));
+      lastStoreError = "";
+      return true;
+    } catch (e) {
+      lastStoreError = (e && e.name ? e.name : "Error") + ": " + (e && e.message ? e.message : "");
+    }
+  }
+
+  if (hasBridge()) {
+    let s = null;
+    try { s = JSON.stringify(value); } catch (e) {}
+    if (s === null || lastBridgeJson[key] !== s) {
+      if (s !== null) lastBridgeJson[key] = s;
+      pushToApp();
+    }
     lastStoreError = "";
     return true;
-  } catch (e) {
-    lastStoreError = (e && e.name ? e.name : "Error") + ": " + (e && e.message ? e.message : "");
-    return false;
   }
+
+  if (!lastStoreError) lastStoreError = "No storage available";
+  return false;
 }
 
 function esc(s) {
