@@ -2,7 +2,7 @@
 <html lang="or">
 <head>
 <meta charset="UTF-8">
-<!-- ଏଠାରେ ଜୁମ୍ ବନ୍ଦ କରିବା ପାଇଁ user-scalable=no ଯୋଡ଼ା ଯାଇଛି -->
+<!-- Zoom ବନ୍ଦ କରିବା ପାଇଁ -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta name="theme-color" content="#4c1d95">
 <title>GyanSetu Odisha</title>
@@ -605,6 +605,9 @@ body.dark .pg-stat-num{color:#c4b5fd;}
 <script>
 "use strict";
 
+// ==========================================
+// 1. CORE SETUP & ERROR HANDLING
+// ==========================================
 window.alert = function (msg) {
   var m = document.getElementById("msgModal");
   var t = document.getElementById("msgModalText");
@@ -657,22 +660,22 @@ let currentViewMode = "quiz";
 let currentQuizUrl = "";
 let currentQuizTitle = "";
 let currentQuizHtml = "";
-
 let quizSeconds = 0;
 let quizTimerInterval = null;
 let isQuizPaused = false;
 let studySeconds = 0;
 let studyInterval = null;
-
 const $ = id => document.getElementById(id);
 
+// ==========================================
+// 2. SAFE STORAGE SYSTEM (Offline Support)
+// ==========================================
 const memoryFallback = {};
 const lastBridgeJson = {};
 const pendingBridge = {};
 const bridgeKeys = {};
 let lastStoreError = "";
 let pushTimer = null;
-
 let hasLocalStorage = false;
 try {
   if (window.localStorage && typeof window.localStorage.setItem === "function") {
@@ -770,6 +773,9 @@ function store(key, value) {
   return ok;
 }
 
+// ==========================================
+// 3. APP UPDATE & NETWORK
+// ==========================================
 function parseVer(v) { return String(v || "").replace(/^[^\d]*/, "").split(".").map(n => parseInt(n, 10) || 0); }
 function isNewerVersion(remote, local) {
   var a = parseVer(remote), b = parseVer(local);
@@ -800,7 +806,7 @@ async function checkForAppUpdate(manualCheck) {
   } catch (err) {
     console.error("Update check error:", err);
     if (manualCheck) {
-      alert("❌ ଅପଡେଟ୍ ଯାଞ୍ଚ ବିଫଳ।");
+      alert("❌ ଅପଡେଟ୍ ଯାଞ୍ଚ ବିଫଳ। ଇଣ୍ଟରନେଟ୍ ଯାଞ୍ଚ କରନ୍ତୁ।");
     }
   }
 }
@@ -811,17 +817,16 @@ function performAppUpdate() {
   window.open(APP_DOWNLOAD_LINK, "_blank");
 }
 
-// Live Time & Calendar Function with Professional Look
+// ==========================================
+// 4. LIVE TIME & CALENDAR
+// ==========================================
 function updateLiveDateTime() {
   const now = new Date();
   const timeStr = now.toLocaleTimeString('en-US', { hour12: false });
-  
   const days = ['ରବିବାର', 'ସୋମବାର', 'ମଙ୍ଗଳବାର', 'ବୁଧବାର', 'ଗୁରୁବାର', 'ଶୁକ୍ରବାର', 'ଶନିବାର'];
   const months = ['ଜାନୁଆରୀ', 'ଫେବୃଆରୀ', 'ମାର୍ଚ୍ଚ', 'ଏପ୍ରିଲ', 'ମେ', 'ଜୁନ', 'ଜୁଲାଇ', 'ଅଗଷ୍ଟ', 'ସେପ୍ଟେମ୍ବର', 'ଅକ୍ଟୋବର', 'ନଭେମ୍ବର', 'ଡିସେମ୍ବର'];
-  
   const dateStr = now.getDate() + ' ' + months[now.getMonth()] + ' ' + now.getFullYear();
   const dayStr = days[now.getDay()];
-  
   const quotes = [
     "ଶିକ୍ଷା ହେଉଛି ସଫଳତାର ଚାବିକାଠି।",
     "ଆଜିର ପରିଶ୍ରମ, କାଲିର ସଫଳତା।",
@@ -836,7 +841,6 @@ function updateLiveDateTime() {
   const dateEl = document.getElementById('liveDate');
   const dayEl = document.getElementById('liveDay');
   const quoteEl = document.getElementById('dailyQuote');
-  
   if (timeEl) timeEl.textContent = timeStr;
   if (dateEl) dateEl.textContent = dateStr;
   if (dayEl) dayEl.textContent = dayStr;
@@ -845,13 +849,76 @@ function updateLiveDateTime() {
 updateLiveDateTime();
 setInterval(updateLiveDateTime, 1000);
 
+// ==========================================
+// 5. NAVIGATION & BACK BUTTON HANDLER
+// ==========================================
+let backStack = ["home"];
+let savedScreen = localStorage.getItem("gs_last_screen");
+if (savedScreen && document.getElementById(savedScreen)) {
+    backStack = [savedScreen];
+}
+
+function pushHistoryState(screenId) {
+    localStorage.setItem("gs_last_screen", screenId);
+    if (backStack[backStack.length - 1] !== screenId) {
+        backStack.push(screenId);
+        history.pushState({ screen: screenId }, "", "#" + screenId);
+    }
+}
+
+window.addEventListener("popstate", function (e) {
+    // Stop timers of the screen we are leaving
+    const currentActive = document.querySelector(".screen.active");
+    if (currentActive) {
+        if (currentActive.id === "quizScreen") {
+            cleanViewerFrame();
+        }
+        if (currentActive.id !== "memoryGameScreen") { if (typeof mmInterval !== "undefined" && mmInterval) { clearInterval(mmInterval); mmInterval = null; } }
+        if (currentActive.id !== "mathGameScreen") { if (typeof mtStop === "function") mtStop(); }
+    }
+
+    if (backStack.length > 1) {
+        backStack.pop(); 
+        let prevScreen = backStack[backStack.length - 1];
+        let target = document.getElementById(prevScreen) || document.getElementById("home");
+        document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
+        target.classList.add("active");
+        window.scrollTo(0, 0);
+        
+        if (prevScreen === "bookmarks") renderBookmarks();
+        if (prevScreen === "offlineQuizMenuScreen") renderDownloadedQuizList();
+        if (prevScreen === "progressScreen") renderProgress();
+        if (prevScreen === "memoryGameScreen") refreshLevelBests();
+        updateBottomNav(prevScreen);
+        localStorage.setItem("gs_last_screen", prevScreen);
+    } else {
+        if (confirm("ଆପ୍ ବନ୍ଦ କରିବାକୁ ଚାହାଁନ୍ତି କି?")) {
+            if (window.AppInventor && typeof window.AppInventor.setWebViewString === "function") {
+                window.AppInventor.setWebViewString("CLOSE_APP"); 
+            } else {
+                window.close(); 
+            }
+        } else {
+            history.pushState({ screen: "home" }, "", "#home");
+        }
+    }
+});
+
+history.replaceState({ screen: savedScreen || "home" }, "", "#" + (savedScreen || "home"));
+
 window.addEventListener("load", function() {
   syncHeaderHeight();
   applyStoredPrefs();
+  if (savedScreen && document.getElementById(savedScreen)) {
+      showScreen(savedScreen, false); // Don't push history on load
+  }
   setTimeout(() => { checkForAppUpdate(false); }, 2000);
   setTimeout(() => { checkDailyProgress(); }, 1000);
 });
 
+// ==========================================
+// 6. UTILS & ROUTING
+// ==========================================
 function esc(s) { return String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c])); }
 
 function withBase(html) {
@@ -883,10 +950,19 @@ function updateBottomNav(id){
   if(nav)nav.classList.toggle("hidden",id==="quizScreen"||id==="memoryGameScreen"||id==="mathGameScreen");
 }
 
-function showScreen(id) {
+function showScreen(id, pushHistory = true) {
   let target = $(id) || $("home");
-  if (id !== "memoryGameScreen") { if (typeof mmInterval !== "undefined" && mmInterval) { clearInterval(mmInterval); mmInterval = null; } }
-  if (id !== "mathGameScreen") { if (typeof mtStop === "function") mtStop(); }
+  
+  // Stop timers if leaving game screens
+  const currentActive = document.querySelector(".screen.active");
+  if (currentActive && currentActive.id !== id) {
+      if (currentActive.id === "quizScreen") {
+          cleanViewerFrame();
+      }
+      if (currentActive.id !== "memoryGameScreen") { if (typeof mmInterval !== "undefined" && mmInterval) { clearInterval(mmInterval); mmInterval = null; } }
+      if (currentActive.id !== "mathGameScreen") { if (typeof mtStop === "function") mtStop(); }
+  }
+
   document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
   target.classList.add("active");
   window.scrollTo(0, 0);
@@ -895,20 +971,14 @@ function showScreen(id) {
   if (id === "progressScreen") renderProgress();
   if (id === "memoryGameScreen") refreshLevelBests();
   updateBottomNav(id);
+  if (pushHistory) pushHistoryState(id);
 }
 
-function goBack(){
-  const active = document.querySelector(".screen.active");
-  const id = active ? active.id : "home";
-  const backMap = {
-    classes:"home", subjects:"classes", folder:"subjects",
-    mcqSetup:"home", offlineQuizMenuScreen:"home",
-    bookmarks:"home", studyTimer:"home", about:"home", progressScreen:"home",
-    gameMenuScreen:"home", memoryGameScreen:"gameMenuScreen", mathGameScreen:"gameMenuScreen"
-  };
-  showScreen(backMap[id] || "home");
-}
+function goBack(){ history.back(); }
 
+// ==========================================
+// 7. STUDY MATERIALS
+// ==========================================
 function showClasses() {
   $("classTitle").textContent = "Select Class · Study Materials";
   $("classGrid").innerHTML = "";
@@ -944,22 +1014,41 @@ function openSubject(sub) {
   showScreen("folder");
 }
 
+// ==========================================
+// 8. MCQ & VIEWER LOGIC
+// ==========================================
 function cleanViewerFrame() {
   clearInterval(quizTimerInterval); quizTimerInterval = null;
   isQuizPaused = false; currentQuizHtml = ""; currentQuizTitle = ""; currentQuizUrl = "";
   $("noteActionToolbar").style.display = "none";
   $("pauseModal").classList.remove("active");
-  $("quizFrame").srcdoc = "";
+  if ($("quizFrame")) $("quizFrame").srcdoc = "";
 }
 
 function handleViewerBack() {
   cleanViewerFrame();
-  if (currentViewMode === "quiz") showScreen("mcqSetup");
-  else if (currentViewMode === "downloaded_quiz") showScreen("offlineQuizMenuScreen");
-  else showScreen("subjects");
+  // Forcefully reset history to prevent iframe from closing the app
+  if (currentViewMode === "quiz") {
+      showScreen("mcqSetup", false);
+      backStack = ["home", "mcqSetup"];
+      history.replaceState({ screen: "mcqSetup" }, "", "#mcqSetup");
+  } else if (currentViewMode === "downloaded_quiz") {
+      showScreen("offlineQuizMenuScreen", false);
+      backStack = ["home", "offlineQuizMenuScreen"];
+      history.replaceState({ screen: "offlineQuizMenuScreen" }, "", "#offlineQuizMenuScreen");
+  } else {
+      showScreen("subjects", false);
+      backStack = ["home", "classes", "subjects"];
+      history.replaceState({ screen: "subjects" }, "", "#subjects");
+  }
 }
 
-function goHomeFromViewer() { cleanViewerFrame(); showScreen("home"); }
+function goHomeFromViewer() {
+  cleanViewerFrame();
+  showScreen("home", false);
+  backStack = ["home"];
+  history.replaceState({ screen: "home" }, "", "#home");
+}
 
 async function saveCurrentQuizOffline() {
   try {
@@ -1036,7 +1125,9 @@ function deleteDownloadedMcq(key) {
   });
 }
 
-/* ==================== PROGRESS / XP SYSTEM ==================== */
+// ==========================================
+// 9. PROGRESS / XP SYSTEM
+// ==========================================
 function migrateOldGarden() {
   try {
     const old = load("gs_garden", null);
@@ -1121,7 +1212,9 @@ function renderProgress() {
   $("pgBadges").innerHTML = badgesHtml;
 }
 
-/* ==================== MEMORY MATCH GAME ==================== */
+// ==========================================
+// 10. MEMORY MATCH GAME
+// ==========================================
 var mmInterval = null;
 var mmSeconds = 0;
 var mmMoves = 0;
@@ -1336,10 +1429,14 @@ function closeWinAndLevels() {
 function exitMemoryGame() {
   clearInterval(mmInterval); mmInterval = null;
   $("mmWinModal").classList.remove("active");
-  showScreen("gameMenuScreen");
+  showScreen("gameMenuScreen", false);
+  backStack = ["home", "gameMenuScreen"];
+  history.replaceState({ screen: "gameMenuScreen" }, "", "#gameMenuScreen");
 }
 
-/* ==================== MATH SPEED CHALLENGE ==================== */
+// ==========================================
+// 11. MATH SPEED CHALLENGE
+// ==========================================
 var MT_DURATION = 30;
 var MT_LEVELS = {
   easy:   { name: "😊 ସହଜ · Easy",    ops: ["+","-","×"],      addMax: 20,  mulA: [2,5],  mulB: [2,5] },
@@ -1492,9 +1589,16 @@ function mtFinish() {
   if (mtScoreVal >= 10) launchConfetti();
 }
 
-function exitMathGame() { mtStop(); showScreen("gameMenuScreen"); }
+function exitMathGame() { 
+  mtStop(); 
+  showScreen("gameMenuScreen", false);
+  backStack = ["home", "gameMenuScreen"];
+  history.replaceState({ screen: "gameMenuScreen" }, "", "#gameMenuScreen");
+}
 
-/* ==================== UTILS ==================== */
+// ==========================================
+// 12. MISC UTILS
+// ==========================================
 function sendBridge(msg) {
   if (window.AppInventor && typeof window.AppInventor.setWebViewString === "function") {
     window.AppInventor.setWebViewString(msg); return true;
@@ -1624,7 +1728,13 @@ function startQuiz() {
 
 function pauseQuiz() { isQuizPaused = true; $("pausedTimeText").textContent = fmtTime(quizSeconds); $("pauseModal").classList.add("active"); }
 function resumeQuiz() { isQuizPaused = false; $("pauseModal").classList.remove("active"); }
-function closePauseAndExit() { $("pauseModal").classList.remove("active"); cleanViewerFrame(); showScreen("mcqSetup"); }
+function closePauseAndExit() { 
+  $("pauseModal").classList.remove("active"); 
+  cleanViewerFrame(); 
+  showScreen("mcqSetup", false);
+  backStack = ["home", "mcqSetup"];
+  history.replaceState({ screen: "mcqSetup" }, "", "#mcqSetup");
+}
 
 function startStudy() { if (studyInterval) return; studyInterval = setInterval(() => { studySeconds++; renderStudyClock(); }, 1000); }
 function pauseStudy() { clearInterval(studyInterval); studyInterval = null; }
@@ -1648,6 +1758,23 @@ function shareApp() {
   if (navigator.clipboard && navigator.clipboard.writeText) {
     navigator.clipboard.writeText(message).then(function () { alert("📋 Message copy ହୋଇଗଲା।"); }).catch(function () { alert("Share not supported."); });
   } else { alert("Share not supported."); }
+}
+
+// ==========================================
+// AUDIO BEEP (GAMES)
+// ==========================================
+var nokiaAudioCtx = null;
+function playNokiaBeep(freq, duration) {
+  try {
+    if (!nokiaAudioCtx) nokiaAudioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    if (nokiaAudioCtx.state === "suspended") nokiaAudioCtx.resume();
+    var osc = nokiaAudioCtx.createOscillator();
+    var gain = nokiaAudioCtx.createGain();
+    osc.type = "square"; osc.frequency.value = freq;
+    gain.gain.setValueAtTime(0.08, nokiaAudioCtx.currentTime);
+    osc.connect(gain); gain.connect(nokiaAudioCtx.destination);
+    osc.start(); osc.stop(nokiaAudioCtx.currentTime + duration);
+  } catch (e) {}
 }
 
 if (load("gs_dark_theme", "0") === "1") { document.body.classList.add("dark"); }
