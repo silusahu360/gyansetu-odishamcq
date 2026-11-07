@@ -8,17 +8,19 @@
 <style>
 :root{--primary:#6d28d9;--deep:#4c1d95;--accent:#fbbf24;--bg:#f5f3ff;--card:#ffffff;--ink:#241746;--muted:#71658b;--line:#e6ddf7;--good:#15803d;--bad:#b91c1c;--pill-bg:#ede9fe;--pill-ink:#6d28d9;}
 *{box-sizing:border-box}
-body{margin:0;font-family:system-ui,-apple-system,"Noto Sans Oriya","Noto Sans",sans-serif;font-size:17px;line-height:1.55;background:linear-gradient(145deg,#fdf2f8 0%,#f3e8ff 45%,#e0f2fe 100%);background-attachment:fixed;color:var(--ink);min-height:100vh;}
+body{margin:0;font-family:system-ui,-apple-system,"Noto Sans Oriya","Noto Sans",sans-serif;font-size:17px;line-height:1.55;background:linear-gradient(145deg,#fdf2f8 0%,#f3e8ff 45%,#e0f2fe 100%);background-attachment:fixed;color:var(--ink);min-height:100vh;padding-bottom:76px;}
 body.dark{--bg:#101827;--card:#1d293b;--ink:#edf2f7;--muted:#aab7c8;--line:#344256;--pill-bg:#312e81;--pill-ink:#e0e7ff;background:linear-gradient(145deg,#111827,#1e1b4b 55%,#172554);background-attachment:fixed;}
-header{background:linear-gradient(115deg,#4c1d95 0%,#7c3aed 42%,#db2777 100%);color:#fff;text-align:center;padding:18px 12px;position:sticky;top:0;z-index:5;box-shadow:0 4px 14px rgba(0,0,0,0.15);border-bottom:4px solid #fbbf24;}
-.brand{font-size:clamp(22px,5vw,30px);font-weight:850}
+header{background:linear-gradient(115deg,#4c1d95 0%,#7c3aed 42%,#db2777 100%);color:#fff;text-align:center;padding:14px 54px 14px 12px;position:sticky;top:0;z-index:5;box-shadow:0 4px 14px rgba(0,0,0,0.15);border-bottom:4px solid #fbbf24;}
+.brand{font-size:clamp(20px,5vw,26px);font-weight:850}
 .brand span{color:#fde68a}
-header p{margin:6px 0 0;font-size:15px;line-height:1.5;opacity:.95}
-main{max-width:680px;margin:auto;padding:18px 14px 28px}
+header p{margin:2px 0 0;font-size:12px;line-height:1.4;opacity:.9}
+.theme-toggle{position:absolute;top:50%;right:12px;transform:translateY(-50%);width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.18);border:1.5px solid rgba(255,255,255,.35);color:#fff;font-size:19px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.2s;padding:0;}
+.theme-toggle:active{transform:translateY(-50%) scale(.92);}
+main{max-width:680px;margin:auto;padding:18px 14px 20px}
 .screen{display:none}
 .screen.active{display:block;animation:up .2s}
 @keyframes up{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
-h2{font-size:23px;line-height:1.4;margin:12px 0 18px;text-align:center;color:#5b21b6}
+h2{font-size:22px;line-height:1.4;margin:12px 0 18px;text-align:center;color:#5b21b6}
 body.dark h2{color:#c4b5fd}
 .card{background:var(--card);border:1px solid #e9d5ff;border-radius:16px;padding:16px;margin-bottom:12px;box-shadow:0 8px 24px rgba(76,29,149,0.08)}
 body.dark .card{border-color:#344256;box-shadow:0 8px 24px rgba(0,0,0,0.25)}
@@ -46,7 +48,7 @@ body.dark .btn.light{background:#312e81;color:#ede9fe;border-color:#4338ca}
 .subject:nth-child(3n){border-left-color:#f97316}
 .field{width:100%;padding:12px;border:1.5px solid #d8b4fe;border-radius:9px;background:var(--card);color:var(--ink);margin:5px 0 12px;font-size:15px}
 .field:focus{outline:2px solid #a78bfa;border-color:#7c3aed}
-.back{border:2px solid #a78bfa;color:#4c1d95;background:linear-gradient(135deg,#fff7ed,#ede9fe);width:100%;padding:16px;border-radius:25px;margin-top:14px;font-size:18px;font-weight:800;box-shadow:0 5px 14px rgba(76,29,149,0.12);cursor:pointer}
+.back{border:2px solid #a78bfa;color:#4c1d95;background:linear-gradient(135deg,#fff7ed,#ede9fe);width:100%;padding:14px;border-radius:25px;margin-top:14px;font-size:17px;font-weight:800;box-shadow:0 5px 14px rgba(76,29,149,0.12);cursor:pointer}
 body.dark .back{color:#f5f3ff;border:2px solid #8b5cf6;background:linear-gradient(135deg,#312e81,#1d293b)}
 .back.home-alt{background:linear-gradient(135deg,#e0e7ff,#ede9fe);color:#4338ca}
 body.dark .back.home-alt{background:linear-gradient(135deg,#312e81,#1d293b);color:#f5f3ff}
@@ -76,24 +78,42 @@ body.dark .dev-badge-card{background:linear-gradient(135deg,rgba(139,92,246,.15)
 body.dark .dev-tag{background:#312e81;color:#ddd6fe}
 body.dark .dev-name{color:#e0e7ff}
 body.dark .dev-desc{color:#aab7c8}
-footer{text-align:center;padding:15px;color:#6b5b86;font-size:13px}
+footer{text-align:center;padding:18px 12px 20px;color:#6b5b86;font-size:12px}
 body.dark footer{color:#aab7c8}
 @media(max-width:380px){.btnrow{grid-template-columns:1fr}.grid{gap:8px}.btnrow3{grid-template-columns:1fr}}
 
-/* LIVE CLOCK CSS */
-.live-clock-container{text-align:center;margin:-8px 0 16px;}
-.live-clock-box{display:inline-flex;align-items:center;gap:8px;background:var(--card);border:1.5px solid #c4b5fd;padding:8px 18px;border-radius:30px;font-family:monospace;font-size:16px;font-weight:850;color:#6d28d9;box-shadow:0 4px 12px rgba(76,29,149,0.1);}
-body.dark .live-clock-box{background:#1d293b;border-color:#6d28d9;color:#e0e7ff;}
-#liveTime{color:#db2777;font-size:18px;}
-body.dark #liveTime{color:#f472b6;}
+/* HOME HERO */
+.hero-card{background:linear-gradient(135deg,#7c3aed 0%,#db2777 100%);padding:20px;border-radius:18px;margin-bottom:18px;box-shadow:0 10px 28px rgba(124,58,237,.28);position:relative;overflow:hidden;}
+.hero-card::after{content:"";position:absolute;top:-30px;right:-30px;width:120px;height:120px;background:radial-gradient(circle,rgba(255,255,255,.15),transparent 70%);border-radius:50%;}
+.section-title{font-size:12.5px;color:var(--muted);margin:18px 0 10px;font-weight:800;text-transform:uppercase;letter-spacing:.7px;}
+.quick-actions{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;}
+.quick-btn{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 4px;display:flex;flex-direction:column;align-items:center;gap:5px;font-size:11px;font-weight:750;color:var(--ink);cursor:pointer;transition:.15s;box-shadow:0 2px 8px rgba(76,29,149,.05);}
+.quick-btn span:first-child{font-size:22px;line-height:1;}
+.quick-btn:active{transform:scale(.94);background:var(--pill-bg);}
 
-/* SNAKE GAME CSS */
+/* BOTTOM NAV */
+.bottom-nav{position:fixed;bottom:0;left:0;right:0;background:var(--card);border-top:1.5px solid var(--line);display:flex;padding:6px 4px calc(6px + env(safe-area-inset-bottom));z-index:60;box-shadow:0 -6px 18px rgba(76,29,149,.12);}
+.bottom-nav.hidden{display:none;}
+.nav-item{flex:1;background:none;border:0;padding:6px 2px;display:flex;flex-direction:column;align-items:center;gap:2px;color:var(--muted);font-size:10.5px;font-weight:750;cursor:pointer;border-radius:10px;transition:.15s;font-family:inherit;}
+.nav-item .nav-icon{font-size:20px;line-height:1;transition:.2s;}
+.nav-item.active{color:var(--primary);background:var(--pill-bg);}
+.nav-item.active .nav-icon{transform:scale(1.15);}
+body.dark .nav-item.active{color:#c4b5fd;}
+
+/* PROGRESS SCREEN */
+.pg-stat-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:12px;}
+.pg-stat{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 8px;text-align:center;box-shadow:0 4px 12px rgba(76,29,149,.06);}
+.pg-stat-num{font-size:20px;font-weight:850;color:#6d28d9;}
+body.dark .pg-stat-num{color:#c4b5fd;}
+.pg-stat-label{font-size:12px;color:var(--muted);margin-top:4px;font-weight:600;}
+
+/* SNAKE GAME */
 .nokia-snake-card{background:#140c2b;border:2px solid #8b5cf6;border-radius:22px;padding:16px;width:100%;max-width:390px;margin:0 auto;box-shadow:0 0 25px rgba(139,92,246,0.3);text-align:center;color:#f8fafc}
 .nokia-title{font-size:21px;font-weight:900;letter-spacing:1.5px;color:#fde047;text-shadow:0 0 12px rgba(253,224,71,0.5);margin:0 0 10px}
 .nokia-scoreboard{display:flex;justify-content:space-around;background:#0d0620;border:1.5px solid #3b2075;border-radius:14px;padding:8px;margin-bottom:12px;font-weight:800}
 .nokia-score-item{font-size:13px;color:#a78bfa}
 .nokia-score-num{font-size:20px;color:#38bdf8;font-family:monospace;display:block}
-#nokiaCanvas{background:#090414;border:2.5px solid #38bdf8;border-radius:12px;box-shadow:0 0 16px rgba(56,189,248,0.25);display:block;margin:0 auto 12px;max-width:100%;touch-action:none}
+#nokiaCanvas{background:#090414;border:2.5px solid #38bdf8;border-radius:12px;box-shadow:0 0 16px rgba(56,189,248,0.25);display:block;margin:0 auto 12px;max-width:100%;height:auto;touch-action:none}
 .nokia-pad{display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(3,50px);gap:8px;width:210px;margin:10px auto}
 .nokia-pad-btn{background:linear-gradient(135deg,#6d28d9,#4f46e5);border:1.5px solid #a78bfa;border-radius:12px;color:white;font-size:22px;display:flex;align-items:center;justify-content:center;cursor:pointer;user-select:none;box-shadow:0 4px 10px rgba(0,0,0,0.4)}
 .nokia-pad-btn:active{transform:scale(0.94);background:#7c3aed}
@@ -103,17 +123,101 @@ body.dark #liveTime{color:#f472b6;}
 .nokia-pad-right{grid-column:3;grid-row:2}
 .nokia-pad-down{grid-column:2;grid-row:3}
 
-/* STUDY GARDEN CSS */
-.garden-sky{background:linear-gradient(180deg,#bae6fd 0%,#e0f2fe 100%);border-radius:16px 16px 0 0;padding:20px;text-align:center;border:1px solid #bae6fd;border-bottom:0;min-height:160px;display:flex;flex-direction:column;justify-content:flex-end;}
-body.dark .garden-sky{background:linear-gradient(180deg,#0f172a 0%,#1e293b 100%);border-color:#334155;}
-.garden-soil{background:#a16207;border-radius:0 0 16px 16px;height:40px;border:1px solid #854d0e;border-top:4px solid #713f12;box-shadow:inset 0 4px 10px rgba(0,0,0,0.2);}
-body.dark .garden-soil{background:#451a03;border-color:#78350f;border-top-color:#451a03;}
-.gd-plants{font-size:40px;line-height:1.2;letter-spacing:4px;}
-.pg-stat-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:12px;}
-.pg-stat{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 8px;text-align:center;box-shadow:0 4px 12px rgba(76,29,149,.06);}
-.pg-stat-num{font-size:20px;font-weight:850;color:#6d28d9;}
-body.dark .pg-stat-num{color:#c4b5fd;}
-.pg-stat-label{font-size:12px;color:var(--muted);margin-top:4px;font-weight:600;}
+/* MEMORY MATCH */
+.mm-wrapper{background:#140c2b;border:2px solid #8b5cf6;border-radius:22px;padding:16px;max-width:440px;margin:0 auto;box-shadow:0 0 25px rgba(139,92,246,0.3);text-align:center;color:#f8fafc;}
+.mm-title{font-size:19px;font-weight:900;letter-spacing:1px;color:#fde047;text-shadow:0 0 12px rgba(253,224,71,0.5);margin:0 0 10px}
+.mm-scoreboard{display:flex;justify-content:space-around;background:#0d0620;border:1.5px solid #3b2075;border-radius:14px;padding:8px;margin-bottom:14px;font-weight:800;gap:4px}
+.mm-score-item{font-size:11px;color:#a78bfa;flex:1}
+.mm-score-num{font-size:17px;color:#38bdf8;font-family:monospace;display:block;margin-top:2px}
+.mm-grid{display:grid;gap:8px;max-width:360px;margin:0 auto 12px;justify-content:center;}
+.mm-grid.easy{grid-template-columns:repeat(4,1fr);}
+.mm-grid.medium{grid-template-columns:repeat(4,1fr);}
+.mm-grid.hard{grid-template-columns:repeat(6,1fr);}
+.mm-card{background:linear-gradient(135deg,#6d28d9,#4f46e5);border:2px solid #a78bfa;border-radius:10px;aspect-ratio:1;position:relative;cursor:pointer;padding:0;transition:transform .15s;overflow:hidden;min-width:0;}
+.mm-card .mm-face{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;transition:opacity .2s;line-height:1;}
+.mm-card .mm-back{color:#fde68a;font-weight:900;font-size:clamp(14px,4vw,22px);}
+.mm-card .mm-front{opacity:0;background:#fff7ed;font-size:clamp(18px,5vw,30px);}
+.mm-grid.hard .mm-front{font-size:clamp(14px,3.5vw,22px);}
+.mm-card:active{transform:scale(.94);}
+.mm-card.flipped{transform:scale(1.03);}
+.mm-card.flipped .mm-back{opacity:0;}
+.mm-card.flipped .mm-front{opacity:1;}
+.mm-card.matched{background:linear-gradient(135deg,#10b981,#047857);border-color:#34d399;opacity:.7;pointer-events:none;transform:scale(.96);}
+.mm-card.matched .mm-front{background:#dcfce7;}
+.mm-levels{display:grid;gap:10px;margin-bottom:12px;}
+.mm-level-btn{background:linear-gradient(135deg,#6d28d9,#4f46e5);border:2px solid #a78bfa;border-radius:14px;padding:16px;color:#fff;cursor:pointer;text-align:left;display:flex;align-items:center;justify-content:space-between;gap:10px;transition:.15s;}
+.mm-level-btn:active{transform:scale(.97);}
+.mm-level-btn.easy{background:linear-gradient(135deg,#10b981,#047857);border-color:#34d399;}
+.mm-level-btn.medium{background:linear-gradient(135deg,#f59e0b,#ea580c);border-color:#fbbf24;}
+.mm-level-btn.hard{background:linear-gradient(135deg,#ef4444,#be123c);border-color:#f87171;}
+.mm-level-info{flex:1;}
+.mm-level-name{font-size:17px;font-weight:850;display:flex;align-items:center;gap:6px;}
+.mm-level-meta{font-size:12px;opacity:.9;margin-top:2px;}
+.mm-level-best{font-size:12px;font-weight:800;color:#fde68a;text-align:right;line-height:1.3;}
+.mm-stars{font-size:20px;letter-spacing:1px;}
+.mm-stars .dim{opacity:.3;}
+
+/* WIN MODAL */
+.mm-win-overlay{position:fixed;inset:0;background:rgba(15,23,42,.9);z-index:150;display:none;align-items:center;justify-content:center;padding:16px;}
+.mm-win-overlay.active{display:flex;}
+.mm-win-box{background:linear-gradient(160deg,#7c3aed,#db2777);color:#fff;border-radius:22px;padding:26px 20px;max-width:380px;width:100%;text-align:center;box-shadow:0 20px 50px rgba(0,0,0,.4);border:3px solid #fbbf24;position:relative;animation:pop .4s;}
+@keyframes pop{0%{transform:scale(.7);opacity:0}60%{transform:scale(1.05)}100%{transform:scale(1);opacity:1}}
+.mm-win-emoji{font-size:60px;line-height:1;margin-bottom:6px;}
+.mm-win-title{font-size:22px;font-weight:850;margin:6px 0;}
+.mm-win-stars{font-size:44px;letter-spacing:4px;margin:8px 0 4px;}
+.mm-win-stars .dim{opacity:.3;}
+.mm-win-praise{font-size:15px;font-weight:700;margin:8px 0 12px;opacity:.95;}
+.mm-win-stats{display:flex;justify-content:space-around;background:rgba(255,255,255,.18);border-radius:12px;padding:10px;margin-bottom:14px;}
+.mm-win-stat{font-size:11px;opacity:.85;font-weight:700;text-transform:uppercase;letter-spacing:.5px;}
+.mm-win-stat b{display:block;font-size:18px;color:#fde68a;margin-top:2px;}
+.mm-win-box .btn{background:rgba(255,255,255,.25);border:2px solid rgba(255,255,255,.5);}
+.mm-win-box .btn.green{background:#fbbf24;color:#4c1d95;border-color:#fde68a;}
+
+/* MATH SPEED */
+.mt-wrapper{background:#140c2b;border:2px solid #8b5cf6;border-radius:22px;padding:16px;max-width:440px;margin:0 auto;box-shadow:0 0 25px rgba(139,92,246,0.3);text-align:center;color:#f8fafc;}
+.mt-title{font-size:19px;font-weight:900;letter-spacing:1px;color:#fde047;text-shadow:0 0 12px rgba(253,224,71,0.5);margin:0 0 10px}
+.mt-scoreboard{display:flex;justify-content:space-around;background:#0d0620;border:1.5px solid #3b2075;border-radius:14px;padding:8px;margin-bottom:12px;font-weight:800;gap:4px}
+.mt-score-item{font-size:11px;color:#a78bfa;flex:1}
+.mt-score-num{font-size:19px;color:#38bdf8;font-family:monospace;display:block;margin-top:2px}
+.mt-bar-wrap{height:10px;background:#0d0620;border:1.5px solid #3b2075;border-radius:10px;overflow:hidden;margin-bottom:14px}
+.mt-bar{height:100%;width:100%;background:linear-gradient(90deg,#10b981,#fbbf24,#ef4444);background-size:300% 100%;border-radius:10px;transition:width .1s linear}
+.mt-streak{min-height:24px;font-size:15px;font-weight:800;color:#fb923c;margin-bottom:4px}
+.mt-question{font-size:44px;font-weight:900;color:#fff;background:#0d0620;border:2px solid #3b2075;border-radius:16px;padding:22px 8px;margin-bottom:14px;font-family:monospace;letter-spacing:1px}
+.mt-options{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}
+.mt-opt{padding:18px 8px;font-size:26px;font-weight:850;font-family:monospace;color:#fff;background:linear-gradient(135deg,#6d28d9,#4f46e5);border:2px solid #a78bfa;border-radius:14px;cursor:pointer;transition:transform .1s}
+.mt-opt:active{transform:scale(.95)}
+.mt-opt.right{background:linear-gradient(135deg,#10b981,#047857);border-color:#34d399}
+.mt-opt.wrong{background:linear-gradient(135deg,#ef4444,#be123c);border-color:#f87171}
+.mt-opt:disabled{cursor:default}
+.mt-levels{display:grid;gap:10px;margin-bottom:12px}
+.mt-level-btn{border:2px solid #a78bfa;border-radius:14px;padding:16px;color:#fff;cursor:pointer;text-align:left;display:flex;align-items:center;justify-content:space-between;gap:10px;background:linear-gradient(135deg,#6d28d9,#4f46e5)}
+.mt-level-btn:active{transform:scale(.97)}
+.mt-level-btn.easy{background:linear-gradient(135deg,#10b981,#047857);border-color:#34d399}
+.mt-level-btn.medium{background:linear-gradient(135deg,#f59e0b,#ea580c);border-color:#fbbf24}
+.mt-level-btn.hard{background:linear-gradient(135deg,#ef4444,#be123c);border-color:#f87171}
+.mt-level-name{font-size:17px;font-weight:850}
+.mt-level-meta{font-size:12px;opacity:.9;margin-top:2px}
+.mt-level-best{font-size:12px;font-weight:800;color:#fde68a;text-align:right;line-height:1.3}
+.mt-result{background:linear-gradient(160deg,#7c3aed,#db2777);border:3px solid #fbbf24;border-radius:20px;padding:22px 16px;margin-bottom:12px}
+.mt-result-emoji{font-size:54px;line-height:1}
+.mt-result-title{font-size:22px;font-weight:850;margin:6px 0}
+.mt-result-score{font-size:46px;font-weight:900;color:#fde68a;line-height:1.1}
+.mt-result-sub{font-size:14px;font-weight:700;opacity:.95;margin-top:6px;white-space:pre-line}
+
+/* FLAPPY BIRD */
+.fl-wrapper{background:#140c2b;border:2px solid #8b5cf6;border-radius:22px;padding:16px;max-width:390px;margin:0 auto;box-shadow:0 0 25px rgba(139,92,246,0.3);text-align:center;color:#f8fafc;}
+.fl-title{font-size:21px;font-weight:900;letter-spacing:1.5px;color:#fde047;text-shadow:0 0 12px rgba(253,224,71,0.5);margin:0 0 10px}
+.fl-scoreboard{display:flex;justify-content:space-around;background:#0d0620;border:1.5px solid #3b2075;border-radius:14px;padding:8px;margin-bottom:12px;font-weight:800}
+.fl-score-item{font-size:13px;color:#a78bfa}
+.fl-score-num{font-size:20px;color:#38bdf8;font-family:monospace;display:block}
+#flCanvas{background:#70c5ce;border:2.5px solid #38bdf8;border-radius:12px;box-shadow:0 0 16px rgba(56,189,248,0.25);display:block;margin:0 auto 12px;max-width:100%;height:auto;max-height:60vh;touch-action:none;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.fl-flap-btn{width:100%;padding:18px;font-size:20px;font-weight:900;border:2px solid #fde68a;border-radius:16px;background:linear-gradient(135deg,#f59e0b,#ea580c);color:#fff;cursor:pointer;user-select:none;box-shadow:0 5px 14px rgba(0,0,0,.4)}
+.fl-flap-btn:active{transform:scale(.97)}
+
+/* CONFETTI */
+.confetti-container{position:fixed;inset:0;pointer-events:none;z-index:200;overflow:hidden;}
+.confetti{position:absolute;width:9px;height:9px;top:-20px;border-radius:2px;animation:fall linear forwards;}
+@keyframes fall{to{transform:translateY(105vh) rotate(720deg);opacity:.8;}}
 </style>
 </head>
 <body>
@@ -121,53 +225,47 @@ body.dark .pg-stat-num{color:#c4b5fd;}
 <header id="appHeader">
 <div class="brand">🎓 GYANSETU <span>ODISHA</span></div>
 <p>NCERT & Odisha State Board Learning Portal</p>
+<button class="theme-toggle" onclick="toggleTheme()" id="themeBtn" aria-label="Toggle theme">🌙</button>
 </header>
 
 <main>
 <section id="home" class="screen active">
-<h2>ସ୍ୱାଗତମ୍ | Welcome</h2>
-
-<!-- LIVE CLOCK ADDED HERE -->
-<div class="live-clock-container">
-  <div class="live-clock-box">
-    <span>📅 <span id="liveDate">--/--/----</span></span> |
-    <span>⏰ <span id="liveTime">--:--:--</span></span>
+  <div class="hero-card">
+    <h2 style="color:#fff;text-align:left;margin:0 0 4px;font-size:22px;">ସ୍ୱାଗତମ୍ 👋</h2>
+    <p style="color:rgba(255,255,255,.85);font-size:13px;margin:0 0 12px;">ଆଜି କଣ ଶିଖିବେ?</p>
+    <div style="display:inline-flex;align-items:center;gap:8px;padding:6px 14px;background:rgba(255,255,255,.22);border:1px solid rgba(255,255,255,.35);border-radius:30px;color:#fff;font-size:13px;font-weight:750;">
+      <span style="width:8px;height:8px;background:#86efac;border-radius:50%;box-shadow:0 0 8px #86efac;"></span>
+      <span id="homeStatus">Ready to learn.</span>
+    </div>
   </div>
-</div>
 
-<div class="grid">
-<button type="button" class="tile" onclick="openMcqSetup()">📝 MCQ Practice</button>
-<button type="button" class="tile" onclick="showClasses()">📂 Study Materials</button>
-<button type="button" class="tile" onclick="openOfflineQuizMenu()">⚡ Downloaded Quiz</button>
-<button type="button" class="tile" onclick="openSnakeGame()">🎮 Mind Fresh</button>
-<button type="button" class="tile" style="grid-column:1 / -1; background:linear-gradient(135deg,#10b981,#047857);" onclick="openGarden()">🌱 Study Garden (ଅଧ୍ୟୟନ ବଗିଚା)</button>
-</div>
-<div class="btnrow">
-<button type="button" class="btn green" onclick="shareApp()">📤 Share App</button>
-<button type="button" class="btn secondary" onclick="showScreen('studyTimer')">⏱ Study Timer</button>
-<button type="button" class="btn light" onclick="showScreen('bookmarks')">⭐ Bookmarks</button>
-<button type="button" class="btn light" onclick="toggleTheme()">🌙 Dark / Light</button>
-<button type="button" class="btn purple span2" onclick="checkForAppUpdate(true)">🔄 Check for Updates</button>
-<button type="button" class="btn light span2" onclick="showScreen('about')">ℹ About / Help</button>
-</div>
-<div style="text-align:center;">
-<div id="homeStatusPill" class="status-pill">
-<span class="dot"></span>
-<span id="homeStatus">Ready to learn.</span>
-</div>
-</div>
+  <h3 class="section-title">📚 ମୁଖ୍ୟ ବିଭାଗ</h3>
+  <div class="grid">
+    <button class="tile" onclick="openMcqSetup()" style="flex-direction:column;gap:6px;min-height:88px;font-size:14px;"><span style="font-size:28px;">📝</span>MCQ Practice</button>
+    <button class="tile" onclick="showClasses()" style="flex-direction:column;gap:6px;min-height:88px;font-size:14px;"><span style="font-size:28px;">📂</span>Study Materials</button>
+    <button class="tile" onclick="openOfflineQuizMenu()" style="flex-direction:column;gap:6px;min-height:88px;font-size:14px;"><span style="font-size:28px;">⚡</span>Downloaded</button>
+    <button class="tile" onclick="openGameMenu()" style="flex-direction:column;gap:6px;min-height:88px;font-size:14px;"><span style="font-size:28px;">🎮</span>Mind Fresh</button>
+  </div>
+
+  <h3 class="section-title">🛠 ଶୀଘ୍ର ପ୍ରବେଶ</h3>
+  <div class="quick-actions">
+    <button class="quick-btn" onclick="showScreen('studyTimer')"><span>⏱</span><span>Timer</span></button>
+    <button class="quick-btn" onclick="showScreen('bookmarks')"><span>⭐</span><span>Saved</span></button>
+    <button class="quick-btn" onclick="shareApp()"><span>📤</span><span>Share</span></button>
+    <button class="quick-btn" onclick="showScreen('about')"><span>ℹ</span><span>About</span></button>
+  </div>
 </section>
 
 <section id="classes" class="screen">
 <h2 id="classTitle">Select Class</h2>
 <div class="grid" id="classGrid"></div>
-<button type="button" class="back" onclick="showScreen('home')">⬅ Home</button>
+<button type="button" class="back" onclick="goBack()">← Back</button>
 </section>
 
 <section id="subjects" class="screen">
 <h2 id="subjectTitle">Select Subject</h2>
 <div id="subjectList"></div>
-<button type="button" class="back" onclick="showScreen('classes')">⬅ Back to Classes</button>
+<button type="button" class="back" onclick="goBack()">← Back</button>
 </section>
 
 <section id="folder" class="screen">
@@ -178,7 +276,7 @@ body.dark .pg-stat-num{color:#c4b5fd;}
 <button type="button" class="btn light full" onclick="bookmarkCurrent()">⭐ Bookmark this Subject</button>
 <p id="noteStatus" style="font-size:14px;color:var(--muted);margin-top:10px;text-align:center;"></p>
 </div>
-<button type="button" class="back" onclick="showScreen('subjects')">⬅ Back</button>
+<button type="button" class="back" onclick="goBack()">← Back</button>
 </section>
 
 <section id="mcqSetup" class="screen">
@@ -195,44 +293,74 @@ body.dark .pg-stat-num{color:#c4b5fd;}
 <button type="button" class="btn orange" onclick="downloadSelectedTopicMcq()">💾 Save Offline</button>
 </div>
 </div>
-<button type="button" class="back" onclick="showScreen('home')">⬅ Home</button>
+<button type="button" class="back" onclick="goBack()">← Back</button>
 </section>
 
 <section id="offlineQuizMenuScreen" class="screen">
-<h2>⚡ Downloaded Offline Quiz Sets</h2>
+<h2>⚡ Downloaded Quiz Sets</h2>
 <div class="card">
 <p class="muted">ଅଫଲାଇନ୍‌ରେ ଅଭ୍ୟାସ କରିବା ପାଇଁ ଆପଣଙ୍କ ଡାଉନଲୋଡ୍ ହୋଇଥିବା ସେଟ୍:</p>
 <div id="downloadedQuizList"></div>
 </div>
-<button type="button" class="back" onclick="showScreen('home')">⬅ Home</button>
+<button type="button" class="back" onclick="goBack()">← Back</button>
 </section>
 
 <section id="quizScreen" class="screen">
 <div id="quizTimerBar" class="quiz-timer-strip">
 <div style="display:flex;align-items:center;gap:8px;">
-<span style="font-size:15px;font-weight:700;">⏱ RUNNING TIME:</span>
+<span style="font-size:15px;font-weight:700;">⏱ TIME:</span>
 <span id="quizRunningTimer" class="quiz-time-badge">00:00</span>
 </div>
-<button type="button" class="btn secondary" style="padding:6px 14px;font-size:13px;border-radius:8px;" onclick="pauseQuiz()">👁 Hide Quiz</button>
+<button type="button" class="btn secondary" style="padding:6px 14px;font-size:13px;border-radius:8px;" onclick="pauseQuiz()">👁 Hide</button>
 </div>
 <div id="noteActionToolbar" style="display:none;margin-bottom:10px;gap:8px;">
-<button type="button" id="quizSaveBtn" class="btn green full" style="display:none" onclick="saveCurrentQuizOffline()">💾 Download Quiz for Offline</button>
+<button type="button" id="quizSaveBtn" class="btn green full" style="display:none" onclick="saveCurrentQuizOffline()">💾 Download for Offline</button>
 </div>
 <div id="quizFrameContainer" style="width:100%;border-radius:14px;overflow:hidden;background:#fff;box-shadow:0 6px 20px rgba(0,0,0,0.1);">
 <iframe id="quizFrame" style="width:100%;height:72vh;border:0;display:block;" title="Content Viewer"></iframe>
 </div>
 <div class="btnrow" style="margin-top:14px;">
-<button type="button" id="viewerBackButton" class="back" style="margin-top:0;" onclick="handleViewerBack()">⬅ Back</button>
+<button type="button" id="viewerBackButton" class="back" style="margin-top:0;" onclick="handleViewerBack()">← Back</button>
 <button type="button" class="back home-alt" style="margin-top:0;" onclick="goHomeFromViewer()">⌂ Home</button>
 </div>
 </section>
 
+<!-- GAME MENU -->
+<section id="gameMenuScreen" class="screen">
+  <h2>🎮 Mind Fresh</h2>
+  <p class="muted" style="text-align:center;margin-bottom:16px;">ମନ ତାଜା କରିବା ପାଇଁ ଏକ game ବାଛନ୍ତୁ</p>
+  <div class="grid">
+    <button class="tile" onclick="openSnakeGame()" style="flex-direction:column;gap:6px;min-height:110px;">
+      <span style="font-size:36px;">🐍</span>
+      <span>Snake</span>
+      <span style="font-size:11px;opacity:.85;">Nokia Neon</span>
+    </button>
+    <button class="tile" onclick="openMemoryGame()" style="flex-direction:column;gap:6px;min-height:110px;background:linear-gradient(135deg,#f59e0b,#db2777);">
+      <span style="font-size:36px;">🧠</span>
+      <span>Memory Match</span>
+      <span style="font-size:11px;opacity:.85;">ମନେପଥ</span>
+    </button>
+    <button class="tile" onclick="openFlappyGame()" style="flex-direction:column;gap:6px;min-height:110px;background:linear-gradient(135deg,#0891b2,#2563eb);">
+      <span style="font-size:36px;">🐦</span>
+      <span>Flappy Bird</span>
+      <span style="font-size:11px;opacity:.85;">ଉଡ଼ାଅ</span>
+    </button>
+    <button class="tile" onclick="openMathGame()" style="flex-direction:column;gap:6px;min-height:110px;background:linear-gradient(135deg,#10b981,#047857);">
+      <span style="font-size:36px;">🧮</span>
+      <span>Math Speed</span>
+      <span style="font-size:11px;opacity:.85;">ଗଣିତ ଦ୍ରୁତ</span>
+    </button>
+  </div>
+  <button type="button" class="back" onclick="goBack()">← Back</button>
+</section>
+
+<!-- SNAKE -->
 <section id="snakeGameScreen" class="screen">
 <div class="nokia-snake-card">
 <div class="nokia-title" id="nokiaTitle">🐍 NOKIA NEON SNAKE ⚡</div>
 <div class="nokia-scoreboard">
 <div class="nokia-score-item">SCORE<span class="nokia-score-num" id="nokiaScoreVal">0</span></div>
-<div class="nokia-score-item">BEST RECORD<span class="nokia-score-num" id="nokiaHighScoreVal">0</span></div>
+<div class="nokia-score-item">BEST<span class="nokia-score-num" id="nokiaHighScoreVal">0</span></div>
 </div>
 <canvas id="nokiaCanvas" width="300" height="300"></canvas>
 <div class="nokia-pad">
@@ -246,31 +374,163 @@ body.dark .pg-stat-num{color:#c4b5fd;}
 <button type="button" class="btn cyan" onclick="resetNokiaGame()">🔄 Restart</button>
 <button type="button" class="btn purple" onclick="toggleNokiaSound()" id="nokiaSoundBtn">🔊 Sound ON</button>
 </div>
-<button type="button" class="back" onclick="exitNokiaGame()">⬅ Return to Home</button>
+<button type="button" class="back" onclick="exitNokiaGame()">← Back to Games</button>
 </div>
 </section>
 
-<section id="gardenScreen" class="screen">
-<h2>🌱 ମୋ ବଗିଚା</h2>
-<div style="margin-bottom:12px;">
-  <div class="garden-sky">
-    <div id="gdPlants" class="gd-plants">🟫 (ଏବେ କୌଣସି ଗଛ ନାହିଁ)</div>
+<!-- MEMORY MATCH -->
+<section id="memoryGameScreen" class="screen">
+  <div class="mm-wrapper">
+    <div class="mm-title" id="mmTitle">🧠 MEMORY MATCH</div>
+    <div class="mm-scoreboard" id="mmScoreboard" style="display:none;">
+      <div class="mm-score-item">MOVES<span class="mm-score-num" id="mmMoves">0</span></div>
+      <div class="mm-score-item">TIME<span class="mm-score-num" id="mmTime">00:00</span></div>
+      <div class="mm-score-item">BEST<span class="mm-score-num" id="mmBest">-</span></div>
+    </div>
+
+    <!-- LEVEL SELECTOR -->
+    <div id="mmLevels" class="mm-levels">
+      <button class="mm-level-btn easy" onclick="startMemoryLevel('easy')">
+        <div class="mm-level-info">
+          <div class="mm-level-name">😊 ସହଜ · Easy</div>
+          <div class="mm-level-meta">4 ଯୋଡ଼ି · 8 କାର୍ଡ</div>
+        </div>
+        <div class="mm-level-best" id="mmBestEasy">ଖେଳି ନାହାନ୍ତି</div>
+      </button>
+      <button class="mm-level-btn medium" onclick="startMemoryLevel('medium')">
+        <div class="mm-level-info">
+          <div class="mm-level-name">😎 ମଧ୍ୟମ · Medium</div>
+          <div class="mm-level-meta">8 ଯୋଡ଼ି · 16 କାର୍ଡ</div>
+        </div>
+        <div class="mm-level-best" id="mmBestMedium">ଖେଳି ନାହାନ୍ତି</div>
+      </button>
+      <button class="mm-level-btn hard" onclick="startMemoryLevel('hard')">
+        <div class="mm-level-info">
+          <div class="mm-level-name">🔥 କଠିନ · Hard</div>
+          <div class="mm-level-meta">12 ଯୋଡ଼ି · 24 କାର୍ଡ</div>
+        </div>
+        <div class="mm-level-best" id="mmBestHard">ଖେଳି ନାହାନ୍ତି</div>
+      </button>
+    </div>
+
+    <!-- GAME GRID -->
+    <div id="mmGrid" class="mm-grid" style="display:none;"></div>
+
+    <div class="btnrow" id="mmControlRow" style="margin-top:12px;display:none;">
+      <button type="button" class="btn cyan" onclick="resetMemoryLevel()">🔄 Restart</button>
+      <button type="button" class="btn purple" onclick="backToLevels()">↺ Levels</button>
+    </div>
+
+    <button type="button" class="back" style="background:linear-gradient(135deg,#312e81,#1d293b);color:#f5f3ff;border-color:#8b5cf6;" onclick="exitMemoryGame()">← Back to Games</button>
   </div>
-  <div class="garden-soil"></div>
+</section>
+
+<!-- MATH SPEED CHALLENGE -->
+<section id="mathGameScreen" class="screen">
+  <div class="mt-wrapper">
+    <div class="mt-title" id="mtTitle">🧮 MATH SPEED</div>
+
+    <div class="mt-scoreboard" id="mtScoreboard" style="display:none;">
+      <div class="mt-score-item">SCORE<span class="mt-score-num" id="mtScore">0</span></div>
+      <div class="mt-score-item">TIME<span class="mt-score-num" id="mtTime">30</span></div>
+      <div class="mt-score-item">BEST<span class="mt-score-num" id="mtBest">-</span></div>
+    </div>
+
+    <div id="mtLevels" class="mt-levels">
+      <p class="muted" style="color:#c4b5fd;margin:0 0 4px;">30 ସେକେଣ୍ଡରେ ଯେତେ ପାରିବ ସଠିକ୍ ଉତ୍ତର ଦିଅ!</p>
+      <button class="mt-level-btn easy" onclick="startMathLevel('easy')">
+        <div><div class="mt-level-name">😊 ସହଜ · Easy</div><div class="mt-level-meta">+ − × (ଛୋଟ ସଂଖ୍ୟା)</div></div>
+        <div class="mt-level-best" id="mtBestEasy">ଖେଳି ନାହାନ୍ତି</div>
+      </button>
+      <button class="mt-level-btn medium" onclick="startMathLevel('medium')">
+        <div><div class="mt-level-name">😎 ମଧ୍ୟମ · Medium</div><div class="mt-level-meta">+ − × (ବଡ଼ ସଂଖ୍ୟା)</div></div>
+        <div class="mt-level-best" id="mtBestMedium">ଖେଳି ନାହାନ୍ତି</div>
+      </button>
+      <button class="mt-level-btn hard" onclick="startMathLevel('hard')">
+        <div><div class="mt-level-name">🔥 କଠିନ · Hard</div><div class="mt-level-meta">+ − × ÷ (ବହୁତ ବଡ଼)</div></div>
+        <div class="mt-level-best" id="mtBestHard">ଖେଳି ନାହାନ୍ତି</div>
+      </button>
+    </div>
+
+    <div id="mtPlay" style="display:none;">
+      <div class="mt-bar-wrap"><div class="mt-bar" id="mtBar"></div></div>
+      <div class="mt-streak" id="mtStreak"></div>
+      <div class="mt-question" id="mtQuestion">?</div>
+      <div class="mt-options" id="mtOptions"></div>
+      <div class="btnrow">
+        <button type="button" class="btn cyan" onclick="resetMathLevel()">🔄 Restart</button>
+        <button type="button" class="btn purple" onclick="backToMathLevels()">↺ Levels</button>
+      </div>
+    </div>
+
+    <div id="mtResult" class="mt-result" style="display:none;">
+      <div class="mt-result-emoji" id="mtResEmoji">🎉</div>
+      <div class="mt-result-title" id="mtResTitle">ସମୟ ଶେଷ!</div>
+      <div class="mt-result-score" id="mtResScore">0</div>
+      <div class="mt-result-sub" id="mtResSub"></div>
+      <button type="button" class="btn green full" onclick="resetMathLevel()">🎮 ପୁଣି ଖେଳ</button>
+      <button type="button" class="btn full" style="margin-top:8px;background:rgba(255,255,255,.25);border:2px solid rgba(255,255,255,.5);" onclick="backToMathLevels()">↺ Level ବଦଳାଅ</button>
+    </div>
+
+    <button type="button" class="back" style="background:linear-gradient(135deg,#312e81,#1d293b);color:#f5f3ff;border-color:#8b5cf6;" onclick="exitMathGame()">← Back to Games</button>
+  </div>
+</section>
+
+<!-- FLAPPY BIRD -->
+<section id="flappyGameScreen" class="screen">
+  <div class="fl-wrapper">
+    <div class="fl-title" id="flTitle">🐦 FLAPPY BIRD</div>
+    <div class="fl-scoreboard">
+      <div class="fl-score-item">SCORE<span class="fl-score-num" id="flScoreVal">0</span></div>
+      <div class="fl-score-item">BEST<span class="fl-score-num" id="flBestVal">0</span></div>
+    </div>
+    <canvas id="flCanvas" width="300" height="400"></canvas>
+    <button type="button" class="fl-flap-btn" id="flFlapBtn">🐦 TAP TO FLAP</button>
+    <div class="btnrow" style="margin-top:10px;">
+      <button type="button" class="btn cyan" onclick="flReset()">🔄 Restart</button>
+      <button type="button" class="btn purple" onclick="flToggleSound()" id="flSoundBtn">🔊 Sound ON</button>
+    </div>
+    <button type="button" class="back" onclick="exitFlappyGame()">← Back to Games</button>
+  </div>
+</section>
+
+<!-- WIN MODAL -->
+<div id="mmWinModal" class="mm-win-overlay">
+  <div class="mm-win-box">
+    <div class="mm-win-emoji" id="mmWinEmoji">🎉</div>
+    <div class="mm-win-title" id="mmWinTitle">ଅଭିନନ୍ଦନ!</div>
+    <div class="mm-win-stars" id="mmWinStars">⭐⭐⭐</div>
+    <div class="mm-win-praise" id="mmWinPraise">ତୁମେ ବହୁତ ଭଲ ଖେଳିଲ!</div>
+    <div class="mm-win-stats">
+      <div><div class="mm-win-stat">Moves<b id="mmWinMoves">0</b></div></div>
+      <div><div class="mm-win-stat">Time<b id="mmWinTime">00:00</b></div></div>
+      <div><div class="mm-win-stat">Best<b id="mmWinBest">-</b></div></div>
+    </div>
+    <button type="button" class="btn green full" onclick="closeWinAndReplay()">🎮 ପୁଣି ଖେଳ</button>
+    <button type="button" class="btn full" style="margin-top:8px;" onclick="closeWinAndLevels()">↺ Level ବଦଳାଅ</button>
+  </div>
 </div>
 
+<section id="progressScreen" class="screen">
+<h2>📊 ମୋ ଅଗ୍ରଗତି</h2>
+<div class="hero-card" style="text-align:center;">
+  <div style="color:rgba(255,255,255,.85);font-size:12px;font-weight:750;letter-spacing:1.5px;">LEVEL</div>
+  <div style="color:#fff;font-size:56px;font-weight:850;line-height:1;margin:4px 0;" id="pgLevel">1</div>
+  <div style="background:rgba(255,255,255,.22);height:10px;border-radius:10px;overflow:hidden;margin:12px 0 6px;">
+    <div id="pgXPBar" style="height:100%;background:#fbbf24;border-radius:10px;transition:width .4s;width:0%;"></div>
+  </div>
+  <div style="color:rgba(255,255,255,.92);font-size:12px;font-weight:750;" id="pgXPText">0 / 100 XP</div>
+</div>
 <div class="pg-stat-grid">
-  <div class="pg-stat"><div class="pg-stat-num">🔥 <span id="gdStreak">0</span></div><div class="pg-stat-label">Streak (ଦିନ)</div></div>
-  <div class="pg-stat"><div class="pg-stat-num">📅 <span id="gdTotalDays">0</span></div><div class="pg-stat-label">ମୋଟ ଦିନ</div></div>
-  <div class="pg-stat"><div class="pg-stat-num">🌳 <span id="gdPlantCount">0</span></div><div class="pg-stat-label">ଗଛ ସଂଖ୍ୟା</div></div>
+  <div class="pg-stat"><div class="pg-stat-num">🔥 <span id="pgStreak">0</span></div><div class="pg-stat-label">Streak</div></div>
+  <div class="pg-stat"><div class="pg-stat-num">📅 <span id="pgTotalDays">0</span></div><div class="pg-stat-label">ମୋଟ ଦିନ</div></div>
+  <div class="pg-stat"><div class="pg-stat-num">💎 <span id="pgXP">0</span></div><div class="pg-stat-label">XP</div></div>
 </div>
-
 <div class="card">
   <h3 style="margin-top:0;color:#5b21b6;font-size:17px;">🏆 ସଫଳତା (Badges)</h3>
-  <div id="gdBadgeDisplay" style="font-size:28px;line-height:1.8;text-align:center;">ଏବେ ପର୍ଯ୍ୟନ୍ତ କୌଣସି ସଫଳତା ନାହିଁ</div>
+  <div id="pgBadges" style="font-size:28px;line-height:1.8;text-align:center;">ଏବେ ପର୍ଯ୍ୟନ୍ତ କୌଣସି ସଫଳତା ନାହିଁ</div>
 </div>
-
-<button type="button" class="back" onclick="showScreen('home')">⬅ Home</button>
+<button type="button" class="back" onclick="goBack()">← Back</button>
 </section>
 
 <div id="pauseModal" class="modal-overlay">
@@ -286,7 +546,7 @@ body.dark .pg-stat-num{color:#c4b5fd;}
 <div id="updateModal" class="modal-overlay">
 <div class="modal-box">
 <h3 style="color:#7c3aed;margin-top:0;font-size:22px;">🚀 New Update Available!</h3>
-<p id="updateMessage" class="muted">ଜ୍ଞାନସେତୁ ଓଡ଼ିଶାର ଏକ ନୂତନ ଭର୍ସନ୍ ଉପଲବ୍ଧ ଅଛି। ଦୟାକରି Update କରନ୍ତୁ।</p>
+<p id="updateMessage" class="muted">ଜ୍ଞାନସେତୁ ଓଡ଼ିଶାର ଏକ ନୂତନ ଭର୍ସନ୍ ଉପଲବ୍ଧ ଅଛି।</p>
 <button type="button" id="executeUpdateBtn" class="btn green full" onclick="performAppUpdate()">📥 UPDATE NOW</button>
 <button type="button" class="btn secondary full" style="margin-top:8px;" onclick="document.getElementById('updateModal').classList.remove('active')">Later</button>
 </div>
@@ -313,7 +573,7 @@ body.dark .pg-stat-num{color:#c4b5fd;}
 <h2>⭐ Bookmarks</h2>
 <div id="bookmarkList"></div>
 <button type="button" class="btn red full" onclick="clearBookmarks()">Clear All Bookmarks</button>
-<button type="button" class="back" onclick="showScreen('home')">Home</button>
+<button type="button" class="back" onclick="goBack()">← Back</button>
 </section>
 
 <section id="studyTimer" class="screen">
@@ -326,7 +586,7 @@ body.dark .pg-stat-num{color:#c4b5fd;}
 <button type="button" class="btn red" onclick="resetStudy()">Reset</button>
 </div>
 </div>
-<button type="button" class="back" onclick="showScreen('home')">Home</button>
+<button type="button" class="back" onclick="goBack()">← Back</button>
 </section>
 
 <section id="about" class="screen">
@@ -340,50 +600,24 @@ body.dark .pg-stat-num{color:#c4b5fd;}
 <div class="dev-desc">Dedicated to empowering Odisha school students with smart NCERT learning tools.</div>
 </div>
 </div>
-<button type="button" class="back" onclick="showScreen('home')">⌂ HOME</button>
+<button type="button" class="btn purple full" onclick="checkForAppUpdate(true)">🔄 Check for Updates</button>
+<button type="button" class="back" onclick="goBack()">← Back</button>
 </section>
-
 </main>
+
+<nav id="bottomNav" class="bottom-nav">
+  <button class="nav-item active" data-nav="home" onclick="showScreen('home')"><span class="nav-icon">🏠</span>Home</button>
+  <button class="nav-item" data-nav="mcq" onclick="openMcqSetup()"><span class="nav-icon">📝</span>MCQ</button>
+  <button class="nav-item" data-nav="classes" onclick="showClasses()"><span class="nav-icon">📂</span>Notes</button>
+  <button class="nav-item" data-nav="progress" onclick="openProgress()"><span class="nav-icon">📊</span>Progress</button>
+  <button class="nav-item" data-nav="more" onclick="showScreen('about')"><span class="nav-icon">⋯</span>More</button>
+</nav>
 
 <footer>© 2026 GyanSetu Odisha · Developed by Sangram Sahu</footer>
 
 <script>
 "use strict";
 
-/* ==================== LIVE CLOCK LOGIC ==================== */
-function updateLiveClock() {
-  const now = new Date();
-  
-  // Date
-  const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-  const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-  
-  const dayName = days[now.getDay()];
-  const dateNum = String(now.getDate()).padStart(2, '0');
-  const monthName = months[now.getMonth()];
-  const year = now.getFullYear();
-  
-  // Time
-  let hours = now.getHours();
-  const ampm = hours >= 12 ? 'PM' : 'AM';
-  hours = hours % 12;
-  hours = hours ? hours : 12;
-  const hoursStr = String(hours).padStart(2, '0');
-  const minutesStr = String(now.getMinutes()).padStart(2, '0');
-  const secondsStr = String(now.getSeconds()).padStart(2, '0');
-  
-  const dateEl = document.getElementById("liveDate");
-  const timeEl = document.getElementById("liveTime");
-  
-  if (dateEl) dateEl.textContent = `${dayName}, ${dateNum} ${monthName} ${year}`;
-  if (timeEl) timeEl.textContent = `${hoursStr}:${minutesStr}:${secondsStr} ${ampm}`;
-}
-
-// Start clock
-setInterval(updateLiveClock, 1000);
-updateLiveClock();
-
-/* ==================== CUSTOM POPUPS ==================== */
 window.alert = function (msg) {
   var m = document.getElementById("msgModal");
   var t = document.getElementById("msgModalText");
@@ -406,7 +640,7 @@ function confirmAnswer(yes) {
   if (yes && typeof cb === "function") cb();
 }
 
-const CURRENT_APP_VERSION = "v1.0.0";
+const CURRENT_APP_VERSION = "v1.4.1";
 const GITHUB_PAGES_BASE = "https://silusahu360.github.io/gyansetu-odishamcq/";
 const GITHUB_MCQ_JSON_URL = GITHUB_PAGES_BASE + "mcq_data.json";
 const GITHUB_VERSION_JSON_URL = GITHUB_PAGES_BASE + "version.json";
@@ -488,6 +722,8 @@ function applyStoredPrefs() {
   try {
     var dark = load("gs_dark_theme", "0") === "1";
     document.body.classList.toggle("dark", dark);
+    var tb = document.getElementById("themeBtn");
+    if (tb) tb.textContent = dark ? "☀️" : "🌙";
     var storedHi = parseInt(load("gs_snake_hi", 0), 10) || 0;
     if (storedHi > nokiaHighScore) {
       nokiaHighScore = storedHi;
@@ -567,8 +803,9 @@ function isNewerVersion(remote, local) {
   return false;
 }
 
-async function checkForAppUpdate(manualCheck = false) {
-  if (manualCheck) $("homeStatus").textContent = "Checking for updates...";
+async function checkForAppUpdate(manualCheck) {
+  manualCheck = !!manualCheck;
+  if (manualCheck) $("homeStatus").textContent = "Checking...";
   try {
     const res = await fetch(GITHUB_VERSION_JSON_URL + "?t=" + Date.now(), { cache: "no-store" });
     if (!res.ok) throw new Error("Update check failed");
@@ -577,18 +814,18 @@ async function checkForAppUpdate(manualCheck = false) {
       if (data.apkUrl) APP_DOWNLOAD_LINK = data.apkUrl;
       $("updateMessage").textContent = "ଜ୍ଞାନସେତୁ ଓଡ଼ିଶାର ଏକ ନୂତନ ଭର୍ସନ୍ (" + data.version + ") ଉପଲବ୍ଧ ଅଛି। " + (data.notes || "");
       $("updateModal").classList.add("active");
-      if (manualCheck) $("homeStatus").textContent = "New update found! (" + data.version + ")";
+      if (manualCheck) $("homeStatus").textContent = "Update: " + data.version;
     } else {
       if (manualCheck) {
-        alert("✅ ଆପଣଙ୍କ ଆପ୍ ପୂର୍ବରୁ ହିଁ Latest Version (" + CURRENT_APP_VERSION + ") ରେ ଅଛି।");
-        $("homeStatus").textContent = "Up to date (" + CURRENT_APP_VERSION + ")";
+        alert("✅ ଆପଣଙ୍କ ଆପ୍ Latest Version (" + CURRENT_APP_VERSION + ") ରେ ଅଛି।");
+        $("homeStatus").textContent = "Up to date";
       }
     }
   } catch (err) {
     console.error("Update check error:", err);
     if (manualCheck) {
-      alert("❌ ଅପଡେଟ୍ ଯାଞ୍ଚ କରିବାରେ ବିଫଳ।");
-      $("homeStatus").textContent = "Update check failed.";
+      alert("❌ ଅପଡେଟ୍ ଯାଞ୍ଚ ବିଫଳ।");
+      $("homeStatus").textContent = "Check failed.";
     }
   }
 }
@@ -601,9 +838,10 @@ function performAppUpdate() {
 
 window.addEventListener("load", function() {
   syncHeaderHeight();
-  $("homeStatus").textContent = "Ready to learn. (" + CURRENT_APP_VERSION + ")";
+  applyStoredPrefs();
+  $("homeStatus").textContent = "Ready (" + CURRENT_APP_VERSION + ")";
   setTimeout(() => { checkForAppUpdate(false); }, 2000);
-  setTimeout(() => { checkDailyGarden(); }, 1000); 
+  setTimeout(() => { checkDailyProgress(); }, 1000);
 });
 
 function esc(s) { return String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c])); }
@@ -625,15 +863,45 @@ function syncHeaderHeight() {
 }
 window.addEventListener("resize", syncHeaderHeight);
 
+function updateBottomNav(id){
+  const map={home:"home",mcqSetup:"mcq",classes:"classes",subjects:"classes",folder:"classes",
+    progressScreen:"progress",about:"more",bookmarks:"more",studyTimer:"more",
+    offlineQuizMenuScreen:"mcq",gameMenuScreen:"home",memoryGameScreen:"home",snakeGameScreen:"home",flappyGameScreen:"home",mathGameScreen:"home"};
+  document.querySelectorAll(".nav-item").forEach(n=>n.classList.remove("active"));
+  const key=map[id]||"home";
+  const el=document.querySelector('.nav-item[data-nav="'+key+'"]');
+  if(el)el.classList.add("active");
+  const nav=document.getElementById("bottomNav");
+  if(nav)nav.classList.toggle("hidden",id==="quizScreen"||id==="snakeGameScreen"||id==="flappyGameScreen"||id==="memoryGameScreen"||id==="mathGameScreen");
+}
+
 function showScreen(id) {
   let target = $(id) || $("home");
   if (id !== "snakeGameScreen") { clearInterval(nokiaGameInterval); nokiaGameInterval = null; }
+  if (id !== "flappyGameScreen") { if (typeof flStop === "function") flStop(); }
+  if (id !== "mathGameScreen") { if (typeof mtStop === "function") mtStop(); }
+  if (id !== "memoryGameScreen") { if (typeof mmInterval !== "undefined" && mmInterval) { clearInterval(mmInterval); mmInterval = null; } }
   document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
   target.classList.add("active");
   window.scrollTo(0, 0);
   if (id === "bookmarks") renderBookmarks();
   if (id === "offlineQuizMenuScreen") renderDownloadedQuizList();
-  if (id === "gardenScreen") renderGarden();
+  if (id === "progressScreen") renderProgress();
+  if (id === "memoryGameScreen") refreshLevelBests();
+  updateBottomNav(id);
+}
+
+function goBack(){
+  const active = document.querySelector(".screen.active");
+  const id = active ? active.id : "home";
+  const backMap = {
+    classes:"home", subjects:"classes", folder:"subjects",
+    mcqSetup:"home", offlineQuizMenuScreen:"home",
+    bookmarks:"home", studyTimer:"home", about:"home", progressScreen:"home",
+    gameMenuScreen:"home", memoryGameScreen:"gameMenuScreen",
+    snakeGameScreen:"gameMenuScreen", flappyGameScreen:"gameMenuScreen", mathGameScreen:"gameMenuScreen"
+  };
+  showScreen(backMap[id] || "home");
 }
 
 function showClasses() {
@@ -641,9 +909,7 @@ function showClasses() {
   $("classGrid").innerHTML = "";
   Object.keys(subjectsByClass).forEach(cls => {
     const b = document.createElement("button");
-    b.type = "button";
-    b.className = "tile";
-    b.textContent = cls;
+    b.type = "button"; b.className = "tile"; b.textContent = cls;
     b.onclick = () => showSubjects(cls);
     $("classGrid").appendChild(b);
   });
@@ -655,12 +921,9 @@ function showSubjects(cls) {
   $("subjectList").innerHTML = "";
   subjectsByClass[cls].forEach(subject => {
     const b = document.createElement("button");
-    b.type = "button";
-    b.className = "subject";
-    const name = document.createElement("span");
-    name.textContent = subject;
-    const arrow = document.createElement("span");
-    arrow.textContent = "➜";
+    b.type = "button"; b.className = "subject";
+    const name = document.createElement("span"); name.textContent = subject;
+    const arrow = document.createElement("span"); arrow.textContent = "➜";
     b.append(name, arrow);
     b.onclick = () => openSubject(subject);
     $("subjectList").appendChild(b);
@@ -695,12 +958,12 @@ function goHomeFromViewer() { cleanViewerFrame(); showScreen("home"); }
 
 async function saveCurrentQuizOffline() {
   try {
-    if (!currentQuizTitle || !currentQuizHtml) { alert("❌ Quiz ଏବେ ଲୋଡ୍ ହୋଇନାହିଁ।"); return; }
+    if (!currentQuizTitle || !currentQuizHtml) { alert("❌ Quiz ଲୋଡ୍ ହୋଇନାହିଁ।"); return; }
     const s = load("gs_saved_mcqs", {});
     s[currentQuizTitle] = { title: currentQuizTitle, content: currentQuizHtml, date: new Date().toLocaleDateString("or-IN") };
-    if (store("gs_saved_mcqs", s)) { flushNow(); alert("✅ Quiz ସଫଳତା ସହ Download ହୋଇଗଲା!"); }
+    if (store("gs_saved_mcqs", s)) { flushNow(); alert("✅ Quiz Download ହୋଇଗଲା!"); }
     else { alert(MSG_STORAGE_FULL + "\n\n" + lastStoreError); }
-  } catch (e) { console.error(e); alert("❌ Download ହେଲା ନାହିଁ: " + e.message); }
+  } catch (e) { console.error(e); alert("❌ Download ବିଫଳ: " + e.message); }
 }
 
 async function downloadSelectedTopicMcq() {
@@ -715,9 +978,9 @@ async function downloadSelectedTopicMcq() {
     const html = await r.text();
     const s = load("gs_saved_mcqs", {});
     s[key] = { title: key, content: html, date: new Date().toLocaleDateString("or-IN") };
-    if (store("gs_saved_mcqs", s)) { flushNow(); alert("✅ ଏହି Topic ଅଫଲାଇନ୍ ପାଇଁ Save ହୋଇଗଲା!"); }
+    if (store("gs_saved_mcqs", s)) { flushNow(); alert("✅ Offline Save ହୋଇଗଲା!"); }
     else { alert(MSG_STORAGE_FULL + "\n\n" + lastStoreError); }
-  } catch (e) { console.error(e); alert("ଡାଉନଲୋଡ୍ ବିଫଳ ହେଲା। ଇଣ୍ଟରନେଟ୍ ଯାଞ୍ଚ କରନ୍ତୁ।"); }
+  } catch (e) { console.error(e); alert("ଡାଉନଲୋଡ୍ ବିଫଳ। ଇଣ୍ଟରନେଟ୍ ଯାଞ୍ଚ କରନ୍ତୁ।"); }
 }
 
 function fmtBytes(n) { if (n < 1024) return n + " B"; if (n < 1048576) return (n / 1024).toFixed(1) + " KB"; return (n / 1048576).toFixed(2) + " MB"; }
@@ -746,7 +1009,7 @@ function renderDownloadedQuizList() {
     const item = savedMcqs[key]; totalBytes += new Blob([String(item.content || "")]).size;
     container.appendChild(makeRow("📝 " + (item.title || key), item.date, "Play", () => openDownloadedMcq(key), () => deleteDownloadedMcq(key), byteSize(item.content)));
   });
-  const head = document.createElement("div"); head.className = "muted"; head.style.cssText = "text-align:center;padding:4px 0 10px;font-size:13px;"; head.textContent = "Total storage used: " + fmtBytes(totalBytes); container.prepend(head);
+  const head = document.createElement("div"); head.className = "muted"; head.style.cssText = "text-align:center;padding:4px 0 10px;font-size:13px;"; head.textContent = "Total: " + fmtBytes(totalBytes); container.prepend(head);
 }
 
 function openDownloadedMcq(key) {
@@ -756,98 +1019,101 @@ function openDownloadedMcq(key) {
   quizSeconds = 0; $("quizRunningTimer").textContent = "00:00";
   clearInterval(quizTimerInterval);
   quizTimerInterval = setInterval(() => { if (!isQuizPaused) { quizSeconds++; $("quizRunningTimer").textContent = fmtTime(quizSeconds); } }, 1000);
-  $("pauseModal").classList.remove("active"); $("quizTimerBar").style.display = "flex"; $("noteActionToolbar").style.display = "none"; $("viewerBackButton").textContent = "⬅ Back to Sets";
+  $("pauseModal").classList.remove("active"); $("quizTimerBar").style.display = "flex"; $("noteActionToolbar").style.display = "none"; $("viewerBackButton").textContent = "← Back to Sets";
   showScreen("quizScreen"); $("quizFrame").srcdoc = withBase(item.content);
 }
 
 function deleteDownloadedMcq(key) {
-  askConfirm(key + " ସେଟ୍ କାଢ଼ିବାକୁ ଚାହାନ୍ତି କି?", function () {
+  askConfirm(key + " କାଢ଼ିବାକୁ ଚାହାନ୍ତି?", function () {
     const s = load("gs_saved_mcqs", {}); delete s[key];
-    if (!store("gs_saved_mcqs", s)) alert("⚠ ଡିଲିଟ୍ ହେଲା ନାହିଁ।\n" + lastStoreError); else flushNow();
+    if (!store("gs_saved_mcqs", s)) alert("⚠ ଡିଲିଟ୍ ବିଫଳ।\n" + lastStoreError); else flushNow();
     renderDownloadedQuizList();
   });
 }
 
-/* ==================== STUDY GARDEN LOGIC ==================== */
-function checkDailyGarden() {
+/* ==================== PROGRESS / XP SYSTEM ==================== */
+function migrateOldGarden() {
+  try {
+    const old = load("gs_garden", null);
+    const current = load("gs_progress", null);
+    if (old && !current) {
+      store("gs_progress", {
+        streak: old.streak || 0, lastOpenDate: old.lastOpenDate || "",
+        totalDays: old.totalDays || 0, xp: (old.totalDays || 0) * 10,
+        badges: old.badges || []
+      });
+    }
+  } catch (e) {}
+}
+
+function checkDailyProgress() {
+  migrateOldGarden();
   const d = new Date();
   const today = d.getFullYear() + "-" + String(d.getMonth()+1).padStart(2,'0') + "-" + String(d.getDate()).padStart(2,'0');
-  const yesterdayDate = new Date(Date.now() - 86400000);
-  const yesterday = yesterdayDate.getFullYear() + "-" + String(yesterdayDate.getMonth()+1).padStart(2,'0') + "-" + String(yesterdayDate.getDate()).padStart(2,'0');
-  
-  let garden = load("gs_garden", { streak: 0, lastOpenDate: "", totalDays: 0, plants: [], badges: [] });
-  
-  if (garden.lastOpenDate === today) return; // Already updated today
-  
-  if (garden.lastOpenDate === yesterday) {
-    garden.streak++;
-  } else if (garden.lastOpenDate === "") {
-    garden.streak = 1;
-  } else {
-    garden.streak = 1; // Broken streak
-  }
-  
-  garden.lastOpenDate = today;
-  garden.totalDays++;
-  
-  // Grow plant
-  if (!garden.plants || garden.plants.length === 0) {
-    garden.plants = [{ id: Date.now(), days: 1, bloomed: false }];
-  } else {
-    let last = garden.plants[garden.plants.length - 1];
-    last.days++;
-    if (last.days >= 30) last.bloomed = true;
-    
-    // New plant every 30 days
-    if (last.days > 30 && last.days % 30 === 0) {
-      garden.plants.push({ id: Date.now(), days: 1, bloomed: false });
-    }
-  }
-  
-  // Badges
+  const yd = new Date(Date.now() - 86400000);
+  const yesterday = yd.getFullYear() + "-" + String(yd.getMonth()+1).padStart(2,'0') + "-" + String(yd.getDate()).padStart(2,'0');
+
+  let p = load("gs_progress", { streak: 0, lastOpenDate: "", totalDays: 0, xp: 0, badges: [] });
+  if (p.lastOpenDate === today) return;
+
+  if (p.lastOpenDate === yesterday) p.streak++;
+  else if (p.lastOpenDate === "") p.streak = 1;
+  else p.streak = 1;
+
+  p.lastOpenDate = today;
+  p.totalDays++;
+  p.xp += 10;
+
   const newBadges = [];
-  if (garden.totalDays >= 1 && !garden.badges.includes("first_day")) newBadges.push("first_day");
-  if (garden.streak >= 7 && !garden.badges.includes("week")) newBadges.push("week");
-  if (garden.streak >= 30 && !garden.badges.includes("month")) newBadges.push("month");
-  if (garden.plants.some(p => p.bloomed) && !garden.badges.includes("first_bloom")) newBadges.push("first_bloom");
-  
+  if (p.totalDays >= 1 && !p.badges.includes("first_day")) newBadges.push("first_day");
+  if (p.streak >= 7 && !p.badges.includes("week")) newBadges.push("week");
+  if (p.streak >= 30 && !p.badges.includes("month")) newBadges.push("month");
+  if (p.xp >= 100 && !p.badges.includes("xp100")) newBadges.push("xp100");
+  if (p.xp >= 500 && !p.badges.includes("xp500")) newBadges.push("xp500");
+
   if (newBadges.length > 0) {
-    garden.badges = garden.badges.concat(newBadges);
+    p.badges = p.badges.concat(newBadges);
     setTimeout(() => {
-      let badgeNames = newBadges.map(b => b === 'first_day' ? '🌱 ପ୍ରଥମ ପାଣି' : b === 'week' ? '🔥 ୭ ଦିନ ସ୍ଟ୍ରିକ୍' : b === 'month' ? '🌟 ୩୦ ଦିନ ସ୍ଟ୍ରିକ୍' : '🌸 ପ୍ରଥମ ଫୁଲ').join("\n");
-      alert("🏆 ନୂଆ ସଫଳତା ମିଳିଲା!\n\n" + badgeNames);
+      let names = newBadges.map(b =>
+        b === 'first_day' ? '🌱 ପ୍ରଥମ ଦିନ' :
+        b === 'week' ? '🔥 ୭ ଦିନ ସ୍ଟ୍ରିକ୍' :
+        b === 'month' ? '🌟 ୩୦ ଦିନ ସ୍ଟ୍ରିକ୍' :
+        b === 'xp100' ? '💎 ୧୦୦ XP' : '👑 ୫୦୦ XP'
+      ).join("\n");
+      alert("🏆 ନୂଆ ସଫଳତା!\n\n" + names);
     }, 1500);
   }
-  
-  store("gs_garden", garden);
+  store("gs_progress", p);
   flushNow();
-  if ($("gardenScreen").classList.contains("active")) renderGarden();
+  if ($("progressScreen").classList.contains("active")) renderProgress();
 }
 
-function openGarden() {
-  renderGarden();
-  showScreen("gardenScreen");
+function addXP(amount) {
+  let p = load("gs_progress", { streak: 0, lastOpenDate: "", totalDays: 0, xp: 0, badges: [] });
+  p.xp = (p.xp || 0) + amount;
+  const newBadges = [];
+  if (p.xp >= 100 && !p.badges.includes("xp100")) { newBadges.push("xp100"); p.badges.push("xp100"); }
+  if (p.xp >= 500 && !p.badges.includes("xp500")) { newBadges.push("xp500"); p.badges.push("xp500"); }
+  store("gs_progress", p);
+  flushNow();
 }
 
-function renderGarden() {
-  let garden = load("gs_garden", { streak: 0, lastOpenDate: "", totalDays: 0, plants: [], badges: [] });
-  $("gdStreak").textContent = garden.streak;
-  $("gdTotalDays").textContent = garden.totalDays;
-  $("gdPlantCount").textContent = garden.plants.length;
-  
-  let plantsHtml = "";
-  garden.plants.forEach(p => {
-    if (p.bloomed) plantsHtml += "🌸";
-    else if (p.days >= 14) plantsHtml += "🌳";
-    else if (p.days >= 7) plantsHtml += "🌿";
-    else plantsHtml += "🌱";
-  });
-  if (!plantsHtml) plantsHtml = "🟫 (ଏବେ କୌଣସି ଗଛ ନାହିଁ)";
-  $("gdPlants").textContent = plantsHtml;
+function openProgress() { renderProgress(); showScreen("progressScreen"); }
 
-  let badgesHtml = garden.badges.map(b => b === 'first_day' ? '🌱' : b === 'week' ? '🔥' : b === 'month' ? '🌟' : '🌸').join(" ");
+function renderProgress() {
+  let p = load("gs_progress", { streak: 0, lastOpenDate: "", totalDays: 0, xp: 0, badges: [] });
+  const level = Math.floor(p.xp / 100) + 1;
+  const xpInLevel = p.xp % 100;
+  $("pgLevel").textContent = level;
+  $("pgStreak").textContent = p.streak || 0;
+  $("pgTotalDays").textContent = p.totalDays || 0;
+  $("pgXP").textContent = p.xp || 0;
+  $("pgXPBar").style.width = xpInLevel + "%";
+  $("pgXPText").textContent = xpInLevel + " / 100 XP · Level " + level;
+  const badgeMap = { first_day: '🌱', week: '🔥', month: '🌟', xp100: '💎', xp500: '👑' };
+  let badgesHtml = (p.badges || []).map(b => '<span title="' + b + '">' + (badgeMap[b] || '🏅') + '</span>').join(" ");
   if (!badgesHtml) badgesHtml = "<span style='font-size:14px;color:gray;'>ଏବେ ପର୍ଯ୍ୟନ୍ତ କୌଣସି ସଫଳତା ନାହିଁ</span>";
-  $("gdBadgeDisplay").innerHTML = badgesHtml;
+  $("pgBadges").innerHTML = badgesHtml;
 }
 
 /* ==================== SNAKE GAME ==================== */
@@ -969,7 +1235,7 @@ function resetNokiaGame() {
   spawnNokiaFood(); drawNokiaSnake();
 }
 
-function exitNokiaGame() { showScreen("home"); }
+function exitNokiaGame() { showScreen("gameMenuScreen"); }
 
 document.addEventListener("keydown", function (e) {
   if (!$("snakeGameScreen").classList.contains("active")) return;
@@ -986,6 +1252,554 @@ document.addEventListener("keydown", function (e) {
     if (Math.abs(dx) > Math.abs(dy)) setNokiaDir(dx > 0 ? "RIGHT" : "LEFT"); else setNokiaDir(dy > 0 ? "DOWN" : "UP");
   }, { passive: true });
 })();
+
+/* ==================== MEMORY MATCH GAME ==================== */
+var mmInterval = null;
+var mmSeconds = 0;
+var mmMoves = 0;
+var mmMatched = 0;
+var mmFirstCard = null;
+var mmSecondCard = null;
+var mmLocked = false;
+var mmCurrentLevel = "easy";
+
+var MM_LEVELS = {
+  easy:   { pairs: 4,  cols: 4, emojis: ["🎓","📚","✏️","🎨"],                name: "😊 ସହଜ · Easy",    stars: [6, 9] },
+  medium: { pairs: 8,  cols: 4, emojis: ["🎓","📚","✏️","🎨","🔬","🌍","🎵","🏆"], name: "😎 ମଧ୍ୟମ · Medium", stars: [11, 15] },
+  hard:   { pairs: 12, cols: 6, emojis: ["🎓","📚","✏️","🎨","🔬","🌍","🎵","🏆","📖","🖊️","🧮","🌱"], name: "🔥 କଠିନ · Hard", stars: [16, 22] }
+};
+
+var MM_PRAISES = [
+  "ବହୁତ ଭଲ! ତୁମେ ଚମତ୍କାର କରିଛ! 🌟",
+  "ଅଦ୍ଭୁତ! ତୁମେ ମନେ ରଖିବାରେ ମାଷ୍ଟର! 🎉",
+  "ଚମତ୍କାର ଖେଳ! ଆଉ ଥରେ ଚେଷ୍ଟା କର! 🚀",
+  "ତୁମେ ବହୁତ ଭଲ ଖେଳିଲ! ସାବାସ୍! 👏",
+  "ଅଭିନନ୍ଦନ! ତୁମର ମନ ବହୁତ ତେଜ! 💪"
+];
+
+function openGameMenu() { showScreen("gameMenuScreen"); }
+
+function openMemoryGame() {
+  refreshLevelBests();
+  showScreen("memoryGameScreen");
+  backToLevels();
+}
+
+function refreshLevelBests() {
+  ["easy","medium","hard"].forEach(function (lvl) {
+    var best = load("gs_mm_best_" + lvl, null);
+    var el = $("mmBest" + (lvl === "easy" ? "Easy" : lvl === "medium" ? "Medium" : "Hard"));
+    if (!el) return;
+    if (!best) { el.innerHTML = "ଖେଳି ନାହାନ୍ତି"; }
+    else {
+      var starsHtml = "";
+      for (var i = 0; i < 3; i++) starsHtml += (i < best.stars ? "⭐" : "☆");
+      el.innerHTML = starsHtml + "<br>" + best.moves + "mv · " + fmtTime(best.time);
+    }
+  });
+}
+
+function backToLevels() {
+  clearInterval(mmInterval); mmInterval = null;
+  $("mmLevels").style.display = "grid";
+  $("mmGrid").style.display = "none";
+  $("mmScoreboard").style.display = "none";
+  $("mmControlRow").style.display = "none";
+  $("mmTitle").textContent = "🧠 MEMORY MATCH";
+  refreshLevelBests();
+}
+
+function startMemoryLevel(lvl) {
+  mmCurrentLevel = lvl;
+  var cfg = MM_LEVELS[lvl];
+  clearInterval(mmInterval);
+  mmSeconds = 0; mmMoves = 0; mmMatched = 0;
+  mmFirstCard = null; mmSecondCard = null; mmLocked = false;
+
+  $("mmLevels").style.display = "none";
+  $("mmGrid").style.display = "grid";
+  $("mmScoreboard").style.display = "flex";
+  $("mmControlRow").style.display = "grid";
+  $("mmTitle").textContent = cfg.name;
+  $("mmMoves").textContent = "0";
+  $("mmTime").textContent = "00:00";
+  var best = load("gs_mm_best_" + lvl, null);
+  $("mmBest").textContent = best ? best.moves + "mv" : "-";
+
+  var grid = $("mmGrid");
+  grid.className = "mm-grid " + lvl;
+  grid.innerHTML = "";
+
+  var deck = cfg.emojis.concat(cfg.emojis);
+  for (var i = deck.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+    var t = deck[i]; deck[i] = deck[j]; deck[j] = t;
+  }
+
+  deck.forEach(function (emoji) {
+    var card = document.createElement("button");
+    card.type = "button";
+    card.className = "mm-card";
+    card.dataset.emoji = emoji;
+    card.dataset.flipped = "0";
+    card.innerHTML = '<span class="mm-face mm-back">?</span><span class="mm-face mm-front">' + emoji + '</span>';
+    card.onclick = function () { mmFlip(card); };
+    grid.appendChild(card);
+  });
+
+  mmInterval = setInterval(function () {
+    mmSeconds++;
+    $("mmTime").textContent = fmtTime(mmSeconds);
+  }, 1000);
+}
+
+function resetMemoryLevel() {
+  startMemoryLevel(mmCurrentLevel);
+}
+
+function mmFlip(card) {
+  if (mmLocked) return;
+  if (card.dataset.flipped === "1") return;
+  card.dataset.flipped = "1";
+  card.classList.add("flipped");
+  playNokiaBeep(620, 0.04);
+
+  if (!mmFirstCard) { mmFirstCard = card; return; }
+  if (!mmSecondCard) {
+    mmSecondCard = card;
+    mmMoves++;
+    $("mmMoves").textContent = mmMoves;
+    mmCheckMatch();
+  }
+}
+
+function mmCheckMatch() {
+  if (mmFirstCard.dataset.emoji === mmSecondCard.dataset.emoji) {
+    mmMatched++;
+    playNokiaBeep(900, 0.12);
+    var a = mmFirstCard, b = mmSecondCard;
+    mmFirstCard = null; mmSecondCard = null;
+    setTimeout(function () {
+      a.classList.add("matched");
+      b.classList.add("matched");
+      if (mmMatched === MM_LEVELS[mmCurrentLevel].pairs) mmWin();
+    }, 300);
+  } else {
+    mmLocked = true;
+    playNokiaBeep(260, 0.08);
+    var a = mmFirstCard, b = mmSecondCard;
+    mmFirstCard = null; mmSecondCard = null;
+    setTimeout(function () {
+      a.dataset.flipped = "0"; b.dataset.flipped = "0";
+      a.classList.remove("flipped"); b.classList.remove("flipped");
+      mmLocked = false;
+    }, 750);
+  }
+}
+
+function calculateStars(lvl, moves) {
+  var th = MM_LEVELS[lvl].stars;
+  if (moves <= th[0]) return 3;
+  if (moves <= th[1]) return 2;
+  return 1;
+}
+
+function mmWin() {
+  clearInterval(mmInterval); mmInterval = null;
+  playNokiaBeep(1100, 0.25);
+  setTimeout(function(){ playNokiaBeep(1320, 0.15); }, 200);
+  setTimeout(function(){ playNokiaBeep(1600, 0.2); }, 400);
+
+  var stars = calculateStars(mmCurrentLevel, mmMoves);
+  var best = load("gs_mm_best_" + mmCurrentLevel, null);
+  var isNewBest = !best || (stars > best.stars) || (stars === best.stars && mmMoves < best.moves) || (stars === best.stars && mmMoves === best.moves && mmSeconds < best.time);
+  if (isNewBest) {
+    store("gs_mm_best_" + mmCurrentLevel, { moves: mmMoves, time: mmSeconds, stars: stars });
+    flushNow();
+  }
+
+  var xpEarned = 5 + stars * 5; // 1★=10, 2★=15, 3★=20
+  addXP(xpEarned);
+
+  var starsHtml = "";
+  for (var i = 0; i < 3; i++) starsHtml += (i < stars ? "⭐" : '<span class="dim">⭐</span>');
+
+  $("mmWinEmoji").textContent = stars === 3 ? "🏆" : stars === 2 ? "🎉" : "👏";
+  $("mmWinTitle").textContent = stars === 3 ? "ଅଦ୍ଭୁତ ବିଜୟ!" : stars === 2 ? "ବହୁତ ଭଲ!" : "ସଫଳ!";
+  $("mmWinStars").innerHTML = starsHtml;
+  $("mmWinPraise").textContent = MM_PRAISES[Math.floor(Math.random() * MM_PRAISES.length)] + (isNewBest ? "\n🏆 ନୂଆ ରେକର୍ଡ!" : "");
+  $("mmWinMoves").textContent = mmMoves;
+  $("mmWinTime").textContent = fmtTime(mmSeconds);
+  $("mmWinBest").textContent = (isNewBest || !best) ? "NEW!" : best.moves + "mv";
+
+  $("mmWinModal").classList.add("active");
+  launchConfetti();
+}
+
+function launchConfetti() {
+  var c = document.createElement("div");
+  c.className = "confetti-container";
+  document.body.appendChild(c);
+  var colors = ["#fbbf24","#ef4444","#10b981","#3b82f6","#a855f7","#ec4899","#f97316"];
+  for (var i = 0; i < 60; i++) {
+    var p = document.createElement("div");
+    p.className = "confetti";
+    p.style.left = Math.random() * 100 + "%";
+    p.style.background = colors[Math.floor(Math.random() * colors.length)];
+    p.style.animationDuration = (1.5 + Math.random() * 1.5) + "s";
+    p.style.animationDelay = (Math.random() * 0.5) + "s";
+    p.style.width = p.style.height = (6 + Math.random() * 8) + "px";
+    if (Math.random() > 0.5) p.style.borderRadius = "50%";
+    c.appendChild(p);
+  }
+  setTimeout(function () { if (c.parentNode) c.parentNode.removeChild(c); }, 3500);
+}
+
+function closeWinAndReplay() {
+  $("mmWinModal").classList.remove("active");
+  startMemoryLevel(mmCurrentLevel);
+}
+
+function closeWinAndLevels() {
+  $("mmWinModal").classList.remove("active");
+  backToLevels();
+}
+
+function exitMemoryGame() {
+  clearInterval(mmInterval); mmInterval = null;
+  $("mmWinModal").classList.remove("active");
+  showScreen("gameMenuScreen");
+}
+
+/* ==================== FLAPPY BIRD ==================== */
+var FL_W = 300, FL_H = 400, FL_GROUND = 50;
+var FL_GRAVITY = 0.42, FL_FLAP = -6.6, FL_PIPE_W = 52, FL_GAP = 125, FL_SPEED = 2.1, FL_BIRD_X = 70, FL_R = 12;
+var flCanvas = null, flCtx = null;
+var flRaf = null, flLast = 0;
+var flState = "ready"; // ready | play | over
+var flBird = { y: 200, v: 0 };
+var flPipes = [];
+var flScore = 0;
+var flBest = parseInt(load("gs_flappy_hi", 0), 10) || 0;
+var flOverAt = 0;
+var flTick = 0;
+var flInputBound = false;
+
+function openFlappyGame() {
+  showScreen("flappyGameScreen");
+  flCanvas = $("flCanvas"); flCtx = flCanvas.getContext("2d");
+  flBest = Math.max(flBest, parseInt(load("gs_flappy_hi", 0), 10) || 0);
+  $("flBestVal").textContent = flBest;
+  $("flSoundBtn").textContent = nokiaSoundEnabled ? "🔊 Sound ON" : "🔇 Sound OFF";
+  if (!flInputBound) {
+    flInputBound = true;
+    flCanvas.addEventListener("pointerdown", function (e) { e.preventDefault(); flFlap(); });
+    $("flFlapBtn").addEventListener("pointerdown", function (e) { e.preventDefault(); flFlap(); });
+    document.addEventListener("keydown", function (e) {
+      if (!$("flappyGameScreen").classList.contains("active")) return;
+      if (e.code === "Space" || e.key === "ArrowUp") { e.preventDefault(); flFlap(); }
+    });
+  }
+  flReset();
+  flStop();
+  flLast = 0;
+  flRaf = requestAnimationFrame(flLoop);
+}
+
+function flStop() { if (flRaf) { cancelAnimationFrame(flRaf); flRaf = null; } }
+
+function flReset() {
+  flBird = { y: 180, v: 0 };
+  flPipes = [];
+  flScore = 0; flTick = 0;
+  flState = "ready";
+  $("flScoreVal").textContent = "0";
+  $("flTitle").textContent = "🐦 FLAPPY BIRD";
+}
+
+function flFlap() {
+  if (flState === "over") {
+    if (Date.now() - flOverAt > 450) { flReset(); flState = "play"; flBird.v = FL_FLAP; playNokiaBeep(520, 0.04); }
+    return;
+  }
+  if (flState === "ready") flState = "play";
+  flBird.v = FL_FLAP;
+  playNokiaBeep(520, 0.04);
+}
+
+function flSpawnPipe() {
+  var minTop = 55, maxTop = FL_H - FL_GROUND - FL_GAP - 55;
+  var top = minTop + Math.random() * (maxTop - minTop);
+  flPipes.push({ x: FL_W + 10, top: top, passed: false });
+}
+
+function flGameOver() {
+  flState = "over";
+  flOverAt = Date.now();
+  playNokiaBeep(160, 0.3);
+  $("flTitle").textContent = "💥 GAME OVER: " + flScore;
+  if (flScore > flBest) {
+    flBest = flScore;
+    $("flBestVal").textContent = flBest;
+    store("gs_flappy_hi", flBest);
+    flushNow();
+  }
+  if (flScore > 0) addXP(Math.min(flScore, 10));
+}
+
+function flUpdate(k) {
+  flTick += k;
+  if (flState === "ready") {
+    flBird.y = 180 + Math.sin(flTick / 8) * 6;
+    return;
+  }
+  if (flState !== "play") return;
+
+  flBird.v += FL_GRAVITY * k;
+  flBird.y += flBird.v * k;
+
+  if (!flPipes.length || flPipes[flPipes.length - 1].x < FL_W - 170) flSpawnPipe();
+  for (var i = 0; i < flPipes.length; i++) flPipes[i].x -= FL_SPEED * k;
+  while (flPipes.length && flPipes[0].x + FL_PIPE_W < -5) flPipes.shift();
+
+  for (var j = 0; j < flPipes.length; j++) {
+    var p = flPipes[j];
+    if (!p.passed && p.x + FL_PIPE_W < FL_BIRD_X - FL_R) {
+      p.passed = true; flScore++;
+      $("flScoreVal").textContent = flScore;
+      playNokiaBeep(880, 0.07);
+    }
+    var inX = FL_BIRD_X + FL_R - 3 > p.x && FL_BIRD_X - FL_R + 3 < p.x + FL_PIPE_W;
+    if (inX && (flBird.y - FL_R + 3 < p.top || flBird.y + FL_R - 3 > p.top + FL_GAP)) { flGameOver(); return; }
+  }
+  if (flBird.y + FL_R >= FL_H - FL_GROUND) { flBird.y = FL_H - FL_GROUND - FL_R; flGameOver(); return; }
+  if (flBird.y - FL_R <= 0) { flBird.y = FL_R; flBird.v = 0; }
+}
+
+function flDrawPipe(x, yTop, h, isTop) {
+  var c = flCtx;
+  c.fillStyle = "#4ade80"; c.fillRect(x, yTop, FL_PIPE_W, h);
+  c.fillStyle = "#16a34a"; c.fillRect(x + FL_PIPE_W - 8, yTop, 8, h);
+  c.strokeStyle = "#14532d"; c.lineWidth = 2; c.strokeRect(x, yTop, FL_PIPE_W, h);
+  var capY = isTop ? yTop + h - 18 : yTop;
+  c.fillStyle = "#4ade80"; c.fillRect(x - 4, capY, FL_PIPE_W + 8, 18);
+  c.strokeRect(x - 4, capY, FL_PIPE_W + 8, 18);
+}
+
+function flDraw() {
+  var c = flCtx; if (!c) return;
+  var g = c.createLinearGradient(0, 0, 0, FL_H);
+  g.addColorStop(0, "#38bdf8"); g.addColorStop(1, "#bae6fd");
+  c.fillStyle = g; c.fillRect(0, 0, FL_W, FL_H);
+
+  for (var i = 0; i < flPipes.length; i++) {
+    var p = flPipes[i];
+    flDrawPipe(p.x, 0, p.top, true);
+    flDrawPipe(p.x, p.top + FL_GAP, FL_H - FL_GROUND - (p.top + FL_GAP), false);
+  }
+
+  c.fillStyle = "#d6b25e"; c.fillRect(0, FL_H - FL_GROUND, FL_W, FL_GROUND);
+  c.fillStyle = "#65a30d"; c.fillRect(0, FL_H - FL_GROUND, FL_W, 10);
+
+  // bird
+  var tilt = Math.max(-0.5, Math.min(1.1, flBird.v / 10));
+  c.save();
+  c.translate(FL_BIRD_X, flBird.y); c.rotate(tilt);
+  c.fillStyle = "#fde047"; c.beginPath(); c.arc(0, 0, FL_R, 0, Math.PI * 2); c.fill();
+  c.strokeStyle = "#a16207"; c.lineWidth = 2; c.stroke();
+  c.fillStyle = "#fb923c"; c.beginPath(); c.moveTo(FL_R - 2, -2); c.lineTo(FL_R + 9, 2); c.lineTo(FL_R - 2, 6); c.closePath(); c.fill();
+  c.fillStyle = "#fff"; c.beginPath(); c.arc(4, -4, 4, 0, Math.PI * 2); c.fill();
+  c.fillStyle = "#000"; c.beginPath(); c.arc(5.5, -4, 1.8, 0, Math.PI * 2); c.fill();
+  c.fillStyle = "#facc15"; c.beginPath(); c.ellipse(-4, 3, 6, 4, -0.4, 0, Math.PI * 2); c.fill(); c.stroke();
+  c.restore();
+
+  c.textAlign = "center"; c.lineWidth = 4; c.strokeStyle = "#000"; c.fillStyle = "#fff";
+  if (flState === "play") {
+    c.font = "bold 40px sans-serif";
+    c.strokeText(String(flScore), FL_W / 2, 60); c.fillText(String(flScore), FL_W / 2, 60);
+  } else if (flState === "ready") {
+    c.font = "bold 22px sans-serif";
+    c.strokeText("Tap to start", FL_W / 2, 110); c.fillText("Tap to start", FL_W / 2, 110);
+  } else {
+    c.fillStyle = "rgba(0,0,0,.45)"; c.fillRect(0, 120, FL_W, 130);
+    c.fillStyle = "#fde047"; c.font = "bold 30px sans-serif"; c.fillText("GAME OVER", FL_W / 2, 165);
+    c.fillStyle = "#fff"; c.font = "bold 20px sans-serif";
+    c.fillText("Score: " + flScore + "  Best: " + flBest, FL_W / 2, 200);
+    c.font = "16px sans-serif"; c.fillText("Tap to play again", FL_W / 2, 232);
+  }
+}
+
+function flLoop(ts) {
+  if (!$("flappyGameScreen").classList.contains("active")) { flRaf = null; return; }
+  if (!flLast) flLast = ts;
+  var dt = ts - flLast; flLast = ts;
+  var k = Math.min(dt / 16.67, 2.5);
+  flUpdate(k);
+  flDraw();
+  flRaf = requestAnimationFrame(flLoop);
+}
+
+function flToggleSound() {
+  nokiaSoundEnabled = !nokiaSoundEnabled;
+  $("flSoundBtn").textContent = nokiaSoundEnabled ? "🔊 Sound ON" : "🔇 Sound OFF";
+}
+
+function exitFlappyGame() { flStop(); showScreen("gameMenuScreen"); }
+
+/* ==================== MATH SPEED CHALLENGE ==================== */
+var MT_DURATION = 30;
+var MT_LEVELS = {
+  easy:   { name: "😊 ସହଜ · Easy",    ops: ["+","-","×"],      addMax: 20,  mulA: [2,5],  mulB: [2,5] },
+  medium: { name: "😎 ମଧ୍ୟମ · Medium", ops: ["+","-","×"],      addMax: 99,  mulA: [2,10], mulB: [2,10] },
+  hard:   { name: "🔥 କଠିନ · Hard",    ops: ["+","-","×","÷"],  addMax: 500, mulA: [3,15], mulB: [3,15] }
+};
+var mtInterval = null, mtLevel = "easy", mtScoreVal = 0, mtTimeLeft = MT_DURATION;
+var mtStreakVal = 0, mtBestStreak = 0, mtAnswer = 0, mtLocked = false, mtTotal = 0, mtActive = false;
+
+function mtRand(a, b) { return a + Math.floor(Math.random() * (b - a + 1)); }
+function mtStop() { clearInterval(mtInterval); mtInterval = null; mtActive = false; }
+
+function openMathGame() {
+  showScreen("mathGameScreen");
+  backToMathLevels();
+}
+
+function refreshMathBests() {
+  ["easy","medium","hard"].forEach(function (lvl) {
+    var best = load("gs_math_best_" + lvl, null);
+    var el = $("mtBest" + (lvl === "easy" ? "Easy" : lvl === "medium" ? "Medium" : "Hard"));
+    if (el) el.innerHTML = best ? "🏆 " + best + "<br>ଠିକ୍ ଉତ୍ତର" : "ଖେଳି ନାହାନ୍ତି";
+  });
+}
+
+function backToMathLevels() {
+  mtStop();
+  $("mtLevels").style.display = "grid";
+  $("mtPlay").style.display = "none";
+  $("mtResult").style.display = "none";
+  $("mtScoreboard").style.display = "none";
+  $("mtTitle").textContent = "🧮 MATH SPEED";
+  refreshMathBests();
+}
+
+function startMathLevel(lvl) {
+  mtStop();
+  mtLevel = lvl;
+  mtScoreVal = 0; mtTimeLeft = MT_DURATION; mtStreakVal = 0; mtBestStreak = 0; mtTotal = 0;
+  mtLocked = false; mtActive = true;
+  $("mtLevels").style.display = "none";
+  $("mtResult").style.display = "none";
+  $("mtPlay").style.display = "block";
+  $("mtScoreboard").style.display = "flex";
+  $("mtTitle").textContent = MT_LEVELS[lvl].name;
+  $("mtScore").textContent = "0";
+  $("mtTime").textContent = String(MT_DURATION);
+  $("mtStreak").textContent = "";
+  $("mtBar").style.width = "100%";
+  var best = load("gs_math_best_" + lvl, null);
+  $("mtBest").textContent = best ? best : "-";
+  mtNextQuestion();
+  mtInterval = setInterval(mtTick, 100);
+}
+
+function resetMathLevel() { startMathLevel(mtLevel); }
+
+function mtTick() {
+  mtTimeLeft -= 0.1;
+  if (mtTimeLeft <= 0) { mtTimeLeft = 0; mtFinish(); return; }
+  $("mtTime").textContent = String(Math.ceil(mtTimeLeft));
+  $("mtBar").style.width = (mtTimeLeft / MT_DURATION * 100) + "%";
+}
+
+function mtMakeQuestion() {
+  var cfg = MT_LEVELS[mtLevel];
+  var op = cfg.ops[mtRand(0, cfg.ops.length - 1)];
+  var a, b, ans;
+  if (op === "+") { a = mtRand(2, cfg.addMax); b = mtRand(2, cfg.addMax); ans = a + b; }
+  else if (op === "-") { a = mtRand(2, cfg.addMax); b = mtRand(1, a); ans = a - b; }
+  else if (op === "×") { a = mtRand(cfg.mulA[0], cfg.mulA[1]); b = mtRand(cfg.mulB[0], cfg.mulB[1]); ans = a * b; }
+  else { b = mtRand(2, 12); ans = mtRand(2, 15); a = b * ans; }
+  return { text: a + " " + op + " " + b, ans: ans };
+}
+
+function mtNextQuestion() {
+  var q = mtMakeQuestion();
+  mtAnswer = q.ans;
+  $("mtQuestion").textContent = q.text + " = ?";
+
+  var opts = [q.ans];
+  var guard = 0;
+  while (opts.length < 4 && guard < 100) {
+    guard++;
+    var spread = Math.max(3, Math.round(q.ans * 0.2));
+    var off = mtRand(1, Math.min(spread, 12));
+    var cand = q.ans + (Math.random() < 0.5 ? -off : off);
+    if (cand >= 0 && opts.indexOf(cand) === -1) opts.push(cand);
+  }
+  var n = 1;
+  while (opts.length < 4) { if (opts.indexOf(q.ans + n) === -1) opts.push(q.ans + n); n++; }
+  for (var i = opts.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+    var t = opts[i]; opts[i] = opts[j]; opts[j] = t;
+  }
+
+  var box = $("mtOptions");
+  box.innerHTML = "";
+  opts.forEach(function (v) {
+    var b = document.createElement("button");
+    b.type = "button"; b.className = "mt-opt"; b.textContent = v;
+    b.onclick = function () { mtPick(b, v); };
+    box.appendChild(b);
+  });
+  mtLocked = false;
+}
+
+function mtPick(btn, value) {
+  if (mtLocked || !mtActive) return;
+  mtLocked = true;
+  mtTotal++;
+  if (value === mtAnswer) {
+    btn.classList.add("right");
+    mtScoreVal++; mtStreakVal++;
+    if (mtStreakVal > mtBestStreak) mtBestStreak = mtStreakVal;
+    $("mtScore").textContent = mtScoreVal;
+    $("mtStreak").textContent = mtStreakVal >= 3 ? "🔥 x" + mtStreakVal + " Streak!" : "";
+    playNokiaBeep(880, 0.06);
+  } else {
+    btn.classList.add("wrong");
+    mtStreakVal = 0;
+    $("mtStreak").textContent = "";
+    Array.prototype.forEach.call($("mtOptions").children, function (o) {
+      if (parseInt(o.textContent, 10) === mtAnswer) o.classList.add("right");
+    });
+    playNokiaBeep(220, 0.12);
+  }
+  setTimeout(function () { if (mtActive) mtNextQuestion(); }, 350);
+}
+
+function mtFinish() {
+  mtStop();
+  mtLocked = true;
+  var best = load("gs_math_best_" + mtLevel, 0) || 0;
+  var isNew = mtScoreVal > best;
+  if (isNew) { store("gs_math_best_" + mtLevel, mtScoreVal); flushNow(); }
+  var xp = Math.min(mtScoreVal, 15);
+  if (xp > 0) addXP(xp);
+
+  var acc = mtTotal ? Math.round(mtScoreVal / mtTotal * 100) : 0;
+  $("mtPlay").style.display = "none";
+  $("mtScoreboard").style.display = "none";
+  $("mtResult").style.display = "block";
+  $("mtResEmoji").textContent = mtScoreVal >= 20 ? "🏆" : mtScoreVal >= 10 ? "🎉" : "👏";
+  $("mtResTitle").textContent = "ସମୟ ଶେଷ!";
+  $("mtResScore").textContent = mtScoreVal;
+  $("mtResSub").textContent = "ଠିକ୍ ଉତ୍ତର · " + acc + "% accuracy\n🔥 Best streak: " + mtBestStreak +
+    (xp > 0 ? "\n💎 +" + xp + " XP" : "") + (isNew && mtScoreVal > 0 ? "\n🏆 ନୂଆ ରେକର୍ଡ!" : "");
+  playNokiaBeep(1100, 0.2);
+  if (mtScoreVal >= 10) launchConfetti();
+}
+
+function exitMathGame() { mtStop(); showScreen("gameMenuScreen"); }
 
 /* ==================== UTILS ==================== */
 function sendBridge(msg) {
@@ -1006,9 +1820,9 @@ function bookmarkCurrent() {
   const value = { cls: currentClass, sub: currentSubject };
   if (!bookmarks.some(x => x.cls === value.cls && x.sub === value.sub)) {
     bookmarks.push(value);
-    if (store("gs_bookmarks", bookmarks)) { flushNow(); $("noteStatus").textContent = "⭐ Subject bookmarked successfully!"; }
-    else { $("noteStatus").textContent = "⚠ Bookmark could not be saved. " + lastStoreError; }
-  } else { $("noteStatus").textContent = "Already in bookmarks!"; }
+    if (store("gs_bookmarks", bookmarks)) { flushNow(); $("noteStatus").textContent = "⭐ Bookmarked!"; }
+    else { $("noteStatus").textContent = "⚠ Bookmark save ବିଫଳ। " + lastStoreError; }
+  } else { $("noteStatus").textContent = "Already bookmarked!"; }
 }
 
 function renderBookmarks() {
@@ -1018,7 +1832,7 @@ function renderBookmarks() {
   bookmarks.forEach((b, index) => { const key = b.sub || "OTHER"; if (!grouped[key]) grouped[key] = []; grouped[key].push(Object.assign({}, b, { originalIndex: index })); });
   let html = "";
   Object.keys(grouped).forEach(sub => {
-    html += '<div class="subject-group"><div class="subject-header"><span>📖 ' + esc(sub) + '</span><span class="count-badge">' + grouped[sub].length + ' saved</span></div>';
+    html += '<div class="subject-group"><div class="subject-header"><span>📖 ' + esc(sub) + '</span><span class="count-badge">' + grouped[sub].length + '</span></div>';
     grouped[sub].forEach(item => {
       html += '<div class="item" style="display:flex;justify-content:space-between;align-items:center;">' +
         '<div><b>' + esc(item.cls) + '</b><br><small class="muted">' + esc(item.sub) + '</small></div>' +
@@ -1096,8 +1910,9 @@ function startQuiz() {
   const fullUrl = new URL(fileName, GITHUB_PAGES_BASE).href; currentQuizUrl = fullUrl;
   currentQuizTitle = $("mcqClass").value + " · " + $("mcqSubject").value + " · " + $("mcqTopic").selectedOptions[0].text;
   currentQuizHtml = "";
+  addXP(5);
   $("noteActionToolbar").style.display = "flex"; $("quizSaveBtn").style.display = "block";
-  $("quizTimerBar").style.display = "flex"; $("viewerBackButton").textContent = "⬅ Back to Topics";
+  $("quizTimerBar").style.display = "flex"; $("viewerBackButton").textContent = "← Back to Topics";
   quizSeconds = 0; isQuizPaused = false; $("quizRunningTimer").textContent = "00:00";
   clearInterval(quizTimerInterval);
   quizTimerInterval = setInterval(() => { if (!isQuizPaused) { quizSeconds++; $("quizRunningTimer").textContent = fmtTime(quizSeconds); } }, 1000);
@@ -1125,15 +1940,21 @@ function renderStudyClock() {
   $("studyClock").textContent = [Math.floor(studySeconds / 3600), Math.floor(studySeconds / 60) % 60, studySeconds % 60].map(v => String(v).padStart(2, "0")).join(":");
 }
 
-function toggleTheme() { document.body.classList.toggle("dark"); store("gs_dark_theme", document.body.classList.contains("dark") ? "1" : "0"); }
+function toggleTheme() {
+  document.body.classList.toggle("dark");
+  const isDark = document.body.classList.contains("dark");
+  store("gs_dark_theme", isDark ? "1" : "0");
+  const tb = document.getElementById("themeBtn");
+  if (tb) tb.textContent = isDark ? "☀️" : "🌙";
+}
 
 function shareApp() {
-  const message = "🎓 ଜ୍ଞାନସେତୁ ଓଡ଼ିଶା (GyanSetu Odisha)\nଷଷ୍ଠ ରୁ ଦଶମ ଶ୍ରେଣୀ ପାଇଁ NCERT ଓ ଓଡ଼ିଶା ବୋର୍ଡ ଶିକ୍ଷଣ ଆପ୍।\n📚 ନୋଟ୍ସ, 📝 MCQ ଅଭ୍ୟାସ ଓ 📂 ଅଧ୍ୟୟନ ସାମଗ୍ରୀ ଏକ ସ୍ଥାନରେ।\n\n📲 ଆପ୍ ଡାଉନଲୋଡ୍ କରିବାକୁ ଏହି ଲିଙ୍କ୍‌ରେ କ୍ଲିକ୍ କରନ୍ତୁ:\n" + APP_DOWNLOAD_LINK;
+  const message = "🎓 ଜ୍ଞାନସେତୁ ଓଡ଼ିଶା (GyanSetu Odisha)\nଷଷ୍ଠ ରୁ ଦଶମ ଶ୍ରେଣୀ ପାଇଁ NCERT ଓ ଓଡ଼ିଶା ବୋର୍ଡ ଶିକ୍ଷଣ ଆପ୍।\n📚 ନୋଟ୍ସ, 📝 MCQ ଅଭ୍ୟାସ ଓ 📂 ଅଧ୍ୟୟନ ସାମଗ୍ରୀ ଏକ ସ୍ଥାନରେ।\n\n📲 ଡାଉନଲୋଡ୍ ଲିଙ୍କ:\n" + APP_DOWNLOAD_LINK;
   if (sendBridge("SHARE~" + message)) return;
   if (navigator.share) { navigator.share({ title: "GyanSetu Odisha", text: message }).catch(function () {}); return; }
   if (navigator.clipboard && navigator.clipboard.writeText) {
-    navigator.clipboard.writeText(message).then(function () { alert("📋 Message copy ହୋଇଗଲା।"); }).catch(function () { alert("Share is not supported."); });
-  } else { alert("Share is not supported."); }
+    navigator.clipboard.writeText(message).then(function () { alert("📋 Message copy ହୋଇଗଲା।"); }).catch(function () { alert("Share not supported."); });
+  } else { alert("Share not supported."); }
 }
 
 if (load("gs_dark_theme", "0") === "1") { document.body.classList.add("dark"); }
