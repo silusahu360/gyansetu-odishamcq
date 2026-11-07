@@ -2,7 +2,8 @@
 <html lang="or">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- ଏଠାରେ ଜୁମ୍ ବନ୍ଦ କରିବା ପାଇଁ user-scalable=no ଯୋଡ଼ା ଯାଇଛି -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta name="theme-color" content="#4c1d95">
 <title>GyanSetu Odisha</title>
 <style>
@@ -82,9 +83,59 @@ footer{text-align:center;padding:18px 12px 20px;color:#6b5b86;font-size:12px}
 body.dark footer{color:#aab7c8}
 @media(max-width:380px){.btnrow{grid-template-columns:1fr}.grid{gap:8px}.btnrow3{grid-template-columns:1fr}}
 
-/* HOME HERO */
-.hero-card{background:linear-gradient(135deg,#7c3aed 0%,#db2777 100%);padding:20px;border-radius:18px;margin-bottom:18px;box-shadow:0 10px 28px rgba(124,58,237,.28);position:relative;overflow:hidden;}
-.hero-card::after{content:"";position:absolute;top:-30px;right:-30px;width:120px;height:120px;background:radial-gradient(circle,rgba(255,255,255,.15),transparent 70%);border-radius:50%;}
+/* PROFESSIONAL TIME & CALENDAR WIDGET */
+.pro-widget {
+  background: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(245,243,255,0.9) 100%);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(167, 139, 250, 0.4);
+  border-radius: 20px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 10px 30px rgba(109, 40, 217, 0.12);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+body.dark .pro-widget {
+  background: linear-gradient(135deg, rgba(29,41,59,0.95) 0%, rgba(23,37,84,0.9) 100%);
+  border-color: rgba(139, 92, 246, 0.3);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+.pro-widget::before {
+  content: ''; position: absolute; top: -50%; right: -10%; width: 150px; height: 150px;
+  background: radial-gradient(circle, rgba(251, 191, 36, 0.15) 0%, transparent 70%);
+  border-radius: 50%; pointer-events: none;
+}
+.pro-top { display: flex; justify-content: space-between; align-items: flex-start; }
+.pro-greeting { display: flex; flex-direction: column; gap: 2px; }
+.pro-hello { font-size: 22px; font-weight: 900; color: #4c1d95; }
+body.dark .pro-hello { color: #fde68a; }
+.pro-sub { font-size: 13px; color: #71658b; font-weight: 600; }
+body.dark .pro-sub { color: #aab7c8; }
+.pro-clock-box {
+  background: linear-gradient(135deg, #4c1d95, #6d28d9);
+  padding: 8px 14px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(76,29,149,0.3);
+  border: 1px solid rgba(255,255,255,0.2);
+}
+.pro-clock { font-family: 'Courier New', monospace; font-size: 24px; font-weight: 900; color: #fde68a; letter-spacing: 1.5px; line-height: 1; }
+.pro-date-row {
+  display: flex; justify-content: space-between; align-items: center;
+  background: rgba(237, 233, 254, 0.6);
+  padding: 8px 12px; border-radius: 10px; margin-top: 4px;
+  border: 1px solid rgba(167, 139, 250, 0.3);
+}
+body.dark .pro-date-row { background: rgba(49, 46, 129, 0.4); border-color: rgba(139, 92, 246, 0.3); }
+.pro-date-left { display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 750; color: #5b21b6; }
+body.dark .pro-date-left { color: #c4b5fd; }
+.pro-quote { font-size: 12.5px; font-style: italic; color: #64748b; text-align: center; border-top: 1px dashed #cbd5e1; padding-top: 8px; margin-top: 2px; }
+body.dark .pro-quote { color: #94a3b8; border-color: #475569; }
+
+/* HOME HERO (Removed but keep section-title) */
 .section-title{font-size:12.5px;color:var(--muted);margin:18px 0 10px;font-weight:800;text-transform:uppercase;letter-spacing:.7px;}
 .quick-actions{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;}
 .quick-btn{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 4px;display:flex;flex-direction:column;align-items:center;gap:5px;font-size:11px;font-weight:750;color:var(--ink);cursor:pointer;transition:.15s;box-shadow:0 2px 8px rgba(76,29,149,.05);}
@@ -106,22 +157,6 @@ body.dark .nav-item.active{color:#c4b5fd;}
 .pg-stat-num{font-size:20px;font-weight:850;color:#6d28d9;}
 body.dark .pg-stat-num{color:#c4b5fd;}
 .pg-stat-label{font-size:12px;color:var(--muted);margin-top:4px;font-weight:600;}
-
-/* SNAKE GAME */
-.nokia-snake-card{background:#140c2b;border:2px solid #8b5cf6;border-radius:22px;padding:16px;width:100%;max-width:390px;margin:0 auto;box-shadow:0 0 25px rgba(139,92,246,0.3);text-align:center;color:#f8fafc}
-.nokia-title{font-size:21px;font-weight:900;letter-spacing:1.5px;color:#fde047;text-shadow:0 0 12px rgba(253,224,71,0.5);margin:0 0 10px}
-.nokia-scoreboard{display:flex;justify-content:space-around;background:#0d0620;border:1.5px solid #3b2075;border-radius:14px;padding:8px;margin-bottom:12px;font-weight:800}
-.nokia-score-item{font-size:13px;color:#a78bfa}
-.nokia-score-num{font-size:20px;color:#38bdf8;font-family:monospace;display:block}
-#nokiaCanvas{background:#090414;border:2.5px solid #38bdf8;border-radius:12px;box-shadow:0 0 16px rgba(56,189,248,0.25);display:block;margin:0 auto 12px;max-width:100%;height:auto;touch-action:none}
-.nokia-pad{display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(3,50px);gap:8px;width:210px;margin:10px auto}
-.nokia-pad-btn{background:linear-gradient(135deg,#6d28d9,#4f46e5);border:1.5px solid #a78bfa;border-radius:12px;color:white;font-size:22px;display:flex;align-items:center;justify-content:center;cursor:pointer;user-select:none;box-shadow:0 4px 10px rgba(0,0,0,0.4)}
-.nokia-pad-btn:active{transform:scale(0.94);background:#7c3aed}
-.nokia-pad-up{grid-column:2;grid-row:1}
-.nokia-pad-left{grid-column:1;grid-row:2}
-.nokia-pad-center{grid-column:2;grid-row:2;background:#059669;border-color:#34d399;font-size:15px;font-weight:800}
-.nokia-pad-right{grid-column:3;grid-row:2}
-.nokia-pad-down{grid-column:2;grid-row:3}
 
 /* MEMORY MATCH */
 .mm-wrapper{background:#140c2b;border:2px solid #8b5cf6;border-radius:22px;padding:16px;max-width:440px;margin:0 auto;box-shadow:0 0 25px rgba(139,92,246,0.3);text-align:center;color:#f8fafc;}
@@ -204,16 +239,6 @@ body.dark .pg-stat-num{color:#c4b5fd;}
 .mt-result-score{font-size:46px;font-weight:900;color:#fde68a;line-height:1.1}
 .mt-result-sub{font-size:14px;font-weight:700;opacity:.95;margin-top:6px;white-space:pre-line}
 
-/* FLAPPY BIRD */
-.fl-wrapper{background:#140c2b;border:2px solid #8b5cf6;border-radius:22px;padding:16px;max-width:390px;margin:0 auto;box-shadow:0 0 25px rgba(139,92,246,0.3);text-align:center;color:#f8fafc;}
-.fl-title{font-size:21px;font-weight:900;letter-spacing:1.5px;color:#fde047;text-shadow:0 0 12px rgba(253,224,71,0.5);margin:0 0 10px}
-.fl-scoreboard{display:flex;justify-content:space-around;background:#0d0620;border:1.5px solid #3b2075;border-radius:14px;padding:8px;margin-bottom:12px;font-weight:800}
-.fl-score-item{font-size:13px;color:#a78bfa}
-.fl-score-num{font-size:20px;color:#38bdf8;font-family:monospace;display:block}
-#flCanvas{background:#70c5ce;border:2.5px solid #38bdf8;border-radius:12px;box-shadow:0 0 16px rgba(56,189,248,0.25);display:block;margin:0 auto 12px;max-width:100%;height:auto;max-height:60vh;touch-action:none;cursor:pointer;-webkit-tap-highlight-color:transparent}
-.fl-flap-btn{width:100%;padding:18px;font-size:20px;font-weight:900;border:2px solid #fde68a;border-radius:16px;background:linear-gradient(135deg,#f59e0b,#ea580c);color:#fff;cursor:pointer;user-select:none;box-shadow:0 5px 14px rgba(0,0,0,.4)}
-.fl-flap-btn:active{transform:scale(.97)}
-
 /* CONFETTI */
 .confetti-container{position:fixed;inset:0;pointer-events:none;z-index:200;overflow:hidden;}
 .confetti{position:absolute;width:9px;height:9px;top:-20px;border-radius:2px;animation:fall linear forwards;}
@@ -229,14 +254,28 @@ body.dark .pg-stat-num{color:#c4b5fd;}
 </header>
 
 <main>
+<!-- HOME SCREEN -->
 <section id="home" class="screen active">
-  <div class="hero-card">
-    <h2 style="color:#fff;text-align:left;margin:0 0 4px;font-size:22px;">ସ୍ୱାଗତମ୍ 👋</h2>
-    <p style="color:rgba(255,255,255,.85);font-size:13px;margin:0 0 12px;">ଆଜି କଣ ଶିଖିବେ?</p>
-    <div style="display:inline-flex;align-items:center;gap:8px;padding:6px 14px;background:rgba(255,255,255,.22);border:1px solid rgba(255,255,255,.35);border-radius:30px;color:#fff;font-size:13px;font-weight:750;">
-      <span style="width:8px;height:8px;background:#86efac;border-radius:50%;box-shadow:0 0 8px #86efac;"></span>
-      <span id="homeStatus">Ready to learn.</span>
+  
+  <!-- Professional Time & Calendar Widget -->
+  <div class="pro-widget">
+    <div class="pro-top">
+      <div class="pro-greeting">
+        <div class="pro-hello">ସ୍ୱାଗତମ୍ 👋</div>
+        <div class="pro-sub">ଆଜି କଣ ଶିଖିବେ?</div>
+      </div>
+      <div class="pro-clock-box">
+        <div class="pro-clock" id="liveTime">00:00:00</div>
+      </div>
     </div>
+    <div class="pro-date-row">
+      <div class="pro-date-left">
+        <span>📅</span>
+        <span id="liveDate">---</span>
+      </div>
+      <div style="font-size:13px; font-weight:800; color:#db2777;" id="liveDay">---</div>
+    </div>
+    <div class="pro-quote" id="dailyQuote">"ଶିକ୍ଷା ହେଉଛି ସଫଳତାର ଚାବିକାଠି।"</div>
   </div>
 
   <h3 class="section-title">📚 ମୁଖ୍ୟ ବିଭାଗ</h3>
@@ -330,20 +369,10 @@ body.dark .pg-stat-num{color:#c4b5fd;}
   <h2>🎮 Mind Fresh</h2>
   <p class="muted" style="text-align:center;margin-bottom:16px;">ମନ ତାଜା କରିବା ପାଇଁ ଏକ game ବାଛନ୍ତୁ</p>
   <div class="grid">
-    <button class="tile" onclick="openSnakeGame()" style="flex-direction:column;gap:6px;min-height:110px;">
-      <span style="font-size:36px;">🐍</span>
-      <span>Snake</span>
-      <span style="font-size:11px;opacity:.85;">Nokia Neon</span>
-    </button>
     <button class="tile" onclick="openMemoryGame()" style="flex-direction:column;gap:6px;min-height:110px;background:linear-gradient(135deg,#f59e0b,#db2777);">
       <span style="font-size:36px;">🧠</span>
       <span>Memory Match</span>
       <span style="font-size:11px;opacity:.85;">ମନେପଥ</span>
-    </button>
-    <button class="tile" onclick="openFlappyGame()" style="flex-direction:column;gap:6px;min-height:110px;background:linear-gradient(135deg,#0891b2,#2563eb);">
-      <span style="font-size:36px;">🐦</span>
-      <span>Flappy Bird</span>
-      <span style="font-size:11px;opacity:.85;">ଉଡ଼ାଅ</span>
     </button>
     <button class="tile" onclick="openMathGame()" style="flex-direction:column;gap:6px;min-height:110px;background:linear-gradient(135deg,#10b981,#047857);">
       <span style="font-size:36px;">🧮</span>
@@ -352,30 +381,6 @@ body.dark .pg-stat-num{color:#c4b5fd;}
     </button>
   </div>
   <button type="button" class="back" onclick="goBack()">← Back</button>
-</section>
-
-<!-- SNAKE -->
-<section id="snakeGameScreen" class="screen">
-<div class="nokia-snake-card">
-<div class="nokia-title" id="nokiaTitle">🐍 NOKIA NEON SNAKE ⚡</div>
-<div class="nokia-scoreboard">
-<div class="nokia-score-item">SCORE<span class="nokia-score-num" id="nokiaScoreVal">0</span></div>
-<div class="nokia-score-item">BEST<span class="nokia-score-num" id="nokiaHighScoreVal">0</span></div>
-</div>
-<canvas id="nokiaCanvas" width="300" height="300"></canvas>
-<div class="nokia-pad">
-<button type="button" class="nokia-pad-btn nokia-pad-up" onclick="setNokiaDir('UP')">▲</button>
-<button type="button" class="nokia-pad-btn nokia-pad-left" onclick="setNokiaDir('LEFT')">◀</button>
-<button type="button" class="nokia-pad-btn nokia-pad-center" onclick="toggleNokiaPause()" id="nokiaPauseBtn">⏸</button>
-<button type="button" class="nokia-pad-btn nokia-pad-right" onclick="setNokiaDir('RIGHT')">▶</button>
-<button type="button" class="nokia-pad-btn nokia-pad-down" onclick="setNokiaDir('DOWN')">▼</button>
-</div>
-<div class="btnrow" style="margin-top:10px;">
-<button type="button" class="btn cyan" onclick="resetNokiaGame()">🔄 Restart</button>
-<button type="button" class="btn purple" onclick="toggleNokiaSound()" id="nokiaSoundBtn">🔊 Sound ON</button>
-</div>
-<button type="button" class="back" onclick="exitNokiaGame()">← Back to Games</button>
-</div>
 </section>
 
 <!-- MEMORY MATCH -->
@@ -476,24 +481,6 @@ body.dark .pg-stat-num{color:#c4b5fd;}
   </div>
 </section>
 
-<!-- FLAPPY BIRD -->
-<section id="flappyGameScreen" class="screen">
-  <div class="fl-wrapper">
-    <div class="fl-title" id="flTitle">🐦 FLAPPY BIRD</div>
-    <div class="fl-scoreboard">
-      <div class="fl-score-item">SCORE<span class="fl-score-num" id="flScoreVal">0</span></div>
-      <div class="fl-score-item">BEST<span class="fl-score-num" id="flBestVal">0</span></div>
-    </div>
-    <canvas id="flCanvas" width="300" height="400"></canvas>
-    <button type="button" class="fl-flap-btn" id="flFlapBtn">🐦 TAP TO FLAP</button>
-    <div class="btnrow" style="margin-top:10px;">
-      <button type="button" class="btn cyan" onclick="flReset()">🔄 Restart</button>
-      <button type="button" class="btn purple" onclick="flToggleSound()" id="flSoundBtn">🔊 Sound ON</button>
-    </div>
-    <button type="button" class="back" onclick="exitFlappyGame()">← Back to Games</button>
-  </div>
-</section>
-
 <!-- WIN MODAL -->
 <div id="mmWinModal" class="mm-win-overlay">
   <div class="mm-win-box">
@@ -513,13 +500,13 @@ body.dark .pg-stat-num{color:#c4b5fd;}
 
 <section id="progressScreen" class="screen">
 <h2>📊 ମୋ ଅଗ୍ରଗତି</h2>
-<div class="hero-card" style="text-align:center;">
-  <div style="color:rgba(255,255,255,.85);font-size:12px;font-weight:750;letter-spacing:1.5px;">LEVEL</div>
-  <div style="color:#fff;font-size:56px;font-weight:850;line-height:1;margin:4px 0;" id="pgLevel">1</div>
-  <div style="background:rgba(255,255,255,.22);height:10px;border-radius:10px;overflow:hidden;margin:12px 0 6px;">
+<div class="card" style="text-align:center;">
+  <div style="color:var(--muted);font-size:12px;font-weight:750;letter-spacing:1.5px;">LEVEL</div>
+  <div style="color:#7c3aed;font-size:56px;font-weight:850;line-height:1;margin:4px 0;" id="pgLevel">1</div>
+  <div style="background:var(--line);height:10px;border-radius:10px;overflow:hidden;margin:12px 0 6px;">
     <div id="pgXPBar" style="height:100%;background:#fbbf24;border-radius:10px;transition:width .4s;width:0%;"></div>
   </div>
-  <div style="color:rgba(255,255,255,.92);font-size:12px;font-weight:750;" id="pgXPText">0 / 100 XP</div>
+  <div style="color:var(--muted);font-size:12px;font-weight:750;" id="pgXPText">0 / 100 XP</div>
 </div>
 <div class="pg-stat-grid">
   <div class="pg-stat"><div class="pg-stat-num">🔥 <span id="pgStreak">0</span></div><div class="pg-stat-label">Streak</div></div>
@@ -677,8 +664,6 @@ let isQuizPaused = false;
 let studySeconds = 0;
 let studyInterval = null;
 
-var nokiaGameInterval = null;
-
 const $ = id => document.getElementById(id);
 
 const memoryFallback = {};
@@ -724,12 +709,6 @@ function applyStoredPrefs() {
     document.body.classList.toggle("dark", dark);
     var tb = document.getElementById("themeBtn");
     if (tb) tb.textContent = dark ? "☀️" : "🌙";
-    var storedHi = parseInt(load("gs_snake_hi", 0), 10) || 0;
-    if (storedHi > nokiaHighScore) {
-      nokiaHighScore = storedHi;
-      var hs = document.getElementById("nokiaHighScoreVal");
-      if (hs) hs.textContent = nokiaHighScore;
-    }
   } catch (e) { console.error("Prefs error:", e); }
 }
 
@@ -805,7 +784,6 @@ function isNewerVersion(remote, local) {
 
 async function checkForAppUpdate(manualCheck) {
   manualCheck = !!manualCheck;
-  if (manualCheck) $("homeStatus").textContent = "Checking...";
   try {
     const res = await fetch(GITHUB_VERSION_JSON_URL + "?t=" + Date.now(), { cache: "no-store" });
     if (!res.ok) throw new Error("Update check failed");
@@ -814,18 +792,15 @@ async function checkForAppUpdate(manualCheck) {
       if (data.apkUrl) APP_DOWNLOAD_LINK = data.apkUrl;
       $("updateMessage").textContent = "ଜ୍ଞାନସେତୁ ଓଡ଼ିଶାର ଏକ ନୂତନ ଭର୍ସନ୍ (" + data.version + ") ଉପଲବ୍ଧ ଅଛି। " + (data.notes || "");
       $("updateModal").classList.add("active");
-      if (manualCheck) $("homeStatus").textContent = "Update: " + data.version;
     } else {
       if (manualCheck) {
         alert("✅ ଆପଣଙ୍କ ଆପ୍ Latest Version (" + CURRENT_APP_VERSION + ") ରେ ଅଛି।");
-        $("homeStatus").textContent = "Up to date";
       }
     }
   } catch (err) {
     console.error("Update check error:", err);
     if (manualCheck) {
       alert("❌ ଅପଡେଟ୍ ଯାଞ୍ଚ ବିଫଳ।");
-      $("homeStatus").textContent = "Check failed.";
     }
   }
 }
@@ -836,10 +811,43 @@ function performAppUpdate() {
   window.open(APP_DOWNLOAD_LINK, "_blank");
 }
 
+// Live Time & Calendar Function with Professional Look
+function updateLiveDateTime() {
+  const now = new Date();
+  const timeStr = now.toLocaleTimeString('en-US', { hour12: false });
+  
+  const days = ['ରବିବାର', 'ସୋମବାର', 'ମଙ୍ଗଳବାର', 'ବୁଧବାର', 'ଗୁରୁବାର', 'ଶୁକ୍ରବାର', 'ଶନିବାର'];
+  const months = ['ଜାନୁଆରୀ', 'ଫେବୃଆରୀ', 'ମାର୍ଚ୍ଚ', 'ଏପ୍ରିଲ', 'ମେ', 'ଜୁନ', 'ଜୁଲାଇ', 'ଅଗଷ୍ଟ', 'ସେପ୍ଟେମ୍ବର', 'ଅକ୍ଟୋବର', 'ନଭେମ୍ବର', 'ଡିସେମ୍ବର'];
+  
+  const dateStr = now.getDate() + ' ' + months[now.getMonth()] + ' ' + now.getFullYear();
+  const dayStr = days[now.getDay()];
+  
+  const quotes = [
+    "ଶିକ୍ଷା ହେଉଛି ସଫଳତାର ଚାବିକାଠି।",
+    "ଆଜିର ପରିଶ୍ରମ, କାଲିର ସଫଳତା।",
+    "ଜ୍ଞାନ ହିଁ ଶକ୍ତି।",
+    "ଛୋଟ ଛୋଟ ପଦକ୍ଷେପ ବଡ଼ ପରିବର୍ତ୍ତନ ଆଣେ।",
+    "ନିଜକୁ ବିଶ୍ୱାସ କର, ତୁମେ ପାରିବ।",
+    "ପ୍ରତ୍ୟେକ ଦିନ ଏକ ନୂଆ ସୁଯୋଗ।"
+  ];
+  const quoteIndex = now.getDate() % quotes.length;
+
+  const timeEl = document.getElementById('liveTime');
+  const dateEl = document.getElementById('liveDate');
+  const dayEl = document.getElementById('liveDay');
+  const quoteEl = document.getElementById('dailyQuote');
+  
+  if (timeEl) timeEl.textContent = timeStr;
+  if (dateEl) dateEl.textContent = dateStr;
+  if (dayEl) dayEl.textContent = dayStr;
+  if (quoteEl) quoteEl.textContent = '"' + quotes[quoteIndex] + '"';
+}
+updateLiveDateTime();
+setInterval(updateLiveDateTime, 1000);
+
 window.addEventListener("load", function() {
   syncHeaderHeight();
   applyStoredPrefs();
-  $("homeStatus").textContent = "Ready (" + CURRENT_APP_VERSION + ")";
   setTimeout(() => { checkForAppUpdate(false); }, 2000);
   setTimeout(() => { checkDailyProgress(); }, 1000);
 });
@@ -866,21 +874,19 @@ window.addEventListener("resize", syncHeaderHeight);
 function updateBottomNav(id){
   const map={home:"home",mcqSetup:"mcq",classes:"classes",subjects:"classes",folder:"classes",
     progressScreen:"progress",about:"more",bookmarks:"more",studyTimer:"more",
-    offlineQuizMenuScreen:"mcq",gameMenuScreen:"home",memoryGameScreen:"home",snakeGameScreen:"home",flappyGameScreen:"home",mathGameScreen:"home"};
+    offlineQuizMenuScreen:"mcq",gameMenuScreen:"home",memoryGameScreen:"home",mathGameScreen:"home"};
   document.querySelectorAll(".nav-item").forEach(n=>n.classList.remove("active"));
   const key=map[id]||"home";
   const el=document.querySelector('.nav-item[data-nav="'+key+'"]');
   if(el)el.classList.add("active");
   const nav=document.getElementById("bottomNav");
-  if(nav)nav.classList.toggle("hidden",id==="quizScreen"||id==="snakeGameScreen"||id==="flappyGameScreen"||id==="memoryGameScreen"||id==="mathGameScreen");
+  if(nav)nav.classList.toggle("hidden",id==="quizScreen"||id==="memoryGameScreen"||id==="mathGameScreen");
 }
 
 function showScreen(id) {
   let target = $(id) || $("home");
-  if (id !== "snakeGameScreen") { clearInterval(nokiaGameInterval); nokiaGameInterval = null; }
-  if (id !== "flappyGameScreen") { if (typeof flStop === "function") flStop(); }
-  if (id !== "mathGameScreen") { if (typeof mtStop === "function") mtStop(); }
   if (id !== "memoryGameScreen") { if (typeof mmInterval !== "undefined" && mmInterval) { clearInterval(mmInterval); mmInterval = null; } }
+  if (id !== "mathGameScreen") { if (typeof mtStop === "function") mtStop(); }
   document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
   target.classList.add("active");
   window.scrollTo(0, 0);
@@ -898,8 +904,7 @@ function goBack(){
     classes:"home", subjects:"classes", folder:"subjects",
     mcqSetup:"home", offlineQuizMenuScreen:"home",
     bookmarks:"home", studyTimer:"home", about:"home", progressScreen:"home",
-    gameMenuScreen:"home", memoryGameScreen:"gameMenuScreen",
-    snakeGameScreen:"gameMenuScreen", flappyGameScreen:"gameMenuScreen", mathGameScreen:"gameMenuScreen"
+    gameMenuScreen:"home", memoryGameScreen:"gameMenuScreen", mathGameScreen:"gameMenuScreen"
   };
   showScreen(backMap[id] || "home");
 }
@@ -1116,143 +1121,6 @@ function renderProgress() {
   $("pgBadges").innerHTML = badgesHtml;
 }
 
-/* ==================== SNAKE GAME ==================== */
-var nokiaCanvas = null;
-var nokiaCtx = null;
-var nokiaGridSize = 15;
-var nokiaTileCount = 20;
-var nokiaSnake = [{x:10,y:10},{x:10,y:11},{x:10,y:12}];
-var nokiaDx = 0;
-var nokiaDy = -1;
-var nokiaNext = null;
-var nokiaFood = {x:5,y:5};
-var nokiaScore = 0;
-var nokiaHighScore = parseInt(load("gs_snake_hi", 0), 10) || 0;
-var nokiaIsPaused = false;
-var nokiaSoundEnabled = true;
-var nokiaAudioCtx = null;
-var nokiaOver = false;
-
-function playNokiaBeep(freq, duration) {
-  if (!nokiaSoundEnabled) return;
-  try {
-    if (!nokiaAudioCtx) nokiaAudioCtx = new (window.AudioContext || window.webkitAudioContext)();
-    if (nokiaAudioCtx.state === "suspended") nokiaAudioCtx.resume();
-    var osc = nokiaAudioCtx.createOscillator();
-    var gain = nokiaAudioCtx.createGain();
-    osc.type = "square"; osc.frequency.value = freq;
-    gain.gain.setValueAtTime(0.08, nokiaAudioCtx.currentTime);
-    osc.connect(gain); gain.connect(nokiaAudioCtx.destination);
-    osc.start(); osc.stop(nokiaAudioCtx.currentTime + duration);
-  } catch (e) {}
-}
-
-function openSnakeGame() {
-  showScreen("snakeGameScreen");
-  nokiaCanvas = $("nokiaCanvas"); nokiaCtx = nokiaCanvas.getContext("2d");
-  applyStoredPrefs(); $("nokiaHighScoreVal").textContent = nokiaHighScore;
-  resetNokiaGame();
-  clearInterval(nokiaGameInterval);
-  nokiaGameInterval = setInterval(updateNokiaSnake, 130);
-}
-
-function spawnNokiaFood() {
-  var tries = 0, onSnake;
-  do {
-    nokiaFood.x = Math.floor(Math.random() * nokiaTileCount);
-    nokiaFood.y = Math.floor(Math.random() * nokiaTileCount);
-    onSnake = nokiaSnake.some(s => s.x === nokiaFood.x && s.y === nokiaFood.y);
-    tries++;
-  } while (onSnake && tries < 500);
-}
-
-function drawNokiaSnake() {
-  if (!nokiaCtx) return;
-  nokiaCtx.fillStyle = "#090414"; nokiaCtx.fillRect(0, 0, nokiaCanvas.width, nokiaCanvas.height);
-  nokiaCtx.strokeStyle = "#160b30"; nokiaCtx.lineWidth = 0.5;
-  for (var x = 0; x < nokiaCanvas.width; x += nokiaGridSize) { nokiaCtx.beginPath(); nokiaCtx.moveTo(x, 0); nokiaCtx.lineTo(x, nokiaCanvas.height); nokiaCtx.stroke(); }
-  for (var y = 0; y < nokiaCanvas.height; y += nokiaGridSize) { nokiaCtx.beginPath(); nokiaCtx.moveTo(0, y); nokiaCtx.lineTo(nokiaCanvas.width, y); nokiaCtx.stroke(); }
-  nokiaCtx.fillStyle = "#f43f5e"; nokiaCtx.shadowColor = "#f43f5e"; nokiaCtx.shadowBlur = 8;
-  nokiaCtx.fillRect(nokiaFood.x * nokiaGridSize + 1, nokiaFood.y * nokiaGridSize + 1, nokiaGridSize - 2, nokiaGridSize - 2);
-  nokiaCtx.shadowBlur = 0;
-  for (var i = 0; i < nokiaSnake.length; i++) {
-    if (i === 0) { nokiaCtx.fillStyle = "#38bdf8"; nokiaCtx.shadowColor = "#38bdf8"; nokiaCtx.shadowBlur = 10; }
-    else { nokiaCtx.fillStyle = "#4ade80"; nokiaCtx.shadowBlur = 0; }
-    nokiaCtx.fillRect(nokiaSnake[i].x * nokiaGridSize + 1, nokiaSnake[i].y * nokiaGridSize + 1, nokiaGridSize - 2, nokiaGridSize - 2);
-  }
-  nokiaCtx.shadowBlur = 0;
-}
-
-function updateNokiaSnake() {
-  if (nokiaIsPaused || nokiaOver) return;
-  if (nokiaNext) { nokiaDx = nokiaNext.x; nokiaDy = nokiaNext.y; nokiaNext = null; }
-  var head = { x: nokiaSnake[0].x + nokiaDx, y: nokiaSnake[0].y + nokiaDy };
-  if (head.x < 0) head.x = nokiaTileCount - 1; if (head.x >= nokiaTileCount) head.x = 0;
-  if (head.y < 0) head.y = nokiaTileCount - 1; if (head.y >= nokiaTileCount) head.y = 0;
-  var eating = (head.x === nokiaFood.x && head.y === nokiaFood.y);
-  var body = eating ? nokiaSnake : nokiaSnake.slice(0, -1);
-  for (var i = 0; i < body.length; i++) {
-    if (body[i].x === head.x && body[i].y === head.y) {
-      playNokiaBeep(180, 0.3); nokiaOver = true; $("nokiaTitle").textContent = "💥 GAME OVER: " + nokiaScore; return;
-    }
-  }
-  nokiaSnake.unshift(head);
-  if (eating) {
-    nokiaScore += 10; $("nokiaScoreVal").textContent = nokiaScore;
-    if (nokiaScore > nokiaHighScore) {
-      nokiaHighScore = nokiaScore; $("nokiaHighScoreVal").textContent = nokiaHighScore; store("gs_snake_hi", nokiaHighScore);
-    }
-    playNokiaBeep(780, 0.08); spawnNokiaFood();
-  } else { nokiaSnake.pop(); }
-  drawNokiaSnake();
-}
-
-function setNokiaDir(d) {
-  var dx = nokiaNext ? nokiaNext.x : nokiaDx;
-  var dy = nokiaNext ? nokiaNext.y : nokiaDy;
-  if (d === "UP" && dy !== 1) nokiaNext = { x: 0, y: -1 };
-  else if (d === "DOWN" && dy !== -1) nokiaNext = { x: 0, y: 1 };
-  else if (d === "LEFT" && dx !== 1) nokiaNext = { x: -1, y: 0 };
-  else if (d === "RIGHT" && dx !== -1) nokiaNext = { x: 1, y: 0 };
-  playNokiaBeep(440, 0.03);
-}
-
-function toggleNokiaPause() {
-  if (nokiaOver) return; nokiaIsPaused = !nokiaIsPaused;
-  $("nokiaPauseBtn").textContent = nokiaIsPaused ? "▶" : "⏸";
-}
-
-function toggleNokiaSound() {
-  nokiaSoundEnabled = !nokiaSoundEnabled;
-  $("nokiaSoundBtn").textContent = nokiaSoundEnabled ? "🔊 Sound ON" : "🔇 Sound OFF";
-}
-
-function resetNokiaGame() {
-  nokiaSnake = [{x:10,y:10},{x:10,y:11},{x:10,y:12}]; nokiaDx = 0; nokiaDy = -1; nokiaNext = null;
-  nokiaScore = 0; nokiaIsPaused = false; nokiaOver = false;
-  $("nokiaScoreVal").textContent = "0"; $("nokiaPauseBtn").textContent = "⏸";
-  $("nokiaTitle").textContent = "🐍 NOKIA NEON SNAKE ⚡";
-  spawnNokiaFood(); drawNokiaSnake();
-}
-
-function exitNokiaGame() { showScreen("gameMenuScreen"); }
-
-document.addEventListener("keydown", function (e) {
-  if (!$("snakeGameScreen").classList.contains("active")) return;
-  var map = { ArrowUp: "UP", ArrowDown: "DOWN", ArrowLeft: "LEFT", ArrowRight: "RIGHT" };
-  if (map[e.key]) { e.preventDefault(); setNokiaDir(map[e.key]); }
-});
-
-(function () {
-  var sx = 0, sy = 0; var c = $("nokiaCanvas"); if (!c) return;
-  c.addEventListener("touchstart", function (e) { sx = e.touches[0].clientX; sy = e.touches[0].clientY; }, { passive: true });
-  c.addEventListener("touchend", function (e) {
-    var dx = e.changedTouches[0].clientX - sx; var dy = e.changedTouches[0].clientY - sy;
-    if (Math.max(Math.abs(dx), Math.abs(dy)) < 20) return;
-    if (Math.abs(dx) > Math.abs(dy)) setNokiaDir(dx > 0 ? "RIGHT" : "LEFT"); else setNokiaDir(dy > 0 ? "DOWN" : "UP");
-  }, { passive: true });
-})();
-
 /* ==================== MEMORY MATCH GAME ==================== */
 var mmInterval = null;
 var mmSeconds = 0;
@@ -1418,7 +1286,7 @@ function mmWin() {
     flushNow();
   }
 
-  var xpEarned = 5 + stars * 5; // 1★=10, 2★=15, 3★=20
+  var xpEarned = 5 + stars * 5;
   addXP(xpEarned);
 
   var starsHtml = "";
@@ -1470,181 +1338,6 @@ function exitMemoryGame() {
   $("mmWinModal").classList.remove("active");
   showScreen("gameMenuScreen");
 }
-
-/* ==================== FLAPPY BIRD ==================== */
-var FL_W = 300, FL_H = 400, FL_GROUND = 50;
-var FL_GRAVITY = 0.42, FL_FLAP = -6.6, FL_PIPE_W = 52, FL_GAP = 125, FL_SPEED = 2.1, FL_BIRD_X = 70, FL_R = 12;
-var flCanvas = null, flCtx = null;
-var flRaf = null, flLast = 0;
-var flState = "ready"; // ready | play | over
-var flBird = { y: 200, v: 0 };
-var flPipes = [];
-var flScore = 0;
-var flBest = parseInt(load("gs_flappy_hi", 0), 10) || 0;
-var flOverAt = 0;
-var flTick = 0;
-var flInputBound = false;
-
-function openFlappyGame() {
-  showScreen("flappyGameScreen");
-  flCanvas = $("flCanvas"); flCtx = flCanvas.getContext("2d");
-  flBest = Math.max(flBest, parseInt(load("gs_flappy_hi", 0), 10) || 0);
-  $("flBestVal").textContent = flBest;
-  $("flSoundBtn").textContent = nokiaSoundEnabled ? "🔊 Sound ON" : "🔇 Sound OFF";
-  if (!flInputBound) {
-    flInputBound = true;
-    flCanvas.addEventListener("pointerdown", function (e) { e.preventDefault(); flFlap(); });
-    $("flFlapBtn").addEventListener("pointerdown", function (e) { e.preventDefault(); flFlap(); });
-    document.addEventListener("keydown", function (e) {
-      if (!$("flappyGameScreen").classList.contains("active")) return;
-      if (e.code === "Space" || e.key === "ArrowUp") { e.preventDefault(); flFlap(); }
-    });
-  }
-  flReset();
-  flStop();
-  flLast = 0;
-  flRaf = requestAnimationFrame(flLoop);
-}
-
-function flStop() { if (flRaf) { cancelAnimationFrame(flRaf); flRaf = null; } }
-
-function flReset() {
-  flBird = { y: 180, v: 0 };
-  flPipes = [];
-  flScore = 0; flTick = 0;
-  flState = "ready";
-  $("flScoreVal").textContent = "0";
-  $("flTitle").textContent = "🐦 FLAPPY BIRD";
-}
-
-function flFlap() {
-  if (flState === "over") {
-    if (Date.now() - flOverAt > 450) { flReset(); flState = "play"; flBird.v = FL_FLAP; playNokiaBeep(520, 0.04); }
-    return;
-  }
-  if (flState === "ready") flState = "play";
-  flBird.v = FL_FLAP;
-  playNokiaBeep(520, 0.04);
-}
-
-function flSpawnPipe() {
-  var minTop = 55, maxTop = FL_H - FL_GROUND - FL_GAP - 55;
-  var top = minTop + Math.random() * (maxTop - minTop);
-  flPipes.push({ x: FL_W + 10, top: top, passed: false });
-}
-
-function flGameOver() {
-  flState = "over";
-  flOverAt = Date.now();
-  playNokiaBeep(160, 0.3);
-  $("flTitle").textContent = "💥 GAME OVER: " + flScore;
-  if (flScore > flBest) {
-    flBest = flScore;
-    $("flBestVal").textContent = flBest;
-    store("gs_flappy_hi", flBest);
-    flushNow();
-  }
-  if (flScore > 0) addXP(Math.min(flScore, 10));
-}
-
-function flUpdate(k) {
-  flTick += k;
-  if (flState === "ready") {
-    flBird.y = 180 + Math.sin(flTick / 8) * 6;
-    return;
-  }
-  if (flState !== "play") return;
-
-  flBird.v += FL_GRAVITY * k;
-  flBird.y += flBird.v * k;
-
-  if (!flPipes.length || flPipes[flPipes.length - 1].x < FL_W - 170) flSpawnPipe();
-  for (var i = 0; i < flPipes.length; i++) flPipes[i].x -= FL_SPEED * k;
-  while (flPipes.length && flPipes[0].x + FL_PIPE_W < -5) flPipes.shift();
-
-  for (var j = 0; j < flPipes.length; j++) {
-    var p = flPipes[j];
-    if (!p.passed && p.x + FL_PIPE_W < FL_BIRD_X - FL_R) {
-      p.passed = true; flScore++;
-      $("flScoreVal").textContent = flScore;
-      playNokiaBeep(880, 0.07);
-    }
-    var inX = FL_BIRD_X + FL_R - 3 > p.x && FL_BIRD_X - FL_R + 3 < p.x + FL_PIPE_W;
-    if (inX && (flBird.y - FL_R + 3 < p.top || flBird.y + FL_R - 3 > p.top + FL_GAP)) { flGameOver(); return; }
-  }
-  if (flBird.y + FL_R >= FL_H - FL_GROUND) { flBird.y = FL_H - FL_GROUND - FL_R; flGameOver(); return; }
-  if (flBird.y - FL_R <= 0) { flBird.y = FL_R; flBird.v = 0; }
-}
-
-function flDrawPipe(x, yTop, h, isTop) {
-  var c = flCtx;
-  c.fillStyle = "#4ade80"; c.fillRect(x, yTop, FL_PIPE_W, h);
-  c.fillStyle = "#16a34a"; c.fillRect(x + FL_PIPE_W - 8, yTop, 8, h);
-  c.strokeStyle = "#14532d"; c.lineWidth = 2; c.strokeRect(x, yTop, FL_PIPE_W, h);
-  var capY = isTop ? yTop + h - 18 : yTop;
-  c.fillStyle = "#4ade80"; c.fillRect(x - 4, capY, FL_PIPE_W + 8, 18);
-  c.strokeRect(x - 4, capY, FL_PIPE_W + 8, 18);
-}
-
-function flDraw() {
-  var c = flCtx; if (!c) return;
-  var g = c.createLinearGradient(0, 0, 0, FL_H);
-  g.addColorStop(0, "#38bdf8"); g.addColorStop(1, "#bae6fd");
-  c.fillStyle = g; c.fillRect(0, 0, FL_W, FL_H);
-
-  for (var i = 0; i < flPipes.length; i++) {
-    var p = flPipes[i];
-    flDrawPipe(p.x, 0, p.top, true);
-    flDrawPipe(p.x, p.top + FL_GAP, FL_H - FL_GROUND - (p.top + FL_GAP), false);
-  }
-
-  c.fillStyle = "#d6b25e"; c.fillRect(0, FL_H - FL_GROUND, FL_W, FL_GROUND);
-  c.fillStyle = "#65a30d"; c.fillRect(0, FL_H - FL_GROUND, FL_W, 10);
-
-  // bird
-  var tilt = Math.max(-0.5, Math.min(1.1, flBird.v / 10));
-  c.save();
-  c.translate(FL_BIRD_X, flBird.y); c.rotate(tilt);
-  c.fillStyle = "#fde047"; c.beginPath(); c.arc(0, 0, FL_R, 0, Math.PI * 2); c.fill();
-  c.strokeStyle = "#a16207"; c.lineWidth = 2; c.stroke();
-  c.fillStyle = "#fb923c"; c.beginPath(); c.moveTo(FL_R - 2, -2); c.lineTo(FL_R + 9, 2); c.lineTo(FL_R - 2, 6); c.closePath(); c.fill();
-  c.fillStyle = "#fff"; c.beginPath(); c.arc(4, -4, 4, 0, Math.PI * 2); c.fill();
-  c.fillStyle = "#000"; c.beginPath(); c.arc(5.5, -4, 1.8, 0, Math.PI * 2); c.fill();
-  c.fillStyle = "#facc15"; c.beginPath(); c.ellipse(-4, 3, 6, 4, -0.4, 0, Math.PI * 2); c.fill(); c.stroke();
-  c.restore();
-
-  c.textAlign = "center"; c.lineWidth = 4; c.strokeStyle = "#000"; c.fillStyle = "#fff";
-  if (flState === "play") {
-    c.font = "bold 40px sans-serif";
-    c.strokeText(String(flScore), FL_W / 2, 60); c.fillText(String(flScore), FL_W / 2, 60);
-  } else if (flState === "ready") {
-    c.font = "bold 22px sans-serif";
-    c.strokeText("Tap to start", FL_W / 2, 110); c.fillText("Tap to start", FL_W / 2, 110);
-  } else {
-    c.fillStyle = "rgba(0,0,0,.45)"; c.fillRect(0, 120, FL_W, 130);
-    c.fillStyle = "#fde047"; c.font = "bold 30px sans-serif"; c.fillText("GAME OVER", FL_W / 2, 165);
-    c.fillStyle = "#fff"; c.font = "bold 20px sans-serif";
-    c.fillText("Score: " + flScore + "  Best: " + flBest, FL_W / 2, 200);
-    c.font = "16px sans-serif"; c.fillText("Tap to play again", FL_W / 2, 232);
-  }
-}
-
-function flLoop(ts) {
-  if (!$("flappyGameScreen").classList.contains("active")) { flRaf = null; return; }
-  if (!flLast) flLast = ts;
-  var dt = ts - flLast; flLast = ts;
-  var k = Math.min(dt / 16.67, 2.5);
-  flUpdate(k);
-  flDraw();
-  flRaf = requestAnimationFrame(flLoop);
-}
-
-function flToggleSound() {
-  nokiaSoundEnabled = !nokiaSoundEnabled;
-  $("flSoundBtn").textContent = nokiaSoundEnabled ? "🔊 Sound ON" : "🔇 Sound OFF";
-}
-
-function exitFlappyGame() { flStop(); showScreen("gameMenuScreen"); }
 
 /* ==================== MATH SPEED CHALLENGE ==================== */
 var MT_DURATION = 30;
