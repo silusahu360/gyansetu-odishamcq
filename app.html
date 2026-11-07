@@ -78,6 +78,7 @@ cursor:pointer;box-shadow:0 3px 9px rgba(76,29,149,0.12)
 body.dark .btn.light{background:#312e81;color:#ede9fe;border-color:#4338ca}
 .btnrow{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin:10px 0}
 .btnrow .span2{grid-column:1 / -1}
+.btnrow3{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin:14px 0 4px}
 .btn.full{width:100%;margin-top:8px}
 .subject{
 display:flex;align-items:center;justify-content:space-between;
@@ -139,6 +140,7 @@ position:fixed;top:0;left:0;right:0;bottom:0;
 background:rgba(15,23,42,0.85);z-index:99;
 display:none;align-items:center;justify-content:center;padding:16px
 }
+.modal-overlay.top{z-index:120}
 .modal-overlay.active{display:flex}
 .modal-box{
 background:var(--card);color:var(--ink);
@@ -146,6 +148,7 @@ border-radius:18px;max-width:420px;width:100%;
 padding:24px;text-align:center;
 box-shadow:0 12px 36px rgba(0,0,0,0.35);border:2px solid #a78bfa
 }
+.msg-text{font-size:18px;font-weight:700;margin:6px 0 18px;white-space:pre-line;line-height:1.5;word-break:break-word}
 .paused-box{margin:18px 0;padding:12px;background:var(--pill-bg);border-radius:12px;font-size:18px;font-weight:800;color:var(--pill-ink)}
 .dev-badge-card{
 margin-top:20px;padding:16px 14px;
@@ -165,7 +168,7 @@ body.dark .dev-name{color:#e0e7ff}
 body.dark .dev-desc{color:#aab7c8}
 footer{text-align:center;padding:15px;color:#6b5b86;font-size:13px}
 body.dark footer{color:#aab7c8}
-@media(max-width:380px){.btnrow{grid-template-columns:1fr}.grid{gap:8px}}
+@media(max-width:380px){.btnrow{grid-template-columns:1fr}.grid{gap:8px}.btnrow3{grid-template-columns:1fr}}
 
 .nokia-snake-card{
 background:#140c2b;border:2px solid #8b5cf6;
@@ -226,6 +229,7 @@ cursor:pointer;user-select:none;box-shadow:0 4px 10px rgba(0,0,0,0.4)
 <button type="button" class="btn secondary" onclick="showScreen('studyTimer')">⏱ Study Timer</button>
 <button type="button" class="btn light" onclick="showScreen('bookmarks')">⭐ Bookmarks</button>
 <button type="button" class="btn light" onclick="toggleTheme()">🌙 Dark / Light</button>
+<button type="button" class="btn purple span2" onclick="checkForAppUpdate(true)">🔄 Check for Updates</button>
 <button type="button" class="btn light span2" onclick="showScreen('about')">ℹ About / Help</button>
 </div>
 <div style="text-align:center;">
@@ -347,6 +351,35 @@ cursor:pointer;user-select:none;box-shadow:0 4px 10px rgba(0,0,0,0.4)
 </div>
 </div>
 
+<!-- UPDATE MODAL POPUP -->
+<div id="updateModal" class="modal-overlay">
+<div class="modal-box">
+<h3 style="color:#7c3aed;margin-top:0;font-size:22px;">🚀 New Update Available!</h3>
+<p id="updateMessage" class="muted">ଜ୍ଞାନସେତୁ ଓଡ଼ିଶାର ଏକ ନୂତନ ଭର୍ସନ୍ ଉପଲବ୍ଧ ଅଛି। ଦୟାକରି Update କରନ୍ତୁ।</p>
+<button type="button" id="executeUpdateBtn" class="btn green full" onclick="performAppUpdate()">📥 UPDATE NOW</button>
+<button type="button" class="btn secondary full" style="margin-top:8px;" onclick="document.getElementById('updateModal').classList.remove('active')">Later</button>
+</div>
+</div>
+
+<!-- CUSTOM MESSAGE POPUP (replaces alert) -->
+<div id="msgModal" class="modal-overlay top">
+<div class="modal-box">
+<p id="msgModalText" class="msg-text"></p>
+<button type="button" class="btn green full" onclick="closeMsg()">OK</button>
+</div>
+</div>
+
+<!-- CUSTOM CONFIRM POPUP (replaces confirm) -->
+<div id="confirmModal" class="modal-overlay top">
+<div class="modal-box">
+<p id="confirmText" class="msg-text"></p>
+<div class="btnrow">
+<button type="button" class="btn secondary" onclick="confirmAnswer(false)">ନାହିଁ / Cancel</button>
+<button type="button" class="btn red" onclick="confirmAnswer(true)">ହଁ / Yes</button>
+</div>
+</div>
+</div>
+
 <section id="downloads" class="screen">
 <h2>📥 Saved Offline Notes</h2>
 <div class="card">
@@ -367,9 +400,11 @@ cursor:pointer;user-select:none;box-shadow:0 4px 10px rgba(0,0,0,0.4)
 <h2>⏱ Study Timer</h2>
 <div class="card" style="text-align:center;">
 <div id="studyClock" style="font-size:42px;font-weight:850;color:#7c3aed;margin:12px 0;">00:00:00</div>
+<div class="btnrow3">
 <button type="button" class="btn green" onclick="startStudy()">Start</button>
 <button type="button" class="btn orange" onclick="pauseStudy()">Pause</button>
 <button type="button" class="btn red" onclick="resetStudy()">Reset</button>
+</div>
 </div>
 <button type="button" class="back" onclick="showScreen('home')">Home</button>
 </section>
@@ -395,9 +430,40 @@ cursor:pointer;user-select:none;box-shadow:0 4px 10px rgba(0,0,0,0.4)
 <script>
 "use strict";
 
+/* ==========================================================
+   CUSTOM POPUPS — alert() / confirm() replacement
+   (hides the "The page at ... says:" browser header)
+   ========================================================== */
+window.alert = function (msg) {
+  var m = document.getElementById("msgModal");
+  var t = document.getElementById("msgModalText");
+  if (!m || !t) return;
+  t.textContent = String(msg);
+  m.classList.add("active");
+};
+function closeMsg() {
+  document.getElementById("msgModal").classList.remove("active");
+}
+
+var confirmCallback = null;
+function askConfirm(msg, onYes) {
+  document.getElementById("confirmText").textContent = String(msg);
+  confirmCallback = onYes;
+  document.getElementById("confirmModal").classList.add("active");
+}
+function confirmAnswer(yes) {
+  document.getElementById("confirmModal").classList.remove("active");
+  var cb = confirmCallback;
+  confirmCallback = null;
+  if (yes && typeof cb === "function") cb();
+}
+
+const CURRENT_APP_VERSION = "v1.0.0";
 const GITHUB_PAGES_BASE = "https://silusahu360.github.io/gyansetu-odishamcq/";
 const GITHUB_MCQ_JSON_URL = GITHUB_PAGES_BASE + "mcq_data.json";
-const APP_DOWNLOAD_LINK = "https://github.com/silusahu360/gyansetu-odishamcq/releases/download/v1.0.0/GYANSETU_ODISHA.apk";
+// version info JSON file hosted on GitHub
+const GITHUB_VERSION_JSON_URL = GITHUB_PAGES_BASE + "version.json";
+let APP_DOWNLOAD_LINK = "https://github.com/silusahu360/gyansetu-odishamcq/releases/download/v1.0.0/GYANSETU_ODISHA.apk";
 
 const classDriveFolders = {
   "CLASS VI":"https://drive.google.com/drive/folders/1KUhgA15GZ0jMPfF22XhN_0ipuayW3jhr",
@@ -469,8 +535,6 @@ function hydrateFromApp() {
       if (raw && raw.indexOf("DATA~") === 0) {
         const obj = JSON.parse(raw.substring(5));
         Object.keys(obj).forEach(function (k) {
-          // Don't overwrite newer in-memory data with stale incoming data
-          // unless we haven't seen this key before
           if (bridgeKeys[k] && memoryFallback[k] !== undefined) {
             return;
           }
@@ -489,27 +553,42 @@ function hydrateFromApp() {
 }
 hydrateFromApp();
 
-/* FIX C: retry for 3 seconds — App Inventor may set WebViewString
-   AFTER the page has already started executing */
+// After App Inventor data arrives, re-apply saved theme and snake high score
+function applyStoredPrefs() {
+  try {
+    var dark = load("gs_dark_theme", "0") === "1";
+    document.body.classList.toggle("dark", dark);
+
+    var storedHi = parseInt(load("gs_snake_hi", 0), 10) || 0;
+    if (storedHi > nokiaHighScore) {
+      nokiaHighScore = storedHi;
+      var hs = document.getElementById("nokiaHighScoreVal");
+      if (hs) hs.textContent = nokiaHighScore;
+    }
+  } catch (e) {
+    console.error("Prefs error:", e);
+  }
+}
+
 (function hydrateWithRetry() {
   let attempts = 0;
   const retry = setInterval(() => {
     attempts++;
     hydrateFromApp();
-    // Stop early if we've already received data
+    if (Object.keys(bridgeKeys).length > 0) {
+      applyStoredPrefs();
+    }
     if (attempts >= 10 || Object.keys(bridgeKeys).length > 0) {
       clearInterval(retry);
     }
   }, 300);
 })();
 
-/* Debounced push — used for background saves (theme, etc.) */
 function pushToApp() {
   clearTimeout(pushTimer);
   pushTimer = setTimeout(flushNow, 100);
 }
 
-/* FIX A: immediate flush — call after critical saves */
 function flushNow() {
   clearTimeout(pushTimer);
   const keys = Object.keys(pendingBridge);
@@ -523,11 +602,10 @@ function flushNow() {
     window.AppInventor.setWebViewString("SAVE~" + JSON.stringify(payload));
   } catch (e) {
     console.error("Flush error:", e);
-    keys.forEach(k => { pendingBridge[k] = payload[k]; });   // retry later
+    keys.forEach(k => { pendingBridge[k] = payload[k]; });
   }
 }
 
-/* FIX B: flush pending data when the page/app is closing */
 window.addEventListener("pagehide", flushNow);
 window.addEventListener("beforeunload", flushNow);
 document.addEventListener("visibilitychange", function () {
@@ -581,6 +659,72 @@ function store(key, value) {
   return ok;
 }
 
+/* ==========================================================
+   AUTOMATIC APP UPDATE CHECKER & DOWNLOADER
+   ========================================================== */
+function parseVer(v) {
+  return String(v || "").replace(/^[^\d]*/, "").split(".").map(function (n) {
+    return parseInt(n, 10) || 0;
+  });
+}
+
+// true only if `remote` is strictly newer than `local`
+function isNewerVersion(remote, local) {
+  var a = parseVer(remote), b = parseVer(local);
+  var len = Math.max(a.length, b.length);
+  for (var i = 0; i < len; i++) {
+    var x = a[i] || 0, y = b[i] || 0;
+    if (x > y) return true;
+    if (x < y) return false;
+  }
+  return false;
+}
+
+async function checkForAppUpdate(manualCheck = false) {
+  if (manualCheck) {
+    $("homeStatus").textContent = "Checking for updates...";
+  }
+  try {
+    const res = await fetch(GITHUB_VERSION_JSON_URL + "?t=" + Date.now(), { cache: "no-store" });
+    if (!res.ok) throw new Error("Update check failed");
+    const data = await res.json();
+
+    if (data.version && isNewerVersion(data.version, CURRENT_APP_VERSION)) {
+      if (data.apkUrl) {
+        APP_DOWNLOAD_LINK = data.apkUrl;
+      }
+      $("updateMessage").textContent = "ଜ୍ଞାନସେତୁ ଓଡ଼ିଶାର ଏକ ନୂତନ ଭର୍ସନ୍ (" + data.version + ") ଉପଲବ୍ଧ ଅଛି। " + (data.notes || "");
+      $("updateModal").classList.add("active");
+      if (manualCheck) $("homeStatus").textContent = "New update found! (" + data.version + ")";
+    } else {
+      if (manualCheck) {
+        alert("✅ ଆପଣଙ୍କ ଆପ୍ ପୂର୍ବରୁ ହିଁ Latest Version (" + CURRENT_APP_VERSION + ") ରେ ଅଛି।");
+        $("homeStatus").textContent = "Up to date (" + CURRENT_APP_VERSION + ")";
+      }
+    }
+  } catch (err) {
+    console.error("Update check error:", err);
+    if (manualCheck) {
+      alert("❌ ଅପଡେଟ୍ ଯାଞ୍ଚ କରିବାରେ ବିଫଳ। ଇଣ୍ଟରନେଟ୍ ସଂଯୋଗ ଯାଞ୍ଚ କରନ୍ତୁ।");
+      $("homeStatus").textContent = "Update check failed.";
+    }
+  }
+}
+
+function performAppUpdate() {
+  $("updateModal").classList.remove("active");
+  // Inside the app: ask App Inventor to download; otherwise open browser
+  if (sendBridge("DOWNLOAD_APK~" + APP_DOWNLOAD_LINK)) return;
+  window.open(APP_DOWNLOAD_LINK, "_blank");
+}
+
+// Auto update check on app open
+window.addEventListener("load", function() {
+  syncHeaderHeight();
+  $("homeStatus").textContent = "Ready to learn. (" + CURRENT_APP_VERSION + ")";
+  setTimeout(() => { checkForAppUpdate(false); }, 2000);
+});
+
 function esc(s) {
   return String(s).replace(/[&<>"']/g, c =>
     ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
@@ -589,8 +733,9 @@ function esc(s) {
 function withBase(html) {
   const tag = '<base href="' + GITHUB_PAGES_BASE + '">';
   html = String(html || "");
-  if (/<head[^>]*>/i.test(html)) return html.replace(/<head[^>]*>/i, m => m + tag);
-  if (/<html[^>]*>/i.test(html)) return html.replace(/<html[^>]*>/i, m => "<head>" + tag + "</head>");
+  // <head ...> only (does not match <header>)
+  if (/<head(\s[^>]*)?>/i.test(html)) return html.replace(/<head(\s[^>]*)?>/i, m => m + tag);
+  if (/<html[^>]*>/i.test(html)) return html.replace(/<html[^>]*>/i, m => m + "<head>" + tag + "</head>");
   return tag + html;
 }
 
@@ -601,7 +746,6 @@ function syncHeaderHeight() {
   if (h) document.documentElement.style.setProperty("--hdr", h.offsetHeight + "px");
 }
 window.addEventListener("resize", syncHeaderHeight);
-window.addEventListener("load", syncHeaderHeight);
 
 function showScreen(id) {
   let target = $(id) || $("home");
@@ -742,7 +886,7 @@ async function saveCurrentNoteOffline() {
       date: new Date().toLocaleDateString("or-IN")
     };
     if (store("gs_saved_notes", saved)) {
-      flushNow();   // FIX A: immediate push to TinyDB
+      flushNow();
       alert("✅ ନୋଟ୍ ସଫଳତା ସହ Save ହୋଇଗଲା!");
     } else {
       alert(MSG_STORAGE_FULL + "\n\n" + lastStoreError);
@@ -766,7 +910,7 @@ async function saveCurrentQuizOffline() {
       date: new Date().toLocaleDateString("or-IN")
     };
     if (store("gs_saved_mcqs", s)) {
-      flushNow();   // FIX A
+      flushNow();
       alert("✅ Quiz ସଫଳତା ସହ Download ହୋଇଗଲା!");
     } else {
       alert(MSG_STORAGE_FULL + "\n\n" + lastStoreError);
@@ -795,7 +939,7 @@ async function downloadSelectedTopicMcq() {
     const s = load("gs_saved_mcqs", {});
     s[key] = { title: key, content: html, date: new Date().toLocaleDateString("or-IN") };
     if (store("gs_saved_mcqs", s)) {
-      flushNow();   // FIX A
+      flushNow();
       alert("✅ ଏହି Topic ଅଫଲାଇନ୍ ପାଇଁ Save ହୋଇଗଲା!");
     } else {
       alert(MSG_STORAGE_FULL + "\n\n" + lastStoreError);
@@ -888,15 +1032,16 @@ function viewSavedNote(key) {
 }
 
 function deleteSavedNote(key) {
-  if (!confirm(key + " ନୋଟ୍ କାଢ଼ିବାକୁ ଚାହାନ୍ତି କି?")) return;
-  const saved = load("gs_saved_notes", {});
-  delete saved[key];
-  if (!store("gs_saved_notes", saved)) {
-    alert("⚠ ସ୍ଥାୟୀ ଭାବରେ ଡିଲିଟ୍ ହେଲା ନାହିଁ।\n" + lastStoreError);
-  } else {
-    flushNow();   // FIX A
-  }
-  renderSavedNotesList();
+  askConfirm(key + " ନୋଟ୍ କାଢ଼ିବାକୁ ଚାହାନ୍ତି କି?", function () {
+    const saved = load("gs_saved_notes", {});
+    delete saved[key];
+    if (!store("gs_saved_notes", saved)) {
+      alert("⚠ ସ୍ଥାୟୀ ଭାବରେ ଡିଲିଟ୍ ହେଲା ନାହିଁ।\n" + lastStoreError);
+    } else {
+      flushNow();
+    }
+    renderSavedNotesList();
+  });
 }
 
 function openOfflineQuizMenu() {
@@ -962,15 +1107,16 @@ function openDownloadedMcq(key) {
 }
 
 function deleteDownloadedMcq(key) {
-  if (!confirm(key + " ସେଟ୍ କାଢ଼ିବାକୁ ଚାହାନ୍ତି କି?")) return;
-  const s = load("gs_saved_mcqs", {});
-  delete s[key];
-  if (!store("gs_saved_mcqs", s)) {
-    alert("⚠ ସ୍ଥାୟୀ ଭାବରେ ଡିଲିଟ୍ ହେଲା ନାହିଁ।\n" + lastStoreError);
-  } else {
-    flushNow();   // FIX A
-  }
-  renderDownloadedQuizList();
+  askConfirm(key + " ସେଟ୍ କାଢ଼ିବାକୁ ଚାହାନ୍ତି କି?", function () {
+    const s = load("gs_saved_mcqs", {});
+    delete s[key];
+    if (!store("gs_saved_mcqs", s)) {
+      alert("⚠ ସ୍ଥାୟୀ ଭାବରେ ଡିଲିଟ୍ ହେଲା ନାହିଁ।\n" + lastStoreError);
+    } else {
+      flushNow();
+    }
+    renderDownloadedQuizList();
+  });
 }
 
 var nokiaCanvas = null;
@@ -1012,6 +1158,7 @@ function openSnakeGame() {
   showScreen("snakeGameScreen");
   nokiaCanvas = $("nokiaCanvas");
   nokiaCtx = nokiaCanvas.getContext("2d");
+  applyStoredPrefs();
   $("nokiaHighScoreVal").textContent = nokiaHighScore;
   resetNokiaGame();
   clearInterval(nokiaGameInterval);
@@ -1197,7 +1344,7 @@ function downloadNotes() {
       const saved = load("gs_saved_notes", {});
       saved[key] = { title: key, content: html, date: new Date().toLocaleDateString("or-IN") };
       if (store("gs_saved_notes", saved)) {
-        flushNow();   // FIX A
+        flushNow();
         $("noteStatus").textContent = "✅ ନୋଟ୍ ଅଫଲାଇନ୍ ସେଭ୍ ହୋଇଗଲା!";
       } else {
         $("noteStatus").textContent = MSG_STORAGE_FULL + " " + lastStoreError;
@@ -1219,7 +1366,7 @@ function bookmarkCurrent() {
   if (!bookmarks.some(x => x.cls === value.cls && x.sub === value.sub && (x.mode || "materials") === value.mode)) {
     bookmarks.push(value);
     if (store("gs_bookmarks", bookmarks)) {
-      flushNow();   // FIX A
+      flushNow();
       $("noteStatus").textContent = "⭐ Subject bookmarked successfully!";
     } else {
       $("noteStatus").textContent = "⚠ Bookmark could not be saved permanently. " + lastStoreError;
@@ -1278,11 +1425,11 @@ function deleteBookmark(index) {
 }
 
 function clearBookmarks() {
-  if (confirm("Clear all bookmarks?")) {
+  askConfirm("Clear all bookmarks?", function () {
     store("gs_bookmarks", []);
     flushNow();
     renderBookmarks();
-  }
+  });
 }
 
 function openMcqSetup() {
@@ -1471,8 +1618,6 @@ function shareApp() {
 if (load("gs_dark_theme", "0") === "1") {
   document.body.classList.add("dark");
 }
-
-syncHeaderHeight();
 </script>
 
 </body>
