@@ -77,6 +77,7 @@ cursor:pointer;box-shadow:0 3px 9px rgba(76,29,149,0.12)
 .btn.light{background:#ede9fe;color:#5b21b6;border:1px solid #ddd6fe}
 body.dark .btn.light{background:#312e81;color:#ede9fe;border-color:#4338ca}
 .btnrow{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin:10px 0}
+.btnrow .span2{grid-column:1 / -1}
 .btn.full{width:100%;margin-top:8px}
 .subject{
 display:flex;align-items:center;justify-content:space-between;
@@ -226,11 +227,10 @@ cursor:pointer;user-select:none;box-shadow:0 4px 10px rgba(0,0,0,0.4)
 
 <div class="btnrow">
 <button type="button" class="btn green" onclick="shareApp()">📤 Share App</button>
-<button type="button" class="btn" onclick="checkUpdates()">🔄 Check Update</button>
 <button type="button" class="btn secondary" onclick="showScreen('studyTimer')">⏱ Study Timer</button>
 <button type="button" class="btn light" onclick="showScreen('bookmarks')">⭐ Bookmarks</button>
 <button type="button" class="btn light" onclick="toggleTheme()">🌙 Dark / Light</button>
-<button type="button" class="btn light" onclick="showScreen('about')">ℹ About / Help</button>
+<button type="button" class="btn light span2" onclick="showScreen('about')">ℹ About / Help</button>
 </div>
 
 <div style="text-align:center;">
@@ -423,9 +423,9 @@ cursor:pointer;user-select:none;box-shadow:0 4px 10px rgba(0,0,0,0.4)
 "use strict";
 
 /* CONFIG */
-const CURRENT_VERSION = "2.0";
 const GITHUB_PAGES_BASE = "https://silusahu360.github.io/gyansetu-odishamcq/";
 const GITHUB_MCQ_JSON_URL = GITHUB_PAGES_BASE + "mcq_data.json";
+const APP_DOWNLOAD_LINK = "https://github.com/silusahu360/gyansetu-odishamcq/releases/download/v1.0.0/GYANSETU_ODISHA.apk";
 
 const classDriveFolders = {
   "CLASS VI":"https://drive.google.com/drive/folders/1KUhgA15GZ0jMPfF22XhN_0ipuayW3jhr",
@@ -461,7 +461,10 @@ let studyInterval = null;
 
 const $ = id => document.getElementById(id);
 
-/* SAFE STORAGE HELPERS (Fallback memory added for Offline APK stability) */
+/* SAFE STORAGE HELPERS
+   store() returns true only when data was really written to localStorage.
+   If it fails (quota full / blocked), data is kept in memory for this session only
+   and false is returned so the caller can warn the user. */
 const memoryFallback = {};
 function load(key, fallback) {
   try {
@@ -476,13 +479,12 @@ function load(key, fallback) {
 }
 
 function store(key, value) {
+  memoryFallback[key] = value;
   try {
     localStorage.setItem(key, JSON.stringify(value));
-    memoryFallback[key] = value;
     return true;
   } catch (e) {
-    memoryFallback[key] = value;
-    return true;
+    return false;
   }
 }
 
@@ -490,6 +492,17 @@ function esc(s) {
   return String(s).replace(/[&<>"']/g, c =>
     ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 }
+
+/* Add <base> so relative images/links work inside srcdoc iframes */
+function withBase(html) {
+  const tag = '<base href="' + GITHUB_PAGES_BASE + '">';
+  html = String(html || "");
+  if (/<head[^>]*>/i.test(html)) return html.replace(/<head[^>]*>/i, m => m + tag);
+  if (/<html[^>]*>/i.test(html)) return html.replace(/<html[^>]*>/i, m => m + "<head>" + tag + "</head>");
+  return tag + html;
+}
+
+const MSG_STORAGE_FULL = "❌ Phone storage ପୂର୍ଣ୍ଣ ବା blocked ଅଛି। Save ହେଲା ନାହିଁ (ଏହି session ପାଇଁ ମାତ୍ର ରହିବ)।";
 
 /* HEADER HEIGHT */
 function syncHeaderHeight() {
@@ -584,11 +597,18 @@ function openSubject(sub) {
 
     fetch(currentNoteHtmlUrl + "?t=" + Date.now())
       .then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.text(); })
-      .then(html => { $("quizFrame").srcdoc = html; })
+      .then(html => { $("quizFrame").srcdoc = withBase(html); })
       .catch(err => {
         console.error(err);
-        $("quizFrame").srcdoc =
-          "<div style='padding:20px;text-align:center;font-family:sans-serif;'>ଇଣ୍ଟରନେଟ୍ ସଂଯୋଗ ନାହିଁ କିମ୍ବା ଏହି ନୋଟ୍ ଅଫଲାଇନ୍‌ରେ ସେଭ୍ ହୋଇନାହିଁ। Saved Notes ରୁ ଚେଷ୍ଟା କରନ୍ତୁ।</div>";
+        // Auto-open the offline copy if this note was saved earlier
+        const key = currentClass + " · " + currentSubject;
+        const saved = load("gs_saved_notes", {})[key];
+        if (saved && saved.content) {
+          $("quizFrame").srcdoc = withBase(saved.content);
+        } else {
+          $("quizFrame").srcdoc =
+            "<div style='padding:20px;text-align:center;font-family:sans-serif;'>ଇଣ୍ଟରନେଟ୍ ସଂଯୋଗ ନାହିଁ କିମ୍ବା ଏହି ନୋଟ୍ ଅଫଲାଇନ୍‌ରେ ସେଭ୍ ହୋଇନାହିଁ।</div>";
+        }
       });
     return;
   }
@@ -631,8 +651,11 @@ async function saveCurrentNoteOffline() {
     const key = currentClass + " · " + currentSubject;
     saved[key] = { title: key, content: html, date: new Date().toLocaleDateString("or-IN") };
 
-    store("gs_saved_notes", saved);
-    alert("✅ ନୋଟ୍ ସଫଳତା ସହ Save ହୋଇଗଲା!");
+    if (store("gs_saved_notes", saved)) {
+      alert("✅ ନୋଟ୍ ସଫଳତା ସହ Save ହୋଇଗଲା!");
+    } else {
+      alert(MSG_STORAGE_FULL);
+    }
   } catch (e) {
     console.error(e);
     alert("❌ Save ହେଲା ନାହିଁ। Internet ସଂଯୋଗ ଯାଞ୍ଚ କରନ୍ତୁ।");
@@ -649,8 +672,11 @@ async function saveCurrentQuizOffline() {
     const s = load("gs_saved_mcqs", {});
     s[currentQuizTitle] = { title: currentQuizTitle, content: html, date: new Date().toLocaleDateString("or-IN") };
 
-    store("gs_saved_mcqs", s);
-    alert("✅ Quiz ସଫଳତା ସହ Download ହୋଇଗଲା!");
+    if (store("gs_saved_mcqs", s)) {
+      alert("✅ Quiz ସଫଳତା ସହ Download ହୋଇଗଲା!");
+    } else {
+      alert(MSG_STORAGE_FULL);
+    }
   } catch (e) {
     console.error(e);
     alert("❌ Download ହେଲା ନାହିଁ। Internet ସଂଯୋଗ ଯାଞ୍ଚ କରନ୍ତୁ।");
@@ -677,8 +703,11 @@ async function downloadSelectedTopicMcq() {
     const s = load("gs_saved_mcqs", {});
     s[key] = { title: key, content: html, date: new Date().toLocaleDateString("or-IN") };
 
-    store("gs_saved_mcqs", s);
-    alert("✅ ଏହି Topic ଅଫଲାଇନ୍ ପାଇଁ Save ହୋଇଗଲା!");
+    if (store("gs_saved_mcqs", s)) {
+      alert("✅ ଏହି Topic ଅଫଲାଇନ୍ ପାଇଁ Save ହୋଇଗଲା!");
+    } else {
+      alert(MSG_STORAGE_FULL);
+    }
   } catch (e) {
     console.error(e);
     alert("ଡାଉନଲୋଡ୍ ବିଫଳ ହେଲା। ଇଣ୍ଟରନେଟ୍ ସଂଯୋଗ ଯାଞ୍ଚ କରନ୍ତୁ।");
@@ -746,7 +775,7 @@ function viewSavedNote(key) {
   const saved = load("gs_saved_notes", {});
   if (saved[key]) {
     $("savedNoteTitle").textContent = key;
-    $("savedNoteBody").srcdoc = saved[key].content;
+    $("savedNoteBody").srcdoc = withBase(saved[key].content);
     showScreen("offlineNoteViewer");
   }
 }
@@ -799,7 +828,7 @@ function openDownloadedMcq(key) {
   $("viewerBackButton").textContent = "⬅ Back to Sets";
 
   showScreen("quizScreen");
-  $("quizFrame").srcdoc = item.content;
+  $("quizFrame").srcdoc = withBase(item.content);
 }
 
 function deleteDownloadedMcq(key) {
@@ -862,10 +891,11 @@ function openSnakeGame() {
 
 function spawnNokiaFood() {
   var tries = 0;
+  var onSnake;
   do {
     nokiaFood.x = Math.floor(Math.random() * nokiaTileCount);
     nokiaFood.y = Math.floor(Math.random() * nokiaTileCount);
-    var onSnake = nokiaSnake.some(function (s) { return s.x === nokiaFood.x && s.y === nokiaFood.y; });
+    onSnake = nokiaSnake.some(function (s) { return s.x === nokiaFood.x && s.y === nokiaFood.y; });
     tries++;
   } while (onSnake && tries < 500);
 }
@@ -920,8 +950,12 @@ function updateNokiaSnake() {
   if (head.y < 0) head.y = nokiaTileCount - 1;
   if (head.y >= nokiaTileCount) head.y = 0;
 
-  for (var i = 0; i < nokiaSnake.length; i++) {
-    if (nokiaSnake[i].x === head.x && nokiaSnake[i].y === head.y) {
+  var eating = (head.x === nokiaFood.x && head.y === nokiaFood.y);
+
+  // The tail cell is free this tick unless the snake is growing
+  var body = eating ? nokiaSnake : nokiaSnake.slice(0, -1);
+  for (var i = 0; i < body.length; i++) {
+    if (body[i].x === head.x && body[i].y === head.y) {
       playNokiaBeep(180, 0.3);
       nokiaOver = true;
       $("nokiaTitle").textContent = "💥 GAME OVER: " + nokiaScore;
@@ -931,7 +965,7 @@ function updateNokiaSnake() {
 
   nokiaSnake.unshift(head);
 
-  if (head.x === nokiaFood.x && head.y === nokiaFood.y) {
+  if (eating) {
     nokiaScore += 10;
     $("nokiaScoreVal").textContent = nokiaScore;
 
@@ -1040,8 +1074,11 @@ function bookmarkCurrent() {
 
   if (!bookmarks.some(x => x.cls === value.cls && x.sub === value.sub && (x.mode || "materials") === value.mode)) {
     bookmarks.push(value);
-    store("gs_bookmarks", bookmarks);
-    $("noteStatus").textContent = "⭐ Subject bookmarked successfully!";
+    if (store("gs_bookmarks", bookmarks)) {
+      $("noteStatus").textContent = "⭐ Subject bookmarked successfully!";
+    } else {
+      $("noteStatus").textContent = "⚠ Bookmark could not be saved permanently.";
+    }
   } else {
     $("noteStatus").textContent = "Already in bookmarks!";
   }
@@ -1085,8 +1122,9 @@ function renderBookmarks() {
 function goToBookmarked(i) {
   const b = load("gs_bookmarks", [])[i];
   if (!b) return;
-  currentClass = b.cls;
   window.classMode = b.mode || "materials";
+  // Rebuild the subject list for this class so "Back" shows the right class
+  showSubjects(b.cls);
   openSubject(b.sub);
 }
 
@@ -1099,7 +1137,7 @@ function deleteBookmark(index) {
 
 function clearBookmarks() {
   if (confirm("Clear all bookmarks?")) {
-    try { localStorage.removeItem("gs_bookmarks"); } catch (e) {}
+    store("gs_bookmarks", []);
     renderBookmarks();
   }
 }
@@ -1108,10 +1146,20 @@ function clearBookmarks() {
 function openMcqSetup() {
   showScreen("mcqSetup");
 
+  const prevClass = $("mcqClass").value;
+  const prevSubject = $("mcqSubject").value;
+
   $("mcqClass").innerHTML = Object.keys(subjectsByClass)
     .map(cls => '<option value="' + cls + '">' + cls + '</option>').join("");
 
+  if (prevClass && subjectsByClass[prevClass]) $("mcqClass").value = prevClass;
+
   fillSubjects();
+
+  if (prevSubject && (subjectsByClass[$("mcqClass").value] || []).indexOf(prevSubject) !== -1) {
+    $("mcqSubject").value = prevSubject;
+    fillTopics();
+  }
 
   if (!Object.keys(mcqDataStore).length) {
     $("mcqTopic").innerHTML = '<option value="">Loading topics... ଅପେକ୍ଷା କରନ୍ତୁ</option>';
@@ -1136,7 +1184,13 @@ async function loadRemoteMcq() {
     console.error("MCQ JSON Error:", error);
     mcqDataStore = load("gs_cached_mcq_json", {});
   }
+  // Keep the user's current topic choice after the list refreshes
+  const prevTopic = $("mcqTopic").value;
   fillTopics();
+  if (prevTopic) {
+    const has = Array.prototype.some.call($("mcqTopic").options, o => o.value === prevTopic);
+    if (has) $("mcqTopic").value = prevTopic;
+  }
 }
 
 function fillTopics() {
@@ -1199,15 +1253,23 @@ function startQuiz() {
 
   fetch(fullUrl + "?t=" + Date.now())
     .then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.text(); })
-    .then(html => { $("quizFrame").srcdoc = html; })
+    .then(html => { $("quizFrame").srcdoc = withBase(html); })
     .catch(err => {
       console.error(err);
-      $("quizFrame").srcdoc =
-        "<div style='padding:20px;text-align:center;font-family:sans-serif;'>ଇଣ୍ଟରନେଟ୍ ସଂଯୋଗ ନାହିଁ। ଏହି Quiz କୁ ପୂର୍ବରୁ 'Save Offline' କରନ୍ତୁ।</div>";
+      // Use the offline copy automatically if this quiz was downloaded earlier
+      const saved = load("gs_saved_mcqs", {})[currentQuizTitle];
+      if (saved && saved.content) {
+        $("quizFrame").srcdoc = withBase(saved.content);
+      } else {
+        $("quizFrame").srcdoc =
+          "<div style='padding:20px;text-align:center;font-family:sans-serif;'>ଇଣ୍ଟରନେଟ୍ ସଂଯୋଗ ନାହିଁ। ଏହି Quiz କୁ ପୂର୍ବରୁ 'Save Offline' କରନ୍ତୁ।</div>";
+      }
     });
 }
 
-/* QUIZ PAUSE */
+/* QUIZ PAUSE
+   Note: this pauses the app's timer and covers the quiz with the pause screen.
+   Scripts inside the quiz page itself cannot be stopped from here. */
 function pauseQuiz() {
   isQuizPaused = true;
   $("pausedTimeText").textContent = fmtTime(quizSeconds);
@@ -1257,34 +1319,27 @@ function toggleTheme() {
 }
 
 /* SHARE */
-const APP_DOWNLOAD_LINK = "https://github.com/silusahu360/gyansetu-odishamcq/releases/download/v1.0.0/GYANSETU_ODISHA.apk";
-
 function shareApp() {
   const message =
     "🎓 ଜ୍ଞାନସେତୁ ଓଡ଼ିଶା (GyanSetu Odisha)\n" +
-    "ଷଷ୍ଠ ରୁ ଦଶମ ଶ୍ରେଣୀ ପାଇଁ NCERT ଓ ଓଡ଼ିଶା ବୋର୍ଡ ଶିକ୍ଷଣ ଆପ୍。\n" +
+    "ଷଷ୍ଠ ରୁ ଦଶମ ଶ୍ରେଣୀ ପାଇଁ NCERT ଓ ଓଡ଼ିଶା ବୋର୍ଡ ଶିକ୍ଷଣ ଆପ୍।\n" +
     "📚 ନୋଟ୍ସ, 📝 MCQ ଅଭ୍ୟାସ ଓ 📂 ଅଧ୍ୟୟନ ସାମଗ୍ରୀ ଏକ ସ୍ଥାନରେ।\n\n" +
-    "📲 ଆପ୍ ଡାଉନଲୋଡ୍ କରିବାକୁ ଏହି ଲିଙ୍କ୍‌ରେ କ୍ଲିକ୍ କରନ୍ତୁ:\n" + APP_DOWNLOAD_LINK
+    "📲 ଆପ୍ ଡାଉନଲୋଡ୍ କରିବାକୁ ଏହି ଲିଙ୍କ୍‌ରେ କ୍ଲିକ୍ କରନ୍ତୁ:\n" + APP_DOWNLOAD_LINK;
 
   if (sendBridge("SHARE~" + message)) return;
 
   if (navigator.share) {
-    navigator.share({ title: "GyanSetu Odisha", text: message }).catch(err => {});
+    navigator.share({ title: "GyanSetu Odisha", text: message }).catch(function () {});
     return;
   }
 
-  try {
-    navigator.clipboard.writeText(message).then(() => {
-      alert("📋 Message copy ହୋଇଗଲା।");
-    });
-  } catch (e) {
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(message)
+      .then(function () { alert("📋 Message copy ହୋଇଗଲା।"); })
+      .catch(function () { alert("Share is not supported."); });
+  } else {
     alert("Share is not supported.");
   }
-}
-
-/* CHECK UPDATE */
-function checkUpdates() {
-  alert("You are using the latest version (" + CURRENT_VERSION + ").");
 }
 
 /* RESTORE THEME */
