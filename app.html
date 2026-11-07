@@ -261,7 +261,7 @@ cursor:pointer;user-select:none;box-shadow:0 4px 10px rgba(0,0,0,0.4)
 <div class="card">
 <p id="folderMessage" class="muted">Google Drive folder is ready for your chapters.</p>
 <button type="button" class="btn full" onclick="openDrive()">📂 Open Google Drive</button>
-<button type="button" class="btn green full" onclick="downloadNotes()">⬇ Download Notes</button>
+<button type="button" class="btn green full" onclick="downloadNotes()">💾 Save Note Offline</button>
 <button type="button" class="btn secondary full" onclick="openSavedNotesScreen()">📱 Open Saved Notes</button>
 <button type="button" class="btn light full" onclick="bookmarkCurrent()">⭐ Bookmark this Subject</button>
 <p id="noteStatus" style="font-size:14px;color:var(--muted);margin-top:10px;text-align:center;"></p>
@@ -297,7 +297,7 @@ cursor:pointer;user-select:none;box-shadow:0 4px 10px rgba(0,0,0,0.4)
 <button type="button" class="back" onclick="showScreen('home')">⬅ Home</button>
 </section>
 
-<!-- VIEWER (quiz / note) -->
+<!-- VIEWER -->
 <section id="quizScreen" class="screen">
 
 <div id="quizTimerBar" class="quiz-timer-strip">
@@ -305,7 +305,8 @@ cursor:pointer;user-select:none;box-shadow:0 4px 10px rgba(0,0,0,0.4)
 <span style="font-size:15px;font-weight:700;">⏱ RUNNING TIME:</span>
 <span id="quizRunningTimer" class="quiz-time-badge">00:00</span>
 </div>
-<button type="button" class="btn secondary" style="padding:6px 14px;font-size:13px;border-radius:8px;" onclick="pauseQuiz()">⏸ Pause</button>
+<!-- FIX C: honest label — iframe scripts cannot be paused -->
+<button type="button" class="btn secondary" style="padding:6px 14px;font-size:13px;border-radius:8px;" onclick="pauseQuiz()">👁 Hide Quiz</button>
 </div>
 
 <div id="noteActionToolbar" style="display:none;margin-bottom:10px;gap:8px;">
@@ -313,6 +314,8 @@ cursor:pointer;user-select:none;box-shadow:0 4px 10px rgba(0,0,0,0.4)
 <button type="button" id="quizSaveBtn" class="btn green full" style="display:none" onclick="saveCurrentQuizOffline()">💾 Download Quiz for Offline</button>
 </div>
 
+<!-- FIX B: no sandbox — content is from your own GitHub repo and needs
+     fetch/localStorage/CORS to work. Sandboxing broke real quizzes. -->
 <div id="quizFrameContainer" style="width:100%;border-radius:14px;overflow:hidden;background:#fff;box-shadow:0 6px 20px rgba(0,0,0,0.1);">
 <iframe id="quizFrame" style="width:100%;height:72vh;border:0;display:block;" title="Content Viewer"></iframe>
 </div>
@@ -359,13 +362,13 @@ cursor:pointer;user-select:none;box-shadow:0 4px 10px rgba(0,0,0,0.4)
 </div>
 </section>
 
-<!-- PAUSE MODAL -->
+<!-- HIDE-QUIZ MODAL -->
 <div id="pauseModal" class="modal-overlay">
 <div class="modal-box">
-<h3 style="color:#7c3aed;margin-top:0;font-size:22px;">⏸ Quiz Paused</h3>
-<p class="muted">ଆପଣଙ୍କ Quiz ସମୟ ସ୍ଥଗିତ ରହିଛି।</p>
-<div class="paused-box">ଚାଲୁଥିବା ସମୟ: <span id="pausedTimeText" style="font-family:monospace;">00:00</span></div>
-<button type="button" class="btn green full" onclick="resumeQuiz()">▶ RESUME QUIZ</button>
+<h3 style="color:#7c3aed;margin-top:0;font-size:22px;">👁 Quiz Hidden</h3>
+<p class="muted">Quiz ଭିତରେ ଚାଲୁ ଅଛି, କେବଳ app timer ସ୍ଥଗିତ ଅଛି।<br>The quiz keeps running inside — only this strip's timer is paused.</p>
+<div class="paused-box">App timer: <span id="pausedTimeText" style="font-family:monospace;">00:00</span></div>
+<button type="button" class="btn green full" onclick="resumeQuiz()">▶ RETURN TO QUIZ</button>
 <button type="button" class="btn red full" onclick="closePauseAndExit()">Exit Practice</button>
 </div>
 </div>
@@ -449,8 +452,10 @@ let currentSubject = "";
 let currentFolder = "";
 let currentViewMode = "quiz";
 let currentNoteHtmlUrl = "";
+let currentNoteHtml = "";
 let currentQuizUrl = "";
 let currentQuizTitle = "";
+let currentQuizHtml = "";
 window.classMode = "notes";
 
 let quizSeconds = 0;
@@ -459,17 +464,19 @@ let isQuizPaused = false;
 let studySeconds = 0;
 let studyInterval = null;
 
+var nokiaGameInterval = null;
+
 const $ = id => document.getElementById(id);
 
 /* ==========================================================
-   STORAGE (works in normal browsers AND in MIT App Inventor)
-   1) If localStorage works, it is used.
-   2) If localStorage is blocked (App Inventor WebViewer), data is kept in
-      memory and sent to the app as "SAVE~{json}". The app stores it in
-      TinyDB and gives it back on start as "DATA~{json}" in WebViewString.
+   STORAGE — dual-write to localStorage AND TinyDB bridge
+   FIX A: bridge push now runs unconditionally when available,
+          so APK TinyDB never falls behind localStorage.
    ========================================================== */
 const memoryFallback = {};
 const lastBridgeJson = {};
+const pendingBridge = {};
+const bridgeKeys = {};
 let lastStoreError = "";
 let pushTimer = null;
 
@@ -488,7 +495,6 @@ function hasBridge() {
   return !!(window.AppInventor && typeof window.AppInventor.setWebViewString === "function");
 }
 
-/* Read the saved data that the app gave us at start */
 function hydrateFromApp() {
   try {
     if (window.AppInventor && typeof window.AppInventor.getWebViewString === "function") {
@@ -497,7 +503,11 @@ function hydrateFromApp() {
         const obj = JSON.parse(raw.substring(5));
         Object.keys(obj).forEach(function (k) {
           memoryFallback[k] = obj[k];
+          bridgeKeys[k] = true;
           try { lastBridgeJson[k] = JSON.stringify(obj[k]); } catch (e) {}
+          if (hasLocalStorage) {
+            try { localStorage.setItem(k, JSON.stringify(obj[k])); } catch (e) {}
+          }
         });
       }
     }
@@ -507,19 +517,25 @@ function hydrateFromApp() {
 }
 hydrateFromApp();
 
-/* Send everything to the app (waits 400 ms so many saves become one) */
+/* Debounced bridge push — flushes 100ms after last change */
 function pushToApp() {
   clearTimeout(pushTimer);
   pushTimer = setTimeout(function () {
+    const keys = Object.keys(pendingBridge);
+    if (!keys.length) return;
+    const payload = {};
+    keys.forEach(k => { payload[k] = pendingBridge[k]; delete pendingBridge[k]; });
     try {
-      window.AppInventor.setWebViewString("SAVE~" + JSON.stringify(memoryFallback));
+      window.AppInventor.setWebViewString("SAVE~" + JSON.stringify(payload));
     } catch (e) {
       console.error("Push error:", e);
+      keys.forEach(k => { pendingBridge[k] = payload[k]; });
     }
-  }, 400);
+  }, 100);
 }
 
 function load(key, fallback) {
+  if (bridgeKeys[key]) return memoryFallback[key];
   try {
     if (hasLocalStorage) {
       const item = localStorage.getItem(key);
@@ -529,33 +545,42 @@ function load(key, fallback) {
   return memoryFallback[key] !== undefined ? memoryFallback[key] : fallback;
 }
 
-/* store() returns true only if the data is really saved (localStorage or app) */
+/* FIX A: dual-write. localStorage AND bridge both updated.
+   Returns true if data landed in at least one store. */
 function store(key, value) {
   memoryFallback[key] = value;
+  lastStoreError = "";
+  let ok = false;
 
   if (hasLocalStorage) {
     try {
       localStorage.setItem(key, JSON.stringify(value));
-      lastStoreError = "";
-      return true;
+      ok = true;
     } catch (e) {
-      lastStoreError = (e && e.name ? e.name : "Error") + ": " + (e && e.message ? e.message : "");
+      lastStoreError = (e && e.name ? e.name : "Error") + ": " +
+                       (e && e.message ? e.message : "");
     }
   }
 
   if (hasBridge()) {
+    bridgeKeys[key] = true;
     let s = null;
     try { s = JSON.stringify(value); } catch (e) {}
-    if (s === null || lastBridgeJson[key] !== s) {
-      if (s !== null) lastBridgeJson[key] = s;
+    if (s === null) {
+      if (!ok) lastStoreError = "Value could not be converted to JSON";
+      return ok;
+    }
+    if (lastBridgeJson[key] !== s) {
+      lastBridgeJson[key] = s;
+      pendingBridge[key] = value;
       pushToApp();
     }
+    ok = true;
     lastStoreError = "";
-    return true;
   }
 
-  if (!lastStoreError) lastStoreError = "No storage available";
-  return false;
+  if (!ok && !lastStoreError) lastStoreError = "No storage available";
+  return ok;
 }
 
 function esc(s) {
@@ -563,18 +588,16 @@ function esc(s) {
     ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 }
 
-/* Add <base> so relative images/links work inside srcdoc iframes */
 function withBase(html) {
   const tag = '<base href="' + GITHUB_PAGES_BASE + '">';
   html = String(html || "");
   if (/<head[^>]*>/i.test(html)) return html.replace(/<head[^>]*>/i, m => m + tag);
-  if (/<html[^>]*>/i.test(html)) return html.replace(/<html[^>]*>/i, m => m + "<head>" + tag + "</head>");
+  if (/<html[^>]*>/i.test(html)) return html.replace(/<html[^>]*>/i, m => "<head>" + tag + "</head>");
   return tag + html;
 }
 
 const MSG_STORAGE_FULL = "❌ Phone storage ପୂର୍ଣ୍ଣ ବା blocked ଅଛି। Save ହେଲା ନାହିଁ (ଏହି session ପାଇଁ ମାତ୍ର ରହିବ)।";
 
-/* HEADER HEIGHT */
 function syncHeaderHeight() {
   const h = $("appHeader");
   if (h) document.documentElement.style.setProperty("--hdr", h.offsetHeight + "px");
@@ -585,12 +608,10 @@ window.addEventListener("load", syncHeaderHeight);
 /* SCREEN MANAGEMENT */
 function showScreen(id) {
   let target = $(id) || $("home");
-
   if (id !== "snakeGameScreen") {
     clearInterval(nokiaGameInterval);
     nokiaGameInterval = null;
   }
-
   document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
   target.classList.add("active");
   window.scrollTo(0, 0);
@@ -607,7 +628,6 @@ function showClasses(mode) {
     ? "Select Class · Notes Library"
     : "Select Class · Study Materials";
   $("classGrid").innerHTML = "";
-
   Object.keys(subjectsByClass).forEach(cls => {
     const b = document.createElement("button");
     b.type = "button";
@@ -623,7 +643,6 @@ function showClasses(mode) {
 function showSubjects(cls) {
   currentClass = cls;
   $("subjectList").innerHTML = "";
-
   subjectsByClass[cls].forEach(subject => {
     const b = document.createElement("button");
     b.type = "button";
@@ -646,10 +665,10 @@ function openSubject(sub) {
 
   if (window.classMode === "notes") {
     currentViewMode = "note";
-
     const cleanCls = currentClass.toLowerCase().replace(/[^a-z0-9]/g, "");
     const cleanSub = sub.toLowerCase().replace(/[^a-z0-9]/g, "");
     currentNoteHtmlUrl = GITHUB_PAGES_BASE + cleanCls + "_" + cleanSub + "_note.html";
+    currentNoteHtml = "";
 
     clearInterval(quizTimerInterval);
     quizTimerInterval = null;
@@ -661,19 +680,21 @@ function openSubject(sub) {
     $("viewerBackButton").textContent = "⬅ Back to Subjects";
 
     showScreen("quizScreen");
-
     $("quizFrame").srcdoc =
       "<div style='display:flex;align-items:center;justify-content:center;height:60vh;font-family:sans-serif;color:#6d28d9;font-size:18px;'><b>Loading Note... ଅପେକ୍ଷା କରନ୍ତୁ...</b></div>";
 
     fetch(currentNoteHtmlUrl + "?t=" + Date.now())
       .then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.text(); })
-      .then(html => { $("quizFrame").srcdoc = withBase(html); })
+      .then(html => {
+        currentNoteHtml = html;
+        $("quizFrame").srcdoc = withBase(html);
+      })
       .catch(err => {
         console.error(err);
-        // Auto-open the offline copy if this note was saved earlier
         const key = currentClass + " · " + currentSubject;
         const saved = load("gs_saved_notes", {})[key];
         if (saved && saved.content) {
+          currentNoteHtml = saved.content;
           $("quizFrame").srcdoc = withBase(saved.content);
         } else {
           $("quizFrame").srcdoc =
@@ -693,6 +714,10 @@ function cleanViewerFrame() {
   clearInterval(quizTimerInterval);
   quizTimerInterval = null;
   isQuizPaused = false;
+  currentNoteHtml = "";
+  currentQuizHtml = "";
+  currentQuizTitle = "";
+  currentQuizUrl = "";
   $("noteActionToolbar").style.display = "none";
   $("pauseModal").classList.remove("active");
   $("quizFrame").srcdoc = "";
@@ -710,17 +735,20 @@ function goHomeFromViewer() {
   showScreen("home");
 }
 
-/* SAVE NOTE OFFLINE */
+/* SAVE NOTE OFFLINE — uses cache, works after connection drops */
 async function saveCurrentNoteOffline() {
   try {
-    const r = await fetch(currentNoteHtmlUrl + "?t=" + Date.now());
-    if (!r.ok) throw new Error("HTTP " + r.status);
-    const html = await r.text();
-
+    if (!currentNoteHtml) {
+      alert("❌ ନୋଟ୍ ଏବେ ଲୋଡ୍ ହୋଇନାହିଁ। ପ୍ରଥମେ ନୋଟ୍ ଖୋଲନ୍ତୁ।");
+      return;
+    }
     const saved = load("gs_saved_notes", {});
     const key = currentClass + " · " + currentSubject;
-    saved[key] = { title: key, content: html, date: new Date().toLocaleDateString("or-IN") };
-
+    saved[key] = {
+      title: key,
+      content: currentNoteHtml,
+      date: new Date().toLocaleDateString("or-IN")
+    };
     if (store("gs_saved_notes", saved)) {
       alert("✅ ନୋଟ୍ ସଫଳତା ସହ Save ହୋଇଗଲା!");
     } else {
@@ -728,20 +756,23 @@ async function saveCurrentNoteOffline() {
     }
   } catch (e) {
     console.error(e);
-    alert("❌ Save ହେଲା ନାହିଁ। Internet ସଂଯୋଗ ଯାଞ୍ଚ କରନ୍ତୁ।");
+    alert("❌ Save ହେଲା ନାହିଁ: " + e.message);
   }
 }
 
-/* SAVE QUIZ OFFLINE */
+/* SAVE QUIZ OFFLINE — uses cache */
 async function saveCurrentQuizOffline() {
   try {
-    const r = await fetch(currentQuizUrl + "?t=" + Date.now());
-    if (!r.ok) throw new Error("HTTP " + r.status);
-    const html = await r.text();
-
+    if (!currentQuizTitle || !currentQuizHtml) {
+      alert("❌ Quiz ଏବେ ଲୋଡ୍ ହୋଇନାହିଁ। ପ୍ରଥମେ Quiz ଆରମ୍ଭ କରନ୍ତୁ।");
+      return;
+    }
     const s = load("gs_saved_mcqs", {});
-    s[currentQuizTitle] = { title: currentQuizTitle, content: html, date: new Date().toLocaleDateString("or-IN") };
-
+    s[currentQuizTitle] = {
+      title: currentQuizTitle,
+      content: currentQuizHtml,
+      date: new Date().toLocaleDateString("or-IN")
+    };
     if (store("gs_saved_mcqs", s)) {
       alert("✅ Quiz ସଫଳତା ସହ Download ହୋଇଗଲା!");
     } else {
@@ -749,11 +780,11 @@ async function saveCurrentQuizOffline() {
     }
   } catch (e) {
     console.error(e);
-    alert("❌ Download ହେଲା ନାହିଁ। Internet ସଂଯୋଗ ଯାଞ୍ଚ କରନ୍ତୁ।");
+    alert("❌ Download ହେଲା ନାହିଁ: " + e.message);
   }
 }
 
-/* SAVE SELECTED TOPIC QUIZ OFFLINE */
+/* SAVE SELECTED TOPIC FROM MCQ SETUP SCREEN */
 async function downloadSelectedTopicMcq() {
   const sel = $("mcqTopic");
   const file = sel.value;
@@ -769,10 +800,8 @@ async function downloadSelectedTopicMcq() {
     const r = await fetch(fullUrl + "?t=" + Date.now());
     if (!r.ok) throw new Error("HTTP " + r.status);
     const html = await r.text();
-
     const s = load("gs_saved_mcqs", {});
     s[key] = { title: key, content: html, date: new Date().toLocaleDateString("or-IN") };
-
     if (store("gs_saved_mcqs", s)) {
       alert("✅ ଏହି Topic ଅଫଲାଇନ୍ ପାଇଁ Save ହୋଇଗଲା!");
     } else {
@@ -789,7 +818,14 @@ function openSavedNotesScreen() {
   showScreen("downloads");
 }
 
-function makeRow(titleText, dateText, openLabel, onOpen, onDelete) {
+function fmtBytes(n) {
+  if (n < 1024) return n + " B";
+  if (n < 1048576) return (n / 1024).toFixed(1) + " KB";
+  return (n / 1048576).toFixed(2) + " MB";
+}
+function byteSize(s) { return fmtBytes(new Blob([String(s || "")]).size); }
+
+function makeRow(titleText, dateText, openLabel, onOpen, onDelete, sizeText) {
   const row = document.createElement("div");
   row.className = "item";
   row.style.cssText = "display:flex;justify-content:space-between;align-items:center;padding:12px 6px;gap:8px;";
@@ -799,7 +835,7 @@ function makeRow(titleText, dateText, openLabel, onOpen, onDelete) {
   title.textContent = titleText;
   const date = document.createElement("small");
   date.className = "muted";
-  date.textContent = dateText || "";
+  date.textContent = (dateText || "") + (sizeText ? " · " + sizeText : "");
   info.append(title, document.createElement("br"), date);
 
   const actions = document.createElement("div");
@@ -833,12 +869,21 @@ function renderSavedNotesList() {
     container.innerHTML = '<div style="text-align:center;padding:16px;color:var(--muted);">କୌଣସି ନୋଟ୍ ସେଭ୍ ହୋଇନାହିଁ।</div>';
     return;
   }
+
+  let totalBytes = 0;
   container.innerHTML = "";
   keys.forEach(key => {
     const item = saved[key];
+    totalBytes += new Blob([String(item.content || "")]).size;
     container.appendChild(makeRow("📖 " + item.title, item.date, "Open",
-      () => viewSavedNote(key), () => deleteSavedNote(key)));
+      () => viewSavedNote(key), () => deleteSavedNote(key), byteSize(item.content)));
   });
+
+  const head = document.createElement("div");
+  head.className = "muted";
+  head.style.cssText = "text-align:center;padding:4px 0 10px;font-size:13px;";
+  head.textContent = "Total storage used: " + fmtBytes(totalBytes);
+  container.prepend(head);
 }
 
 function viewSavedNote(key) {
@@ -854,7 +899,9 @@ function deleteSavedNote(key) {
   if (!confirm(key + " ନୋଟ୍ କାଢ଼ିବାକୁ ଚାହାନ୍ତି କି?")) return;
   const saved = load("gs_saved_notes", {});
   delete saved[key];
-  store("gs_saved_notes", saved);
+  if (!store("gs_saved_notes", saved)) {
+    alert("⚠ ସ୍ଥାୟୀ ଭାବରେ ଡିଲିଟ୍ ହେଲା ନାହିଁ।\n" + lastStoreError);
+  }
   renderSavedNotesList();
 }
 
@@ -872,12 +919,21 @@ function renderDownloadedQuizList() {
     container.innerHTML = '<div style="text-align:center;padding:18px;color:var(--muted);">କୌଣସି Quiz Download ହୋଇନାହିଁ।</div>';
     return;
   }
+
+  let totalBytes = 0;
   container.innerHTML = "";
   keys.forEach(key => {
     const item = savedMcqs[key];
+    totalBytes += new Blob([String(item.content || "")]).size;
     container.appendChild(makeRow("📝 " + (item.title || key), item.date, "Play",
-      () => openDownloadedMcq(key), () => deleteDownloadedMcq(key)));
+      () => openDownloadedMcq(key), () => deleteDownloadedMcq(key), byteSize(item.content)));
   });
+
+  const head = document.createElement("div");
+  head.className = "muted";
+  head.style.cssText = "text-align:center;padding:4px 0 10px;font-size:13px;";
+  head.textContent = "Total storage used: " + fmtBytes(totalBytes);
+  container.prepend(head);
 }
 
 function openDownloadedMcq(key) {
@@ -888,12 +944,23 @@ function openDownloadedMcq(key) {
   }
 
   currentViewMode = "downloaded_quiz";
-  clearInterval(quizTimerInterval);
-  quizTimerInterval = null;
+  currentQuizHtml = "";
+  currentQuizTitle = "";
+  currentQuizUrl = "";
   isQuizPaused = false;
 
+  quizSeconds = 0;
+  $("quizRunningTimer").textContent = "00:00";
+  clearInterval(quizTimerInterval);
+  quizTimerInterval = setInterval(() => {
+    if (!isQuizPaused) {
+      quizSeconds++;
+      $("quizRunningTimer").textContent = fmtTime(quizSeconds);
+    }
+  }, 1000);
+
   $("pauseModal").classList.remove("active");
-  $("quizTimerBar").style.display = "none";
+  $("quizTimerBar").style.display = "flex";
   $("noteActionToolbar").style.display = "none";
   $("viewerBackButton").textContent = "⬅ Back to Sets";
 
@@ -905,7 +972,9 @@ function deleteDownloadedMcq(key) {
   if (!confirm(key + " ସେଟ୍ କାଢ଼ିବାକୁ ଚାହାନ୍ତି କି?")) return;
   const s = load("gs_saved_mcqs", {});
   delete s[key];
-  store("gs_saved_mcqs", s);
+  if (!store("gs_saved_mcqs", s)) {
+    alert("⚠ ସ୍ଥାୟୀ ଭାବରେ ଡିଲିଟ୍ ହେଲା ନାହିଁ।\n" + lastStoreError);
+  }
   renderDownloadedQuizList();
 }
 
@@ -921,7 +990,6 @@ var nokiaNext = null;
 var nokiaFood = {x:5,y:5};
 var nokiaScore = 0;
 var nokiaHighScore = parseInt(load("gs_snake_hi", 0), 10) || 0;
-var nokiaGameInterval = null;
 var nokiaIsPaused = false;
 var nokiaSoundEnabled = true;
 var nokiaAudioCtx = null;
@@ -934,7 +1002,6 @@ function playNokiaBeep(freq, duration) {
       nokiaAudioCtx = new (window.AudioContext || window.webkitAudioContext)();
     }
     if (nokiaAudioCtx.state === "suspended") nokiaAudioCtx.resume();
-
     var osc = nokiaAudioCtx.createOscillator();
     var gain = nokiaAudioCtx.createGain();
     osc.type = "square";
@@ -952,9 +1019,7 @@ function openSnakeGame() {
   nokiaCanvas = $("nokiaCanvas");
   nokiaCtx = nokiaCanvas.getContext("2d");
   $("nokiaHighScoreVal").textContent = nokiaHighScore;
-
   resetNokiaGame();
-
   clearInterval(nokiaGameInterval);
   nokiaGameInterval = setInterval(updateNokiaSnake, 130);
 }
@@ -972,7 +1037,6 @@ function spawnNokiaFood() {
 
 function drawNokiaSnake() {
   if (!nokiaCtx) return;
-
   nokiaCtx.fillStyle = "#090414";
   nokiaCtx.fillRect(0, 0, nokiaCanvas.width, nokiaCanvas.height);
 
@@ -1007,13 +1071,11 @@ function drawNokiaSnake() {
 
 function updateNokiaSnake() {
   if (nokiaIsPaused || nokiaOver) return;
-
   if (nokiaNext) {
     nokiaDx = nokiaNext.x;
     nokiaDy = nokiaNext.y;
     nokiaNext = null;
   }
-
   var head = { x: nokiaSnake[0].x + nokiaDx, y: nokiaSnake[0].y + nokiaDy };
   if (head.x < 0) head.x = nokiaTileCount - 1;
   if (head.x >= nokiaTileCount) head.x = 0;
@@ -1021,8 +1083,6 @@ function updateNokiaSnake() {
   if (head.y >= nokiaTileCount) head.y = 0;
 
   var eating = (head.x === nokiaFood.x && head.y === nokiaFood.y);
-
-  // The tail cell is free this tick unless the snake is growing
   var body = eating ? nokiaSnake : nokiaSnake.slice(0, -1);
   for (var i = 0; i < body.length; i++) {
     if (body[i].x === head.x && body[i].y === head.y) {
@@ -1032,13 +1092,10 @@ function updateNokiaSnake() {
       return;
     }
   }
-
   nokiaSnake.unshift(head);
-
   if (eating) {
     nokiaScore += 10;
     $("nokiaScoreVal").textContent = nokiaScore;
-
     if (nokiaScore > nokiaHighScore) {
       nokiaHighScore = nokiaScore;
       $("nokiaHighScoreVal").textContent = nokiaHighScore;
@@ -1055,12 +1112,10 @@ function updateNokiaSnake() {
 function setNokiaDir(d) {
   var dx = nokiaNext ? nokiaNext.x : nokiaDx;
   var dy = nokiaNext ? nokiaNext.y : nokiaDy;
-
   if (d === "UP" && dy !== 1) nokiaNext = { x: 0, y: -1 };
   else if (d === "DOWN" && dy !== -1) nokiaNext = { x: 0, y: 1 };
   else if (d === "LEFT" && dx !== 1) nokiaNext = { x: -1, y: 0 };
   else if (d === "RIGHT" && dx !== -1) nokiaNext = { x: 1, y: 0 };
-
   playNokiaBeep(440, 0.03);
 }
 
@@ -1083,11 +1138,9 @@ function resetNokiaGame() {
   nokiaScore = 0;
   nokiaIsPaused = false;
   nokiaOver = false;
-
   $("nokiaScoreVal").textContent = "0";
   $("nokiaPauseBtn").textContent = "⏸";
   $("nokiaTitle").textContent = "🐍 NOKIA NEON SNAKE ⚡";
-
   spawnNokiaFood();
   drawNokiaSnake();
 }
@@ -1135,13 +1188,41 @@ function openDrive() {
   window.open(currentFolder, "_blank");
 }
 
-function downloadNotes() { openDrive(); }
+function downloadNotes() {
+  if (!currentClass || !currentSubject) {
+    alert("ପ୍ରଥମେ Class ଓ Subject ବାଛନ୍ତୁ।");
+    return;
+  }
+  const cleanCls = currentClass.toLowerCase().replace(/[^a-z0-9]/g, "");
+  const cleanSub = currentSubject.toLowerCase().replace(/[^a-z0-9]/g, "");
+  const noteUrl = GITHUB_PAGES_BASE + cleanCls + "_" + cleanSub + "_note.html";
+  const key = currentClass + " · " + currentSubject;
+
+  fetch(noteUrl + "?t=" + Date.now())
+    .then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.text(); })
+    .then(html => {
+      const saved = load("gs_saved_notes", {});
+      saved[key] = { title: key, content: html, date: new Date().toLocaleDateString("or-IN") };
+      if (store("gs_saved_notes", saved)) {
+        $("noteStatus").textContent = "✅ ନୋଟ୍ ଅଫଲାଇନ୍ ସେଭ୍ ହୋଇଗଲା!";
+      } else {
+        $("noteStatus").textContent = MSG_STORAGE_FULL + " " + lastStoreError;
+      }
+    })
+    .catch(() => {
+      const saved = load("gs_saved_notes", {})[key];
+      if (saved) {
+        $("noteStatus").textContent = "ℹ ଏହି ନୋଟ୍ ପୂର୍ବରୁ ସେଭ୍ ଅଛି।";
+      } else {
+        $("noteStatus").textContent = "❌ ଡାଉନଲୋଡ୍ ବିଫଳ। ଇଣ୍ଟରନେଟ୍ ଯାଞ୍ଚ କରନ୍ତୁ।";
+      }
+    });
+}
 
 /* BOOKMARKS */
 function bookmarkCurrent() {
   const bookmarks = load("gs_bookmarks", []);
   const value = { cls: currentClass, sub: currentSubject, mode: window.classMode || "materials" };
-
   if (!bookmarks.some(x => x.cls === value.cls && x.sub === value.sub && (x.mode || "materials") === value.mode)) {
     bookmarks.push(value);
     if (store("gs_bookmarks", bookmarks)) {
@@ -1157,12 +1238,10 @@ function bookmarkCurrent() {
 function renderBookmarks() {
   const bookmarks = load("gs_bookmarks", []);
   const container = $("bookmarkList");
-
   if (!bookmarks.length) {
     container.innerHTML = '<div class="card" style="text-align:center;color:var(--muted);">No bookmarks saved yet.</div>';
     return;
   }
-
   const grouped = {};
   bookmarks.forEach((b, index) => {
     const key = b.sub || "OTHER";
@@ -1174,7 +1253,6 @@ function renderBookmarks() {
   Object.keys(grouped).forEach(sub => {
     html += '<div class="subject-group"><div class="subject-header"><span>📖 ' + esc(sub) +
       '</span><span class="count-badge">' + grouped[sub].length + ' saved</span></div>';
-
     grouped[sub].forEach(item => {
       html += '<div class="item" style="display:flex;justify-content:space-between;align-items:center;">' +
         '<div><b>' + esc(item.cls) + '</b><br><small class="muted">' + esc(item.sub) +
@@ -1193,7 +1271,6 @@ function goToBookmarked(i) {
   const b = load("gs_bookmarks", [])[i];
   if (!b) return;
   window.classMode = b.mode || "materials";
-  // Rebuild the subject list for this class so "Back" shows the right class
   showSubjects(b.cls);
   openSubject(b.sub);
 }
@@ -1215,7 +1292,6 @@ function clearBookmarks() {
 /* MCQ SETUP */
 function openMcqSetup() {
   showScreen("mcqSetup");
-
   const prevClass = $("mcqClass").value;
   const prevSubject = $("mcqSubject").value;
 
@@ -1223,14 +1299,11 @@ function openMcqSetup() {
     .map(cls => '<option value="' + cls + '">' + cls + '</option>').join("");
 
   if (prevClass && subjectsByClass[prevClass]) $("mcqClass").value = prevClass;
-
   fillSubjects();
-
   if (prevSubject && (subjectsByClass[$("mcqClass").value] || []).indexOf(prevSubject) !== -1) {
     $("mcqSubject").value = prevSubject;
     fillTopics();
   }
-
   if (!Object.keys(mcqDataStore).length) {
     $("mcqTopic").innerHTML = '<option value="">Loading topics... ଅପେକ୍ଷା କରନ୍ତୁ</option>';
   }
@@ -1254,7 +1327,6 @@ async function loadRemoteMcq() {
     console.error("MCQ JSON Error:", error);
     mcqDataStore = load("gs_cached_mcq_json", {});
   }
-  // Keep the user's current topic choice after the list refreshes
   const prevTopic = $("mcqTopic").value;
   fillTopics();
   if (prevTopic) {
@@ -1268,7 +1340,6 @@ function fillTopics() {
   const subject = $("mcqSubject").value;
   const topicSelect = $("mcqTopic");
   const list = (mcqDataStore[cls] && mcqDataStore[cls][subject]) || [];
-
   if (Array.isArray(list) && list.length > 0) {
     topicSelect.innerHTML = list.map(item =>
       '<option value="' + esc(item.file) + '">' + esc(item.title) + '</option>').join("");
@@ -1277,7 +1348,6 @@ function fillTopics() {
   }
 }
 
-/* TIMER FORMAT */
 function fmtTime(s) {
   return String(Math.floor(s / 60)).padStart(2, "0") + ":" + String(s % 60).padStart(2, "0");
 }
@@ -1292,10 +1362,10 @@ function startQuiz() {
 
   currentViewMode = "quiz";
   const fullUrl = new URL(fileName, GITHUB_PAGES_BASE).href;
-
   currentQuizUrl = fullUrl;
   currentQuizTitle = $("mcqClass").value + " · " + $("mcqSubject").value + " · " +
     $("mcqTopic").selectedOptions[0].text;
+  currentQuizHtml = "";
 
   $("noteActionToolbar").style.display = "flex";
   $("noteSaveBtn").style.display = "none";
@@ -1323,12 +1393,15 @@ function startQuiz() {
 
   fetch(fullUrl + "?t=" + Date.now())
     .then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.text(); })
-    .then(html => { $("quizFrame").srcdoc = withBase(html); })
+    .then(html => {
+      currentQuizHtml = html;
+      $("quizFrame").srcdoc = withBase(html);
+    })
     .catch(err => {
       console.error(err);
-      // Use the offline copy automatically if this quiz was downloaded earlier
       const saved = load("gs_saved_mcqs", {})[currentQuizTitle];
       if (saved && saved.content) {
+        currentQuizHtml = saved.content;
         $("quizFrame").srcdoc = withBase(saved.content);
       } else {
         $("quizFrame").srcdoc =
@@ -1337,9 +1410,7 @@ function startQuiz() {
     });
 }
 
-/* QUIZ PAUSE
-   Note: this pauses the app's timer and covers the quiz with the pause screen.
-   Scripts inside the quiz page itself cannot be stopped from here. */
+/* HIDE QUIZ (not a true pause — iframe scripts keep running) */
 function pauseQuiz() {
   isQuizPaused = true;
   $("pausedTimeText").textContent = fmtTime(quizSeconds);
@@ -1362,18 +1433,15 @@ function startStudy() {
   if (studyInterval) return;
   studyInterval = setInterval(() => { studySeconds++; renderStudyClock(); }, 1000);
 }
-
 function pauseStudy() {
   clearInterval(studyInterval);
   studyInterval = null;
 }
-
 function resetStudy() {
   pauseStudy();
   studySeconds = 0;
   renderStudyClock();
 }
-
 function renderStudyClock() {
   $("studyClock").textContent = [
     Math.floor(studySeconds / 3600),
@@ -1397,12 +1465,10 @@ function shareApp() {
     "📲 ଆପ୍ ଡାଉନଲୋଡ୍ କରିବାକୁ ଏହି ଲିଙ୍କ୍‌ରେ କ୍ଲିକ୍ କରନ୍ତୁ:\n" + APP_DOWNLOAD_LINK;
 
   if (sendBridge("SHARE~" + message)) return;
-
   if (navigator.share) {
     navigator.share({ title: "GyanSetu Odisha", text: message }).catch(function () {});
     return;
   }
-
   if (navigator.clipboard && navigator.clipboard.writeText) {
     navigator.clipboard.writeText(message)
       .then(function () { alert("📋 Message copy ହୋଇଗଲା।"); })
