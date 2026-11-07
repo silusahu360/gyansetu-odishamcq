@@ -429,7 +429,7 @@ const APP_DOWNLOAD_LINK = "https://github.com/silusahu360/gyansetu-odishamcq/rel
 
 const classDriveFolders = {
   "CLASS VI":"https://drive.google.com/drive/folders/1KUhgA15GZ0jMPfF22XhN_0ipuayW3jhr",
-  "CLASS VII":"https://drive.google.com/drive/folders/1ToIWcidnQfATl6_awNSSPRcRK1nyZWAv",
+  "CLASS VII":"https://drive.google.com/drive/folders/1ToIWcidnQfATl6awNSSPRcRK1nyZWAv",
   "CLASS VIII":"https://drive.google.com/drive/folders/1gnCILN6NhsAsK2c4ljn8DbTNv4zAnMCC",
   "CLASS IX":"https://drive.google.com/drive/folders/1xC7s790hPESNNYKTDZ8jnFvgkDLHrKbD",
   "CLASS X":"https://drive.google.com/drive/folders/1KC4TAH3EzQiOdfwj9SKmttCOdhfqz0Td"
@@ -463,9 +463,11 @@ const $ = id => document.getElementById(id);
 
 /* SAFE STORAGE HELPERS
    store() returns true only when data was really written to localStorage.
-   If it fails (quota full / blocked), data is kept in memory for this session only
-   and false is returned so the caller can warn the user. */
+   If it fails (quota full / blocked), data is kept in memory for this session only,
+   false is returned, and the real error is saved in lastStoreError. */
 const memoryFallback = {};
+let lastStoreError = "";
+
 function load(key, fallback) {
   try {
     const item = localStorage.getItem(key);
@@ -482,8 +484,10 @@ function store(key, value) {
   memoryFallback[key] = value;
   try {
     localStorage.setItem(key, JSON.stringify(value));
+    lastStoreError = "";
     return true;
   } catch (e) {
+    lastStoreError = (e && e.name ? e.name : "Error") + ": " + (e && e.message ? e.message : "");
     return false;
   }
 }
@@ -654,7 +658,7 @@ async function saveCurrentNoteOffline() {
     if (store("gs_saved_notes", saved)) {
       alert("✅ ନୋଟ୍ ସଫଳତା ସହ Save ହୋଇଗଲା!");
     } else {
-      alert(MSG_STORAGE_FULL);
+      alert(MSG_STORAGE_FULL + "\n\n" + lastStoreError);
     }
   } catch (e) {
     console.error(e);
@@ -675,7 +679,7 @@ async function saveCurrentQuizOffline() {
     if (store("gs_saved_mcqs", s)) {
       alert("✅ Quiz ସଫଳତା ସହ Download ହୋଇଗଲା!");
     } else {
-      alert(MSG_STORAGE_FULL);
+      alert(MSG_STORAGE_FULL + "\n\n" + lastStoreError);
     }
   } catch (e) {
     console.error(e);
@@ -706,7 +710,7 @@ async function downloadSelectedTopicMcq() {
     if (store("gs_saved_mcqs", s)) {
       alert("✅ ଏହି Topic ଅଫଲାଇନ୍ ପାଇଁ Save ହୋଇଗଲା!");
     } else {
-      alert(MSG_STORAGE_FULL);
+      alert(MSG_STORAGE_FULL + "\n\n" + lastStoreError);
     }
   } catch (e) {
     console.error(e);
@@ -1077,7 +1081,7 @@ function bookmarkCurrent() {
     if (store("gs_bookmarks", bookmarks)) {
       $("noteStatus").textContent = "⭐ Subject bookmarked successfully!";
     } else {
-      $("noteStatus").textContent = "⚠ Bookmark could not be saved permanently.";
+      $("noteStatus").textContent = "⚠ Bookmark could not be saved permanently. " + lastStoreError;
     }
   } else {
     $("noteStatus").textContent = "Already in bookmarks!";
