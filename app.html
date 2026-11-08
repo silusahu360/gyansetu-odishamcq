@@ -692,16 +692,42 @@ function fetchT(url, opts, ms) {
   );
 }
 
-// A fresh iframe each time: keeps the iframe from adding browser-history entries
+// A fresh iframe each time: keeps the iframe from adding browser-history entries.
+// The frame grows to its full content height, so only the PAGE scrolls (no nested scrolling).
+function fitFrame(f) {
+  try {
+    const d = f.contentDocument;
+    if (!d || !d.documentElement) return false;
+    const y = window.scrollY;
+    f.style.height = "300px";
+    const h = Math.max(d.documentElement.scrollHeight, d.body ? d.body.scrollHeight : 0, 300);
+    f.style.height = h + "px";
+    window.scrollTo(0, y);
+    return true;
+  } catch (e) { return false; }
+}
+
 function setFrameHtml(html) {
   const old = document.getElementById("quizFrame");
   if (!old) return;
   const f = document.createElement("iframe");
   f.id = "quizFrame"; f.title = "Content Viewer";
   f.style.cssText = "width:100%;height:72vh;border:0;display:block;";
+  f.addEventListener("load", function () {
+    if (!fitFrame(f)) return;
+    f.setAttribute("scrolling", "no");
+    const d = f.contentDocument;
+    const refit = function () { setTimeout(function () { fitFrame(f); }, 120); setTimeout(function () { fitFrame(f); }, 600); };
+    try { d.addEventListener("click", refit); d.addEventListener("touchend", refit); } catch (e) {}
+    const t = setInterval(function () {
+      if (!f.isConnected) { clearInterval(t); return; }
+      try { if (d.documentElement.scrollHeight > f.clientHeight + 2) fitFrame(f); } catch (e) {}
+    }, 700);
+  });
   f.srcdoc = html || "";
   old.replaceWith(f);
 }
+window.addEventListener("resize", function () { const f = document.getElementById("quizFrame"); if (f) fitFrame(f); });
 
 // ---- Big storage for saved quizzes (IndexedDB; falls back to old storage) ----
 let savedMeta = {};
