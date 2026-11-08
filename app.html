@@ -266,7 +266,7 @@ body.dark .pg-stat-num{color:#c4b5fd;}
 
 <header id="appHeader">
 <div class="brand">🎓 GYANSETU <span>ODISHA</span></div>
-<p>NCERT & Odisha State Board Learning Portal</p>
+<p>NCERT &amp; Odisha State Board Learning Portal</p>
 <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn" aria-label="Toggle theme">🌙</button>
 </header>
 
@@ -467,7 +467,7 @@ body.dark .pg-stat-num{color:#c4b5fd;}
       </button>
       <button class="mt-level-btn medium" onclick="startMathLevel('medium')">
         <div><div class="mt-level-name">😎 ମଧ୍ୟମ · Medium</div><div class="mt-level-meta">+ − × (ବଡ଼ ସଂଖ୍ୟା)</div></div>
-        <div class="mt-level-best" id="mmBestMedium">ଖେଳି ନାହାନ୍ତି</div>
+        <div class="mt-level-best" id="mtBestMedium">ଖେଳି ନାହାନ୍ତି</div>
       </button>
       <button class="mt-level-btn hard" onclick="startMathLevel('hard')">
         <div><div class="mt-level-name">🔥 କଠିନ · Hard</div><div class="mt-level-meta">+ − × ÷ (ବହୁତ ବଡ଼)</div></div>
@@ -600,7 +600,7 @@ body.dark .pg-stat-num{color:#c4b5fd;}
 <h3 style="text-align:center;color:#7c3aed;margin:8px 0 6px">🎓 GyanSetu Odisha</h3>
 <p class="muted" style="text-align:center;font-size:16px">Classes VI to X ପାଇଁ ଏକ ସ୍ମାର୍ଟ ଶିକ୍ଷଣ ପୋର୍ଟାଲ୍।</p>
 <div class="dev-badge-card">
-<div class="dev-tag">App Creator & Educator</div>
+<div class="dev-tag">App Creator &amp; Educator</div>
 <div class="dev-name">👨‍🏫 Sangram Sahu</div>
 <div class="dev-desc">Dedicated to empowering Odisha school students with smart NCERT learning tools.</div>
 </div>
@@ -623,6 +623,38 @@ body.dark .pg-stat-num{color:#c4b5fd;}
 <script>
 "use strict";
 
+/* ================= SAFE STORAGE HELPERS (defined first) ================= */
+var memoryFallback = {};
+var lastBridgeJson = {};
+var pendingBridge = {};
+var bridgeKeys = {};
+var lastStoreError = "";
+var pushTimer = null;
+var hasLocalStorage = false;
+
+try {
+  if (window.localStorage && typeof window.localStorage.setItem === "function") {
+    window.localStorage.setItem("__gs_test__", "1");
+    window.localStorage.removeItem("__gs_test__");
+    hasLocalStorage = true;
+  }
+} catch (e) { hasLocalStorage = false; }
+
+/* Safe wrappers - NEVER let localStorage crash the app */
+function lsGet(key) {
+  try { if (hasLocalStorage) return localStorage.getItem(key); } catch (e) {}
+  return null;
+}
+function lsSet(key, value) {
+  try { if (hasLocalStorage) localStorage.setItem(key, value); } catch (e) {}
+}
+
+/* ================= GLOBAL ERROR GUARD ================= */
+window.addEventListener("error", function (e) {
+  console.error("GyanSetu error:", e.message, "at", e.filename, e.lineno);
+});
+
+/* ================= CUSTOM ALERT / CONFIRM ================= */
 window.alert = function (msg) {
   var m = document.getElementById("msgModal");
   var t = document.getElementById("msgModalText");
@@ -645,6 +677,7 @@ function confirmAnswer(yes) {
   if (yes && typeof cb === "function") cb();
 }
 
+/* ================= CONSTANTS ================= */
 const CURRENT_APP_VERSION = "v1.4.1";
 const GITHUB_PAGES_BASE = "https://silusahu360.github.io/gyansetu-odishamcq/";
 const GITHUB_MCQ_JSON_URL = GITHUB_PAGES_BASE + "mcq_data.json";
@@ -682,21 +715,7 @@ let studySeconds = 0;
 let studyInterval = null;
 const $ = id => document.getElementById(id);
 
-const memoryFallback = {};
-const lastBridgeJson = {};
-const pendingBridge = {};
-const bridgeKeys = {};
-let lastStoreError = "";
-let pushTimer = null;
-let hasLocalStorage = false;
-try {
-  if (window.localStorage && typeof window.localStorage.setItem === "function") {
-    window.localStorage.setItem("__gs_test__", "1");
-    window.localStorage.removeItem("__gs_test__");
-    hasLocalStorage = true;
-  }
-} catch (e) { hasLocalStorage = false; }
-
+/* ================= APP INVENTOR BRIDGE ================= */
 function hasBridge() { return !!(window.AppInventor && typeof window.AppInventor.setWebViewString === "function"); }
 
 function hydrateFromApp() {
@@ -785,6 +804,7 @@ function store(key, value) {
   return ok;
 }
 
+/* ================= VERSION CHECK ================= */
 function parseVer(v) { return String(v || "").replace(/^[^\d]*/, "").split(".").map(n => parseInt(n, 10) || 0); }
 function isNewerVersion(remote, local) {
   var a = parseVer(remote), b = parseVer(local);
@@ -826,99 +846,120 @@ function performAppUpdate() {
   window.open(APP_DOWNLOAD_LINK, "_blank");
 }
 
+/* ================= LIVE CLOCK ================= */
 function updateLiveDateTime() {
-  const now = new Date();
-  const timeStr = now.toLocaleTimeString('en-US', { hour12: false });
-  const days = ['ରବିବାର', 'ସୋମବାର', 'ମଙ୍ଗଳବାର', 'ବୁଧବାର', 'ଗୁରୁବାର', 'ଶୁକ୍ରବାର', 'ଶନିବାର'];
-  const months = ['ଜାନୁଆରୀ', 'ଫେବୃଆରୀ', 'ମାର୍ଚ୍ଚ', 'ଏପ୍ରିଲ', 'ମେ', 'ଜୁନ', 'ଜୁଲାଇ', 'ଅଗଷ୍ଟ', 'ସେପ୍ଟେମ୍ବର', 'ଅକ୍ଟୋବର', 'ନଭେମ୍ବର', 'ଡିସେମ୍ବର'];
-  const dateStr = now.getDate() + ' ' + months[now.getMonth()] + ' ' + now.getFullYear();
-  const dayStr = days[now.getDay()];
-  const quotes = [
-    "ଶିକ୍ଷା ହେଉଛି ସଫଳତାର ଚାବିକାଠି।",
-    "ଆଜିର ପରିଶ୍ରମ, କାଲିର ସଫଳତା।",
-    "ଜ୍ଞାନ ହିଁ ଶକ୍ତି।",
-    "ଛୋଟ ଛୋଟ ପଦକ୍ଷେପ ବଡ଼ ପରିବର୍ତ୍ତନ ଆଣେ।",
-    "ନିଜକୁ ବିଶ୍ୱାସ କର, ତୁମେ ପାରିବ।",
-    "ପ୍ରତ୍ୟେକ ଦିନ ଏକ ନୂଆ ସୁଯୋଗ।"
-  ];
-  const quoteIndex = now.getDate() % quotes.length;
+  try {
+    const now = new Date();
+    const timeStr = now.toLocaleTimeString('en-US', { hour12: false });
+    const days = ['ରବିବାର', 'ସୋମବାର', 'ମଙ୍ଗଳବାର', 'ବୁଧବାର', 'ଗୁରୁବାର', 'ଶୁକ୍ରବାର', 'ଶନିବାର'];
+    const months = ['ଜାନୁଆରୀ', 'ଫେବୃଆରୀ', 'ମାର୍ଚ୍ଚ', 'ଏପ୍ରିଲ', 'ମେ', 'ଜୁନ', 'ଜୁଲାଇ', 'ଅଗଷ୍ଟ', 'ସେପ୍ଟେମ୍ବର', 'ଅକ୍ଟୋବର', 'ନଭେମ୍ବର', 'ଡିସେମ୍ବର'];
+    const dateStr = now.getDate() + ' ' + months[now.getMonth()] + ' ' + now.getFullYear();
+    const dayStr = days[now.getDay()];
+    const quotes = [
+      "ଶିକ୍ଷା ହେଉଛି ସଫଳତାର ଚାବିକାଠି।",
+      "ଆଜିର ପରିଶ୍ରମ, କାଲିର ସଫଳତା।",
+      "ଜ୍ଞାନ ହିଁ ଶକ୍ତି।",
+      "ଛୋଟ ଛୋଟ ପଦକ୍ଷେପ ବଡ଼ ପରିବର୍ତ୍ତନ ଆଣେ।",
+      "ନିଜକୁ ବିଶ୍ୱାସ କର, ତୁମେ ପାରିବ।",
+      "ପ୍ରତ୍ୟେକ ଦିନ ଏକ ନୂଆ ସୁଯୋଗ।"
+    ];
+    const quoteIndex = now.getDate() % quotes.length;
 
-  const timeEl = document.getElementById('liveTime');
-  const dateEl = document.getElementById('liveDate');
-  const dayEl = document.getElementById('liveDay');
-  const quoteEl = document.getElementById('dailyQuote');
-  if (timeEl) timeEl.textContent = timeStr;
-  if (dateEl) dateEl.textContent = dateStr;
-  if (dayEl) dayEl.textContent = dayStr;
-  if (quoteEl) quoteEl.textContent = '"' + quotes[quoteIndex] + '"';
+    const timeEl = document.getElementById('liveTime');
+    const dateEl = document.getElementById('liveDate');
+    const dayEl = document.getElementById('liveDay');
+    const quoteEl = document.getElementById('dailyQuote');
+    if (timeEl) timeEl.textContent = timeStr;
+    if (dateEl) dateEl.textContent = dateStr;
+    if (dayEl) dayEl.textContent = dayStr;
+    if (quoteEl) quoteEl.textContent = '"' + quotes[quoteIndex] + '"';
+  } catch (e) { console.error("Clock error:", e); }
 }
 updateLiveDateTime();
 setInterval(updateLiveDateTime, 1000);
 
+/* ================= HISTORY / NAVIGATION ================= */
+var SAFE_RESTORE = ["home","mcqSetup","classes","bookmarks","studyTimer","about","progressScreen","gameMenuScreen","offlineQuizMenuScreen"];
+
 let backStack = ["home"];
-let savedScreen = localStorage.getItem("gs_last_screen");
+let savedScreen = null;
+try {
+  if (hasLocalStorage) savedScreen = localStorage.getItem("gs_last_screen");
+} catch (e) { savedScreen = null; }
+if (savedScreen && SAFE_RESTORE.indexOf(savedScreen) === -1) savedScreen = "home";
 if (savedScreen && document.getElementById(savedScreen)) {
     backStack = [savedScreen];
 }
 
+function safePushState(screenId) {
+  try { history.pushState({ screen: screenId }, ""); } catch (e) { console.warn("pushState failed:", e); }
+}
+function safeReplaceState(screenId) {
+  try { history.replaceState({ screen: screenId }, ""); } catch (e) { console.warn("replaceState failed:", e); }
+}
+
 function pushHistoryState(screenId) {
-    localStorage.setItem("gs_last_screen", screenId);
+    lsSet("gs_last_screen", screenId);
     if (backStack[backStack.length - 1] !== screenId) {
         backStack.push(screenId);
-        history.pushState({ screen: screenId }, "", "#" + screenId);
+        safePushState(screenId);
     }
 }
 
 window.addEventListener("popstate", function (e) {
     const currentActive = document.querySelector(".screen.active");
-    if (currentActive) {
-        if (currentActive.id === "quizScreen") {
-            cleanViewerFrame();
-        }
-        if (currentActive.id !== "memoryGameScreen") { if (typeof mmInterval !== "undefined" && mmInterval) { clearInterval(mmInterval); mmInterval = null; } }
-        if (currentActive.id !== "mathGameScreen") { if (typeof mtStop === "function") mtStop(); }
+    const targetScreenId = backStack.length > 1 ? backStack[backStack.length - 2] : "home";
+
+    if (currentActive && currentActive.id === "quizScreen") {
+        cleanViewerFrame();
     }
+    if (targetScreenId !== "memoryGameScreen" && mmInterval) { clearInterval(mmInterval); mmInterval = null; }
+    if (targetScreenId !== "mathGameScreen" && typeof mtStop === "function") mtStop();
 
     if (backStack.length > 1) {
-        backStack.pop(); 
+        backStack.pop();
         let prevScreen = backStack[backStack.length - 1];
         let target = document.getElementById(prevScreen) || document.getElementById("home");
         document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
         target.classList.add("active");
         window.scrollTo(0, 0);
-        
+
         if (prevScreen === "bookmarks") renderBookmarks();
         if (prevScreen === "offlineQuizMenuScreen") renderDownloadedQuizList();
         if (prevScreen === "progressScreen") renderProgress();
         if (prevScreen === "memoryGameScreen") refreshLevelBests();
         updateBottomNav(prevScreen);
-        localStorage.setItem("gs_last_screen", prevScreen);
+        lsSet("gs_last_screen", prevScreen);
     } else {
-        if (confirm("ଆପ୍ ବନ୍ଦ କରିବାକୁ ଚାହାଁନ୍ତି କି?")) {
+        askConfirm("ଆପ୍ ବନ୍ଦ କରିବାକୁ ଚାହାଁନ୍ତି କି?", function () {
             if (window.AppInventor && typeof window.AppInventor.setWebViewString === "function") {
-                window.AppInventor.setWebViewString("CLOSE_APP"); 
+                window.AppInventor.setWebViewString("CLOSE_APP");
             } else {
-                window.close(); 
+                window.close();
             }
-        } else {
-            history.pushState({ screen: "home" }, "", "#home");
-        }
+        });
+        safePushState("home");
     }
 });
 
-history.replaceState({ screen: savedScreen || "home" }, "", "#" + (savedScreen || "home"));
+safeReplaceState(savedScreen || "home");
 
 window.addEventListener("load", function() {
-  syncHeaderHeight();
+  try { syncHeaderHeight(); } catch (e) {}
   applyStoredPrefs();
   if (savedScreen && document.getElementById(savedScreen)) {
       showScreen(savedScreen, false);
   }
-  setTimeout(() => { checkForAppUpdate(false); }, 2000);
-  setTimeout(() => { checkDailyProgress(); }, 1000);
+  setTimeout(function () { checkForAppUpdate(false); }, 2000);
+  setTimeout(function () { checkDailyProgress(); }, 1000);
 });
 
-function esc(s) { return String(s).replace(/[&<>"']/g, c => ({"&":"&","<":"<",">":">",'"':""","'":"'"}[c])); }
+/* ================= UTIL ================= */
+function esc(s) {
+  return String(s).replace(/[&<>"']/g, function (c) {
+    return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
+  });
+}
 
 function withBase(html) {
   const tag = '<base href="' + GITHUB_PAGES_BASE + '">';
@@ -951,29 +992,32 @@ function updateBottomNav(id){
 
 function showScreen(id, pushHistory = true) {
   let target = $(id) || $("home");
-  
+  const realId = target.id;
+
   const currentActive = document.querySelector(".screen.active");
-  if (currentActive && currentActive.id !== id) {
+  if (currentActive && currentActive.id !== realId) {
       if (currentActive.id === "quizScreen") {
           cleanViewerFrame();
       }
-      if (currentActive.id !== "memoryGameScreen") { if (typeof mmInterval !== "undefined" && mmInterval) { clearInterval(mmInterval); mmInterval = null; } }
-      if (currentActive.id !== "mathGameScreen") { if (typeof mtStop === "function") mtStop(); }
+      /* Stop game timers whenever we LEAVE a game screen */
+      if (realId !== "memoryGameScreen" && mmInterval) { clearInterval(mmInterval); mmInterval = null; }
+      if (realId !== "mathGameScreen" && typeof mtStop === "function") mtStop();
   }
 
   document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
   target.classList.add("active");
   window.scrollTo(0, 0);
-  if (id === "bookmarks") renderBookmarks();
-  if (id === "offlineQuizMenuScreen") renderDownloadedQuizList();
-  if (id === "progressScreen") renderProgress();
-  if (id === "memoryGameScreen") refreshLevelBests();
-  updateBottomNav(id);
-  if (pushHistory) pushHistoryState(id);
+  if (realId === "bookmarks") renderBookmarks();
+  if (realId === "offlineQuizMenuScreen") renderDownloadedQuizList();
+  if (realId === "progressScreen") renderProgress();
+  if (realId === "memoryGameScreen") refreshLevelBests();
+  updateBottomNav(realId);
+  if (pushHistory) pushHistoryState(realId);
 }
 
 function goBack(){ history.back(); }
 
+/* ================= STUDY MATERIALS ================= */
 function showClasses() {
   $("classTitle").textContent = "Select Class · Study Materials";
   $("classGrid").innerHTML = "";
@@ -1009,6 +1053,7 @@ function openSubject(sub) {
   showScreen("folder");
 }
 
+/* ================= VIEWER ================= */
 function cleanViewerFrame() {
   clearInterval(quizTimerInterval); quizTimerInterval = null;
   isQuizPaused = false; currentQuizHtml = ""; currentQuizTitle = ""; currentQuizUrl = "";
@@ -1022,15 +1067,15 @@ function handleViewerBack() {
   if (currentViewMode === "quiz") {
       showScreen("mcqSetup", false);
       backStack = ["home", "mcqSetup"];
-      history.replaceState({ screen: "mcqSetup" }, "", "#mcqSetup");
+      safeReplaceState("mcqSetup");
   } else if (currentViewMode === "downloaded_quiz") {
       showScreen("offlineQuizMenuScreen", false);
       backStack = ["home", "offlineQuizMenuScreen"];
-      history.replaceState({ screen: "offlineQuizMenuScreen" }, "", "#offlineQuizMenuScreen");
+      safeReplaceState("offlineQuizMenuScreen");
   } else {
       showScreen("subjects", false);
       backStack = ["home", "classes", "subjects"];
-      history.replaceState({ screen: "subjects" }, "", "#subjects");
+      safeReplaceState("subjects");
   }
 }
 
@@ -1038,9 +1083,10 @@ function goHomeFromViewer() {
   cleanViewerFrame();
   showScreen("home", false);
   backStack = ["home"];
-  history.replaceState({ screen: "home" }, "", "#home");
+  safeReplaceState("home");
 }
 
+/* ================= OFFLINE QUIZ ================= */
 async function saveCurrentQuizOffline() {
   try {
     if (!currentQuizTitle || !currentQuizHtml) { alert("❌ Quiz ଲୋଡ୍ ହୋଇନାହିଁ।"); return; }
@@ -1116,6 +1162,7 @@ function deleteDownloadedMcq(key) {
   });
 }
 
+/* ================= PROGRESS ================= */
 function migrateOldGarden() {
   try {
     const old = load("gs_garden", null);
@@ -1169,15 +1216,14 @@ function checkDailyProgress() {
   }
   store("gs_progress", p);
   flushNow();
-  if ($("progressScreen").classList.contains("active")) renderProgress();
+  if ($("progressScreen") && $("progressScreen").classList.contains("active")) renderProgress();
 }
 
 function addXP(amount) {
   let p = load("gs_progress", { streak: 0, lastOpenDate: "", totalDays: 0, xp: 0, badges: [] });
   p.xp = (p.xp || 0) + amount;
-  const newBadges = [];
-  if (p.xp >= 100 && !p.badges.includes("xp100")) { newBadges.push("xp100"); p.badges.push("xp100"); }
-  if (p.xp >= 500 && !p.badges.includes("xp500")) { newBadges.push("xp500"); p.badges.push("xp500"); }
+  if (p.xp >= 100 && !p.badges.includes("xp100")) p.badges.push("xp100");
+  if (p.xp >= 500 && !p.badges.includes("xp500")) p.badges.push("xp500");
   store("gs_progress", p);
   flushNow();
 }
@@ -1200,6 +1246,7 @@ function renderProgress() {
   $("pgBadges").innerHTML = badgesHtml;
 }
 
+/* ================= MEMORY MATCH ================= */
 var mmInterval = null;
 var mmSeconds = 0;
 var mmMoves = 0;
@@ -1416,9 +1463,10 @@ function exitMemoryGame() {
   $("mmWinModal").classList.remove("active");
   showScreen("gameMenuScreen", false);
   backStack = ["home", "gameMenuScreen"];
-  history.replaceState({ screen: "gameMenuScreen" }, "", "#gameMenuScreen");
+  safeReplaceState("gameMenuScreen");
 }
 
+/* ================= MATH SPEED ================= */
 var MT_DURATION = 30;
 var MT_LEVELS = {
   easy:   { name: "😊 ସହଜ · Easy",    ops: ["+","-","×"],      addMax: 20,  mulA: [2,5],  mulB: [2,5] },
@@ -1571,13 +1619,14 @@ function mtFinish() {
   if (mtScoreVal >= 10) launchConfetti();
 }
 
-function exitMathGame() { 
-  mtStop(); 
+function exitMathGame() {
+  mtStop();
   showScreen("gameMenuScreen", false);
   backStack = ["home", "gameMenuScreen"];
-  history.replaceState({ screen: "gameMenuScreen" }, "", "#gameMenuScreen");
+  safeReplaceState("gameMenuScreen");
 }
 
+/* ================= BRIDGE / DRIVE / BOOKMARKS ================= */
 function sendBridge(msg) {
   if (window.AppInventor && typeof window.AppInventor.setWebViewString === "function") {
     window.AppInventor.setWebViewString(msg); return true;
@@ -1636,6 +1685,7 @@ function clearBookmarks() {
   askConfirm("Clear all bookmarks?", function () { store("gs_bookmarks", []); flushNow(); renderBookmarks(); });
 }
 
+/* ================= MCQ SETUP ================= */
 function openMcqSetup() {
   showScreen("mcqSetup");
   const prevClass = $("mcqClass").value; const prevSubject = $("mcqSubject").value;
@@ -1707,14 +1757,15 @@ function startQuiz() {
 
 function pauseQuiz() { isQuizPaused = true; $("pausedTimeText").textContent = fmtTime(quizSeconds); $("pauseModal").classList.add("active"); }
 function resumeQuiz() { isQuizPaused = false; $("pauseModal").classList.remove("active"); }
-function closePauseAndExit() { 
-  $("pauseModal").classList.remove("active"); 
-  cleanViewerFrame(); 
+function closePauseAndExit() {
+  $("pauseModal").classList.remove("active");
+  cleanViewerFrame();
   showScreen("mcqSetup", false);
   backStack = ["home", "mcqSetup"];
-  history.replaceState({ screen: "mcqSetup" }, "", "#mcqSetup");
+  safeReplaceState("mcqSetup");
 }
 
+/* ================= STUDY TIMER ================= */
 function startStudy() { if (studyInterval) return; studyInterval = setInterval(() => { studySeconds++; renderStudyClock(); }, 1000); }
 function pauseStudy() { clearInterval(studyInterval); studyInterval = null; }
 function resetStudy() { pauseStudy(); studySeconds = 0; renderStudyClock(); }
@@ -1722,6 +1773,7 @@ function renderStudyClock() {
   $("studyClock").textContent = [Math.floor(studySeconds / 3600), Math.floor(studySeconds / 60) % 60, studySeconds % 60].map(v => String(v).padStart(2, "0")).join(":");
 }
 
+/* ================= THEME / SHARE / SOUND ================= */
 function toggleTheme() {
   document.body.classList.toggle("dark");
   const isDark = document.body.classList.contains("dark");
@@ -1731,7 +1783,7 @@ function toggleTheme() {
 }
 
 function shareApp() {
-  const message = "🎓 ଜ୍ଞାନସେତୁ ଓଡ଼ିଶା (GyanSetu Odisha)\nଷଷ୍ଠ ରୁ ଦଶମ ଶ୍ରେଣୀ ପାଇଁ NCERT ଓ ଓଡ଼ିଶା ବୋର୍ଡ ଶିକ୍ଷଣ ଆପ୍।\n📚 ନୋଟ୍ସ, 📝 MCQ ଅଭ୍ୟାସ ଓ 📂 ଅଧ୍ୟୟନ ସାମଗ୍ରୀ ଏକ ସ୍ଥାନରେ。\n\n📲 ଡାଉନଲୋଡ୍ ଲିଙ୍କ:\n" + APP_DOWNLOAD_LINK;
+  const message = "🎓 ଜ୍ଞାନସେତୁ ଓଡ଼ିଶା (GyanSetu Odisha)\nଷଷ୍ଠ ରୁ ଦଶମ ଶ୍ରେଣୀ ପାଇଁ NCERT ଓ ଓଡ଼ିଶା ବୋର୍ଡ ଶିକ୍ଷଣ ଆପ୍।\n📚 ନୋଟ୍ସ, 📝 MCQ ଅଭ୍ୟାସ ଓ 📂 ଅଧ୍ୟୟନ ସାମଗ୍ରୀ ଏକ ସ୍ଥାନରେ।\n\n📲 ଡାଉନଲୋଡ୍ ଲିଙ୍କ:\n" + APP_DOWNLOAD_LINK;
   if (sendBridge("SHARE~" + message)) return;
   if (navigator.share) { navigator.share({ title: "GyanSetu Odisha", text: message }).catch(function () {}); return; }
   if (navigator.clipboard && navigator.clipboard.writeText) {
@@ -1753,6 +1805,7 @@ function playNokiaBeep(freq, duration) {
   } catch (e) {}
 }
 
+/* ================= BOOT ================= */
 if (load("gs_dark_theme", "0") === "1") { document.body.classList.add("dark"); }
 </script>
 </body>
