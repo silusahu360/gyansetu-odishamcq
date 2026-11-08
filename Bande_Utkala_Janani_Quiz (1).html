@@ -1,0 +1,1596 @@
+<html lang="or" class="h-full"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ବନ୍ଦେ ଉତ୍କଳ ଜନନୀ - ଇଣ୍ଟରଆକ୍ଟିଭ୍ କୁଇଜ୍ ଆପ୍ଲିକେସନ୍</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script><style>/*! tailwindcss v4.3.5 | MIT License | https://tailwindcss.com */
+@layer properties;
+@layer theme, base, components, utilities;
+@layer theme {
+  :root, :host {
+    --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', 'Noto Sans', Arial,
+    sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+    --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New',
+    monospace;
+    --color-red-100: oklch(93.6% 0.032 17.717);
+    --color-red-600: oklch(57.7% 0.245 27.325);
+    --color-orange-50: oklch(98% 0.016 73.684);
+    --color-orange-100: oklch(95.4% 0.038 75.164);
+    --color-orange-200: oklch(90.1% 0.076 70.697);
+    --color-orange-600: oklch(64.6% 0.222 41.116);
+    --color-orange-700: oklch(55.3% 0.195 38.402);
+    --color-orange-900: oklch(40.8% 0.123 38.172);
+    --color-amber-50: oklch(98.7% 0.022 95.277);
+    --color-amber-100: oklch(96.2% 0.059 95.617);
+    --color-amber-200: oklch(92.4% 0.12 95.746);
+    --color-amber-500: oklch(76.9% 0.188 70.08);
+    --color-amber-600: oklch(66.6% 0.179 58.318);
+    --color-amber-700: oklch(55.5% 0.163 48.998);
+    --color-amber-900: oklch(41.4% 0.112 45.904);
+    --color-green-100: oklch(96.2% 0.044 156.743);
+    --color-green-600: oklch(62.7% 0.194 149.214);
+    --color-slate-50: oklch(98.4% 0.003 247.858);
+    --color-slate-100: oklch(96.8% 0.007 247.896);
+    --color-slate-200: oklch(92.9% 0.013 255.508);
+    --color-slate-500: oklch(55.4% 0.046 257.417);
+    --color-slate-600: oklch(44.6% 0.043 257.281);
+    --color-slate-700: oklch(37.2% 0.044 257.287);
+    --color-slate-800: oklch(27.9% 0.041 260.031);
+    --color-slate-900: oklch(20.8% 0.042 265.755);
+    --color-white: #fff;
+    --spacing: 0.25rem;
+    --container-md: 28rem;
+    --container-2xl: 42rem;
+    --text-xs: 0.75rem;
+    --text-xs--line-height: calc(1 / 0.75);
+    --text-sm: 0.875rem;
+    --text-sm--line-height: calc(1.25 / 0.875);
+    --text-base: 1rem;
+    --text-base--line-height: calc(1.5 / 1);
+    --text-lg: 1.125rem;
+    --text-lg--line-height: calc(1.75 / 1.125);
+    --text-xl: 1.25rem;
+    --text-xl--line-height: calc(1.75 / 1.25);
+    --text-2xl: 1.5rem;
+    --text-2xl--line-height: calc(2 / 1.5);
+    --text-3xl: 1.875rem;
+    --text-3xl--line-height: calc(2.25 / 1.875);
+    --text-4xl: 2.25rem;
+    --text-4xl--line-height: calc(2.5 / 2.25);
+    --font-weight-medium: 500;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
+    --tracking-wide: 0.025em;
+    --leading-snug: 1.375;
+    --leading-relaxed: 1.625;
+    --radius-xl: 0.75rem;
+    --radius-2xl: 1rem;
+    --radius-3xl: 1.5rem;
+    --blur-sm: 8px;
+    --default-transition-duration: 150ms;
+    --default-transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    --default-font-family: var(--font-sans);
+    --default-mono-font-family: var(--font-mono);
+  }
+}
+@layer base {
+  *, ::after, ::before, ::backdrop, ::file-selector-button {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    border: 0 solid;
+  }
+  html, :host {
+    line-height: 1.5;
+    -webkit-text-size-adjust: 100%;
+    tab-size: 4;
+    font-family: var(--default-font-family, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', 'Noto Sans', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji');
+    font-feature-settings: var(--default-font-feature-settings, normal);
+    font-variation-settings: var(--default-font-variation-settings, normal);
+    -webkit-tap-highlight-color: transparent;
+  }
+  hr {
+    height: 0;
+    color: inherit;
+    border-top-width: 1px;
+  }
+  abbr:where([title]) {
+    -webkit-text-decoration: underline dotted;
+    text-decoration: underline dotted;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-size: inherit;
+    font-weight: inherit;
+  }
+  a {
+    color: inherit;
+    -webkit-text-decoration: inherit;
+    text-decoration: inherit;
+  }
+  b, strong {
+    font-weight: bolder;
+  }
+  code, kbd, samp, pre {
+    font-family: var(--default-mono-font-family, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace);
+    font-feature-settings: var(--default-mono-font-feature-settings, normal);
+    font-variation-settings: var(--default-mono-font-variation-settings, normal);
+    font-size: 1em;
+  }
+  small {
+    font-size: 80%;
+  }
+  sub, sup {
+    font-size: 75%;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline;
+  }
+  sub {
+    bottom: -0.25em;
+  }
+  sup {
+    top: -0.5em;
+  }
+  table {
+    text-indent: 0;
+    border-color: inherit;
+    border-collapse: collapse;
+  }
+  :-moz-focusring:where(:not(iframe)) {
+    outline: auto;
+  }
+  progress {
+    vertical-align: baseline;
+  }
+  summary {
+    display: list-item;
+  }
+  ol, ul, menu {
+    list-style: none;
+  }
+  img, svg, video, canvas, audio, iframe, embed, object {
+    display: block;
+    vertical-align: middle;
+  }
+  img, video {
+    max-width: 100%;
+    height: auto;
+  }
+  button, input, select, optgroup, textarea, ::file-selector-button {
+    font: inherit;
+    font-feature-settings: inherit;
+    font-variation-settings: inherit;
+    letter-spacing: inherit;
+    color: inherit;
+    border-radius: 0;
+    background-color: transparent;
+    opacity: 1;
+  }
+  :where(select:is([multiple], [size])) optgroup {
+    font-weight: bolder;
+  }
+  :where(select:is([multiple], [size])) optgroup option {
+    padding-inline-start: 20px;
+  }
+  ::file-selector-button {
+    margin-inline-end: 4px;
+  }
+  ::placeholder {
+    opacity: 1;
+  }
+  @supports (not (-webkit-appearance: -apple-pay-button))  or (contain-intrinsic-size: 1px) {
+    ::placeholder {
+      color: currentcolor;
+      @supports (color: color-mix(in lab, red, red)) {
+        color: color-mix(in oklab, currentcolor 50%, transparent);
+      }
+    }
+  }
+  textarea {
+    resize: vertical;
+  }
+  ::-webkit-search-decoration {
+    -webkit-appearance: none;
+  }
+  ::-webkit-date-and-time-value {
+    min-height: 1lh;
+    text-align: inherit;
+  }
+  ::-webkit-datetime-edit {
+    display: inline-flex;
+  }
+  ::-webkit-datetime-edit-fields-wrapper {
+    padding: 0;
+  }
+  ::-webkit-datetime-edit, ::-webkit-datetime-edit-year-field, ::-webkit-datetime-edit-month-field, ::-webkit-datetime-edit-day-field, ::-webkit-datetime-edit-hour-field, ::-webkit-datetime-edit-minute-field, ::-webkit-datetime-edit-second-field, ::-webkit-datetime-edit-millisecond-field, ::-webkit-datetime-edit-meridiem-field {
+    padding-block: 0;
+  }
+  ::-webkit-calendar-picker-indicator {
+    line-height: 1;
+  }
+  :-moz-ui-invalid {
+    box-shadow: none;
+  }
+  button, input:where([type='button'], [type='reset'], [type='submit']), ::file-selector-button {
+    appearance: button;
+  }
+  ::-webkit-inner-spin-button, ::-webkit-outer-spin-button {
+    height: auto;
+  }
+  [hidden]:where(:not([hidden='until-found'])) {
+    display: none !important;
+  }
+}
+@layer utilities {
+  .absolute {
+    position: absolute;
+  }
+  .relative {
+    position: relative;
+  }
+  .top-4 {
+    top: calc(var(--spacing) * 4);
+  }
+  .left-4 {
+    left: calc(var(--spacing) * 4);
+  }
+  .mx-auto {
+    margin-inline: auto;
+  }
+  .mt-1 {
+    margin-top: var(--spacing);
+  }
+  .mt-2 {
+    margin-top: calc(var(--spacing) * 2);
+  }
+  .mb-1 {
+    margin-bottom: var(--spacing);
+  }
+  .mb-2 {
+    margin-bottom: calc(var(--spacing) * 2);
+  }
+  .flex {
+    display: flex;
+  }
+  .grid {
+    display: grid;
+  }
+  .hidden {
+    display: none;
+  }
+  .inline-block {
+    display: inline-block;
+  }
+  .h-2\.5 {
+    height: calc(var(--spacing) * 2.5);
+  }
+  .h-full {
+    height: 100%;
+  }
+  .min-h-\[600px\] {
+    min-height: 600px;
+  }
+  .min-h-full {
+    min-height: 100%;
+  }
+  .w-full {
+    width: 100%;
+  }
+  .max-w-2xl {
+    max-width: var(--container-2xl);
+  }
+  .max-w-md {
+    max-width: var(--container-md);
+  }
+  .flex-1 {
+    flex: 1;
+  }
+  .transform {
+    transform: var(--tw-rotate-x, ) var(--tw-rotate-y, ) var(--tw-rotate-z, ) var(--tw-skew-x, ) var(--tw-skew-y, );
+  }
+  .cursor-pointer {
+    cursor: pointer;
+  }
+  .grid-cols-1 {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
+  .grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .flex-col {
+    flex-direction: column;
+  }
+  .items-center {
+    align-items: center;
+  }
+  .justify-between {
+    justify-content: space-between;
+  }
+  .justify-center {
+    justify-content: center;
+  }
+  .justify-end {
+    justify-content: flex-end;
+  }
+  .gap-2 {
+    gap: calc(var(--spacing) * 2);
+  }
+  .gap-3 {
+    gap: calc(var(--spacing) * 3);
+  }
+  .gap-4 {
+    gap: calc(var(--spacing) * 4);
+  }
+  :where(.space-y-6 > :not(:last-child)) {
+    --tw-space-y-reverse: 0;
+    margin-block-start: calc(calc(var(--spacing) * 6) * var(--tw-space-y-reverse));
+    margin-block-end: calc(calc(var(--spacing) * 6) * calc(1 - var(--tw-space-y-reverse)));
+  }
+  .overflow-hidden {
+    overflow: hidden;
+  }
+  .rounded-2xl {
+    border-radius: var(--radius-2xl);
+  }
+  .rounded-3xl {
+    border-radius: var(--radius-3xl);
+  }
+  .rounded-full {
+    border-radius: calc(infinity * 1px);
+  }
+  .rounded-xl {
+    border-radius: var(--radius-xl);
+  }
+  .rounded-r-xl {
+    border-top-right-radius: var(--radius-xl);
+    border-bottom-right-radius: var(--radius-xl);
+  }
+  .border {
+    border-style: var(--tw-border-style);
+    border-width: 1px;
+  }
+  .border-t {
+    border-top-style: var(--tw-border-style);
+    border-top-width: 1px;
+  }
+  .border-l-4 {
+    border-left-style: var(--tw-border-style);
+    border-left-width: 4px;
+  }
+  .border-amber-200 {
+    border-color: var(--color-amber-200);
+  }
+  .border-amber-500 {
+    border-color: var(--color-amber-500);
+  }
+  .border-orange-100 {
+    border-color: var(--color-orange-100);
+  }
+  .border-orange-200 {
+    border-color: var(--color-orange-200);
+  }
+  .border-slate-200 {
+    border-color: var(--color-slate-200);
+  }
+  .border-slate-200\/80 {
+    border-color: color-mix(in srgb, oklch(92.9% 0.013 255.508) 80%, transparent);
+    @supports (color: color-mix(in lab, red, red)) {
+      border-color: color-mix(in oklab, var(--color-slate-200) 80%, transparent);
+    }
+  }
+  .bg-amber-50 {
+    background-color: var(--color-amber-50);
+  }
+  .bg-amber-100 {
+    background-color: var(--color-amber-100);
+  }
+  .bg-green-100 {
+    background-color: var(--color-green-100);
+  }
+  .bg-orange-50 {
+    background-color: var(--color-orange-50);
+  }
+  .bg-orange-100 {
+    background-color: var(--color-orange-100);
+  }
+  .bg-orange-600 {
+    background-color: var(--color-orange-600);
+  }
+  .bg-orange-700\/55 {
+    background-color: color-mix(in srgb, oklch(55.3% 0.195 38.402) 55%, transparent);
+    @supports (color: color-mix(in lab, red, red)) {
+      background-color: color-mix(in oklab, var(--color-orange-700) 55%, transparent);
+    }
+  }
+  .bg-slate-50 {
+    background-color: var(--color-slate-50);
+  }
+  .bg-slate-100 {
+    background-color: var(--color-slate-100);
+  }
+  .bg-slate-200 {
+    background-color: var(--color-slate-200);
+  }
+  .bg-slate-800 {
+    background-color: var(--color-slate-800);
+  }
+  .bg-white {
+    background-color: var(--color-white);
+  }
+  .bg-gradient-to-br {
+    --tw-gradient-position: to bottom right in oklab;
+    background-image: linear-gradient(var(--tw-gradient-stops));
+  }
+  .bg-gradient-to-r {
+    --tw-gradient-position: to right in oklab;
+    background-image: linear-gradient(var(--tw-gradient-stops));
+  }
+  .from-amber-50 {
+    --tw-gradient-from: var(--color-amber-50);
+    --tw-gradient-stops: var(--tw-gradient-via-stops, var(--tw-gradient-position), var(--tw-gradient-from) var(--tw-gradient-from-position), var(--tw-gradient-to) var(--tw-gradient-to-position));
+  }
+  .from-orange-600 {
+    --tw-gradient-from: var(--color-orange-600);
+    --tw-gradient-stops: var(--tw-gradient-via-stops, var(--tw-gradient-position), var(--tw-gradient-from) var(--tw-gradient-from-position), var(--tw-gradient-to) var(--tw-gradient-to-position));
+  }
+  .via-orange-50 {
+    --tw-gradient-via: var(--color-orange-50);
+    --tw-gradient-via-stops: var(--tw-gradient-position), var(--tw-gradient-from) var(--tw-gradient-from-position), var(--tw-gradient-via) var(--tw-gradient-via-position), var(--tw-gradient-to) var(--tw-gradient-to-position);
+    --tw-gradient-stops: var(--tw-gradient-via-stops);
+  }
+  .to-amber-600 {
+    --tw-gradient-to: var(--color-amber-600);
+    --tw-gradient-stops: var(--tw-gradient-via-stops, var(--tw-gradient-position), var(--tw-gradient-from) var(--tw-gradient-from-position), var(--tw-gradient-to) var(--tw-gradient-to-position));
+  }
+  .to-orange-50 {
+    --tw-gradient-to: var(--color-orange-50);
+    --tw-gradient-stops: var(--tw-gradient-via-stops, var(--tw-gradient-position), var(--tw-gradient-from) var(--tw-gradient-from-position), var(--tw-gradient-to) var(--tw-gradient-to-position));
+  }
+  .to-red-100 {
+    --tw-gradient-to: var(--color-red-100);
+    --tw-gradient-stops: var(--tw-gradient-via-stops, var(--tw-gradient-position), var(--tw-gradient-from) var(--tw-gradient-from-position), var(--tw-gradient-to) var(--tw-gradient-to-position));
+  }
+  .p-3 {
+    padding: calc(var(--spacing) * 3);
+  }
+  .p-4 {
+    padding: calc(var(--spacing) * 4);
+  }
+  .p-5 {
+    padding: calc(var(--spacing) * 5);
+  }
+  .p-6 {
+    padding: calc(var(--spacing) * 6);
+  }
+  .px-3 {
+    padding-inline: calc(var(--spacing) * 3);
+  }
+  .px-4 {
+    padding-inline: calc(var(--spacing) * 4);
+  }
+  .px-6 {
+    padding-inline: calc(var(--spacing) * 6);
+  }
+  .px-8 {
+    padding-inline: calc(var(--spacing) * 8);
+  }
+  .py-1 {
+    padding-block: var(--spacing);
+  }
+  .py-2 {
+    padding-block: calc(var(--spacing) * 2);
+  }
+  .py-2\.5 {
+    padding-block: calc(var(--spacing) * 2.5);
+  }
+  .py-3 {
+    padding-block: calc(var(--spacing) * 3);
+  }
+  .py-4 {
+    padding-block: calc(var(--spacing) * 4);
+  }
+  .py-6 {
+    padding-block: calc(var(--spacing) * 6);
+  }
+  .pt-2 {
+    padding-top: calc(var(--spacing) * 2);
+  }
+  .pt-4 {
+    padding-top: calc(var(--spacing) * 4);
+  }
+  .text-center {
+    text-align: center;
+  }
+  .text-left {
+    text-align: left;
+  }
+  .text-2xl {
+    font-size: var(--text-2xl);
+    line-height: var(--tw-leading, var(--text-2xl--line-height));
+  }
+  .text-4xl {
+    font-size: var(--text-4xl);
+    line-height: var(--tw-leading, var(--text-4xl--line-height));
+  }
+  .text-base {
+    font-size: var(--text-base);
+    line-height: var(--tw-leading, var(--text-base--line-height));
+  }
+  .text-lg {
+    font-size: var(--text-lg);
+    line-height: var(--tw-leading, var(--text-lg--line-height));
+  }
+  .text-sm {
+    font-size: var(--text-sm);
+    line-height: var(--tw-leading, var(--text-sm--line-height));
+  }
+  .text-xl {
+    font-size: var(--text-xl);
+    line-height: var(--tw-leading, var(--text-xl--line-height));
+  }
+  .text-xs {
+    font-size: var(--text-xs);
+    line-height: var(--tw-leading, var(--text-xs--line-height));
+  }
+  .leading-relaxed {
+    --tw-leading: var(--leading-relaxed);
+    line-height: var(--leading-relaxed);
+  }
+  .leading-snug {
+    --tw-leading: var(--leading-snug);
+    line-height: var(--leading-snug);
+  }
+  .font-bold {
+    --tw-font-weight: var(--font-weight-bold);
+    font-weight: var(--font-weight-bold);
+  }
+  .font-medium {
+    --tw-font-weight: var(--font-weight-medium);
+    font-weight: var(--font-weight-medium);
+  }
+  .font-semibold {
+    --tw-font-weight: var(--font-weight-semibold);
+    font-weight: var(--font-weight-semibold);
+  }
+  .tracking-wide {
+    --tw-tracking: var(--tracking-wide);
+    letter-spacing: var(--tracking-wide);
+  }
+  .text-amber-600 {
+    color: var(--color-amber-600);
+  }
+  .text-amber-900 {
+    color: var(--color-amber-900);
+  }
+  .text-green-600 {
+    color: var(--color-green-600);
+  }
+  .text-orange-100 {
+    color: var(--color-orange-100);
+  }
+  .text-orange-600 {
+    color: var(--color-orange-600);
+  }
+  .text-orange-700 {
+    color: var(--color-orange-700);
+  }
+  .text-orange-900 {
+    color: var(--color-orange-900);
+  }
+  .text-red-600 {
+    color: var(--color-red-600);
+  }
+  .text-slate-500 {
+    color: var(--color-slate-500);
+  }
+  .text-slate-600 {
+    color: var(--color-slate-600);
+  }
+  .text-slate-700 {
+    color: var(--color-slate-700);
+  }
+  .text-slate-800 {
+    color: var(--color-slate-800);
+  }
+  .text-slate-900 {
+    color: var(--color-slate-900);
+  }
+  .text-white {
+    color: var(--color-white);
+  }
+  .uppercase {
+    text-transform: uppercase;
+  }
+  .italic {
+    font-style: italic;
+  }
+  .shadow {
+    --tw-shadow: 0 1px 3px 0 var(--tw-shadow-color, rgb(0 0 0 / 0.1)), 0 1px 2px -1px var(--tw-shadow-color, rgb(0 0 0 / 0.1));
+    box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+  }
+  .shadow-2xl {
+    --tw-shadow: 0 25px 50px -12px var(--tw-shadow-color, rgb(0 0 0 / 0.25));
+    box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+  }
+  .shadow-inner {
+    --tw-shadow: inset 0 2px 4px 0 var(--tw-shadow-color, rgb(0 0 0 / 0.05));
+    box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+  }
+  .shadow-lg {
+    --tw-shadow: 0 10px 15px -3px var(--tw-shadow-color, rgb(0 0 0 / 0.1)), 0 4px 6px -4px var(--tw-shadow-color, rgb(0 0 0 / 0.1));
+    box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+  }
+  .shadow-md {
+    --tw-shadow: 0 4px 6px -1px var(--tw-shadow-color, rgb(0 0 0 / 0.1)), 0 2px 4px -2px var(--tw-shadow-color, rgb(0 0 0 / 0.1));
+    box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+  }
+  .shadow-sm {
+    --tw-shadow: 0 1px 3px 0 var(--tw-shadow-color, rgb(0 0 0 / 0.1)), 0 1px 2px -1px var(--tw-shadow-color, rgb(0 0 0 / 0.1));
+    box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+  }
+  .shadow-xs {
+    --tw-shadow: 0 1px 2px 0 var(--tw-shadow-color, rgb(0 0 0 / 0.05));
+    box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+  }
+  .backdrop-blur-sm {
+    --tw-backdrop-blur: blur(var(--blur-sm));
+    -webkit-backdrop-filter: var(--tw-backdrop-blur, ) var(--tw-backdrop-brightness, ) var(--tw-backdrop-contrast, ) var(--tw-backdrop-grayscale, ) var(--tw-backdrop-hue-rotate, ) var(--tw-backdrop-invert, ) var(--tw-backdrop-opacity, ) var(--tw-backdrop-saturate, ) var(--tw-backdrop-sepia, );
+    backdrop-filter: var(--tw-backdrop-blur, ) var(--tw-backdrop-brightness, ) var(--tw-backdrop-contrast, ) var(--tw-backdrop-grayscale, ) var(--tw-backdrop-hue-rotate, ) var(--tw-backdrop-invert, ) var(--tw-backdrop-opacity, ) var(--tw-backdrop-saturate, ) var(--tw-backdrop-sepia, );
+  }
+  .transition {
+    transition-property: color, background-color, border-color, outline-color, text-decoration-color, fill, stroke, --tw-gradient-from, --tw-gradient-via, --tw-gradient-to, opacity, box-shadow, transform, translate, scale, rotate, filter, -webkit-backdrop-filter, backdrop-filter, display, content-visibility, overlay, pointer-events;
+    transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
+    transition-duration: var(--tw-duration, var(--default-transition-duration));
+  }
+  .transition-all {
+    transition-property: all;
+    transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
+    transition-duration: var(--tw-duration, var(--default-transition-duration));
+  }
+  .duration-300 {
+    --tw-duration: 300ms;
+    transition-duration: 300ms;
+  }
+  @media (hover: hover) {
+    .hover\:-translate-y-0\.5:hover {
+      --tw-translate-y: calc(var(--spacing) * -0.5);
+      translate: var(--tw-translate-x) var(--tw-translate-y);
+    }
+    .hover\:bg-orange-700:hover {
+      background-color: var(--color-orange-700);
+    }
+    .hover\:bg-slate-900:hover {
+      background-color: var(--color-slate-900);
+    }
+    .hover\:from-orange-700:hover {
+      --tw-gradient-from: var(--color-orange-700);
+      --tw-gradient-stops: var(--tw-gradient-via-stops, var(--tw-gradient-position), var(--tw-gradient-from) var(--tw-gradient-from-position), var(--tw-gradient-to) var(--tw-gradient-to-position));
+    }
+    .hover\:to-amber-700:hover {
+      --tw-gradient-to: var(--color-amber-700);
+      --tw-gradient-stops: var(--tw-gradient-via-stops, var(--tw-gradient-position), var(--tw-gradient-from) var(--tw-gradient-from-position), var(--tw-gradient-to) var(--tw-gradient-to-position));
+    }
+  }
+  @media (width >= 40rem) {
+    .sm\:grid-cols-4 {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+    .sm\:flex-row {
+      flex-direction: row;
+    }
+  }
+  @media (width >= 48rem) {
+    .md\:p-6 {
+      padding: calc(var(--spacing) * 6);
+    }
+    .md\:text-3xl {
+      font-size: var(--text-3xl);
+      line-height: var(--tw-leading, var(--text-3xl--line-height));
+    }
+    .md\:text-base {
+      font-size: var(--text-base);
+      line-height: var(--tw-leading, var(--text-base--line-height));
+    }
+    .md\:text-lg {
+      font-size: var(--text-lg);
+      line-height: var(--tw-leading, var(--text-lg--line-height));
+    }
+    .md\:text-xl {
+      font-size: var(--text-xl);
+      line-height: var(--tw-leading, var(--text-xl--line-height));
+    }
+  }
+}
+@property --tw-rotate-x {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-rotate-y {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-rotate-z {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-skew-x {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-skew-y {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-space-y-reverse {
+  syntax: "*";
+  inherits: false;
+  initial-value: 0;
+}
+@property --tw-border-style {
+  syntax: "*";
+  inherits: false;
+  initial-value: solid;
+}
+@property --tw-gradient-position {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-gradient-from {
+  syntax: "<color>";
+  inherits: false;
+  initial-value: #0000;
+}
+@property --tw-gradient-via {
+  syntax: "<color>";
+  inherits: false;
+  initial-value: #0000;
+}
+@property --tw-gradient-to {
+  syntax: "<color>";
+  inherits: false;
+  initial-value: #0000;
+}
+@property --tw-gradient-stops {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-gradient-via-stops {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-gradient-from-position {
+  syntax: "<length-percentage>";
+  inherits: false;
+  initial-value: 0%;
+}
+@property --tw-gradient-via-position {
+  syntax: "<length-percentage>";
+  inherits: false;
+  initial-value: 50%;
+}
+@property --tw-gradient-to-position {
+  syntax: "<length-percentage>";
+  inherits: false;
+  initial-value: 100%;
+}
+@property --tw-leading {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-font-weight {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-tracking {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-shadow {
+  syntax: "*";
+  inherits: false;
+  initial-value: 0 0 #0000;
+}
+@property --tw-shadow-color {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-shadow-alpha {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: 100%;
+}
+@property --tw-inset-shadow {
+  syntax: "*";
+  inherits: false;
+  initial-value: 0 0 #0000;
+}
+@property --tw-inset-shadow-color {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-inset-shadow-alpha {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: 100%;
+}
+@property --tw-ring-color {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-ring-shadow {
+  syntax: "*";
+  inherits: false;
+  initial-value: 0 0 #0000;
+}
+@property --tw-inset-ring-color {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-inset-ring-shadow {
+  syntax: "*";
+  inherits: false;
+  initial-value: 0 0 #0000;
+}
+@property --tw-ring-inset {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-ring-offset-width {
+  syntax: "<length>";
+  inherits: false;
+  initial-value: 0px;
+}
+@property --tw-ring-offset-color {
+  syntax: "*";
+  inherits: false;
+  initial-value: #fff;
+}
+@property --tw-ring-offset-shadow {
+  syntax: "*";
+  inherits: false;
+  initial-value: 0 0 #0000;
+}
+@property --tw-backdrop-blur {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-backdrop-brightness {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-backdrop-contrast {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-backdrop-grayscale {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-backdrop-hue-rotate {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-backdrop-invert {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-backdrop-opacity {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-backdrop-saturate {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-backdrop-sepia {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-duration {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-translate-x {
+  syntax: "*";
+  inherits: false;
+  initial-value: 0;
+}
+@property --tw-translate-y {
+  syntax: "*";
+  inherits: false;
+  initial-value: 0;
+}
+@property --tw-translate-z {
+  syntax: "*";
+  inherits: false;
+  initial-value: 0;
+}
+@layer properties {
+  @supports ((-webkit-hyphens: none) and (not (margin-trim: block))) or ((-moz-orient: inline) and (not (color:rgb(from red r g b)))) {
+    *, ::before, ::after, ::backdrop {
+      --tw-rotate-x: initial;
+      --tw-rotate-y: initial;
+      --tw-rotate-z: initial;
+      --tw-skew-x: initial;
+      --tw-skew-y: initial;
+      --tw-space-y-reverse: 0;
+      --tw-border-style: solid;
+      --tw-gradient-position: initial;
+      --tw-gradient-from: #0000;
+      --tw-gradient-via: #0000;
+      --tw-gradient-to: #0000;
+      --tw-gradient-stops: initial;
+      --tw-gradient-via-stops: initial;
+      --tw-gradient-from-position: 0%;
+      --tw-gradient-via-position: 50%;
+      --tw-gradient-to-position: 100%;
+      --tw-leading: initial;
+      --tw-font-weight: initial;
+      --tw-tracking: initial;
+      --tw-shadow: 0 0 #0000;
+      --tw-shadow-color: initial;
+      --tw-shadow-alpha: 100%;
+      --tw-inset-shadow: 0 0 #0000;
+      --tw-inset-shadow-color: initial;
+      --tw-inset-shadow-alpha: 100%;
+      --tw-ring-color: initial;
+      --tw-ring-shadow: 0 0 #0000;
+      --tw-inset-ring-color: initial;
+      --tw-inset-ring-shadow: 0 0 #0000;
+      --tw-ring-inset: initial;
+      --tw-ring-offset-width: 0px;
+      --tw-ring-offset-color: #fff;
+      --tw-ring-offset-shadow: 0 0 #0000;
+      --tw-backdrop-blur: initial;
+      --tw-backdrop-brightness: initial;
+      --tw-backdrop-contrast: initial;
+      --tw-backdrop-grayscale: initial;
+      --tw-backdrop-hue-rotate: initial;
+      --tw-backdrop-invert: initial;
+      --tw-backdrop-opacity: initial;
+      --tw-backdrop-saturate: initial;
+      --tw-backdrop-sepia: initial;
+      --tw-duration: initial;
+      --tw-translate-x: 0;
+      --tw-translate-y: 0;
+      --tw-translate-z: 0;
+    }
+  }
+}
+</style>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Odia:wght@400;600;700&amp;display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans Odia', sans-serif;
+        }
+        @keyframes bounce-slow {
+            0%, 100% { transform: translateY(-5%); animation-timing-function: cubic-bezier(0.8,0,1,1); }
+            50% { transform: none; animation-timing-function: cubic-bezier(0,0,0.2,1); }
+        }
+        .animate-bounce-slow {
+            animation: bounce-slow 2s infinite;
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-amber-50 via-orange-50 to-red-100 min-h-full flex flex-col items-center justify-center p-4 text-slate-800">
+
+    <!-- App Container -->
+    <div id="app" class="w-full max-w-2xl bg-white shadow-2xl rounded-3xl overflow-hidden border border-orange-100 flex flex-col min-h-[600px]">
+        
+        <!-- Header -->
+        <header class="bg-gradient-to-r from-orange-600 to-amber-600 text-white p-6 text-center relative shadow-md">
+            <div class="absolute top-4 left-4 bg-orange-700/55 px-3 py-1 rounded-full text-xs font-semibold tracking-wide uppercase backdrop-blur-sm">
+                ଓଡ଼ିଶା ରାଜ୍ୟ ସଙ୍ଗୀତ
+            </div>
+            <h1 class="text-2xl md:text-3xl font-bold mt-2">ବନ୍ଦେ ଉତ୍କଳ ଜନନୀ</h1>
+            <p class="text-orange-100 text-sm mt-1">କାନ୍ତକବି ଲକ୍ଷ୍ମୀକାନ୍ତ ମହାପାତ୍ର — ଇଣ୍ଟରଆକ୍ଟିଭ୍ କୁଇଜ୍</p>
+        </header>
+
+        <!-- Main Content Area -->
+        <main class="flex-1 p-6 flex flex-col justify-center">
+
+            <!-- Welcome Screen -->
+            <div id="welcome-screen" class="text-center space-y-6 py-6">
+                <div class="inline-block p-4 bg-orange-100 rounded-full text-orange-600 text-4xl shadow-inner mb-2 animate-bounce-slow">
+                    📚
+                </div>
+                <h2 class="text-2xl font-bold text-slate-900">ପାଠ୍ୟକ୍ରମ ଆଧାରିତ କୁଇଜ୍ କାର୍ଯ୍ୟକ୍ରମ</h2>
+                <p class="text-slate-600 max-w-md mx-auto text-sm md:text-base leading-relaxed">
+                    ଦଶମ ଶ୍ରେଣୀ ପଦ୍ୟ ‘ବନ୍ଦେ ଉତ୍କଳ ଜନନୀ’ ଅଧ୍ୟାୟର ସମସ୍ତ ଗୁରୁତ୍ୱପୂର୍ଣ୍ଣ ତଥ୍ୟ, କବି ପରିଚୟ, ଶବ୍ଦାର୍ଥ ଓ ପ୍ରଶ୍ନୋତ୍ତରକୁ ନେଇ ପ୍ରସ୍ତୁତ। ନିଜର ଜ୍ଞାନ ପରୀକ୍ଷା କରନ୍ତୁ!
+                </p>
+                <div class="pt-4 flex flex-col sm:flex-row justify-center gap-3">
+                    <button onclick="startQuiz()" class="bg-gradient-to-r from-orange-600 to-amber-600 hover:from-orange-700 hover:to-amber-700 text-white font-bold py-3 px-8 rounded-full shadow-lg transition transform hover:-translate-y-0.5 cursor-pointer text-lg">
+                        କୁଇଜ୍ ଆରମ୍ଭ କରନ୍ତୁ 🚀
+                    </button>
+                    <button onclick="downloadHtmlFile()" class="bg-slate-800 hover:bg-slate-900 text-white font-semibold py-3 px-6 rounded-full shadow-md transition transform hover:-translate-y-0.5 cursor-pointer text-sm flex items-center justify-center gap-2">
+                        📥 ଡାଉନଲୋଡ୍ କରନ୍ତୁ
+                    </button>
+                </div>
+            </div>
+
+            <!-- Quiz Screen (Hidden initially) -->
+            <div id="quiz-screen" class="hidden flex-col space-y-6">
+                <!-- Progress & Score Header -->
+                <div class="flex justify-between items-center text-sm font-semibold text-slate-600 bg-orange-50 px-4 py-2 rounded-xl">
+                    <span id="question-counter">ପ୍ରଶ୍ନ ୧ / ୫୦</span>
+                    <span id="score-display" class="text-orange-700">ସ୍କୋର୍: ୦</span>
+                </div>
+
+                <!-- Progress Bar -->
+                <div class="w-full bg-slate-200 h-2.5 rounded-full overflow-hidden">
+                    <div id="progress-bar" class="bg-orange-600 h-full transition-all duration-300" style="width: 2%;"></div>
+                </div>
+
+                <!-- Question Card -->
+                <div class="bg-slate-50 border border-slate-200/80 rounded-2xl p-5 md:p-6 shadow-sm">
+                    <h3 id="question-text" class="text-lg md:text-xl font-bold text-slate-900 leading-snug">
+                        <!-- Question inserted via JS -->
+                    </h3>
+                </div>
+
+                <!-- Options List -->
+                <div id="options-container" class="grid grid-cols-1 gap-3">
+                    <!-- Options inserted via JS -->
+                </div>
+
+                <!-- Explanation Box -->
+                <div id="explanation-container" class="hidden bg-amber-50 border-l-4 border-amber-500 p-4 rounded-r-xl text-sm text-slate-700 leading-relaxed shadow-sm">
+                    <p class="font-bold text-amber-900 mb-1">ବିଶ୍ଳେଷଣ / ସଠିକ୍ ତଥ୍ୟ:</p>
+                    <p id="explanation-text"></p>
+                </div>
+
+                <!-- Next Button -->
+                <div class="flex justify-end pt-2">
+                    <button id="next-btn" onclick="nextQuestion()" class="hidden bg-orange-600 hover:bg-orange-700 text-white font-bold py-2.5 px-6 rounded-xl shadow transition cursor-pointer">
+                        ପରବର୍ତ୍ତୀ ପ୍ରଶ୍ନ ➡️
+                    </button>
+                </div>
+            </div>
+
+            <!-- Funny Fact Break Screen -->
+            <div id="fact-screen" class="hidden text-center space-y-6 py-6">
+                <div class="inline-block p-4 bg-amber-100 rounded-full text-amber-600 text-4xl shadow-inner animate-bounce-slow">
+                    💡
+                </div>
+                <h3 class="text-2xl font-bold text-slate-900">ଜ୍ଞାନବର୍ଦ୍ଧକ ଓ ମଜାଦାର ତଥ୍ୟ!</h3>
+                <div class="bg-gradient-to-r from-amber-50 to-orange-50 border border-amber-200 p-6 rounded-2xl shadow-sm text-left">
+                    <p id="fact-text" class="text-slate-700 text-base md:text-lg leading-relaxed">
+                        <!-- Fact inserted via JS -->
+                    </p>
+                </div>
+                <button onclick="resumeQuiz()" class="bg-orange-600 hover:bg-orange-700 text-white font-bold py-3 px-8 rounded-full shadow-lg transition transform hover:-translate-y-0.5 cursor-pointer">
+                    ପାଠପଢ଼ା ଜାରି ରଖନ୍ତୁ ✨
+                </button>
+            </div>
+
+            <!-- Result Screen -->
+            <div id="result-screen" class="hidden text-center space-y-6 py-4">
+                <div class="inline-block p-4 bg-green-100 rounded-full text-green-600 text-4xl shadow-inner animate-bounce-slow">
+                    🏆
+                </div>
+                <h2 class="text-2xl font-bold text-slate-900">କୁଇଜ୍ ସମାପ୍ତ!</h2>
+                
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 bg-slate-50 p-4 rounded-2xl border border-slate-200 text-center">
+                    <div class="p-3 bg-white rounded-xl shadow-xs">
+                        <p class="text-xs text-slate-500 font-semibold">ମୋଟ ପ୍ରଶ୍ନ</p>
+                        <p id="res-total" class="text-xl font-bold text-slate-800 mt-1">୫୦</p>
+                    </div>
+                    <div class="p-3 bg-white rounded-xl shadow-xs">
+                        <p class="text-xs text-slate-500 font-semibold">ସଠିକ୍ ଉତ୍ତର</p>
+                        <p id="res-correct" class="text-xl font-bold text-green-600 mt-1">୦</p>
+                    </div>
+                    <div class="p-3 bg-white rounded-xl shadow-xs">
+                        <p class="text-xs text-slate-500 font-semibold">ଭୁଲ୍ ଉତ୍ତର</p>
+                        <p id="res-incorrect" class="text-xl font-bold text-red-600 mt-1">୦</p>
+                    </div>
+                    <div class="p-3 bg-white rounded-xl shadow-xs">
+                        <p class="text-xs text-slate-500 font-semibold">ଶତକଡ଼ା</p>
+                        <p id="res-percentage" class="text-xl font-bold text-orange-600 mt-1">୦%</p>
+                    </div>
+                </div>
+
+                <div id="performance-msg" class="bg-orange-50 border border-orange-200 p-4 rounded-xl text-orange-900 font-medium text-sm md:text-base">
+                    <!-- Performance message inserted here -->
+                </div>
+
+                <div class="bg-amber-50 border-l-4 border-amber-500 p-4 rounded-r-xl text-left text-sm text-slate-700 italic shadow-sm">
+                    "Every question you practise makes you stronger. Every mistake makes you wiser. Keep learning, keep growing, and one day success will be yours!"
+                </div>
+
+                <div class="pt-2 flex flex-col sm:flex-row justify-center gap-3">
+                    <button onclick="restartQuiz()" class="bg-orange-600 hover:bg-orange-700 text-white font-bold py-3 px-8 rounded-full shadow-lg transition transform hover:-translate-y-0.5 cursor-pointer">
+                        ପୁନର୍ବାର ଆରମ୍ଭ କରନ୍ତୁ 🔄
+                    </button>
+                    <button onclick="downloadHtmlFile()" class="bg-slate-800 hover:bg-slate-900 text-white font-semibold py-3 px-6 rounded-full shadow-md transition transform hover:-translate-y-0.5 cursor-pointer text-sm flex items-center justify-center gap-2">
+                        📥 ଡାଉନଲୋଡ୍ କରନ୍ତୁ
+                    </button>
+                </div>
+            </div>
+
+        </main>
+
+        <!-- Footer -->
+        <footer class="bg-slate-100 text-center py-3 text-xs text-slate-500 border-t border-slate-200">
+            ଓଡ଼ିଶା ରାଜ୍ୟ ସଙ୍ଗୀତ ‘ବନ୍ଦେ ଉତ୍କଳ ଜନନୀ’ ଅଧ୍ୟାୟ ଭିତ୍ତିକ ଶିକ୍ଷଣ ସହାୟକ ଆପ୍ଲିକେସନ୍
+        </footer>
+    </div>
+
+    <script>
+        const questions = [
+            // Author & Background Questions (1 to 10)
+            {
+                q: "‘ବନ୍ଦେ ଉତ୍କଳ ଜନନୀ’ କବିତାର ରଚୟିତା କିଏ?",
+                options: ["ରାଧାନାଥ ରାୟ", "ଲକ୍ଷ୍ମୀକାନ୍ତ ମହାପାତ୍ର", "ଗଙ୍ଗାଧର ମେହେର", "ଗୋଦାବରୀଶ ମିଶ୍ର"],
+                answer: 1,
+                explanation: "ଓଡ଼ିଶାରେ ‘କାନ୍ତକବି’ ରୂପେ ସୁପରିଚିତ ଲକ୍ଷ୍ମୀକାନ୍ତ ମହାପାତ୍ର ଏହି ଜାତୀୟତାବାଦୀ ଚେତନା ଓ ଦେଶାତ୍ମବୋଧକ କବିତାର ରଚୟିତା।"
+            },
+            {
+                q: "କାନ୍ତକବି ଲକ୍ଷ୍ମୀକାନ୍ତ ମହାପାତ୍ରଙ୍କ ଜନ୍ମସ୍ଥାନ କେଉଁଠାରେ?",
+                options: ["ଭଦ୍ରକ ନିକଟବର୍ତ୍ତୀ ତାଳପଦା", "କଟକର ସାକ୍ଷୀଗୋପାଳ", "ପୁରୀ ଜିଲ୍ଲାର କାକଟପୁର", "ବାଲେଶ୍ୱର ସଦର"],
+                answer: 0,
+                explanation: "ତାଙ୍କର ପୈତୃକ ଗ୍ରାମ ଭଦ୍ରକ ନିକଟବର୍ତ୍ତୀ ତାଳପଦା, ଯାହା ପୂର୍ବରୁ ଅବିଭକ୍ତ ବାଲେଶ୍ୱର ଜିଲ୍ଲା ଅନ୍ତର୍ଗତ ଥିଲା।"
+            },
+            {
+                q: "ଲକ୍ଷ୍ମୀକାନ୍ତ ମହାପାତ୍ରଙ୍କ ପିତାଙ୍କ ନାମ କ’ଣ ଥିଲା?",
+                options: ["ରାଧାମଣି ଦେବୀ", "ଚୌଧୁରୀ ଭାଗବତ ପ୍ରସାଦ ସାମନ୍ତରାୟ ମହାପାତ୍ର", "ବାବାଜୀ ରାମଦାସ", "ବ୍ରଜନାଥ ରଥ"],
+                answer: 1,
+                explanation: "ତାଙ୍କ ପିତାଙ୍କ ନାମ ଥିଲା ଚୌଧୁରୀ ଭାଗବତ ପ୍ରସାଦ ସାମନ୍ତରାୟ ମହାପାତ୍ର ଏବଂ ମାତାଙ୍କ ନାମ ରାଧାମଣି ଦେବୀ।"
+            },
+            {
+                q: "କାହାର ପ୍ରରୋଚନାରେ ଲକ୍ଷ୍ମୀକାନ୍ତ ସଙ୍ଗୀତରେ ମନୋନିବେଶ କରିଥିଲେ?",
+                options: ["ରାଧାନାଥ ରାୟ", "ବାବାଜୀ ରାମଦାସ", "ମଧୁସୂଦନ ଦାସ", "ଫକୀରମୋହନ ସେନାପତି"],
+                answer: 1,
+                explanation: "ଶାରୀରିକ ଅସୁସ୍ଥତା ହେତୁ ଶିକ୍ଷା କ୍ଷେତ୍ରରେ ଅଧିକ ଆଗେଇ ନ ପାରିବାରୁ ପାରିବାରିକ ଗୁରୁ ବାବାଜୀ ରାମଦାସଙ୍କ ପ୍ରରୋଚନାରେ ସେ ସଙ୍ଗୀତରେ ମନୋନିବେଶ କରିଥିଲେ।"
+            },
+            {
+                q: "ଲକ୍ଷ୍ମୀକାନ୍ତ ମହାପାତ୍ରଙ୍କ ରଚିତ ଉପନ୍ୟାସଟିର ନାମ କ’ଣ?",
+                options: ["ଜୀବନ ସଙ୍ଗୀତ", "କଣାମାମୁ", "ବୁଢ଼ା ଶଙ୍ଖାରି", "ଚଟକ ଚନ୍ଦ୍ରହାସ ଚମ୍ପୂ"],
+                answer: 1,
+                explanation: "ତାଙ୍କର ରଚିତ ସ୍ମରଣୀୟ କୃତିଗୁଡ଼ିକ ମଧ୍ୟରେ ‘କଣାମାମୁ’ ହେଉଛି ଏକ ପ୍ରସିଦ୍ଧ ଉପନ୍ୟାସ।"
+            },
+            {
+                q: "‘ଜୀବନ ସଙ୍ଗୀତ’ କାହାର ଏକ ପ୍ରସିଦ୍ଧ ସଙ୍ଗୀତ ଗୁଚ୍ଛ?",
+                options: ["ଗଙ୍ଗାଧର ମେହେର", "ଲକ୍ଷ୍ମୀକାନ୍ତ ମହାପାତ୍ର", "ନନ୍ଦକିଶୋର ବଳ", "ମଧୁସୂଦନ ରାଓ"],
+                answer: 1,
+                explanation: "‘ଜୀବନ ସଙ୍ଗୀତ’ ଲକ୍ଷ୍ମୀକାନ୍ତ ମହାପାତ୍ରଙ୍କଦ୍ୱାରା ରଚିତ ଏକ ସଙ୍ଗୀତ ଗୁଚ୍ଛ।"
+            },
+            {
+                q: "୧୯୩୭ ମସିହାରେ ପ୍ରକାଶିତ କେଉଁ ପ୍ରସିଦ୍ଧ ପତ୍ରିକାର ସେ ପ୍ରତିଷ୍ଠାତା ସମ୍ପାଦକ ଥିଲେ?",
+                options: ["ସହକାର", "ଉତ୍କଳ ଦୀପିକା", "ଡଗର", "ମୁକୁର"],
+                answer: 2,
+                explanation: "୧୯୩୭ ମସିହାରେ ପ୍ରକାଶିତ ‘ଡଗର’ ପତ୍ରିକାର ସେ ଥିଲେ ପ୍ରତିଷ୍ଠାତା ସମ୍ପାଦକ।"
+            },
+            {
+                q: "‘ବନ୍ଦେ ଉତ୍କଳ ଜନନୀ’ ଗୀତଟି ଓଡ଼ିଶା ସରକାରଙ୍କ ଦ୍ୱାରା କେତେ ମସିହାରେ ରାଜ୍ୟ ସଙ୍ଗୀତର ମାନ୍ୟତା ଲାଭ କରିଛି?",
+                options: ["୨୦୧୯ ମସିହାରେ", "୨୦୨୦ ମସିହାରେ", "୨୦୨୧ ମସିହାରେ", "୨୦୧୮ ମସିହାରେ"],
+                answer: 1,
+                explanation: "ଏହି ଗୀତଟି ଓଡ଼ିଶା ସରକାରଙ୍କ ଦ୍ୱାରା ୨୦୨୦ ମସିହାରେ ରାଜ୍ୟ ସଙ୍ଗୀତର ମାନ୍ୟତା ଲାଭ କରିଛି।"
+            },
+            {
+                q: "ଲକ୍ଷ୍ମୀକାନ୍ତଙ୍କର ରଚିତ ପ୍ରବନ୍ଧ ସଂକଳନଟିର ନାମ କ’ଣ?",
+                options: ["ଶରୀରମାଦ୍ୟମ୍", "ଦେହି ପଦ ପଲ୍ଲବ ମୁଦାରମ୍", "ସବୁଥିରୁ ବଞ୍ଚିତ କରି", "ଚଟକ ଚନ୍ଦ୍ରହାସ ଚମ୍ପୂ"],
+                answer: 0,
+                explanation: "ତାଙ୍କର ପ୍ରବନ୍ଧ ସଂକଳନଟି ହେଉଛି ‘ଶରୀରମାଦ୍ୟମ୍’ ଏବଂ ଗଳ୍ପ ସଂକଳନଟି ‘ଦେହି ପଦ ପଲ୍ଲବ ମୁଦାରମ୍’।"
+            },
+            {
+                q: "ଲକ୍ଷ୍ମୀକାନ୍ତ ମହାପାତ୍ରଙ୍କ ଲିଖିତ ପ୍ରସିଦ୍ଧ ଗଳ୍ପଟିର ନାମ କ’ଣ?",
+                options: ["ରେବତୀ", "ବୁଢ଼ା ଶଙ୍ଖାରି", "ମାଣିକ ପୁଅଣୀ", "ଧୂଳିର ଧରଣୀ"],
+                answer: 1,
+                explanation: "ତାଙ୍କର ଗଳ୍ପ ‘ବୁଢ଼ା ଶଙ୍ଖାରି’ ଓ କବିତା ‘ସବୁଥିରୁ ବଞ୍ଚିତ କରି’ ଓଡ଼ିଶାର ଜନମାନସରେ ବେଶ୍ ପରିଚିତ।"
+            },
+
+            // Stanza 1 & Nature Questions (11 to 20)
+            {
+                q: "‘ପୂତ-ପୟୋଧି ବିଧୌତ-ଶରୀରା’ – ଏଠାରେ ‘ପୟୋଧି’ ଶବ୍ଦର ଅର୍ଥ କ’ଣ?",
+                options: ["ନଦୀ", "ସମୁଦ୍ର", "ପର୍ବତ", "ଝରଣା"],
+                answer: 1,
+                explanation: "‘ପୟୋଧି’ ର ଅର୍ଥ ହେଉଛି ସମୁଦ୍ର। ସମୁଦ୍ରର ପବିତ୍ର ଜଳଧାରା ଉତ୍କଳ ଜନନୀଙ୍କ ଶରୀରକୁ ଧୋଇ ଦିଏ।"
+            },
+            {
+                q: "‘ବିଧୌତ’ ଶବ୍ଦର ଅର୍ଥ କ’ଣ?",
+                options: ["ଧୋଉଥିବା", "ସଜାଉଥିବା", "ପ୍ରବାହିତ ହେଉଥିବା", "ରକ୍ତିମ କରିବା"],
+                answer: 0,
+                explanation: "‘ବିଧୌତ’ ର ଅର୍ଥ ହେଉଛି ଧୋଉଥିବା ବା ପରିଷ୍କାର କରୁଥିବା।"
+            },
+            {
+                q: "ଉତ୍କଳ ଜନନୀଙ୍କ ତଟଦେଶ କେଉଁ କେଉଁ ଗଛ ଦ୍ୱାରା ସୁଶୋଭିତ?",
+                options: ["ଆମ୍ବ ଓ ପଣସ", "ତାଳ ଓ ତମାଳ", "ଶାଳ ଓ ଶିଶୁ", "ବର ଓ ଅଶ୍ୱତ୍ଥ"],
+                answer: 1,
+                explanation: "କବିତା ଅନୁଯାୟୀ ସମୁଦ୍ରର ତଟଦେଶ ତାଳ ଓ ତମାଳ ବୃକ୍ଷ ଦ୍ୱାରା ସୁଶୋଭିତ।"
+            },
+            {
+                q: "ନଦୀ କୂଳରେ କି ପ୍ରକାର ପବନ ପ୍ରବାହିତ ହୋଇଥାଏ?",
+                options: ["ଉଷ୍ଣ ପବନ", "ଶୀତଳ ଓ ଜଳକଣାଯୁକ୍ତ ପବନ", "ଝଡ଼ତୋଫାନ", "ଶୁଷ୍କ ପବନ"],
+                answer: 1,
+                explanation: "ସ୍ୱଚ୍ଛ ଜଳ ଧାରଣ କରିଥିବା ନଦୀ କୂଳରେ ଶୀତଳ ପବନ ଓ ଜଳକଣା (ଶୀକର-ସମୀରା) ପ୍ରବାହିତ ହୁଏ।"
+            },
+            {
+                q: "ଉତ୍କଳ ଜନନୀଙ୍କ ଅଙ୍ଗ କିପରି ବନଭୂମି ଦ୍ୱାରା ଶୋଭାପାଏ?",
+                options: ["ଘଞ୍ଚ ବନଭୂମି", "ଶୁଷ୍କ ବନଭୂମି", "ତୃଣହୀନ ପ୍ରାନ୍ତର", "କୃତ୍ରିମ ବଗିଚା"],
+                answer: 0,
+                explanation: "‘ଘନଘନ ବନଭୂମି ରାଜିତ ଅଙ୍ଗେ’ ଅର୍ଥାତ୍ ଉତ୍କଳ ଜନନୀଙ୍କ ଶରୀର ଘଞ୍ଚ ବନଭୂମିରେ ପରିଶୋଭିତ।"
+            },
+            {
+                q: "ଉତ୍କଳ ଜନନୀଙ୍କ ଦେହରେ କେଉଁ ପର୍ବତମାଳା ତରଙ୍ଗ ଆକାରରେ ଶୋଭାପାଏ?",
+                options: ["ହିମାଳୟ", "ନୀଳ ଭୂଧରମାଳା", "ବିନ୍ଧ୍ୟାଚଳ", "ଆରାବଳୀ"],
+                answer: 1,
+                explanation: "ନୀଳପର୍ବତମାଳା (ନୀଳ ଭୂଧରମାଳା) ତରଙ୍ଗ ଆକାରରେ ପ୍ରକାଶ ପାଇ ଉତ୍କଳ ଜନନୀଙ୍କ ଦେହରେ ଶୋଭାପାଏ।"
+            },
+            {
+                q: "ଉତ୍କଳର ଆକାଶ କାହାର କଳକଳ ରାବରେ ମୁଖରିତ ହୋଇଥାଏ?",
+                options: ["ଝରଣା", "ପକ୍ଷୀମାନଙ୍କର", "ପ୍ରବାହିତ ଜଳର", "ପବନର"],
+                answer: 1,
+                explanation: "ଉତ୍କଳ ଜନନୀଙ୍କ ଆକାଶ ସୁନ୍ଦର ପକ୍ଷୀମାନଙ୍କର କଳକଳ ରାବରେ ମୁଖରିତ ହେଉଥାଏ।"
+            },
+            {
+                q: "‘ଭୂଧର’ ଶବ୍ଦର ପ୍ରତିଶବ୍ଦ କ’ଣ?",
+                options: ["ନଦୀ", "ପର୍ବତ", "ସମୁଦ୍ର", "ଆକାଶ"],
+                answer: 1,
+                explanation: "‘ଭୂଧର’ ର ଅର୍ଥ ପର୍ବତ ବା ଗିରି।"
+            },
+            {
+                q: "‘ପୂତ’ ଶବ୍ଦର ଅର୍ଥ କ’ଣ?",
+                options: ["ଅପବିତ୍ର", "ପବିତ୍ର", "ବଡ଼", "ସୁନ୍ଦର"],
+                answer: 1,
+                explanation: "‘ପୂତ’ ଶବ୍ଦର ଅର୍ଥ ହେଉଛି ପବିତ୍ର।"
+            },
+            {
+                q: "‘ଚାରୁ ହାସମୟୀ ଚାରୁ ଭାଷମୟୀ’ କାହାକୁ କୁହାଯାଇଛି?",
+                options: ["ଭାରତ ମାତାଙ୍କୁ", "ଉତ୍କଳ ଜନନୀଙ୍କୁ", "ଓଡ଼ିଶାର ନଦୀମାନଙ୍କୁ", "ଓଡ଼ିଆ କବିମାନଙ୍କୁ"],
+                answer: 1,
+                explanation: "ପ୍ରକୃତି ପରିଶୋଭିତ ଉତ୍କଳ ଜନନୀଙ୍କ ହସ ସୁନ୍ଦର ଓ ଭାଷା ସୁନ୍ଦର ବୋଲି କବି ବର୍ଣ୍ଣନା କରିଛନ୍ତି।"
+            },
+
+            // Stanza 2 & Culture Questions (21 to 30)
+            {
+                q: "ଉତ୍କଳର ଶସ୍ୟ କ୍ଷେତ କେଉଁଥିରେ ପରିପୂର୍ଣ?",
+                options: ["ସୁନ୍ଦର ଧାନ (ଶାଳି)", "ଗହମ", "ମକା", "ଆଖୁ"],
+                answer: 0,
+                explanation: "‘ସୁନ୍ଦରଶାଳି-ସୁଶୋଭିତ-କ୍ଷେତ୍ରା’ ଅର୍ଥାତ୍ ଉତ୍କଳର ଶସ୍ୟ କ୍ଷେତ ସୁନ୍ଦର ଧାନରେ ପରିପୂର୍ଣ୍ଣ।"
+            },
+            {
+                q: "ଉତ୍କଳ ଜନନୀଙ୍କ ଚକ୍ଷୁ କେଉଁଥିରେ ଉଦ୍‌ଭାସିତ ବା ପ୍ରଦର୍ଶିତ?",
+                options: ["ଧନରତନ", "ଜ୍ଞାନ-ବିଜ୍ଞାନ", "କଳା ଓ ସାହିତ୍ୟ", "ଯୁଦ୍ଧାସ୍ତ୍ର"],
+                answer: 1,
+                explanation: "ଉତ୍କଳ ଜନନୀଙ୍କ ଚକ୍ଷୁ ଜ୍ଞାନ-ବିଜ୍ଞାନ ପ୍ରଦର୍ଶନରେ ଉଦ୍‌ଭାସିତ ବା ପ୍ରଦର୍ଶିତ।"
+            },
+            {
+                q: "କାହାର କୁଟୀର (ଊଟଜ) ଦ୍ୱାରା ଉତ୍କଳ ଜନନୀ ପବିତ୍ର ହୋଇଛନ୍ତି?",
+                options: ["ରାଜା ଓ ମହାରାଜାଙ୍କର", "ଯୋଗୀଋଷିଗଣଙ୍କର", "ବ୍ୟାପାରୀମାନଙ୍କର", "ବିଦେଶୀ ପର୍ଯ୍ୟଟକଙ୍କର"],
+                answer: 1,
+                explanation: "ବହୁ ଯୋଗୀଋଷିଙ୍କ କୁଟୀର ଦ୍ୱାରା ଉତ୍କଳ ଜନନୀ ପବିତ୍ର ହୋଇଛନ୍ତି।"
+            },
+            {
+                q: "ଉତ୍କଳ ଭୂମି କେଉଁଥିରେ ବିମଣ୍ଡିତା?",
+                options: ["ସୁନ୍ଦର ମନ୍ଦିରମାନଙ୍କରେ", "ବଡ଼ ବଡ଼ କଳକାରଖାନାରେ", "ଆଧୁନିକ ଅଟ୍ଟାଳିକାରେ", "ବିଶ୍ୱବିଦ୍ୟାଳୟରେ"],
+                answer: 0,
+                explanation: "ସୁନ୍ଦର ମନ୍ଦିରମାନଙ୍କରେ ଉତ୍କଳ ଭୂମି ବିମଣ୍ଡିତା ଏବଂ ତାଙ୍କର ବେଶ ଚାରୁକଳା ଦ୍ୱାରା ସୁଶୋଭିତ।"
+            },
+            {
+                q: "ଉତ୍କଳ ପ୍ରଦେଶ କେଉଁଥିରେ ପରିପୂର୍ଣ୍ଣ?",
+                options: ["ପୁଣ୍ୟ ତୀର୍ଥଚୟ", "ମରୁଭୂମି", "ବଡ଼ ବଡ଼ ଜଳଭଣ୍ଡାର", "ଘନ ଅରଣ୍ୟ"],
+                answer: 0,
+                explanation: "ଉତ୍କଳ ପ୍ରଦେଶ ଅନେକ ପୁଣ୍ୟ ତୀର୍ଥସ୍ଥାନ ସମୂହରେ ପରିପୂର୍ଣ୍ଣ।"
+            },
+            {
+                q: "ଉତ୍କଳ ଜନନୀଙ୍କ ଦେହ କାହାଦ୍ୱାରା ଅନୁରଞ୍ଜିତ ବା ଚର୍ଚ୍ଚିତ?",
+                options: ["ଶତ୍ରୁମାନଙ୍କର ରକ୍ତରେ", "ଫୁଲର ରଙ୍ଗରେ", "ଚନ୍ଦନ ଓ କର୍ପୂରରେ", "ମାଟିର ଲେପନରେ"],
+                answer: 0,
+                explanation: "‘ଅରିକୁଳ-ଶୋଣିତ-ଚର୍ଚ୍ଚିତ-ଦେହା’ – ଶତ୍ରୁମାନଙ୍କର ରକ୍ତରେ ଉତ୍କଳ ଜନନୀଙ୍କ ଦେହ ଅନୁରଞ୍ଜିତ।"
+            },
+            {
+                q: "‘ଶୂରବର’ ଶବ୍ଦର ଅର୍ଥ କ’ଣ?",
+                options: ["ଭୀରୁ ସୈନିକ", "ଶ୍ରେଷ୍ଠ ବୀର", "ବିଦ୍ୱାନ ବ୍ୟକ୍ତି", "ରାଜା"],
+                answer: 1,
+                explanation: "‘ଶୂରବର’ ର ଅର୍ଥ ହେଉଛି ଶ୍ରେଷ୍ଠବୀର। ଓଡ଼ିଶା ହେଉଛି ବହୁ ବୀର ଓ ଯୋଦ୍ଧାଙ୍କର ବାସଭୂମି।"
+            },
+            {
+                q: "‘ଅରିକୁଳ’ ଶବ୍ଦର ଅର୍ଥ କ’ଣ?",
+                options: ["ବନ୍ଧୁବର୍ଗ", "ଶତ୍ରୁବଂଶ", "କବିସମାଜ", "ଯୋଗୀଋଷି"],
+                answer: 1,
+                explanation: "‘ଅରି’ ଶବ୍ଦର ଅର୍ଥ ଶତ୍ରୁ, ତେଣୁ ‘ଅରିକୁଳ’ ଅର୍ଥ ଶତ୍ରୁବଂଶ।"
+            },
+            {
+                q: "‘ବିଶ୍ୱଭୂମଣ୍ଡଳ-କୃତବର-ସ୍ନେହା’ – ଏଠାରେ ‘କୃତବର’ ର ଅର୍ଥ କ’ଣ?",
+                options: ["ବିଦ୍ୱାନ", "ଅଜ୍ଞାନ", "ନୀରବ", "ଗରୀବ"],
+                answer: 0,
+                explanation: "‘କୃତବର’ ଶବ୍ଦର ଅର୍ଥ ବିଦ୍ୱାନ ବା ଜ୍ଞାନୀ ବ୍ୟକ୍ତି।"
+            },
+            {
+                q: "‘ଗେହ’ ଶବ୍ଦର ଅର୍ଥ କ’ଣ?",
+                options: ["ରାସ୍ତା", "ଗୃହ ବା ବାସଭୂମି", "ବଗିଚା", "ପର୍ବତ"],
+                answer: 1,
+                explanation: "‘ଗେହ’ ଶବ୍ଦର ଅର୍ଥ ଗୃହ ବା ବାସସ୍ଥାନ।"
+            },
+
+            // Stanza 3 & Legacy Questions (31 to 40)
+            {
+                q: "କବିକୁଳମୌଳିଙ୍କର ସୁନନ୍ଦନମାନଙ୍କ ଦ୍ୱାରା ଉତ୍କଳ ଜନନୀ କିପରି?",
+                options: ["ବନ୍ଦନୀୟା (ବନ୍ଧ୍ୟା)", "ତିରସ୍କୃତା", "ଅଜ୍ଞାତା", "ଉପେକ୍ଷିତା"],
+                answer: 0,
+                explanation: "ମହାନ କବି ଓ ସୁପୁତ୍ରମାନଙ୍କ ଦ୍ୱାରା ଉତ୍କଳ ଜନନୀ ବନ୍ଦନୀୟା।"
+            },
+            {
+                q: "ଉତ୍କଳ ଜନନୀଙ୍କ କୀର୍ତ୍ତି କେଉଁଠାରେ ପ୍ରଚାରିତ ଓ ବିଘୋଷିତ?",
+                options: ["କେବଳ ଗାଁରେ", "ସମଗ୍ର ଭୁବନରେ (ପୃଥିବୀରେ)", "କେବଳ ରାଜଧାନୀରେ", "ପଡ଼ୋଶୀ ରାଜ୍ୟରେ"],
+                answer: 1,
+                explanation: "‘ଭୁବନ-ବିଘୋଷିତ କୀର୍ତ୍ତି ଅନିନ୍ଦ୍ୟା’ – ତାଙ୍କର ପ୍ରଶଂସନୀୟ କୀର୍ତ୍ତି ସାରା ବିଶ୍ୱରେ ପ୍ରଚାରିତ।"
+            },
+            {
+                q: "ଉତ୍କଳ ଜନନୀ ସର୍ବଦା କିପରି ଭାବେ ନମସ୍ୟା?",
+                options: ["ଶରଣଦାତ୍ରୀ ଭାବେ", "ଭୟଭୀତା ଭାବେ", "ନିରବଦ୍ରଷ୍ଟା ଭାବେ", "ଦୁର୍ବଳା ଭାବେ"],
+                answer: 0,
+                explanation: "ଉତ୍କଳ ଜନନୀ ସର୍ବଦା ଶରଣଦାତ୍ରୀ ଭାବେ ଚିର ନମସ୍ୟା, ଧନ୍ୟା ଓ ପୁଣ୍ୟବତୀ।"
+            },
+            {
+                q: "‘ଶରଣ୍ୟ’ ଶବ୍ଦର ଅର୍ଥ କ’ଣ?",
+                options: ["ଭୟଭୀତ କରୁଥିବା", "ସବୁଦିନ ପାଇଁ ଶରଣ ପ୍ରଦାନ କରୁଥିବା", "ଯୁଦ୍ଧ କରୁଥିବା", "ତ୍ୟାଗ କରୁଥିବା"],
+                answer: 1,
+                explanation: "‘ଶରଣ୍ୟ’ ର ଅର୍ଥ ସବୁଦିନ ପାଇଁ ଆଶ୍ରୟ ବା ଶରଣ ପ୍ରଦାନ କରୁଥିବା।"
+            },
+            {
+                q: "‘ଅନିନ୍ଦ୍ୟା’ ଶବ୍ଦର ଅର୍ଥ କ’ଣ?",
+                options: ["ନିନ୍ଦନୀୟ", "ପ୍ରଶଂସନୀୟା / ନିନ୍ଦାହୀନା", "ଅଜ୍ଞାତ", "ଅସୁନ୍ଦର"],
+                answer: 1,
+                explanation: "‘ଅନିନ୍ଦ୍ୟା’ ଅର୍ଥ ଯାହାର କୌଣସି ନିନ୍ଦା ନାହିଁ ଅର୍ଥାତ୍ ପ୍ରଶଂସନୀୟା।"
+            },
+            {
+                q: "‘ମୌଳି’ ଶବ୍ଦର ଅର୍ଥ କ’ଣ?",
+                options: ["ପାଦ", "ମୁକୁଟ ବା ଶିର", "ହସ୍ତ", "ହୃଦୟ"],
+                answer: 1,
+                explanation: "‘ମୌଳି’ ଶବ୍ଦର ଅର୍ଥ ମୁକୁଟ ବା ଶିରଦେଶ।"
+            },
+            {
+                q: "‘ତୀର୍ଥଚୟ’ ର ଅର୍ଥ କ’ଣ?",
+                options: ["ଏକମାତ୍ର ତୀର୍ଥ", "ତୀର୍ଥସ୍ଥାନ ସମୂହ", "ତୀର୍ଥଯାତ୍ରୀ", "ନଦୀକୂଳ"],
+                answer: 1,
+                explanation: "‘ତୀର୍ଥଚୟ’ ଅର୍ଥ ତୀର୍ଥସ୍ଥାନ ସମୂହ ଯାହାଦ୍ୱାରା ଉତ୍କଳ ପ୍ରଦେଶ ପରିପୂର୍ଣ୍ଣ।"
+            },
+            {
+                q: "‘ଶୀକର’ ଶବ୍ଦର ଅର୍ଥ କ’ଣ?",
+                options: ["ଜଳକଣା", "ଉଷ୍ଣତା", "ଧୂଳିକଣା", "ଶୁଷ୍କ ପବନ"],
+                answer: 0,
+                explanation: "‘ଶୀକର’ ଶବ୍ଦର ଅର୍ଥ ହେଉଛି ଜଳକଣା।"
+            },
+            {
+                q: "‘ସମୀର’ ଶବ୍ଦର ପ୍ରତିଶବ୍ଦ ନିମ୍ନୋକ୍ତ ମଧ୍ୟରୁ କେଉଁଟି?",
+                options: ["ଅଗ୍ନି", "ପବନ", "ଜଳ", "ଆକାଶ"],
+                answer: 1,
+                explanation: "‘ସମୀର’ ର ଅର୍ଥ ହେଉଛି ପବନ ବା ବାୟୁ।"
+            },
+            {
+                q: "‘ରାଜିତ’ ଶବ୍ଦର ଅର୍ଥ କ’ଣ?",
+                options: ["ଶୋଭାପାଏ", "ଲୁକ୍କାୟିତ", "ନଷ୍ଟ ହୁଏ", "ବିଚଳିତ ହୁଏ"],
+                answer: 0,
+                explanation: "‘ରାଜିତ’ ଶବ୍ଦର ଅର୍ଥ ଶୋଭାପାଏ।"
+            },
+
+            // Grammar, Antonyms & Word Differences (41 to 50)
+            {
+                q: "‘ଶୁଭ୍ର’ ଶବ୍ଦର ବିପରୀତାର୍ଥବୋଧକ ଶବ୍ଦ କ’ଣ?",
+                options: ["ଧଳା", "ଅଶୁଭ୍ର ବା ଅସୁଭ୍ର (କୃଷ୍ଣ/ଅରୁଣ)", "ପବିତ୍ର", "ଉଜ୍ଜ୍ୱଳ"],
+                answer: 1,
+                explanation: "‘ଶୁଭ୍ର’ (ଧଳା/ସ୍ୱଚ୍ଛ) ର ବିପରୀତାର୍ଥବୋଧକ ଅଶୁଭ୍ର ବା ଅନ୍ଧକାରମୟ/ଅସୁଭ୍ର।"
+            },
+            {
+                q: "‘ଘନ’ ଶବ୍ଦର ବିପରୀତାର୍ଥବୋଧକ ଶବ୍ଦ କ’ଣ?",
+                options: ["ପତଳା / ତନୁ", "ନିବିଡ଼", "ବଡ଼", "ସୁନ୍ଦର"],
+                answer: 0,
+                explanation: "‘ଘନ’ (ଘଞ୍ଚ/ନିବିଡ଼) ର ବିପରୀତାର୍ଥବୋଧକ ହେଉଛି ପତଳା।"
+            },
+            {
+                q: "‘ଦର୍ପିତ’ ଶବ୍ଦର ବିପରୀତାର୍ଥବୋଧକ ଶବ୍ଦ କ’ଣ?",
+                options: ["ଗର୍ବିତ", "ବିନୀତ / ନମ୍ର", "ଶକ୍ତିଶାଳୀ", "ଭୟଭୀତ"],
+                answer: 1,
+                explanation: "‘ଦର୍ପିତ’ (ଗର୍ବିତ) ର ବିପରୀତାର୍ଥବୋଧକ ଶବ୍ଦ ହେଉଛି ବିନୀତ ବା ନମ୍ର।"
+            },
+            {
+                q: "‘ସୁର’ ଓ ‘ଶୂର’ ମଧ୍ୟରେ ଅର୍ଥଗତ ପାର୍ଥକ୍ୟ କ’ଣ?",
+                options: ["ଦେବତା ଓ ବୀର", "ରାକ୍ଷସ ଓ ମଣିଷ", "ନଦୀ ଓ ପର୍ବତ", "ରାଜା ଓ ପ୍ରଜା"],
+                answer: 0,
+                explanation: "‘ସୁର’ ଅର୍ଥ ଦେବତା ଏବଂ ‘ଶୂର’ ଅର୍ଥ ବୀର ବା ଯୋଦ୍ଧା।"
+            },
+            {
+                q: "‘ପୂତ’ ଓ ‘ପୁତ’ ମଧ୍ୟରେ ଅର୍ଥଗତ ପାର୍ଥକ୍ୟ କ’ଣ?",
+                options: ["ପବିତ୍ର ଓ ପୁତ୍ର", "ଜଳ ଓ ସ୍ଥଳ", "ସୁନ୍ଦର ଓ ଅସୁନ୍ଦର", "ରାତି ଓ ଦିନ"],
+                answer: 0,
+                explanation: "‘ପୂତ’ ଅର୍ଥ ପବିତ୍ର ଏବଂ ‘ପୁତ’ ଅର୍ଥ ପୁତ୍ର ବା ସନ୍ତାନ।"
+            },
+            {
+                q: "‘କୂଳ’ ଓ ‘କୁଳ’ ମଧ୍ୟରେ ଅର୍ଥଗତ ପାର୍ଥକ୍ୟ କ’ଣ?",
+                options: ["ନଦୀକୂଳ ଓ ବଂଶ", "ଜଳ ଓ ସ୍ଥଳ", "ରାଜା ଓ ପ୍ରଜା", "ଫୁଲ ଓ ଫଳ"],
+                answer: 0,
+                explanation: "‘କୂଳ’ ଅର୍ଥ ନଦୀର ତଟ ବା କୂଳ ଏବଂ ‘କୁଳ’ ଅର୍ଥ ବଂଶ ବା ଗୋଷ୍ଠୀ।"
+            },
+            {
+                q: "‘କଳକଳ’ ଭଳି ଏକ ଧ୍ୱନ୍ୟାତ୍ମକ ଯୁଗ୍ମଶବ୍ଦ ନିମ୍ନୋକ୍ତ ମଧ୍ୟରୁ କେଉଁଟି?",
+                options: ["ଝିମଝିମ", "ଭଲମନ୍ଦ", "ଦିନରାତି", "ହାଟବାଜାର"],
+                answer: 0,
+                explanation: "‘କଳକଳ’ ଏକ ଧ୍ୱନ୍ୟାତ୍ମକ ଯୁଗ୍ମଶବ୍ଦ, ସେହିପରି ‘ଝିମଝିମ’, ‘ଖିଲଖିଲ’, ‘ଝରଝର’ ମଧ୍ୟ ଧ୍ୱନ୍ୟାତ୍ମକ ଯୁଗ୍ମଶବ୍ଦ ଅଟେ।"
+            },
+            {
+                q: "‘ବନ୍ଦେ ଉତ୍କଳ ଜନନୀ’ କବିତାରେ କେଉଁ ଭାବନା ପ୍ରକାଶ ପାଇଛି?",
+                options: ["ଜାତୀୟତାବାଦୀ ଚେତନା ଓ ଦେଶାତ୍ମବୋଧ", "ବୈଜ୍ଞାନିକ ଅନ୍ୱେଷଣ", "ପ୍ରାଚୀନ ରାଜତନ୍ତ୍ର", "ବ୍ୟାପାର ଓ ବାଣିଜ୍ୟ"],
+                answer: 0,
+                explanation: "ଏହି ଗୀତଟିରେ ଜାତୀୟତାବାଦୀ ଚେତନା ଓ ମାତୃଭୂମି ପ୍ରତି ଗଭୀର ଦେଶାତ୍ମବୋଧ ଭାବନା ପ୍ରକାଶ ପାଇଛି।"
+            },
+            {
+                q: "‘ପୁଣ୍ୟ’ ଶବ୍ଦର ବିପରୀତାର୍ଥବୋଧକ ଶବ୍ଦ କ’ଣ?",
+                options: ["ପାପ", "ଶୁଭ୍ର", "ଧର୍ମ", "ଭଲ"],
+                answer: 0,
+                explanation: "‘ପୁଣ୍ୟ’ ର ବିପରୀତାର୍ଥବୋଧକ ଶବ୍ଦ ହେଉଛି ପାପ।"
+            },
+            {
+                q: "‘ସୁନ୍ଦର’ ଶବ୍ଦର ବିପରୀତାର୍ଥବୋଧକ ଶବ୍ଦ କ’ଣ?",
+                options: ["ଅସୁନ୍ଦର ବା କଦାକାର", "ଭଲ", "ବଡ଼", "ଉଜ୍ଜ୍ୱଳ"],
+                answer: 0,
+                explanation: "‘ସୁନ୍ଦର’ ର ବିପରୀତାର୍ଥବୋଧକ ଶବ୍ଦ ହେଉଛି ଅସୁନ୍ଦର।"
+            }
+        ];
+
+        const funnyFacts = [
+            "ଜାଣିଛନ୍ତି କି? ‘ବନ୍ଦେ ଉତ୍କଳ ଜନନୀ’ ଗୀତଟି ଓଡ଼ିଶାର କାନ୍ତକବି ଲକ୍ଷ୍ମୀକାନ୍ତ ମହାପାତ୍ରଙ୍କଦ୍ୱାରା ଇଂଲିଶ ଶାସନ କାଳରେ ଜାତୀୟତାବାଦୀ ଚେତନା ଜାଗ୍ରତ କରିବା ପାଇଁ ରଚିତ ହୋଇଥିଲା ଏବଂ ୨୦୨୦ ମସିହାରେ ଏହା ରାଜ୍ୟ ସଙ୍ଗୀତର ମାନ୍ୟତା ପାଇଛି! 🌟",
+            "ମଜାଦାର ତଥ୍ୟ: ଓଡ଼ିଶାର ପ୍ରକୃତି ଏତେ ସୁନ୍ଦର ଯେ ଏଠାକାର ତାଳ ଓ ତମାଳ ବୃକ୍ଷଶୋଭିତ ସମୁଦ୍ର ତଟ ଏବଂ ନୀଳ ପର୍ବତମାଳା ସବୁବେଳେ କବିମାନଙ୍କ ଲେଖନୀକୁ ପ୍ରେରଣା ଯୋଗାଇଥାଏ! 🌴",
+            "ଆଶ୍ଚର୍ଯ୍ୟଜନକ ତଥ୍ୟ: କାନ୍ତକବି ଲକ୍ଷ୍ମୀକାନ୍ତ ମହାପାତ୍ର ୧୯୩୭ ମସିହାରେ ପ୍ରସିଦ୍ଧ ‘ଡଗର’ ପତ୍ରିକାର ପ୍ରତିଷ୍ଠାତା ସମ୍ପାଦକ ଥିଲେ, ଯାହା ଓଡ଼ିଆ ସାହିତ୍ୟ ଜଗତରେ ଏକ ନୂତନ ଯୁଗ ଆଣିଥିଲା! ✍️",
+            "ଉପଦେଶ: ପ୍ରତିଦିନ ପାଠ ପଢ଼ିବା ଏବଂ ଏପରି କୁଇଜ୍ ଅଭ୍ୟାସ କରିବା ଦ୍ୱାରା ମସ୍ତିଷ୍କର ସ୍ମରଣ ଶକ୍ତି ବୃଦ୍ଧି ପାଏ ଏବଂ ପାଠଗୁଡ଼ିକ ସହଜରେ ମନେରହେ! 🧠✨"
+        ];
+
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let incorrectCount = 0;
+        let answered = false;
+        let shuffledQuestions = [];
+
+        function startQuiz() {
+            shuffledQuestions = [...questions]; // Keep order or shuffle if needed
+            currentQuestionIndex = 0;
+            score = 0;
+            incorrectCount = 0;
+            document.getElementById('welcome-screen').classList.add('hidden');
+            document.getElementById('result-screen').classList.add('hidden');
+            document.getElementById('quiz-screen').classList.remove('hidden');
+            document.getElementById('quiz-screen').classList.add('flex');
+            loadQuestion();
+        }
+
+        function loadQuestion() {
+            answered = false;
+            document.getElementById('explanation-container').classList.add('hidden');
+            document.getElementById('next-btn').classList.add('hidden');
+
+            const q = shuffledQuestions[currentQuestionIndex];
+            const total = shuffledQuestions.length;
+
+            document.getElementById('question-counter').innerText = `ପ୍ରଶ୍ନ ${currentQuestionIndex + 1} / ${total}`;
+            document.getElementById('score-display').innerText = `ସ୍କୋର୍: ${score}`;
+            document.getElementById('progress-bar').style.width = `${((currentQuestionIndex + 1) / total) * 100}%`;
+            document.getElementById('question-text').innerText = q.q;
+
+            const optionsContainer = document.getElementById('options-container');
+            optionsContainer.innerHTML = '';
+
+            q.options.forEach((opt, idx) => {
+                const btn = document.createElement('button');
+                btn.className = 'w-full text-left p-4 rounded-xl border border-slate-200 bg-white hover:bg-orange-50 hover:border-orange-300 font-medium text-slate-700 transition shadow-xs cursor-pointer flex items-center justify-between';
+                btn.innerHTML = `<span><strong class="mr-2 text-orange-600">${String.fromCharCode(65 + idx)}.</strong> ${opt}</span>`;
+                btn.onclick = () => selectOption(idx, btn);
+                optionsContainer.appendChild(btn);
+            });
+        }
+
+        function selectOption(selectedIdx, btnElement) {
+            if (answered) return;
+            answered = true;
+
+            const q = shuffledQuestions[currentQuestionIndex];
+            const optionsContainer = document.getElementById('options-container');
+            const allButtons = optionsContainer.getElementsByTagName('button');
+
+            if (selectedIdx === q.answer) {
+                score++;
+                btnElement.className = 'w-full text-left p-4 rounded-xl border border-green-300 bg-green-50 font-medium text-green-800 transition shadow-xs flex items-center justify-between';
+                btnElement.innerHTML += '<span class="text-green-600 font-bold">✔ ସଠିକ୍</span>';
+            } else {
+                incorrectCount++;
+                btnElement.className = 'w-full text-left p-4 rounded-xl border border-red-300 bg-red-50 font-medium text-red-800 transition shadow-xs flex items-center justify-between';
+                btnElement.innerHTML += '<span class="text-red-600 font-bold">✖ ଭୁଲ୍</span>';
+
+                // Highlight correct one
+                const correctBtn = allButtons[q.answer];
+                correctBtn.className = 'w-full text-left p-4 rounded-xl border border-green-300 bg-green-50 font-medium text-green-800 transition shadow-xs flex items-center justify-between';
+                correctBtn.innerHTML += '<span class="text-green-600 font-bold">✔ ସଠିକ୍ ଉତ୍ତର</span>';
+            }
+
+            // Disable all buttons
+            for (let b of allButtons) {
+                b.style.cursor = 'default';
+                b.onclick = null;
+            }
+
+            // Show explanation
+            document.getElementById('explanation-text').innerText = q.explanation;
+            document.getElementById('explanation-container').classList.remove('hidden');
+            document.getElementById('next-btn').classList.remove('hidden');
+            document.getElementById('score-display').innerText = `ସ୍କୋର୍: ${score}`;
+        }
+
+        function nextQuestion() {
+            currentQuestionIndex++;
+            
+            // Check for Funny Fact Break after every 20 questions
+            if (currentQuestionIndex > 0 && currentQuestionIndex % 20 === 0 && currentQuestionIndex < shuffledQuestions.length) {
+                showFactBreak();
+                return;
+            }
+
+            if (currentQuestionIndex < shuffledQuestions.length) {
+                loadQuestion();
+            } else {
+                showResults();
+            }
+        }
+
+        function showFactBreak() {
+            document.getElementById('quiz-screen').classList.add('hidden');
+            document.getElementById('quiz-screen').classList.remove('flex');
+            
+            // Pick a random fact or sequential
+            const factIndex = Math.floor((currentQuestionIndex / 20) - 1) % funnyFacts.length;
+            document.getElementById('fact-text').innerText = funnyFacts[factIndex];
+            
+            document.getElementById('fact-screen').classList.remove('hidden');
+            document.getElementById('fact-screen').classList.add('flex');
+        }
+
+        function resumeQuiz() {
+            document.getElementById('fact-screen').classList.add('hidden');
+            document.getElementById('fact-screen').classList.remove('flex');
+            document.getElementById('quiz-screen').classList.remove('hidden');
+            document.getElementById('quiz-screen').classList.add('flex');
+            loadQuestion();
+        }
+
+        function showResults() {
+            document.getElementById('quiz-screen').classList.add('hidden');
+            document.getElementById('quiz-screen').classList.remove('flex');
+            document.getElementById('result-screen').classList.remove('hidden');
+            document.getElementById('result-screen').classList.add('flex');
+
+            const total = shuffledQuestions.length;
+            const percentage = Math.round((score / total) * 100);
+
+            document.getElementById('res-total').innerText = total;
+            document.getElementById('res-correct').innerText = score;
+            document.getElementById('res-incorrect').innerText = incorrectCount;
+            document.getElementById('res-percentage').innerText = percentage + '%';
+
+            let msg = "";
+            if (percentage >= 90) {
+                msg = "ଅତି ଉତ୍ତମ! ଆପଣ ଏହି ଅଧ୍ୟାୟଟିକୁ ବହୁତ ଭଲଭାବେ ବୁଝିଛନ୍ତି ଏବଂ ସମସ୍ତ ତଥ୍ୟ ଆପଣଙ୍କ ମନରେ ଅଛି।";
+            } else if (percentage >= 70) {
+                msg = "ଉତ୍ତମ ପ୍ରଦର୍ଶନ! ଆପଣଙ୍କର ପ୍ରସ୍ତୁତି ବହୁତ ଭଲ ଅଛି, ଆଉ ଅନ୍ତର୍ନିହିତ ଅଭ୍ୟାସ ଦ୍ୱାରା ଆପଣ ଆହୁରି ଭଲ କରିପାରିବେ।";
+            } else {
+                msg = "ଭଲ ପ୍ରୟାସ! ଆଉ ଥରେ ଅଧ୍ୟାୟଟି ପଢ଼ି କୁଇଜ୍ ଅଭ୍ୟାସ କଲେ ଆପଣଙ୍କ ଜ୍ଞାନ ଆହୁରି ଦୃଢ଼ ହେବ।";
+            }
+            document.getElementById('performance-msg').innerText = msg;
+        }
+
+        function restartQuiz() {
+            startQuiz();
+        }
+
+        function downloadHtmlFile() {
+            const htmlContentFull = document.documentElement.outerHTML;
+            const blob = new Blob([htmlContentFull], { type: 'text/html' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'Bande_Utkala_Janani_Quiz.html';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+    </script>
+
+
+</body></html>
