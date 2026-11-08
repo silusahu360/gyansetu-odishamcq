@@ -135,7 +135,6 @@ body.dark .pro-date-left { color: #c4b5fd; }
 .pro-quote { font-size: 12.5px; font-style: italic; color: #64748b; text-align: center; border-top: 1px dashed #cbd5e1; padding-top: 8px; margin-top: 2px; }
 body.dark .pro-quote { color: #94a3b8; border-color: #475569; }
 
-/* HOME HERO (Removed but keep section-title) */
 .section-title{font-size:12.5px;color:var(--muted);margin:18px 0 10px;font-weight:800;text-transform:uppercase;letter-spacing:.7px;}
 .quick-actions{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;}
 .quick-btn{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 4px;display:flex;flex-direction:column;align-items:center;gap:5px;font-size:11px;font-weight:750;color:var(--ink);cursor:pointer;transition:.15s;box-shadow:0 2px 8px rgba(76,29,149,.05);}
@@ -243,6 +242,24 @@ body.dark .pg-stat-num{color:#c4b5fd;}
 .confetti-container{position:fixed;inset:0;pointer-events:none;z-index:200;overflow:hidden;}
 .confetti{position:absolute;width:9px;height:9px;top:-20px;border-radius:2px;animation:fall linear forwards;}
 @keyframes fall{to{transform:translateY(105vh) rotate(720deg);opacity:.8;}}
+
+/* FIXED QUIZ SCROLL CONTAINER STYLES */
+.quiz-container-wrap {
+  width: 100%;
+  border-radius: 14px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+  -webkit-overflow-scrolling: touch;
+}
+#quizFrame {
+  width: 100%;
+  height: 72vh;
+  border: 0;
+  display: block;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
 </style>
 </head>
 <body>
@@ -257,7 +274,6 @@ body.dark .pg-stat-num{color:#c4b5fd;}
 <!-- HOME SCREEN -->
 <section id="home" class="screen active">
   
-  <!-- Professional Time & Calendar Widget -->
   <div class="pro-widget">
     <div class="pro-top">
       <div class="pro-greeting">
@@ -344,6 +360,7 @@ body.dark .pg-stat-num{color:#c4b5fd;}
 <button type="button" class="back" onclick="goBack()">← Back</button>
 </section>
 
+<!-- QUIZ SCREEN WITH FIXED SCROLL CONTAINER -->
 <section id="quizScreen" class="screen">
 <div id="quizTimerBar" class="quiz-timer-strip">
 <div style="display:flex;align-items:center;gap:8px;">
@@ -355,9 +372,12 @@ body.dark .pg-stat-num{color:#c4b5fd;}
 <div id="noteActionToolbar" style="display:none;margin-bottom:10px;gap:8px;">
 <button type="button" id="quizSaveBtn" class="btn green full" style="display:none" onclick="saveCurrentQuizOffline()">💾 Download for Offline</button>
 </div>
-<div id="quizFrameContainer" style="width:100%;border-radius:14px;overflow:hidden;background:#fff;box-shadow:0 6px 20px rgba(0,0,0,0.1);">
-<iframe id="quizFrame" style="width:100%;height:72vh;border:0;display:block;" title="Content Viewer"></iframe>
+
+<!-- Scroll container wrapped securely -->
+<div class="quiz-container-wrap">
+<iframe id="quizFrame" title="Content Viewer"></iframe>
 </div>
+
 <div class="btnrow" style="margin-top:14px;">
 <button type="button" id="viewerBackButton" class="back" style="margin-top:0;" onclick="handleViewerBack()">← Back</button>
 <button type="button" class="back home-alt" style="margin-top:0;" onclick="goHomeFromViewer()">⌂ Home</button>
@@ -393,7 +413,6 @@ body.dark .pg-stat-num{color:#c4b5fd;}
       <div class="mm-score-item">BEST<span class="mm-score-num" id="mmBest">-</span></div>
     </div>
 
-    <!-- LEVEL SELECTOR -->
     <div id="mmLevels" class="mm-levels">
       <button class="mm-level-btn easy" onclick="startMemoryLevel('easy')">
         <div class="mm-level-info">
@@ -418,7 +437,6 @@ body.dark .pg-stat-num{color:#c4b5fd;}
       </button>
     </div>
 
-    <!-- GAME GRID -->
     <div id="mmGrid" class="mm-grid" style="display:none;"></div>
 
     <div class="btnrow" id="mmControlRow" style="margin-top:12px;display:none;">
@@ -449,7 +467,7 @@ body.dark .pg-stat-num{color:#c4b5fd;}
       </button>
       <button class="mt-level-btn medium" onclick="startMathLevel('medium')">
         <div><div class="mt-level-name">😎 ମଧ୍ୟମ · Medium</div><div class="mt-level-meta">+ − × (ବଡ଼ ସଂଖ୍ୟା)</div></div>
-        <div class="mt-level-best" id="mtBestMedium">ଖେଳି ନାହାନ୍ତି</div>
+        <div class="mt-level-best" id="mmBestMedium">ଖେଳି ନାହାନ୍ତି</div>
       </button>
       <button class="mt-level-btn hard" onclick="startMathLevel('hard')">
         <div><div class="mt-level-name">🔥 କଠିନ · Hard</div><div class="mt-level-meta">+ − × ÷ (ବହୁତ ବଡ଼)</div></div>
@@ -605,9 +623,6 @@ body.dark .pg-stat-num{color:#c4b5fd;}
 <script>
 "use strict";
 
-// ==========================================
-// 1. CORE SETUP & ERROR HANDLING
-// ==========================================
 window.alert = function (msg) {
   var m = document.getElementById("msgModal");
   var t = document.getElementById("msgModalText");
@@ -667,9 +682,6 @@ let studySeconds = 0;
 let studyInterval = null;
 const $ = id => document.getElementById(id);
 
-// ==========================================
-// 2. SAFE STORAGE SYSTEM (Offline Support)
-// ==========================================
 const memoryFallback = {};
 const lastBridgeJson = {};
 const pendingBridge = {};
@@ -773,9 +785,6 @@ function store(key, value) {
   return ok;
 }
 
-// ==========================================
-// 3. APP UPDATE & NETWORK
-// ==========================================
 function parseVer(v) { return String(v || "").replace(/^[^\d]*/, "").split(".").map(n => parseInt(n, 10) || 0); }
 function isNewerVersion(remote, local) {
   var a = parseVer(remote), b = parseVer(local);
@@ -817,9 +826,6 @@ function performAppUpdate() {
   window.open(APP_DOWNLOAD_LINK, "_blank");
 }
 
-// ==========================================
-// 4. LIVE TIME & CALENDAR
-// ==========================================
 function updateLiveDateTime() {
   const now = new Date();
   const timeStr = now.toLocaleTimeString('en-US', { hour12: false });
@@ -849,9 +855,6 @@ function updateLiveDateTime() {
 updateLiveDateTime();
 setInterval(updateLiveDateTime, 1000);
 
-// ==========================================
-// 5. NAVIGATION & BACK BUTTON HANDLER
-// ==========================================
 let backStack = ["home"];
 let savedScreen = localStorage.getItem("gs_last_screen");
 if (savedScreen && document.getElementById(savedScreen)) {
@@ -867,7 +870,6 @@ function pushHistoryState(screenId) {
 }
 
 window.addEventListener("popstate", function (e) {
-    // Stop timers of the screen we are leaving
     const currentActive = document.querySelector(".screen.active");
     if (currentActive) {
         if (currentActive.id === "quizScreen") {
@@ -910,16 +912,13 @@ window.addEventListener("load", function() {
   syncHeaderHeight();
   applyStoredPrefs();
   if (savedScreen && document.getElementById(savedScreen)) {
-      showScreen(savedScreen, false); // Don't push history on load
+      showScreen(savedScreen, false);
   }
   setTimeout(() => { checkForAppUpdate(false); }, 2000);
   setTimeout(() => { checkDailyProgress(); }, 1000);
 });
 
-// ==========================================
-// 6. UTILS & ROUTING
-// ==========================================
-function esc(s) { return String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c])); }
+function esc(s) { return String(s).replace(/[&<>"']/g, c => ({"&":"&","<":"<",">":">",'"':""","'":"'"}[c])); }
 
 function withBase(html) {
   const tag = '<base href="' + GITHUB_PAGES_BASE + '">';
@@ -953,7 +952,6 @@ function updateBottomNav(id){
 function showScreen(id, pushHistory = true) {
   let target = $(id) || $("home");
   
-  // Stop timers if leaving game screens
   const currentActive = document.querySelector(".screen.active");
   if (currentActive && currentActive.id !== id) {
       if (currentActive.id === "quizScreen") {
@@ -976,9 +974,6 @@ function showScreen(id, pushHistory = true) {
 
 function goBack(){ history.back(); }
 
-// ==========================================
-// 7. STUDY MATERIALS
-// ==========================================
 function showClasses() {
   $("classTitle").textContent = "Select Class · Study Materials";
   $("classGrid").innerHTML = "";
@@ -1014,9 +1009,6 @@ function openSubject(sub) {
   showScreen("folder");
 }
 
-// ==========================================
-// 8. MCQ & VIEWER LOGIC
-// ==========================================
 function cleanViewerFrame() {
   clearInterval(quizTimerInterval); quizTimerInterval = null;
   isQuizPaused = false; currentQuizHtml = ""; currentQuizTitle = ""; currentQuizUrl = "";
@@ -1027,7 +1019,6 @@ function cleanViewerFrame() {
 
 function handleViewerBack() {
   cleanViewerFrame();
-  // Forcefully reset history to prevent iframe from closing the app
   if (currentViewMode === "quiz") {
       showScreen("mcqSetup", false);
       backStack = ["home", "mcqSetup"];
@@ -1125,9 +1116,6 @@ function deleteDownloadedMcq(key) {
   });
 }
 
-// ==========================================
-// 9. PROGRESS / XP SYSTEM
-// ==========================================
 function migrateOldGarden() {
   try {
     const old = load("gs_garden", null);
@@ -1212,9 +1200,6 @@ function renderProgress() {
   $("pgBadges").innerHTML = badgesHtml;
 }
 
-// ==========================================
-// 10. MEMORY MATCH GAME
-// ==========================================
 var mmInterval = null;
 var mmSeconds = 0;
 var mmMoves = 0;
@@ -1434,9 +1419,6 @@ function exitMemoryGame() {
   history.replaceState({ screen: "gameMenuScreen" }, "", "#gameMenuScreen");
 }
 
-// ==========================================
-// 11. MATH SPEED CHALLENGE
-// ==========================================
 var MT_DURATION = 30;
 var MT_LEVELS = {
   easy:   { name: "😊 ସହଜ · Easy",    ops: ["+","-","×"],      addMax: 20,  mulA: [2,5],  mulB: [2,5] },
@@ -1596,9 +1578,6 @@ function exitMathGame() {
   history.replaceState({ screen: "gameMenuScreen" }, "", "#gameMenuScreen");
 }
 
-// ==========================================
-// 12. MISC UTILS
-// ==========================================
 function sendBridge(msg) {
   if (window.AppInventor && typeof window.AppInventor.setWebViewString === "function") {
     window.AppInventor.setWebViewString(msg); return true;
@@ -1752,7 +1731,7 @@ function toggleTheme() {
 }
 
 function shareApp() {
-  const message = "🎓 ଜ୍ଞାନସେତୁ ଓଡ଼ିଶା (GyanSetu Odisha)\nଷଷ୍ଠ ରୁ ଦଶମ ଶ୍ରେଣୀ ପାଇଁ NCERT ଓ ଓଡ଼ିଶା ବୋର୍ଡ ଶିକ୍ଷଣ ଆପ୍।\n📚 ନୋଟ୍ସ, 📝 MCQ ଅଭ୍ୟାସ ଓ 📂 ଅଧ୍ୟୟନ ସାମଗ୍ରୀ ଏକ ସ୍ଥାନରେ।\n\n📲 ଡାଉନଲୋଡ୍ ଲିଙ୍କ:\n" + APP_DOWNLOAD_LINK;
+  const message = "🎓 ଜ୍ଞାନସେତୁ ଓଡ଼ିଶା (GyanSetu Odisha)\nଷଷ୍ଠ ରୁ ଦଶମ ଶ୍ରେଣୀ ପାଇଁ NCERT ଓ ଓଡ଼ିଶା ବୋର୍ଡ ଶିକ୍ଷଣ ଆପ୍।\n📚 ନୋଟ୍ସ, 📝 MCQ ଅଭ୍ୟାସ ଓ 📂 ଅଧ୍ୟୟନ ସାମଗ୍ରୀ ଏକ ସ୍ଥାନରେ。\n\n📲 ଡାଉନଲୋଡ୍ ଲିଙ୍କ:\n" + APP_DOWNLOAD_LINK;
   if (sendBridge("SHARE~" + message)) return;
   if (navigator.share) { navigator.share({ title: "GyanSetu Odisha", text: message }).catch(function () {}); return; }
   if (navigator.clipboard && navigator.clipboard.writeText) {
@@ -1760,9 +1739,6 @@ function shareApp() {
   } else { alert("Share not supported."); }
 }
 
-// ==========================================
-// AUDIO BEEP (GAMES)
-// ==========================================
 var nokiaAudioCtx = null;
 function playNokiaBeep(freq, duration) {
   try {
