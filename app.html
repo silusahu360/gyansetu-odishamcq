@@ -703,6 +703,119 @@ function setFrameHtml(html) {
   old.replaceWith(f);
 }
 
+// ---- Big storage for saved quizzes (IndexedDB; falls back to old storage) ----
+let savedMeta = {};
+let dbPromise = null;
+let useLegacy = false;
+
+function getDB() {
+  if (!dbPromise) {
+    dbPromise = new Promise(function (res, rej) {
+      if (!window.indexedDB) { rej(new Error("no indexedDB")); return; }
+      const rq = indexedDB.open("gyansetu_db", 1);
+      rq.onupgradeneeded = function () {
+        const d = rq.result;
+        d.createObjectStore("quizzes", { keyPath: "key" });
+        d.createObjectStore("meta", { keyPath: "key" });
+      };
+      rq.onsuccess = function () { res(rq.result); };
+      rq.onerror = function () { rej(rq.error || new Error("IDB open failed")); };
+    }).catch(function (e) { dbPromise = null; throw e; });
+  }
+  return dbPromise;
+}
+async function ensureStore() { if (useLegacy) return; try { await getDB(); } catch (e) { useLegacy = true; } }
+
+function idbOp(storeName, mode, fn) {
+  return getDB().then(function (db) {
+    return new Promise(function (res, rej) {
+      const tx = db.transaction(storeName, mode);
+      const rq = fn(tx.objectStore(storeName));
+      tx.oncomplete = function () { res(rq ? rq.result : undefined); };
+      tx.onerror = function () { rej(tx.error); };
+      tx.onabort = function () { rej(tx.error || new Error("aborted")); };
+    });
+  });
+}
+
+async function savedPut(key, html, date) {
+  await ensureStore();
+  date = date || new Date().toLocaleDateString("or-IN");
+  const size = new Blob([html]).size;
+  if (useLegacy) {
+    const s = load("gs_saved_mcqs", {});
+    s[key] = { title: key, content: html, date: date };
+    if (!store("gs_saved_mcqs", s)) throw new Error(lastStoreError || "Storage error");
+    flushNow();
+    savedMeta[key] = { key: key, title: key, date: date, size: size };
+    return;
+  }
+  const db = await getDB();
+  await new Promise(function (res, rej) {
+    const tx = db.transaction(["quizzes", "meta"], "readwrite");
+    tx.objectStore("quizzes").put({ key: key, content: html });
+    tx.objectStore("meta").put({ key: key, title: key, date: date, size: size });
+    tx.oncomplete = res;
+    tx.onerror = function () { rej(tx.error); };
+    tx.onabort = function () { rej(tx.error || new Error("Storage full")); };
+  });
+  const back = await savedGet(key);
+  if (!back || back.length !== html.length) throw new Error("Save verify failed");
+  savedMeta[key] = { key: key, title: key, date: date, size: size };
+}
+
+async function savedGet(key) {
+  await ensureStore();
+  if (useLegacy) { const it = load("gs_saved_mcqs", {})[key]; return it ? it.content : null; }
+  const r = await idbOp("quizzes", "readonly", function (s) { return s.get(key); });
+  return r ? r.content : null;
+}
+
+async function savedDelete(key) {
+  await ensureStore();
+  if (useLegacy) {
+    const s = load("gs_saved_mcqs", {}); delete s[key]; store("gs_saved_mcqs", s); flushNow();
+  } else {
+    const db = await getDB();
+    await new Promise(function (res, rej) {
+      const tx = db.transaction(["quizzes", "meta"], "readwrite");
+      tx.objectStore("quizzes").delete(key); tx.objectStore("meta").delete(key);
+      tx.oncomplete = res; tx.onerror = function () { rej(tx.error); }; tx.onabort = function () { rej(tx.error); };
+    });
+  }
+  delete savedMeta[key];
+}
+
+async function savedInit() {
+  try {
+    await ensureStore();
+    if (useLegacy) {
+      const s = load("gs_saved_mcqs", {});
+      Object.keys(s).forEach(function (k) {
+        const it = s[k]; if (!it) return;
+        savedMeta[k] = { key: k, title: it.title || k, date: it.date, size: new Blob([String(it.content || "")]).size };
+      });
+    } else {
+      const all = await idbOp("meta", "readonly", function (s) { return s.getAll(); });
+      all.forEach(function (m) { savedMeta[m.key] = m; });
+      const old = load("gs_saved_mcqs", {});
+      const ks = Object.keys(old || {});
+      if (ks.length) {
+        for (let i = 0; i < ks.length; i++) {
+          const it = old[ks[i]];
+          if (it && it.content && !savedMeta[ks[i]]) await savedPut(ks[i], it.content, it.date);
+        }
+        store("gs_saved_mcqs", {}); flushNow();
+      }
+      if (navigator.storage && navigator.storage.persist) navigator.storage.persist().catch(function () {});
+    }
+  } catch (e) { console.error("savedInit:", e); }
+  try {
+    if ($("mcqSetup").classList.contains("active")) refreshTopicsKeepSelection();
+    if ($("offlineQuizMenuScreen").classList.contains("active")) renderDownloadedQuizList();
+  } catch (e) {}
+}
+
 function blobToDataURL(b) {
   return new Promise(function (res, rej) {
     const r = new FileReader();
@@ -732,7 +845,7 @@ async function inlineAssets(html) {
     tasks.push((async function () {
       try {
         const b = await fetchAsset(s, false);
-        if (b.size > 600000) return;
+        if (b.size > 300000) return;
         img.setAttribute("src", await blobToDataURL(b));
         img.removeAttribute("srcset");
       } catch (e) {}
@@ -1015,6 +1128,8 @@ window.addEventListener("load", function () {
   updateNetStatus();
   setTimeout(function () { if (isOnline()) checkForAppUpdate(false); }, 2000);
   setTimeout(function () { checkDailyProgress(); }, 1000);
+  savedInit();
+  setTimeout(savedInit, 3500);
   if ("serviceWorker" in navigator && /^https?:$/.test(location.protocol)) {
     navigator.serviceWorker.register("sw.js").catch(function () {});
   }
@@ -1163,11 +1278,9 @@ async function saveCurrentQuizOffline() {
     btn.textContent = "⏳ Saving...";
     const title = currentQuizTitle;
     const html = await inlineAssets(currentQuizHtml);
-    const s = load("gs_saved_mcqs", {});
-    s[title] = { title: title, content: html, date: new Date().toLocaleDateString("or-IN") };
-    if (store("gs_saved_mcqs", s)) { flushNow(); alert("✅ Quiz Download ହୋଇଗଲା!"); }
-    else { alert(MSG_STORAGE_FULL + "\n\n" + lastStoreError); }
-  } catch (e) { console.error(e); alert("❌ Download ବିଫଳ: " + e.message); }
+    await savedPut(title, html);
+    alert("✅ Quiz Download ହୋଇଗଲା!");
+  } catch (e) { console.error(e); alert("❌ Save ବିଫଳ।\n" + MSG_STORAGE_FULL + "\n\n" + (e && e.message)); }
   finally { saveBusy = false; btn.textContent = "💾 Download for Offline"; }
 }
 
@@ -1188,16 +1301,17 @@ async function downloadSelectedTopicMcq() {
   if (saveBusy) return;
   saveBusy = true;
   const key = $("mcqClass").value + " · " + $("mcqSubject").value + " · " + topicTitle();
+  let html = "";
   try {
     setSaveStatus("⏳ Download ହେଉଛି...");
     const r = await fetchT(new URL(file, GITHUB_PAGES_BASE).href + "?t=" + Date.now(), {}, 15000);
     if (!r.ok) throw new Error("HTTP " + r.status);
-    const html = await inlineAssets(await r.text());
-    const s = load("gs_saved_mcqs", {});
-    s[key] = { title: key, content: html, date: new Date().toLocaleDateString("or-IN") };
-    if (store("gs_saved_mcqs", s)) { flushNow(); alert("✅ Offline Save ହୋଇଗଲା!"); refreshTopicsKeepSelection(); }
-    else { alert(MSG_STORAGE_FULL + "\n\n" + lastStoreError); }
-  } catch (e) { console.error(e); alert("ଡାଉନଲୋଡ୍ ବିଫଳ। ଇଣ୍ଟରନେଟ୍ ଯାଞ୍ଚ କରନ୍ତୁ।"); }
+    html = await inlineAssets(await r.text());
+  } catch (e) { console.error(e); alert("ଡାଉନଲୋଡ୍ ବିଫଳ। ଇଣ୍ଟରନେଟ୍ ଯାଞ୍ଚ କରନ୍ତୁ।"); saveBusy = false; setSaveStatus(""); return; }
+  try {
+    await savedPut(key, html);
+    alert("✅ Offline Save ହୋଇଗଲା!"); refreshTopicsKeepSelection();
+  } catch (e) { console.error(e); alert("❌ Save ବିଫଳ।\n" + MSG_STORAGE_FULL + "\n\n" + (e && e.message)); }
   finally { saveBusy = false; setSaveStatus(""); }
 }
 
@@ -1209,23 +1323,21 @@ async function downloadAllSubjectMcq() {
   if (saveBusy) return;
   saveBusy = true;
   let ok = 0, fail = 0, skipped = 0, full = false;
-  const s = load("gs_saved_mcqs", {});
   try {
     for (let i = 0; i < list.length; i++) {
       const item = list[i];
       const key = cls + " · " + sub + " · " + item.title;
       setSaveStatus("⏳ " + (i + 1) + " / " + list.length + " Save ହେଉଛି...");
-      if (s[key] && s[key].content) { skipped++; continue; }
+      if (savedMeta[key]) { skipped++; continue; }
+      let html;
       try {
         const r = await fetchT(new URL(item.file, GITHUB_PAGES_BASE).href + "?t=" + Date.now(), {}, 15000);
         if (!r.ok) throw new Error("HTTP " + r.status);
-        const html = await inlineAssets(await r.text());
-        s[key] = { title: key, content: html, date: new Date().toLocaleDateString("or-IN") };
-        if (!store("gs_saved_mcqs", s)) { delete s[key]; full = true; break; }
-        ok++;
-      } catch (e) { console.error(e); fail++; }
+        html = await inlineAssets(await r.text());
+      } catch (e) { console.error(e); fail++; continue; }
+      try { await savedPut(key, html); ok++; }
+      catch (e) { console.error(e); full = true; break; }
     }
-    flushNow();
   } finally { saveBusy = false; setSaveStatus(""); }
   refreshTopicsKeepSelection();
   let msg = "✅ " + ok + " ନୂଆ Save ହେଲା" + (skipped ? "\n📌 " + skipped + " ଆଗରୁ Save ଥିଲା" : "") + (fail ? "\n❌ " + fail + " ବିଫଳ" : "");
@@ -1252,31 +1364,31 @@ function makeRow(titleText, dateText, openLabel, onOpen, onDelete, sizeText) {
 function openOfflineQuizMenu() { showScreen("offlineQuizMenuScreen"); }
 
 function renderDownloadedQuizList() {
-  const savedMcqs = load("gs_saved_mcqs", {}); const container = $("downloadedQuizList"); const keys = Object.keys(savedMcqs);
+  const container = $("downloadedQuizList"); const keys = Object.keys(savedMeta);
   if (!keys.length) { container.innerHTML = '<div style="text-align:center;padding:18px;color:var(--muted);">କୌଣସି Quiz Download ହୋଇନାହିଁ।</div>'; return; }
   let totalBytes = 0; container.innerHTML = "";
-  keys.forEach(key => {
-    const item = savedMcqs[key]; totalBytes += new Blob([String(item.content || "")]).size;
-    container.appendChild(makeRow("📝 " + (item.title || key), item.date, "Play", () => openDownloadedMcq(key), () => deleteDownloadedMcq(key), byteSize(item.content)));
+  keys.forEach(function (key) {
+    const m = savedMeta[key]; totalBytes += m.size || 0;
+    container.appendChild(makeRow("📝 " + (m.title || key), m.date, "Play", function () { openDownloadedMcq(key); }, function () { deleteDownloadedMcq(key); }, fmtBytes(m.size || 0)));
   });
   const head = document.createElement("div"); head.className = "muted"; head.style.cssText = "text-align:center;padding:4px 0 10px;font-size:13px;"; head.textContent = "Total: " + fmtBytes(totalBytes); container.prepend(head);
 }
 
-function openDownloadedMcq(key) {
-  const item = load("gs_saved_mcqs", {})[key];
-  if (!item || !item.content) { alert("Downloaded Quiz ମିଳିଲା ନାହିଁ।"); return; }
+async function openDownloadedMcq(key) {
+  let content = null;
+  try { content = await savedGet(key); } catch (e) { console.error(e); }
+  if (!content) { alert("Downloaded Quiz ମିଳିଲା ନାହିଁ।"); return; }
   currentViewMode = "downloaded_quiz"; currentQuizHtml = ""; currentQuizTitle = ""; currentQuizUrl = ""; isQuizPaused = false;
   quizSeconds = 0; $("quizRunningTimer").textContent = "00:00";
   clearInterval(quizTimerInterval);
   quizTimerInterval = setInterval(() => { if (!isQuizPaused) { quizSeconds++; $("quizRunningTimer").textContent = fmtTime(quizSeconds); } }, 1000);
   $("pauseModal").classList.remove("active"); $("quizTimerBar").style.display = "flex"; $("noteActionToolbar").style.display = "none"; $("viewerBackButton").textContent = "← Back to Sets";
-  showScreen("quizScreen"); setFrameHtml(withBase(item.content));
+  showScreen("quizScreen"); setFrameHtml(withBase(content));
 }
 
 function deleteDownloadedMcq(key) {
-  askConfirm(key + " କାଢ଼ିବାକୁ ଚାହାନ୍ତି?", function () {
-    const s = load("gs_saved_mcqs", {}); delete s[key];
-    if (!store("gs_saved_mcqs", s)) alert("⚠ ଡିଲିଟ୍ ବିଫଳ।\n" + lastStoreError); else flushNow();
+  askConfirm(key + " କାଢ଼ିବାକୁ ଚାହାନ୍ତି?", async function () {
+    try { await savedDelete(key); } catch (e) { alert("⚠ ଡିଲିଟ୍ ବିଫଳ।"); }
     renderDownloadedQuizList();
   });
 }
@@ -1856,10 +1968,10 @@ function fillTopics() {
   const cls = $("mcqClass").value; const subject = $("mcqSubject").value; const topicSelect = $("mcqTopic");
   const list = (mcqDataStore[cls] && mcqDataStore[cls][subject]) || [];
   if (Array.isArray(list) && list.length > 0) {
-    const saved = load("gs_saved_mcqs", {});
+    const saved = savedMeta;
     topicSelect.innerHTML = list.map(function (item) {
       const key = cls + " · " + subject + " · " + item.title;
-      const mark = (saved[key] && saved[key].content) ? "✅ " : "";
+      const mark = saved[key] ? "✅ " : "";
       return '<option value="' + esc(item.file) + '" data-title="' + esc(item.title) + '">' + mark + esc(item.title) + '</option>';
     }).join("");
   } else {
@@ -1884,21 +1996,21 @@ function startQuiz() {
   $("pauseModal").classList.remove("active"); showScreen("quizScreen");
 
   const title = currentQuizTitle;
-  const saved = load("gs_saved_mcqs", {})[title];
   const show = function (html) { if (currentQuizTitle !== title) return; currentQuizHtml = html; setFrameHtml(withBase(html)); };
-  const useSaved = function () { if (saved && saved.content) { show(saved.content); return true; } return false; };
   const noNet = "<div style='padding:20px;text-align:center;font-family:sans-serif;line-height:1.6;'>📴 Internet ନାହିଁ ଏବଂ ଏହି Quiz Download ହୋଇନାହିଁ।<br><br>Internet ଚାଲୁ କରି ପ୍ରଥମେ <b>Save Offline</b> କରନ୍ତୁ।</div>";
+  const fallback = async function () {
+    let c = null;
+    try { c = await savedGet(title); } catch (e) { console.error(e); }
+    if (currentQuizTitle !== title) return;
+    if (c) show(c); else setFrameHtml(noNet);
+  };
 
   setFrameHtml("<div style='display:flex;align-items:center;justify-content:center;height:60vh;font-family:sans-serif;color:#6d28d9;font-size:18px;'><b>Loading Quiz...</b></div>");
-  if (!isOnline()) { if (!useSaved()) setFrameHtml(noNet); return; }
+  if (!isOnline()) { fallback(); return; }
   fetchT(fullUrl + "?t=" + Date.now(), {}, 10000)
     .then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.text(); })
     .then(show)
-    .catch(err => {
-      console.error(err);
-      if (currentQuizTitle !== title) return;
-      if (!useSaved()) setFrameHtml(noNet);
-    });
+    .catch(err => { console.error(err); fallback(); });
 }
 
 function pauseQuiz() { isQuizPaused = true; $("pausedTimeText").textContent = fmtTime(quizSeconds); $("pauseModal").classList.add("active"); }
