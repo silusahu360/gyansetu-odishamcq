@@ -2,8 +2,8 @@
 <html lang="or">
 <head>
 <meta charset="UTF-8">
-<!-- ଏଠାରେ ଜୁମ୍ ବନ୍ଦ କରିବା ପାଇଁ user-scalable=no ଯୋଡ଼ା ଯାଇଛି -->
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<!-- Zoom ବନ୍ଦ କରିବା ପାଇଁ -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 <meta name="theme-color" content="#4c1d95">
 <title>GyanSetu Odisha</title>
 <style>
@@ -243,6 +243,8 @@ body.dark .pg-stat-num{color:#c4b5fd;}
 .confetti-container{position:fixed;inset:0;pointer-events:none;z-index:200;overflow:hidden;}
 .confetti{position:absolute;width:9px;height:9px;top:-20px;border-radius:2px;animation:fall linear forwards;}
 @keyframes fall{to{transform:translateY(105vh) rotate(720deg);opacity:.8;}}
+.dot.off{background:#ef4444;box-shadow:0 0 8px #ef4444}
+.status-wrap{text-align:center}
 </style>
 </head>
 <body>
@@ -277,6 +279,8 @@ body.dark .pg-stat-num{color:#c4b5fd;}
     </div>
     <div class="pro-quote" id="dailyQuote">"ଶିକ୍ଷା ହେଉଛି ସଫଳତାର ଚାବିକାଠି।"</div>
   </div>
+
+  <div class="status-wrap"><span class="status-pill"><span class="dot" id="netDot"></span><span id="netText">Online</span></span></div>
 
   <h3 class="section-title">📚 ମୁଖ୍ୟ ବିଭାଗ</h3>
   <div class="grid">
@@ -330,6 +334,8 @@ body.dark .pg-stat-num{color:#c4b5fd;}
 <div class="btnrow">
 <button type="button" class="btn green" onclick="startQuiz()">START QUIZ ➜</button>
 <button type="button" class="btn orange" onclick="downloadSelectedTopicMcq()">💾 Save Offline</button>
+<button type="button" class="btn purple span2" onclick="downloadAllSubjectMcq()">📦 ଏହି Subject ର ସବୁ Topic Save କରନ୍ତୁ</button>
+<p id="mcqSaveStatus" class="muted span2" style="text-align:center;margin:0;"></p>
 </div>
 </div>
 <button type="button" class="back" onclick="goBack()">← Back</button>
@@ -605,6 +611,9 @@ body.dark .pg-stat-num{color:#c4b5fd;}
 <script>
 "use strict";
 
+// ==========================================
+// 1. CORE SETUP & ERROR HANDLING
+// ==========================================
 window.alert = function (msg) {
   var m = document.getElementById("msgModal");
   var t = document.getElementById("msgModalText");
@@ -657,22 +666,121 @@ let currentViewMode = "quiz";
 let currentQuizUrl = "";
 let currentQuizTitle = "";
 let currentQuizHtml = "";
-
 let quizSeconds = 0;
 let quizTimerInterval = null;
 let isQuizPaused = false;
 let studySeconds = 0;
 let studyInterval = null;
-
 const $ = id => document.getElementById(id);
 
+// ==========================================
+// 1b. OFFLINE HELPERS
+// ==========================================
+let saveBusy = false;
+function isOnline() { return navigator.onLine !== false; }
+
+function fetchT(url, opts, ms) {
+  opts = Object.assign({}, opts || {});
+  ms = ms || 8000;
+  if (typeof AbortController === "undefined") return fetch(url, opts);
+  const ctrl = new AbortController();
+  const timer = setTimeout(function () { ctrl.abort(); }, ms);
+  opts.signal = ctrl.signal;
+  return fetch(url, opts).then(
+    function (r) { clearTimeout(timer); return r; },
+    function (e) { clearTimeout(timer); throw e; }
+  );
+}
+
+// A fresh iframe each time: keeps the iframe from adding browser-history entries
+function setFrameHtml(html) {
+  const old = document.getElementById("quizFrame");
+  if (!old) return;
+  const f = document.createElement("iframe");
+  f.id = "quizFrame"; f.title = "Content Viewer";
+  f.style.cssText = "width:100%;height:72vh;border:0;display:block;";
+  f.srcdoc = html || "";
+  old.replaceWith(f);
+}
+
+function blobToDataURL(b) {
+  return new Promise(function (res, rej) {
+    const r = new FileReader();
+    r.onload = function () { res(r.result); };
+    r.onerror = rej;
+    r.readAsDataURL(b);
+  });
+}
+
+async function fetchAsset(src, asText) {
+  const abs = new URL(src, GITHUB_PAGES_BASE).href;
+  const r = await fetchT(abs, {}, 12000);
+  if (!r.ok) throw new Error("HTTP " + r.status);
+  return asText ? r.text() : r.blob();
+}
+
+// Put images / css / js INSIDE the quiz html so it works with no internet
+async function inlineAssets(html) {
+  html = String(html || "");
+  let doc;
+  try { doc = new DOMParser().parseFromString(html, "text/html"); } catch (e) { return html; }
+  const tasks = [];
+
+  doc.querySelectorAll("img[src]").forEach(function (img) {
+    const s = img.getAttribute("src");
+    if (!s || /^(data:|blob:|#)/i.test(s)) return;
+    tasks.push((async function () {
+      try {
+        const b = await fetchAsset(s, false);
+        if (b.size > 600000) return;
+        img.setAttribute("src", await blobToDataURL(b));
+        img.removeAttribute("srcset");
+      } catch (e) {}
+    })());
+  });
+
+  doc.querySelectorAll('link[rel~="stylesheet"][href]').forEach(function (l) {
+    const h = l.getAttribute("href");
+    if (!h || /^(data:|blob:)/i.test(h)) return;
+    tasks.push((async function () {
+      try {
+        const css = await fetchAsset(h, true);
+        const st = doc.createElement("style");
+        st.textContent = css;
+        l.replaceWith(st);
+      } catch (e) {}
+    })());
+  });
+
+  doc.querySelectorAll("script[src]").forEach(function (sc) {
+    const h = sc.getAttribute("src");
+    if (!h || /^(data:|blob:)/i.test(h)) return;
+    tasks.push((async function () {
+      try {
+        const js = await fetchAsset(h, true);
+        const n = doc.createElement("script");
+        const t = sc.getAttribute("type"); if (t) n.setAttribute("type", t);
+        n.textContent = js.replace(/<\/script/gi, "<\\/script");
+        if (sc.hasAttribute("defer") || sc.hasAttribute("async")) { sc.remove(); doc.body.appendChild(n); }
+        else sc.replaceWith(n);
+      } catch (e) {}
+    })());
+  });
+
+  await Promise.all(tasks);
+  const hasDoctype = /^\s*<!doctype/i.test(html);
+  return (hasDoctype ? "<!DOCTYPE html>\n" : "") + doc.documentElement.outerHTML;
+}
+
+// ==========================================
+// 2. SAFE STORAGE SYSTEM (Offline Support)
+// ==========================================
 const memoryFallback = {};
 const lastBridgeJson = {};
 const pendingBridge = {};
 const bridgeKeys = {};
 let lastStoreError = "";
 let pushTimer = null;
-
 let hasLocalStorage = false;
 try {
   if (window.localStorage && typeof window.localStorage.setItem === "function") {
@@ -770,6 +878,9 @@ function store(key, value) {
   return ok;
 }
 
+// ==========================================
+// 3. APP UPDATE & NETWORK
+// ==========================================
 function parseVer(v) { return String(v || "").replace(/^[^\d]*/, "").split(".").map(n => parseInt(n, 10) || 0); }
 function isNewerVersion(remote, local) {
   var a = parseVer(remote), b = parseVer(local);
@@ -784,8 +895,12 @@ function isNewerVersion(remote, local) {
 
 async function checkForAppUpdate(manualCheck) {
   manualCheck = !!manualCheck;
+  if (!isOnline()) {
+    if (manualCheck) alert("📴 ଆପଣ Offline ଅଛନ୍ତି। Update ଯାଞ୍ଚ ପାଇଁ Internet ଚାଲୁ କରନ୍ତୁ।");
+    return;
+  }
   try {
-    const res = await fetch(GITHUB_VERSION_JSON_URL + "?t=" + Date.now(), { cache: "no-store" });
+    const res = await fetchT(GITHUB_VERSION_JSON_URL + "?t=" + Date.now(), { cache: "no-store" }, 8000);
     if (!res.ok) throw new Error("Update check failed");
     const data = await res.json();
     if (data.version && isNewerVersion(data.version, CURRENT_APP_VERSION)) {
@@ -800,7 +915,7 @@ async function checkForAppUpdate(manualCheck) {
   } catch (err) {
     console.error("Update check error:", err);
     if (manualCheck) {
-      alert("❌ ଅପଡେଟ୍ ଯାଞ୍ଚ ବିଫଳ।");
+      alert("❌ ଅପଡେଟ୍ ଯାଞ୍ଚ ବିଫଳ। ଇଣ୍ଟରନେଟ୍ ଯାଞ୍ଚ କରନ୍ତୁ।");
     }
   }
 }
@@ -811,17 +926,16 @@ function performAppUpdate() {
   window.open(APP_DOWNLOAD_LINK, "_blank");
 }
 
-// Live Time & Calendar Function with Professional Look
+// ==========================================
+// 4. LIVE TIME & CALENDAR
+// ==========================================
 function updateLiveDateTime() {
   const now = new Date();
   const timeStr = now.toLocaleTimeString('en-US', { hour12: false });
-  
   const days = ['ରବିବାର', 'ସୋମବାର', 'ମଙ୍ଗଳବାର', 'ବୁଧବାର', 'ଗୁରୁବାର', 'ଶୁକ୍ରବାର', 'ଶନିବାର'];
   const months = ['ଜାନୁଆରୀ', 'ଫେବୃଆରୀ', 'ମାର୍ଚ୍ଚ', 'ଏପ୍ରିଲ', 'ମେ', 'ଜୁନ', 'ଜୁଲାଇ', 'ଅଗଷ୍ଟ', 'ସେପ୍ଟେମ୍ବର', 'ଅକ୍ଟୋବର', 'ନଭେମ୍ବର', 'ଡିସେମ୍ବର'];
-  
   const dateStr = now.getDate() + ' ' + months[now.getMonth()] + ' ' + now.getFullYear();
   const dayStr = days[now.getDay()];
-  
   const quotes = [
     "ଶିକ୍ଷା ହେଉଛି ସଫଳତାର ଚାବିକାଠି।",
     "ଆଜିର ପରିଶ୍ରମ, କାଲିର ସଫଳତା।",
@@ -836,7 +950,6 @@ function updateLiveDateTime() {
   const dateEl = document.getElementById('liveDate');
   const dayEl = document.getElementById('liveDay');
   const quoteEl = document.getElementById('dailyQuote');
-  
   if (timeEl) timeEl.textContent = timeStr;
   if (dateEl) dateEl.textContent = dateStr;
   if (dayEl) dayEl.textContent = dayStr;
@@ -845,13 +958,71 @@ function updateLiveDateTime() {
 updateLiveDateTime();
 setInterval(updateLiveDateTime, 1000);
 
-window.addEventListener("load", function() {
-  syncHeaderHeight();
-  applyStoredPrefs();
-  setTimeout(() => { checkForAppUpdate(false); }, 2000);
-  setTimeout(() => { checkDailyProgress(); }, 1000);
+// ==========================================
+// 5. NAVIGATION & BACK BUTTON HANDLER
+// ==========================================
+let backStack = ["home"];
+
+function pushHistoryState(id) {
+  if (id === "home") { backStack = ["home"]; return; }
+  const i = backStack.indexOf(id);
+  if (i !== -1) { backStack = backStack.slice(0, i + 1); return; }
+  backStack.push(id);
+}
+
+function appBack() {
+  const on = function (id) { const e = $(id); return e && e.classList.contains("active"); };
+  if (on("confirmModal")) { confirmAnswer(false); return; }
+  if (on("msgModal")) { closeMsg(); return; }
+  if (on("updateModal")) { $("updateModal").classList.remove("active"); return; }
+  if (on("mmWinModal")) { closeWinAndLevels(); return; }
+  if (on("pauseModal")) { resumeQuiz(); return; }
+  const cur = document.querySelector(".screen.active");
+  if (cur) {
+    if (cur.id === "quizScreen") { handleViewerBack(); return; }
+    if (cur.id === "memoryGameScreen") { exitMemoryGame(); return; }
+    if (cur.id === "mathGameScreen") { exitMathGame(); return; }
+  }
+  if (backStack.length > 1) {
+    backStack.pop();
+    showScreen(backStack[backStack.length - 1], false);
+    return;
+  }
+  askConfirm("ଆପ୍ ବନ୍ଦ କରିବାକୁ ଚାହାଁନ୍ତି କି?", function () {
+    if (!sendBridge("CLOSE_APP")) window.close();
+  });
+}
+
+// Keep one extra history entry so the phone Back button is always handled by the app
+try { history.replaceState({ gs: 0 }, ""); history.pushState({ gs: 1 }, ""); } catch (e) {}
+window.addEventListener("popstate", function () {
+  try { history.pushState({ gs: 1 }, ""); } catch (e) {}
+  appBack();
 });
 
+function updateNetStatus() {
+  const on = isOnline();
+  const d = $("netDot"), t = $("netText");
+  if (d) d.classList.toggle("off", !on);
+  if (t) t.textContent = on ? "ଅନଲାଇନ୍ · Online" : "ଅଫଲାଇନ୍ · Downloaded Quiz ଚାଲିବ";
+}
+window.addEventListener("online", updateNetStatus);
+window.addEventListener("offline", updateNetStatus);
+
+window.addEventListener("load", function () {
+  syncHeaderHeight();
+  applyStoredPrefs();
+  updateNetStatus();
+  setTimeout(function () { if (isOnline()) checkForAppUpdate(false); }, 2000);
+  setTimeout(function () { checkDailyProgress(); }, 1000);
+  if ("serviceWorker" in navigator && /^https?:$/.test(location.protocol)) {
+    navigator.serviceWorker.register("sw.js").catch(function () {});
+  }
+});
+
+// ==========================================
+// 6. UTILS & ROUTING
+// ==========================================
 function esc(s) { return String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c])); }
 
 function withBase(html) {
@@ -883,10 +1054,19 @@ function updateBottomNav(id){
   if(nav)nav.classList.toggle("hidden",id==="quizScreen"||id==="memoryGameScreen"||id==="mathGameScreen");
 }
 
-function showScreen(id) {
+function showScreen(id, pushHistory = true) {
   let target = $(id) || $("home");
-  if (id !== "memoryGameScreen") { if (typeof mmInterval !== "undefined" && mmInterval) { clearInterval(mmInterval); mmInterval = null; } }
-  if (id !== "mathGameScreen") { if (typeof mtStop === "function") mtStop(); }
+  
+  // Stop timers if leaving game screens
+  const currentActive = document.querySelector(".screen.active");
+  if (currentActive && currentActive.id !== id) {
+      if (currentActive.id === "quizScreen") {
+          cleanViewerFrame();
+      }
+      if (currentActive.id !== "memoryGameScreen") { if (typeof mmInterval !== "undefined" && mmInterval) { clearInterval(mmInterval); mmInterval = null; } }
+      if (currentActive.id !== "mathGameScreen") { if (typeof mtStop === "function") mtStop(); }
+  }
+
   document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
   target.classList.add("active");
   window.scrollTo(0, 0);
@@ -895,20 +1075,14 @@ function showScreen(id) {
   if (id === "progressScreen") renderProgress();
   if (id === "memoryGameScreen") refreshLevelBests();
   updateBottomNav(id);
+  if (pushHistory) pushHistoryState(id);
 }
 
-function goBack(){
-  const active = document.querySelector(".screen.active");
-  const id = active ? active.id : "home";
-  const backMap = {
-    classes:"home", subjects:"classes", folder:"subjects",
-    mcqSetup:"home", offlineQuizMenuScreen:"home",
-    bookmarks:"home", studyTimer:"home", about:"home", progressScreen:"home",
-    gameMenuScreen:"home", memoryGameScreen:"gameMenuScreen", mathGameScreen:"gameMenuScreen"
-  };
-  showScreen(backMap[id] || "home");
-}
+function goBack(){ appBack(); }
 
+// ==========================================
+// 7. STUDY MATERIALS
+// ==========================================
 function showClasses() {
   $("classTitle").textContent = "Select Class · Study Materials";
   $("classGrid").innerHTML = "";
@@ -944,48 +1118,119 @@ function openSubject(sub) {
   showScreen("folder");
 }
 
+// ==========================================
+// 8. MCQ & VIEWER LOGIC
+// ==========================================
 function cleanViewerFrame() {
   clearInterval(quizTimerInterval); quizTimerInterval = null;
   isQuizPaused = false; currentQuizHtml = ""; currentQuizTitle = ""; currentQuizUrl = "";
   $("noteActionToolbar").style.display = "none";
   $("pauseModal").classList.remove("active");
-  $("quizFrame").srcdoc = "";
+  setFrameHtml("");
 }
 
 function handleViewerBack() {
   cleanViewerFrame();
-  if (currentViewMode === "quiz") showScreen("mcqSetup");
-  else if (currentViewMode === "downloaded_quiz") showScreen("offlineQuizMenuScreen");
-  else showScreen("subjects");
+  // Forcefully reset history to prevent iframe from closing the app
+  if (currentViewMode === "quiz") {
+      showScreen("mcqSetup", false);
+      backStack = ["home", "mcqSetup"];
+      history.replaceState({ screen: "mcqSetup" }, "", "#mcqSetup");
+  } else if (currentViewMode === "downloaded_quiz") {
+      showScreen("offlineQuizMenuScreen", false);
+      backStack = ["home", "offlineQuizMenuScreen"];
+      history.replaceState({ screen: "offlineQuizMenuScreen" }, "", "#offlineQuizMenuScreen");
+  } else {
+      showScreen("subjects", false);
+      backStack = ["home", "classes", "subjects"];
+      history.replaceState({ screen: "subjects" }, "", "#subjects");
+  }
 }
 
-function goHomeFromViewer() { cleanViewerFrame(); showScreen("home"); }
+function goHomeFromViewer() {
+  cleanViewerFrame();
+  showScreen("home", false);
+  backStack = ["home"];
+  history.replaceState({ screen: "home" }, "", "#home");
+}
 
 async function saveCurrentQuizOffline() {
+  if (saveBusy) return;
+  const btn = $("quizSaveBtn");
   try {
     if (!currentQuizTitle || !currentQuizHtml) { alert("❌ Quiz ଲୋଡ୍ ହୋଇନାହିଁ।"); return; }
+    saveBusy = true;
+    btn.textContent = "⏳ Saving...";
+    const title = currentQuizTitle;
+    const html = await inlineAssets(currentQuizHtml);
     const s = load("gs_saved_mcqs", {});
-    s[currentQuizTitle] = { title: currentQuizTitle, content: currentQuizHtml, date: new Date().toLocaleDateString("or-IN") };
+    s[title] = { title: title, content: html, date: new Date().toLocaleDateString("or-IN") };
     if (store("gs_saved_mcqs", s)) { flushNow(); alert("✅ Quiz Download ହୋଇଗଲା!"); }
     else { alert(MSG_STORAGE_FULL + "\n\n" + lastStoreError); }
   } catch (e) { console.error(e); alert("❌ Download ବିଫଳ: " + e.message); }
+  finally { saveBusy = false; btn.textContent = "💾 Download for Offline"; }
+}
+
+function topicTitle() {
+  const o = $("mcqTopic").selectedOptions && $("mcqTopic").selectedOptions[0];
+  return o ? (o.dataset.title || o.text) : "";
+}
+function setSaveStatus(t) { const e = $("mcqSaveStatus"); if (e) e.textContent = t || ""; }
+function refreshTopicsKeepSelection() {
+  const prev = $("mcqTopic").value; fillTopics();
+  if (prev && Array.prototype.some.call($("mcqTopic").options, function (o) { return o.value === prev; })) $("mcqTopic").value = prev;
 }
 
 async function downloadSelectedTopicMcq() {
-  const sel = $("mcqTopic"); const file = sel.value;
+  const file = $("mcqTopic").value;
   if (!file) { alert("ଦୟାକରି ଏକ Topic ବାଛନ୍ତୁ।"); return; }
-  const topicName = sel.options[sel.selectedIndex].text;
-  const fullUrl = new URL(file, GITHUB_PAGES_BASE).href;
-  const key = $("mcqClass").value + " · " + $("mcqSubject").value + " · " + topicName;
+  if (!isOnline()) { alert("📴 Internet ନାହିଁ। Save କରିବା ପାଇଁ Internet ଚାଲୁ କରନ୍ତୁ।"); return; }
+  if (saveBusy) return;
+  saveBusy = true;
+  const key = $("mcqClass").value + " · " + $("mcqSubject").value + " · " + topicTitle();
   try {
-    const r = await fetch(fullUrl + "?t=" + Date.now());
+    setSaveStatus("⏳ Download ହେଉଛି...");
+    const r = await fetchT(new URL(file, GITHUB_PAGES_BASE).href + "?t=" + Date.now(), {}, 15000);
     if (!r.ok) throw new Error("HTTP " + r.status);
-    const html = await r.text();
+    const html = await inlineAssets(await r.text());
     const s = load("gs_saved_mcqs", {});
     s[key] = { title: key, content: html, date: new Date().toLocaleDateString("or-IN") };
-    if (store("gs_saved_mcqs", s)) { flushNow(); alert("✅ Offline Save ହୋଇଗଲା!"); }
+    if (store("gs_saved_mcqs", s)) { flushNow(); alert("✅ Offline Save ହୋଇଗଲା!"); refreshTopicsKeepSelection(); }
     else { alert(MSG_STORAGE_FULL + "\n\n" + lastStoreError); }
   } catch (e) { console.error(e); alert("ଡାଉନଲୋଡ୍ ବିଫଳ। ଇଣ୍ଟରନେଟ୍ ଯାଞ୍ଚ କରନ୍ତୁ।"); }
+  finally { saveBusy = false; setSaveStatus(""); }
+}
+
+async function downloadAllSubjectMcq() {
+  if (!isOnline()) { alert("📴 Internet ନାହିଁ। Save କରିବା ପାଇଁ Internet ଚାଲୁ କରନ୍ତୁ।"); return; }
+  const cls = $("mcqClass").value, sub = $("mcqSubject").value;
+  const list = (mcqDataStore[cls] && mcqDataStore[cls][sub]) || [];
+  if (!Array.isArray(list) || !list.length) { alert("ଏହି Subject ପାଇଁ Topic ମିଳିଲା ନାହିଁ।"); return; }
+  if (saveBusy) return;
+  saveBusy = true;
+  let ok = 0, fail = 0, skipped = 0, full = false;
+  const s = load("gs_saved_mcqs", {});
+  try {
+    for (let i = 0; i < list.length; i++) {
+      const item = list[i];
+      const key = cls + " · " + sub + " · " + item.title;
+      setSaveStatus("⏳ " + (i + 1) + " / " + list.length + " Save ହେଉଛି...");
+      if (s[key] && s[key].content) { skipped++; continue; }
+      try {
+        const r = await fetchT(new URL(item.file, GITHUB_PAGES_BASE).href + "?t=" + Date.now(), {}, 15000);
+        if (!r.ok) throw new Error("HTTP " + r.status);
+        const html = await inlineAssets(await r.text());
+        s[key] = { title: key, content: html, date: new Date().toLocaleDateString("or-IN") };
+        if (!store("gs_saved_mcqs", s)) { delete s[key]; full = true; break; }
+        ok++;
+      } catch (e) { console.error(e); fail++; }
+    }
+    flushNow();
+  } finally { saveBusy = false; setSaveStatus(""); }
+  refreshTopicsKeepSelection();
+  let msg = "✅ " + ok + " ନୂଆ Save ହେଲା" + (skipped ? "\n📌 " + skipped + " ଆଗରୁ Save ଥିଲା" : "") + (fail ? "\n❌ " + fail + " ବିଫଳ" : "");
+  if (full) msg += "\n\n" + MSG_STORAGE_FULL;
+  alert(msg);
 }
 
 function fmtBytes(n) { if (n < 1024) return n + " B"; if (n < 1048576) return (n / 1024).toFixed(1) + " KB"; return (n / 1048576).toFixed(2) + " MB"; }
@@ -1025,7 +1270,7 @@ function openDownloadedMcq(key) {
   clearInterval(quizTimerInterval);
   quizTimerInterval = setInterval(() => { if (!isQuizPaused) { quizSeconds++; $("quizRunningTimer").textContent = fmtTime(quizSeconds); } }, 1000);
   $("pauseModal").classList.remove("active"); $("quizTimerBar").style.display = "flex"; $("noteActionToolbar").style.display = "none"; $("viewerBackButton").textContent = "← Back to Sets";
-  showScreen("quizScreen"); $("quizFrame").srcdoc = withBase(item.content);
+  showScreen("quizScreen"); setFrameHtml(withBase(item.content));
 }
 
 function deleteDownloadedMcq(key) {
@@ -1036,7 +1281,9 @@ function deleteDownloadedMcq(key) {
   });
 }
 
-/* ==================== PROGRESS / XP SYSTEM ==================== */
+// ==========================================
+// 9. PROGRESS / XP SYSTEM
+// ==========================================
 function migrateOldGarden() {
   try {
     const old = load("gs_garden", null);
@@ -1121,7 +1368,9 @@ function renderProgress() {
   $("pgBadges").innerHTML = badgesHtml;
 }
 
-/* ==================== MEMORY MATCH GAME ==================== */
+// ==========================================
+// 10. MEMORY MATCH GAME
+// ==========================================
 var mmInterval = null;
 var mmSeconds = 0;
 var mmMoves = 0;
@@ -1336,10 +1585,14 @@ function closeWinAndLevels() {
 function exitMemoryGame() {
   clearInterval(mmInterval); mmInterval = null;
   $("mmWinModal").classList.remove("active");
-  showScreen("gameMenuScreen");
+  showScreen("gameMenuScreen", false);
+  backStack = ["home", "gameMenuScreen"];
+  history.replaceState({ screen: "gameMenuScreen" }, "", "#gameMenuScreen");
 }
 
-/* ==================== MATH SPEED CHALLENGE ==================== */
+// ==========================================
+// 11. MATH SPEED CHALLENGE
+// ==========================================
 var MT_DURATION = 30;
 var MT_LEVELS = {
   easy:   { name: "😊 ସହଜ · Easy",    ops: ["+","-","×"],      addMax: 20,  mulA: [2,5],  mulB: [2,5] },
@@ -1492,9 +1745,16 @@ function mtFinish() {
   if (mtScoreVal >= 10) launchConfetti();
 }
 
-function exitMathGame() { mtStop(); showScreen("gameMenuScreen"); }
+function exitMathGame() { 
+  mtStop(); 
+  showScreen("gameMenuScreen", false);
+  backStack = ["home", "gameMenuScreen"];
+  history.replaceState({ screen: "gameMenuScreen" }, "", "#gameMenuScreen");
+}
 
-/* ==================== UTILS ==================== */
+// ==========================================
+// 12. MISC UTILS
+// ==========================================
 function sendBridge(msg) {
   if (window.AppInventor && typeof window.AppInventor.setWebViewString === "function") {
     window.AppInventor.setWebViewString(msg); return true;
@@ -1504,6 +1764,7 @@ function sendBridge(msg) {
 
 function openDrive() {
   if (!currentFolder) { alert("ପ୍ରଥମେ Class ଓ Subject ବାଛନ୍ତୁ।"); return; }
+  if (!isOnline()) { alert("📴 Google Drive ଖୋଲିବା ପାଇଁ Internet ଦରକାର।"); return; }
   if (sendBridge("OPEN_URL~" + currentFolder)) return;
   window.open(currentFolder, "_blank");
 }
@@ -1573,26 +1834,37 @@ function fillSubjects() {
 }
 
 async function loadRemoteMcq() {
+  if (!Object.keys(mcqDataStore).length) {
+    const cached = load("gs_cached_mcq_json", {});
+    if (cached && Object.keys(cached).length) { mcqDataStore = cached; refreshTopicsKeepSelection(); }
+  }
+  if (!isOnline()) { refreshTopicsKeepSelection(); return; }
   try {
-    const r = await fetch(GITHUB_MCQ_JSON_URL + "?t=" + Date.now(), { cache: "no-store" });
+    const r = await fetchT(GITHUB_MCQ_JSON_URL + "?t=" + Date.now(), { cache: "no-store" }, 8000);
     if (!r.ok) throw new Error("HTTP " + r.status);
-    mcqDataStore = await r.json(); store("gs_cached_mcq_json", mcqDataStore);
+    const fresh = await r.json();
+    mcqDataStore = fresh;
+    if (JSON.stringify(fresh) !== JSON.stringify(load("gs_cached_mcq_json", {}))) store("gs_cached_mcq_json", fresh);
   } catch (error) {
-    console.error("MCQ JSON Error:", error); mcqDataStore = load("gs_cached_mcq_json", {});
+    console.error("MCQ JSON Error:", error);
+    if (!Object.keys(mcqDataStore).length) mcqDataStore = load("gs_cached_mcq_json", {});
   }
-  const prevTopic = $("mcqTopic").value; fillTopics();
-  if (prevTopic) {
-    const has = Array.prototype.some.call($("mcqTopic").options, o => o.value === prevTopic);
-    if (has) $("mcqTopic").value = prevTopic;
-  }
+  refreshTopicsKeepSelection();
 }
 
 function fillTopics() {
   const cls = $("mcqClass").value; const subject = $("mcqSubject").value; const topicSelect = $("mcqTopic");
   const list = (mcqDataStore[cls] && mcqDataStore[cls][subject]) || [];
   if (Array.isArray(list) && list.length > 0) {
-    topicSelect.innerHTML = list.map(item => '<option value="' + esc(item.file) + '">' + esc(item.title) + '</option>').join("");
-  } else { topicSelect.innerHTML = '<option value="">No topics available offline</option>'; }
+    const saved = load("gs_saved_mcqs", {});
+    topicSelect.innerHTML = list.map(function (item) {
+      const key = cls + " · " + subject + " · " + item.title;
+      const mark = (saved[key] && saved[key].content) ? "✅ " : "";
+      return '<option value="' + esc(item.file) + '" data-title="' + esc(item.title) + '">' + mark + esc(item.title) + '</option>';
+    }).join("");
+  } else {
+    topicSelect.innerHTML = '<option value="">' + (isOnline() ? "No topics available" : "Topics ମିଳିଲା ନାହିଁ — ଥରେ Internet ରେ ଖୋଲନ୍ତୁ") + '</option>';
+  }
 }
 
 function fmtTime(s) { return String(Math.floor(s / 60)).padStart(2, "0") + ":" + String(s % 60).padStart(2, "0"); }
@@ -1601,7 +1873,7 @@ function startQuiz() {
   const fileName = $("mcqTopic").value; if (!fileName) { alert("ଦୟାକରି ଏକ Topic ବାଛନ୍ତୁ।"); return; }
   currentViewMode = "quiz";
   const fullUrl = new URL(fileName, GITHUB_PAGES_BASE).href; currentQuizUrl = fullUrl;
-  currentQuizTitle = $("mcqClass").value + " · " + $("mcqSubject").value + " · " + $("mcqTopic").selectedOptions[0].text;
+  currentQuizTitle = $("mcqClass").value + " · " + $("mcqSubject").value + " · " + topicTitle();
   currentQuizHtml = "";
   addXP(5);
   $("noteActionToolbar").style.display = "flex"; $("quizSaveBtn").style.display = "block";
@@ -1610,21 +1882,34 @@ function startQuiz() {
   clearInterval(quizTimerInterval);
   quizTimerInterval = setInterval(() => { if (!isQuizPaused) { quizSeconds++; $("quizRunningTimer").textContent = fmtTime(quizSeconds); } }, 1000);
   $("pauseModal").classList.remove("active"); showScreen("quizScreen");
-  $("quizFrame").srcdoc = "<div style='display:flex;align-items:center;justify-content:center;height:60vh;font-family:sans-serif;color:#6d28d9;font-size:18px;'><b>Loading Quiz...</b></div>";
-  fetch(fullUrl + "?t=" + Date.now())
+
+  const title = currentQuizTitle;
+  const saved = load("gs_saved_mcqs", {})[title];
+  const show = function (html) { if (currentQuizTitle !== title) return; currentQuizHtml = html; setFrameHtml(withBase(html)); };
+  const useSaved = function () { if (saved && saved.content) { show(saved.content); return true; } return false; };
+  const noNet = "<div style='padding:20px;text-align:center;font-family:sans-serif;line-height:1.6;'>📴 Internet ନାହିଁ ଏବଂ ଏହି Quiz Download ହୋଇନାହିଁ।<br><br>Internet ଚାଲୁ କରି ପ୍ରଥମେ <b>Save Offline</b> କରନ୍ତୁ।</div>";
+
+  setFrameHtml("<div style='display:flex;align-items:center;justify-content:center;height:60vh;font-family:sans-serif;color:#6d28d9;font-size:18px;'><b>Loading Quiz...</b></div>");
+  if (!isOnline()) { if (!useSaved()) setFrameHtml(noNet); return; }
+  fetchT(fullUrl + "?t=" + Date.now(), {}, 10000)
     .then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.text(); })
-    .then(html => { currentQuizHtml = html; $("quizFrame").srcdoc = withBase(html); })
+    .then(show)
     .catch(err => {
       console.error(err);
-      const saved = load("gs_saved_mcqs", {})[currentQuizTitle];
-      if (saved && saved.content) { currentQuizHtml = saved.content; $("quizFrame").srcdoc = withBase(saved.content); }
-      else { $("quizFrame").srcdoc = "<div style='padding:20px;text-align:center;font-family:sans-serif;'>ଇଣ୍ଟରନେଟ୍ ସଂଯୋଗ ନାହିଁ।</div>"; }
+      if (currentQuizTitle !== title) return;
+      if (!useSaved()) setFrameHtml(noNet);
     });
 }
 
 function pauseQuiz() { isQuizPaused = true; $("pausedTimeText").textContent = fmtTime(quizSeconds); $("pauseModal").classList.add("active"); }
 function resumeQuiz() { isQuizPaused = false; $("pauseModal").classList.remove("active"); }
-function closePauseAndExit() { $("pauseModal").classList.remove("active"); cleanViewerFrame(); showScreen("mcqSetup"); }
+function closePauseAndExit() { 
+  $("pauseModal").classList.remove("active"); 
+  cleanViewerFrame(); 
+  showScreen("mcqSetup", false);
+  backStack = ["home", "mcqSetup"];
+  history.replaceState({ screen: "mcqSetup" }, "", "#mcqSetup");
+}
 
 function startStudy() { if (studyInterval) return; studyInterval = setInterval(() => { studySeconds++; renderStudyClock(); }, 1000); }
 function pauseStudy() { clearInterval(studyInterval); studyInterval = null; }
@@ -1648,6 +1933,23 @@ function shareApp() {
   if (navigator.clipboard && navigator.clipboard.writeText) {
     navigator.clipboard.writeText(message).then(function () { alert("📋 Message copy ହୋଇଗଲା।"); }).catch(function () { alert("Share not supported."); });
   } else { alert("Share not supported."); }
+}
+
+// ==========================================
+// AUDIO BEEP (GAMES)
+// ==========================================
+var nokiaAudioCtx = null;
+function playNokiaBeep(freq, duration) {
+  try {
+    if (!nokiaAudioCtx) nokiaAudioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    if (nokiaAudioCtx.state === "suspended") nokiaAudioCtx.resume();
+    var osc = nokiaAudioCtx.createOscillator();
+    var gain = nokiaAudioCtx.createGain();
+    osc.type = "square"; osc.frequency.value = freq;
+    gain.gain.setValueAtTime(0.08, nokiaAudioCtx.currentTime);
+    osc.connect(gain); gain.connect(nokiaAudioCtx.destination);
+    osc.start(); osc.stop(nokiaAudioCtx.currentTime + duration);
+  } catch (e) {}
 }
 
 if (load("gs_dark_theme", "0") === "1") { document.body.classList.add("dark"); }
