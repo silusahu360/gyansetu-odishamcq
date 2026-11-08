@@ -251,7 +251,7 @@ body.dark .pg-stat-num{color:#c4b5fd;}
 
 <header id="appHeader">
 <div class="brand">🎓 GYANSETU <span>ODISHA</span></div>
-<p>NCERT & Odisha State Board Learning Portal</p>
+<p>NCERT & Odisha State Board Learning Portal · b4</p>
 <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn" aria-label="Toggle theme">🌙</button>
 </header>
 
@@ -606,7 +606,7 @@ body.dark .pg-stat-num{color:#c4b5fd;}
   <button class="nav-item" data-nav="more" onclick="showScreen('about')"><span class="nav-icon">⋯</span>More</button>
 </nav>
 
-<footer>© 2026 GyanSetu Odisha · Developed by Sangram Sahu</footer>
+<footer>© 2026 GyanSetu Odisha · Developed by Sangram Sahu<br><span style="opacity:.7">Build: b4 · 08-Nov-2026</span></footer>
 
 <script>
 "use strict";
@@ -621,6 +621,10 @@ window.alert = function (msg) {
   t.textContent = String(msg);
   m.classList.add("active");
 };
+window.addEventListener("error", function (e) {
+  if (window.__errShown) return; window.__errShown = true;
+  alert("⚠ Error: " + (e && e.message) + (e && e.lineno ? " (line " + e.lineno + ")" : ""));
+});
 function closeMsg() { document.getElementById("msgModal").classList.remove("active"); }
 
 var confirmCallback = null;
@@ -636,6 +640,7 @@ function confirmAnswer(yes) {
   if (yes && typeof cb === "function") cb();
 }
 
+const BUILD_ID = "b4";
 const CURRENT_APP_VERSION = "v1.4.1";
 const GITHUB_PAGES_BASE = "https://silusahu360.github.io/gyansetu-odishamcq/";
 const GITHUB_MCQ_JSON_URL = GITHUB_PAGES_BASE + "mcq_data.json";
@@ -719,6 +724,29 @@ function setFrameHtml(html) {
     const d = f.contentDocument;
     const refit = function () { setTimeout(function () { fitFrame(f); }, 120); setTimeout(function () { fitFrame(f); }, 600); };
     try { d.addEventListener("click", refit); d.addEventListener("touchend", refit); } catch (e) {}
+    // Android WebView sometimes does not pass finger-scroll from an iframe to the page: do it by hand
+    try {
+      let sy = 0, ly = 0, lt = 0, vel = 0, raf = 0, moved = false;
+      d.addEventListener("touchstart", function (e) {
+        cancelAnimationFrame(raf);
+        sy = ly = e.touches[0].screenY; lt = Date.now(); vel = 0; moved = false;
+      }, { passive: true });
+      d.addEventListener("touchmove", function (e) {
+        const y = e.touches[0].screenY;
+        if (Math.abs(y - sy) > 6) moved = true;
+        if (!moved) return;
+        if (e.cancelable) e.preventDefault();
+        const now = Date.now(), dt = Math.max(now - lt, 1), dy = ly - y;
+        vel = dy / dt; ly = y; lt = now;
+        window.scrollBy(0, dy);
+      }, { passive: false });
+      d.addEventListener("touchend", function () {
+        if (!moved) return;
+        let v = vel * 16;
+        const step = function () { if (Math.abs(v) < 0.5) return; window.scrollBy(0, v); v *= 0.95; raf = requestAnimationFrame(step); };
+        raf = requestAnimationFrame(step);
+      }, { passive: true });
+    } catch (e) {}
     const t = setInterval(function () {
       if (!f.isConnected) { clearInterval(t); return; }
       try { if (d.documentElement.scrollHeight > f.clientHeight + 2) fitFrame(f); } catch (e) {}
@@ -1156,6 +1184,14 @@ window.addEventListener("load", function () {
   setTimeout(function () { checkDailyProgress(); }, 1000);
   savedInit();
   setTimeout(savedInit, 3500);
+  if (isOnline() && /^https?:$/.test(location.protocol)) {
+    fetchT(location.pathname + "?chk=" + Date.now(), { cache: "no-store" }, 8000)
+      .then(function (r) { return r.text(); })
+      .then(function (t) {
+        const m = t.match(/BUILD_ID\s*=\s*"([^"]+)"/);
+        if (m && m[1] !== BUILD_ID && location.search.indexOf("v=" + m[1]) === -1) location.replace(location.pathname + "?v=" + m[1]);
+      }).catch(function () {});
+  }
   if ("serviceWorker" in navigator && /^https?:$/.test(location.protocol)) {
     navigator.serviceWorker.register("sw.js").catch(function () {});
   }
